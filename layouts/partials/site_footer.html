@@ -1,0 +1,34 @@
+<footer>
+    <hr>
+
+    <div class="row course-info">
+        <div class="col-md-7 text-left">
+            <p style="text-align: left;">
+                <strong>{{ .Site.Params.course.number }}: {{ .Site.Title }} ({{ .Site.Params.course.semester }})</strong><br>
+
+                <a href="{{ .Site.Params.school.url }}" target="_blank" rel="noopener">{{ .Site.Params.school.name }}</a><br>
+                <a href="{{ .Site.Params.university.url }}" target="_blank" rel="noopener">{{ .Site.Params.university.name }}</a>
+            </p>
+
+            <p style="text-align: left;">
+                <a href="{{ .Site.Params.instructor.url }}" target="_blank" rel="noopener"><i class="fas fa-user"></i>
+                    {{ .Site.Params.instructor.name }}</a><br>
+                <a href="mailto:{{ .Site.Params.instructor.email }}"><i class="fas fa-envelope"></i>
+                    {{ .Site.Params.instructor.email }}</a>
+            </p>
+
+        </div>
+
+        <div class="col-md-5 credits">
+            <p style="text-align: left;">All content licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial 4.0 International License</a>.</p>
+
+            <p style="text-align: left;">Content <i class="fab fa-creative-commons"></i> {{ .Site.Params.course.copyrightYear }} <a href="{{ .Site.Params.instructor.url }}" target="_blank" rel="noopener">{{ .Site.Params.author }}</a></p>
+
+            {{- if .Site.Params.credits }}
+            <p style="text-align: left;">{{ .Site.Params.credits | markdownify }}</p>
+            {{- end }}
+
+            <p style="text-align: left;"><a href="https://github.com/{{ .Site.Params.course.github }}" target="_blank" rel="noopener"><i class="fab fa-github"></i> View the source at GitHub.</a></p>
+        </div>
+    </div>
+</footer>

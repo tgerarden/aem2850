@@ -1,0 +1,48 @@
+---
+title: "Welcome to AEM 2850 + truth, beauty, and data"
+linktitle: "1: Truth, beauty, and data + the tidyverse"
+date: "`r format(Sys.time())`"
+menu:
+  content:
+    parent: Course content
+    weight: 1
+type: docs
+# bibliography: "../../static/bib/references.bib"
+# csl: "../../static/bib/chicago-fullnote-bibliography-no-bib.csl"
+slides: "01-slides"
+
+output:
+  blogdown::html_page:
+    keep_md: true # do this to save results in .md file
+    toc: false
+---
+
+## Readings
+
+- The [syllabus](/syllabus/)
+- <i class="fas fa-book"></i> [Chapter 1 (read through 1.2, skim 1.3+)](http://socviz.co/lookatdata.html) of *Data Visualization* by Kieran Healy
+
+#### Optional Readings
+
+- <i class="fas fa-external-link-square-alt"></i> [Study: Charts change hearts and minds better than words do](https://www.washingtonpost.com/news/wonk/wp/2018/06/15/study-charts-change-hearts-and-minds-better-than-words-do/?utm_term=.4474599c0d5e)
+- <i class="fas fa-podcast"></i> Tim Harford, ["Florence Nightingale: Data Viz Pioneer,"](https://99percentinvisible.org/episode/florence-nightingale-data-viz-pioneer/) *99% Invisible*
+
+
+## Questions to reflect on
+
+- How do we know what is true?
+- Are facts truth?
+- Why do we visualize data?
+- What makes a great visualization?
+- How do you choose which kind of visualization to use?
+
+
+## Slides
+
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
+
+{{< blogdown/slide-buttons >}}
+
+:::fyi
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.
+:::

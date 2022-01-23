@@ -1,0 +1,236 @@
+# SITE SETUP
+# Guide: https://wowchemy.com/docs/getting-started/
+# Documentation: https://wowchemy.com/docs/
+# This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
+
+############################
+## Appearance
+############################
+
+# Choose a theme.
+theme: carnelian
+
+# Enable users to switch between day and night mode?
+day_night: false
+
+# Override the theme's font set (optional).
+font: '' # "fira"
+
+# Choose a font size.
+# Sizes: XS (extra small), S (small), M (medium), L (large - DEFAULT), XL (extra large)
+font_size: L
+
+
+############################
+## Basic Info
+############################
+
+# SEO
+
+# Website type
+#   Improve how search engines understand your site.
+#   For personal sites, choose "Person".
+#   For organizations and projects, choose from https://schema.org/Organization#subtypes
+#   E.g. Person, Organization, LocalBusiness, Project, EducationalOrganization
+site_type: Person # "AEM2850"
+local_business_type: ''
+org_name: ''
+description: "R Programming for Business Analytics and Data Visualization"
+twitter: ''
+
+
+############################
+## Contact details
+##
+## These details power the Contact widget (if enabled).
+## Additionally, for organizations, these details may be used to enrich search engine results.
+############################
+
+author: Todd Gerarden
+
+instructor:
+  name: Prof. Todd Gerarden
+  email: gerarden@cornell.edu
+  url: "https://www.toddgerarden.com"
+  office: "Warren 466"
+  twitter: 'toddgerarden'
+  contact_policy: >-
+    Email is best for short and concrete questions. Please use office hours for complex or open-ended questions.
+
+teaching_assistant:
+  name: Hui Zhou
+  email: hz423@cornell.edu
+
+course:
+  number: "AEM 2850"
+  semester: "Spring 2022"
+  days: "Tuesdays and Thursdays"
+  time: "9:40am - 10:55am"
+  location: "Warren 150"
+  dates: "January – May, 2022"
+  copyrightYear: "2022"
+#  slack: "https://join.slack.com/t/msu-qs62738/shared_invite/zt-10u63bf0n-b0cePmz9NDhhw3MSUPBP5A"
+  office_hours: "Tuesday 11:00am - 12:00pm + by appointment"
+  appointment_url: 'https://aem2850.youcanbook.me'
+  github: "tgerarden/aem2850"
+  
+university:
+  name: Cornell University
+  url: "https://www.cornell.edu"
+
+school:
+  name: Dyson School of Applied Economics and Management
+  url: "https://dyson.cornell.edu"
+
+
+# Contact (edit or remove options as required)
+
+# phone: 888 888 88 88
+
+#contact_links:
+#  - icon: twitter
+#    icon_pack: fab
+#    name: DM Me
+#    link: 'https://twitter.com/toddgerarden'
+#  - icon: skype
+#    icon_pack: fab
+#    name: Skype Me
+#    link: 'skype:echo123?call'
+#  - icon: keybase
+#    icon_pack: fab
+#    name: Chat on Keybase
+#    link: 'https://keybase.io/'
+#  - icon: comments
+#    icon_pack: fas
+#    name: Discuss on Forum
+#    link: 'https://discourse.gohugo.io'
+
+# Site header
+
+
+main_menu:
+  # Display the navigation bar?
+  enable: true
+  # Align menu links: left (l), center (c), or right (r)
+  align: r
+  # Display your site title or `assets/media/logo*` image in the nav bar?
+  show_logo: true
+  # Show a language chooser (if you have translated your site content)?
+  show_translations: false
+  # If `show_translations` is enabled, do you wish to display the current language name?
+  show_language: false
+  # Let the user override the default light/dark mode of your theme?
+  show_day_night: false
+  # Let the user search from the nav bar?
+  show_search: false
+  # Attempt to automatically highlight the active menu link? Can be disabled for complex sites.
+  highlight_active_link: true
+
+# Localization
+
+date_format: 'Jan 2, 2006'
+time_format: '3:04 PM'
+address_format: en-us
+
+############################
+## Site Features
+############################
+
+highlight: true
+highlight_languages:
+  - r
+math: false # true for latex math
+diagram: false
+privacy_pack: false
+edit_page:
+  repo_url: ''
+  content_dir: ''
+  repo_branch: main
+  editable:
+    page: false
+    post: false
+    book: false
+show_related:
+  book: true
+  page: false
+  post: true
+  project: true
+  publication: true
+  event: true
+
+# Show estimated reading time for posts? (true/false)
+reading_time: true
+
+# Display next/previous section pager? (true/false)
+section_pager: false
+docs_section_pager: false  # Display pager in Docs layout (e.g. tutorials)?
+
+# Enable in-built social sharing buttons? (true/false)
+sharing: false
+
+# Link authors to their profile page? (true/false)
+link_authors: false
+
+copyright_license:
+  enable: false
+  allow_derivatives: false
+  share_alike: true
+  allow_commercial: false
+  notice: 'This work is licensed under {license}'
+abstract_length: 135
+plugins_js: []
+avatar:
+  gravatar: false
+  shape: circle
+publications:
+  date_format: January 2006
+  citation_style: apa
+projects:
+  post_view: 2
+  publication_view: 2
+  talk_view: 2
+breadcrumb:
+  page_types:
+    book: true
+
+comments:
+  provider: ''
+  commentable:
+    post: true
+    book: true
+    project: true
+    publication: true
+    event: true
+  disqus:
+    shortname: ''
+    show_count: true
+  commento:
+    url: ''
+
+search:
+  provider: 0
+  algolia:
+    app_id: ''
+    api_key: ''
+    index_name: ''
+    show_logo: false
+
+map:
+  provider: ''
+  api_key: ''
+  zoom: 15
+
+marketing:
+  google_analytics: ''
+  google_tag_manager: ''
+  google_site_verification: ''
+  baidu_site_verification: ''
+  baidu_tongji: ''
+
+cms:
+  branch: master
+  local_backend: false
+
+icon:
+  pack:
+    ai: true
