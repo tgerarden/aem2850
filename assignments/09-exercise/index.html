@@ -1,0 +1,175 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Wowchemy 5.4.0 for Hugo">
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media=print onload="this.media='all'">
+<meta name=description content="Getting started For this exercise, you&rsquo;ll use whatever data you want to make a plot and add annotations to it. Use a dataset from a past exercise, use one of the built-in datasets like mpg or gapminder from the gapminder package, download stuff from the World Bank using the WDI package, or use something from this list of datasets.">
+<link rel=alternate hreflang=en-us href=aem2850.toddgerarden.com/assignments/09-exercise/>
+<meta name=theme-color content="#B31B1B">
+<link rel=stylesheet href=/aem2850.toddgerarden.com/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin=anonymous media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css crossorigin=anonymous title=hl-light media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css crossorigin=anonymous title=hl-dark media=print onload="this.media='all'" disabled>
+<link rel=stylesheet href=/aem2850.toddgerarden.com/css/wowchemy.0955c4d33b0be4851935253be0520832.css>
+<link rel=manifest href=aem2850.toddgerarden.com/manifest.webmanifest>
+<link rel=icon type=image/png href=/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_3.png>
+<link rel=apple-touch-icon type=image/png href=/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_3.png>
+<link rel=canonical href=aem2850.toddgerarden.com/assignments/09-exercise/>
+<meta property="twitter:card" content="summary">
+<meta property="og:site_name" content="R for Business Analytics">
+<meta property="og:url" content="aem2850.toddgerarden.com/assignments/09-exercise/">
+<meta property="og:title" content="Annotations | R for Business Analytics">
+<meta property="og:description" content="Getting started For this exercise, you&rsquo;ll use whatever data you want to make a plot and add annotations to it. Use a dataset from a past exercise, use one of the built-in datasets like mpg or gapminder from the gapminder package, download stuff from the World Bank using the WDI package, or use something from this list of datasets."><meta property="og:image" content="/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png">
+<meta property="twitter:image" content="/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
+<meta property="article:published_time" content="2021-07-12T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-07-12T00:00:00+00:00">
+<title>Annotations | R for Business Analytics</title>
+</head>
+<body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=d8f241e7b24a2d015b246e0a3616011c>
+<script src=/aem2850.toddgerarden.com/js/wowchemy-init.min.133800c88f3b5bb934932231fd94fed7.js></script>
+<div class=page-header>
+<header class=header--fixed>
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id=navbar-main>
+<div class=container-xl>
+<div class="d-none d-lg-inline-flex">
+<a class=navbar-brand href=/aem2850.toddgerarden.com/>R for Business Analytics</a>
+</div>
+<button type=button class=navbar-toggler data-toggle=collapse data-target=#navbar-content aria-controls=navbar-content aria-expanded=false aria-label="Toggle navigation">
+<span><i class="fas fa-bars"></i></span>
+</button>
+<div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+<a class=navbar-brand href=/aem2850.toddgerarden.com/>R for Business Analytics</a>
+</div>
+<div class="navbar-collapse main-menu-item collapse justify-content-end" id=navbar-content>
+<ul class="navbar-nav d-md-inline-flex">
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/syllabus/><span>Syllabus</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/schedule/><span>Schedule</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/resource/><span>Resources</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://rstudio.cloud/ target=_blank rel=noopener><span><i class="fab fa-r-project"></i></span></a>
+</li>
+</ul>
+</div>
+<ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+</ul>
+</div>
+</nav>
+</header>
+</div>
+<div class=page-body>
+<article class=article>
+<div class="article-container pt-3">
+<h1>Annotations</h1>
+<div class=article-metadata>
+<span class=article-date>
+Jul 12, 2021
+</span>
+</div>
+</div>
+<div class=article-container>
+<div class=article-style>
+<h2 id=getting-started>Getting started</h2>
+<p>For this exercise, you&rsquo;ll use whatever data you want to make a plot and add annotations to it. Use a dataset from a past exercise, use one of the built-in datasets like <code>mpg</code> or <code>gapminder</code> from the <strong>gapminder</strong> package, download stuff from the World Bank using the <strong>WDI</strong> package, or use something from <a href=/resource/data/>this list of datasets</a>.</p>
+<p>You should use an RStudio Project to keep your files well organized (either on your computer or on RStudio.cloud). Either create a new project for this exercise only, or make a project for all your work in this class.</p>
+<p><strong>To help you</strong>, I&rsquo;ve created a skeleton R Markdown file with a template for this exercise, along with some code to help you clean and summarize the data. Download that here and include it in your project:</p>
+<ul>
+<li><a href=/projects/09-exercise/09-exercise.Rmd><i class="fab fa-r-project"></i> <code>09-exercise.Rmd</code></a></li>
+</ul>
+<p>In the end, the structure of your project directory should look something like this:</p>
+<pre><code class=language-text>your-project-name\
+  09-exercise.Rmd
+  your-project-name.Rproj
+  data\
+    WHATEVER.csv
+</code></pre>
+<p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:</p>
+<ul>
+<li><a href=/projects/09-exercise.zip><i class="fas fa-file-archive"></i> <code>09-exercise.zip</code></a></li>
+</ul>
+<p>The <a href=https://ggplot2.tidyverse.org/reference/annotate.html target=_blank rel=noopener>documentation for <code>annotate()</code></a>, <a href=https://ggplot2.tidyverse.org/reference/geom_text.html target=_blank rel=noopener><code>geom_text()</code> and <code>geom_label()</code></a>, and <a href=https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html target=_blank rel=noopener><code>geom_text_repel()</code> and <code>geom_label_repel()</code></a> will be incredibly helpful for this exercise. <a href=/example/09-example/>The example for today&rsquo;s session</a> is also helpful for seeing annotations in real life.</p>
+<p>Again, you don&rsquo;t need to make your plots super fancy (except for these annotations), but if you&rsquo;re feeling brave, experiment with changing colors or modifying themes and theme elements.</p>
+<p>You&rsquo;ll need to insert your own code chunks where needed. Rather than typing them by hand (that&rsquo;s tedious and you might miscount the number of backticks!), use the &ldquo;Insert&rdquo; button at the top of the editing window, or type <kbd>ctrl</kbd> + <kbd>alt</kbd> + <kbd>i</kbd> on Windows, or <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>i</kbd> on macOS.</p>
+<img src=/img/assignments/insert-chunk-button.png width=19%>
+<h2 id=task-1-reflection>Task 1: Reflection</h2>
+<p>Write your reflection for the day&rsquo;s readings.</p>
+<h2 id=task-2-annotations>Task 2: Annotations</h2>
+<p>Do the following:</p>
+<ol>
+<li>
+<p>Make a plot. Any kind of plot will do (though it might be easiest to work with <code>geom_point()</code>).</p>
+</li>
+<li>
+<p>Label (some or all of) the points using one of <code>geom_text()</code>, <code>geom_label()</code>, <code>geom_text_repel()</code>, or <code>geom_label_repel()</code>. You might need to make a new indicator variable so that you only highlight a few of the points instead of all of them. <a href=hslides/09-slides.html#29>See this slide for an example</a>, as well as <a href=/example/09-example/>the complete example plot on the example page</a> for today&rsquo;s session.</p>
+</li>
+<li>
+<p>Add <em>at least two each</em>* the following annotations somewhere on the plot using <code>annotate()</code>:</p>
+<ul>
+<li><strong>Text</strong></li>
+<li><strong>An arrow</strong> (look at <a href=https://www.r-graph-gallery.com/233-add-annotations-on-ggplot2-chart.html target=_blank rel=noopener>this page</a>, or search for &ldquo;arrow&rdquo; <a href=https://ggplot2-book.org/annotations.html target=_blank rel=noopener>on this page</a> for examples). Make a curved arrow for bonus fun.</li>
+<li><strong>A rectangle</strong></li>
+</ul>
+<p>You can add more if you want, but those three are the minimum. Try to incorporate the annotations into the design of the plot rather than just placing them wherever.</p>
+</li>
+</ol>
+<h2 id=turning-everything-in>Turning everything in</h2>
+<p>When you&rsquo;re all done, click on the &ldquo;Knit&rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&rsquo;ve <a href=/resource/install/#install-tinytex>installed <strong>tinytex</strong></a>) of your document. Upload that file to iCollege.</p>
+<img src=/img/assignments/knit-button.png width=30%>
+</div>
+<div class="media author-card content-widget-hr">
+<div class=media-body>
+<h5 class=card-title><a href=aem2850.toddgerarden.com></a></h5>
+<ul class=network-icon aria-hidden=true>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class=page-footer>
+</div>
+<div id=modal class="modal fade" role=dialog>
+<div class=modal-dialog>
+<div class=modal-content>
+<div class=modal-header>
+<h5 class=modal-title>Cite</h5>
+<button type=button class=close data-dismiss=modal aria-label=Close>
+<span aria-hidden=true>&#215;</span>
+</button>
+</div>
+<div class=modal-body>
+<pre><code class="tex hljs"></code></pre>
+</div>
+<div class=modal-footer>
+<a class="btn btn-outline-primary my-1 js-copy-cite" href=# target=_blank>
+<i class="fas fa-copy"></i> Copy
+</a>
+<a class="btn btn-outline-primary my-1 js-download-cite" href=# target=_blank>
+<i class="fas fa-download"></i> Download
+</a>
+<div id=modal-error></div>
+</div>
+</div>
+</div>
+</div>
+<script src=/aem2850.toddgerarden.com/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js></script>
+<script src=https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/bryanbraun/anchorjs@4.2.2/anchor.min.js integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin=anonymous></script>
+<script>anchors.add()</script>
+<script id=page-data type=application/json>{"use_headroom":true}</script>
+<script src=/aem2850.toddgerarden.com/js/wowchemy-headroom.1cb9e2fc8399acee94eab837265b73bf.js type=module></script>
+<script src=/aem2850.toddgerarden.com/en/js/wowchemy.min.216188596c551a0582beb89fb0d646e2.js></script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Wowchemy 5.4.0 for Hugo">
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media=print onload="this.media='all'">
+<meta name=description content="For this example we’ll use data from the World Bank once again, which we download using the WDI package.
+If you want to skip the data downloading, you can download the data below (you’ll likely need to right click and choose “Save Link As…”):">
+<link rel=alternate hreflang=en-us href=aem2850.toddgerarden.com/example/10-example/>
+<meta name=theme-color content="#B31B1B">
+<link rel=stylesheet href=/aem2850.toddgerarden.com/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin=anonymous media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css crossorigin=anonymous title=hl-light media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css crossorigin=anonymous title=hl-dark media=print onload="this.media='all'" disabled>
+<link rel=stylesheet href=/aem2850.toddgerarden.com/css/wowchemy.0955c4d33b0be4851935253be0520832.css>
+<link rel=manifest href=aem2850.toddgerarden.com/manifest.webmanifest>
+<link rel=icon type=image/png href=/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_3.png>
+<link rel=apple-touch-icon type=image/png href=/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_3.png>
+<link rel=canonical href=aem2850.toddgerarden.com/example/10-example/>
+<meta property="twitter:card" content="summary">
+<meta property="og:site_name" content="R for Business Analytics">
+<meta property="og:url" content="aem2850.toddgerarden.com/example/10-example/">
+<meta property="og:title" content="Interactivity | R for Business Analytics">
+<meta property="og:description" content="For this example we’ll use data from the World Bank once again, which we download using the WDI package.
+If you want to skip the data downloading, you can download the data below (you’ll likely need to right click and choose “Save Link As…”):"><meta property="og:image" content="/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png">
+<meta property="twitter:image" content="/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
+<meta property="article:published_time" content="2021-07-05T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-07-05T00:00:00+00:00">
+<title>Interactivity | R for Business Analytics</title>
+</head>
+<body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=7d0a53375ef9f0dd0968572178ee71c7>
+<script src=/aem2850.toddgerarden.com/js/wowchemy-init.min.133800c88f3b5bb934932231fd94fed7.js></script>
+<div class=page-header>
+<header class=header--fixed>
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id=navbar-main>
+<div class=container-xl>
+<div class="d-none d-lg-inline-flex">
+<a class=navbar-brand href=/aem2850.toddgerarden.com/>R for Business Analytics</a>
+</div>
+<button type=button class=navbar-toggler data-toggle=collapse data-target=#navbar-content aria-controls=navbar-content aria-expanded=false aria-label="Toggle navigation">
+<span><i class="fas fa-bars"></i></span>
+</button>
+<div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+<a class=navbar-brand href=/aem2850.toddgerarden.com/>R for Business Analytics</a>
+</div>
+<div class="navbar-collapse main-menu-item collapse justify-content-end" id=navbar-content>
+<ul class="navbar-nav d-md-inline-flex">
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/syllabus/><span>Syllabus</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/schedule/><span>Schedule</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/resource/><span>Resources</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://rstudio.cloud/ target=_blank rel=noopener><span><i class="fab fa-r-project"></i></span></a>
+</li>
+</ul>
+</div>
+<ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+</ul>
+</div>
+</nav>
+</header>
+</div>
+<div class=page-body>
+<article class=article>
+<div class="article-container pt-3">
+<h1>Interactivity</h1>
+<div class=article-metadata>
+<span class=article-date>
+Jul 5, 2021
+</span>
+</div>
+</div>
+<div class=article-container>
+<div class=article-style>
+<script src=/rmarkdown-libs/htmlwidgets/htmlwidgets.js></script>
+<script src=/rmarkdown-libs/pymjs/pym.v1.js></script>
+<script src=/rmarkdown-libs/widgetframe-binding/widgetframe.js></script>
+<script src=/rmarkdown-libs/htmlwidgets/htmlwidgets.js></script>
+<script src=/rmarkdown-libs/pymjs/pym.v1.js></script>
+<script src=/rmarkdown-libs/widgetframe-binding/widgetframe.js></script>
+<script src=/rmarkdown-libs/htmlwidgets/htmlwidgets.js></script>
+<script src=/rmarkdown-libs/pymjs/pym.v1.js></script>
+<script src=/rmarkdown-libs/widgetframe-binding/widgetframe.js></script>
+<p>For this example we’ll use data from the <a href=https://data.worldbank.org/ target=_blank rel=noopener>World Bank</a> once again, which we download using the <a href=https://cran.r-project.org/web/packages/WDI/index.html target=_blank rel=noopener><strong>WDI</strong> package</a>.</p>
+<p>If you want to skip the data downloading, you can download the data below (you’ll likely need to right click and choose “Save Link As…”):</p>
+<ul>
+<li><a href=/data/wdi_parl.csv><i class="fas fa-file-csv"></i> <code>wdi_parl.csv</code></a></li>
+</ul>
+<h2 id=live-coding-example>Live coding example</h2>
+<p>There is no video for this one, since it really only involves feeding a few ggplot plots fed into <code>ggplotly()</code>.</p>
+<h2 id=complete-code>Complete code</h2>
+<h3 id=get-and-clean-data>Get and clean data</h3>
+<p>First, we load the libraries we’ll be using:</p>
+<pre><code class=language-r>library(tidyverse)  # For ggplot, dplyr, and friends
+library(WDI)        # Get data from the World Bank
+library(scales)     # For nicer label formatting
+library(plotly)     # For easy interactive plots
+</code></pre>
+<pre><code class=language-r>indicators &lt;- c(&quot;SP.POP.TOTL&quot;,     # Population
+                &quot;SG.GEN.PARL.ZS&quot;,  # Proportion of seats held by women in national parliaments (%)
+                &quot;NY.GDP.PCAP.KD&quot;)  # GDP per capita
+
+wdi_parl_raw &lt;- WDI(country = &quot;all&quot;, indicators, extra = TRUE, 
+                    start = 2000, end = 2019)
+</code></pre>
+<p>Then we clean the data by removing non-country countries and renaming some of the columns.</p>
+<pre><code class=language-r>wdi_clean &lt;- wdi_parl_raw %&gt;% 
+  filter(region != &quot;Aggregates&quot;) %&gt;% 
+  select(iso2c, iso3c, country, year, 
+         population = SP.POP.TOTL,
+         prop_women_parl = SG.GEN.PARL.ZS, 
+         gdp_per_cap = NY.GDP.PCAP.KD, 
+         region, income)
+</code></pre>
+<h3 id=creating-a-basic-interactive-chart>Creating a basic interactive chart</h3>
+<p>Let’s make a chart that shows the distribution of the proportion of women in national parliaments in 2019, by continent. We’ll use a strip plot with jittered points.</p>
+<p>First we need to make a regular static plot with ggplot:</p>
+<pre><code class=language-r>wdi_2019 &lt;- wdi_clean %&gt;% 
+  filter(year == 2019) %&gt;% 
+  drop_na(prop_women_parl) %&gt;% 
+  # Scale this down from 0-100 to 0-1 so that scales::percent() can format it as
+  # an actual percent
+  mutate(prop_women_parl = prop_women_parl / 100)
+
+static_plot &lt;- ggplot(wdi_2019, 
+                      aes(y = fct_rev(region), x = prop_women_parl, color = region)) +
+  geom_point(position = position_jitter(width = 0, height = 0.15, seed = 1234)) +
+  guides(color = &quot;none&quot;) +
+  scale_x_continuous(labels = percent) +
+  # I used https://medialab.github.io/iwanthue/ to generate these colors
+  scale_color_manual(values = c(&quot;#425300&quot;, &quot;#e680ff&quot;, &quot;#01bd71&quot;, &quot;#ff3aad&quot;,
+                                &quot;#9f3e00&quot;, &quot;#0146bf&quot;, &quot;#671d56&quot;)) +
+  labs(x = &quot;% women in parliament&quot;, y = NULL, caption = &quot;Source: The World Bank&quot;) +
+  theme_bw()
+static_plot
+</code></pre>
+<img src=/example/10-example_files/figure-html/strip-plot-basic-1.png width=576 style=display:block;margin:auto>
+<p>Great! That looks pretty good.</p>
+<p>To make it interactive, <em>all we have to do</em> is feed the <code>static_plot</code> object into <code>ggplotly()</code>. That’s it.</p>
+<pre><code class=language-r>ggplotly(static_plot)
+</code></pre>
+<div id=htmlwidget-1 style=width:100%;height:400px class="widgetframe html-widget"></div>
+<script type=application/json data-for=htmlwidget-1>{"x":{"url":"/example/10-example_files/figure-html//widgets/widget_strip-plot-basic-interactive-real.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>Not <em>everything</em> translates over to JavaScript—the caption is gone now, and the legend is back (which is fine, I guess, since the legend is interactive). But still, this is magic.</p>
+<h3 id=modifying-the-tooltip>Modifying the tooltip</h3>
+<p>Right now, the default tooltip you see when you hover over the points includes the actual proportion of women in parliament for each point, along with the continent, which is neat, but it’d be great if we could see the country name too. The tooltip picks up the information to include from the variables we use in <code>aes()</code>, and we never map the <code>country</code> column to any aesthetic, so it doesn’t show up.</p>
+<p>To get around this, we can add a new aesthetic for country to the points. Instead of using one of the real ggplot aesthetics like <code>color</code> or <code>fill</code>, we’ll use a fake one called <code>text</code> (we can call it whatever we want! <code>asdf</code> would also work). ggplot has no idea how to do anything with the <code>text</code> aesthetic, and it’ll give you a warning, but that’s okay. The static plot looks the same:</p>
+<pre><code class=language-r>static_plot_toolip &lt;- ggplot(wdi_2019, 
+                             aes(y = fct_rev(region), x = prop_women_parl, color = region)) +
+  geom_point(aes(text = country),
+             position = position_jitter(width = 0, height = 0.15, seed = 1234)) +
+  guides(color = &quot;none&quot;) +
+  scale_x_continuous(labels = percent) +
+  # I used https://medialab.github.io/iwanthue/ to generate these colors
+  scale_color_manual(values = c(&quot;#425300&quot;, &quot;#e680ff&quot;, &quot;#01bd71&quot;, &quot;#ff3aad&quot;,
+                                &quot;#9f3e00&quot;, &quot;#0146bf&quot;, &quot;#671d56&quot;)) +
+  labs(x = &quot;% women in parliament&quot;, y = NULL, caption = &quot;Source: The World Bank&quot;) +
+  theme_bw()
+</code></pre>
+<pre><code>## Warning: Ignoring unknown aesthetics: text
+</code></pre>
+<pre><code class=language-r>static_plot_toolip
+</code></pre>
+<img src=/example/10-example_files/figure-html/strip-plot-text-aes-1.png width=576 style=display:block;margin:auto>
+<p>Now we can tell plotly to use this fake <code>text</code> aesthetic for the tooltip:</p>
+<pre><code class=language-r>ggplotly(static_plot_toolip, tooltip = &quot;text&quot;)
+</code></pre>
+<div id=htmlwidget-2 style=width:100%;height:400px class="widgetframe html-widget"></div>
+<script type=application/json data-for=htmlwidget-2>{"x":{"url":"/example/10-example_files/figure-html//widgets/widget_strip-plot-text-interactive-real.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>Now we should just see the country names in the tooltips!</p>
+<h3 id=including-more-information-in-the-tooltip>Including more information in the tooltip</h3>
+<p>We have country names, but we lost the values in the x-axis. Rwanda has the highest proportion of women in parliament, but what’s the exact number? It’s somewhere above 60%, but that’s all we can see now.</p>
+<p>To fix this, we can make a new column in the data with all the text we want to include in the tooltip. We’ll use <code>paste0()</code> to combine text and variable values to make the tooltip follow this format:</p>
+<pre><code class=language-text>Name of country
+X% women in parliament
+</code></pre>
+<p>Let’s add a new column with <code>mutate()</code>. A couple things to note here:</p>
+<ul>
+<li>
+<p>The <code>&lt;br></code> is HTML code for a line break</p>
+</li>
+<li>
+<p>We use the <code>percent()</code> function to format numbers as percents. The <code>accuracy</code> argument tells R how many decimal points to use. If we used <code>1</code>, it would say 12%; if we used <code>0.01</code>, it would say 12.08%; etc.</p>
+</li>
+</ul>
+<pre><code class=language-r>wdi_2019 &lt;- wdi_clean %&gt;% 
+  filter(year == 2019) %&gt;% 
+  drop_na(prop_women_parl) %&gt;% 
+  # Scale this down from 0-100 to 0-1 so that scales::percent() can format it as
+  # an actual percent
+  mutate(prop_women_parl = prop_women_parl / 100) %&gt;% 
+  mutate(fancy_label = paste0(country, &quot;&lt;br&gt;&quot;, 
+                              percent(prop_women_parl, accuracy = 0.1), 
+                              &quot; women in parliament&quot;))
+</code></pre>
+<p>Let’s check to see if it worked:</p>
+<pre><code class=language-r>wdi_2019 %&gt;% select(country, prop_women_parl, fancy_label) %&gt;% head()
+</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   country              prop_women_parl fancy_label                                      
+##   &lt;chr&gt;                          &lt;dbl&gt; &lt;chr&gt;                                            
+## 1 Andorra                        0.5   Andorra&lt;br&gt;50.0% women in parliament             
+## 2 United Arab Emirates           0.225 United Arab Emirates&lt;br&gt;22.5% women in parliament
+## 3 Afghanistan                    0.279 Afghanistan&lt;br&gt;27.9% women in parliament         
+## 4 Antigua and Barbuda            0.111 Antigua and Barbuda&lt;br&gt;11.1% women in parliament 
+## 5 Albania                        0.295 Albania&lt;br&gt;29.5% women in parliament             
+## 6 Armenia                        0.242 Armenia&lt;br&gt;24.2% women in parliament
+</code></pre>
+<p>Now instead of using <code>text = country</code> we’ll use <code>text = fancy_label</code> to map that new column onto the plot. Again, this won’t be visible in the static plot (and you’ll get a warning), but it will show up in the interactive plot.</p>
+<pre><code class=language-r>static_plot_toolip_fancy &lt;- ggplot(wdi_2019, 
+                                   aes(y = fct_rev(region), 
+                                       x = prop_women_parl, 
+                                       color = region)) +
+  geom_point(aes(text = fancy_label),
+             position = position_jitter(width = 0, height = 0.15, seed = 1234)) +
+  guides(color = &quot;none&quot;) +
+  scale_x_continuous(labels = percent) +
+  # I used https://medialab.github.io/iwanthue/ to generate these colors
+  scale_color_manual(values = c(&quot;#425300&quot;, &quot;#e680ff&quot;, &quot;#01bd71&quot;, &quot;#ff3aad&quot;,
+                                &quot;#9f3e00&quot;, &quot;#0146bf&quot;, &quot;#671d56&quot;)) +
+  labs(x = &quot;% women in parliament&quot;, y = NULL, caption = &quot;Source: The World Bank&quot;) +
+  theme_bw()
+</code></pre>
+<pre><code>## Warning: Ignoring unknown aesthetics: text
+</code></pre>
+<pre><code class=language-r>ggplotly(static_plot_toolip_fancy, tooltip = &quot;text&quot;)
+</code></pre>
+<div id=htmlwidget-3 style=width:100%;height:400px class="widgetframe html-widget"></div>
+<script type=application/json data-for=htmlwidget-3>{"x":{"url":"/example/10-example_files/figure-html//widgets/widget_strip-plot-text-interactive-fancy-real.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>Perfect!</p>
+<p>Finally, if we want to save this plot as a standalone self-contained HTML file, we can use the <code>saveWidget()</code> function from the <strong>htmlwidgets</strong> package.</p>
+<pre><code class=language-r># This is like ggsave, but for interactive HTML plots
+interactive_plot &lt;- static_plot_toolip_fancy
+
+htmlwidgets::saveWidget(interactive_plot, &quot;fancy_plot.html&quot;)
+</code></pre>
+<h3 id=making-a-dashboard-with-flexdashboard>Making a dashboard with <strong>flexdashboard</strong></h3>
+<p>The <a href=https://rmarkdown.rstudio.com/flexdashboard/ target=_blank rel=noopener>documentation for <strong>flexdashboard</strong> is so great and complete</a> that I’m not going to include a full example here. There is also a brief overview in <a href=https://bookdown.org/yihui/rmarkdown/dashboards.html target=_blank rel=noopener>chapter 5 of the official R Markdown book</a>. You can also watch <a href="https://www.youtube.com/watch?v=_oDfBVr9wmQ" target=_blank rel=noopener>this really quick video here</a>. She uses a package called <strong>dimple</strong> instead of <strong>plotly</strong>, which doesn’t work with ggplot like <code>ggplotly()</code>, so <em>ignore her code</em> about <code>dimple()</code> and use your <code>ggplotly()</code> skills instead. You can search YouTube for a bunch of other short tutorial videos, too.</p>
+<p>The quickest and easiest way to get started is to install the <strong>flexdashboard</strong> package and then in RStudio go to File > New File… > R Markdown… > From Template > Flexdashboard:</p>
+<img src=/img/examples/flexdashboard-template.png width=60% style=display:block;margin:auto>
+<p>That will give you an empty dashboard with three chart areas spread across two columns. Put static or dynamic graphs in the different chart areas, knit, and you’ll be good to go!</p>
+<p>If you’re interested in making the dashboard reactive with Shiny-like elements, <a href=https://www.andrewheiss.com/blog/2020/01/01/flexdashboard-dynamic-data/ target=_blank rel=noopener>check out this tutorial</a>.</p>
+</div>
+<div class="media author-card content-widget-hr">
+<div class=media-body>
+<h5 class=card-title><a href=aem2850.toddgerarden.com></a></h5>
+<ul class=network-icon aria-hidden=true>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class=page-footer>
+</div>
+<div id=modal class="modal fade" role=dialog>
+<div class=modal-dialog>
+<div class=modal-content>
+<div class=modal-header>
+<h5 class=modal-title>Cite</h5>
+<button type=button class=close data-dismiss=modal aria-label=Close>
+<span aria-hidden=true>&#215;</span>
+</button>
+</div>
+<div class=modal-body>
+<pre><code class="tex hljs"></code></pre>
+</div>
+<div class=modal-footer>
+<a class="btn btn-outline-primary my-1 js-copy-cite" href=# target=_blank>
+<i class="fas fa-copy"></i> Copy
+</a>
+<a class="btn btn-outline-primary my-1 js-download-cite" href=# target=_blank>
+<i class="fas fa-download"></i> Download
+</a>
+<div id=modal-error></div>
+</div>
+</div>
+</div>
+</div>
+<script src=/aem2850.toddgerarden.com/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js></script>
+<script src=https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/bryanbraun/anchorjs@4.2.2/anchor.min.js integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin=anonymous></script>
+<script>anchors.add()</script>
+<script id=page-data type=application/json>{"use_headroom":true}</script>
+<script src=/aem2850.toddgerarden.com/js/wowchemy-headroom.1cb9e2fc8399acee94eab837265b73bf.js type=module></script>
+<script src=/aem2850.toddgerarden.com/en/js/wowchemy.min.216188596c551a0582beb89fb0d646e2.js></script>
+</body>
+</html>

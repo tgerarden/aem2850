@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Helpful resources | R for Business Analytics</title><link>aem2850.toddgerarden.com/resource/</link><atom:link href="aem2850.toddgerarden.com/resource/index.xml" rel="self" type="application/rss+xml"/><description>Helpful resources</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 06 May 2020 00:00:00 +0000</lastBuildDate><image><url>/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url><title>Helpful resources</title><link>aem2850.toddgerarden.com/resource/</link></image><item><title>Installing R, RStudio, tidyverse, and tinytex</title><link>aem2850.toddgerarden.com/resource/install/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/resource/install/</guid><description>&lt;p>You will do all of your work in this class with the open source (and free!) programming language &lt;a href="https://cran.r-project.org/" target="_blank" rel="noopener">R&lt;/a>. You will use &lt;a href="https://www.rstudio.com/" target="_blank" rel="noopener">RStudio&lt;/a> as the main program to access R. Think of R as an engine and RStudio as a car dashboard—R handles all the calculations and the actual statistics, while RStudio provides a nice interface for running R code.&lt;/p>
+&lt;h2 id="rstudiocloud">RStudio.cloud&lt;/h2>
+&lt;p>R is free, but it can sometimes be a pain to install and configure. To make life easier, you can (and should!) use the free &lt;a href="http://rstudio.cloud/" target="_blank" rel="noopener">RStudio.cloud&lt;/a> service &lt;em>initially&lt;/em>, which lets you run a full instance of RStudio in your web browser. This means you won&amp;rsquo;t have to install anything on your computer to get started with R! We will have a shared class workspace in RStudio.cloud that will let you quickly copy templates for labs and problem sets.&lt;/p>
+&lt;p>Go to &lt;a href="https://rstudio.cloud/" target="_blank" rel="noopener">https://rstudio.cloud/&lt;/a> and create an account. You&amp;rsquo;ll receive a link to join the shared class workspace separately. If you don&amp;rsquo;t get this link, let me know and I will invite you.&lt;/p>
+&lt;h2 id="rstudio-on-your-computer">RStudio on your computer&lt;/h2>
+&lt;p>RStudio.cloud is convenient, but it can be slow and it is not designed to be able to handle larger datasets, more complicated analysis, or fancier graphics. Over the course of the semester, you should wean yourself off of RStudio.cloud and install all these things locally. This is also important if you want to customize fonts, since RStudio.cloud has extremely limited support for fonts other than Helvetica.&lt;/p>
+&lt;p>Here&amp;rsquo;s how you install all these things&lt;/p>
+&lt;h3 id="install-r">Install R&lt;/h3>
+&lt;p>First you need to install R itself (the engine).&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Go to the CRAN (Collective R Archive Network)&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> website: &lt;a href="https://cran.r-project.org/" target="_blank" rel="noopener">https://cran.r-project.org/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Click on &amp;ldquo;Download R for &lt;code>XXX&lt;/code>&amp;rdquo;, where &lt;code>XXX&lt;/code> is either Mac or Windows:&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/install/install-r-links.png" width="60%" />
+&lt;ul>
+&lt;li>
+&lt;p>If you use macOS, scroll down to the first &lt;code>.pkg&lt;/code> file in the list of files (in this picture, it&amp;rsquo;s &lt;code>R-4.0.0.pkg&lt;/code>; as of right now, the current version is also 4.0.0) and download it.&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/install/install-r-mac.png" width="100%" />
+&lt;/li>
+&lt;li>
+&lt;p>If you use Windows, click &amp;ldquo;base&amp;rdquo; (or click on the bolded &amp;ldquo;install R for the first time&amp;rdquo; link) and download it.&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/install/install-r-windows.png" width="100%" />
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Double click on the downloaded file (check your &lt;code>Downloads&lt;/code> folder). Click yes through all the prompts to install like any other program.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>If you use macOS, &lt;a href="https://www.xquartz.org/" target="_blank" rel="noopener">download and install XQuartz&lt;/a>. You do not need to do this on Windows.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="install-rstudio">Install RStudio&lt;/h3>
+&lt;p>Next, you need to install RStudio, the nicer graphical user interface (GUI) for R (the dashboard). Once R and RStudio are both installed, you can ignore R and only use RStudio. RStudio will use R automatically and you won&amp;rsquo;t ever have to interact with it directly.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Go to the free download location on RStudio&amp;rsquo;s website: &lt;a href="https://www.rstudio.com/products/rstudio/download/#download" target="_blank" rel="noopener">https://www.rstudio.com/products/rstudio/download/#download&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The website should automatically detect your operating system (macOS or Windows) and show a big download button for it:&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/install/install-r-rstudio1.png" width="50%" />
+&lt;p>If not, scroll down a little to the large table and choose the version of RStudio that matches your operating system.&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/install/install-r-rstudio2.png" width="100%" />
+&lt;/li>
+&lt;li>
+&lt;p>Double click on the downloaded file (again, check your &lt;code>Downloads&lt;/code> folder). Click yes through all the prompts to install like any other program.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Double click on RStudio to run it (check your applications folder or start menu).&lt;/p>
+&lt;h3 id="install-tidyverse">Install &lt;code>tidyverse&lt;/code>&lt;/h3>
+&lt;p>R packages are easy to install with RStudio. Select the packages panel, click on &amp;ldquo;Install,&amp;rdquo; type the name of the package you want to install, and press enter.&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/install/install-r-package-panel.png" width="40%" />
+&lt;p>This can sometimes be tedious when you&amp;rsquo;re installing lots of packages, though. &lt;a href="https://www.tidyverse.org/" target="_blank" rel="noopener">The tidyverse&lt;/a>, for instance, consists of dozens of packages (including &lt;strong>ggplot2&lt;/strong>) that all work together. Rather than install each individually, you can install a single magical package and get them all at the same time.&lt;/p>
+&lt;p>Go to the packages panel in RStudio, click on &amp;ldquo;Install,&amp;rdquo; type &amp;ldquo;tidyverse&amp;rdquo;, and press enter. You&amp;rsquo;ll see a bunch of output in the RStudio console as all the tidyverse packages are installed.&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/install/install-r-tidyverse.png" width="60%" />
+&lt;p>Notice also that RStudio will generate a line of code for you and run it: &lt;code>install.packages(&amp;quot;tidyverse&amp;quot;)&lt;/code>. You can also just paste and run this instead of using the packages panel.&lt;/p>
+&lt;h3 id="install-tinytex">Install &lt;code>tinytex&lt;/code>&lt;/h3>
+&lt;p>When you knit to PDF, R uses a special scientific typesetting program named LaTeX (pronounced &amp;ldquo;lay-tek&amp;rdquo; or &amp;ldquo;lah-tex&amp;rdquo;; for goofy nerdy reasons, the x is technically the &amp;ldquo;ch&amp;rdquo; sound in &amp;ldquo;Bach&amp;rdquo;, but most people just say it as &amp;ldquo;k&amp;rdquo;—saying &amp;ldquo;layteks&amp;rdquo; is frowned on for whatever reason).&lt;/p>
+&lt;p>LaTeX is neat and makes pretty documents, but it&amp;rsquo;s a huge program—&lt;a href="https://tug.org/mactex/mactex-download.html" target="_blank" rel="noopener">the macOS version, for instance, is nearly 4 GB&lt;/a>! To make life easier, there&amp;rsquo;s &lt;a href="https://yihui.org/tinytex/" target="_blank" rel="noopener">an R package named &lt;strong>tinytex&lt;/strong>&lt;/a> that installs a minimal LaTeX program and that automatically deals with differences between macOS and Windows.&lt;/p>
+&lt;p>Here&amp;rsquo;s how to install &lt;strong>tinytex&lt;/strong> so you can knit to pretty PDFs:&lt;/p>
+&lt;ol>
+&lt;li>Use the Packages in panel in RStudio to install &lt;strong>tinytex&lt;/strong> like you did above with &lt;strong>tidyverse&lt;/strong>. Alternatively, run &lt;code>install.packages(&amp;quot;tinytex&amp;quot;)&lt;/code> in the console.&lt;/li>
+&lt;li>Run &lt;code>tinytex::install_tinytex()&lt;/code> in the console.&lt;/li>
+&lt;li>Wait for a bit while R downloads and installs everything you need.&lt;/li>
+&lt;li>The end! You should now be able to knit to PDF.&lt;/li>
+&lt;/ol>
+&lt;section class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1" role="doc-endnote">
+&lt;p>It&amp;rsquo;s a goofy name, but CRAN is where most R packages—and R itself—lives.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/section></description></item><item><title>Design</title><link>aem2850.toddgerarden.com/resource/design/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/resource/design/</guid><description>&lt;h2 id="accessibility">Accessibility&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="http://www.vischeck.com/vischeck/vischeckImage.php" target="_blank" rel="noopener">&lt;strong>Vischeck&lt;/strong>&lt;/a>: Simulate how your images look for people with different forms of colorblindness (web-based)&lt;/li>
+&lt;li>&lt;a href="http://colororacle.org/index.html" target="_blank" rel="noopener">&lt;strong>Color Oracle&lt;/strong>&lt;/a>: Simulate how your images look for people with different forms of colorblindness (desktop-based, more types of colorblindness)&lt;/li>
+&lt;/ul>
+&lt;h2 id="colors">Colors&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://color.adobe.com" target="_blank" rel="noopener">&lt;strong>Adobe Color&lt;/strong>&lt;/a>: Create, share, and explore rule-based and custom color palettes.&lt;/li>
+&lt;li>&lt;a href="http://www.colourlovers.com/" target="_blank" rel="noopener">&lt;strong>ColourLovers&lt;/strong>&lt;/a>: Like Facebook for color palettes.&lt;/li>
+&lt;li>&lt;a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html" target="_blank" rel="noopener">&lt;strong>viridis&lt;/strong>&lt;/a>: Percetually uniform color scales.&lt;/li>
+&lt;li>&lt;a href="http://www.fabiocrameri.ch/colourmaps.php" target="_blank" rel="noopener">&lt;strong>Scientific Colour-Maps&lt;/strong>&lt;/a>: Perceptually uniform color scales like viridis. Use them in R with &lt;a href="https://github.com/thomasp85/scico" target="_blank" rel="noopener">&lt;strong>scico&lt;/strong>&lt;/a>.&lt;/li>
+&lt;li>&lt;a href="http://colorbrewer2.org/" target="_blank" rel="noopener">&lt;strong>ColorBrewer&lt;/strong>&lt;/a>: Sequential, diverging, and qualitative color palettes that take accessibility into account.&lt;/li>
+&lt;li>&lt;a href="http://colorspace.r-forge.r-project.org/articles/ggplot2_color_scales.html#available-palettes-1" target="_blank" rel="noopener">*&lt;em>HCL palettes&lt;/em>&lt;/a>: The &lt;strong>colorspace&lt;/strong> package for R includes a ton of qualitative, sequential, and diverging &lt;a href="http://colorspace.r-forge.r-project.org/articles/hcl_palettes.html" target="_blank" rel="noopener">HCL (hue-chroma-luminance)&lt;/a> palettes that use fancy mathematical rules that maintain perceptual distance&lt;/li>
+&lt;li>&lt;a href="http://vrl.cs.brown.edu/color" target="_blank" rel="noopener">&lt;strong>Colorgorical&lt;/strong>&lt;/a>: Create color palettes based on fancy mathematical rules for perceptual distance.&lt;/li>
+&lt;li>&lt;a href="http://tristen.ca/hcl-picker/" target="_blank" rel="noopener">&lt;strong>Colorpicker for data&lt;/strong>&lt;/a>: More fancy mathematical rules for color palettes (&lt;a href="https://www.vis4.net/blog/posts/avoid-equidistant-hsv-colors/" target="_blank" rel="noopener">explanation&lt;/a>).&lt;/li>
+&lt;li>&lt;a href="http://tools.medialab.sciences-po.fr/iwanthue/" target="_blank" rel="noopener">&lt;strong>iWantHue&lt;/strong>&lt;/a>: Yet another perceptual distance-based color palette builder.&lt;/li>
+&lt;li>&lt;a href="https://photochrome.io/" target="_blank" rel="noopener">&lt;strong>Photochrome&lt;/strong>&lt;/a>: Word-based color pallettes.&lt;/li>
+&lt;li>&lt;a href="https://policyviz.com/better-presentations/design-resources/design-color-tools/" target="_blank" rel="noopener">&lt;strong>PolicyViz Design Color Tools&lt;/strong>&lt;/a>: Large collection of useful color resources&lt;/li>
+&lt;/ul>
+&lt;h2 id="fonts">Fonts&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://fonts.google.com/" target="_blank" rel="noopener">&lt;strong>Google Fonts&lt;/strong>&lt;/a>: Huge collection of free, well-made fonts.&lt;/li>
+&lt;li>&lt;a href="https://www.reliablepsd.com/ultimate-google-font-pairings/" target="_blank" rel="noopener">&lt;strong>The Ultimate Collection of Google Font Pairings&lt;/strong>&lt;/a>: A list of great, well-designed font pairings from all those fonts hosted by Google (for when you&amp;rsquo;re looking for good contrasting or complementary fonts).&lt;/li>
+&lt;/ul>
+&lt;h2 id="graphic-assets">Graphic assets&lt;/h2>
+&lt;h3 id="images">Images&lt;/h3>
+&lt;ul>
+&lt;li>Use the Creative Commons filters on Google Images or Flickr&lt;/li>
+&lt;li>&lt;a href="https://unsplash.com/" target="_blank" rel="noopener">&lt;strong>Unsplash&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.pexels.com/" target="_blank" rel="noopener">&lt;strong>Pexels&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://pixabay.com/" target="_blank" rel="noopener">&lt;strong>Pixabay&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://stocksnap.io/" target="_blank" rel="noopener">&lt;strong>StockSnap.io&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://burst.shopify.com/" target="_blank" rel="noopener">&lt;strong>Burst&lt;/strong>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://freephotos.cc/" target="_blank" rel="noopener">&lt;strong>freephotos.cc&lt;/strong>&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="vectors">Vectors&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://thenounproject.com/" target="_blank" rel="noopener">&lt;strong>Noun Project&lt;/strong>&lt;/a>: Thousands of free simple vector images&lt;/li>
+&lt;li>&lt;a href="http://aiconica.net/" target="_blank" rel="noopener">&lt;strong>aiconica&lt;/strong>&lt;/a>: 1,000+ vector icons&lt;/li>
+&lt;li>&lt;a href="https://www.vecteezy.com/" target="_blank" rel="noopener">&lt;strong>Vecteezy&lt;/strong>&lt;/a>: Thousands of free vector images&lt;/li>
+&lt;/ul>
+&lt;h3 id="vectors-photos-videos-and-other-assets">Vectors, photos, videos, and other assets&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.stockio.com/" target="_blank" rel="noopener">&lt;strong>Stockio&lt;/strong>&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Visualization</title><link>aem2850.toddgerarden.com/resource/visualization/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/resource/visualization/</guid><description>&lt;h2 id="interesting-and-excellent-real-world-examples">Interesting and excellent real world examples&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="http://www.storiesbehindaline.com/" target="_blank" rel="noopener">The Stories Behind a Line&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://flowingdata.com/2017/06/28/australia-as-100-people/" target="_blank" rel="noopener">Australia as 100 people&lt;/a>: You can make something like this with &lt;a href="https://d3js.org/" target="_blank" rel="noopener">d3&lt;/a> and the &lt;a href="https://github.com/civisanalytics/potato" target="_blank" rel="noopener">potato project&lt;/a>.&lt;/li>
+&lt;li>&lt;a href="https://flowingdata.com/2017/07/17/marrying-age-over-the-past-century/" target="_blank" rel="noopener">Marrying Later, Staying Single Longer&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="how-to-select-the-appropriate-chart-type">How to select the appropriate chart type&lt;/h2>
+&lt;p>Many people have created many useful tools for selecting the correct chart type for a given dataset or question. The &lt;em>Financial Times&lt;/em> has an excellent diagram that shows what kind of charts are appropriate for which kinds of data you have:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>The &lt;em>Financial Times&lt;/em>&amp;rsquo;s &amp;ldquo;Visual Vocabulary&amp;rdquo;&lt;/strong> (&lt;a href="https://github.com/ft-interactive/chart-doctor/tree/master/visual-vocabulary" target="_blank" rel="noopener">PDF poster&lt;/a> and &lt;a href="https://ft-interactive.github.io/visual-vocabulary/" target="_blank" rel="noopener">interactive website&lt;/a>)&lt;/li>
+&lt;/ul>
+&lt;p>Here are some other fantastic resources too:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="http://www.datavizcatalogue.com/" target="_blank" rel="noopener">&lt;strong>The Data Visualisation Catalogue&lt;/strong>&lt;/a>: Descriptions, explanations, examples, and tools for creating 60 different types of visualizations.&lt;/li>
+&lt;li>&lt;a href="http://datavizproject.com/" target="_blank" rel="noopener">&lt;strong>The Data Viz Project&lt;/strong>&lt;/a>: Descriptions and examples for 150 different types of visualizations. Also allows you to search by data shape and chart function (comparison, correlation, distribution, geographical, part to whole, trend over time, etc.).&lt;/li>
+&lt;li>&lt;a href="https://www.data-to-viz.com/" target="_blank" rel="noopener">&lt;strong>From Data to Viz&lt;/strong>&lt;/a>: A decision tree for dozens of chart types with links to R and Python code.&lt;/li>
+&lt;li>&lt;a href="http://chartmaker.visualisingdata.com/" target="_blank" rel="noopener">&lt;strong>The Chartmaker Directory&lt;/strong>&lt;/a>: Examples of how to create 51 different types of visualizations in 31 different software packages, including Excel, Tableau, and R.&lt;/li>
+&lt;li>&lt;a href="http://shinyapps.stat.ubc.ca/r-graph-catalog/" target="_blank" rel="noopener">&lt;strong>R Graph Catalog&lt;/strong>&lt;/a>: R code for 124 ggplot graphs.&lt;/li>
+&lt;li>&lt;a href="http://annkemery.com/essentials/" target="_blank" rel="noopener">&lt;strong>Emery&amp;rsquo;s Essentials&lt;/strong>&lt;/a>: Descriptions and examples of 26 different chart types.&lt;/li>
+&lt;/ul>
+&lt;h2 id="general-resources">General resources&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="http://www.storytellingwithdata.com/" target="_blank" rel="noopener">&lt;strong>Storytelling with Data&lt;/strong>&lt;/a>: Blog and site full of resources by Cole Nussbaumer Knaflic.&lt;/li>
+&lt;li>&lt;a href="http://annkemery.com/blog/" target="_blank" rel="noopener">&lt;strong>Ann K. Emery&amp;rsquo;s blog&lt;/strong>&lt;/a>: Blog and tutorials by &lt;a href="https://twitter.com/AnnKEmery" target="_blank" rel="noopener">Ann Emery&lt;/a>.&lt;/li>
+&lt;li>&lt;a href="http://stephanieevergreen.com/" target="_blank" rel="noopener">&lt;strong>Evergreen Data&lt;/strong>&lt;/a>: Helful resources by &lt;a href="https://twitter.com/evergreendata" target="_blank" rel="noopener">Stephanie Evergreen&lt;/a>.&lt;/li>
+&lt;li>&lt;a href="https://policyviz.com/" target="_blank" rel="noopener">&lt;strong>PolicyViz&lt;/strong>&lt;/a>: Regular podcast and site full of helpful resources by &lt;a href="https://twitter.com/jschwabish" target="_blank" rel="noopener">Jon Schwabisch&lt;/a>.&lt;/li>
+&lt;li>&lt;a href="http://www.visualisingdata.com/" target="_blank" rel="noopener">&lt;strong>Visualising Data&lt;/strong>&lt;/a>: Fantastic collection of visualization resources, articles, and tutorials by &lt;a href="https://twitter.com/visualisingdata" target="_blank" rel="noopener">Andy Kirk&lt;/a>.&lt;/li>
+&lt;li>&lt;a href="http://infowetrust.com/" target="_blank" rel="noopener">&lt;strong>Info We Trust&lt;/strong>&lt;/a>: Detailed explorations of visualizations by &lt;a href="https://twitter.com/infowetrust" target="_blank" rel="noopener">RJ Andrews&lt;/a>, including a &lt;a href="http://infowetrust.com/history/" target="_blank" rel="noopener">beautiful visual history of the field&lt;/a>.&lt;/li>
+&lt;li>&lt;a href="https://flowingdata.com/" target="_blank" rel="noopener">&lt;strong>FlowingData&lt;/strong>&lt;/a>: Blog by &lt;a href="https://twitter.com/flowingdata" target="_blank" rel="noopener">Nathan Yau&lt;/a>.&lt;/li>
+&lt;li>&lt;a href="http://www.informationisbeautiful.net/" target="_blank" rel="noopener">&lt;strong>Information is Beautiful&lt;/strong>&lt;/a>: Blog by &lt;a href="https://twitter.com/mccandelish" target="_blank" rel="noopener">David McCandless&lt;/a>.&lt;/li>
+&lt;li>&lt;a href="http://junkcharts.typepad.com/" target="_blank" rel="noopener">&lt;strong>Junk Charts&lt;/strong>&lt;/a>: Blog by &lt;a href="https://twitter.com/junkcharts" target="_blank" rel="noopener">Kaiser Fung&lt;/a>.&lt;/li>
+&lt;li>&lt;a href="http://viz.wtf/" target="_blank" rel="noopener">&lt;strong>WTF Visualizations&lt;/strong>&lt;/a>: Visualizations that make you ask &amp;ldquo;wtf?&amp;rdquo;&lt;/li>
+&lt;li>&lt;a href="http://annkemery.com/checklist/" target="_blank" rel="noopener">&lt;strong>The Data Visualization Checklist&lt;/strong>&lt;/a>: A helpful set of criteria for grading the effectiveness of a graphic.&lt;/li>
+&lt;li>&lt;a href="https://docs.google.com/document/d/1kKRadOiF0LruItsvGA40fSDZkAQfCqC_Ela0gBdo8A4/edit" target="_blank" rel="noopener">&lt;strong>Data Literacy Starter Kit&lt;/strong>&lt;/a>: Compilation of resources to become data literate by &lt;a href="http://lauracalloway.com/" target="_blank" rel="noopener">Laura Calloway&lt;/a>.&lt;/li>
+&lt;li>&lt;a href="http://seeingdata.org/" target="_blank" rel="noopener">&lt;strong>Seeing Data&lt;/strong>&lt;/a>: A series of research projects about perceptions and visualizations.&lt;/li>
+&lt;/ul>
+&lt;h2 id="visualization-in-excel">Visualization in Excel&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="http://stephanieevergreen.com/how-to/" target="_blank" rel="noopener">&lt;strong>How to Build Data Visualizations in Excel&lt;/strong>&lt;/a>: Detailed tutorials for creating 14 different visualizations in Excel.&lt;/li>
+&lt;li>&lt;a href="http://annkemery.com/category/visualizing-data/tutorials/" target="_blank" rel="noopener">&lt;strong>Ann Emery&amp;rsquo;s tutorials&lt;/strong>&lt;/a>: Fantastic series of tutorials for creating charts in Excel.&lt;/li>
+&lt;/ul>
+&lt;h2 id="visualization-in-tableau">Visualization in Tableau&lt;/h2>
+&lt;p>Because it is focused entirely on visualization (and because it&amp;rsquo;s a well-supported commercial product), Tableau has a &lt;a href="https://www.tableau.com/learn/training" target="_blank" rel="noopener">phenomenal library of tutorials and training videos&lt;/a>. There&amp;rsquo;s &lt;a href="https://www.quora.com/What-are-some-good-video-tutorials-for-learning-Tableau" target="_blank" rel="noopener">a helpful collections of videos here&lt;/a>, as well.&lt;/p></description></item><item><title>Using R Markdown</title><link>aem2850.toddgerarden.com/resource/rmarkdown/</link><pubDate>Mon, 13 Jan 2020 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/resource/rmarkdown/</guid><description>&lt;p>&lt;a href="https://rmarkdown.rstudio.com/" target="_blank" rel="noopener">R Markdown&lt;/a> is &lt;a href="aem2850.toddgerarden.com/reference/markdown/">regular Markdown&lt;/a> with R code and output sprinkled in. You can do everything you can with &lt;a href="aem2850.toddgerarden.com/reference/markdown/">regular Markdown&lt;/a>, but you can incorporate graphs, tables, and other R output directly in your document. You can create HTML, PDF, and Word documents, PowerPoint and HTML presentations, websites, books, and even &lt;a href="https://rmarkdown.rstudio.com/flexdashboard/index.html" target="_blank" rel="noopener">interactive dashboards&lt;/a> with R Markdown. This whole course website is created with R Markdown (and &lt;a href="https://bookdown.org/yihui/blogdown/" target="_blank" rel="noopener">a package named &lt;strong>blogdown&lt;/strong>&lt;/a>).&lt;/p>
+&lt;p>The &lt;a href="https://rmarkdown.rstudio.com/" target="_blank" rel="noopener">documentation for R Markdown&lt;/a> is extremely comprehensive, and their &lt;a href="https://rmarkdown.rstudio.com/lesson-1.html" target="_blank" rel="noopener">tutorials&lt;/a> and &lt;a href="https://rmarkdown.rstudio.com/lesson-15.html" target="_blank" rel="noopener">cheatsheets&lt;/a> are excellent—rely on those.&lt;/p>
+&lt;p>Here are the most important things you&amp;rsquo;ll need to know about R Markdown in this class:&lt;/p>
+&lt;h2 id="key-terms">Key terms&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Document&lt;/strong>: A Markdown file where you type stuff&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Chunk&lt;/strong>: A piece of R code that is included in your document. It looks like this:&lt;/p>
+&lt;pre>&lt;code class="language-markdown">```{r}
+# Code goes here
+```
+&lt;/code>&lt;/pre>
+&lt;p>There must be an empty line before and after the chunk. The final three backticks must be the only thing on the line—if you add more text, or if you forget to add the backticks, or accidentally delete the backticks, your document will not knit correctly.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Knit&lt;/strong>: When you &amp;ldquo;knit&amp;rdquo; a document, R runs each of the chunks sequentially and converts the output of each chunk into Markdown. R then runs the knitted document through &lt;a href="https://pandoc.org/" target="_blank" rel="noopener">pandoc&lt;/a> to convert it to HTML or PDF or Word (or whatever output you&amp;rsquo;ve selected).&lt;/p>
+&lt;p>You can knit by clicking on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editor window, or by pressing &lt;code>⌘⇧K&lt;/code> on macOS or &lt;code>control + shift + K&lt;/code> on Windows.&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" />
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="add-chunks">Add chunks&lt;/h2>
+&lt;p>There are three ways to insert chunks:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Press &lt;code>⌘⌥I&lt;/code> on macOS or &lt;code>control + alt + I&lt;/code> on Windows&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Click on the &amp;ldquo;Insert&amp;rdquo; button at the top of the editor window&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/reference/insert-chunk.png" width="30%" />
+&lt;/li>
+&lt;li>
+&lt;p>Manually type all the backticks and curly braces (don&amp;rsquo;t do this)&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="chunk-names">Chunk names&lt;/h2>
+&lt;p>You can add names to chunks to make it easier to navigate your document. If you click on the little dropdown menu at the bottom of your editor in RStudio, you can see a table of contents that shows all the headings and chunks. If you name chunks, they&amp;rsquo;ll appear in the list. If you don&amp;rsquo;t include a name, the chunk will still show up, but you won&amp;rsquo;t know what it does.&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/reference/chunk-toc.png" width="40%" />
+&lt;p>To add a name, include it immediately after the &lt;code>{r&lt;/code> in the first line of the chunk. Names cannot contain spaces, but they can contain underscores and dashes. &lt;strong>All chunk names in your document must be unique.&lt;/strong>&lt;/p>
+&lt;pre>&lt;code class="language-markdown">```{r name-of-this-chunk}
+# Code goes here
+```
+&lt;/code>&lt;/pre>
+&lt;h2 id="chunk-options">Chunk options&lt;/h2>
+&lt;p>There are a bunch of different options you can set for each chunk. You can see a complete list in the &lt;a href="https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf" target="_blank" rel="noopener">RMarkdown Reference Guide&lt;/a> or at &lt;a href="https://yihui.org/knitr/options/" target="_blank" rel="noopener">&lt;strong>knitr&lt;/strong>&amp;rsquo;s website&lt;/a>.&lt;/p>
+&lt;p>Options go inside the &lt;code>{r}&lt;/code> section of the chunk:&lt;/p>
+&lt;pre>&lt;code class="language-markdown">```{r name-of-this-chunk, warning=FALSE, message=FALSE}
+# Code goes here
+```
+&lt;/code>&lt;/pre>
+&lt;p>The most common chunk options are these:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>fig.width=5&lt;/code> and &lt;code>fig.height=3&lt;/code> (&lt;em>or whatever number you want&lt;/em>): Set the dimensions for figures&lt;/li>
+&lt;li>&lt;code>echo=FALSE&lt;/code>: The code is not shown in the final document, but the results are&lt;/li>
+&lt;li>&lt;code>message=FALSE&lt;/code>: Any messages that R generates (like all the notes that appear after you load a package) are omitted&lt;/li>
+&lt;li>&lt;code>warning=FALSE&lt;/code>: Any warnings that R generates are omitted&lt;/li>
+&lt;li>&lt;code>include=FALSE&lt;/code>: The chunk still runs, but the code and results are not included in the final document&lt;/li>
+&lt;/ul>
+&lt;p>You can also set chunk options by clicking on the little gear icon in the top right corner of any chunk:&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/reference/chunk-options.png" width="70%" />
+&lt;h2 id="inline-chunks">Inline chunks&lt;/h2>
+&lt;p>You can also include R output directly in your text, which is really helpful if you want to report numbers from your analysis. To do this, use &lt;code>`r r_code_here`&lt;/code>.&lt;/p>
+&lt;p>It&amp;rsquo;s generally easiest to calculate numbers in a regular chunk beforehand and then use an inline chunk to display the value in your text. For instance, this document…&lt;/p>
+&lt;pre>&lt;code class="language-markdown">```{r find-avg-mpg, echo=FALSE}
+avg_mpg &amp;lt;- mean(mtcars$mpg)
+```
+The average fuel efficiency for cars from 1974 was `r round(avg_mpg, 1)` miles per gallon.
+&lt;/code>&lt;/pre>
+&lt;p>… would knit into this:&lt;/p>
+&lt;blockquote>
+&lt;p>The average fuel efficiency for cars from 1974 was 20.1 miles per gallon.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="output-formats">Output formats&lt;/h2>
+&lt;p>You can specify what kind of document you create when you knit in the &lt;a href="aem2850.toddgerarden.com/reference/markdown/#front-matter">YAML front matter&lt;/a>.&lt;/p>
+&lt;pre>&lt;code class="language-yaml">title: &amp;quot;My document&amp;quot;
+output:
+html_document: default
+pdf_document: default
+word_document: default
+&lt;/code>&lt;/pre>
+&lt;p>You can also click on the down arrow on the &amp;ldquo;Knit&amp;rdquo; button to choose the output &lt;em>and&lt;/em> generate the appropriate YAML. If you click on the gear icon next to the &amp;ldquo;Knit&amp;rdquo; button and choose &amp;ldquo;Output options&amp;rdquo;, you change settings for each specific output type, like default figure dimensions or whether or not a table of contents is included.&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/reference/output-options.png" width="35%" />
+&lt;p>The first output type listed under &lt;code>output:&lt;/code> will be what is generated when you click on the &amp;ldquo;Knit&amp;rdquo; button or press the keyboard shortcut (&lt;code>⌘⇧K&lt;/code> on macOS; &lt;code>control + shift + K&lt;/code> on Windows). If you choose a different output with the &amp;ldquo;Knit&amp;rdquo; button menu, that output will be moved to the top of the &lt;code>output&lt;/code> section.&lt;/p>
+&lt;p>The indentation of the YAML section matters, especially when you have settings nested under each output type. Here&amp;rsquo;s what a typical &lt;code>output&lt;/code> section might look like:&lt;/p>
+&lt;pre>&lt;code class="language-yaml">---
+title: &amp;quot;My document&amp;quot;
+author: &amp;quot;My name&amp;quot;
+date: &amp;quot;January 13, 2020&amp;quot;
+output:
+html_document:
+toc: yes
+fig_caption: yes
+fig_height: 8
+fig_width: 10
+pdf_document:
+latex_engine: xelatex # More modern PDF typesetting engine
+toc: yes
+word_document:
+toc: yes
+fig_caption: yes
+fig_height: 4
+fig_width: 5
+---
+&lt;/code>&lt;/pre></description></item><item><title>R</title><link>aem2850.toddgerarden.com/resource/r/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/resource/r/</guid><description>&lt;h2 id="learning-r">Learning R&lt;/h2>
+&lt;p>I highly recommend subscribing to the &lt;a href="https://rweekly.org/" target="_blank" rel="noopener">R Weekly newsletter&lt;/a>. This e-mail is sent every Monday and is full of helpful tutorials about how to do stuff with R.&lt;/p>
+&lt;p>Searching for help with R on Google can sometimes be tricky because the program name is a single letter. Google is generally smart enough to figure out what you mean when you search for &amp;ldquo;r scatterplot&amp;rdquo;, but if it does struggle, try searching for &amp;ldquo;rstats&amp;rdquo; instead (e.g. &amp;ldquo;rstats scatterplot&amp;rdquo;). Also, since most of your R work in this class will deal with &lt;strong>ggplot2&lt;/strong>, it&amp;rsquo;s often easier to just search for that instead of the letter &amp;ldquo;r&amp;rdquo; (e.g. &amp;ldquo;ggplot scatterplot&amp;rdquo;).&lt;/p>
+&lt;p>If you use Twitter, post R-related questions and content with &lt;a href="https://twitter.com/search?q=%23rstats" target="_blank" rel="noopener">#rstats&lt;/a>. The community there is exceptionally generous and helpful. Also check out &lt;a href="https://stackoverflow.com/" target="_blank" rel="noopener">StackOverflow&lt;/a> (a Q&amp;amp;A site with hundreds of thousands of answers to all sorts of programming questions) and &lt;a href="https://community.rstudio.com/" target="_blank" rel="noopener">RStudio Community&lt;/a> (a forum specifically designed for people using RStudio and the tidyverse (i.e. you)).&lt;/p>
+&lt;p>These resources are also really really helpful:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://r4ds.had.co.nz/" target="_blank" rel="noopener">&lt;strong>R for Data Science&lt;/strong>&lt;/a>: A free online book for learning the basics of R and the tidyverse.&lt;/li>
+&lt;li>&lt;a href="https://www.rstudio.com/resources/cheatsheets/" target="_blank" rel="noopener">&lt;strong>R and RStudio cheat sheets&lt;/strong>&lt;/a>: A large collection of simple cheat sheets for RStudio, &lt;strong>ggplot2&lt;/strong>, and other R-related things.&lt;/li>
+&lt;li>&lt;a href="http://stat545.com/" target="_blank" rel="noopener">&lt;strong>Stat 545&lt;/strong>&lt;/a>: &lt;a href="https://twitter.com/JennyBryan" target="_blank" rel="noopener">Dr. Jenny Bryan&lt;/a> at RStudio has an entire introductory course in R, visualization, and data analysis online.&lt;/li>
+&lt;li>&lt;a href="http://www2.stat.duke.edu/courses/Fall17/sta112.01/" target="_blank" rel="noopener">&lt;strong>STA 112FS: Data Science&lt;/strong>&lt;/a>: &lt;a href="https://twitter.com/minebocek" target="_blank" rel="noopener">Dr. Mine Çetinkaya-Rundel&lt;/a> at the University of Edinburgh / Duke University has an entire introductory course in R, visualization, and data science online.&lt;/li>
+&lt;li>&lt;a href="http://cslu.ohsu.edu/~bedricks/courses/cs631/" target="_blank" rel="noopener">&lt;strong>CSE 631: Principles &amp;amp; Practice of Data Visualization&lt;/strong>&lt;/a>: Yet another introductory course for R and ggplot2 by &lt;a href="https://twitter.com/apreshill" target="_blank" rel="noopener">Dr. Alison Presmanes Hill&lt;/a> at RStudio.&lt;/li>
+&lt;/ul>
+&lt;h2 id="r-in-the-wild">R in the wild&lt;/h2>
+&lt;p>A popular (and increasingly standard) way for sharing your analyses and visualizations is to post an annotated explanation of your process somewhere online. RStudio allows you to publish knitted HTML files directly to &lt;a href="http://rpubs.com/" target="_blank" rel="noopener">RPubs&lt;/a>, but you can also post your output to a blog or other type of website.&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> Reading these kinds of posts is one of the best ways to learn R, since they walk you through each step of the process &lt;em>and&lt;/em> show the code and output.&lt;/p>
+&lt;p>Here are some of the best examples I&amp;rsquo;ve come across:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="http://varianceexplained.org/r/trump-tweets/" target="_blank" rel="noopener">Text analysis of Trump&amp;rsquo;s tweets confirms he writes only the (angrier) Android half&lt;/a> (with a &lt;a href="http://varianceexplained.org/r/trump-followup/" target="_blank" rel="noopener">follow-up&lt;/a>)&lt;/li>
+&lt;li>&lt;a href="https://rudeboybert.github.io/fivethirtyeight/articles/bob_ross.html" target="_blank" rel="noopener">Bob Ross - Joy of Painting&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://rudeboybert.github.io/fivethirtyeight/articles/bechdel.html" target="_blank" rel="noopener">Bechdel analysis using the tidyverse&lt;/a>: There are also a bunch of other examples &lt;a href="https://rudeboybert.github.io/fivethirtyeight/articles/" target="_blank" rel="noopener">using data from FiveThirtyEight&lt;/a>.&lt;/li>
+&lt;li>&lt;a href="http://rpubs.com/Jwhitman/Final_Project" target="_blank" rel="noopener">Sexism on the Silver Screen: Exploring film&amp;rsquo;s gender divide&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://soc301s2017.netlify.com/group_projects/group5" target="_blank" rel="noopener">Comparison of Quentin Tarantino Movies by Box Office and the Bechdel Test&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://juliasilge.com/blog/who-came-to-vote/" target="_blank" rel="noopener">Who came to vote in Utah&amp;rsquo;s caucuses?&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://juliasilge.com/blog/health-care-indicators/" target="_blank" rel="noopener">Health care indicators in Utah counties&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://juliasilge.com/blog/song-lyrics-across/" target="_blank" rel="noopener">Song lyrics across the United States&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://blog.karawoo.com/2016/09/22/A-decade-ish-of-listening-to-Sigur-Ros" target="_blank" rel="noopener">A decade (ish) of listening to Sigur Rós&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://rpubs.com/ry_lisa_elana/chicago" target="_blank" rel="noopener">When is Tom peeping these days?&lt;/a>: There are a also bunch of final projects from other R and data visualization classes &lt;a href="http://soc301s2017.netlify.com/group-projects/" target="_blank" rel="noopener">here&lt;/a> and &lt;a href="https://rudeboybert.github.io/MATH116/PS/final_project/final_project_outline.html#past_examples" target="_blank" rel="noopener">here&lt;/a>.&lt;/li>
+&lt;li>&lt;a href="https://rud.is/b/2017/09/18/mapping-fall-foliage-with-sf/" target="_blank" rel="noopener">Mapping Fall Foliage&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://rud.is/b/2017/07/25/r%E2%81%B6-general-attys-distributions/" target="_blank" rel="noopener">General (Attys) Distributions&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://rud.is/b/2017/06/18/r%E2%81%B6-disproving-approval/" target="_blank" rel="noopener">Disproving Approval&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;section class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1" role="doc-endnote">
+&lt;p>If you want to be really fancy, you can use &lt;a href="https://bookdown.org/yihui/blogdown/" target="_blank" rel="noopener">blogdown&lt;/a>, which makes a complete website with R Markdown files. That&amp;rsquo;s actually how this site is built (&lt;a href="https://github.com/andrewheiss/datavizm20.classes.andrewheiss.com" target="_blank" rel="noopener">see the source code&lt;/a>). You can build your own site &lt;a href="https://apreshill.rbind.io/post/up-and-running-with-blogdown/" target="_blank" rel="noopener">with this tutorial&lt;/a>.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/section></description></item><item><title>R style suggestions</title><link>aem2850.toddgerarden.com/resource/style/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/resource/style/</guid><description>&lt;h2 id="r-style-conventions">R style conventions&lt;/h2>
+&lt;p>R is fairly forgiving about how you type code (unlike other languages like Python, where miscounting spaces can ruin your code!). All of these things will do exactly the same thing:&lt;/p>
+&lt;pre>&lt;code class="language-r">mpg %&amp;gt;%
+filter(cty &amp;gt; 10, class == &amp;quot;compact&amp;quot;)
+mpg %&amp;gt;% filter(cty &amp;gt; 10, class == &amp;quot;compact&amp;quot;)
+mpg %&amp;gt;%
+filter(cty &amp;gt; 10,
+class == &amp;quot;compact&amp;quot;)
+mpg %&amp;gt;% filter(cty&amp;gt;10, class==&amp;quot;compact&amp;quot;)
+filter(mpg,cty&amp;gt;10,class==&amp;quot;compact&amp;quot;)
+mpg %&amp;gt;%
+filter(cty &amp;gt; 10,
+class == &amp;quot;compact&amp;quot;)
+filter ( mpg,cty&amp;gt;10, class==&amp;quot;compact&amp;quot; )
+&lt;/code>&lt;/pre>
+&lt;p>But you&amp;rsquo;ll notice that only a few of those iterations (the first three) are easily readable.&lt;/p>
+&lt;p>To help improve readability and make it easier to share code with others, there&amp;rsquo;s &lt;a href="https://style.tidyverse.org/index.html" target="_blank" rel="noopener">an unofficial style guide for writing R code&lt;/a>. It&amp;rsquo;s fairly short and just has lots of examples of good and bad ways of writing code (naming variables, dealing with long lines, using proper indentation levels, etc.)—you should glance through it some time.&lt;/p>
+&lt;p>RStudio has a built-in way of cleaning up your code. Select some code, press &lt;kbd>ctrl&lt;/kbd> + &lt;kbd>i&lt;/kbd> (on Windows) or &lt;kbd>⌘&lt;/kbd> + &lt;kbd>i&lt;/kbd> (on macOS), and R will reformat the code for you. It&amp;rsquo;s not always perfect, but it&amp;rsquo;s really helpful for getting indentation right without having to manually hit &lt;kbd>space&lt;/kbd> a billion times.&lt;/p>
+&lt;h2 id="main-style-things-to-pay-attention-to-for-this-class">Main style things to pay attention to for this class&lt;/h2>
+&lt;blockquote>
+&lt;p>&lt;em>Important note&lt;/em>: I won&amp;rsquo;t ever grade you on any of this! If you submit something like &lt;code>filter(mpg,cty&amp;gt;10,class==&amp;quot;compact&amp;quot;)&lt;/code>, I might recommend adding spaces, but it won&amp;rsquo;t affect your grade or points or anything.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="spacing">Spacing&lt;/h3>
+&lt;blockquote>
+&lt;p>See the &lt;a href="https://style.tidyverse.org/syntax.html#spacing" target="_blank" rel="noopener">&amp;ldquo;Spacing&amp;rdquo; section&lt;/a> in the tidyverse style guide.&lt;/p>
+&lt;/blockquote>
+&lt;p>Put spaces after commas (like in regular English):&lt;/p>
+&lt;pre>&lt;code class="language-r"># Good
+filter(mpg, cty &amp;gt; 10)
+# Bad
+filter(mpg , cty &amp;gt; 10)
+filter(mpg ,cty &amp;gt; 10)
+filter(mpg,cty &amp;gt; 10)
+&lt;/code>&lt;/pre>
+&lt;p>Put spaces around operators like &lt;code>+&lt;/code>, &lt;code>-&lt;/code>, &lt;code>&amp;gt;&lt;/code>, &lt;code>=&lt;/code>, etc.:&lt;/p>
+&lt;pre>&lt;code class="language-r"># Good
+filter(mpg, cty &amp;gt; 10)
+# Bad
+filter(mpg, cty&amp;gt;10)
+filter(mpg, cty&amp;gt; 10)
+filter(mpg, cty &amp;gt;10)
+&lt;/code>&lt;/pre>
+&lt;p>Don&amp;rsquo;t put spaces around parentheses that are parts of functions:&lt;/p>
+&lt;pre>&lt;code class="language-r"># Good
+filter(mpg, cty &amp;gt; 10)
+# Bad
+filter (mpg, cty &amp;gt; 10)
+filter ( mpg, cty &amp;gt; 10)
+filter( mpg, cty &amp;gt; 10 )
+&lt;/code>&lt;/pre>
+&lt;h3 id="long-lines">Long lines&lt;/h3>
+&lt;blockquote>
+&lt;p>See the &lt;a href="https://style.tidyverse.org/syntax.html#long-lines" target="_blank" rel="noopener">&amp;ldquo;Long lines&amp;rdquo; section&lt;/a> in the tidyverse style guide.&lt;/p>
+&lt;/blockquote>
+&lt;p>It&amp;rsquo;s generally good practice to not have really long lines of code. A good suggestion is to keep lines at a maximum of 80 characters. Instead of counting characters by hand (ew), in RStudio go to &amp;ldquo;Tools&amp;rdquo; &amp;gt; &amp;ldquo;Global Options&amp;rdquo; &amp;gt; &amp;ldquo;Code&amp;rdquo; &amp;gt; &amp;ldquo;Display&amp;rdquo; and check the box for &amp;ldquo;Show margin&amp;rdquo;. You should now see a really thin line indicating 80 characters. Again, you can go beyond this—that&amp;rsquo;s fine. It&amp;rsquo;s just good practice to avoid going too far past it.&lt;/p>
+&lt;p>You can add line breaks inside longer lines of code. Line breaks should come after commas, and things like function arguments should align within the function:&lt;/p>
+&lt;pre>&lt;code class="language-r"># Good
+filter(mpg, cty &amp;gt; 10, class == &amp;quot;compact&amp;quot;)
+# Good
+filter(mpg, cty &amp;gt; 10,
+class == &amp;quot;compact&amp;quot;)
+# Good
+filter(mpg,
+cty &amp;gt; 10,
+class == &amp;quot;compact&amp;quot;)
+# Bad
+filter(mpg, cty &amp;gt; 10, class %in% c(&amp;quot;compact&amp;quot;, &amp;quot;pickup&amp;quot;, &amp;quot;midsize&amp;quot;, &amp;quot;subcompact&amp;quot;, &amp;quot;suv&amp;quot;, &amp;quot;2seater&amp;quot;, &amp;quot;minivan&amp;quot;))
+# Good
+filter(mpg,
+cty &amp;gt; 10,
+class %in% c(&amp;quot;compact&amp;quot;, &amp;quot;pickup&amp;quot;, &amp;quot;midsize&amp;quot;, &amp;quot;subcompact&amp;quot;,
+&amp;quot;suv&amp;quot;, &amp;quot;2seater&amp;quot;, &amp;quot;minivan&amp;quot;))
+&lt;/code>&lt;/pre>
+&lt;h3 id="pipes--and-ggplot-layers-">Pipes (&lt;code>%&amp;gt;%&lt;/code>) and ggplot layers (&lt;code>+&lt;/code>)&lt;/h3>
+&lt;p>Put each layer of a ggplot plot on separate lines, with the &lt;code>+&lt;/code> at the end of the line, indented with two spaces:&lt;/p>
+&lt;pre>&lt;code class="language-r"># Good
+ggplot(mpg, aes(x = cty, y = hwy, color = class)) +
+geom_point() +
+geom_smooth() +
+theme_bw()
+# Bad
+ggplot(mpg, aes(x = cty, y = hwy, color = class)) +
+geom_point() + geom_smooth() +
+theme_bw()
+# Super bad
+ggplot(mpg, aes(x = cty, y = hwy, color = class)) + geom_point() + geom_smooth() + theme_bw()
+# Super bad and won't even work
+ggplot(mpg, aes(x = cty, y = hwy, color = class))
++ geom_point()
++ geom_smooth()
++ theme_bw()
+&lt;/code>&lt;/pre>
+&lt;p>Put each step in a dplyr pipeline on separate lines, with the &lt;code>%&amp;gt;%&lt;/code> at the end of the line, indented with two spaces:&lt;/p>
+&lt;pre>&lt;code class="language-r"># Good
+mpg %&amp;gt;%
+filter(cty &amp;gt; 10) %&amp;gt;%
+group_by(class) %&amp;gt;%
+summarize(avg_hwy = mean(hwy))
+# Bad
+mpg %&amp;gt;% filter(cty &amp;gt; 10) %&amp;gt;% group_by(class) %&amp;gt;%
+summarize(avg_hwy = mean(hwy))
+# Super bad
+mpg %&amp;gt;% filter(cty &amp;gt; 10) %&amp;gt;% group_by(class) %&amp;gt;% summarize(avg_hwy = mean(hwy))
+# Super bad and won't even work
+mpg %&amp;gt;%
+filter(cty &amp;gt; 10)
+%&amp;gt;% group_by(class)
+%&amp;gt;% summarize(avg_hwy = mean(hwy))
+&lt;/code>&lt;/pre>
+&lt;h3 id="comments">Comments&lt;/h3>
+&lt;blockquote>
+&lt;p>See the &lt;a href="https://style.tidyverse.org/syntax.html#comments" target="_blank" rel="noopener">&amp;ldquo;Comments&amp;rdquo; section&lt;/a> in the tidyverse style guide.&lt;/p>
+&lt;/blockquote>
+&lt;p>Comments should start with a comment symbol and a single space: &lt;code># &lt;/code>&lt;/p>
+&lt;pre>&lt;code class="language-r"># Good
+#Bad
+#Bad
+&lt;/code>&lt;/pre>
+&lt;p>If the comment is really short (and won&amp;rsquo;t cause you to go over 80 characters in the line), you can include it in the same line as the code, separated by at least two spaces (it works with one space, but using a couple can enhance readability):&lt;/p>
+&lt;pre>&lt;code class="language-r">mpg %&amp;gt;%
+filter(cty &amp;gt; 10) %&amp;gt;% # Only rows where cty is 10 +
+group_by(class) %&amp;gt;% # Divide into class groups
+summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
+&lt;/code>&lt;/pre>
+&lt;p>You can add extra spaces to get inline comments to align, if you want:&lt;/p>
+&lt;pre>&lt;code class="language-r">mpg %&amp;gt;%
+filter(cty &amp;gt; 10) %&amp;gt;% # Only rows where cty is 10 +
+group_by(class) %&amp;gt;% # Divide into class groups
+summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
+&lt;/code>&lt;/pre>
+&lt;p>If the comment is really long, you can break it into multiple lines. RStudio can do this for you if you go to &amp;ldquo;Code&amp;rdquo; &amp;gt; &amp;ldquo;Reflow comment&amp;rdquo;&lt;/p>
+&lt;pre>&lt;code class="language-r"># Good
+# Happy families are all alike; every unhappy family is unhappy in its own way.
+# Everything was in confusion in the Oblonskys’ house. The wife had discovered
+# that the husband was carrying on an intrigue with a French girl, who had been
+# a governess in their family, and she had announced to her husband that she
+# could not go on living in the same house with him. This position of affairs
+# had now lasted three days, and not only the husband and wife themselves, but
+# all the members of their family and household, were painfully conscious of it.
+# Bad
+# Happy families are all alike; every unhappy family is unhappy in its own way. Everything was in confusion in the Oblonskys’ house. The wife had discovered that the husband was carrying on an intrigue with a French girl, who had been a governess in their family, and she had announced to her husband that she could not go on living in the same house with him. This position of affairs had now lasted three days, and not only the husband and wife themselves, but all the members of their family and household, were painfully conscious of it.
+&lt;/code>&lt;/pre>
+&lt;p>Though, if you&amp;rsquo;re dealing with comments that are &lt;em>that&lt;/em> long, consider putting the text in R Markdown instead and having it be actual prose.&lt;/p></description></item><item><title>Unzipping files</title><link>aem2850.toddgerarden.com/resource/unzipping/</link><pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/resource/unzipping/</guid><description>&lt;p>Because RStudio projects typically consist of multiple files (R scripts, datasets, graphical output, etc.) the easiest way to distribute them to you for examples, assignments, and projects is to combine all the different files in to a single compressed collection called a &lt;strong>zip file&lt;/strong>. When you unzip a zipped file, your operating system extracts all the files that are contained inside into a new folder on your computer.&lt;/p>
+&lt;p>Unzipping files on macOS is trivial, but unzipping files on Windows can mess you up if you don&amp;rsquo;t pay careful attention. Here&amp;rsquo;s a helpful guide to unzipping files on both macOS and Windows.&lt;/p>
+&lt;h2 id="unzipping-files-on-macos">Unzipping files on macOS&lt;/h2>
+&lt;p>Double click on the downloaded &lt;code>.zip&lt;/code> file. macOS will automatically create a new folder with the same name as the &lt;code>.zip&lt;/code> file, and all the file&amp;rsquo;s contents will be inside. Double click on the RStudio Project file (&lt;code>.Rproj&lt;/code>) to get started.&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/unzipping/unzip-mac.png" width="60%" />
+&lt;h2 id="unzipping-files-on-windows">Unzipping files on Windows&lt;/h2>
+&lt;p>&lt;em>&lt;strong>tl;dr&lt;/strong>: Right click on the &lt;code>.zip&lt;/code> file, select &amp;ldquo;Extract All…&amp;rdquo;, and work with the resulting unzipped folder.&lt;/em>&lt;/p>
+&lt;p>Unlike macOS, Windows does &lt;em>not&lt;/em> automatically unzip things for you. If you double click on the &lt;code>.zip&lt;/code> file, Windows will show you what&amp;rsquo;s inside, but it will do so without actually extracting anything. This &lt;del>can be&lt;/del> is incredibly confusing! Here&amp;rsquo;s what it looks like—the only clues that this folder is really a &lt;code>.zip&lt;/code> file are that there&amp;rsquo;s a &amp;ldquo;Compressed Folder Tools&amp;rdquo; tab at the top, and there&amp;rsquo;s a &amp;ldquo;Ratio&amp;rdquo; column that shows how much each file is compressed.&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/unzipping/inside-zip-windows.png" width="80%" />
+&lt;p>It is very tempting to try to open files from this view. However, if you do, things will break and you won&amp;rsquo;t be able to correctly work with any of the files in the zipped folder. If you open the R Project file, for instance, RStudio will point to a bizarre working directory buried deep in some temporary folder:&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/unzipping/temp-wd-windows.png" width="60%" />
+&lt;p>You most likely won&amp;rsquo;t be able to open any data files or save anything, which will be frustrating.&lt;/p>
+&lt;p>Instead, you need to right click on the &lt;code>.zip&lt;/code> file and select &amp;ldquo;Extract All…&amp;quot;:&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/unzipping/extract-windows-1.png" width="60%" />
+&lt;p>Then choose where you want to unzip all the files and click on &amp;ldquo;Extract&amp;rdquo;&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/unzipping/extract-windows-2.png" width="60%" />
+&lt;p>You should then finally have a real folder with all the contents of the zipped file. Open the R Project file and RStudio will point to the correct working directory and everything will work.&lt;/p>
+&lt;img src="aem2850.toddgerarden.com/img/unzipping/extract-windows-3.png" width="60%" /></description></item><item><title>Data</title><link>aem2850.toddgerarden.com/resource/data/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/resource/data/</guid><description>&lt;p>There are a ton of places to find data related to public policy and administration (as well as data on pretty much any topic you want) online:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://tinyletter.com/data-is-plural" target="_blank" rel="noopener">&lt;strong>Data is Plural newsletter&lt;/strong>&lt;/a>: Jeremy Singer-Vine sends a weekly newsletter of the most interesting public datasets he&amp;rsquo;s found. You should subscribe to it. &lt;a href="https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit#gid=0" target="_blank" rel="noopener">He also has an archive of all the datasets he&amp;rsquo;s highlighted.&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://toolbox.google.com/datasetsearch" target="_blank" rel="noopener">&lt;strong>Google Dataset Search&lt;/strong>&lt;/a>: Google indexes thousands of public datasets; search for them here.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.kaggle.com/datasets" target="_blank" rel="noopener">&lt;strong>Kaggle&lt;/strong>&lt;/a>: Kaggle hosts machine learning competitions where people compete to create the fastest, most efficient, most predictive algorithms. A byproduct of these competitions is a host of fascinating datasets that are generally free and open to the public. See, for example, &lt;a href="https://www.kaggle.com/hugomathien/soccer" target="_blank" rel="noopener">the European Soccer Database&lt;/a>, the &lt;a href="https://www.kaggle.com/rtatman/salem-witchcraft-dataset" target="_blank" rel="noopener">Salem Witchcraft Dataset&lt;/a> or results from an &lt;a href="https://www.kaggle.com/rtatman/oreo-flavors-tastetest-ratings" target="_blank" rel="noopener">Oreo flavors taste test&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="http://www.threesixtygiving.org/data/data-registry/" target="_blank" rel="noopener">&lt;strong>360Giving&lt;/strong>&lt;/a>: Dozens of British foundations follow a standard file format for sharing grant data and have made that data available online.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="http://us-cities.survey.okfn.org/" target="_blank" rel="noopener">&lt;strong>US City Open Data Census&lt;/strong>&lt;/a>: More than 100 US cities have committed to sharing dozens of types of data, including data about crime, budgets, campaign finance, lobbying, transit, and zoning. This site from the &lt;a href="http://sunlightfoundation.com/" target="_blank" rel="noopener">Sunlight Foundation&lt;/a> and &lt;a href="http://www.codeforamerica.org//" target="_blank" rel="noopener">Code for America&lt;/a> collects this data and rates cities by how well they&amp;rsquo;re doing.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Political science and economics datasets&lt;/strong>: There&amp;rsquo;s a wealth of data available for political science- and economics-related topics:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/briatte/srqm/wiki/Data" target="_blank" rel="noopener">&lt;strong>François Briatte&amp;rsquo;s extensive curated lists&lt;/strong>&lt;/a>: Includes data from/about intergovernmental organizations (IGOs), nongovernmental organizations (NGOs), public opinion surveys, parliaments and legislatures, wars, human rights, elections, and municipalities.&lt;/li>
+&lt;li>&lt;a href="https://github.com/leeper/poliscitoys/issues/1" target="_blank" rel="noopener">&lt;strong>Thomas Leeper&amp;rsquo;s list of political science datasets&lt;/strong>&lt;/a>: Good short list of useful datasets, divided by type of data (country-level data, survey data, social media data, event data, text data, etc.).&lt;/li>
+&lt;li>&lt;a href="https://github.com/erikgahner/PolData" target="_blank" rel="noopener">&lt;strong>Erik Gahner&amp;rsquo;s list of political science datasets&lt;/strong>&lt;/a>: Huge list of useful datasets, divided by topic (governance, elections, policy, political elites, etc.)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>Citations and bibliography</title><link>aem2850.toddgerarden.com/resource/citations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/resource/citations/</guid><description>&lt;p>You can &lt;a href="aem2850.toddgerarden.com/bib/references.bib">download a BibTeX file&lt;/a> of all the non-web-based readings in the course:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="aem2850.toddgerarden.com/bib/references.bib">&lt;i class="fas fa-book">&lt;/i> &lt;code>references.bib&lt;/code>&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>You can open the file in &lt;a href="http://bibdesk.sourceforge.net/" target="_blank" rel="noopener">BibDesk on macOS&lt;/a>, &lt;a href="http://www.jabref.org/" target="_blank" rel="noopener">JabRef on Windows&lt;/a>, or &lt;a href="https://www.zotero.org/" target="_blank" rel="noopener">Zotero&lt;/a> or &lt;a href="https://www.mendeley.com/" target="_blank" rel="noopener">Mendeley&lt;/a> online.&lt;/p></description></item><item><title>Using Markdown</title><link>aem2850.toddgerarden.com/resource/markdown/</link><pubDate>Mon, 13 Jan 2020 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/resource/markdown/</guid><description>&lt;p>&lt;a href="https://daringfireball.net/projects/markdown/" target="_blank" rel="noopener">Markdown&lt;/a> is a special kind of markup language that lets you format text with simple syntax. You can then use a converter program like &lt;a href="https://pandoc.org/" target="_blank" rel="noopener">pandoc&lt;/a> to convert Markdown into whatever format you want: HTML, PDF, Word, PowerPoint, etc. (&lt;a href="https://pandoc.org/MANUAL.html#option--to" target="_blank" rel="noopener">see the full list of output types here&lt;/a>)&lt;/p>
+&lt;h2 id="basic-markdown-formatting">Basic Markdown formatting&lt;/h2>
+&lt;table>
+&lt;colgroup>
+&lt;col width="40%" />
+&lt;col width="21%" />
+&lt;col width="38%" />
+&lt;/colgroup>
+&lt;thead>
+&lt;tr class="header">
+&lt;th>Type…&lt;/th>
+&lt;th>…or…&lt;/th>
+&lt;th>…to get&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr class="odd">
+&lt;td>&lt;pre>Some text in a paragraph.&lt;br>
+More text in the next paragraph. Always
+use empty lines between paragraphs.&lt;/pre>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;p>Some text in a paragraph.&lt;/p>
+&lt;p>More text in the next paragraph. Always
+use empty lines between paragraphs.&lt;/p>&lt;/td>
+&lt;/tr>
+&lt;tr class="even">
+&lt;td>&lt;code>*Italic*&lt;/code>&lt;/td>
+&lt;td>&lt;code>_Italic_&lt;/code>&lt;/td>
+&lt;td>&lt;em>Italic&lt;/em>&lt;/td>
+&lt;/tr>
+&lt;tr class="odd">
+&lt;td>&lt;code>**Bold**&lt;/code>&lt;/td>
+&lt;td>&lt;code>__Bold__&lt;/code>&lt;/td>
+&lt;td>&lt;strong>Bold&lt;/strong>&lt;/td>
+&lt;/tr>
+&lt;tr class="even">
+&lt;td>&lt;code># Heading 1&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;h1 class="smaller-h1">
+Heading 1
+&lt;/h1>&lt;/td>
+&lt;/tr>
+&lt;tr class="odd">
+&lt;td>&lt;code>## Heading 2&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;h2 class="smaller-h2">
+Heading 2
+&lt;/h2>&lt;/td>
+&lt;/tr>
+&lt;tr class="even">
+&lt;td>&lt;code>### Heading 3&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;h3 class="smaller-h3">
+Heading 3
+&lt;/h3>&lt;/td>
+&lt;/tr>
+&lt;tr class="odd">
+&lt;td>(Go up to heading level 6 with &lt;code>######&lt;/code>)&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr class="even">
+&lt;td>&lt;code>[Link text](http://www.example.com)&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;a href="http://www.example.com">Link text&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr class="odd">
+&lt;td>&lt;code>![Image caption](/path/to/image.png)&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;img src="aem2850.toddgerarden.com/img/mstile-144x144.png" title="fig:" alt="Class logo" />&lt;/td>
+&lt;/tr>
+&lt;tr class="even">
+&lt;td>`&lt;code>Inline code` with backticks&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;code>Inline code&lt;/code> with backticks&lt;/td>
+&lt;/tr>
+&lt;tr class="odd">
+&lt;td>&lt;code>&amp;gt; Blockquote&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;blockquote>
+&lt;p>Blockquote&lt;/p>
+&lt;/blockquote>&lt;/td>
+&lt;/tr>
+&lt;tr class="even">
+&lt;td>&lt;pre>- Things in
+- an unordered
+- list&lt;/pre>&lt;/td>
+&lt;td>&lt;pre>* Things in
+* an unordered
+* list&lt;/pre>&lt;/td>
+&lt;td>&lt;ul>
+&lt;li>Things in&lt;/li>
+&lt;li>an unordered&lt;/li>
+&lt;li>list&lt;/li>
+&lt;/ul>&lt;/td>
+&lt;/tr>
+&lt;tr class="odd">
+&lt;td>&lt;pre>1. Things in
+2. an ordered
+3. list&lt;/pre>&lt;/td>
+&lt;td>&lt;pre>1) Things in
+2) an ordered
+3) list&lt;/pre>&lt;/td>
+&lt;td>&lt;ol style="list-style-type: decimal">
+&lt;li>Things in&lt;/li>
+&lt;li>an ordered&lt;/li>
+&lt;li>list&lt;/li>
+&lt;/ol>&lt;/td>
+&lt;/tr>
+&lt;tr class="even">
+&lt;td>&lt;pre>Horizontal line
+&lt;p>&amp;mdash;&lt;/pre>&lt;/td>&lt;/p>
+&lt;td>&lt;pre>Horizontal line
+&lt;p>***&lt;/pre>&lt;/td>&lt;/p>
+&lt;td>&lt;p>Horizontal line&lt;/p>
+&lt;hr />&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="math">Math&lt;/h2>
+&lt;p>Markdown uses LaTeX to create fancy mathematical equations. There are like a billion little options and features available for math equations—you can find &lt;a href="http://www.malinc.se/math/latex/basiccodeen.php" target="_blank" rel="noopener">helpful examples of the the most common basic commands here&lt;/a>.&lt;/p>
+&lt;p>You can use math in two different ways: inline or in a display block. To use math inline, wrap it in single dollar signs, like &lt;code>\$y = mx + b\$&lt;/code>:&lt;/p>
+&lt;table>
+&lt;colgroup>
+&lt;col width="52%" />
+&lt;col width="47%" />
+&lt;/colgroup>
+&lt;thead>
+&lt;tr class="header">
+&lt;th>Type…&lt;/th>
+&lt;th>…to get&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr class="odd">
+&lt;td>&lt;pre>Based on the DAG, the regression model for
+estimating the effect of education on wages
+is &amp;dollar;\hat{y} = \beta_0 + \beta_1 x_1 + \epsilon&amp;dollar;, or
+&amp;dollar;\text{Wages} = \beta_0 + \beta_1 \text{Education} + \epsilon&amp;dollar;.&lt;/pre>&lt;/td>
+&lt;td>Based on the DAG, the regression model for
+estimating the effect of education on wages
+is &lt;span class="math inline">\(\hat{y} = \beta_0 + \beta_1 x_1 + \epsilon\)&lt;/span>, or
+&lt;span class="math inline">\(\text{Wages} = \beta_0 + \beta_1 \text{Education} + \epsilon\)&lt;/span>.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>To put an equation on its own line in a display block, wrap it in double dollar signs, like this:&lt;/p>
+&lt;p>&lt;strong>Type…&lt;/strong>&lt;/p>
+&lt;pre>&lt;code class="language-text">The quadratic equation was an important part of high school math:
+$$
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+$$
+But now we just use computers to solve for $x$.
+&lt;/code>&lt;/pre>
+&lt;p>&lt;strong>…to get…&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>The quadratic equation was an important part of high school math:&lt;/p>
+&lt;p>$$
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+$$&lt;/p>
+&lt;p>But now we just use computers to solve for &lt;code>\(x\)&lt;/code>.&lt;/p>
+&lt;/blockquote>
+&lt;hr>
+&lt;p>Because dollar signs are used to indicate math equations, you can&amp;rsquo;t just use dollar signs like normal if you&amp;rsquo;re writing about actual dollars. For instance, if you write &lt;code>This book costs \$5.75 and this other costs \$40&lt;/code>, Markdown will treat everything that comes between the dollar signs as math, like so: &amp;ldquo;This book costs $5.75 and this other costs $40&amp;rdquo;.&lt;/p>
+&lt;p>To get around that, put a backslash (&lt;code>\&lt;/code>) in front of the dollar signs, so that &lt;code>This book costs \\\$5.75 and this other costs \\\$40&lt;/code> becomes &amp;ldquo;This book costs &lt;span>$5.75&lt;/span> and this other costs &lt;span>$40&lt;/span>&amp;rdquo;.&lt;/p>
+&lt;h2 id="tables">Tables&lt;/h2>
+&lt;p>There are 4 different ways to hand-create tables in Markdown—I say &amp;ldquo;hand-create&amp;rdquo; because it&amp;rsquo;s normally way easier to use R to generate these things with packages like &lt;a href="https://rapporter.github.io/pander/" target="_blank" rel="noopener">&lt;strong>pander&lt;/strong>&lt;/a> (use &lt;code>pandoc.table()&lt;/code>) or &lt;strong>knitr&lt;/strong> (use &lt;a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html" target="_blank" rel="noopener">&lt;code>kable()&lt;/code>&lt;/a>). The two most common are simple tables and pipe tables. &lt;a href="https://pandoc.org/MANUAL.html#tables" target="_blank" rel="noopener">You should look at the full documentation here&lt;/a>.&lt;/p>
+&lt;p>&lt;strong>For simple tables, type…&lt;/strong>&lt;/p>
+&lt;pre>&lt;code class="language-text"> Right Left Center Default
+------- ------ ---------- -------
+12 12 12 12
+123 123 123 123
+1 1 1 1
+Table: Caption goes here
+&lt;/code>&lt;/pre>
+&lt;p>&lt;strong>…to get…&lt;/strong>&lt;/p>
+&lt;p>Right Left Center Default&lt;/p>
+&lt;hr>
+&lt;pre>&lt;code> 12 12 12 12
+123 123 123 123
+1 1 1 1
+&lt;/code>&lt;/pre>
+&lt;p>Table: Caption goes here&lt;/p>
+&lt;p>&lt;strong>For pipe tables, type…&lt;/strong>&lt;/p>
+&lt;pre>&lt;code class="language-text">| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+| 12 | 12 | 12 | 12 |
+| 123 | 123 | 123 | 123 |
+| 1 | 1 | 1 | 1 |
+Table: Caption goes here
+&lt;/code>&lt;/pre>
+&lt;p>&lt;strong>…to get…&lt;/strong>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:right">Right&lt;/th>
+&lt;th style="text-align:left">Left&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th style="text-align:center">Center&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:right">12&lt;/td>
+&lt;td style="text-align:left">12&lt;/td>
+&lt;td>12&lt;/td>
+&lt;td style="text-align:center">12&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:right">123&lt;/td>
+&lt;td style="text-align:left">123&lt;/td>
+&lt;td>123&lt;/td>
+&lt;td style="text-align:center">123&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:right">1&lt;/td>
+&lt;td style="text-align:left">1&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td style="text-align:center">1&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Table: Caption goes here&lt;/p>
+&lt;h2 id="footnotes">Footnotes&lt;/h2>
+&lt;p>There are two different ways to add footnotes (&lt;a href="https://pandoc.org/MANUAL.html#footnotes" target="_blank" rel="noopener">see here for complete documentation&lt;/a>): regular and inline.&lt;/p>
+&lt;p>Regular notes need (1) an identifier and (2) the actual note. The identifier can be whatever you want. Some people like to use numbers like &lt;code>[^1]&lt;/code>, but if you ever rearrange paragraphs or add notes before #1, the numbering will be wrong (in your Markdown file, not in the output; everything will be correct in the output). Because of that, I prefer to use some sort of text label:&lt;/p>
+&lt;p>&lt;strong>Type…&lt;/strong>&lt;/p>
+&lt;pre>&lt;code class="language-text">Here is a footnote reference[^1] and here is another [^note-on-dags].
+[^1]: This is a note.
+[^note-on-dags]: DAGs are neat.
+And here's more of the document.
+&lt;/code>&lt;/pre>
+&lt;p>&lt;strong>…to get…&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>Here is a footnote reference&lt;a href="#fn1" class="footnote-ref" id="fnref1">&lt;sup>1&lt;/sup>&lt;/a> and here is another.&lt;a href="#fn2" class="footnote-ref" id="fnref2">&lt;sup>2&lt;/sup>&lt;/a>&lt;/p>
+&lt;p>And here&amp;rsquo;s more of the document.&lt;/p>
+&lt;hr />
+&lt;div class="footnotes">
+&lt;ol>
+&lt;li id="fn1">&lt;p>This is a note.&lt;a href="#fnref1" class="footnote-back">↩︎&lt;/a>&lt;/p>&lt;/li>
+&lt;li id="fn2">&lt;p>DAGs are neat.&lt;a href="#fnref2" class="footnote-back">↩︎&lt;/a>&lt;/p>&lt;/li>
+&lt;/ol>
+&lt;/div>
+&lt;/blockquote>
+&lt;hr>
+&lt;p>You can also use inline footnotes with &lt;code>^[Text of the note goes here]&lt;/code>, which are often easier because you don&amp;rsquo;t need to worry about identifiers:&lt;/p>
+&lt;p>&lt;strong>Type…&lt;/strong>&lt;/p>
+&lt;pre>&lt;code class="language-text">Causal inference is neat.^[But it can be hard too!]
+&lt;/code>&lt;/pre>
+&lt;p>&lt;strong>…to get…&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>Causal inference is neat.&lt;a href="#fn3" class="footnote-ref" id="fnref3">&lt;sup>1&lt;/sup>&lt;/a>&lt;/p>
+&lt;hr />
+&lt;div class="footnotes">
+&lt;ol>
+&lt;li id="fn3">&lt;p>But it can be hard too!&lt;a href="#fnref3" class="footnote-back">↩︎&lt;/a>&lt;/p>&lt;/li>
+&lt;/ol>
+&lt;/div>
+&lt;/blockquote>
+&lt;h2 id="front-matter">Front matter&lt;/h2>
+&lt;p>You can include a special section at the top of a Markdown document that contains metadata (or data about your document) like the title, date, author, etc. This section uses a special simple syntax named &lt;a href="https://learn.getgrav.org/16/advanced/yaml" target="_blank" rel="noopener">YAML&lt;/a> (or &amp;ldquo;YAML Ain&amp;rsquo;t Markup Language&amp;rdquo;) that follows this basic outline: &lt;code>setting: value for setting&lt;/code>. Here&amp;rsquo;s an example YAML metadata section. Note that it must start and end with three dashes (&lt;code>---&lt;/code>).&lt;/p>
+&lt;pre>&lt;code class="language-yaml">---
+title: Title of your document
+date: &amp;quot;January 13, 2020&amp;quot;
+author: &amp;quot;Your name&amp;quot;
+---
+&lt;/code>&lt;/pre>
+&lt;p>You can put the values inside quotes (like the date and name in the example above), or you can leave them outside of quotes (like the title in the example above). I typically use quotes just to be safe—if the value you&amp;rsquo;re using has a colon (&lt;code>:&lt;/code>) in it, it&amp;rsquo;ll confuse Markdown since it&amp;rsquo;ll be something like &lt;code>title: My cool title: a subtitle&lt;/code>, which has two colons. It&amp;rsquo;s better to do this:&lt;/p>
+&lt;pre>&lt;code class="language-yaml">---
+title: &amp;quot;My cool title: a subtitle&amp;quot;
+---
+&lt;/code>&lt;/pre>
+&lt;p>If you want to use quotes inside one of the values (e.g. your document is &lt;code>An evaluation of &amp;quot;scare quotes&amp;quot;&lt;/code>), you can use single quotes instead:&lt;/p>
+&lt;pre>&lt;code class="language-yaml">---
+title: 'An evaluation of &amp;quot;scare quotes&amp;quot;'
+---
+&lt;/code>&lt;/pre>
+&lt;h2 id="citations">Citations&lt;/h2>
+&lt;p>One of the most powerful features of Markdown + pandoc is the ability to automatically cite things and generate bibliographies. to use citations, you need to create a &lt;a href="http://www.bibtex.org/" target="_blank" rel="noopener">BibTeX file&lt;/a> (ends in &lt;code>.bib&lt;/code>) that contains a database of the things you want to cite. You can do this with bibliography managers designed to work with BibTeX directly (like &lt;a href="https://bibdesk.sourceforge.io/" target="_blank" rel="noopener">BibDesk&lt;/a> on macOS), or you can use &lt;a href="https://www.zotero.org/" target="_blank" rel="noopener">Zotero&lt;/a> (macOS and Windows) to export a &lt;code>.bib&lt;/code> file. You can &lt;a href="aem2850.toddgerarden.com/resource/citations/">download an example &lt;code>.bib&lt;/code> file of all the readings from this class here&lt;/a>.&lt;/p>
+&lt;p>&lt;a href="https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html" target="_blank" rel="noopener">Complete details for using citations can be found here&lt;/a>. In brief, you need to do three things:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Add a &lt;code>bibliography:&lt;/code> entry to the YAML metadata:&lt;/p>
+&lt;pre>&lt;code class="language-yaml">---
+title: Title of your document
+date: &amp;quot;January 13, 2020&amp;quot;
+author: &amp;quot;Your name&amp;quot;
+bibliography: name_of_file.bib
+---
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;li>
+&lt;p>Choose a citation style based on a CSL file. The default is Chicago author-date, but you can choose from 2,000+ &lt;a href="https://github.com/citation-style-language/styles" target="_blank" rel="noopener">at this repository&lt;/a>. Download the CSL file, put it in your project folder, and add an entry to the YAML metadata (or provide a URL to the online version):&lt;/p>
+&lt;pre>&lt;code class="language-yaml">---
+title: Title of your document
+date: &amp;quot;January 13, 2020&amp;quot;
+author: &amp;quot;Your name&amp;quot;
+bibliography: name_of_file.bib
+csl: &amp;quot;https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl&amp;quot;
+---
+&lt;/code>&lt;/pre>
+&lt;p>Some of the most common CSLs are:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://raw.githubusercontent.com/citation-style-language/styles/master/chicago-author-date.csl" target="_blank" rel="noopener">Chicago author-date&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://raw.githubusercontent.com/citation-style-language/styles/master/chicago-note-bibliography.csl" target="_blank" rel="noopener">Chicago note-bibliography&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://raw.githubusercontent.com/citation-style-language/styles/master/chicago-fullnote-bibliography.csl" target="_blank" rel="noopener">Chicago full note-bibliography&lt;/a> (no shortened notes or ibids)&lt;/li>
+&lt;li>&lt;a href="https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl" target="_blank" rel="noopener">APA 7th edition&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://raw.githubusercontent.com/citation-style-language/styles/master/modern-language-association.csl" target="_blank" rel="noopener">MLA 8th edition&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Cite things in your document. &lt;a href="https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html" target="_blank" rel="noopener">Check the documentation for full details of how to do this&lt;/a>. Essentially, you use &lt;code>@citationkey&lt;/code> inside square brackets (&lt;code>[]&lt;/code>):&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Type…&lt;/th>
+&lt;th>…to get…&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>Causal inference is neat [@Rohrer:2018; @AngristPischke:2015].&lt;/code>&lt;/td>
+&lt;td>Causal inference is neat (Rohrer 2018; Angrist and Pischke 2015).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>Causal inference is neat [see @Rohrer:2018, p. 34; also @AngristPischke:2015, chapter 1].&lt;/code>&lt;/td>
+&lt;td>Causal inference is neat (see Rohrer 2018, 34; also Angrist and Pischke 2015, chap. 1).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>Angrist and Pischke say causal inference is neat [-@AngristPischke:2015; see also @Rohrer:2018].&lt;/code>&lt;/td>
+&lt;td>Angrist and Pischke say causal inference is neat (2015; see also Rohrer 2018).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>@AngristPischke:2015 [chapter 1] say causal inference is neat, and @Rohrer:2018 agrees.&lt;/code>&lt;/td>
+&lt;td>Angrist and Pischke (2015, chap. 1) say causal inference is neat, and Rohrer (2018) agrees.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>After compiling, you should have a perfectly formatted bibliography added to the end of your document too:&lt;/p>
+&lt;blockquote>
+&lt;p>Angrist, Joshua D., and Jörn-Steffen Pischke. 2015. &lt;em>Mastering ’Metrics: The Path from Cause to Effect.&lt;/em> Princeton, NJ: Princeton University Press.&lt;/p>
+&lt;p>Rohrer, Julia M. 2018. “Thinking Clearly About Correlations and Causation: Graphical Causal Models for Observational Data.” &lt;em>Advances in Methods and Practices in Psychological Science&lt;/em> 1 (1): 27–42. &lt;a href="https://doi.org/10.1177/2515245917745629" target="_blank" rel="noopener">https://doi.org/10.1177/2515245917745629&lt;/a>.&lt;/p>
+&lt;/blockquote>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="other-references">Other references&lt;/h2>
+&lt;p>These websites have additional details and examples and practice tools:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://commonmark.org/help/tutorial/" target="_blank" rel="noopener">&lt;strong>CommonMark&amp;rsquo;s Markdown tutorial&lt;/strong>&lt;/a>: A quick interactive Markdown tutorial.&lt;/li>
+&lt;li>&lt;a href="https://www.markdowntutorial.com/" target="_blank" rel="noopener">&lt;strong>Markdown tutorial&lt;/strong>&lt;/a>: Another interactive tutorial to practice using Markdown.&lt;/li>
+&lt;li>&lt;a href="http://packetlife.net/media/library/16/Markdown.pdf" target="_blank" rel="noopener">&lt;strong>Markdown cheatsheet&lt;/strong>&lt;/a>: Useful one-page reminder of Markdown syntax.&lt;/li>
+&lt;li>&lt;a href="http://plain-text.co/" target="_blank" rel="noopener">&lt;strong>The Plain Person’s Guide to Plain Text Social Science&lt;/strong>&lt;/a>: A comprehensive explanation and tutorial about why you should write data-based reports in Markdown.&lt;/li>
+&lt;/ul></description></item></channel></rss>

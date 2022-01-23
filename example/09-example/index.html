@@ -1,0 +1,330 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Wowchemy 5.4.0 for Hugo">
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media=print onload="this.media='all'">
+<meta name=description content="For this example, we&rsquo;re again going to use cross-national data from the World Bank&rsquo;s Open Data portal. We&rsquo;ll download the data with the WDI package.
+If you want to skip the data downloading, you can download the data below (you&rsquo;ll likely need to right click and choose &ldquo;Save Link As…&#34;):">
+<link rel=alternate hreflang=en-us href=aem2850.toddgerarden.com/example/09-example/>
+<meta name=theme-color content="#B31B1B">
+<link rel=stylesheet href=/aem2850.toddgerarden.com/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin=anonymous media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css crossorigin=anonymous title=hl-light media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css crossorigin=anonymous title=hl-dark media=print onload="this.media='all'" disabled>
+<link rel=stylesheet href=/aem2850.toddgerarden.com/css/wowchemy.0955c4d33b0be4851935253be0520832.css>
+<link rel=manifest href=aem2850.toddgerarden.com/manifest.webmanifest>
+<link rel=icon type=image/png href=/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_3.png>
+<link rel=apple-touch-icon type=image/png href=/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_3.png>
+<link rel=canonical href=aem2850.toddgerarden.com/example/09-example/>
+<meta property="twitter:card" content="summary">
+<meta property="og:site_name" content="R for Business Analytics">
+<meta property="og:url" content="aem2850.toddgerarden.com/example/09-example/">
+<meta property="og:title" content="Annotations | R for Business Analytics">
+<meta property="og:description" content="For this example, we&rsquo;re again going to use cross-national data from the World Bank&rsquo;s Open Data portal. We&rsquo;ll download the data with the WDI package.
+If you want to skip the data downloading, you can download the data below (you&rsquo;ll likely need to right click and choose &ldquo;Save Link As…&#34;):"><meta property="og:image" content="/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png">
+<meta property="twitter:image" content="/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
+<meta property="article:published_time" content="2021-07-05T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-07-05T00:00:00+00:00">
+<title>Annotations | R for Business Analytics</title>
+</head>
+<body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=fffbfb191766d0ab951aef7eb2b59fe3>
+<script src=/aem2850.toddgerarden.com/js/wowchemy-init.min.133800c88f3b5bb934932231fd94fed7.js></script>
+<div class=page-header>
+<header class=header--fixed>
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id=navbar-main>
+<div class=container-xl>
+<div class="d-none d-lg-inline-flex">
+<a class=navbar-brand href=/aem2850.toddgerarden.com/>R for Business Analytics</a>
+</div>
+<button type=button class=navbar-toggler data-toggle=collapse data-target=#navbar-content aria-controls=navbar-content aria-expanded=false aria-label="Toggle navigation">
+<span><i class="fas fa-bars"></i></span>
+</button>
+<div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+<a class=navbar-brand href=/aem2850.toddgerarden.com/>R for Business Analytics</a>
+</div>
+<div class="navbar-collapse main-menu-item collapse justify-content-end" id=navbar-content>
+<ul class="navbar-nav d-md-inline-flex">
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/syllabus/><span>Syllabus</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/schedule/><span>Schedule</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/resource/><span>Resources</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://rstudio.cloud/ target=_blank rel=noopener><span><i class="fab fa-r-project"></i></span></a>
+</li>
+</ul>
+</div>
+<ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+</ul>
+</div>
+</nav>
+</header>
+</div>
+<div class=page-body>
+<article class=article>
+<div class="article-container pt-3">
+<h1>Annotations</h1>
+<div class=article-metadata>
+<span class=article-date>
+Jul 5, 2021
+</span>
+</div>
+</div>
+<div class=article-container>
+<div class=article-style>
+<p>For this example, we&rsquo;re again going to use cross-national data from the <a href=https://data.worldbank.org/ target=_blank rel=noopener>World Bank&rsquo;s Open Data portal</a>. We&rsquo;ll download the data with the <a href=https://cran.r-project.org/web/packages/WDI/index.html target=_blank rel=noopener><strong>WDI</strong> package</a>.</p>
+<p>If you want to skip the data downloading, you can download the data below (you&rsquo;ll likely need to right click and choose &ldquo;Save Link As…"):</p>
+<ul>
+<li><a href=/data/wdi_co2.csv><i class="fas fa-file-csv"></i> <code>wdi_co2.csv</code></a></li>
+</ul>
+<h2 id=live-coding-example>Live coding example</h2>
+<div class="embed-responsive embed-responsive-16by9">
+<iframe class=embed-responsive-item src=https://www.youtube.com/embed/gMSMsOy7KF0 frameborder=0 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<h2 id=complete-code>Complete code</h2>
+<p><em>(This is a slightly cleaned up version of the code from the video.)</em></p>
+<h3 id=load-data>Load data</h3>
+<p>First, we load the libraries we&rsquo;ll be using:</p>
+<pre><code class=language-r>library(tidyverse)  # For ggplot, dplyr, and friends
+library(WDI)        # Get data from the World Bank
+library(ggrepel)    # For non-overlapping labels
+
+# You need to install ggtext from GitHub. Follow the instructions at 
+# https://github.com/wilkelab/ggtext
+library(ggtext)     # For fancier text handling
+</code></pre>
+<pre><code class=language-r>indicators &lt;- c(&quot;SP.POP.TOTL&quot;,     # Population
+                &quot;EN.ATM.CO2E.PC&quot;,  # CO2 emissions
+                &quot;NY.GDP.PCAP.KD&quot;)  # GDP per capita
+
+wdi_co2_raw &lt;- WDI(country = &quot;all&quot;, indicators, extra = TRUE, 
+                   start = 1995, end = 2015)
+</code></pre>
+<p>Then we clean the data by removing non-country countries and renaming some of the columns.</p>
+<pre><code class=language-r>wdi_clean &lt;- wdi_co2_raw %&gt;% 
+  filter(region != &quot;Aggregates&quot;) %&gt;% 
+  select(iso2c, iso3c, country, year, 
+         population = SP.POP.TOTL,
+         co2_emissions = EN.ATM.CO2E.PC, 
+         gdp_per_cap = NY.GDP.PCAP.KD, 
+         region, income)
+</code></pre>
+<h3 id=clean-and-reshape-data>Clean and reshape data</h3>
+<p>Next we&rsquo;ll do some substantial filtering and reshaping so that we can end up with the rankings of CO~2~ emissions in 1995 and 2014. I annotate as much as possible below so you can see what&rsquo;s happening in each step.</p>
+<pre><code class=language-r>co2_rankings &lt;- wdi_clean %&gt;% 
+  # Get rid of smaller countries
+  filter(population &gt; 200000) %&gt;% 
+  # Only look at two years
+  filter(year %in% c(1995, 2014)) %&gt;% 
+  # Get rid of all the rows that have missing values in co2_emissions
+  drop_na(co2_emissions) %&gt;% 
+  # Look at each year individually and rank countries based on their emissions that year
+  group_by(year) %&gt;% 
+  mutate(ranking = rank(co2_emissions)) %&gt;% 
+  ungroup() %&gt;% 
+  # Only select a handful of columns, mostly just the newly created &quot;ranking&quot;
+  # column and some country identifiers
+  select(iso3c, country, year, region, income, ranking) %&gt;% 
+  # Right now the data is tidy and long, but we want to widen it and create
+  # separate columns for emissions in 1995 and in 2014. pivot_wider() will make
+  # new columns based on the existing &quot;year&quot; column (that's what `names_from`
+  # does), and it will add &quot;rank_&quot; as the prefix, so that the new columns will
+  # be &quot;rank_1995&quot; and &quot;rank_2014&quot;. The values that go in those new columns will
+  # come from the existing &quot;ranking&quot; column
+  pivot_wider(names_from = year, names_prefix = &quot;rank_&quot;, values_from = ranking) %&gt;% 
+  # Find the difference in ranking between 2014 and 1995
+  mutate(rank_diff = rank_2014 - rank_1995) %&gt;% 
+  # Remove all rows where there's a missing value in the rank_diff column
+  drop_na(rank_diff) %&gt;% 
+  # Make an indicator variable that is true of the absolute value of the
+  # difference in rankings is greater than 25. 25 is arbitrary here—that just
+  # felt like a big change in rankings
+  mutate(big_change = ifelse(abs(rank_diff) &gt;= 25, TRUE, FALSE)) %&gt;% 
+  # Make another indicator variable that indicates if the rank improved by a
+  # lot, worsened by a lot, or didn't change much. We use the case_when()
+  # function, which is like a fancy version of ifelse() that takes multiple
+  # conditions. This is how it generally works:
+  #
+  # case_when(
+  #  some_test ~ value_if_true,
+  #  some_other_test ~ value_if_true,
+  #  TRUE ~ value_otherwise
+  #)
+  mutate(better_big_change = case_when(
+    rank_diff &lt;= -25 ~ &quot;Rank improved&quot;,
+    rank_diff &gt;= 25 ~ &quot;Rank worsened&quot;,
+    TRUE ~ &quot;Rank changed a little&quot;
+  ))
+</code></pre>
+<p>Here&rsquo;s what that reshaped data looked like before:</p>
+<pre><code class=language-r>head(wdi_clean)
+</code></pre>
+<pre><code>## # A tibble: 6 x 9
+##   iso2c iso3c country  year population co2_emissions gdp_per_cap region                income     
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt;      
+## 1 AD    AND   Andorra  2015      78011         NA         41768. Europe &amp; Central Asia High income
+## 2 AD    AND   Andorra  2004      76244          7.36      47033. Europe &amp; Central Asia High income
+## 3 AD    AND   Andorra  2001      67341          7.79      41421. Europe &amp; Central Asia High income
+## 4 AD    AND   Andorra  2002      70049          7.59      42396. Europe &amp; Central Asia High income
+## 5 AD    AND   Andorra  2014      79213          5.83      40790. Europe &amp; Central Asia High income
+## 6 AD    AND   Andorra  1995      63850          6.66      32918. Europe &amp; Central Asia High income
+</code></pre>
+<p>And here&rsquo;s what it looks like now:</p>
+<pre><code class=language-r>head(co2_rankings)
+</code></pre>
+<pre><code>## # A tibble: 6 x 9
+##   iso3c country              region                     income              rank_1995 rank_2014 rank_diff big_change better_big_change    
+##   &lt;chr&gt; &lt;chr&gt;                &lt;chr&gt;                      &lt;chr&gt;                   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;lgl&gt;      &lt;chr&gt;                
+## 1 ARE   United Arab Emirates Middle East &amp; North Africa High income               167       171         4 FALSE      Rank changed a little
+## 2 AFG   Afghanistan          South Asia                 Low income                  8        24        16 FALSE      Rank changed a little
+## 3 ALB   Albania              Europe &amp; Central Asia      Upper middle income        54        78        24 FALSE      Rank changed a little
+## 4 ARM   Armenia              Europe &amp; Central Asia      Upper middle income        71        76         5 FALSE      Rank changed a little
+## 5 AGO   Angola               Sub-Saharan Africa         Lower middle income        59        61         2 FALSE      Rank changed a little
+## 6 ARG   Argentina            Latin America &amp; Caribbean  High income               103       119        16 FALSE      Rank changed a little
+</code></pre>
+<h3 id=plot-the-data-and-annotate>Plot the data and annotate</h3>
+<p>I use IBM Plex Sans in this plot. You can <a href=https://fonts.google.com/specimen/IBM+Plex+Sans target=_blank rel=noopener>download it from Google Fonts</a>.</p>
+<pre><code class=language-r># These three functions make it so all geoms that use text, label, and
+# label_repel will use IBM Plex Sans as the font. Those layers are *not*
+# influenced by whatever you include in the base_family argument in something
+# like theme_bw(), so ordinarily you'd need to specify the font in each
+# individual annotate(geom = &quot;text&quot;) layer or geom_label() layer, and that's
+# tedious! This removes that tediousness.
+update_geom_defaults(&quot;text&quot;, list(family = &quot;IBM Plex Sans&quot;))
+update_geom_defaults(&quot;label&quot;, list(family = &quot;IBM Plex Sans&quot;))
+update_geom_defaults(&quot;label_repel&quot;, list(family = &quot;IBM Plex Sans&quot;))
+
+ggplot(co2_rankings,
+       aes(x = rank_1995, y = rank_2014)) +
+  # Add a reference line that goes from the bottom corner to the top corner
+  annotate(geom = &quot;segment&quot;, x = 0, xend = 175, y = 0, yend = 175) +
+  # Add points and color them by the type of change in rankings
+  geom_point(aes(color = better_big_change)) +
+  # Add repelled labels. Only use data where big_change is TRUE. Fill them by
+  # the type of change (so they match the color in geom_point() above) and use
+  # white text
+  geom_label_repel(data = filter(co2_rankings, big_change == TRUE),
+                   aes(label = country, fill = better_big_change),
+                   color = &quot;white&quot;) +
+  # Add notes about what the outliers mean in the bottom left and top right
+  # corners. These are italicized and light grey. The text in the bottom corner
+  # is justified to the right with hjust = 1, and the text in the top corner is
+  # justified to the left with hjust = 0
+  annotate(geom = &quot;text&quot;, x = 170, y = 6, label = &quot;Outliers improving&quot;, 
+           fontface = &quot;italic&quot;, hjust = 1, color = &quot;grey50&quot;) +
+  annotate(geom = &quot;text&quot;, x = 2, y = 170, label = &quot;Outliers worsening&quot;, 
+           fontface = &quot;italic&quot;, hjust = 0, color = &quot;grey50&quot;) +
+  # Add mostly transparent rectangles in the bottom right and top left corners
+  annotate(geom = &quot;rect&quot;, xmin = 0, xmax = 25, ymin = 0, ymax = 25, 
+           fill = &quot;#2ECC40&quot;, alpha = 0.25) +
+  annotate(geom = &quot;rect&quot;, xmin = 150, xmax = 175, ymin = 150, ymax = 175, 
+           fill = &quot;#FF851B&quot;, alpha = 0.25) +
+  # Add text to define what the rectangles abovee actually mean. The \n in
+  # &quot;highest\nemitters&quot; will put a line break in the label
+  annotate(geom = &quot;text&quot;, x = 40, y = 6, label = &quot;Lowest emitters&quot;, 
+           hjust = 0, color = &quot;#2ECC40&quot;) +
+  annotate(geom = &quot;text&quot;, x = 162.5, y = 135, label = &quot;Highest\nemitters&quot;, 
+           hjust = 0.5, vjust = 1, lineheight = 1, color = &quot;#FF851B&quot;) +
+  # Add arrows between the text and the rectangles. These use the segment geom,
+  # and the arrows are added with the arrow() function, which lets us define the
+  # angle of the arrowhead and the length of the arrowhead pieces. Here we use
+  # 0.5 lines, which is a unit of measurement that ggplot uses internally (think
+  # of how many lines of text fit in the plot). We could also use unit(1, &quot;cm&quot;)
+  # or unit(0.25, &quot;in&quot;) or anything else
+  annotate(geom = &quot;segment&quot;, x = 38, xend = 20, y = 6, yend = 6, color = &quot;#2ECC40&quot;, 
+           arrow = arrow(angle = 15, length = unit(0.5, &quot;lines&quot;))) +
+  annotate(geom = &quot;segment&quot;, x = 162.5, xend = 162.5, y = 140, yend = 155, color = &quot;#FF851B&quot;, 
+           arrow = arrow(angle = 15, length = unit(0.5, &quot;lines&quot;))) +
+  # Use three different colors for the points
+  scale_color_manual(values = c(&quot;grey50&quot;, &quot;#0074D9&quot;, &quot;#FF4136&quot;)) +
+  # Use two different colors for the filled labels. There are no grey labels, so
+  # we don't have to specify that color
+  scale_fill_manual(values = c(&quot;#0074D9&quot;, &quot;#FF4136&quot;)) +
+  # Make the x and y axes expand all the way to the edges of the plot area and
+  # add breaks every 25 units from 0 to 175
+  scale_x_continuous(expand = c(0, 0), breaks = seq(0, 175, 25)) +
+  scale_y_continuous(expand = c(0, 0), breaks = seq(0, 175, 25)) +
+  # Add labels! There are a couple fancy things here.
+  # 1. In the title we wrap the 2 of CO2 in the HTML &lt;sub&gt;&lt;/sub&gt; tag so that the
+  #    number gets subscripted. The only way this will actually get parsed as 
+  #    HTML is if we tell the plot.title to use element_markdown() in the 
+  #    theme() function, and element_markdown() comes from the ggtext package.
+  # 2. In the subtitle we bold the two words **improved** and **worsened** using
+  #    Markdown asterisks. We also wrap these words with HTML span tags with 
+  #    inline CSS to specify the color of the text. Like the title, this will 
+  #    only be processed and parsed as HTML and Markdown if we tell the p
+  #    lot.subtitle to use element_markdown() in the theme() function.
+  labs(x = &quot;Rank in 1995&quot;, y = &quot;Rank in 2014&quot;,
+       title = &quot;Changes in CO&lt;sub&gt;2&lt;/sub&gt; emission rankings between 1995 and 2014&quot;,
+       subtitle = &quot;Countries that &lt;span style='color: #0074D9'&gt;**improved**&lt;/span&gt; or &lt;span style='color: #FF4136'&gt;**worsened**&lt;/span&gt; more than 25 positions in the rankings highlighted&quot;,
+       caption = &quot;Source: The World Bank.\nCountries with populations of less than 200,000 excluded.&quot;) +
+  # Turn off the legends for color and fill, since the subtitle includes that
+  guides(color = &quot;none&quot;, fill = &quot;none&quot;) +
+  # Use theme_bw() with IBM Plex Sans
+  theme_bw(base_family = &quot;IBM Plex Sans&quot;) +
+  # Tell the title and subtitle to be treated as Markdown/HTML, make the title
+  # 1.6x the size of the base font, and make the subtitle 1.3x the size of the
+  # base font. Also add a little larger margin on the right of the plot so that
+  # the 175 doesn't get cut off.
+  theme(plot.title = element_markdown(face = &quot;bold&quot;, size = rel(1.6)),
+        plot.subtitle = element_markdown(size = rel(1.3)),
+        plot.margin = unit(c(0.5, 1, 0.5, 0.5), units = &quot;lines&quot;))
+</code></pre>
+<img src=/example/09-example_files/figure-html/build-pretty-plot-1.png width=960 style=display:block;margin:auto>
+</div>
+<div class="media author-card content-widget-hr">
+<div class=media-body>
+<h5 class=card-title><a href=aem2850.toddgerarden.com></a></h5>
+<ul class=network-icon aria-hidden=true>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class=page-footer>
+</div>
+<div id=modal class="modal fade" role=dialog>
+<div class=modal-dialog>
+<div class=modal-content>
+<div class=modal-header>
+<h5 class=modal-title>Cite</h5>
+<button type=button class=close data-dismiss=modal aria-label=Close>
+<span aria-hidden=true>&#215;</span>
+</button>
+</div>
+<div class=modal-body>
+<pre><code class="tex hljs"></code></pre>
+</div>
+<div class=modal-footer>
+<a class="btn btn-outline-primary my-1 js-copy-cite" href=# target=_blank>
+<i class="fas fa-copy"></i> Copy
+</a>
+<a class="btn btn-outline-primary my-1 js-download-cite" href=# target=_blank>
+<i class="fas fa-download"></i> Download
+</a>
+<div id=modal-error></div>
+</div>
+</div>
+</div>
+</div>
+<script src=/aem2850.toddgerarden.com/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js></script>
+<script src=https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/bryanbraun/anchorjs@4.2.2/anchor.min.js integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin=anonymous></script>
+<script>anchors.add()</script>
+<script id=page-data type=application/json>{"use_headroom":true}</script>
+<script src=/aem2850.toddgerarden.com/js/wowchemy-headroom.1cb9e2fc8399acee94eab837265b73bf.js type=module></script>
+<script src=/aem2850.toddgerarden.com/en/js/wowchemy.min.216188596c551a0582beb89fb0d646e2.js></script>
+</body>
+</html>

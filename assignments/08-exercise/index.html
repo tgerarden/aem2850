@@ -1,0 +1,209 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Wowchemy 5.4.0 for Hugo">
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media=print onload="this.media='all'">
+<meta name=description content="Getting started For this exercise you&rsquo;ll use state-level unemployment data from 2006 to 2016 that comes from the US Bureau of Labor Statistics (if you&rsquo;re curious, I describe how I built this dataset down below).">
+<link rel=alternate hreflang=en-us href=aem2850.toddgerarden.com/assignments/08-exercise/>
+<meta name=theme-color content="#B31B1B">
+<link rel=stylesheet href=/aem2850.toddgerarden.com/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin=anonymous media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css crossorigin=anonymous title=hl-light media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css crossorigin=anonymous title=hl-dark media=print onload="this.media='all'" disabled>
+<link rel=stylesheet href=/aem2850.toddgerarden.com/css/wowchemy.0955c4d33b0be4851935253be0520832.css>
+<link rel=manifest href=aem2850.toddgerarden.com/manifest.webmanifest>
+<link rel=icon type=image/png href=/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_3.png>
+<link rel=apple-touch-icon type=image/png href=/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_3.png>
+<link rel=canonical href=aem2850.toddgerarden.com/assignments/08-exercise/>
+<meta property="twitter:card" content="summary">
+<meta property="og:site_name" content="R for Business Analytics">
+<meta property="og:url" content="aem2850.toddgerarden.com/assignments/08-exercise/">
+<meta property="og:title" content="Comparisons | R for Business Analytics">
+<meta property="og:description" content="Getting started For this exercise you&rsquo;ll use state-level unemployment data from 2006 to 2016 that comes from the US Bureau of Labor Statistics (if you&rsquo;re curious, I describe how I built this dataset down below)."><meta property="og:image" content="/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png">
+<meta property="twitter:image" content="/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
+<meta property="article:published_time" content="2021-07-05T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-07-05T00:00:00+00:00">
+<title>Comparisons | R for Business Analytics</title>
+</head>
+<body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=83196ea03398a40bc56eff3e0d1a65af>
+<script src=/aem2850.toddgerarden.com/js/wowchemy-init.min.133800c88f3b5bb934932231fd94fed7.js></script>
+<div class=page-header>
+<header class=header--fixed>
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id=navbar-main>
+<div class=container-xl>
+<div class="d-none d-lg-inline-flex">
+<a class=navbar-brand href=/aem2850.toddgerarden.com/>R for Business Analytics</a>
+</div>
+<button type=button class=navbar-toggler data-toggle=collapse data-target=#navbar-content aria-controls=navbar-content aria-expanded=false aria-label="Toggle navigation">
+<span><i class="fas fa-bars"></i></span>
+</button>
+<div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+<a class=navbar-brand href=/aem2850.toddgerarden.com/>R for Business Analytics</a>
+</div>
+<div class="navbar-collapse main-menu-item collapse justify-content-end" id=navbar-content>
+<ul class="navbar-nav d-md-inline-flex">
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/syllabus/><span>Syllabus</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/schedule/><span>Schedule</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/resource/><span>Resources</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://rstudio.cloud/ target=_blank rel=noopener><span><i class="fab fa-r-project"></i></span></a>
+</li>
+</ul>
+</div>
+<ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+</ul>
+</div>
+</nav>
+</header>
+</div>
+<div class=page-body>
+<article class=article>
+<div class="article-container pt-3">
+<h1>Comparisons</h1>
+<div class=article-metadata>
+<span class=article-date>
+Jul 5, 2021
+</span>
+</div>
+</div>
+<div class=article-container>
+<div class=article-style>
+<h2 id=getting-started>Getting started</h2>
+<p>For this exercise you&rsquo;ll use state-level unemployment data from 2006 to 2016 that comes from the US Bureau of Labor Statistics (if you&rsquo;re curious, <a href=#postscript-how-i-got-this-unemployment-data>I describe how I built this dataset down below</a>).</p>
+<p>You should use an RStudio Project to keep your files well organized (either on your computer or on RStudio.cloud). Either create a new project for this exercise only, or make a project for all your work in this class.</p>
+<ul>
+<li><a href=/projects/08-exercise/data/unemployment.csv><i class="fas fa-file-csv"></i> <code>unemployment.csv</code></a></li>
+</ul>
+<p><strong>To help you</strong>, I&rsquo;ve created a skeleton R Markdown file with a template for this exercise, along with some code to help you clean and summarize the data. Download that here and include it in your project:</p>
+<ul>
+<li><a href=/projects/08-exercise/08-exercise.Rmd><i class="fab fa-r-project"></i> <code>08-exercise.Rmd</code></a></li>
+</ul>
+<p>In the end, the structure of your project directory should look something like this:</p>
+<pre><code class=language-text>your-project-name\
+  08-exercise.Rmd
+  your-project-name.Rproj
+  data\
+    unemployment.csv
+</code></pre>
+<p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:</p>
+<ul>
+<li><a href=/projects/08-exercise.zip><i class="fas fa-file-archive"></i> <code>08-exercise.zip</code></a></li>
+</ul>
+<p><a href=/example/08-example/>The example for today&rsquo;s session</a> will be <em><strong>incredibly</strong></em> helpful for this exercise. Reference it.</p>
+<p>Again, you don&rsquo;t need to make your plots super fancy, but if you&rsquo;re feeling brave, experiment with adding a <code>labs()</code> layer or changing colors or modifying themes and theme elements.</p>
+<p>You&rsquo;ll need to insert your own code chunks where needed. Rather than typing them by hand (that&rsquo;s tedious and you might miscount the number of backticks!), use the &ldquo;Insert&rdquo; button at the top of the editing window, or type <kbd>ctrl</kbd> + <kbd>alt</kbd> + <kbd>i</kbd> on Windows, or <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>i</kbd> on macOS.</p>
+<img src=/img/assignments/insert-chunk-button.png width=19%>
+<h2 id=task-1-reflection>Task 1: Reflection</h2>
+<p>Write your reflection for the day&rsquo;s readings.</p>
+<h2 id=task-2-small-multiples>Task 2: Small multiples</h2>
+<p>Use data from the US Bureau of Labor Statistics (BLS) to show the trends in employment rate for all 50 states between 2006 and 2016. What stories does this plot tell? Which states struggled to recover from the 2008–09 recession?</p>
+<p>Some hints/tips:</p>
+<ul>
+<li>
+<p>You won&rsquo;t need to filter out any missing rows because the data here is complete—there are no state-year combinations with missing unemployment data.</p>
+</li>
+<li>
+<p>You&rsquo;ll be plotting 51 facets. You can filter out DC if you want to have a better grid (like 5 × 10), or you can try using <code>facet_geo()</code> from the <strong>geofacet</strong> package to lay out the plots like a map of the US (try this!).</p>
+</li>
+<li>
+<p>Plot the <code>date</code> column along the x-axis, <em>not</em> the <code>year</code> column. If you plot by year, you&rsquo;ll get weird looking lines (try it for fun?), since these observations are monthly. If you really want to plot by year only, you&rsquo;ll need to create a different data frame where you group by year and state and calculate the average unemployment rate for each year/state combination (i.e. <code>group_by(year, state) %>% summarize(avg_unemployment = mean(unemployment))</code>)</p>
+</li>
+<li>
+<p>Try mapping other aesthetics onto the graph too. You&rsquo;ll notice there are columns for region and division—play with those as colors, for instance.</p>
+</li>
+<li>
+<p>This plot might be big, so make sure you adjust <code>fig.width</code> and <code>fig.height</code> in the chunk options so that it&rsquo;s visible when you knit it. You might also want to used <code>ggsave()</code> to save it with extra large dimensions.</p>
+</li>
+</ul>
+<h2 id=task-3-slopegraphs>Task 3: Slopegraphs</h2>
+<p>Use data from the BLS to create a slopegraph that compares the unemployment rate in January 2006 with the unemployment rate in January 2009, either for all 50 states at once (good luck with that!) or for a specific region or division. Make sure the plot doesn&rsquo;t look too busy or crowded in the end.</p>
+<p>What story does this plot tell? Which states in the US (or in the specific region you selected) were the most/least affected the Great Recession?</p>
+<p>Some hints/tips:</p>
+<ul>
+<li>
+<p>You should use <code>filter()</code> to only select rows where the year is 2006 or 2009 (i.e. <code>filter(year %in% c(2006, 2009)</code>) and to select rows where the month is January (<code>filter(month == 1)</code> or <code>filter(month_name == "January")</code>)</p>
+</li>
+<li>
+<p>In order for the year to be plotted as separate categories on the x-axis, it needs to be a factor, so use <code>mutate(year = factor(year))</code> to convert it.</p>
+</li>
+<li>
+<p>To make ggplot draw lines between the 2006 and 2009 categories, you need to include <code>group = state</code> in the aesthetics.</p>
+</li>
+</ul>
+<h2 id=bonus-task-bump-charts>Bonus task! Bump charts</h2>
+<p><strong>This is entirely optional but might be fun.</strong></p>
+<p>For extra fun times, if you feel like it, create a bump chart showing something from the unemployment data (perhaps the top 10 states or bottom 10 states in unemployment?) Adapt the code in the <a href=/example/08-example/>example for today&rsquo;s session</a>.</p>
+<p>If you do this, plotting 51 lines is going to be a huge mess. But filtering the data is also a bad idea, because states could drop in and out of the top/bottom 10 over time, and we don&rsquo;t want to get rid of them. Instead, you can zoom in on a specific range of data in your plot with <code>coord_cartesian(ylim = c(1, 10))</code>, for instance.</p>
+<h2 id=turning-everything-in>Turning everything in</h2>
+<p>When you&rsquo;re all done, click on the &ldquo;Knit&rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&rsquo;ve <a href=/resource/install/#install-tinytex>installed <strong>tinytex</strong></a>) of your document. Upload that file to iCollege.</p>
+<img src=/img/assignments/knit-button.png width=30%>
+<h2 id=postscript-how-i-got-this-unemployment-data>Postscript: how I got this unemployment data</h2>
+<p>For the curious, <a href=/files/get_bls_data.R>here&rsquo;s the code I used</a> to download the unemployment data from the BLS.</p>
+<p>And to pull the curtain back and show how much googling is involved in data visualization (and data analysis and programming in general), here was my process for getting this data:</p>
+<ol>
+<li>I thought &ldquo;I want to have students show variation in something domestic over time&rdquo; and then I googled &ldquo;us data by state&rdquo;. Nothing really came up (since it was an exceedingly vague search in the first place), but some results mentioned unemployment rates, so I figured that could be cool.</li>
+<li>I googled &ldquo;unemployment statistics by state over time&rdquo; and found that the BLS keeps statistics on this. I clicked on the <a href=https://www.bls.gov/data/ target=_blank rel=noopener>&ldquo;Data Tools&rdquo; link in their main navigation bar</a>, clicked on &ldquo;Unemployment&rdquo;, and then clicked on the &ldquo;Multi-screen data search&rdquo; button for the Local Area Unemployment Statistics (LAUS).</li>
+<li>I walked through the multiple screens and got excited that I&rsquo;d be able to download all unemployment stats for all states for a ton of years, BUT THEN the final page had links to 51 individual Excel files, which was dumb.</li>
+<li>So I went back to Google and searched for &ldquo;download bls data r&rdquo; and found a few different packages people have written to do this. The first one I clicked on was <a href=https://github.com/keberwein/blscrapeR target=_blank rel=noopener><code>blscrapeR</code> at GitHub</a>, and it looked like it had been updated recently, so I went with it.</li>
+<li>I followed the examples in the <code>blscrapeR</code> package and downloaded data for every state.</li>
+</ol>
+<p>Another day in the life of doing modern data science. I had no idea people had written R packages to access BLS data, but there are like 3 packages out there! After a few minutes of tinkering, I got it working and it&rsquo;s super magic.</p>
+</div>
+<div class="media author-card content-widget-hr">
+<div class=media-body>
+<h5 class=card-title><a href=aem2850.toddgerarden.com></a></h5>
+<ul class=network-icon aria-hidden=true>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class=page-footer>
+</div>
+<div id=modal class="modal fade" role=dialog>
+<div class=modal-dialog>
+<div class=modal-content>
+<div class=modal-header>
+<h5 class=modal-title>Cite</h5>
+<button type=button class=close data-dismiss=modal aria-label=Close>
+<span aria-hidden=true>&#215;</span>
+</button>
+</div>
+<div class=modal-body>
+<pre><code class="tex hljs"></code></pre>
+</div>
+<div class=modal-footer>
+<a class="btn btn-outline-primary my-1 js-copy-cite" href=# target=_blank>
+<i class="fas fa-copy"></i> Copy
+</a>
+<a class="btn btn-outline-primary my-1 js-download-cite" href=# target=_blank>
+<i class="fas fa-download"></i> Download
+</a>
+<div id=modal-error></div>
+</div>
+</div>
+</div>
+</div>
+<script src=/aem2850.toddgerarden.com/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js></script>
+<script src=https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/bryanbraun/anchorjs@4.2.2/anchor.min.js integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin=anonymous></script>
+<script>anchors.add()</script>
+<script id=page-data type=application/json>{"use_headroom":true}</script>
+<script src=/aem2850.toddgerarden.com/js/wowchemy-headroom.1cb9e2fc8399acee94eab837265b73bf.js type=module></script>
+<script src=/aem2850.toddgerarden.com/en/js/wowchemy.min.216188596c551a0582beb89fb0d646e2.js></script>
+</body>
+</html>

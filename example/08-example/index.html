@@ -1,0 +1,382 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Wowchemy 5.4.0 for Hugo">
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media=print onload="this.media='all'">
+<meta name=description content="For this example, we&rsquo;re going to use cross-national data, but instead of using the typical gapminder dataset, we&rsquo;re going to collect data directly from the World Bank&rsquo;s Open Data portal">
+<link rel=alternate hreflang=en-us href=aem2850.toddgerarden.com/example/08-example/>
+<meta name=theme-color content="#B31B1B">
+<link rel=stylesheet href=/aem2850.toddgerarden.com/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin=anonymous media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css crossorigin=anonymous title=hl-light media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css crossorigin=anonymous title=hl-dark media=print onload="this.media='all'" disabled>
+<link rel=stylesheet href=/aem2850.toddgerarden.com/css/wowchemy.0955c4d33b0be4851935253be0520832.css>
+<link rel=manifest href=aem2850.toddgerarden.com/manifest.webmanifest>
+<link rel=icon type=image/png href=/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_3.png>
+<link rel=apple-touch-icon type=image/png href=/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_3.png>
+<link rel=canonical href=aem2850.toddgerarden.com/example/08-example/>
+<meta property="twitter:card" content="summary">
+<meta property="og:site_name" content="R for Business Analytics">
+<meta property="og:url" content="aem2850.toddgerarden.com/example/08-example/">
+<meta property="og:title" content="Comparisons | R for Business Analytics">
+<meta property="og:description" content="For this example, we&rsquo;re going to use cross-national data, but instead of using the typical gapminder dataset, we&rsquo;re going to collect data directly from the World Bank&rsquo;s Open Data portal"><meta property="og:image" content="/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png">
+<meta property="twitter:image" content="/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
+<meta property="article:published_time" content="2021-06-28T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-06-28T00:00:00+00:00">
+<title>Comparisons | R for Business Analytics</title>
+</head>
+<body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=1fa7cdd10a36c81c6785aebcface1df7>
+<script src=/aem2850.toddgerarden.com/js/wowchemy-init.min.133800c88f3b5bb934932231fd94fed7.js></script>
+<div class=page-header>
+<header class=header--fixed>
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id=navbar-main>
+<div class=container-xl>
+<div class="d-none d-lg-inline-flex">
+<a class=navbar-brand href=/aem2850.toddgerarden.com/>R for Business Analytics</a>
+</div>
+<button type=button class=navbar-toggler data-toggle=collapse data-target=#navbar-content aria-controls=navbar-content aria-expanded=false aria-label="Toggle navigation">
+<span><i class="fas fa-bars"></i></span>
+</button>
+<div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+<a class=navbar-brand href=/aem2850.toddgerarden.com/>R for Business Analytics</a>
+</div>
+<div class="navbar-collapse main-menu-item collapse justify-content-end" id=navbar-content>
+<ul class="navbar-nav d-md-inline-flex">
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/syllabus/><span>Syllabus</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/schedule/><span>Schedule</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/resource/><span>Resources</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://rstudio.cloud/ target=_blank rel=noopener><span><i class="fab fa-r-project"></i></span></a>
+</li>
+</ul>
+</div>
+<ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+</ul>
+</div>
+</nav>
+</header>
+</div>
+<div class=page-body>
+<article class=article>
+<div class="article-container pt-3">
+<h1>Comparisons</h1>
+<div class=article-metadata>
+<span class=article-date>
+Jun 28, 2021
+</span>
+</div>
+</div>
+<div class=article-container>
+<div class=article-style>
+<p>For this example, we&rsquo;re going to use cross-national data, but instead of using the typical <code>gapminder</code> dataset, we&rsquo;re going to collect data directly from the <a href=https://data.worldbank.org/ target=_blank rel=noopener>World Bank&rsquo;s Open Data portal</a></p>
+<p>If you want to skip the data downloading, you can download the data below (you&rsquo;ll likely need to right click and choose &ldquo;Save Link As…"):</p>
+<ul>
+<li><a href=/data/wdi_raw.csv><i class="fas fa-file-csv"></i> <code>wdi_raw.csv</code></a></li>
+</ul>
+<h2 id=live-coding-example>Live coding example</h2>
+<div class="embed-responsive embed-responsive-16by9">
+<iframe class=embed-responsive-item src=https://www.youtube.com/embed/tCnfTLHtMs8 frameborder=0 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<h2 id=complete-code>Complete code</h2>
+<p><em>(This is a slightly cleaned up version of the code from the video.)</em></p>
+<h3 id=load-and-clean-data>Load and clean data</h3>
+<p>First, we load the libraries we&rsquo;ll be using:</p>
+<pre><code class=language-r>library(tidyverse)  # For ggplot, dplyr, and friends
+library(WDI)        # For getting data from the World Bank
+library(geofacet)   # For map-shaped facets
+library(scales)     # For helpful scale functions like dollar()
+library(ggrepel)    # For non-overlapping labels
+</code></pre>
+<p>The World Bank has a ton of country-level data at <a href=https://data.worldbank.org/ target=_blank rel=noopener>data.worldbank.org</a>. We can use <a href="https://cran.r-project.org/package=WDI" target=_blank rel=noopener>a package named <strong>WDI</strong></a> (<strong>w</strong>orld <strong>d</strong>evelopment <strong>i</strong>ndicators) to access their servers and download the data directly into R.</p>
+<p>To do this, we need to find the special World Bank codes for specific variables we want to get. These codes come from the URLs of the World Bank&rsquo;s website. For instance, if you search for &ldquo;access to electricity&rdquo; at the World Bank&rsquo;s website, you&rsquo;ll find <a href=https://data.worldbank.org/indicator/EG.ELC.ACCS.ZS target=_blank rel=noopener>this page</a>. If you look at the end of the URL, you&rsquo;ll see a cryptic code: <code>EG.ELC.ACCS.ZS</code>. That&rsquo;s the World Bank&rsquo;s ID code for the &ldquo;Access to electricity (% of population)&rdquo; indicator.</p>
+<p>We can feed a list of ID codes to the <code>WDI()</code> function to download data for those specific indicators. We want data from 1995-2015, so we set the start and end years accordingly. The <code>extra=TRUE</code> argument means that it&rsquo;ll also include other helpful details like region, aid status, etc. Without it, it would only download the indicators we listed.</p>
+<pre><code class=language-r>indicators &lt;- c(&quot;SP.DYN.LE00.IN&quot;,  # Life expectancy
+                &quot;EG.ELC.ACCS.ZS&quot;,  # Access to electricity
+                &quot;EN.ATM.CO2E.PC&quot;,  # CO2 emissions
+                &quot;NY.GDP.PCAP.KD&quot;)  # GDP per capita
+
+wdi_raw &lt;- WDI(country = &quot;all&quot;, indicators, extra = TRUE, 
+               start = 1995, end = 2015)
+
+head(wdi_raw)
+</code></pre>
+<p>Downloading data from the World Bank every time you knit will get tedious and take a long time (plus if their servers are temporarily down, you won&rsquo;t be able to get the data). It&rsquo;s good practice to save this raw data as a CSV file and then work with that.</p>
+<pre><code class=language-r>write_csv(wdi_raw, &quot;data/wdi_raw.csv&quot;)
+</code></pre>
+<p>Since we care about reproducibility, we still want to include the code we used to get data from the World Bank, we just don&rsquo;t want it to actually run. You can include chunks but not run them by setting <code>eval=FALSE</code> in the chunk options. In this little example, we show the code for downloading the data, but we don&rsquo;t evaluate the chunk. We then include a chunk that loads the data from a CSV file with <code>read_csv()</code>, but we don&rsquo;t include it (<code>include=FALSE</code>). That way, in the knitted file we see the <code>WDI()</code> code, but in reality it&rsquo;s loading the data from CSV. Super tricky.</p>
+<pre><code class=language-text>I first download data from the World Bank:
+
+```{r get-wdi-data, eval=FALSE}
+wdi_raw &lt;- WDI(...)
+
+write_csv(wdi_raw, &quot;data/wdi_raw.csv&quot;)
+```
+
+```{r load-wdi-data-real, include=FALSE}
+wdi_raw &lt;- read_csv(&quot;data/wdi_raw.csv&quot;)
+```
+</code></pre>
+<p>Then we clean up the data a little, filtering out rows that aren&rsquo;t actually countries and renaming the ugly World Bank code columns to actual words:</p>
+<pre><code class=language-r>wdi_clean &lt;- wdi_raw %&gt;% 
+  filter(region != &quot;Aggregates&quot;) %&gt;% 
+  select(iso2c, country, year, 
+         life_expectancy = SP.DYN.LE00.IN, 
+         access_to_electricity = EG.ELC.ACCS.ZS, 
+         co2_emissions = EN.ATM.CO2E.PC, 
+         gdp_per_cap = NY.GDP.PCAP.KD, 
+         region, income)
+
+head(wdi_clean)
+</code></pre>
+<pre><code>## # A tibble: 6 x 9
+##   iso2c country  year life_expectancy access_to_electricity co2_emissions gdp_per_cap region                income     
+##   &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;           &lt;dbl&gt;                 &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;                 &lt;chr&gt;      
+## 1 AD    Andorra  2015              NA                   100         NA         41768. Europe &amp; Central Asia High income
+## 2 AD    Andorra  2004              NA                   100          7.36      47033. Europe &amp; Central Asia High income
+## 3 AD    Andorra  2001              NA                   100          7.79      41421. Europe &amp; Central Asia High income
+## 4 AD    Andorra  2002              NA                   100          7.59      42396. Europe &amp; Central Asia High income
+## 5 AD    Andorra  2014              NA                   100          5.83      40790. Europe &amp; Central Asia High income
+## 6 AD    Andorra  1995              NA                   100          6.66      32918. Europe &amp; Central Asia High income
+</code></pre>
+<h3 id=small-multiples>Small multiples</h3>
+<p>First we can make some small multiples plots and show life expectancy over time for a handful of countries. We&rsquo;ll make a list of some countries chosen at random while I scrolled through the data, and then filter our data to include only those rows. We then plot life expectancy, faceting by country.</p>
+<pre><code class=language-r>life_expectancy_small &lt;- wdi_clean %&gt;%
+  filter(country %in% c(&quot;Argentina&quot;, &quot;Bolivia&quot;, &quot;Brazil&quot;, 
+                        &quot;Belize&quot;, &quot;Canada&quot;, &quot;Chile&quot;))
+
+ggplot(data = life_expectancy_small, 
+       mapping = aes(x = year, y = life_expectancy)) +
+  geom_line(size = 1) +
+  facet_wrap(vars(country))
+</code></pre>
+<img src=/example/08-example_files/figure-html/life-expectancy-small-1.png width=576 style=display:block;margin:auto>
+<p>Small multiples! That&rsquo;s all we need to do.</p>
+<p>We can do some fancier things, though. We can make this plot hyper minimalist:</p>
+<pre><code class=language-r>ggplot(data = life_expectancy_small, 
+       mapping = aes(x = year, y = life_expectancy)) +
+  geom_line(size = 1) +
+  facet_wrap(vars(country), scales = &quot;free_y&quot;) +
+  theme_void() +
+  theme(strip.text = element_text(face = &quot;bold&quot;))
+</code></pre>
+<img src=/example/08-example_files/figure-html/life-expectancy-small-minimalist-1.png width=576 style=display:block;margin:auto>
+<p>We can do a whole part of a continent (poor Iraq and Syria 😞)</p>
+<pre><code class=language-r>life_expectancy_mena &lt;- wdi_clean %&gt;% 
+  filter(region == &quot;Middle East &amp; North Africa&quot;)
+
+ggplot(data = life_expectancy_mena, 
+       mapping = aes(x = year, y = life_expectancy)) +
+  geom_line(size = 1) +
+  facet_wrap(vars(country), scales = &quot;free_y&quot;, nrow = 3) +
+  theme_void() +
+  theme(strip.text = element_text(face = &quot;bold&quot;))
+</code></pre>
+<img src=/example/08-example_files/figure-html/life-expectancy-mena-1.png width=960 style=display:block;margin:auto>
+<p>We can use the <a href=https://hafen.github.io/geofacet/ target=_blank rel=noopener><strong>geofacet</strong> package</a> to arrange these facets by geography:</p>
+<pre><code class=language-r>life_expectancy_eu &lt;- wdi_clean %&gt;% 
+  filter(region == &quot;Europe &amp; Central Asia&quot;)
+
+ggplot(life_expectancy_eu, aes(x = year, y = life_expectancy)) +
+  geom_line(size = 1) +
+  facet_geo(vars(country), grid = &quot;eu_grid1&quot;, scales = &quot;free_y&quot;) +
+  labs(x = NULL, y = NULL, title = &quot;Life expectancy from 1995–2015&quot;,
+       caption = &quot;Source: The World Bank (SP.DYN.LE00.IN)&quot;) +
+  theme_minimal() +
+  theme(strip.text = element_text(face = &quot;bold&quot;),
+        plot.title = element_text(face = &quot;bold&quot;),
+        axis.text.x = element_text(angle = 45, hjust = 1))
+</code></pre>
+<img src=/example/08-example_files/figure-html/life-expectancy-eu-1.png width=960 style=display:block;margin:auto>
+<p>Neat!</p>
+<h3 id=sparklines>Sparklines</h3>
+<p>Sparklines are just line charts (or bar charts) that are really really small.</p>
+<pre><code class=language-r>india_co2 &lt;- wdi_clean %&gt;% 
+  filter(country == &quot;India&quot;)
+
+plot_india &lt;- ggplot(india_co2, aes(x = year, y = co2_emissions)) +
+  geom_line() +
+  theme_void()
+plot_india
+</code></pre>
+<img src=/example/08-example_files/figure-html/india-spark-1.png width=96 style=display:block;margin:auto>
+<pre><code class=language-r>ggsave(&quot;india_co2.pdf&quot;, plot_india, width = 1, height = 0.15, units = &quot;in&quot;)
+ggsave(&quot;india_co2.png&quot;, plot_india, width = 1, height = 0.15, units = &quot;in&quot;)
+</code></pre>
+<pre><code class=language-r>china_co2 &lt;- wdi_clean %&gt;% 
+  filter(country == &quot;China&quot;)
+
+plot_china &lt;- ggplot(china_co2, aes(x = year, y = co2_emissions)) +
+  geom_line() +
+  theme_void()
+plot_china
+</code></pre>
+<img src=/example/08-example_files/figure-html/china-spark-1.png width=96 style=display:block;margin:auto>
+<pre><code class=language-r>ggsave(&quot;china_co2.pdf&quot;, plot_china, width = 1, heighlt = 0.15, units = &quot;in&quot;)
+ggsave(&quot;china_co2.png&quot;, plot_china, width = 1, height = 0.15, units = &quot;in&quot;)
+</code></pre>
+<p>You can then use those saved tiny plots in your text.</p>
+<blockquote>
+<p>Both India <img class=img-inline src=/example/08-example_files/figure-html/india-spark-1.png width=100> and China <img class=img-inline src=/example/08-example_files/figure-html/china-spark-1.png width=100> have seen increased CO~2~ emissions over the past 20 years.</p>
+</blockquote>
+<h3 id=slopegraphs>Slopegraphs</h3>
+<p>We can make a slopegraph to show changes in GDP per capita between two time periods. We need to first filter our WDI to include only the start and end years (here 1995 and 2015). Then, to make sure that we&rsquo;re using complete data, we&rsquo;ll get rid of any country that has missing data for either 1995 or 2015. The <code>group_by(...) %>% filter(...) %>% ungroup()</code> pipeline does this, with the <code>!any(is.na(gdp_per_cap))</code> test keeping any rows where any of the <code>gdp_per_cap</code> values are not missing for the whole country.</p>
+<p>We then add a couple special columns for labels. The <code>paste0()</code> function concatenates strings and variables together, so that <code>paste0("2 + 2 = ", 2 + 2)</code> would show &ldquo;2 + 2 = 4&rdquo;. Here we make labels that say either &ldquo;Country name: $GDP&rdquo; or &ldquo;$GDP&rdquo; depending on the year.</p>
+<pre><code class=language-r>gdp_south_asia &lt;- wdi_clean %&gt;% 
+  filter(region == &quot;South Asia&quot;) %&gt;% 
+  filter(year %in% c(1995, 2015)) %&gt;% 
+  # Look at each country individually
+  group_by(country) %&gt;%
+  # Remove the country if any of its gdp_per_cap values are missing
+  filter(!any(is.na(gdp_per_cap))) %&gt;%
+  ungroup() %&gt;%
+  # Make year a factor
+  mutate(year = factor(year)) %&gt;% 
+  # Make some nice label columns
+  # If the year is 1995, format it like &quot;Country name: $GDP&quot;. If the year is
+  # 2015, format it like &quot;$GDP&quot;
+  mutate(label_first = ifelse(year == 1995, paste0(country, &quot;: &quot;, dollar(round(gdp_per_cap))), NA),
+         label_last = ifelse(year == 2015, dollar(round(gdp_per_cap, 0)), NA))
+</code></pre>
+<p>With the data filtered like this, we can plot it by mapping year to the x-axis, GDP per capita to the y-axis, and coloring by country. To make the lines go across the two categorical labels in the x-axis (since we made year a factor/category), we need to also specify the <code>group</code> aesthetic.</p>
+<pre><code class=language-r>ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = country)) +
+  geom_line(size = 1.5)
+</code></pre>
+<img src=/example/08-example_files/figure-html/slopegraph-sa-simple-1.png width=576 style=display:block;margin:auto>
+<p>Cool! We&rsquo;re getting closer. We can definitely see different slopes, but with 7 different colors, it&rsquo;s hard to see exactly which country is which. Instead, we can directly label each of these lines with <code>geom_text()</code>:</p>
+<pre><code class=language-r>ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = country)) +
+  geom_line(size = 1.5) +
+  geom_text(aes(label = country)) +
+  guides(color = &quot;none&quot;)
+</code></pre>
+<img src=/example/08-example_files/figure-html/slopegraph-sa-simple-text-1.png width=576 style=display:block;margin:auto>
+<p>That gets us a <em>little</em> closer, but the country labels are hard to see, and we could include more information, like the actual values. Remember those <code>label_first</code> and <code>label_last</code> columns we made? Let&rsquo;s use those instead:</p>
+<pre><code class=language-r>ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = country)) +
+  geom_line(size = 1.5) +
+  geom_text(aes(label = label_first)) +
+  geom_text(aes(label = label_last)) +
+  guides(color = &quot;none&quot;)
+</code></pre>
+<img src=/example/08-example_files/figure-html/slopegraph-sa-simple-text-fancier-1.png width=576 style=display:block;margin:auto>
+<p>Now we have dollar amounts and country names, but the labels are still overlapping and really hard to read. To fix this, we can make the labels repel away from each other and randomly position in a way that makes them not overlap. The <a href=https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html target=_blank rel=noopener><strong>ggrepel</strong> package</a> lets us do this with <code>geom_text_repel()</code></p>
+<pre><code class=language-r>ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = country)) +
+  geom_line(size = 1.5) +
+  geom_text_repel(aes(label = label_first)) +
+  geom_text_repel(aes(label = label_last)) +
+  guides(color = &quot;none&quot;)
+</code></pre>
+<img src=/example/08-example_files/figure-html/slopegraph-sa-getting-warmer-1.png width=576 style=display:block;margin:auto>
+<p>Now none of the labels are on top of each other, but the labels are still on top of the lines. Also, some of the labels moved inward and outward along the x-axis, but they don&rsquo;t need to do that—they just need to shift up and down. We can force the labels to only move up and down by setting the <code>direction = "y"</code> argument, and we can move all the labels to the left or right with the <code>nudge_x</code> argument. The <code>seed</code> argument makes sure that the random label placement is the same every time we run this. It can be whatever number you want—it just has to be a number.</p>
+<pre><code class=language-r>ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = country)) +
+  geom_line(size = 1.5) +
+  geom_text_repel(aes(label = label_first), direction = &quot;y&quot;, nudge_x = -1, seed = 1234) +
+  geom_text_repel(aes(label = label_last), direction = &quot;y&quot;, nudge_x = 1, seed = 1234) +
+  guides(color = &quot;none&quot;)
+</code></pre>
+<img src=/example/08-example_files/figure-html/slopegraph-sa-fancier-1.png width=576 style=display:block;margin:auto>
+<p>That&rsquo;s it! Let&rsquo;s take the theme off completely, change the colors a little, and it should be perfect.</p>
+<pre><code class=language-r>ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = country)) +
+  geom_line(size = 1.5) +
+  geom_text_repel(aes(label = label_first), direction = &quot;y&quot;, nudge_x = -1, seed = 1234) +
+  geom_text_repel(aes(label = label_last), direction = &quot;y&quot;, nudge_x = 1, seed = 1234) +
+  guides(color = &quot;none&quot;) +
+  scale_color_viridis_d(option = &quot;magma&quot;, end = 0.9) +
+  theme_void()
+</code></pre>
+<img src=/example/08-example_files/figure-html/slopegraph-sa-done-1.png width=576 style=display:block;margin:auto>
+<h3 id=bump-charts>Bump charts</h3>
+<p>Finally, we can make a bump chart that shows changes in rankings over time. We&rsquo;ll look at CO~2~ emissions in South Asia. First we need to calculate a new variable that shows the rank of each country within each year. We can do this if we group by year and then use the <code>rank()</code> function to rank countries by the <code>co2_emissions</code> column.</p>
+<pre><code class=language-r>sa_co2 &lt;- wdi_clean %&gt;% 
+  filter(region == &quot;South Asia&quot;) %&gt;% 
+  filter(year &gt;= 2004, year &lt; 2015) %&gt;% 
+  group_by(year) %&gt;% 
+  mutate(rank = rank(co2_emissions))
+</code></pre>
+<p>We then plot this with points and lines, reversing the y-axis so 1 is at the top:</p>
+<pre><code class=language-r>ggplot(sa_co2, aes(x = year, y = rank, color = country)) +
+  geom_line() +
+  geom_point() +
+  scale_y_reverse(breaks = 1:8)
+</code></pre>
+<img src=/example/08-example_files/figure-html/make-bump-plot-1.png width=576 style=display:block;margin:auto>
+<p>Afghanistan and Nepal switched around for the number 1 spot, while India dropped from 4 to 6, switching places with Pakistan.</p>
+<p>As with the slopegraph, there are 8 different colors in the legend and it&rsquo;s hard to line them all up with the different lines, so we can plot the text directly instead. We&rsquo;ll use <code>geom_text()</code> again. We don&rsquo;t need to repel anything, since the text should fit in each row just fine. We need to change the <code>data</code> argument in <code>geom_text()</code> though and filter the data to only include one year, otherwise we&rsquo;ll get labels on every point, which is excessive. We can also adjust the theme and colors to make it cleaner.</p>
+<pre><code class=language-r>ggplot(sa_co2, aes(x = year, y = rank, color = country)) +
+  geom_line(size = 2) +
+  geom_point(size = 4) +
+  geom_text(data = filter(sa_co2, year == 2004),
+            aes(label = iso2c, x = 2003.25),
+            fontface = &quot;bold&quot;) +
+  geom_text(data = filter(sa_co2, year == 2014),
+            aes(label = iso2c, x = 2014.75),
+            fontface = &quot;bold&quot;) +
+  guides(color = &quot;none&quot;) +
+  scale_y_reverse(breaks = 1:8) +
+  scale_x_continuous(breaks = 2004:2014) +
+  scale_color_viridis_d(option = &quot;magma&quot;, begin = 0.2, end = 0.9) +
+  labs(x = NULL, y = &quot;Rank&quot;) +
+  theme_minimal() +
+  theme(panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.minor.x = element_blank())
+</code></pre>
+<img src=/example/08-example_files/figure-html/bump-plot-fancier-1.png width=672 style=display:block;margin:auto>
+<p>If you want to be <em>super</em> fancy, you can use flags instead of country codes, but that&rsquo;s a little more complicated (you need to install the <a href=https://github.com/rensa/ggflags target=_blank rel=noopener><strong>ggflags</strong> package</a>. <a href=https://dominikkoch.github.io/Bump-Chart/ target=_blank rel=noopener>See here for an example</a>.</p>
+</div>
+<div class="media author-card content-widget-hr">
+<div class=media-body>
+<h5 class=card-title><a href=aem2850.toddgerarden.com></a></h5>
+<ul class=network-icon aria-hidden=true>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class=page-footer>
+</div>
+<div id=modal class="modal fade" role=dialog>
+<div class=modal-dialog>
+<div class=modal-content>
+<div class=modal-header>
+<h5 class=modal-title>Cite</h5>
+<button type=button class=close data-dismiss=modal aria-label=Close>
+<span aria-hidden=true>&#215;</span>
+</button>
+</div>
+<div class=modal-body>
+<pre><code class="tex hljs"></code></pre>
+</div>
+<div class=modal-footer>
+<a class="btn btn-outline-primary my-1 js-copy-cite" href=# target=_blank>
+<i class="fas fa-copy"></i> Copy
+</a>
+<a class="btn btn-outline-primary my-1 js-download-cite" href=# target=_blank>
+<i class="fas fa-download"></i> Download
+</a>
+<div id=modal-error></div>
+</div>
+</div>
+</div>
+</div>
+<script src=/aem2850.toddgerarden.com/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js></script>
+<script src=https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/bryanbraun/anchorjs@4.2.2/anchor.min.js integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin=anonymous></script>
+<script>anchors.add()</script>
+<script id=page-data type=application/json>{"use_headroom":true}</script>
+<script src=/aem2850.toddgerarden.com/js/wowchemy-headroom.1cb9e2fc8399acee94eab837265b73bf.js type=module></script>
+<script src=/aem2850.toddgerarden.com/en/js/wowchemy.min.216188596c551a0582beb89fb0d646e2.js></script>
+</body>
+</html>

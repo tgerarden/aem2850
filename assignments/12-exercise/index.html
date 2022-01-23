@@ -1,0 +1,177 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Wowchemy 5.4.0 for Hugo">
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media=print onload="this.media='all'">
+<meta name=description content="Getting started For this exercise, you&rsquo;ll visualize the proportion of the world that uses the interent. You&rsquo;ll use data from Max Roser&rsquo;s Our World in Data project, which collects all sorts of interesting cross-national data.">
+<link rel=alternate hreflang=en-us href=aem2850.toddgerarden.com/assignments/12-exercise/>
+<meta name=theme-color content="#B31B1B">
+<link rel=stylesheet href=/aem2850.toddgerarden.com/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin=anonymous media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css crossorigin=anonymous title=hl-light media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css crossorigin=anonymous title=hl-dark media=print onload="this.media='all'" disabled>
+<link rel=stylesheet href=/aem2850.toddgerarden.com/css/wowchemy.0955c4d33b0be4851935253be0520832.css>
+<link rel=manifest href=aem2850.toddgerarden.com/manifest.webmanifest>
+<link rel=icon type=image/png href=/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_3.png>
+<link rel=apple-touch-icon type=image/png href=/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_3.png>
+<link rel=canonical href=aem2850.toddgerarden.com/assignments/12-exercise/>
+<meta property="twitter:card" content="summary">
+<meta property="og:site_name" content="R for Business Analytics">
+<meta property="og:url" content="aem2850.toddgerarden.com/assignments/12-exercise/">
+<meta property="og:title" content="Space | R for Business Analytics">
+<meta property="og:description" content="Getting started For this exercise, you&rsquo;ll visualize the proportion of the world that uses the interent. You&rsquo;ll use data from Max Roser&rsquo;s Our World in Data project, which collects all sorts of interesting cross-national data."><meta property="og:image" content="/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png">
+<meta property="twitter:image" content="/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
+<meta property="article:published_time" content="2021-07-19T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-07-19T00:00:00+00:00">
+<title>Space | R for Business Analytics</title>
+</head>
+<body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=3dec7aacea4b7eb499e70530f0192ca7>
+<script src=/aem2850.toddgerarden.com/js/wowchemy-init.min.133800c88f3b5bb934932231fd94fed7.js></script>
+<div class=page-header>
+<header class=header--fixed>
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id=navbar-main>
+<div class=container-xl>
+<div class="d-none d-lg-inline-flex">
+<a class=navbar-brand href=/aem2850.toddgerarden.com/>R for Business Analytics</a>
+</div>
+<button type=button class=navbar-toggler data-toggle=collapse data-target=#navbar-content aria-controls=navbar-content aria-expanded=false aria-label="Toggle navigation">
+<span><i class="fas fa-bars"></i></span>
+</button>
+<div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+<a class=navbar-brand href=/aem2850.toddgerarden.com/>R for Business Analytics</a>
+</div>
+<div class="navbar-collapse main-menu-item collapse justify-content-end" id=navbar-content>
+<ul class="navbar-nav d-md-inline-flex">
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/syllabus/><span>Syllabus</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/schedule/><span>Schedule</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/resource/><span>Resources</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://rstudio.cloud/ target=_blank rel=noopener><span><i class="fab fa-r-project"></i></span></a>
+</li>
+</ul>
+</div>
+<ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+</ul>
+</div>
+</nav>
+</header>
+</div>
+<div class=page-body>
+<article class=article>
+<div class="article-container pt-3">
+<h1>Space</h1>
+<div class=article-metadata>
+<span class=article-date>
+Jul 19, 2021
+</span>
+</div>
+</div>
+<div class=article-container>
+<div class=article-style>
+<h2 id=getting-started>Getting started</h2>
+<p>For this exercise, you&rsquo;ll visualize the proportion of the world that uses the interent. You&rsquo;ll use data from Max Roser&rsquo;s <a href=https://ourworldindata.org/internet/ target=_blank rel=noopener>Our World in Data</a> project, which collects all sorts of interesting cross-national data. You&rsquo;ll also use national shapefiles from <a href=https://www.naturalearthdata.com/ target=_blank rel=noopener>Natural Earth</a>.</p>
+<p>Download these two data files:</p>
+<ul>
+<li><a href=/data/share-of-individuals-using-the-internet-1990-2015.csv><i class="fas fa-table"></i> <code>share-of-individuals-using-the-internet-1990-2015.csv</code></a></li>
+<li><a href=/data/ne_110m_admin_0_countries.zip><i class="fas fa-file-archive"></i> <code>ne_110m_admin_0_countries.zip</code></a>. This is the <a href=https://www.naturalearthdata.com/downloads/110m-cultural-vectors/ target=_blank rel=noopener>&ldquo;110m Admin 0—Countries&rdquo;</a> shapefile from Natural Earth. It will download as a .zip file. Unzip the file and move the entire <code>ne_110m_admin_0_countries</code> directory into your data folder.</li>
+</ul>
+<p>You should use an RStudio Project to keep your files well organized (either on your computer or on RStudio.cloud). Either create a new project for this exercise only, or make a project for all your work in this class.</p>
+<p><strong>To help you</strong>, I&rsquo;ve created a skeleton R Markdown file with a template for this exercise, along with some code to help you clean and join the two datasets. Download that here and include it in your project:</p>
+<ul>
+<li><a href=/projects/12-exercise/12-exercise.Rmd><i class="fab fa-r-project"></i> <code>12-exercise.Rmd</code></a></li>
+</ul>
+<p>In the end, the structure of your project directory should look something like this:</p>
+<pre><code class=language-text>your-project-name\
+  12-exercise.Rmd
+  your-project-name.Rproj
+  data\
+    share-of-individuals-using-the-internet-1990-2015.csv
+    ne_110m_admin_0_countries/
+      ...
+      ne_110m_admin_0_countries.shp
+      ...
+</code></pre>
+<p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:</p>
+<ul>
+<li><a href=/projects/12-exercise.zip><i class="fas fa-file-archive"></i> <code>12-exercise.zip</code></a></li>
+</ul>
+<p>The <a href=/example/12-example/>example from today&rsquo;s session</a> shows how to load and plot shapefiles and will be incredibly helpful as you do this exercise.</p>
+<p>This can be as simple or as complex as you want. You don&rsquo;t need to make your plot super fancy, but if you&rsquo;re feeling brave, experiment with changing colors or modifying themes and theme elements.</p>
+<p>You&rsquo;ll need to insert your own code chunks where needed. Rather than typing them by hand (that&rsquo;s tedious and you might miscount the number of backticks!), use the &ldquo;Insert&rdquo; button at the top of the editing window, or type <kbd>ctrl</kbd> + <kbd>alt</kbd> + <kbd>i</kbd> on Windows, or <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>i</kbd> on macOS.</p>
+<img src=/img/assignments/insert-chunk-button.png width=19%>
+<h2 id=task-1-reflection>Task 1: Reflection</h2>
+<p>Write your reflection for the day&rsquo;s readings.</p>
+<h2 id=task-2-world-map>Task 2: World map</h2>
+<p>Make a map showing the proportion of individuals in each country that had access to the internet in 2015.</p>
+<ul>
+<li>I&rsquo;ve provided some starter code in the R Markdown file.</li>
+<li>You&rsquo;ll want to fill each country by the <code>users</code> column.</li>
+<li>Make sure you choose a good projection. See the <a href=/example/12-example/#projections-and-coordinate-reference-systems>&ldquo;Projections and coordinate reference systems&rdquo; section</a> from the example.</li>
+</ul>
+<p><em>Bonus optional extra fun: Use your comparison/time skills to show the change in internet access between 2000 and 2015, perhaps with facetting some years, or <a href=https://observablehq.com/@mbostock/methods-of-comparison-compared target=_blank rel=noopener>calculating ratios or proportions or percent changes</a></em></p>
+<h2 id=bonus-optional-task-personal-map>Bonus (optional) task!: Personal map</h2>
+<p>Draw your own map with your own points. This could be a map of places you&rsquo;ve lived, or a map of places you&rsquo;ve visited, or a map of places you want to visit. Anything!</p>
+<p>The only requirement is that you find an appropriate shapefile (states, counties, world, etc.), collect latitude and longitude data from Google Maps, and plot the points (with or without labels) on a map. Use multiple shapefiles if you want—add roads, rivers, lakes, whatever.</p>
+<p>Hint: Basically follow <a href=/example/12-example/#making-your-own-geoencoded-data>the code from the example in the section named &ldquo;Making your own geoencoded data&rdquo;</a></p>
+<h2 id=turning-everything-in>Turning everything in</h2>
+<p>When you&rsquo;re all done, click on the &ldquo;Knit&rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&rsquo;ve <a href=/resource/install/#install-tinytex>installed <strong>tinytex</strong></a>) of your document. Upload that file to iCollege.</p>
+<img src=/img/assignments/knit-button.png width=30%>
+</div>
+<div class="media author-card content-widget-hr">
+<div class=media-body>
+<h5 class=card-title><a href=aem2850.toddgerarden.com></a></h5>
+<ul class=network-icon aria-hidden=true>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class=page-footer>
+</div>
+<div id=modal class="modal fade" role=dialog>
+<div class=modal-dialog>
+<div class=modal-content>
+<div class=modal-header>
+<h5 class=modal-title>Cite</h5>
+<button type=button class=close data-dismiss=modal aria-label=Close>
+<span aria-hidden=true>&#215;</span>
+</button>
+</div>
+<div class=modal-body>
+<pre><code class="tex hljs"></code></pre>
+</div>
+<div class=modal-footer>
+<a class="btn btn-outline-primary my-1 js-copy-cite" href=# target=_blank>
+<i class="fas fa-copy"></i> Copy
+</a>
+<a class="btn btn-outline-primary my-1 js-download-cite" href=# target=_blank>
+<i class="fas fa-download"></i> Download
+</a>
+<div id=modal-error></div>
+</div>
+</div>
+</div>
+</div>
+<script src=/aem2850.toddgerarden.com/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js></script>
+<script src=https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/bryanbraun/anchorjs@4.2.2/anchor.min.js integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin=anonymous></script>
+<script>anchors.add()</script>
+<script id=page-data type=application/json>{"use_headroom":true}</script>
+<script src=/aem2850.toddgerarden.com/js/wowchemy-headroom.1cb9e2fc8399acee94eab837265b73bf.js type=module></script>
+<script src=/aem2850.toddgerarden.com/en/js/wowchemy.min.216188596c551a0582beb89fb0d646e2.js></script>
+</body>
+</html>

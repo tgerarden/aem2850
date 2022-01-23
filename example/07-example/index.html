@@ -1,0 +1,548 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Wowchemy 5.4.0 for Hugo">
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media=print onload="this.media='all'">
+<meta name=description content="For this example, we&rsquo;re again going to use historical weather data from Dark Sky about wind speed and temperature trends for downtown Atlanta (specifically 33.754557, -84.390009) in 2019. I downloaded this data using Dark Sky&rsquo;s (about-to-be-retired-because-they-were-bought-by-Apple) API using the darksky package.">
+<link rel=alternate hreflang=en-us href=aem2850.toddgerarden.com/example/07-example/>
+<meta name=theme-color content="#B31B1B">
+<link rel=stylesheet href=/aem2850.toddgerarden.com/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin=anonymous media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css crossorigin=anonymous title=hl-light media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css crossorigin=anonymous title=hl-dark media=print onload="this.media='all'" disabled>
+<link rel=stylesheet href=/aem2850.toddgerarden.com/css/wowchemy.0955c4d33b0be4851935253be0520832.css>
+<link rel=manifest href=aem2850.toddgerarden.com/manifest.webmanifest>
+<link rel=icon type=image/png href=/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_3.png>
+<link rel=apple-touch-icon type=image/png href=/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_180x180_fill_lanczos_center_3.png>
+<link rel=canonical href=aem2850.toddgerarden.com/example/07-example/>
+<meta property="twitter:card" content="summary">
+<meta property="og:site_name" content="R for Business Analytics">
+<meta property="og:url" content="aem2850.toddgerarden.com/example/07-example/">
+<meta property="og:title" content="Relationships | R for Business Analytics">
+<meta property="og:description" content="For this example, we&rsquo;re again going to use historical weather data from Dark Sky about wind speed and temperature trends for downtown Atlanta (specifically 33.754557, -84.390009) in 2019. I downloaded this data using Dark Sky&rsquo;s (about-to-be-retired-because-they-were-bought-by-Apple) API using the darksky package."><meta property="og:image" content="/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png">
+<meta property="twitter:image" content="/aem2850.toddgerarden.com/media/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
+<meta property="article:published_time" content="2021-06-28T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-06-28T00:00:00+00:00">
+<title>Relationships | R for Business Analytics</title>
+</head>
+<body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=456d2e61a1c3227a0d74dc546242f41f>
+<script src=/aem2850.toddgerarden.com/js/wowchemy-init.min.133800c88f3b5bb934932231fd94fed7.js></script>
+<div class=page-header>
+<header class=header--fixed>
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id=navbar-main>
+<div class=container-xl>
+<div class="d-none d-lg-inline-flex">
+<a class=navbar-brand href=/aem2850.toddgerarden.com/>R for Business Analytics</a>
+</div>
+<button type=button class=navbar-toggler data-toggle=collapse data-target=#navbar-content aria-controls=navbar-content aria-expanded=false aria-label="Toggle navigation">
+<span><i class="fas fa-bars"></i></span>
+</button>
+<div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+<a class=navbar-brand href=/aem2850.toddgerarden.com/>R for Business Analytics</a>
+</div>
+<div class="navbar-collapse main-menu-item collapse justify-content-end" id=navbar-content>
+<ul class="navbar-nav d-md-inline-flex">
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/syllabus/><span>Syllabus</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/schedule/><span>Schedule</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/aem2850.toddgerarden.com/resource/><span>Resources</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://rstudio.cloud/ target=_blank rel=noopener><span><i class="fab fa-r-project"></i></span></a>
+</li>
+</ul>
+</div>
+<ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+</ul>
+</div>
+</nav>
+</header>
+</div>
+<div class=page-body>
+<article class=article>
+<div class="article-container pt-3">
+<h1>Relationships</h1>
+<div class=article-metadata>
+<span class=article-date>
+Jun 28, 2021
+</span>
+</div>
+</div>
+<div class=article-container>
+<div class=article-style>
+<p>For this example, we&rsquo;re again going to use historical weather data from <a href=https://darksky.net/forecast/33.7546,-84.39/us12/en target=_blank rel=noopener>Dark Sky</a> about wind speed and temperature trends for downtown Atlanta (<a href=https://www.google.com/maps/place/33%c2%b045%2716.4%22N+84%c2%b023%2724.0%22W/@33.754557,-84.3921977,17z/ target=_blank rel=noopener>specifically <code>33.754557, -84.390009</code></a>) in 2019. I downloaded this data using Dark Sky&rsquo;s (about-to-be-retired-because-they-were-bought-by-Apple) API using the <a href=https://github.com/hrbrmstr/darksky target=_blank rel=noopener> <strong>darksky</strong> package</a>.</p>
+<p>If you want to follow along with this example, you can download the data below (you&rsquo;ll likely need to right click and choose &ldquo;Save Link As…"):</p>
+<ul>
+<li><a href=/data/atl-weather-2019.csv><i class="fas fa-file-csv"></i> <code>atl-weather-2019.csv</code></a></li>
+</ul>
+<h2 id=live-coding-example>Live coding example</h2>
+<div class="embed-responsive embed-responsive-16by9">
+<iframe class=embed-responsive-item src=https://www.youtube.com/embed/zfEAmJzfbkE frameborder=0 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<h2 id=complete-code>Complete code</h2>
+<p><em>(This is a slightly cleaned up version of the code from the video.)</em></p>
+<h3 id=load-and-clean-data>Load and clean data</h3>
+<p>First, we load the libraries we&rsquo;ll be using:</p>
+<pre><code class=language-r>library(tidyverse)  # For ggplot, dplyr, and friends
+library(patchwork)  # For combining ggplot plots
+library(GGally)     # For scatterplot matrices
+library(broom)      # For converting model objects to data frames
+</code></pre>
+<p>Then we load the data with <code>read_csv()</code>. Here I assume that the CSV file lives in a subfolder in my project named <code>data</code>:</p>
+<pre><code class=language-r>weather_atl &lt;- read_csv(&quot;data/atl-weather-2019.csv&quot;)
+</code></pre>
+<h3 id=legal-dual-y-axes>Legal dual y-axes</h3>
+<p>It is fine (and often helpful!) to use two y-axes if the two different scales measure the same thing, like counts and percentages, Fahrenheit and Celsius, pounds and kilograms, inches and centimeters, etc.</p>
+<p>To do this, you need to add an argument (<code>sec.axis</code>) to <code>scale_y_continuous()</code> to tell it to use a second axis. This <code>sec.axis</code> argument takes a <code>sec_axis()</code> function that tells ggplot how to transform the scale. You need to specify a formula or function that defines how the original axis gets transformed. This formula uses a special syntax. It needs to start with a <code>~</code>, which indicates that it&rsquo;s a function, and it needs to use <code>.</code> to stand in for the original value in the original axis.</p>
+<p>Since the equation for converting Fahrenheit to Celsius is this…</p>
+<p>$$
+\text{C} = (32 - \text{F}) \times -\frac{5}{9}
+$$</p>
+<p>…we can specify this with code like so (where <code>.</code> stands for the Fahrenheit value):</p>
+<pre><code class=language-text>~ (32 - .) * -5 / 9
+</code></pre>
+<p>Here&rsquo;s a plot of daily high temperatures in Atlanta throughout 2019, with a second axis:</p>
+<pre><code class=language-r>ggplot(weather_atl, aes(x = time, y = temperatureHigh)) +
+  geom_line() +
+  scale_y_continuous(sec.axis = sec_axis(trans = ~ (32 - .) * -5/9,
+                                         name = &quot;Celsius&quot;)) +
+  labs(x = NULL, y = &quot;Fahrenheit&quot;) +
+  theme_minimal()
+</code></pre>
+<img src=/example/07-example_files/figure-html/atl-weather-dual-axes-1.png width=576 style=display:block;margin:auto>
+<p>For fun, we could also convert it to Kelvin, which uses this formula:</p>
+<p>$$
+\text{K} = (\text{F} - 32) \times \frac{5}{9} + 273.15
+$$</p>
+<pre><code class=language-r>ggplot(weather_atl, aes(x = time, y = temperatureHigh)) +
+  geom_line() +
+  scale_y_continuous(sec.axis = sec_axis(trans = ~ (. - 32) * 5/9 + 273.15,
+                                         name = &quot;Kelvin&quot;)) +
+  labs(x = NULL, y = &quot;Fahrenheit&quot;) +
+  theme_minimal()
+</code></pre>
+<img src=/example/07-example_files/figure-html/atl-weather-dual-axes-kelvin-1.png width=576 style=display:block;margin:auto>
+<h3 id=combining-plots>Combining plots</h3>
+<p>A good alternative to using two y-axes is to use two plots instead. The <a href=https://github.com/thomasp85/patchwork target=_blank rel=noopener><strong>patchwork</strong> package</a> makes this <em>really</em> easy to do with R. There are other similar packages that do this, like <strong>cowplot</strong> and <strong>gridExtra</strong>, but I&rsquo;ve found that <strong>patchwork</strong> is the easiest to use <em>and</em> it actually aligns the different plot elements like axis lines and legends (yay alignment in CRAP!). The <a href=https://patchwork.data-imaginist.com/articles/guides/assembly.html target=_blank rel=noopener>documentation for <strong>patchwork</strong></a> is really great and full of examples—you should check it out to see all the things you can do with it!</p>
+<p>To use <strong>patchwork</strong>, we need to (1) save our plots as objects and (2) add them together with <code>+</code>.</p>
+<p>For instance, is there a relationship between temperature and humidity in Atlanta? We can plot both:</p>
+<pre><code class=language-r># Temperature in Atlanta
+temp_plot &lt;- ggplot(weather_atl, aes(x = time, y = temperatureHigh)) +
+  geom_line() +
+  geom_smooth() +
+  scale_y_continuous(sec.axis = sec_axis(trans = ~ (32 - .) * -5/9,
+                                         name = &quot;Celsius&quot;)) +
+  labs(x = NULL, y = &quot;Fahrenheit&quot;) +
+  theme_minimal()
+temp_plot
+</code></pre>
+<img src=/example/07-example_files/figure-html/create-temp-humid-plots-1.png width=576 style=display:block;margin:auto>
+<pre><code class=language-r># Humidity in Atlanta
+humidity_plot &lt;- ggplot(weather_atl, aes(x = time, y = humidity)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = NULL, y = &quot;Humidity&quot;) +
+  theme_minimal()
+humidity_plot
+</code></pre>
+<img src=/example/07-example_files/figure-html/create-temp-humid-plots-2.png width=576 style=display:block;margin:auto>
+<p>Right now, these are two separate plots, but we can combine them with <code>+</code> if we load <strong>patchwork</strong>:</p>
+<pre><code class=language-r>library(patchwork)
+
+temp_plot + humidity_plot
+</code></pre>
+<img src=/example/07-example_files/figure-html/patchwork-first-1.png width=576 style=display:block;margin:auto>
+<p>By default, <strong>patchwork</strong> will put these side-by-side, but we can change that with the <code>plot_layout()</code> function:</p>
+<pre><code class=language-r>temp_plot + humidity_plot +
+  plot_layout(ncol = 1)
+</code></pre>
+<img src=/example/07-example_files/figure-html/patchwork-vertical-1.png width=576 style=display:block;margin:auto>
+<p>We can also play with other arguments in <code>plot_layout()</code>. If we want to make the temperature plot taller and shrink the humidity section, we can specify the proportions for the plot heights. Here, the temperature plot is 70% of the height and the humidity plot is 30%:</p>
+<pre><code class=language-r>temp_plot + humidity_plot +
+  plot_layout(ncol = 1, heights = c(0.7, 0.3))
+</code></pre>
+<img src=/example/07-example_files/figure-html/patchwork-vertical-resized-1.png width=576 style=display:block;margin:auto>
+<h3 id=scatterplot-matrices>Scatterplot matrices</h3>
+<p>We can visualize the correlations between pairs of variables with the <code>ggpairs()</code> function in the <strong>GGally</strong> package. For instance, how correlated are high and low temperatures, humidity, wind speed, and the chance of precipitation? We first make a smaller dataset with just those columns, and then we feed that dataset into <code>ggpairs()</code> to see all the correlation information:</p>
+<pre><code class=language-r>library(GGally)
+
+weather_correlations &lt;- weather_atl %&gt;% 
+  select(temperatureHigh, temperatureLow, humidity, windSpeed, precipProbability)
+
+ggpairs(weather_correlations)
+</code></pre>
+<img src=/example/07-example_files/figure-html/ggpairs-1.png width=864 style=display:block;margin:auto>
+<p>It looks like high and low temperatures are extremely highly positively correlated (r = 0.92). Wind spped and temperature are moderately negatively correlated, with low temperatures having a stronger negative correlation (r = -0.45). There&rsquo;s no correlation whatsoever between low temperatures and the precipitation probability (r = -0.03) or humidity and high temperatures (r = -0.03).</p>
+<p>Even though <code>ggpairs()</code> doesn&rsquo;t use the standard <code>ggplot(...) + geom_whatever()</code> syntax we&rsquo;re familiar with, it does behind the scenes, so you can add regular ggplot layers to it:</p>
+<pre><code class=language-r>ggpairs(weather_correlations) +
+  labs(title = &quot;Correlations!&quot;) +
+  theme_dark()
+</code></pre>
+<h3 id=correlograms>Correlograms</h3>
+<p>Scatterplot matrices typically include way too much information to be used in actual publications. I use them when doing my own analysis just to see how different variables are related, but I rarely polish them up for public consumption. In the readings for today, Claus Wilke showed a type of plot called a <a href=https://clauswilke.com/dataviz/visualizing-associations.html#associations-correlograms target=_blank rel=noopener><em>correlogram</em></a> which <em>is</em> more appropriate for publication.</p>
+<p>These are essentially heatmaps of the different correlation coefficients. To make these with ggplot, we need to do a little bit of extra data processing, mostly to reshape data into a long, tidy format that we can plot. Here&rsquo;s how.</p>
+<p>First we need to build a correlation matrix of the main variables we care about. Ordinarily the <code>cor()</code> function in R takes two arguments—x and y—and it will return a single correlation value. If you feed a data frame into <code>cor()</code> though, it&rsquo;ll calculate the correlation between each pair of columns</p>
+<pre><code class=language-r># Create a correlation matrix
+things_to_correlate &lt;- weather_atl %&gt;% 
+  select(temperatureHigh, temperatureLow, humidity, windSpeed, precipProbability) %&gt;% 
+  cor()
+
+things_to_correlate
+</code></pre>
+<pre><code>##                   temperatureHigh temperatureLow humidity windSpeed precipProbability
+## temperatureHigh              1.00          0.920   -0.030    -0.377            -0.124
+## temperatureLow               0.92          1.000    0.112    -0.450            -0.026
+## humidity                    -0.03          0.112    1.000     0.011             0.722
+## windSpeed                   -0.38         -0.450    0.011     1.000             0.196
+## precipProbability           -0.12         -0.026    0.722     0.196             1.000
+</code></pre>
+<p>The two halves of this matrix (split along the diagonal line) are identical, so we can remove the lower triangle with this code (which will set all the cells in the lower triangle to <code>NA</code>):</p>
+<pre><code class=language-r># Get rid of the lower triangle
+things_to_correlate[lower.tri(things_to_correlate)] &lt;- NA
+things_to_correlate
+</code></pre>
+<pre><code>##                   temperatureHigh temperatureLow humidity windSpeed precipProbability
+## temperatureHigh                 1           0.92    -0.03    -0.377            -0.124
+## temperatureLow                 NA           1.00     0.11    -0.450            -0.026
+## humidity                       NA             NA     1.00     0.011             0.722
+## windSpeed                      NA             NA       NA     1.000             0.196
+## precipProbability              NA             NA       NA        NA             1.000
+</code></pre>
+<p>Finally, in order to plot this, the data needs to be in tidy (or long) format. Here we convert the <code>things_to_correlate</code> matrix into a data frame, add a column for the row names, take all the columns and put them into a single column named <code>measure1</code>, and take all the correlation numbers and put them in a column named <code>cor</code> In the end, we make sure the measure variables are ordered by their order of appearance (otherwise they plot alphabetically and don&rsquo;t make a triangle)</p>
+<pre><code class=language-r>things_to_correlate_long &lt;- things_to_correlate %&gt;% 
+  # Convert from a matrix to a data frame
+  as.data.frame() %&gt;% 
+  # Matrixes have column names that don't get converted to columns when using
+  # as.data.frame(), so this adds those names as a column
+  rownames_to_column(&quot;measure2&quot;) %&gt;% 
+  # Make this long. Take all the columns except measure2 and put their names in
+  # a column named measure1 and their values in a column named cor
+  pivot_longer(cols = -measure2,
+               names_to = &quot;measure1&quot;,
+               values_to = &quot;cor&quot;) %&gt;% 
+  # Make a new column with the rounded version of the correlation value
+  mutate(nice_cor = round(cor, 2)) %&gt;% 
+  # Remove rows where the two measures are the same (like the correlation
+  # between humidity and humidity)
+  filter(measure2 != measure1) %&gt;%
+  # Get rid of the empty triangle
+  filter(!is.na(cor)) %&gt;% 
+  # Put these categories in order
+  mutate(measure1 = fct_inorder(measure1),
+         measure2 = fct_inorder(measure2))
+
+things_to_correlate_long
+</code></pre>
+<pre><code>## # A tibble: 10 x 4
+##    measure2        measure1              cor nice_cor
+##    &lt;fct&gt;           &lt;fct&gt;               &lt;dbl&gt;    &lt;dbl&gt;
+##  1 temperatureHigh temperatureLow     0.920      0.92
+##  2 temperatureHigh humidity          -0.0301    -0.03
+##  3 temperatureHigh windSpeed         -0.377     -0.38
+##  4 temperatureHigh precipProbability -0.124     -0.12
+##  5 temperatureLow  humidity           0.112      0.11
+##  6 temperatureLow  windSpeed         -0.450     -0.45
+##  7 temperatureLow  precipProbability -0.0255    -0.03
+##  8 humidity        windSpeed          0.0108     0.01
+##  9 humidity        precipProbability  0.722      0.72
+## 10 windSpeed       precipProbability  0.196      0.2
+</code></pre>
+<p>Phew. With the data all tidied like that, we can make a correlogram with a heatmap. This is just like <a href=https://datavizm20.classes.andrewheiss.com/example/04-example/#heatmap target=_blank rel=noopener>the heatmap you made in session 4</a>, but here we manipulate the fill scale a little so that it&rsquo;s diverging with three colors: a high value, a midpoint value, and a low value.</p>
+<pre><code class=language-r>ggplot(things_to_correlate_long, 
+       aes(x = measure2, y = measure1, fill = cor)) +
+  geom_tile() +
+  geom_text(aes(label = nice_cor)) +
+  scale_fill_gradient2(low = &quot;#E16462&quot;, mid = &quot;white&quot;, high = &quot;#0D0887&quot;,
+                       limits = c(-1, 1)) +
+  labs(x = NULL, y = NULL) +
+  coord_equal() +
+  theme_minimal() +
+  theme(panel.grid = element_blank())
+</code></pre>
+<img src=/example/07-example_files/figure-html/cor-heatmap-1.png width=480 style=display:block;margin:auto>
+<p>Instead of using a heatmap, we can also use points, which encode the correlation information both as color <em>and</em> as size. To do that, we just need to switch <code>geom_tile()</code> to <code>geom_point()</code> and set the <code>size = cor</code> mapping:</p>
+<pre><code class=language-r>ggplot(things_to_correlate_long, 
+       aes(x = measure2, y = measure1, color = cor)) +
+  # Size by the absolute value so that -0.7 and 0.7 are the same size
+  geom_point(aes(size = abs(cor))) +
+  scale_color_gradient2(low = &quot;#E16462&quot;, mid = &quot;white&quot;, high = &quot;#0D0887&quot;,
+                        limits = c(-1, 1)) +
+  scale_size_area(max_size = 15, limits = c(-1, 1), guide = &quot;none&quot;) +
+  labs(x = NULL, y = NULL) +
+  coord_equal() +
+  theme_minimal() +
+  theme(panel.grid = element_blank())
+</code></pre>
+<img src=/example/07-example_files/figure-html/cor-points-1.png width=480 style=display:block;margin:auto>
+<h3 id=simple-regression>Simple regression</h3>
+<p>We can also visualize the relationships between variables using regression. Simple regression is easy to visualize, since you&rsquo;re only working with an X and a Y. For instance, what&rsquo;s the relationship between humidity and high temperatures during the summer?</p>
+<p>First, let&rsquo;s filter the data to only look at the summer. We also add a column to scale up the humidity value—right now it&rsquo;s on a scale of 0-1 (for percentages), but when interpreting regression we talk about increases in whole units, so we&rsquo;d talk about moving from 0% humidity to 100% humidity, which isn&rsquo;t helpful, so instead we multiply everything by 100 so we can talk about moving from 50% humidity to 51% humidity. We also scale up a couple other variables that we&rsquo;ll use in the larger model later.</p>
+<pre><code class=language-r>weather_atl_summer &lt;- weather_atl %&gt;% 
+  filter(time &gt;= &quot;2019-05-01&quot;, time &lt;= &quot;2019-09-30&quot;) %&gt;% 
+  mutate(humidity_scaled = humidity * 100,
+         moonPhase_scaled = moonPhase * 100,
+         precipProbability_scaled = precipProbability * 100,
+         cloudCover_scaled = cloudCover * 100)
+</code></pre>
+<p>Then we can build a simple regression model:</p>
+<pre><code class=language-r>model_simple &lt;- lm(temperatureHigh ~ humidity_scaled, 
+                   data = weather_atl_summer)
+
+tidy(model_simple, conf.int = TRUE)
+</code></pre>
+<pre><code>## # A tibble: 2 x 7
+##   term            estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)      104.       2.35       44.3  1.88e-88   99.5     109.   
+## 2 humidity_scaled   -0.241    0.0358     -6.74 3.21e-10   -0.312    -0.170
+</code></pre>
+<p>We can interpret these coefficients like so:</p>
+<ul>
+<li>The intercept shows that the average temperature when there&rsquo;s 0% humidity is 104°. There are no days with 0% humidity though, so we can ignore the intercept—it&rsquo;s really just here so that we can draw the line.</li>
+<li>The coefficient for <code>humidity_scaled</code> shows that a one percent increase in humidity is associated with a 0.241° decrease in temperature, on average.</li>
+</ul>
+<p>Visualizing this model is simple, since there are only two variables:</p>
+<pre><code class=language-r>ggplot(weather_atl_summer,
+       aes(x = humidity_scaled, y = temperatureHigh)) +
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;)
+</code></pre>
+<pre><code>## `geom_smooth()` using formula 'y ~ x'
+</code></pre>
+<img src=/example/07-example_files/figure-html/plot-simple-model-1.png width=576 style=display:block;margin:auto>
+<p>And indeed, as humidity increases, temperatures decrease.</p>
+<h3 id=coefficient-plots>Coefficient plots</h3>
+<p>But if we use multiple variables in the model, it gets really hard to visualize the results since we&rsquo;re working with multiple dimensions. Instead, we can use coefficient plots to see the individual coefficients in the model.</p>
+<p>First, let&rsquo;s build a more complex model:</p>
+<pre><code class=language-r>model_complex &lt;- lm(temperatureHigh ~ humidity_scaled + moonPhase_scaled + 
+                      precipProbability_scaled + windSpeed + pressure + cloudCover_scaled,
+                    data = weather_atl_summer)
+tidy(model_complex, conf.int = TRUE)
+</code></pre>
+<pre><code>## # A tibble: 7 x 7
+##   term                     estimate std.error statistic   p.value conf.low conf.high
+##   &lt;chr&gt;                       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)              262.      125.         2.09  0.0380    14.8      510.    
+## 2 humidity_scaled           -0.111     0.0757    -1.47  0.143     -0.261      0.0381
+## 3 moonPhase_scaled           0.0116    0.0126     0.917 0.360     -0.0134     0.0366
+## 4 precipProbability_scaled   0.0356    0.0203     1.75  0.0820    -0.00458    0.0758
+## 5 windSpeed                 -1.78      0.414     -4.29  0.0000326 -2.59      -0.958 
+## 6 pressure                  -0.157     0.122     -1.28  0.203     -0.398      0.0854
+## 7 cloudCover_scaled         -0.0952    0.0304    -3.14  0.00207   -0.155     -0.0352
+</code></pre>
+<p>We can interpret these coefficients like so:</p>
+<ul>
+<li>Holding everything else constant, a 1% increase in humidity is associated with a 0.11° decrease in the high temperature, on average, but the effect is not statistically significant</li>
+<li>Holding everything else constant, a 1% increase in moon visibility is associated with a 0.01° increase in the high temperature, on average, and the effect is not statistically significant</li>
+<li>Holding everything else constant, a 1% increase in the probability of precipitation is associated with a 0.04° increase in the high temperature, on average, and the effect is not statistically significant</li>
+<li>Holding everything else constant, a 1 mph increase in the wind speed is associated with a 1.8° decrease in the high temperature, on average, and the effect <em>is</em> statistically significant</li>
+<li>Holding everything else constant, a 1 unit increase in barometric pressure is associated with a 0.15° decrease in the high temperature, on average, and the effect is not statistically significant</li>
+<li>Holding everything else constant, a 1% increase in cloud cover is associated with a 0.01° decrease in the high temperature, on average, and the effect <em>is</em> statistically significant</li>
+<li>The intercept is pretty useless. It shows that the predicted temperature will be 262° when humidity is 0%, the moon is invisible, there&rsquo;s no chance of precipitation, no wind, no barometric pressure, and no cloud cover. Yikes.</li>
+</ul>
+<p>To plot all these things at once, we&rsquo;ll store the results of <code>tidy(model_complex)</code> as a data frame, remove the useless intercept, and plot it using <code>geom_pointrange()</code>:</p>
+<pre><code class=language-r>model_tidied &lt;- tidy(model_complex, conf.int = TRUE) %&gt;% 
+  filter(term != &quot;(Intercept)&quot;)
+
+ggplot(model_tidied,
+       aes(x = estimate, y = term)) +
+  geom_vline(xintercept = 0, color = &quot;red&quot;, linetype = &quot;dotted&quot;) +
+  geom_pointrange(aes(xmin = conf.low, xmax = conf.high)) + 
+  labs(x = &quot;Coefficient estimate&quot;, y = NULL) +
+  theme_minimal()
+</code></pre>
+<img src=/example/07-example_files/figure-html/coef-plot-1.png width=576 style=display:block;margin:auto>
+<p>Neat! Now we can see how big these different coefficients are and how close they are to zero. Wind speed has a big significant effect on temperature. The others are all very close to zero.</p>
+<h3 id=marginal-effects-plots>Marginal effects plots</h3>
+<p>Instead of just looking at the coefficients, we can also see the effect of moving different variables up and down like sliders and switches. Remember that regression coefficients allow us to build actual mathematical formulas that predict the value of Y. The coefficients from <code>model_compex</code> yield the following big hairy ugly equation:</p>
+<p>$$
+<code>\begin{aligned} \hat{\text{High temperature}} =& 262 - 0.11 \times \text{humidity_scaled } \\ & + 0.01 \times \text{moonPhase_scaled } + 0.04 \times \text{precipProbability_scaled } \\ & - 1.78 \times \text{windSpeed} - 0.16 \times \text{pressure} - 0.095 \times \text{cloudCover_scaled} \end{aligned}</code>
+$$</p>
+<p>If we plug in values for each of the explanatory variables, we can get the predicted value of high temperature, or <code>\(\hat{y}\)</code>.</p>
+<p>The <code>augment()</code> function in the <strong>broom</strong> library allows us to take a data frame of explanatory variable values, plug them into the model equation, and get predictions out. For example, let&rsquo;s set each of the variables to some arbitrary values (50% for humidity, moon phase, chance of rain, and cloud cover; 1000 for pressure, and 1 MPH for wind speed).</p>
+<pre><code class=language-r>newdata_example &lt;- tibble(humidity_scaled = 50, moonPhase_scaled = 50, 
+                          precipProbability_scaled = 50, windSpeed = 1, 
+                          pressure = 1000, cloudCover_scaled = 50)
+newdata_example
+</code></pre>
+<pre><code>## # A tibble: 1 x 6
+##   humidity_scaled moonPhase_scaled precipProbability_scaled windSpeed pressure cloudCover_scaled
+##             &lt;dbl&gt;            &lt;dbl&gt;                    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;             &lt;dbl&gt;
+## 1              50               50                       50         1     1000                50
+</code></pre>
+<p>We can plug these values into the model with <code>augment()</code>. The <code>se_fit</code> argument gives us standard errors for each prediction:</p>
+<pre><code class=language-r># I use select() here because augment() returns columns for all the explanatory
+# variables, and the .fitted column with the predicted value is on the far right
+# and gets cut off
+augment(model_complex, newdata = newdata_example, se_fit = TRUE) %&gt;% 
+  select(.fitted, .se.fit)
+</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   .fitted .se.fit
+##     &lt;dbl&gt;   &lt;dbl&gt;
+## 1    96.2    3.19
+</code></pre>
+<p>Given these weather conditions, the predicted high temperature is 96.2°. Now you&rsquo;re an armchair meteorologist!</p>
+<p>We can follow the same pattern to show how the predicted temperature changes as specific variables change across a whole range. Here, we create a data frame of possible wind speeds and keep all the other explanatory variables at their means:</p>
+<pre><code class=language-r>newdata &lt;- tibble(windSpeed = seq(0, 8, 0.5),
+                  pressure = mean(weather_atl_summer$pressure),
+                  precipProbability_scaled = mean(weather_atl_summer$precipProbability_scaled),
+                  moonPhase_scaled = mean(weather_atl_summer$moonPhase_scaled),
+                  humidity_scaled = mean(weather_atl_summer$humidity_scaled),
+                  cloudCover_scaled = mean(weather_atl_summer$cloudCover_scaled))
+newdata
+</code></pre>
+<pre><code>## # A tibble: 17 x 6
+##    windSpeed pressure precipProbability_scaled moonPhase_scaled humidity_scaled cloudCover_scaled
+##        &lt;dbl&gt;    &lt;dbl&gt;                    &lt;dbl&gt;            &lt;dbl&gt;           &lt;dbl&gt;             &lt;dbl&gt;
+##  1       0      1016.                     40.2             50.7            64.8              29.5
+##  2       0.5    1016.                     40.2             50.7            64.8              29.5
+##  3       1      1016.                     40.2             50.7            64.8              29.5
+##  4       1.5    1016.                     40.2             50.7            64.8              29.5
+##  5       2      1016.                     40.2             50.7            64.8              29.5
+##  6       2.5    1016.                     40.2             50.7            64.8              29.5
+##  7       3      1016.                     40.2             50.7            64.8              29.5
+##  8       3.5    1016.                     40.2             50.7            64.8              29.5
+##  9       4      1016.                     40.2             50.7            64.8              29.5
+## 10       4.5    1016.                     40.2             50.7            64.8              29.5
+## 11       5      1016.                     40.2             50.7            64.8              29.5
+## 12       5.5    1016.                     40.2             50.7            64.8              29.5
+## 13       6      1016.                     40.2             50.7            64.8              29.5
+## 14       6.5    1016.                     40.2             50.7            64.8              29.5
+## 15       7      1016.                     40.2             50.7            64.8              29.5
+## 16       7.5    1016.                     40.2             50.7            64.8              29.5
+## 17       8      1016.                     40.2             50.7            64.8              29.5
+</code></pre>
+<p>If we feed this big data frame into <code>augment()</code>, we can get the predicted high temperature for each row. We can also use the <code>.se.fit</code> column to calculate the 95% confidence interval for each predicted value. We take the standard error, multiply it by -1.96 and 1.96 (or the quantile of the normal distribution at 2.5% and 97.5%), and add that value to the estimate.</p>
+<pre><code class=language-r>predicted_values &lt;- augment(model_complex, 
+                            newdata = newdata,
+                            se_fit = TRUE) %&gt;% 
+  mutate(conf.low = .fitted + (-1.96 * .se.fit),
+         conf.high = .fitted + (1.96 * .se.fit))
+
+predicted_values %&gt;% 
+  select(windSpeed, .fitted, .se.fit, conf.low, conf.high) %&gt;% 
+  head()
+</code></pre>
+<pre><code>## # A tibble: 6 x 5
+##   windSpeed .fitted .se.fit conf.low conf.high
+##       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1       0      95.3   1.63      92.2      98.5
+## 2       0.5    94.5   1.42      91.7      97.2
+## 3       1      93.6   1.22      91.2      96.0
+## 4       1.5    92.7   1.03      90.7      94.7
+## 5       2      91.8   0.836     90.1      93.4
+## 6       2.5    90.9   0.653     89.6      92.2
+</code></pre>
+<p>Cool! Just looking at the data in the table, we can see that predicted temperature drops as windspeed increases. We can plot this to visualize the effect:</p>
+<pre><code class=language-r>ggplot(predicted_values, aes(x = windSpeed, y = .fitted)) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high),
+              fill = &quot;#BF3984&quot;, alpha = 0.5) + 
+  geom_line(size = 1, color = &quot;#BF3984&quot;) +
+  labs(x = &quot;Wind speed (MPH)&quot;, y = &quot;Predicted high temperature (F)&quot;) +
+  theme_minimal()
+</code></pre>
+<img src=/example/07-example_files/figure-html/mfx-plot-simple-1.png width=576 style=display:block;margin:auto>
+<p>We just manipulated one of the model coefficients and held everything else at its mean. We can manipulate multiple variables too and encode them all on the graph. For instance, what is the effect of windspeed <em>and</em> cloud cover on the temperature?</p>
+<p>We&rsquo;ll follow the same process, but vary both <code>windSpeed</code> and <code>cloudCover_scaled</code>. Instead of using <code>tibble()</code>, we use <code>exapnd_grid()</code>, which creates every combination of the variables we specify. Instead of varying cloud cover by every possible value (like from 0 to 100), we&rsquo;ll choose four possible cloud cover types: 0%, 33%, 66%, and 100%. Everything else will be at its mean.</p>
+<pre><code class=language-r>newdata_fancy &lt;- expand_grid(windSpeed = seq(0, 8, 0.5),
+                             pressure = mean(weather_atl_summer$pressure),
+                             precipProbability_scaled = mean(weather_atl_summer$precipProbability_scaled),
+                             moonPhase_scaled = mean(weather_atl_summer$moonPhase_scaled),
+                             humidity_scaled = mean(weather_atl_summer$humidity_scaled),
+                             cloudCover_scaled = c(0, 33, 66, 100))
+newdata_fancy
+</code></pre>
+<pre><code>## # A tibble: 68 x 6
+##    windSpeed pressure precipProbability_scaled moonPhase_scaled humidity_scaled cloudCover_scaled
+##        &lt;dbl&gt;    &lt;dbl&gt;                    &lt;dbl&gt;            &lt;dbl&gt;           &lt;dbl&gt;             &lt;dbl&gt;
+##  1       0      1016.                     40.2             50.7            64.8                 0
+##  2       0      1016.                     40.2             50.7            64.8                33
+##  3       0      1016.                     40.2             50.7            64.8                66
+##  4       0      1016.                     40.2             50.7            64.8               100
+##  5       0.5    1016.                     40.2             50.7            64.8                 0
+##  6       0.5    1016.                     40.2             50.7            64.8                33
+##  7       0.5    1016.                     40.2             50.7            64.8                66
+##  8       0.5    1016.                     40.2             50.7            64.8               100
+##  9       1      1016.                     40.2             50.7            64.8                 0
+## 10       1      1016.                     40.2             50.7            64.8                33
+## # … with 58 more rows
+</code></pre>
+<p>Notice now that <code>windSpeed</code> repeats four times (0, 0, 0, 0, 0.5, 0.5, etc.), since there are four possible <code>cloudCover_scaled</code> values (0, 33, 66, 100).</p>
+<p>We can plot this now, just like before, with wind speed on the x-axis, the predicted temperature on the y-axis, and colored and faceted by cloud cover:</p>
+<pre><code class=language-r>predicted_values_fancy &lt;- augment(model_complex, 
+                                  newdata = newdata_fancy, 
+                                  se_fit = TRUE) %&gt;% 
+  mutate(conf.low = .fitted + (-1.96 * .se.fit),
+         conf.high = .fitted + (1.96 * .se.fit)) %&gt;% 
+  # Make cloud cover a categorical variable
+  mutate(cloudCover_scaled = factor(cloudCover_scaled))
+
+ggplot(predicted_values_fancy, aes(x = windSpeed, y = .fitted)) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, fill = cloudCover_scaled),
+              alpha = 0.5) + 
+  geom_line(aes(color = cloudCover_scaled), size = 1) +
+  labs(x = &quot;Wind speed (MPH)&quot;, y = &quot;Predicted high temperature (F)&quot;) +
+  theme_minimal() +
+  guides(fill = &quot;none&quot;, color = &quot;none&quot;) +
+  facet_wrap(vars(cloudCover_scaled), nrow = 1)
+</code></pre>
+<img src=/example/07-example_files/figure-html/mfx-complex-1.png width=864 style=display:block;margin:auto>
+<p>That&rsquo;s so neat! Temperatures go down slightly as cloud cover increases. If we wanted to improve the model, we&rsquo;d add an interaction term between cloud cover and windspeed so that each line would have a different slope in addition to a different intercept, but that&rsquo;s beyond the scope of this class.</p>
+</div>
+<div class="media author-card content-widget-hr">
+<div class=media-body>
+<h5 class=card-title><a href=aem2850.toddgerarden.com></a></h5>
+<ul class=network-icon aria-hidden=true>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class=page-footer>
+</div>
+<div id=modal class="modal fade" role=dialog>
+<div class=modal-dialog>
+<div class=modal-content>
+<div class=modal-header>
+<h5 class=modal-title>Cite</h5>
+<button type=button class=close data-dismiss=modal aria-label=Close>
+<span aria-hidden=true>&#215;</span>
+</button>
+</div>
+<div class=modal-body>
+<pre><code class="tex hljs"></code></pre>
+</div>
+<div class=modal-footer>
+<a class="btn btn-outline-primary my-1 js-copy-cite" href=# target=_blank>
+<i class="fas fa-copy"></i> Copy
+</a>
+<a class="btn btn-outline-primary my-1 js-download-cite" href=# target=_blank>
+<i class="fas fa-download"></i> Download
+</a>
+<div id=modal-error></div>
+</div>
+</div>
+</div>
+</div>
+<script src=/aem2850.toddgerarden.com/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js></script>
+<script src=https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/bryanbraun/anchorjs@4.2.2/anchor.min.js integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin=anonymous></script>
+<script>anchors.add()</script>
+<script id=page-data type=application/json>{"use_headroom":true}</script>
+<script src=/aem2850.toddgerarden.com/js/wowchemy-headroom.1cb9e2fc8399acee94eab837265b73bf.js type=module></script>
+<script src=/aem2850.toddgerarden.com/en/js/wowchemy.min.216188596c551a0582beb89fb0d646e2.js></script>
+</body>
+</html>

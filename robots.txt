@@ -1,0 +1,3 @@
+User-agent: *
+
+Sitemap: aem2850.toddgerarden.com/sitemap.xml
