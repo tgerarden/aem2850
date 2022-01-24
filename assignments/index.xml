@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Assignment overview | R for Business Analytics</title><link>aem2850.toddgerarden.com/assignments/</link><atom:link href="aem2850.toddgerarden.com/assignments/index.xml" rel="self" type="application/rss+xml"/><description>Assignment overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 31 Jul 2021 00:00:00 +0000</lastBuildDate><image><url>/aem2850.toddgerarden.com/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url><title>Assignment overview</title><link>aem2850.toddgerarden.com/assignments/</link></image><item><title>Final project</title><link>aem2850.toddgerarden.com/assignments/final-project/</link><pubDate>Sat, 31 Jul 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/final-project/</guid><description>&lt;p>You made it to the end of our whirlwind tour of data visualization principles! Congratulations!&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Assignment overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/assignments/</link><atom:link href="https://aem2850.toddgerarden.com/assignments/index.xml" rel="self" type="application/rss+xml"/><description>Assignment overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 31 Jul 2021 00:00:00 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url><title>Assignment overview</title><link>https://aem2850.toddgerarden.com/assignments/</link></image><item><title>Final project</title><link>https://aem2850.toddgerarden.com/assignments/final-project/</link><pubDate>Sat, 31 Jul 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/final-project/</guid><description>&lt;p>You made it to the end of our whirlwind tour of data visualization principles! Congratulations!&lt;/p>
 &lt;p>Now you get to show off all the tools you learned with a beautiful, truthful, narrative visualization.&lt;/p>
 &lt;p>For your final project, you will take a dataset, explore it, tinker with it, and tell a nuanced story about it using at least three graphs.&lt;/p>
 &lt;p>I want this project to be as useful for you and your future career as possible—you&amp;rsquo;ll hopefully want to show off your final project in a portfolio or during job interviews.&lt;/p>
 &lt;p>Accordingly, you have some choice in what data you can use for this project. I&amp;rsquo;ve found several different high-quality datasets online related to the core MPA/MPP tracks. &lt;strong>You do not have to choose a dataset in your given field&lt;/strong> (especially if you&amp;rsquo;re not an MPA or MPP student!) Choose whatever one you are most interested in or will have the most fun with.&lt;/p>
 &lt;h2 id="data-from-the-internet">Data from the internet&lt;/h2>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/resource/data/">Go to this list of data sources&lt;/a> and find something interesting! The things in the &amp;ldquo;Data is Plural&amp;rdquo; newsletter are often especially interesting and fun. Here are some different high-quality datasets that students have worked with before:&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/resource/data/">Go to this list of data sources&lt;/a> and find something interesting! The things in the &amp;ldquo;Data is Plural&amp;rdquo; newsletter are often especially interesting and fun. Here are some different high-quality datasets that students have worked with before:&lt;/p>
 &lt;h3 id="nonprofit-management">Nonprofit management&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://www.kaggle.com/crawford/us-charities-and-nonprofits" target="_blank" rel="noopener">U.S. Charities and Non-profits&lt;/a>: All of the charities and nonprofits registered with the IRS. This is actually split into six separate files. You can combine them all into one massive national database with &lt;code>bind_rows()&lt;/code>, or filter the data to include specific states (or a single state). It all depends on the story you&amp;rsquo;re telling. Source: IRS.&lt;/li>
@@ -42,7 +42,7 @@
 &lt;p>&lt;strong>Export&lt;/strong> the final graphic from Illustrator as a PDF and a PNG.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;strong>Write&lt;/strong> a memo using R Markdown to introduce, frame, and describe your story and figure. &lt;a href="aem2850.toddgerarden.com/files/your_name_finalproject.Rmd">Use this template to get started&lt;/a>. You should include the following in the memo:&lt;/p>
+&lt;p>&lt;strong>Write&lt;/strong> a memo using R Markdown to introduce, frame, and describe your story and figure. &lt;a href="https://aem2850.toddgerarden.com/files/your_name_finalproject.Rmd">Use this template to get started&lt;/a>. You should include the following in the memo:&lt;/p>
 &lt;ul>
 &lt;li>Executive summary&lt;/li>
 &lt;li>Background information and summary of the data&lt;/li>
@@ -53,7 +53,7 @@
 &lt;/li>
 &lt;/ol>
 &lt;p>Remember to follow R Markdown etiquette rules and style—don&amp;rsquo;t have it output extraneous messages or warnings, include summary tables in nice tables, adjust the dimensions for your figures, and remove the placeholder text that&amp;rsquo;s in the template already (i.e. I don&amp;rsquo;t want to see stuff like &amp;ldquo;Describe and show how you cleaned and reshaped the data&amp;rdquo; in the final report.)&lt;/p>
-&lt;p>&lt;strong>You should &lt;a href="aem2850.toddgerarden.com/projects/example_final.zip">download a full example of what a final project might look like&lt;/a>&lt;/strong> (but don&amp;rsquo;t make your final combined visualization look exactly like this—show some creativity!)&lt;/p>
+&lt;p>&lt;strong>You should &lt;a href="https://aem2850.toddgerarden.com/projects/example_final.zip">download a full example of what a final project might look like&lt;/a>&lt;/strong> (but don&amp;rsquo;t make your final combined visualization look exactly like this—show some creativity!)&lt;/p>
 &lt;h2 id="final-deliverables">Final deliverables&lt;/h2>
 &lt;p>Upload the following files to iCollege:&lt;/p>
 &lt;ol>
@@ -62,71 +62,71 @@
 &lt;li>A standalone PNG of your graphic exported from Illustrator&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>No late work will be accepted for this project since it&amp;rsquo;s the last project and it counts as your final.&lt;/strong>&lt;/p>
-&lt;p>I will use &lt;a href="aem2850.toddgerarden.com/files/final-project-rubric.xlsx">this rubric&lt;/a> to grade the final product:&lt;/p>
+&lt;p>I will use &lt;a href="https://aem2850.toddgerarden.com/files/final-project-rubric.xlsx">this rubric&lt;/a> to grade the final product:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/files/final-project-rubric.xlsx">&lt;i class="fas fa-file-excel">&lt;/i> &lt;code>final-project-rubric.xlsx&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/files/final-project-rubric.xlsx">&lt;i class="fas fa-file-excel">&lt;/i> &lt;code>final-project-rubric.xlsx&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>I am happy to give feedback and help along the way—please don&amp;rsquo;t hesitate to get help! My goal is for you to have a beautiful graphic in the end that you&amp;rsquo;ll want to show off to all your friends, family, neighbors, employers, and strangers on the street—I&amp;rsquo;m not trying to trip you up or give you trick questions!&lt;/p>
 &lt;p>And that&amp;rsquo;s it. &lt;strong>You&amp;rsquo;re done!&lt;/strong> Go out into the world now and make beautiful, insightful, and truthful graphics.&lt;/p>
 &lt;p>&lt;a href="https://24ways.org/2010/go-forth-and-make-awesomeness/" target="_blank" rel="noopener">&lt;strong>Go forth and make awesomeness.&lt;/strong>&lt;/a>&lt;/p>
 &lt;h2 id="past-examples">Past examples&lt;/h2>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/projects/example_final.zip">Download a full example of what a final project might look like.&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/projects/example_final.zip">Download a full example of what a final project might look like.&lt;/a>&lt;/p>
 &lt;p>Here are some great examples of student projects from past versions of this class.&lt;/p>
 &lt;h3 id="travel-runs-in-yellowstone">Travel runs in Yellowstone&lt;/h3>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/files/past-projects/yellowstone-travel/final_memo.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Project description&lt;/a> 
-&lt;a href="aem2850.toddgerarden.com/files/past-projects/yellowstone-travel/final.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Final PDF&lt;/a> 
-&lt;a href="aem2850.toddgerarden.com/files/past-projects/yellowstone-travel/final.png">&lt;i class="far fa-image">&lt;/i> Final PNG&lt;/a>&lt;/p>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/files/past-projects/yellowstone-travel/final.pdf">
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/yellowstone-travel/final_memo.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Project description&lt;/a> 
+&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/yellowstone-travel/final.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Final PDF&lt;/a> 
+&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/yellowstone-travel/final.png">&lt;i class="far fa-image">&lt;/i> Final PNG&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/yellowstone-travel/final.pdf">
 &lt;figure >
 &lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >&lt;img src="aem2850.toddgerarden.com/files/past-projects/yellowstone-travel/final.png" alt="Yellowstone travel final project" loading="lazy" data-zoomable />&lt;/div>
+&lt;div class="w-100" >&lt;img src="https://aem2850.toddgerarden.com/files/past-projects/yellowstone-travel/final.png" alt="Yellowstone travel final project" loading="lazy" data-zoomable />&lt;/div>
 &lt;/div>&lt;/figure>
 &lt;/a>&lt;/p>
 &lt;h3 id="firefighter-fatalities">Firefighter fatalities&lt;/h3>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/files/past-projects/firefighters/final_memo.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Project description&lt;/a> 
-&lt;a href="aem2850.toddgerarden.com/files/past-projects/firefighters/final.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Final PDF&lt;/a> 
-&lt;a href="aem2850.toddgerarden.com/files/past-projects/firefighters/final.png">&lt;i class="far fa-image">&lt;/i> Final PNG&lt;/a>&lt;/p>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/files/past-projects/firefighters/final.pdf">
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/firefighters/final_memo.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Project description&lt;/a> 
+&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/firefighters/final.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Final PDF&lt;/a> 
+&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/firefighters/final.png">&lt;i class="far fa-image">&lt;/i> Final PNG&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/firefighters/final.pdf">
 &lt;figure >
 &lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >&lt;img src="aem2850.toddgerarden.com/files/past-projects/firefighters/final.png" alt="Firefighter fatalities final project" loading="lazy" data-zoomable />&lt;/div>
+&lt;div class="w-100" >&lt;img src="https://aem2850.toddgerarden.com/files/past-projects/firefighters/final.png" alt="Firefighter fatalities final project" loading="lazy" data-zoomable />&lt;/div>
 &lt;/div>&lt;/figure>
 &lt;/a>&lt;/p>
 &lt;h3 id="scripture-use-by-the-killers">Scripture use by &lt;em>The Killers&lt;/em>&lt;/h3>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/files/past-projects/killers-scripture/final_memo.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Project description&lt;/a> 
-&lt;a href="aem2850.toddgerarden.com/files/past-projects/killers-scripture/final.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Final PDF&lt;/a> 
-&lt;a href="aem2850.toddgerarden.com/files/past-projects/killers-scripture/final.png">&lt;i class="far fa-image">&lt;/i> Final PNG&lt;/a>&lt;/p>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/files/past-projects/killers-scripture/final.pdf">
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/killers-scripture/final_memo.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Project description&lt;/a> 
+&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/killers-scripture/final.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Final PDF&lt;/a> 
+&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/killers-scripture/final.png">&lt;i class="far fa-image">&lt;/i> Final PNG&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/killers-scripture/final.pdf">
 &lt;figure >
 &lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >&lt;img src="aem2850.toddgerarden.com/files/past-projects/killers-scripture/final.png" alt="Firefighter fatalities final project" loading="lazy" data-zoomable />&lt;/div>
+&lt;div class="w-100" >&lt;img src="https://aem2850.toddgerarden.com/files/past-projects/killers-scripture/final.png" alt="Firefighter fatalities final project" loading="lazy" data-zoomable />&lt;/div>
 &lt;/div>&lt;/figure>
 &lt;/a>&lt;/p>
 &lt;h3 id="utah-nonprofits">Utah nonprofits&lt;/h3>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/files/past-projects/utah-nonprofits/final_memo.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Project description&lt;/a> 
-&lt;a href="aem2850.toddgerarden.com/files/past-projects/utah-nonprofits/final.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Final PDF&lt;/a> 
-&lt;a href="aem2850.toddgerarden.com/files/past-projects/utah-nonprofits/final.png">&lt;i class="far fa-image">&lt;/i> Final PNG&lt;/a>&lt;/p>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/files/past-projects/utah-nonprofits/final.pdf">
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/utah-nonprofits/final_memo.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Project description&lt;/a> 
+&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/utah-nonprofits/final.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Final PDF&lt;/a> 
+&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/utah-nonprofits/final.png">&lt;i class="far fa-image">&lt;/i> Final PNG&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/utah-nonprofits/final.pdf">
 &lt;figure >
 &lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >&lt;img src="aem2850.toddgerarden.com/files/past-projects/utah-nonprofits/final.png" alt="Firefighter fatalities final project" loading="lazy" data-zoomable />&lt;/div>
+&lt;div class="w-100" >&lt;img src="https://aem2850.toddgerarden.com/files/past-projects/utah-nonprofits/final.png" alt="Firefighter fatalities final project" loading="lazy" data-zoomable />&lt;/div>
 &lt;/div>&lt;/figure>
 &lt;/a>&lt;/p>
 &lt;h3 id="buckethead">Buckethead&lt;/h3>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/files/past-projects/buckethead/final_memo.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Project description&lt;/a> 
-&lt;a href="aem2850.toddgerarden.com/files/past-projects/buckethead/final.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Final PDF&lt;/a> 
-&lt;a href="aem2850.toddgerarden.com/files/past-projects/buckethead/final.png">&lt;i class="far fa-image">&lt;/i> Final PNG&lt;/a>&lt;/p>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/files/past-projects/buckethead/final.pdf">
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/buckethead/final_memo.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Project description&lt;/a> 
+&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/buckethead/final.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> Final PDF&lt;/a> 
+&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/buckethead/final.png">&lt;i class="far fa-image">&lt;/i> Final PNG&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/files/past-projects/buckethead/final.pdf">
 &lt;figure >
 &lt;div class="d-flex justify-content-center">
-&lt;div class="w-100" >&lt;img src="aem2850.toddgerarden.com/files/past-projects/buckethead/final.png" alt="Firefighter fatalities final project" loading="lazy" data-zoomable />&lt;/div>
+&lt;div class="w-100" >&lt;img src="https://aem2850.toddgerarden.com/files/past-projects/buckethead/final.png" alt="Firefighter fatalities final project" loading="lazy" data-zoomable />&lt;/div>
 &lt;/div>&lt;/figure>
-&lt;/a>&lt;/p></description></item><item><title>Text</title><link>aem2850.toddgerarden.com/assignments/13-exercise/</link><pubDate>Mon, 26 Jul 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/13-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
+&lt;/a>&lt;/p></description></item><item><title>Text</title><link>https://aem2850.toddgerarden.com/assignments/13-exercise/</link><pubDate>Mon, 26 Jul 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/13-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
 &lt;p>For this exercise, you&amp;rsquo;ll download some books from Project Gutenberg and visualize patterns in the words.&lt;/p>
 &lt;p>You should use an RStudio Project to keep your files well organized (either on your computer or on RStudio.cloud). Either create a new project for this exercise only, or make a project for all your work in this class.&lt;/p>
 &lt;p>&lt;strong>To help you&lt;/strong>, I&amp;rsquo;ve created a skeleton R Markdown file with a template for this exercise, along with some helpful starter code. Download that here and include it in your project:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/13-exercise/13-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>13-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/13-exercise/13-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>13-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>In the end, the structure of your project directory should look something like this:&lt;/p>
 &lt;pre>&lt;code class="language-text">your-project-name\
@@ -135,16 +135,16 @@ your-project-name.Rproj
 &lt;/code>&lt;/pre>
 &lt;p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/13-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>13-exercise.zip&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/13-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>13-exercise.zip&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>The &lt;a href="aem2850.toddgerarden.com/example/13-example/">example from today&amp;rsquo;s session&lt;/a> will be incredibly helpful for this exercise.&lt;/p>
+&lt;p>The &lt;a href="https://aem2850.toddgerarden.com/example/13-example/">example from today&amp;rsquo;s session&lt;/a> will be incredibly helpful for this exercise.&lt;/p>
 &lt;p>This can be as simple or as complex as you want. You don&amp;rsquo;t need to make your plots super fancy, but if you&amp;rsquo;re feeling brave, experiment with changing colors or modifying themes and theme elements.&lt;/p>
 &lt;p>You&amp;rsquo;ll need to insert your own code chunks where needed. Rather than typing them by hand (that&amp;rsquo;s tedious and you might miscount the number of backticks!), use the &amp;ldquo;Insert&amp;rdquo; button at the top of the editing window, or type &lt;kbd>ctrl&lt;/kbd> + &lt;kbd>alt&lt;/kbd> + &lt;kbd>i&lt;/kbd> on Windows, or &lt;kbd>⌘&lt;/kbd> + &lt;kbd>⌥&lt;/kbd> + &lt;kbd>i&lt;/kbd> on macOS.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
 &lt;h2 id="task-1-reflection">Task 1: Reflection&lt;/h2>
 &lt;p>Write your reflection for the day&amp;rsquo;s readings.&lt;/p>
 &lt;h2 id="task-2-word-frequencies">Task 2: Word frequencies&lt;/h2>
-&lt;p>Use the &lt;strong>gutenbergr&lt;/strong> package to download 4+ books by some author on &lt;a href="http://www.gutenberg.org/" target="_blank" rel="noopener">Project Gutenberg&lt;/a>. Jane Austen, Victor Hugo, Emily Brontë, Lucy Maud Montgomery, Arthur Conan Doyle, Mark Twain, Henry David Thoreau, Fyodor Dostoyevsky, Leo Tolstoy. Anyone. Just make sure it&amp;rsquo;s all from the same author. &lt;a href="aem2850.toddgerarden.com/example/13-example/">The example page&lt;/a> shows how to do that.&lt;/p>
+&lt;p>Use the &lt;strong>gutenbergr&lt;/strong> package to download 4+ books by some author on &lt;a href="http://www.gutenberg.org/" target="_blank" rel="noopener">Project Gutenberg&lt;/a>. Jane Austen, Victor Hugo, Emily Brontë, Lucy Maud Montgomery, Arthur Conan Doyle, Mark Twain, Henry David Thoreau, Fyodor Dostoyevsky, Leo Tolstoy. Anyone. Just make sure it&amp;rsquo;s all from the same author. &lt;a href="https://aem2850.toddgerarden.com/example/13-example/">The example page&lt;/a> shows how to do that.&lt;/p>
 &lt;p>Alternatively, you can try using text from a source other than Project Gutenberg. Check out, for instance, &lt;a href="https://github.com/bradleyboehmke/harrypotter" target="_blank" rel="noopener">&lt;strong>harrypotter&lt;/strong>&lt;/a> (the full text of all 7 Harry Potter books), &lt;a href="https://github.com/andrewheiss/quRan" target="_blank" rel="noopener">&lt;strong>quRan&lt;/strong>&lt;/a> (the full text of the Qur&amp;rsquo;an; &lt;a href="https://www.andrewheiss.com/blog/2018/12/28/tidytext-pos-arabic/" target="_blank" rel="noopener">here&amp;rsquo;s an example of some text analysis with it&lt;/a>), or &lt;a href="https://github.com/andrewheiss/scriptuRs" target="_blank" rel="noopener">&lt;strong>scriptuRs&lt;/strong>&lt;/a> (the full text of the King James Version of the Bible; &lt;a href="https://www.andrewheiss.com/blog/2018/12/26/tidytext-pos-john/" target="_blank" rel="noopener">here&amp;rsquo;s an example of some text analysis with it&lt;/a>).&lt;/p>
 &lt;p>&lt;strong>Make these two plots and describe what each tell about your author&amp;rsquo;s books:&lt;/strong> (you&amp;rsquo;ll probably want to facet by book)&lt;/p>
 &lt;ol>
@@ -154,17 +154,17 @@ your-project-name.Rproj
 &lt;h2 id="100-optional-bonus-fun-tasks">100% optional bonus fun tasks&lt;/h2>
 &lt;p>If you want, do some other things with the text you&amp;rsquo;ve downloaded. Make a &amp;ldquo;he verbs vs. she verbs&amp;rdquo; plot. Tag the parts of speech and find the most common verbs or nouns. Try some sentiment analysis. Do something fun.&lt;/p>
 &lt;h2 id="turning-everything-in">Turning everything in&lt;/h2>
-&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Enhancing graphics</title><link>aem2850.toddgerarden.com/assignments/14-exercise/</link><pubDate>Mon, 26 Jul 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/14-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
+&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="https://aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Enhancing graphics</title><link>https://aem2850.toddgerarden.com/assignments/14-exercise/</link><pubDate>Mon, 26 Jul 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/14-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
 &lt;p>For this exercise, you&amp;rsquo;ll export a PDF and/or an SVG from R, open it in Adobe Illustrator (&lt;a href="https://technology.gsu.edu/technology-services/it-services/software-computer-purchase/software-download-and-purchase/adobe-creative-cloud/" target="_blank" rel="noopener">free for GSU students&lt;/a>) or &lt;a href="https://www.designer.io/en/" target="_blank" rel="noopener">Gravit Designer&lt;/a> (free for the basic version), add annotations and make minor edits, and then export a final polished version.&lt;/p>
 &lt;p>I have given you 100% of the R code you need to use. All you have to do is run it. You need to download one CSV file:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/data/hot-dog-contest-winners.csv">&lt;i class="fas fa-table">&lt;/i> &lt;code>hot-dog-contest-winners.csv&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/data/hot-dog-contest-winners.csv">&lt;i class="fas fa-table">&lt;/i> &lt;code>hot-dog-contest-winners.csv&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>You should use an RStudio Project to keep your files well organized (either on your computer or on RStudio.cloud). Either create a new project for this exercise only, or make a project for all your work in this class.&lt;/p>
 &lt;p>&lt;strong>To help you&lt;/strong>, I&amp;rsquo;ve created a skeleton R Markdown file with a template for this exercise, along with all the code you&amp;rsquo;ll need. Download that here and include it in your project:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/14-exercise/14-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>14-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/14-exercise/14-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>14-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>In the end, the structure of your project directory should look something like this:&lt;/p>
 &lt;pre>&lt;code class="language-text">your-project-name\
@@ -175,13 +175,13 @@ hot-dog-contest-winners.csv
 &lt;/code>&lt;/pre>
 &lt;p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/14-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>14-exercise.zip&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/14-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>14-exercise.zip&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="task-1-reflection">Task 1: Reflection&lt;/h2>
 &lt;p>Write your reflection for the day&amp;rsquo;s readings.&lt;/p>
 &lt;h2 id="task-2-hot-dog-eating-contest-winners">Task 2: Hot dog eating contest winners&lt;/h2>
 &lt;p>Recreate this plot (or something like it):&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/hot-dogs.gif" width="100%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/hot-dogs.gif" width="100%" />
 &lt;p>Create and save a basic bar chart of hot dog eating contest winners using the code provided. Open the resulting file in Illustrator or Gravit Designer. Open the PDF in Illustrator; open the SVG in Gravit Designer.&lt;/p>
 &lt;p>Be sure that you save your file in Illustrator or Gravit Designer &lt;strong>with a different name&lt;/strong>. You don&amp;rsquo;t want to accidentally overwrite all your enhancements and updates when you knit this document. That would be so sad.&lt;/p>
 &lt;p>You don&amp;rsquo;t have data prior to 1980, so &lt;strong>don&amp;rsquo;t worry about recreating that half of the graph&lt;/strong>. You don&amp;rsquo;t have to put all the text boxes in exactly the same locations—you can even do a completely different design and add different annotations if you want.&lt;/p>
@@ -196,7 +196,7 @@ hot-dog-contest-winners.csv
 &lt;li>Source: Wikipedia and Nathan’s Famous&lt;/li>
 &lt;/ul>
 &lt;h2 id="turning-everything-in">Turning everything in&lt;/h2>
-&lt;p>When you&amp;rsquo;re all done, knit your R Markdown file and use Illustrator or Gravit Designer to export a PDF or PNG version (or both) of your enhanced plot. Upload these files to iCollege.&lt;/p></description></item><item><title>Truth, beauty, and data revisited</title><link>aem2850.toddgerarden.com/assignments/15-exercise/</link><pubDate>Mon, 26 Jul 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/15-exercise/</guid><description>&lt;p>For your final exercise, you won&amp;rsquo;t do anything with R. You&amp;rsquo;ll instead have two writing tasks. You can write these in R Markdown if you want, or you can do it in Word or Google Docs or wherever else.&lt;/p>
+&lt;p>When you&amp;rsquo;re all done, knit your R Markdown file and use Illustrator or Gravit Designer to export a PDF or PNG version (or both) of your enhanced plot. Upload these files to iCollege.&lt;/p></description></item><item><title>Truth, beauty, and data revisited</title><link>https://aem2850.toddgerarden.com/assignments/15-exercise/</link><pubDate>Mon, 26 Jul 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/15-exercise/</guid><description>&lt;p>For your final exercise, you won&amp;rsquo;t do anything with R. You&amp;rsquo;ll instead have two writing tasks. You can write these in R Markdown if you want, or you can do it in Word or Google Docs or wherever else.&lt;/p>
 &lt;h2 id="task-1-storytelling-reflection">Task 1: Storytelling reflection&lt;/h2>
 &lt;p>Write your standard reflection about the storytelling readings and videos.&lt;/p>
 &lt;h2 id="task-2-summary-reflection">Task 2: Summary reflection&lt;/h2>
@@ -212,12 +212,12 @@ hot-dog-contest-winners.csv
 &lt;/ul>
 &lt;h2 id="turning-everything-in">Turning everything in&lt;/h2>
 &lt;p>When you&amp;rsquo;re all done, upload the document with both reflection to iCollege.&lt;/p>
-&lt;p>Congratulations! You did it!&lt;/p></description></item><item><title>Time</title><link>aem2850.toddgerarden.com/assignments/11-exercise/</link><pubDate>Mon, 19 Jul 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/11-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
+&lt;p>Congratulations! You did it!&lt;/p></description></item><item><title>Time</title><link>https://aem2850.toddgerarden.com/assignments/11-exercise/</link><pubDate>Mon, 19 Jul 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/11-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
 &lt;p>For this exercise, you&amp;rsquo;ll visualize something over time. You can use whatever data you want. Use a dataset from a past exercise, use one of the built-in datasets like &lt;code>gapminder&lt;/code> from the &lt;strong>gapminder&lt;/strong> package, download stuff from the World Bank with the &lt;strong>WDI&lt;/strong> package, or download stuff from FRED using the &lt;strong>tidyquant&lt;/strong> package.&lt;/p>
 &lt;p>You should use an RStudio Project to keep your files well organized (either on your computer or on RStudio.cloud). Either create a new project for this exercise only, or make a project for all your work in this class.&lt;/p>
 &lt;p>&lt;strong>To help you&lt;/strong>, I&amp;rsquo;ve created a skeleton R Markdown file with a template for this exercise, along with some code to help you clean and summarize the data. Download that here and include it in your project:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/11-exercise/11-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>11-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/11-exercise/11-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>11-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>In the end, the structure of your project directory should look something like this:&lt;/p>
 &lt;pre>&lt;code class="language-text">your-project-name\
@@ -228,13 +228,13 @@ WHATEVER.csv
 &lt;/code>&lt;/pre>
 &lt;p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/11-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>11-exercise.zip&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/11-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>11-exercise.zip&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>The &lt;a href="aem2850.toddgerarden.com/example/11-example/">example from today&amp;rsquo;s session&lt;/a> shows how to get data from FRED, and the examples from sessions &lt;a href="aem2850.toddgerarden.com/example/08-example/">8&lt;/a> and &lt;a href="aem2850.toddgerarden.com/example/09-example/">9&lt;/a> show. You can also use gapminder, or any other dataset that includes a time-related column (so not &lt;code>mpg&lt;/code>).&lt;/p>
+&lt;p>The &lt;a href="https://aem2850.toddgerarden.com/example/11-example/">example from today&amp;rsquo;s session&lt;/a> shows how to get data from FRED, and the examples from sessions &lt;a href="https://aem2850.toddgerarden.com/example/08-example/">8&lt;/a> and &lt;a href="https://aem2850.toddgerarden.com/example/09-example/">9&lt;/a> show. You can also use gapminder, or any other dataset that includes a time-related column (so not &lt;code>mpg&lt;/code>).&lt;/p>
 &lt;p>There&amp;rsquo;s no specific way you should visualize time. Show it as a line, or as bars, or with a heatmap, or with ridgeplots, or with whatever is most appropriate for the story you&amp;rsquo;re telling. You do not have to recreate the example from today. You&amp;rsquo;re free to do whatever you want!&lt;/p>
 &lt;p>This can be as simple or as complex as you want. You don&amp;rsquo;t need to make your plot super fancy, but if you&amp;rsquo;re feeling brave, experiment with changing colors or modifying themes and theme elements.&lt;/p>
 &lt;p>You&amp;rsquo;ll need to insert your own code chunks where needed. Rather than typing them by hand (that&amp;rsquo;s tedious and you might miscount the number of backticks!), use the &amp;ldquo;Insert&amp;rdquo; button at the top of the editing window, or type &lt;kbd>ctrl&lt;/kbd> + &lt;kbd>alt&lt;/kbd> + &lt;kbd>i&lt;/kbd> on Windows, or &lt;kbd>⌘&lt;/kbd> + &lt;kbd>⌥&lt;/kbd> + &lt;kbd>i&lt;/kbd> on macOS.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
 &lt;h2 id="task-1-reflection">Task 1: Reflection&lt;/h2>
 &lt;p>Write your reflection for the day&amp;rsquo;s readings.&lt;/p>
 &lt;h2 id="task-2-visualizing-time">Task 2: Visualizing time&lt;/h2>
@@ -251,18 +251,18 @@ WHATEVER.csv
 &lt;/li>
 &lt;/ol>
 &lt;h2 id="turning-everything-in">Turning everything in&lt;/h2>
-&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Space</title><link>aem2850.toddgerarden.com/assignments/12-exercise/</link><pubDate>Mon, 19 Jul 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/12-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
+&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="https://aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Space</title><link>https://aem2850.toddgerarden.com/assignments/12-exercise/</link><pubDate>Mon, 19 Jul 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/12-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
 &lt;p>For this exercise, you&amp;rsquo;ll visualize the proportion of the world that uses the interent. You&amp;rsquo;ll use data from Max Roser&amp;rsquo;s &lt;a href="https://ourworldindata.org/internet/" target="_blank" rel="noopener">Our World in Data&lt;/a> project, which collects all sorts of interesting cross-national data. You&amp;rsquo;ll also use national shapefiles from &lt;a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth&lt;/a>.&lt;/p>
 &lt;p>Download these two data files:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/data/share-of-individuals-using-the-internet-1990-2015.csv">&lt;i class="fas fa-table">&lt;/i> &lt;code>share-of-individuals-using-the-internet-1990-2015.csv&lt;/code>&lt;/a>&lt;/li>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/data/ne_110m_admin_0_countries.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>ne_110m_admin_0_countries.zip&lt;/code>&lt;/a>. This is the &lt;a href="https://www.naturalearthdata.com/downloads/110m-cultural-vectors/" target="_blank" rel="noopener">&amp;ldquo;110m Admin 0—Countries&amp;rdquo;&lt;/a> shapefile from Natural Earth. It will download as a .zip file. Unzip the file and move the entire &lt;code>ne_110m_admin_0_countries&lt;/code> directory into your data folder.&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/data/share-of-individuals-using-the-internet-1990-2015.csv">&lt;i class="fas fa-table">&lt;/i> &lt;code>share-of-individuals-using-the-internet-1990-2015.csv&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/data/ne_110m_admin_0_countries.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>ne_110m_admin_0_countries.zip&lt;/code>&lt;/a>. This is the &lt;a href="https://www.naturalearthdata.com/downloads/110m-cultural-vectors/" target="_blank" rel="noopener">&amp;ldquo;110m Admin 0—Countries&amp;rdquo;&lt;/a> shapefile from Natural Earth. It will download as a .zip file. Unzip the file and move the entire &lt;code>ne_110m_admin_0_countries&lt;/code> directory into your data folder.&lt;/li>
 &lt;/ul>
 &lt;p>You should use an RStudio Project to keep your files well organized (either on your computer or on RStudio.cloud). Either create a new project for this exercise only, or make a project for all your work in this class.&lt;/p>
 &lt;p>&lt;strong>To help you&lt;/strong>, I&amp;rsquo;ve created a skeleton R Markdown file with a template for this exercise, along with some code to help you clean and join the two datasets. Download that here and include it in your project:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/12-exercise/12-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>12-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/12-exercise/12-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>12-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>In the end, the structure of your project directory should look something like this:&lt;/p>
 &lt;pre>&lt;code class="language-text">your-project-name\
@@ -277,12 +277,12 @@ ne_110m_admin_0_countries.shp
 &lt;/code>&lt;/pre>
 &lt;p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/12-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>12-exercise.zip&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/12-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>12-exercise.zip&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>The &lt;a href="aem2850.toddgerarden.com/example/12-example/">example from today&amp;rsquo;s session&lt;/a> shows how to load and plot shapefiles and will be incredibly helpful as you do this exercise.&lt;/p>
+&lt;p>The &lt;a href="https://aem2850.toddgerarden.com/example/12-example/">example from today&amp;rsquo;s session&lt;/a> shows how to load and plot shapefiles and will be incredibly helpful as you do this exercise.&lt;/p>
 &lt;p>This can be as simple or as complex as you want. You don&amp;rsquo;t need to make your plot super fancy, but if you&amp;rsquo;re feeling brave, experiment with changing colors or modifying themes and theme elements.&lt;/p>
 &lt;p>You&amp;rsquo;ll need to insert your own code chunks where needed. Rather than typing them by hand (that&amp;rsquo;s tedious and you might miscount the number of backticks!), use the &amp;ldquo;Insert&amp;rdquo; button at the top of the editing window, or type &lt;kbd>ctrl&lt;/kbd> + &lt;kbd>alt&lt;/kbd> + &lt;kbd>i&lt;/kbd> on Windows, or &lt;kbd>⌘&lt;/kbd> + &lt;kbd>⌥&lt;/kbd> + &lt;kbd>i&lt;/kbd> on macOS.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
 &lt;h2 id="task-1-reflection">Task 1: Reflection&lt;/h2>
 &lt;p>Write your reflection for the day&amp;rsquo;s readings.&lt;/p>
 &lt;h2 id="task-2-world-map">Task 2: World map&lt;/h2>
@@ -290,17 +290,17 @@ ne_110m_admin_0_countries.shp
 &lt;ul>
 &lt;li>I&amp;rsquo;ve provided some starter code in the R Markdown file.&lt;/li>
 &lt;li>You&amp;rsquo;ll want to fill each country by the &lt;code>users&lt;/code> column.&lt;/li>
-&lt;li>Make sure you choose a good projection. See the &lt;a href="aem2850.toddgerarden.com/example/12-example/#projections-and-coordinate-reference-systems">&amp;ldquo;Projections and coordinate reference systems&amp;rdquo; section&lt;/a> from the example.&lt;/li>
+&lt;li>Make sure you choose a good projection. See the &lt;a href="https://aem2850.toddgerarden.com/example/12-example/#projections-and-coordinate-reference-systems">&amp;ldquo;Projections and coordinate reference systems&amp;rdquo; section&lt;/a> from the example.&lt;/li>
 &lt;/ul>
 &lt;p>&lt;em>Bonus optional extra fun: Use your comparison/time skills to show the change in internet access between 2000 and 2015, perhaps with facetting some years, or &lt;a href="https://observablehq.com/@mbostock/methods-of-comparison-compared" target="_blank" rel="noopener">calculating ratios or proportions or percent changes&lt;/a>&lt;/em>&lt;/p>
 &lt;h2 id="bonus-optional-task-personal-map">Bonus (optional) task!: Personal map&lt;/h2>
 &lt;p>Draw your own map with your own points. This could be a map of places you&amp;rsquo;ve lived, or a map of places you&amp;rsquo;ve visited, or a map of places you want to visit. Anything!&lt;/p>
 &lt;p>The only requirement is that you find an appropriate shapefile (states, counties, world, etc.), collect latitude and longitude data from Google Maps, and plot the points (with or without labels) on a map. Use multiple shapefiles if you want—add roads, rivers, lakes, whatever.&lt;/p>
-&lt;p>Hint: Basically follow &lt;a href="aem2850.toddgerarden.com/example/12-example/#making-your-own-geoencoded-data">the code from the example in the section named &amp;ldquo;Making your own geoencoded data&amp;rdquo;&lt;/a>&lt;/p>
+&lt;p>Hint: Basically follow &lt;a href="https://aem2850.toddgerarden.com/example/12-example/#making-your-own-geoencoded-data">the code from the example in the section named &amp;ldquo;Making your own geoencoded data&amp;rdquo;&lt;/a>&lt;/p>
 &lt;h2 id="turning-everything-in">Turning everything in&lt;/h2>
-&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Mini project 2</title><link>aem2850.toddgerarden.com/assignments/02-mini-project/</link><pubDate>Mon, 19 Jul 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/02-mini-project/</guid><description>&lt;p>The United States has resettled more than 600,000 refugees from 60 different countries since 2006.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/refugees_welcome.jpg" width="70%" style="display: block; margin: auto;" />
+&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="https://aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Mini project 2</title><link>https://aem2850.toddgerarden.com/assignments/02-mini-project/</link><pubDate>Mon, 19 Jul 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/02-mini-project/</guid><description>&lt;p>The United States has resettled more than 600,000 refugees from 60 different countries since 2006.&lt;/p>
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/refugees_welcome.jpg" width="70%" style="display: block; margin: auto;" />
 &lt;p>In this mini project, you will use &lt;strong>R, ggplot, and &lt;a href="https://www.adobe.com/products/illustrator.html" target="_blank" rel="noopener">Illustrator&lt;/a>, &lt;a href="https://inkscape.org/en/" target="_blank" rel="noopener">Inkscape&lt;/a>, or &lt;a href="https://www.designer.io/" target="_blank" rel="noopener">Gravit Designer&lt;/a>&lt;/strong> to explore where these refugees have come from.&lt;/p>
 &lt;h2 id="instructions">Instructions&lt;/h2>
 &lt;p>Here&amp;rsquo;s what you need to do:&lt;/p>
@@ -310,7 +310,7 @@ ne_110m_admin_0_countries.shp
 &lt;/li>
 &lt;li>
 &lt;p>&lt;strong>Download&lt;/strong> the Department of Homeland Security&amp;rsquo;s annual count of people granted refugee status between 2006-2015:&lt;/p>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/data/refugee_status.csv">&lt;i class="fas fa-file-csv">&lt;/i> DHS refugees, 2006-2015&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/data/refugee_status.csv">&lt;i class="fas fa-file-csv">&lt;/i> DHS refugees, 2006-2015&lt;/a>&lt;/p>
 &lt;p>Place this in the &lt;code>data&lt;/code> subfolder you created in step 1. You might need to right click on this link and choose &amp;ldquo;Save link as…&amp;rdquo;, since your browser may try to display it as text. This data was originally &lt;a href="https://www.kaggle.com/dhs/refugee-report" target="_blank" rel="noopener">uploaded by the Department of Homeland Security to Kaggle&lt;/a>, and is provided with a public domain license.&lt;/p>
 &lt;/li>
 &lt;li>
@@ -362,11 +362,11 @@ NOTHING
 &lt;/ul>
 &lt;/li>
 &lt;/ol>
-&lt;p>You will be graded based on completion using the standard ✓ system, but I&amp;rsquo;ll provide comments on how you use R and &lt;strong>ggplot2&lt;/strong>, how well you apply the principles of CRAP, &lt;em>The Truthful Art&lt;/em>, and &lt;em>Effective Data Visualization&lt;/em>, and how appropriate the graph is for the data and the story you&amp;rsquo;re telling. I will use &lt;a href="aem2850.toddgerarden.com/files/mini-project-2-rubric.pdf">this rubric&lt;/a> to make comments and provide you with a simulated grade.&lt;/p>
+&lt;p>You will be graded based on completion using the standard ✓ system, but I&amp;rsquo;ll provide comments on how you use R and &lt;strong>ggplot2&lt;/strong>, how well you apply the principles of CRAP, &lt;em>The Truthful Art&lt;/em>, and &lt;em>Effective Data Visualization&lt;/em>, and how appropriate the graph is for the data and the story you&amp;rsquo;re telling. I will use &lt;a href="https://aem2850.toddgerarden.com/files/mini-project-2-rubric.pdf">this rubric&lt;/a> to make comments and provide you with a simulated grade.&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/files/mini-project-2-rubric.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> &lt;code>mini-project-2-rubric.pdf&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/files/mini-project-2-rubric.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> &lt;code>mini-project-2-rubric.pdf&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>For this assignment, I am less concerned with the code (that&amp;rsquo;s why I gave most of it to you), and more concerned with the &lt;em>design&lt;/em>. Choose good colors based on palettes. Choose good, clean fonts. Use the heck out of &lt;code>theme()&lt;/code>. Add informative design elements in Illustrator/Inkscape/Gravit Designer. Make it look beautiful and CRAPpy. Refer to &lt;a href="aem2850.toddgerarden.com/resource/design/">the design resources here&lt;/a>.&lt;/p>
+&lt;p>For this assignment, I am less concerned with the code (that&amp;rsquo;s why I gave most of it to you), and more concerned with the &lt;em>design&lt;/em>. Choose good colors based on palettes. Choose good, clean fonts. Use the heck out of &lt;code>theme()&lt;/code>. Add informative design elements in Illustrator/Inkscape/Gravit Designer. Make it look beautiful and CRAPpy. Refer to &lt;a href="https://aem2850.toddgerarden.com/resource/design/">the design resources here&lt;/a>.&lt;/p>
 &lt;p>&lt;strong>The assignment is due by 11:59 PM on Monday, July 19&lt;/strong>.&lt;/p>
 &lt;p>&lt;strong>Please seek out help when you need it!&lt;/strong> You know enough R (and have enough examples of code from class and your readings) to be able to do this. Your project has to be turned in individually, and your visualization should be your own (i.e. if you work with others, don&amp;rsquo;t all turn in the same graph), but you should work with others! Reach out to me for help too—I&amp;rsquo;m here to help!&lt;/p>
 &lt;p>&lt;em>You can do this,&lt;/em> and you&amp;rsquo;ll feel like a budding dataviz witch/wizard when you&amp;rsquo;re done.&lt;/p>
@@ -493,9 +493,9 @@ mutate(cumulative_total = cumsum(total))
 &lt;/code>&lt;/pre>
 &lt;h2 id="visualization-ideas">Visualization ideas&lt;/h2>
 &lt;p>You can redesign one of these ugly, less-than-helpful graphs, or create a brand new visualization (like a map!).&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/assignment/02-mini-project_files/figure-html/create-plots-1.png" width="1056" />
+&lt;img src="https://aem2850.toddgerarden.com/assignment/02-mini-project_files/figure-html/create-plots-1.png" width="1056" />
 &lt;p>Or be super brave and make a map!&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/assignment/02-mini-project_files/figure-html/create-map-1.png" width="1056" />
+&lt;img src="https://aem2850.toddgerarden.com/assignment/02-mini-project_files/figure-html/create-map-1.png" width="1056" />
 &lt;section class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
@@ -506,13 +506,13 @@ mutate(cumulative_total = cumsum(total))
 &lt;p>See Gleditsch, Kristian S. &amp;amp; Michael D. Ward. 1999. &lt;a href="https://www.tandfonline.com/doi/abs/10.1080/03050629908434958" target="_blank" rel="noopener">&amp;ldquo;Interstate System Membership: A Revised List of the Independent States since 1816.&amp;quot;&lt;/a> &lt;em>International Interactions&lt;/em> 25: 393-413; or the &lt;a href="http://www.paulhensel.org/icownames.html" target="_blank" rel="noopener">&amp;ldquo;ICOW Historical State Names Data Set&amp;rdquo;&lt;/a>.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Interactivity</title><link>aem2850.toddgerarden.com/assignments/10-exercise/</link><pubDate>Mon, 12 Jul 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/10-exercise/</guid><description>&lt;p>This exercise is a little different from past ones because you will not knit to PDF or Word. &lt;em>Pay attention to the instructions below.&lt;/em>&lt;/p>
+&lt;/section></description></item><item><title>Interactivity</title><link>https://aem2850.toddgerarden.com/assignments/10-exercise/</link><pubDate>Mon, 12 Jul 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/10-exercise/</guid><description>&lt;p>This exercise is a little different from past ones because you will not knit to PDF or Word. &lt;em>Pay attention to the instructions below.&lt;/em>&lt;/p>
 &lt;h2 id="getting-started">Getting started&lt;/h2>
-&lt;p>For this exercise, you&amp;rsquo;ll use whatever data you want to create an interactive HTML plot and a dashboard. Use a dataset from a past exercise, use one of the built-in datasets like &lt;code>mpg&lt;/code> or &lt;code>gapminder&lt;/code> from the &lt;strong>gapminder&lt;/strong> package, download stuff from the World Bank using the &lt;strong>WDI&lt;/strong> package, or use something from &lt;a href="aem2850.toddgerarden.com/resource/data/">this list of datasets&lt;/a>.&lt;/p>
+&lt;p>For this exercise, you&amp;rsquo;ll use whatever data you want to create an interactive HTML plot and a dashboard. Use a dataset from a past exercise, use one of the built-in datasets like &lt;code>mpg&lt;/code> or &lt;code>gapminder&lt;/code> from the &lt;strong>gapminder&lt;/strong> package, download stuff from the World Bank using the &lt;strong>WDI&lt;/strong> package, or use something from &lt;a href="https://aem2850.toddgerarden.com/resource/data/">this list of datasets&lt;/a>.&lt;/p>
 &lt;p>You should use an RStudio Project to keep your files well organized (either on your computer or on RStudio.cloud). Either create a new project for this exercise only, or make a project for all your work in this class.&lt;/p>
 &lt;p>&lt;strong>To help you&lt;/strong>, I&amp;rsquo;ve created a skeleton R Markdown file with a template for this exercise, along with some code to help you clean and summarize the data. Download that here and include it in your project:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/10-exercise/10-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>10-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/10-exercise/10-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>10-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>In the end, the structure of your project directory should look something like this:&lt;/p>
 &lt;pre>&lt;code class="language-text">your-project-name\
@@ -523,11 +523,11 @@ WHATEVER.csv
 &lt;/code>&lt;/pre>
 &lt;p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/10-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>10-exercise.zip&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/10-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>10-exercise.zip&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/example/10-example/">The example for today&amp;rsquo;s session&lt;/a> will be helpful as you tinker with &lt;code>ggplotly()&lt;/code>, and &lt;a href="aem2850.toddgerarden.com/example/10-example/#making-a-dashboard-with-flexdashboard">the resources listed at the bottom of the example&lt;/a> will be helpful for making a dashboard.&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/example/10-example/">The example for today&amp;rsquo;s session&lt;/a> will be helpful as you tinker with &lt;code>ggplotly()&lt;/code>, and &lt;a href="https://aem2850.toddgerarden.com/example/10-example/#making-a-dashboard-with-flexdashboard">the resources listed at the bottom of the example&lt;/a> will be helpful for making a dashboard.&lt;/p>
 &lt;p>You&amp;rsquo;ll need to insert your own code chunks where needed. Rather than typing them by hand (that&amp;rsquo;s tedious and you might miscount the number of backticks!), use the &amp;ldquo;Insert&amp;rdquo; button at the top of the editing window, or type &lt;kbd>ctrl&lt;/kbd> + &lt;kbd>alt&lt;/kbd> + &lt;kbd>i&lt;/kbd> on Windows, or &lt;kbd>⌘&lt;/kbd> + &lt;kbd>⌥&lt;/kbd> + &lt;kbd>i&lt;/kbd> on macOS.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
 &lt;h2 id="task-1-reflection">Task 1: Reflection&lt;/h2>
 &lt;p>Write your reflection for the day&amp;rsquo;s readings.&lt;/p>
 &lt;h2 id="task-2-interactive-plots">Task 2: Interactive plots&lt;/h2>
@@ -540,7 +540,7 @@ WHATEVER.csv
 &lt;ol>
 &lt;li>
 &lt;p>Knit the document with Tasks 1 and 2 in it to HTML and publish it to RPubs using the &amp;ldquo;Publish document&amp;rdquo; menu in the preview of the knitted file. Take note of the URL.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/slides/img/10/publish-document.png" width="30%" />
+&lt;img src="https://aem2850.toddgerarden.com/slides/img/10/publish-document.png" width="30%" />
 &lt;/li>
 &lt;li>
 &lt;p>Knit the dashboard from Task 3 to HTML and publish it to RPubs using the same menu. Take note of the URL.&lt;/p>
@@ -551,12 +551,12 @@ WHATEVER.csv
 Task 3 dashboard: URL HERE
 &lt;/code>&lt;/pre>
 &lt;/li>
-&lt;/ol></description></item><item><title>Annotations</title><link>aem2850.toddgerarden.com/assignments/09-exercise/</link><pubDate>Mon, 12 Jul 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/09-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
-&lt;p>For this exercise, you&amp;rsquo;ll use whatever data you want to make a plot and add annotations to it. Use a dataset from a past exercise, use one of the built-in datasets like &lt;code>mpg&lt;/code> or &lt;code>gapminder&lt;/code> from the &lt;strong>gapminder&lt;/strong> package, download stuff from the World Bank using the &lt;strong>WDI&lt;/strong> package, or use something from &lt;a href="aem2850.toddgerarden.com/resource/data/">this list of datasets&lt;/a>.&lt;/p>
+&lt;/ol></description></item><item><title>Annotations</title><link>https://aem2850.toddgerarden.com/assignments/09-exercise/</link><pubDate>Mon, 12 Jul 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/09-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
+&lt;p>For this exercise, you&amp;rsquo;ll use whatever data you want to make a plot and add annotations to it. Use a dataset from a past exercise, use one of the built-in datasets like &lt;code>mpg&lt;/code> or &lt;code>gapminder&lt;/code> from the &lt;strong>gapminder&lt;/strong> package, download stuff from the World Bank using the &lt;strong>WDI&lt;/strong> package, or use something from &lt;a href="https://aem2850.toddgerarden.com/resource/data/">this list of datasets&lt;/a>.&lt;/p>
 &lt;p>You should use an RStudio Project to keep your files well organized (either on your computer or on RStudio.cloud). Either create a new project for this exercise only, or make a project for all your work in this class.&lt;/p>
 &lt;p>&lt;strong>To help you&lt;/strong>, I&amp;rsquo;ve created a skeleton R Markdown file with a template for this exercise, along with some code to help you clean and summarize the data. Download that here and include it in your project:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/09-exercise/09-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>09-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/09-exercise/09-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>09-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>In the end, the structure of your project directory should look something like this:&lt;/p>
 &lt;pre>&lt;code class="language-text">your-project-name\
@@ -567,12 +567,12 @@ WHATEVER.csv
 &lt;/code>&lt;/pre>
 &lt;p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/09-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>09-exercise.zip&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/09-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>09-exercise.zip&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>The &lt;a href="https://ggplot2.tidyverse.org/reference/annotate.html" target="_blank" rel="noopener">documentation for &lt;code>annotate()&lt;/code>&lt;/a>, &lt;a href="https://ggplot2.tidyverse.org/reference/geom_text.html" target="_blank" rel="noopener">&lt;code>geom_text()&lt;/code> and &lt;code>geom_label()&lt;/code>&lt;/a>, and &lt;a href="https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html" target="_blank" rel="noopener">&lt;code>geom_text_repel()&lt;/code> and &lt;code>geom_label_repel()&lt;/code>&lt;/a> will be incredibly helpful for this exercise. &lt;a href="aem2850.toddgerarden.com/example/09-example/">The example for today&amp;rsquo;s session&lt;/a> is also helpful for seeing annotations in real life.&lt;/p>
+&lt;p>The &lt;a href="https://ggplot2.tidyverse.org/reference/annotate.html" target="_blank" rel="noopener">documentation for &lt;code>annotate()&lt;/code>&lt;/a>, &lt;a href="https://ggplot2.tidyverse.org/reference/geom_text.html" target="_blank" rel="noopener">&lt;code>geom_text()&lt;/code> and &lt;code>geom_label()&lt;/code>&lt;/a>, and &lt;a href="https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html" target="_blank" rel="noopener">&lt;code>geom_text_repel()&lt;/code> and &lt;code>geom_label_repel()&lt;/code>&lt;/a> will be incredibly helpful for this exercise. &lt;a href="https://aem2850.toddgerarden.com/example/09-example/">The example for today&amp;rsquo;s session&lt;/a> is also helpful for seeing annotations in real life.&lt;/p>
 &lt;p>Again, you don&amp;rsquo;t need to make your plots super fancy (except for these annotations), but if you&amp;rsquo;re feeling brave, experiment with changing colors or modifying themes and theme elements.&lt;/p>
 &lt;p>You&amp;rsquo;ll need to insert your own code chunks where needed. Rather than typing them by hand (that&amp;rsquo;s tedious and you might miscount the number of backticks!), use the &amp;ldquo;Insert&amp;rdquo; button at the top of the editing window, or type &lt;kbd>ctrl&lt;/kbd> + &lt;kbd>alt&lt;/kbd> + &lt;kbd>i&lt;/kbd> on Windows, or &lt;kbd>⌘&lt;/kbd> + &lt;kbd>⌥&lt;/kbd> + &lt;kbd>i&lt;/kbd> on macOS.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
 &lt;h2 id="task-1-reflection">Task 1: Reflection&lt;/h2>
 &lt;p>Write your reflection for the day&amp;rsquo;s readings.&lt;/p>
 &lt;h2 id="task-2-annotations">Task 2: Annotations&lt;/h2>
@@ -582,7 +582,7 @@ WHATEVER.csv
 &lt;p>Make a plot. Any kind of plot will do (though it might be easiest to work with &lt;code>geom_point()&lt;/code>).&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Label (some or all of) the points using one of &lt;code>geom_text()&lt;/code>, &lt;code>geom_label()&lt;/code>, &lt;code>geom_text_repel()&lt;/code>, or &lt;code>geom_label_repel()&lt;/code>. You might need to make a new indicator variable so that you only highlight a few of the points instead of all of them. &lt;a href="hslides/09-slides.html#29">See this slide for an example&lt;/a>, as well as &lt;a href="aem2850.toddgerarden.com/example/09-example/">the complete example plot on the example page&lt;/a> for today&amp;rsquo;s session.&lt;/p>
+&lt;p>Label (some or all of) the points using one of &lt;code>geom_text()&lt;/code>, &lt;code>geom_label()&lt;/code>, &lt;code>geom_text_repel()&lt;/code>, or &lt;code>geom_label_repel()&lt;/code>. You might need to make a new indicator variable so that you only highlight a few of the points instead of all of them. &lt;a href="hslides/09-slides.html#29">See this slide for an example&lt;/a>, as well as &lt;a href="https://aem2850.toddgerarden.com/example/09-example/">the complete example plot on the example page&lt;/a> for today&amp;rsquo;s session.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Add &lt;em>at least two each&lt;/em>* the following annotations somewhere on the plot using &lt;code>annotate()&lt;/code>:&lt;/p>
@@ -595,16 +595,16 @@ WHATEVER.csv
 &lt;/li>
 &lt;/ol>
 &lt;h2 id="turning-everything-in">Turning everything in&lt;/h2>
-&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Relationships</title><link>aem2850.toddgerarden.com/assignments/07-exercise/</link><pubDate>Mon, 05 Jul 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/07-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
+&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="https://aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Relationships</title><link>https://aem2850.toddgerarden.com/assignments/07-exercise/</link><pubDate>Mon, 05 Jul 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/07-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
 &lt;p>For this exercise you&amp;rsquo;ll use precinct-level data from the 2016 presidential election to visualize relationships between variables. This data comes from the &lt;a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VOQCHQ" target="_blank" rel="noopener">MIT Election Data and Science Lab&lt;/a>.&lt;/p>
 &lt;p>You should use an RStudio Project to keep your files well organized (either on your computer or on RStudio.cloud). Either create a new project for this exercise only, or make a project for all your work in this class.&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/07-exercise/data/results_2016.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>results_2016.csv&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/07-exercise/data/results_2016.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>results_2016.csv&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>To help you&lt;/strong>, I&amp;rsquo;ve created a skeleton R Markdown file with a template for this exercise, along with some code to help you clean and summarize the data. Download that here and include it in your project:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/07-exercise/07-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>07-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/07-exercise/07-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>07-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>In the end, the structure of your project directory should look something like this:&lt;/p>
 &lt;pre>&lt;code class="language-text">your-project-name\
@@ -615,12 +615,12 @@ results_2016.csv
 &lt;/code>&lt;/pre>
 &lt;p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/07-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>07-exercise.zip&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/07-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>07-exercise.zip&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/example/07-example/">The example for today&amp;rsquo;s session&lt;/a> will be &lt;em>&lt;strong>incredibly&lt;/strong>&lt;/em> helpful for this exercise. Reference it.&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/example/07-example/">The example for today&amp;rsquo;s session&lt;/a> will be &lt;em>&lt;strong>incredibly&lt;/strong>&lt;/em> helpful for this exercise. Reference it.&lt;/p>
 &lt;p>Again, you don&amp;rsquo;t need to make your plots super fancy, but if you&amp;rsquo;re feeling brave, experiment with adding a &lt;code>labs()&lt;/code> layer or changing colors or modifying themes and theme elements.&lt;/p>
 &lt;p>You&amp;rsquo;ll need to insert your own code chunks where needed. Rather than typing them by hand (that&amp;rsquo;s tedious and you might miscount the number of backticks!), use the &amp;ldquo;Insert&amp;rdquo; button at the top of the editing window, or type &lt;kbd>ctrl&lt;/kbd> + &lt;kbd>alt&lt;/kbd> + &lt;kbd>i&lt;/kbd> on Windows, or &lt;kbd>⌘&lt;/kbd> + &lt;kbd>⌥&lt;/kbd> + &lt;kbd>i&lt;/kbd> on macOS.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
 &lt;h2 id="task-1-reflection">Task 1: Reflection&lt;/h2>
 &lt;p>Write your reflection for the day&amp;rsquo;s readings.&lt;/p>
 &lt;h2 id="task-2-combining-plots">Task 2: Combining plots&lt;/h2>
@@ -645,16 +645,16 @@ state = &amp;quot;Georgia&amp;quot;) # Or whatever
 &lt;p>&lt;strong>This is entirely optional but might be fun.&lt;/strong>&lt;/p>
 &lt;p>For extra fun times, if you feel like it, create a correlogram heatmap, either with &lt;code>geom_tile()&lt;/code> or with points sized by the correlation. Use any variables you want from &lt;code>results_2016&lt;/code>.&lt;/p>
 &lt;h2 id="turning-everything-in">Turning everything in&lt;/h2>
-&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Comparisons</title><link>aem2850.toddgerarden.com/assignments/08-exercise/</link><pubDate>Mon, 05 Jul 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/08-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
+&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="https://aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Comparisons</title><link>https://aem2850.toddgerarden.com/assignments/08-exercise/</link><pubDate>Mon, 05 Jul 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/08-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
 &lt;p>For this exercise you&amp;rsquo;ll use state-level unemployment data from 2006 to 2016 that comes from the US Bureau of Labor Statistics (if you&amp;rsquo;re curious, &lt;a href="#postscript-how-i-got-this-unemployment-data">I describe how I built this dataset down below&lt;/a>).&lt;/p>
 &lt;p>You should use an RStudio Project to keep your files well organized (either on your computer or on RStudio.cloud). Either create a new project for this exercise only, or make a project for all your work in this class.&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/08-exercise/data/unemployment.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>unemployment.csv&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/08-exercise/data/unemployment.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>unemployment.csv&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>To help you&lt;/strong>, I&amp;rsquo;ve created a skeleton R Markdown file with a template for this exercise, along with some code to help you clean and summarize the data. Download that here and include it in your project:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/08-exercise/08-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>08-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/08-exercise/08-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>08-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>In the end, the structure of your project directory should look something like this:&lt;/p>
 &lt;pre>&lt;code class="language-text">your-project-name\
@@ -665,12 +665,12 @@ unemployment.csv
 &lt;/code>&lt;/pre>
 &lt;p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/08-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>08-exercise.zip&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/08-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>08-exercise.zip&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/example/08-example/">The example for today&amp;rsquo;s session&lt;/a> will be &lt;em>&lt;strong>incredibly&lt;/strong>&lt;/em> helpful for this exercise. Reference it.&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/example/08-example/">The example for today&amp;rsquo;s session&lt;/a> will be &lt;em>&lt;strong>incredibly&lt;/strong>&lt;/em> helpful for this exercise. Reference it.&lt;/p>
 &lt;p>Again, you don&amp;rsquo;t need to make your plots super fancy, but if you&amp;rsquo;re feeling brave, experiment with adding a &lt;code>labs()&lt;/code> layer or changing colors or modifying themes and theme elements.&lt;/p>
 &lt;p>You&amp;rsquo;ll need to insert your own code chunks where needed. Rather than typing them by hand (that&amp;rsquo;s tedious and you might miscount the number of backticks!), use the &amp;ldquo;Insert&amp;rdquo; button at the top of the editing window, or type &lt;kbd>ctrl&lt;/kbd> + &lt;kbd>alt&lt;/kbd> + &lt;kbd>i&lt;/kbd> on Windows, or &lt;kbd>⌘&lt;/kbd> + &lt;kbd>⌥&lt;/kbd> + &lt;kbd>i&lt;/kbd> on macOS.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
 &lt;h2 id="task-1-reflection">Task 1: Reflection&lt;/h2>
 &lt;p>Write your reflection for the day&amp;rsquo;s readings.&lt;/p>
 &lt;h2 id="task-2-small-multiples">Task 2: Small multiples&lt;/h2>
@@ -710,13 +710,13 @@ unemployment.csv
 &lt;/ul>
 &lt;h2 id="bonus-task-bump-charts">Bonus task! Bump charts&lt;/h2>
 &lt;p>&lt;strong>This is entirely optional but might be fun.&lt;/strong>&lt;/p>
-&lt;p>For extra fun times, if you feel like it, create a bump chart showing something from the unemployment data (perhaps the top 10 states or bottom 10 states in unemployment?) Adapt the code in the &lt;a href="aem2850.toddgerarden.com/example/08-example/">example for today&amp;rsquo;s session&lt;/a>.&lt;/p>
+&lt;p>For extra fun times, if you feel like it, create a bump chart showing something from the unemployment data (perhaps the top 10 states or bottom 10 states in unemployment?) Adapt the code in the &lt;a href="https://aem2850.toddgerarden.com/example/08-example/">example for today&amp;rsquo;s session&lt;/a>.&lt;/p>
 &lt;p>If you do this, plotting 51 lines is going to be a huge mess. But filtering the data is also a bad idea, because states could drop in and out of the top/bottom 10 over time, and we don&amp;rsquo;t want to get rid of them. Instead, you can zoom in on a specific range of data in your plot with &lt;code>coord_cartesian(ylim = c(1, 10))&lt;/code>, for instance.&lt;/p>
 &lt;h2 id="turning-everything-in">Turning everything in&lt;/h2>
-&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" />
+&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="https://aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" />
 &lt;h2 id="postscript-how-i-got-this-unemployment-data">Postscript: how I got this unemployment data&lt;/h2>
-&lt;p>For the curious, &lt;a href="aem2850.toddgerarden.com/files/get_bls_data.R">here&amp;rsquo;s the code I used&lt;/a> to download the unemployment data from the BLS.&lt;/p>
+&lt;p>For the curious, &lt;a href="https://aem2850.toddgerarden.com/files/get_bls_data.R">here&amp;rsquo;s the code I used&lt;/a> to download the unemployment data from the BLS.&lt;/p>
 &lt;p>And to pull the curtain back and show how much googling is involved in data visualization (and data analysis and programming in general), here was my process for getting this data:&lt;/p>
 &lt;ol>
 &lt;li>I thought &amp;ldquo;I want to have students show variation in something domestic over time&amp;rdquo; and then I googled &amp;ldquo;us data by state&amp;rdquo;. Nothing really came up (since it was an exceedingly vague search in the first place), but some results mentioned unemployment rates, so I figured that could be cool.&lt;/li>
@@ -725,13 +725,13 @@ unemployment.csv
 &lt;li>So I went back to Google and searched for &amp;ldquo;download bls data r&amp;rdquo; and found a few different packages people have written to do this. The first one I clicked on was &lt;a href="https://github.com/keberwein/blscrapeR" target="_blank" rel="noopener">&lt;code>blscrapeR&lt;/code> at GitHub&lt;/a>, and it looked like it had been updated recently, so I went with it.&lt;/li>
 &lt;li>I followed the examples in the &lt;code>blscrapeR&lt;/code> package and downloaded data for every state.&lt;/li>
 &lt;/ol>
-&lt;p>Another day in the life of doing modern data science. I had no idea people had written R packages to access BLS data, but there are like 3 packages out there! After a few minutes of tinkering, I got it working and it&amp;rsquo;s super magic.&lt;/p></description></item><item><title>Mini project 1</title><link>aem2850.toddgerarden.com/assignments/01-mini-project/</link><pubDate>Mon, 05 Jul 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/01-mini-project/</guid><description>&lt;p>New York City is full of urban wildlife, and rats are one of the city’s most infamous animal mascots. Rats in NYC are plentiful, but they also deliver food, so they’re useful too.&lt;/p>
+&lt;p>Another day in the life of doing modern data science. I had no idea people had written R packages to access BLS data, but there are like 3 packages out there! After a few minutes of tinkering, I got it working and it&amp;rsquo;s super magic.&lt;/p></description></item><item><title>Mini project 1</title><link>https://aem2850.toddgerarden.com/assignments/01-mini-project/</link><pubDate>Mon, 05 Jul 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/01-mini-project/</guid><description>&lt;p>New York City is full of urban wildlife, and rats are one of the city’s most infamous animal mascots. Rats in NYC are plentiful, but they also deliver food, so they’re useful too.&lt;/p>
 &lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
 &lt;iframe src="https://www.youtube.com/embed/PeJUqcbool4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
 &lt;/div>
 &lt;p>NYC keeps incredibly detailed data regarding animal sightings, including rats, and &lt;a href="https://www.kaggle.com/new-york-city/nyc-rat-sightings/data" target="_blank" rel="noopener">it makes this data publicly available&lt;/a>.&lt;/p>
 &lt;p>For this first mini project, you will use &lt;strong>R and ggplot2&lt;/strong> to tell an interesting story hidden in the data. You can recreate one of these ugly, less-than-helpful graphs, or create a new story by looking at other variables in the data:&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/rat_examples.png" width="100%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/rat_examples.png" width="100%" />
 &lt;h2 id="instructions">Instructions&lt;/h2>
 &lt;p>Here’s what you need to do:&lt;/p>
 &lt;ol>
@@ -787,9 +787,9 @@ NOTHING
 &lt;/ul>
 &lt;/li>
 &lt;/ol>
-&lt;p>You will be graded based on completion using the standard ✓ system, but I’ll provide comments on how you use R and &lt;strong>ggplot2&lt;/strong>, how well you apply the principles of CRAP, &lt;em>The Truthful Art&lt;/em>, and &lt;em>Effective Data Visualization&lt;/em>, and how appropriate the graph is for the data and the story you’re telling. I will use &lt;a href="aem2850.toddgerarden.com/files/mini-project-1-rubric.pdf">this rubric&lt;/a> to make comments and provide you with a simulated grade.&lt;/p>
+&lt;p>You will be graded based on completion using the standard ✓ system, but I’ll provide comments on how you use R and &lt;strong>ggplot2&lt;/strong>, how well you apply the principles of CRAP, &lt;em>The Truthful Art&lt;/em>, and &lt;em>Effective Data Visualization&lt;/em>, and how appropriate the graph is for the data and the story you’re telling. I will use &lt;a href="https://aem2850.toddgerarden.com/files/mini-project-1-rubric.pdf">this rubric&lt;/a> to make comments and provide you with a simulated grade.&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/files/mini-project-1-rubric.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> &lt;code>mini-project-1-rubric.pdf&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/files/mini-project-1-rubric.pdf">&lt;i class="fas fa-file-pdf">&lt;/i> &lt;code>mini-project-1-rubric.pdf&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>For this assignment, I am less concerned with detailed graphic design principles—select appropriate colors, change fonts if you’re brave, and choose a nice ggplot theme and make some adjustments like moving the legend around (&lt;code>theme(legend.position = &amp;quot;bottom&amp;quot;)&lt;/code>).&lt;/p>
 &lt;p>&lt;strong>The assignment is due by 11:59 PM on Monday, July 5&lt;/strong>.&lt;/p>
@@ -852,15 +852,15 @@ summarize(n = n())
 &lt;p>You can approach this in a couple different ways—you can write the memo and then include the full figure and code at the end, &lt;a href="https://rud.is/b/2017/09/18/mapping-fall-foliage-with-sf/" target="_blank" rel="noopener">similar to this blog post&lt;/a>, or you can write the memo in an incremental way, describing the different steps of creating the figure, ultimately arriving at a clean final figure, &lt;a href="https://rudeboybert.github.io/fivethirtyeight/articles/bechdel.html" target="_blank" rel="noopener">like this blog post&lt;/a>.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Themes</title><link>aem2850.toddgerarden.com/assignments/05-exercise/</link><pubDate>Mon, 28 Jun 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/05-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
+&lt;/section></description></item><item><title>Themes</title><link>https://aem2850.toddgerarden.com/assignments/05-exercise/</link><pubDate>Mon, 28 Jun 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/05-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
 &lt;p>For this assignment, you&amp;rsquo;re going to work with data compiled by &lt;a href="https://www.duncangeere.com/" target="_blank" rel="noopener">data journalist Duncan Greere&lt;/a> related to 48 Soviet dogs who flew as test subjects in USSR&amp;rsquo;s space program in the 1950s and 60s. &lt;a href="https://airtable.com/universe/expG3z2CFykG1dZsp/sovet-space-dogs" target="_blank" rel="noopener">The original data can be found here&lt;/a>.&lt;/p>
 &lt;p>You&amp;rsquo;ll need to download one CSV file and put them somewhere on your computer or upload them to RStudio.cloud—preferably in a folder named &lt;code>data&lt;/code> in your project folder:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/05-exercise/data/Dogs-Database.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>Dogs-Database.csv&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/05-exercise/data/Dogs-Database.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>Dogs-Database.csv&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>To help you, I&amp;rsquo;ve created a skeleton R Markdown file with a template for this exercise, along with some code to clean up the data a little. Download that here and include it in your project:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/05-exercise/05-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>05-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/05-exercise/05-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>05-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>In the end, the structure of your project directory should look something like this:&lt;/p>
 &lt;pre>&lt;code class="language-text">your-project-name\
@@ -871,23 +871,23 @@ Dogs-Database.csv
 &lt;/code>&lt;/pre>
 &lt;p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/05-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>05-exercise.zip&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/05-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>05-exercise.zip&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="task-1-reflection">Task 1: Reflection&lt;/h2>
 &lt;p>Write your reflection for the day&amp;rsquo;s readings.&lt;/p>
 &lt;h2 id="task-2-the-ugliest-plot-in-the-world">Task 2: The ugliest plot in the world&lt;/h2>
 &lt;p>For this assignment, you&amp;rsquo;re going to forget all the wonderful CRAP design principles you just learned and try your hardest to make the ugliest plot in the world. Modify the color scale and change theme elements to make this plot truly hideous.&lt;/p>
 &lt;h2 id="turning-everything-in">Turning everything in&lt;/h2>
-&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a> and you &lt;a href="https://www.andrewheiss.com/blog/2017/09/27/working-with-r-cairo-graphics-custom-fonts-and-ggplot/" target="_blank" rel="noopener">followed the instructions here for how to make Cairo fonts work with knitted PDFs&lt;/a>) of your document.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" />
+&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="https://aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a> and you &lt;a href="https://www.andrewheiss.com/blog/2017/09/27/working-with-r-cairo-graphics-custom-fonts-and-ggplot/" target="_blank" rel="noopener">followed the instructions here for how to make Cairo fonts work with knitted PDFs&lt;/a>) of your document.&lt;/p>
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" />
 &lt;p>Include a chunk that uses &lt;code>ggsave()&lt;/code> to save the plot to your computer as a PNG file.&lt;/p>
-&lt;p>Upload the knitted document and the saved PNG file of your plot to iCollege.&lt;/p></description></item><item><title>Uncertainty</title><link>aem2850.toddgerarden.com/assignments/06-exercise/</link><pubDate>Mon, 28 Jun 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/06-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
+&lt;p>Upload the knitted document and the saved PNG file of your plot to iCollege.&lt;/p></description></item><item><title>Uncertainty</title><link>https://aem2850.toddgerarden.com/assignments/06-exercise/</link><pubDate>Mon, 28 Jun 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/06-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
 &lt;p>For this exercise you&amp;rsquo;ll revisit Hans Rosling&amp;rsquo;s gapminder data on health and wealth.&lt;/p>
 &lt;p>You should use an RStudio Project to keep your files well organized (either on your computer or on RStudio.cloud). Either create a new project for this exercise only, or make a project for all your work in this class.&lt;/p>
 &lt;p>You don&amp;rsquo;t need to download any CSV files for this assignment. If you run &lt;code>library(gapminder)&lt;/code> you&amp;rsquo;ll have access to a data frame named &lt;code>gapminder&lt;/code> that contains all the data.&lt;/p>
 &lt;p>&lt;strong>To help you&lt;/strong>, I&amp;rsquo;ve created a skeleton R Markdown file with a template for this exercise, along with some code to help you clean and summarize the data. Download that here and include it in your project:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/06-exercise/06-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>06-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/06-exercise/06-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>06-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>In the end, the structure of your project directory should look something like this:&lt;/p>
 &lt;pre>&lt;code class="language-text">your-project-name\
@@ -896,7 +896,7 @@ your-project-name.Rproj
 &lt;/code>&lt;/pre>
 &lt;p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/06-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>06-exercise.zip&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/06-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>06-exercise.zip&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="task-1-reflection">Task 1: Reflection&lt;/h2>
 &lt;p>Write your reflection for the day&amp;rsquo;s readings.&lt;/p>
@@ -907,30 +907,30 @@ your-project-name.Rproj
 &lt;p>Make a histogram of &lt;em>logged&lt;/em> GDP per capita for 1997 only, across all five continents&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Make a ridge plot of global life expectancy over time, from 1952 to 2007. You&amp;rsquo;ll need to use the full gapminder data, not the 1997-only data. Each ridge should show the distribution of the world&amp;rsquo;s life expectancy for each given year (similar to the &lt;a href="aem2850.toddgerarden.com/example/06-example/#density-plots">temperature ridge plot in the example&lt;/a>).&lt;/p>
+&lt;p>Make a ridge plot of global life expectancy over time, from 1952 to 2007. You&amp;rsquo;ll need to use the full gapminder data, not the 1997-only data. Each ridge should show the distribution of the world&amp;rsquo;s life expectancy for each given year (similar to the &lt;a href="https://aem2850.toddgerarden.com/example/06-example/#density-plots">temperature ridge plot in the example&lt;/a>).&lt;/p>
 &lt;p>Important note: &lt;code>year&lt;/code> will be on the y-axis, but it must be a categorical variable to work with &lt;strong>ggridges&lt;/strong>, so you&amp;rsquo;ll either need to wrap it in &lt;code>as.factor()&lt;/code> like &lt;code>aes(..., y = as.factor(year))&lt;/code>, or add a new categorical/factor year column to the gapminder dataset with &lt;code>mutate()&lt;/code>.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Make a filtered dataset that selects data from only 2007 &lt;em>and&lt;/em> removes Oceania. Show the distribution of &lt;em>logged&lt;/em> GDP per capita across the &lt;em>four&lt;/em> continents using some combination of boxplots and/or violin plots and/or strip plots, either overlaid on top of each other, or using their &lt;code>geom_half_*()&lt;/code> counterparts from &lt;strong>gghalves&lt;/strong>.&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/example/06-example/">The example for today&amp;rsquo;s session&lt;/a> will be &lt;em>incredibly&lt;/em> helpful for this exercise. Reference it.&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/example/06-example/">The example for today&amp;rsquo;s session&lt;/a> will be &lt;em>incredibly&lt;/em> helpful for this exercise. Reference it.&lt;/p>
 &lt;p>You don&amp;rsquo;t need to make these super fancy, but if you&amp;rsquo;re feeling brave, experiment with adding a &lt;code>labs()&lt;/code> layer or changing colors or modifying themes and theme elements.&lt;/p>
 &lt;p>You&amp;rsquo;ll need to insert your own code chunks where needed. Rather than typing them by hand (that&amp;rsquo;s tedious and you might miscount the number of backticks!), use the &amp;ldquo;Insert&amp;rdquo; button at the top of the editing window, or type &lt;kbd>ctrl&lt;/kbd> + &lt;kbd>alt&lt;/kbd> + &lt;kbd>i&lt;/kbd> on Windows, or &lt;kbd>⌘&lt;/kbd> + &lt;kbd>⌥&lt;/kbd> + &lt;kbd>i&lt;/kbd> on macOS.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
 &lt;h2 id="turning-everything-in">Turning everything in&lt;/h2>
-&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Mapping data to graphics</title><link>aem2850.toddgerarden.com/assignments/03-exercise/</link><pubDate>Mon, 21 Jun 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/03-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
+&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="https://aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Mapping data to graphics</title><link>https://aem2850.toddgerarden.com/assignments/03-exercise/</link><pubDate>Mon, 21 Jun 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/03-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
 &lt;p>You&amp;rsquo;ll be doing all your R work in R Markdown this time (and from now on). You should use an RStudio Project to keep your files well organized (either on your computer or on RStudio.cloud). Either create a new project for this exercise only, or make a project for all your work in this class.&lt;/p>
 &lt;p>You&amp;rsquo;ll need to download three CSV files and put them somewhere on your computer or upload them to RStudio.cloud—preferably in a folder named &lt;code>data&lt;/code> in your project folder:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/03-exercise/data/The_Fellowship_Of_The_Ring.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>The_Fellowship_Of_The_Ring.csv&lt;/code>&lt;/a>&lt;/li>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/03-exercise/data/The_Two_Towers.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>The_Two_Towers.csv&lt;/code>&lt;/a>&lt;/li>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/03-exercise/data/The_Return_Of_The_King.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>The_Return_Of_The_King.csv&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/03-exercise/data/The_Fellowship_Of_The_Ring.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>The_Fellowship_Of_The_Ring.csv&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/03-exercise/data/The_Two_Towers.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>The_Two_Towers.csv&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/03-exercise/data/The_Return_Of_The_King.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>The_Return_Of_The_King.csv&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>To help you, I&amp;rsquo;ve created a skeleton R Markdown file with a template for this exercise. Download that here and include it in your project:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/03-exercise/03-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>03-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/03-exercise/03-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>03-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>In the end, the structure of your project directory should look something like this:&lt;/p>
 &lt;pre>&lt;code class="language-text">your-project-name\
@@ -943,7 +943,7 @@ The_Return_Of_The_King.csv
 &lt;/code>&lt;/pre>
 &lt;p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/03-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>03-exercise.zip&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/03-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>03-exercise.zip&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="task-1-reflection">Task 1: Reflection&lt;/h2>
 &lt;p>Write your reflection for the day&amp;rsquo;s readings.&lt;/p>
@@ -973,20 +973,20 @@ The_Return_Of_The_King.csv
 &lt;/li>
 &lt;/ul>
 &lt;p>You&amp;rsquo;ll need to insert your own code chunks where needed. Rather than typing them by hand (that&amp;rsquo;s tedious and you might miscount the number of backticks!), use the &amp;ldquo;Insert&amp;rdquo; button at the top of the editing window, or type &lt;kbd>ctrl&lt;/kbd> + &lt;kbd>alt&lt;/kbd> + &lt;kbd>i&lt;/kbd> on Windows, or &lt;kbd>⌘&lt;/kbd> + &lt;kbd>⌥&lt;/kbd> + &lt;kbd>i&lt;/kbd> on macOS.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
 &lt;h2 id="turning-everything-in">Turning everything in&lt;/h2>
-&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Amounts and proportions</title><link>aem2850.toddgerarden.com/assignments/04-exercise/</link><pubDate>Mon, 21 Jun 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/04-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
+&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="https://aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Amounts and proportions</title><link>https://aem2850.toddgerarden.com/assignments/04-exercise/</link><pubDate>Mon, 21 Jun 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/04-exercise/</guid><description>&lt;h2 id="getting-started">Getting started&lt;/h2>
 &lt;p>The New York City Department of Buildings (DOB) maintains a list of construction sites that have been categorized as &amp;ldquo;essential&amp;rdquo; during the city&amp;rsquo;s shelter-in-place pandemic order. They&amp;rsquo;ve provided &lt;a href="https://www1.nyc.gov/assets/buildings/html/essential-active-construction.html" target="_blank" rel="noopener">an interactive map here&lt;/a> where you can see the different projects. There&amp;rsquo;s also a link there to download the complete dataset.&lt;/p>
 &lt;p>For this exercise, you&amp;rsquo;re going to use this data to visualize the amounts or proportions of different types of essential projects in the five boroughs of New York City (Brooklyn, Manhattan, the Bronx, Queens, and Staten Island).&lt;/p>
 &lt;p>You&amp;rsquo;ll be doing all your R work in R Markdown this time (and from now on). You should use an RStudio Project to keep your files well organized (either on your computer or on RStudio.cloud). Either create a new project for this exercise only, or make a project for all your work in this class.&lt;/p>
 &lt;p>You&amp;rsquo;ll need to download one CSV file and put it somewhere on your computer or upload it to RStudio.cloud—preferably in a folder named &lt;code>data&lt;/code> in your project folder. You can download the data from &lt;a href="https://www1.nyc.gov/assets/buildings/html/essential-active-construction.html" target="_blank" rel="noopener">the DOB&amp;rsquo;s map&lt;/a>, or use this link to get it directly:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/04-exercise/data/EssentialConstruction.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>EssentialConstruction.csv&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/04-exercise/data/EssentialConstruction.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>EssentialConstruction.csv&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>To help you, I&amp;rsquo;ve created a skeleton R Markdown file with a template for this exercise, along with some code to help you clean and summarize the data. Download that here and include it in your project:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/04-exercise/04-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>04-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/04-exercise/04-exercise.Rmd">&lt;i class="fab fa-r-project">&lt;/i> &lt;code>04-exercise.Rmd&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>In the end, the structure of your project directory should look something like this:&lt;/p>
 &lt;pre>&lt;code class="language-text">your-project-name\
@@ -997,7 +997,7 @@ EssentialConstruction.csv
 &lt;/code>&lt;/pre>
 &lt;p>To check that you put everything in the right places, you can download and unzip this file, which contains everything in the correct structure:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/04-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>04-exercise.zip&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/04-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>04-exercise.zip&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="task-1-reflection">Task 1: Reflection&lt;/h2>
 &lt;p>Write your reflection for the day&amp;rsquo;s readings.&lt;/p>
@@ -1014,16 +1014,16 @@ EssentialConstruction.csv
 &lt;p>Show the proportion of approved projects by borough and category simultaneously using a heatmap&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;p>&lt;a href="aem2850.toddgerarden.com/example/04-example/">The example for today&amp;rsquo;s session&lt;/a> will be &lt;em>incredibly&lt;/em> helpful for this exercise. Reference it.&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/example/04-example/">The example for today&amp;rsquo;s session&lt;/a> will be &lt;em>incredibly&lt;/em> helpful for this exercise. Reference it.&lt;/p>
 &lt;p>You don&amp;rsquo;t need to make these super fancy, but if you&amp;rsquo;re feeling brave, experiment with adding a &lt;code>labs()&lt;/code> layer or changing fill colors with &lt;code>scale_fill_manual()&lt;/code> or with viridis palettes.&lt;/p>
 &lt;p>You&amp;rsquo;ll need to insert your own code chunks where needed. Rather than typing them by hand (that&amp;rsquo;s tedious and you might miscount the number of backticks!), use the &amp;ldquo;Insert&amp;rdquo; button at the top of the editing window, or type &lt;kbd>ctrl&lt;/kbd> + &lt;kbd>alt&lt;/kbd> + &lt;kbd>i&lt;/kbd> on Windows, or &lt;kbd>⌘&lt;/kbd> + &lt;kbd>⌥&lt;/kbd> + &lt;kbd>i&lt;/kbd> on macOS.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
 &lt;h2 id="turning-everything-in">Turning everything in&lt;/h2>
-&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Introduction to R and the tidyverse</title><link>aem2850.toddgerarden.com/assignments/01-exercise/</link><pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/01-exercise/</guid><description>&lt;h2 id="task-1-make-an-rstudio-project">Task 1: Make an RStudio Project&lt;/h2>
+&lt;p>When you&amp;rsquo;re all done, click on the &amp;ldquo;Knit&amp;rdquo; button at the top of the editing window and create an HTML or Word version (or PDF if you&amp;rsquo;ve &lt;a href="https://aem2850.toddgerarden.com/resource/install/#install-tinytex">installed &lt;strong>tinytex&lt;/strong>&lt;/a>) of your document. Upload that file to iCollege.&lt;/p>
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" /></description></item><item><title>Introduction to R and the tidyverse</title><link>https://aem2850.toddgerarden.com/assignments/01-exercise/</link><pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/01-exercise/</guid><description>&lt;h2 id="task-1-make-an-rstudio-project">Task 1: Make an RStudio Project&lt;/h2>
 &lt;ol>
 &lt;li>
-&lt;p>Use either RStudio.cloud or RStudio on your computer (preferably RStudio on your computer! &lt;a href="aem2850.toddgerarden.com/resource/install/">Follow these instructions to get started!&lt;/a>) to create a new RStudio Project.&lt;/p>
+&lt;p>Use either RStudio.cloud or RStudio on your computer (preferably RStudio on your computer! &lt;a href="https://aem2850.toddgerarden.com/resource/install/">Follow these instructions to get started!&lt;/a>) to create a new RStudio Project.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Create a folder named &amp;ldquo;data&amp;rdquo; in the project folder you just made.&lt;/p>
@@ -1031,7 +1031,7 @@ EssentialConstruction.csv
 &lt;li>
 &lt;p>Download this CSV file and place it in that folder:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/data/cars.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>cars.csv&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/data/cars.csv">&lt;i class="fas fa-file-csv">&lt;/i> &lt;code>cars.csv&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>
@@ -1059,7 +1059,7 @@ Replace this line with a code chunk and use it to create a plot.
 &lt;/li>
 &lt;li>
 &lt;p>Your project folder should look something like this:&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/project-structure.png" width="30%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/project-structure.png" width="30%" />
 &lt;/li>
 &lt;/ol>
 &lt;h2 id="task-2-make-an-r-markdown-file-with-a-plot-in-it">Task 2: Make an R Markdown file with a plot in it&lt;/h2>
@@ -1069,14 +1069,14 @@ Replace this line with a code chunk and use it to create a plot.
 &lt;/li>
 &lt;li>
 &lt;p>Remove the text that says &amp;ldquo;Replace this line with a code chunk&amp;rdquo; and insert a new R code chunk. Either type &lt;kbd>ctrl&lt;/kbd> + &lt;kbd>alt&lt;/kbd> + &lt;kbd>i&lt;/kbd> on Windows, or &lt;kbd>⌘&lt;/kbd> + &lt;kbd>⌥&lt;/kbd> + &lt;kbd>i&lt;/kbd> on macOS, or use the &amp;ldquo;Insert Chunk&amp;rdquo; menu:&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/insert-chunk-button.png" width="19%" />
 &lt;/li>
 &lt;li>
 &lt;p>Use &lt;code>ggplot()&lt;/code> to create a scatterplot using the &lt;code>mpg&lt;/code> dataset. Use whatever variables you want. Type the code to create the plot in the new empty chunk.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Knit your document as a Word file (or PDF if you&amp;rsquo;re brave and &lt;a href="aem2850.toddgerarden.com/resource/install/#install-tinytex">installed LaTeX&lt;/a>). Use the &amp;ldquo;Knit&amp;rdquo; menu:&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" />
+&lt;p>Knit your document as a Word file (or PDF if you&amp;rsquo;re brave and &lt;a href="https://aem2850.toddgerarden.com/resource/install/#install-tinytex">installed LaTeX&lt;/a>). Use the &amp;ldquo;Knit&amp;rdquo; menu:&lt;/p>
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/knit-button.png" width="30%" />
 &lt;/li>
 &lt;li>
 &lt;p>Upload the knitted document to iCollege.&lt;/p>
@@ -1087,19 +1087,19 @@ Replace this line with a code chunk and use it to create a plot.
 &lt;/ol>
 &lt;hr>
 &lt;p>You&amp;rsquo;ll be doing this same process for all your future exercises. Each exercise will involve an R Markdown file. You can either create a new RStudio Project directory for all your work:&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/reference/rproj-one-folder.png" width="30%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/reference/rproj-one-folder.png" width="30%" />
 &lt;p>Or you can create individual projects for each assignment and mini-project:&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/reference/rproj-multiple-folders.png" width="30%" /></description></item><item><title>Graphic design</title><link>aem2850.toddgerarden.com/assignments/02-exercise/</link><pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate><guid>aem2850.toddgerarden.com/assignments/02-exercise/</guid><description>&lt;h2 id="task-1-reflection">Task 1: Reflection&lt;/h2>
+&lt;img src="https://aem2850.toddgerarden.com/img/reference/rproj-multiple-folders.png" width="30%" /></description></item><item><title>Graphic design</title><link>https://aem2850.toddgerarden.com/assignments/02-exercise/</link><pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignments/02-exercise/</guid><description>&lt;h2 id="task-1-reflection">Task 1: Reflection&lt;/h2>
 &lt;p>Write your reflection for the day&amp;rsquo;s readings.&lt;/p>
 &lt;h2 id="task-2-crap-critique">Task 2: CRAP critique&lt;/h2>
 &lt;p>Critique the design of the poster for the BYU Student Wellness Center workshop below. Go through the CRAP checklist and analyze how well or poorly the poster follows each of the principles. Discuss how the poster&amp;rsquo;s adherence to (or non-adherence to) these principles influences its effectiveness.&lt;/p>
 &lt;p>(&lt;em>This would have been some random poster from GSU, but I haven&amp;rsquo;t been on campus since mid-March 2020&lt;/em> 😭)&lt;/p>
-&lt;img src="aem2850.toddgerarden.com/img/assignments/student-wellness.jpg" width="60%" />
+&lt;img src="https://aem2850.toddgerarden.com/img/assignments/student-wellness.jpg" width="60%" />
 &lt;h2 id="task-3-crap-redesign">Task 3: CRAP redesign&lt;/h2>
 &lt;p>Redesign the poster for the BYU Student Wellness Center workshop. Use whatever program you want—even PowerPoint if you&amp;rsquo;re most comfortable with that, though it&amp;rsquo;ll probably be easier to use something like &lt;a href="https://www.canva.com/" target="_blank" rel="noopener">Canva&lt;/a> or Adobe Illustrator. If you use Canva, don&amp;rsquo;t use any of the built-in templates—start from scratch with a blank page.&lt;/p>
 &lt;p>To save you from retyping everything, I&amp;rsquo;ve included all the text and Student Wellness hex logo in the zip file below:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="aem2850.toddgerarden.com/projects/02-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>02-exercise.zip&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/projects/02-exercise.zip">&lt;i class="fas fa-file-archive">&lt;/i> &lt;code>02-exercise.zip&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>I didn&amp;rsquo;t include the Instagram logo. If you want to use that, go find one online. You don&amp;rsquo;t have to use it. You don&amp;rsquo;t have to use the big paragraph of text either—you can rewrite it to shrink it down if you want.&lt;/p>
 &lt;p>Critique your new design using the CRAP checklist. How did you use contrast, repetition, alignment, and proximity in your improved design?&lt;/p>
