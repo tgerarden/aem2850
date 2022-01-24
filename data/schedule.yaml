@@ -8,9 +8,8 @@ lessons:
     # date_start: "June 7"
     # date_end: "June 11"
     content: "01-content"
-    lesson: "01-lesson"
-    example: "01-example"
-    assignment: "01-exercise"
+    # example: "01-example"
+    # assignment: "01-exercise"
     bg: 1
 
   - title: '<span class="content-title">Basic base R</span>'
@@ -18,10 +17,9 @@ lessons:
     date: "Week 2"
     # date_start: "June 7"
     # date_end: "June 11"
-    content: "02-content"
-    lesson: "02-lesson"
-    example: "02-example"
-    assignment: "02-exercise"
+    # content: "02-content"
+    # example: "02-example"
+    # assignment: "02-exercise"
     bg: 2
 
   # - title: 'Assignments for sessions 1 and 2 due'
@@ -33,10 +31,9 @@ lessons:
     date: "Week 3"
     # date_start: "June 14"
     # date_end: "June 18"
-    content: "03-content"
-    lesson: "03-lesson"
-    example: "03-example"
-    assignment: "03-exercise"
+    # content: "03-content"
+    # example: "03-example"
+    # assignment: "03-exercise"
     bg: 1
     bottomborder: True
 
@@ -45,10 +42,9 @@ lessons:
     date: "Week 4"
     # date_start: "June 14"
     # date_end: "June 18"
-    content: "04-content"
-    lesson: "04-lesson"
-    example: "04-example"
-    assignment: "04-exercise"
+    # content: "04-content"
+    # example: "04-example"
+    # assignment: "04-exercise"
     bg: 1
 
   # - title: 'Assignments for sessions 3 and 4 due'
@@ -60,10 +56,9 @@ lessons:
     date: "Week 5"
     # date_start: "June 21"
     # date_end: "June 25"
-    content: "05-content"
-    lesson: "05-lesson"
-    example: "05-example"
-    assignment: "05-exercise"
+    # content: "05-content"
+    # example: "05-example"
+    # assignment: "05-exercise"
     bg: 2
 
   - title: '**Data Visualization Foundations**'
@@ -74,10 +69,9 @@ lessons:
     date: "Week 6"
     # date_start: "June 21"
     # date_end: "June 25"
-    content: "06-content"
-    lesson: "06-lesson"
-    example: "06-example"
-    assignment: "06-exercise"
+    # content: "06-content"
+    # example: "06-example"
+    # assignment: "06-exercise"
     bg: 1
 
   # - title: 'Assignments for sessions 5 and 6 due'
@@ -89,10 +83,9 @@ lessons:
     date: "Week 7"
     # date_start: "June 28"
     # date_end: "July 2"
-    content: "07-content"
-    lesson: "07-lesson"
-    example: "07-example"
-    assignment: "07-exercise"
+    # content: "07-content"
+    # example: "07-example"
+    # assignment: "07-exercise"
     bg: 2
 
   - title: '<span class="content-title">Themes</span>'
@@ -100,10 +93,9 @@ lessons:
     date: "Week 8"
     # date_start: "June 28"
     # date_end: "July 2"
-    content: "08-content"
-    lesson: "08-lesson"
-    example: "08-example"
-    assignment: "08-exercise"
+    # content: "08-content"
+    # example: "08-example"
+    # assignment: "08-exercise"
     bg: 1
 
   # - title: 'Assignments for sessions 7 and 8 due'
@@ -121,10 +113,9 @@ lessons:
     date: "Week 9"
     # date_start: "July 5"
     # date_end: "July 9"
-    content: "09-content"
-    lesson: "09-lesson"
-    example: "09-example"
-    assignment: "09-exercise"
+    # content: "09-content"
+    # example: "09-example"
+    # assignment: "09-exercise"
     bg: 1
 
   - title: '<span class="content-title">Relationships</span>'
@@ -132,10 +123,9 @@ lessons:
     date: "Week 10"
     # date_start: "July 5"
     # date_end: "July 9"
-    content: "10-content"
-    lesson: "10-lesson"
-    example: "10-example"
-    assignment: "10-exercise"
+    # content: "10-content"
+    # example: "10-example"
+    # assignment: "10-exercise"
     bg: 2
 
   # - title: 'Assignments for sessions 9 and 10 due'
@@ -147,10 +137,9 @@ lessons:
     date: "Week 11"
     # date_start: "July 12"
     # date_end: "July 16"
-    content: "11-content"
-    lesson: "11-lesson"
-    example: "11-example"
-    assignment: "11-exercise"
+    # content: "11-content"
+    # example: "11-example"
+    # assignment: "11-exercise"
     bg: 1
 
   - title: '**Special Applications**'
@@ -161,10 +150,9 @@ lessons:
     date: "Week 12"
     # date_start: "July 12"
     # date_end: "July 16"
-    content: "12-content"
-    lesson: "12-lesson"
-    example: "12-example"
-    assignment: "12-exercise"
+    # content: "12-content"
+    # example: "12-example"
+    # assignment: "12-exercise"
     bg: 2
 
   # - title: 'Assignments for sessions 11 and 12 due'
@@ -181,10 +169,9 @@ lessons:
     date: "Week 13"
     # date_start: "July 19"
     # date_end: "July 23"
-    content: "13-content"
-    lesson: "13-lesson"
-    example: "13-example"
-    assignment: "13-exercise"
+    # content: "13-content"
+    # example: "13-example"
+    # assignment: "13-exercise"
     bg: 1
 
   - title: '<span class="content-title">Space</span>'
@@ -193,10 +180,9 @@ lessons:
     date: "Week 14"
     # date_start: "July 19"
     # date_end: "July 23"
-    content: "14-content"
-    lesson: "14-lesson"
-    example: "14-example"
-    assignment: "14-exercise"
+    # content: "14-content"
+    # example: "14-example"
+    # assignment: "14-exercise"
     bg: 2
 
   # - title: 'Assignments for sessions 13 and 14 due'
@@ -212,10 +198,9 @@ lessons:
     date: "Week 15"
     # date_start: "July 26"
     # date_end: "July 26"
-    content: "15-content"
-    lesson: "15-lesson"
-    example: "15-example"
-    assignment: "15-exercise"
+    # content: "15-content"
+    # example: "15-example"
+    # assignment: "15-exercise"
     bg: 1
 
   # - title: 'Assignment for session 15 due'

@@ -36,16 +36,16 @@ We will start the semester online using [the class zoom link from canvas](https:
 
 ### My office hours
 
-- Tuesdays 11am - 12pm  using [the class zoom link](https://cornell.zoom.us/j/98464434953?pwd=VDJuR0RhckttSTBJVVBqUXhDT3FxUT09)
+- Tuesdays 11:00am - 12:00pm  using [the class zoom link](https://cornell.zoom.us/j/98464434953?pwd=VDJuR0RhckttSTBJVVBqUXhDT3FxUT09)
   - these are "drop-in" office hours---come at any time, in any number
   - when classes return to being in person, we can meet in Warren 466
 - Other times by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
 ### TA office hours
 
-#### Graduate TA: Hui Zhou ([hz423@cornell.edu](hz423@cornell.edu))
+#### Graduate TA: Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
 
-- Mondays  2pm - 4pm at [cornell.zoom.us/j/4786955504](https://cornell.zoom.us/j/4786955504?pwd=VitTc1hVSjJSVXovWGJlRG9VQm5TZz09)
+- Mondays  1:30pm - 3:30pm at [cornell.zoom.us/j/4786955504](https://cornell.zoom.us/j/4786955504?pwd=VitTc1hVSjJSVXovWGJlRG9VQm5TZz09)
 
 <!-- #### Undergraduate TA: Sophie McComb ([sm2397@cornell.edu](sm2397@cornell.edu)) -->
 
@@ -231,19 +231,17 @@ I want you to learn a lot in this class (R! the tidyverse! grammer of graphics!)
 
 ### Assignments
 
-Your grade in this course will be based on participation, weekly writings, labs, and projects:
+Your grade in this course will be based on weekly reflections, labs, projects:
 
-**Weekly writings** are intended as an easy way to get some points, and a nudge to engage with readings.
+- **Reflections** are short weekly writing assignments. They are intended as an easy way to get some points and a nudge to engage with readings.
 
-**Labs** will be short homework assignments that require you to do something practical using a basic statistical language.
+- **Labs** are short weekly homework assignments that require you to practice programming.
 
-**Projects** are intended to synthesize and reinforce the individual skills you develop in class, and to provide examples of their application to business and life more generally.
+- **Projects** are intended to synthesize and reinforce the individual skills you develop in class, and to provide examples of their application to business and life more generally.
 
-**Class participation** can take many forms. The best form of participation is active participation during class. When we are on zoom you can do this using the zoom chat and hand-raising with camera and mic on. The bare minimum can best be described as “showing your presence and having some engagement” – questions typed in chat and questions posed after class count towards participation. To encourage some form of participation, I will often pose questions to the class.
-<!-- I am not above bribery - your response to these extra credit questions will earn extra credit points, up to 5, for participation. Thus, you can easily pad your score by (1) meeting the minimum participation requirements such that I know you are present, and (2) earning extra credit by responding (through chat or mic, with or without video) to in-class extra credit prompts. I will clearly state which questions are extra credit. Wrong answers get the same credit as right answers. We are here to learn. If you knew everything already, you wouldn’t be in the class. -->
+<!-- **Class participation** can take many forms. The best form of participation is active participation during class. When we are on zoom you can do this using the zoom chat and hand-raising with camera and mic on. The bare minimum can best be described as “showing your presence and having some engagement” – questions typed in chat and questions posed after class count towards participation. To encourage some form of participation, I will often pose questions to the class. -->
 
-More in-depth descriptions for all the assignments will be posted on the [assignments page](/assignment/). As the course progresses, the assignments themselves will be posted there as well.
-
+Please read [the assignments page](/assignments/) for more details on the assignments and their underlying rationale.
 
 Each type of assignment will contribute to the final grade as follows:
 
@@ -251,23 +249,14 @@ Each type of assignment will contribute to the final grade as follows:
 
 
 
-<!-- Assignments -->
-<!-- Homework (40%):	8 programming assignments worth 5% each -->
-<!-- Project (20%):		1 team-based project to use concepts and tools for a business application -->
-<!-- Prelims (40%):	2 prelims, each worth 20% of the final grade -->
-
-<!-- <div class="centered-table"> -->
-
-<!-- ```{r show-assignments-table, echo=FALSE, results="asis"} -->
-<!-- assignments_total <- tibble(Assignment = "Total", -->
-<!--                             Points = sum(assignments$Points), -->
-<!--                             Percent = NA) -->
-
-<!-- bind_rows(assignments, assignments_total) %>% -->
-<!--   dplyr::select(Assignment, Points, Percent) %>% -->
-<!--   pandoc.table(justify = "lcc", missing = "—") -->
-<!-- ``` -->
-<!-- </div> -->
+|Assignment                       | Points| Percent|
+|:--------------------------------|------:|-------:|
+|Reflections (14 x 5 points each) |     70|     16%|
+|Labs (14 x 10 points each)       |    140|     32%|
+|Mini project 1                   |     50|     11%|
+|Mini project 2                   |     50|     11%|
+|Final project                    |    130|     30%|
+|Total                            |    440|    100%|
 
 
 

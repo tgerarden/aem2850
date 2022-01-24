@@ -1,7 +1,7 @@
 ---
-title: "Welcome to AEM 2850 + truth, beauty, and data"
-linktitle: "1: Truth, beauty, and data + the tidyverse"
-date: "2022-01-21 20:24:00"
+title: "Welcome to AEM 2850!"
+linktitle: "Welcome to AEM 2850!"
+date: "2022-01-24 12:08:40"
 menu:
   content:
     parent: Course content
@@ -19,30 +19,39 @@ output:
 
 ## Readings
 
-- The [syllabus](/syllabus/)
-- <i class="fas fa-book"></i> [Chapter 1 (read through 1.2, skim 1.3+)](http://socviz.co/lookatdata.html) of *Data Visualization* by Kieran Healy
+- [Read the syllabus](/syllabus/)
+- [Review the schedule](/schedule/)
+- [Read the assignments overview](/assignments/)
+- <i class="fas fa-book"></i> [Skim the introduction](https://r4ds.had.co.nz/introduction.html) of *R for Data Science*
+- <i class="fas fa-book"></i> [Read chapter 27: R Markdown](https://r4ds.had.co.nz/r-markdown.html) of *R for Data Science*
+- <i class="fas fa-book"></i> [Skim chapter 1, through section 1.2](http://socviz.co/lookatdata.html) of *Data Visualization*
 
-#### Optional Readings
+#### Optional readings
 
 - <i class="fas fa-external-link-square-alt"></i> [Study: Charts change hearts and minds better than words do](https://www.washingtonpost.com/news/wonk/wp/2018/06/15/study-charts-change-hearts-and-minds-better-than-words-do/?utm_term=.4474599c0d5e)
 - <i class="fas fa-podcast"></i> Tim Harford, ["Florence Nightingale: Data Viz Pioneer,"](https://99percentinvisible.org/episode/florence-nightingale-data-viz-pioneer/) *99% Invisible*
 
 
-## Questions to reflect on
+## Guiding questions
 
-- How do we know what is true?
-- Are facts truth?
+*You don’t need to answer all of these—or even any of them! These are just here to help guide your thinking.*
+
+- What is this course all about? [I wonder if that's on the syllabus...](/syllabus/#course-overview)
+- What is `R`? [I bet that's on the syllabus...](/syllabus/#course-materials)
+- Can I succeed in this course? ([yes! according to the syllabus...](/syllabus/#success-in-this-course))
+- Wait, should I read the syllabus? ([here's a hint](https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy))
 - Why do we visualize data?
 - What makes a great visualization?
-- How do you choose which kind of visualization to use?
 
 
 ## Slides
 
-The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
+Slides for this week will be posted here once they are ready...
 
-{{< blogdown/slide-buttons >}}
+<!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
 
-:::fyi
-**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.
-:::
+<!-- {{< blogdown/slide-buttons >}} -->
+
+<!-- :::fyi -->
+<!-- **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands. -->
+<!-- ::: -->

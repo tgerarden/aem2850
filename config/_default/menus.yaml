@@ -14,12 +14,12 @@ main:
 #  - name: Examples
 #    url: /example/
 #    weight: 5
-#  - name: Assignments
-#    url: /assignments/
-#    weight: 6
-  - name: Resources
-    url: /resource/
-    weight: 7
+  - name: Assignments
+    url: /assignments/
+    weight: 6
+  # - name: Resources
+  #   url: /resource/
+  #   weight: 7
 #  - name: '<i class="fab fa-slack"></i>'
 #    url: "https://gsudatavizs21.slack.com"
 #    weight: 8

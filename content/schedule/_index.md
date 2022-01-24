@@ -10,35 +10,38 @@ Here’s your roadmap for the semester! *Note:* this will inevitably change thro
 
 ### Overview
 
-The class is structured with three distinct bits. First, the Tuesday lecture will give an overview of the topic for the week. Next, the Thursday lecture will have a short, practical lecture and an activity which is designed to give you hands-on experience and a greater understanding of the broader material. Finally, you will complete weekly writings (short) and labs (also short; requiring coding in `R`). Out of class, you will complete readings and complete assignments.
+The class is structured with three distinct bits. On Tuesday I will provide an overview of the topic for the week. On Thursday I will give a short, practical lecture and an activity which is designed to give you hands-on experience and a greater understanding of the broader material. Finally, each week outside of class you will complete readings, reflections, and labs (and other assignments later in the semester).
 
-- [**Content**](/content/) (<i class="fas fa-book-reader"></i>): This page contains the readings for the topic. These pages should be read completely. Lectures are *not* an exact replication of the written content; on the contrary, the lectures are intended to keep you focused on the high-level ideas, while the readings are broader and more comprehensive. Accordingly, lectures are shorter than the (often quite lengthy) written content.
+- [**Content**](/content/) (<i class="fas fa-book-reader"></i>): This page contains readings, guiding questions, and lecture slides for each topic.
 
-- [**Examples**](/example/) (<i class="fas fa-laptop-code"></i>): This page the material that we will discuss in Thursday classes. In addition to teaching specific content, there are many more `R` code examples. These are intended as a useful reference to various functions that you will need when working on (nearly) weekly labs and your group project.
+- [**Examples**](/example/) (<i class="fas fa-laptop-code"></i>): This page contains the material that we will discuss in Thursday classes.
 
-- [**Assignments**](/assignment/) (<i class="fas fa-pencil-ruler"></i>): This page contains the instructions for the weekly lab (1–3 brief tasks) and for the two mini projects + final project. **Labs are due by 11:59 PM (Eastern) on the Monday after they're posted.**
+- [**Assignments**](/assignments/) (<i class="fas fa-pencil-ruler"></i>): This page contains the instructions for the weekly labs and for the two mini projects + final project.
 
 ### Office hours reminder:
 
-I highly encourage you to utilize Professor and TA office hours, especially if you struggle with basic `R` programming.
+I highly encourage you to utilize Professor and TA office hours, especially if you have trouble with basic `R` programming. We will hold office hours at the following times:
 
-- Mondays  2pm - 4pm: TA Hui Zhou at [cornell.zoom.us/j/4786955504](https://cornell.zoom.us/j/4786955504?pwd=VitTc1hVSjJSVXovWGJlRG9VQm5TZz09)
-- Tuesdays 11am - 12pm: Prof. Gerarden using [the class zoom link](https://cornell.zoom.us/j/98464434953?pwd=VDJuR0RhckttSTBJVVBqUXhDT3FxUT09)
+- Mondays  1:30pm - 3:30pm: TA Hui Zhou at [cornell.zoom.us/j/4786955504](https://cornell.zoom.us/j/4786955504?pwd=VitTc1hVSjJSVXovWGJlRG9VQm5TZz09)
+- Tuesdays 11:00am - 12:00pm: Prof. Gerarden using [the class zoom link](https://cornell.zoom.us/j/98464434953?pwd=VDJuR0RhckttSTBJVVBqUXhDT3FxUT09)
 - Other times by appointment: Prof. Gerarden, at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
 You can also reach us by email. The best approach is to email both of us at the same time. You can do that with one click [here](mailto:gerarden@cornell.edu,hz423@cornell.edu).
 
 
 
-:::note
-**tl;dr**: You should follow this general process (in order) each week:
+<!-- :::note -->
+### **tl;dr:**
 
-- Do everything on the content page before Tuesday (<i class="fas fa-book-reader"></i>)
-- Come to lecture on Tuesday
-- In class on Thursday, we will work through the example page (<i class="fas fa-laptop-code"></i>)
-- Complete the lab (<i class="fas fa-pencil-ruler"></i>) and the weekly writing (assigned in class) before the next Tuesday's class.
-- As needed, attend the lab hours hosted by the TA.
-:::
+You should follow this general process each week:
+
+- Do readings listed on the content page before Tuesday
+- Tuesday: Come to class
+- Wednedsday: submit reflection on canvas by 11:59pm (starting with Week 2)
+- Thursday: come to class, where we will work through examples
+- Work on the lab before the next Tuesday's class, attending office hours as needed
+- Monday: submit lab on canvas by 11:59pm
+<!-- ::: -->
 
 ---
 
