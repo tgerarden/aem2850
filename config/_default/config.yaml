@@ -4,7 +4,7 @@
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
 title: "R for Business Analytics"
-baseurl: 'aem2850.toddgerarden.com'
+baseurl: 'https://aem2850.toddgerarden.com'
 copyright: '' # Footer text, e.g. '© {year} Me'
 
 ############################
