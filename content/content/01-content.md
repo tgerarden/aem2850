@@ -1,7 +1,7 @@
 ---
 title: "Welcome to AEM 2850!"
 linktitle: "Welcome to AEM 2850!"
-date: "2022-01-24 12:08:40"
+date: "2022-01-25 09:24:21"
 menu:
   content:
     parent: Course content
@@ -46,12 +46,10 @@ output:
 
 ## Slides
 
-Slides for this week will be posted here once they are ready...
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
 
-<!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
-
-<!-- {{< blogdown/slide-buttons >}} -->
+{{< blogdown/slide-buttons >}}
 
 <!-- :::fyi -->
-<!-- **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands. -->
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.
 <!-- ::: -->

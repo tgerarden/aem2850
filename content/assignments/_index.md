@@ -20,7 +20,7 @@ You will get the most of out this class if you:
 Each type of assignment in this class helps with one of these strategies.
 
 
-## Reflections
+### Reflections
 
 To encourage engagement with the course content, you'll need to write a ≈150 word reflection about the readings and lectures for the day. That's fairly short: there are ≈250 words on a typical double-spaced page in Microsoft Word (500 when single-spaced). 
 
@@ -45,7 +45,7 @@ Notice that is essentially a pass/fail or completion-based system. We're not gra
 You will write these using `R Markdown`, `knit` the completed reflection to a PDF document, and submit the resulting PDF via canvas (unless instructed otherwise).
 
 
-## Labs
+### Labs
 
 Each week in class we will learn about how to do specific tasks in R. However, without practicing these principles and making graphics on your own, you won't remember what you learn.
 
@@ -60,7 +60,7 @@ As with the Reflections, this is essentially a pass/fail system. We're not gradi
 You may work together on the labs, but you must turn in your own answers. The default method will be to write these using `R Markdown`, `knit` the completed lab to a PDF document, and submit the resulting PDF via canvas.
 
 
-## Mini projects
+### Mini projects
 
 To give you practice with the data and design principles you'll learn in this class, you will complete two mini projects. The first will focus on programming, while the second will focus on data visualization. I will provide you with real-world data and pose one or more questions. **These will be group projects.** More details will be posted later.
 
@@ -73,7 +73,7 @@ To give you practice with the data and design principles you'll learn in this cl
 <!-- Because these mini projects give you practice for the final project, I will provide you with substantial feedback on your design and code. -->
 
 
-## Final project
+### Final project
 
 At the end of the course, you will demonstrate your programming and data visualization skills by completing a final project. **This will be a group project.** More details will be posted later.
 
