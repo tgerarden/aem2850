@@ -36,7 +36,7 @@ You can also reach us by email. The best approach is to email both of us at the 
 You should follow this general process each week:
 
 - Do readings listed on the content page before Tuesday
-- Tuesday: Come to class
+- Tuesday: come to class
 - Wednedsday: submit reflection on canvas by 11:59pm (starting with Week 2)
 - Thursday: come to class, where we will work through examples
 - Work on the lab before the next Tuesday's class, attending office hours as needed

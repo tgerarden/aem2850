@@ -142,7 +142,7 @@ lessons:
     # assignment: "11-exercise"
     bg: 1
 
-  - title: '**Special Applications**'
+  - title: '**Special Topics**'
     header: True
 
   - title: '<span class="content-title">Annotations</span>'
