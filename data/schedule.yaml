@@ -8,8 +8,8 @@ lessons:
     # date_start: "June 7"
     # date_end: "June 11"
     content: "01-content"
-    # example: "01-example"
-    # assignment: "01-exercise"
+    example: "01-example"
+    assignment: "01-lab"
     bg: 1
 
   - title: '<span class="content-title">Basic base R</span>'
@@ -19,7 +19,7 @@ lessons:
     # date_end: "June 11"
     # content: "02-content"
     # example: "02-example"
-    # assignment: "02-exercise"
+    # assignment: "02-lab"
     bg: 2
 
   # - title: 'Assignments for sessions 1 and 2 due'
@@ -33,7 +33,7 @@ lessons:
     # date_end: "June 18"
     # content: "03-content"
     # example: "03-example"
-    # assignment: "03-exercise"
+    # assignment: "03-lab"
     bg: 1
     bottomborder: True
 
@@ -44,7 +44,7 @@ lessons:
     # date_end: "June 18"
     # content: "04-content"
     # example: "04-example"
-    # assignment: "04-exercise"
+    # assignment: "04-lab"
     bg: 1
 
   # - title: 'Assignments for sessions 3 and 4 due'
@@ -58,7 +58,7 @@ lessons:
     # date_end: "June 25"
     # content: "05-content"
     # example: "05-example"
-    # assignment: "05-exercise"
+    # assignment: "05-lab"
     bg: 2
 
   - title: '**Data Visualization Foundations**'
@@ -71,7 +71,7 @@ lessons:
     # date_end: "June 25"
     # content: "06-content"
     # example: "06-example"
-    # assignment: "06-exercise"
+    # assignment: "06-lab"
     bg: 1
 
   # - title: 'Assignments for sessions 5 and 6 due'
@@ -85,7 +85,7 @@ lessons:
     # date_end: "July 2"
     # content: "07-content"
     # example: "07-example"
-    # assignment: "07-exercise"
+    # assignment: "07-lab"
     bg: 2
 
   - title: '<span class="content-title">Themes</span>'
@@ -95,7 +95,7 @@ lessons:
     # date_end: "July 2"
     # content: "08-content"
     # example: "08-example"
-    # assignment: "08-exercise"
+    # assignment: "08-lab"
     bg: 1
 
   # - title: 'Assignments for sessions 7 and 8 due'
@@ -115,7 +115,7 @@ lessons:
     # date_end: "July 9"
     # content: "09-content"
     # example: "09-example"
-    # assignment: "09-exercise"
+    # assignment: "09-lab"
     bg: 1
 
   - title: '<span class="content-title">Relationships</span>'
@@ -125,7 +125,7 @@ lessons:
     # date_end: "July 9"
     # content: "10-content"
     # example: "10-example"
-    # assignment: "10-exercise"
+    # assignment: "10-lab"
     bg: 2
 
   # - title: 'Assignments for sessions 9 and 10 due'
@@ -139,7 +139,7 @@ lessons:
     # date_end: "July 16"
     # content: "11-content"
     # example: "11-example"
-    # assignment: "11-exercise"
+    # assignment: "11-lab"
     bg: 1
 
   - title: '**Special Topics**'
@@ -152,7 +152,7 @@ lessons:
     # date_end: "July 16"
     # content: "12-content"
     # example: "12-example"
-    # assignment: "12-exercise"
+    # assignment: "12-lab"
     bg: 2
 
   # - title: 'Assignments for sessions 11 and 12 due'
@@ -171,7 +171,7 @@ lessons:
     # date_end: "July 23"
     # content: "13-content"
     # example: "13-example"
-    # assignment: "13-exercise"
+    # assignment: "13-lab"
     bg: 1
 
   - title: '<span class="content-title">Space</span>'
@@ -182,7 +182,7 @@ lessons:
     # date_end: "July 23"
     # content: "14-content"
     # example: "14-example"
-    # assignment: "14-exercise"
+    # assignment: "14-lab"
     bg: 2
 
   # - title: 'Assignments for sessions 13 and 14 due'
@@ -200,7 +200,7 @@ lessons:
     # date_end: "July 26"
     # content: "15-content"
     # example: "15-example"
-    # assignment: "15-exercise"
+    # assignment: "15-lab"
     bg: 1
 
   # - title: 'Assignment for session 15 due'

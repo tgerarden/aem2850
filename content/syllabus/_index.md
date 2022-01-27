@@ -45,11 +45,13 @@ We will start the semester online using [the class zoom link from canvas](https:
 
 #### Graduate TA: Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
 
-- Mondays  1:30pm - 3:30pm at [cornell.zoom.us/j/4786955504](https://cornell.zoom.us/j/4786955504?pwd=VitTc1hVSjJSVXovWGJlRG9VQm5TZz09)
+- Mondays 1:30pm - 3:30pm at [cornell.zoom.us/j/4786955504](https://cornell.zoom.us/j/4786955504?pwd=VitTc1hVSjJSVXovWGJlRG9VQm5TZz09)
 
-<!-- #### Undergraduate TA: Sophie McComb ([sm2397@cornell.edu](sm2397@cornell.edu)) -->
+#### Undergraduate TA: Sophie McComb ([sm2397@cornell.edu](sm2397@cornell.edu))
 
-<!-- - TBD -->
+- TBD
+<!-- - Mondays X - Y at [cornell.zoom.us/j/5679920082](https://cornell.zoom.us/j/5679920082?pwd=OWdhcjZ4OWFlWTFRWXV6R3U2VEx4QT09) -->
+<!-- - Fridays 12:30pm - 1:30pm at [cornell.zoom.us/j/5679920082](https://cornell.zoom.us/j/5679920082?pwd=OWdhcjZ4OWFlWTFRWXV6R3U2VEx4QT09) -->
 
 See below for tips on how to make the most of office hours and email.
 
@@ -179,11 +181,12 @@ Office hours are set times dedicated to you.
  <!-- (most professors call these "office hours"; I don't^[There's fairly widespread misunderstanding about what office hours actually are! [Many students often think that they are the times I *shouldn't* be disturbed](https://www.chronicle.com/article/Can-This-Man-Change-How-Elite/245714/), which is the exact opposite of what they're for!]) -->
 This means that I or a TA will be in an office and/or on zoom neeting waiting for you to talk to us about whatever questions you have. This is the best and easiest way to find us and the best chance for discussing class material and concerns.
 
-I highly encourage you to utilize Professor and TA office hours, especially if you have trouble with basic `R` programming.
+I highly encourage you to utilize Professor and TA office hours, especially if you have trouble with basic `R` programming. [Times and locations are listed at the top of the syllabus](#zoom-links).
 
 #### Email
 
-You can also reach us by email. The best approach is to email both of us at the same time (and reply-all in follow-up emails). You can email us both in one click [here](mailto:gerarden@cornell.edu,hz423@cornell.edu).
+You can also reach us by email. The best approach for generic, time-sensitive questions is to email all of us at the same time (and reply-all in follow-up emails). You can do that with one click [here](mailto:gerarden@cornell.edu,hz423@cornell.edu,sm2397@cornell.edu).
+
 
 Email is a blessing and a curse. Here are some tips to help us get the most out of our email exchanges:
 

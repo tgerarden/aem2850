@@ -1,5 +1,5 @@
 ---
-title: "Truth, beauty, and data"
+title: "Welcome to AEM 2850!"
 author: "Todd Gerarden"
 # acknowledgements: Andrew Heiss
 output:

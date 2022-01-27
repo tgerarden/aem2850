@@ -8,7 +8,6 @@ type: docs
 weight: 1
 output:
   blogdown::html_page:
-    keep_md: true # do this to save results in .md file
     toc: true
 ---
 
@@ -42,7 +41,7 @@ The TA will grade these memos using a check system:
 
 Notice that is essentially a pass/fail or completion-based system. We're not grading your writing ability; we're not counting the exact number of words you're writing; and we're not looking for encyclopedic citations of every single reading to prove that you did indeed read everything. We are simply looking for thoughtful engagement. Do good work and you'll get a ✓.
 
-You will write these using `R Markdown`, `knit` the completed reflection to a PDF document, and submit the resulting PDF via canvas (unless instructed otherwise).
+You will write these using `R Markdown`, `knit` the completed reflection to a html document, and submit the resulting html file via canvas (unless instructed otherwise).
 
 
 ### Labs
@@ -57,7 +56,7 @@ To practice, you will complete a brief set of exercises each week. These exercis
 
 As with the Reflections, this is essentially a pass/fail system. We're not grading your coding ability; we're not checking each line of code to make sure it produces some exact final figure; and we're not looking for perfect. Also note that a ✓ does not require 100% success. You will sometimes get stuck with weird errors that you can't solve, or the demands of pandemic living might occasionally become overwhelming. We are looking for good faith effort. Try hard, do good work, and you'll get a ✓.
 
-You may work together on the labs, but you must turn in your own answers. The default method will be to write these using `R Markdown`, `knit` the completed lab to a PDF document, and submit the resulting PDF via canvas.
+You may work together on the labs, but you must turn in your own answers. The default method will be to write these using `R Markdown`, `knit` the completed lab to a PDF document, and submit the resulting PDF file via canvas.
 
 
 ### Mini projects

@@ -14,9 +14,9 @@ The class is structured with three distinct bits. On Tuesday I will provide an o
 
 - [**Content**](/content/) (<i class="fas fa-book-reader"></i>): This page contains readings, guiding questions, and lecture slides for each topic.
 
-- [**Examples**](/example/) (<i class="fas fa-laptop-code"></i>): This page contains the material that we will discuss in Thursday classes.
+- [**Examples**](/examples/) (<i class="fas fa-laptop-code"></i>): This page contains the material that we will discuss in Thursday classes.
 
-- [**Assignments**](/assignments/) (<i class="fas fa-pencil-ruler"></i>): This page contains the instructions for the weekly labs and for the two mini projects + final project.
+- [**Assignments**](/assignments/) (<i class="fas fa-pencil-ruler"></i>): This page contains the instructions for completing assignments.
 
 ### Office hours reminder:
 
@@ -24,9 +24,10 @@ I highly encourage you to utilize Professor and TA office hours, especially if y
 
 - Mondays  1:30pm - 3:30pm: TA Hui Zhou at [cornell.zoom.us/j/4786955504](https://cornell.zoom.us/j/4786955504?pwd=VitTc1hVSjJSVXovWGJlRG9VQm5TZz09)
 - Tuesdays 11:00am - 12:00pm: Prof. Gerarden using [the class zoom link](https://cornell.zoom.us/j/98464434953?pwd=VDJuR0RhckttSTBJVVBqUXhDT3FxUT09)
+- Fridays  12:30pm - 1:30pm: TA Sophie McComb at [location TBD]()
 - Other times by appointment: Prof. Gerarden, at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
-You can also reach us by email. The best approach is to email both of us at the same time. You can do that with one click [here](mailto:gerarden@cornell.edu,hz423@cornell.edu).
+You can also reach us by email. The best approach for generic, time-sensitive questions is to email all of us at the same time. You can do that with one click [here](mailto:gerarden@cornell.edu,hz423@cornell.edu,sm2397@cornell.edu).
 
 
 
@@ -37,7 +38,7 @@ You should follow this general process each week:
 
 - Do readings listed on the content page before Tuesday
 - Tuesday: come to class
-- Wednedsday: submit reflection on canvas by 11:59pm (starting with Week 2)
+- Wednesday: submit reflection on canvas by 11:59pm (starting with Week 2)
 - Thursday: come to class, where we will work through examples
 - Work on the lab before the next Tuesday's class, attending office hours as needed
 - Monday: submit lab on canvas by 11:59pm
