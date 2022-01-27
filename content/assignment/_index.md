@@ -41,7 +41,7 @@ The TA will grade these memos using a check system:
 
 Notice that is essentially a pass/fail or completion-based system. We're not grading your writing ability; we're not counting the exact number of words you're writing; and we're not looking for encyclopedic citations of every single reading to prove that you did indeed read everything. We are simply looking for thoughtful engagement. Do good work and you'll get a ✓.
 
-You will write these using `R Markdown`, `knit` the completed reflection to a html document, and submit the resulting html file via canvas (unless instructed otherwise).
+You will write these using `R Markdown`, `knit` the completed reflection to a PDF document, and submit the resulting PDF file via canvas.
 
 
 ### Labs

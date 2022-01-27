@@ -1,7 +1,7 @@
 ---
 title: "Intro to R, RStudio, and RMarkdown"
 linktitle: "Intro to R, RStudio, and RMarkdown"
-date: "2022-01-26 23:41:29"
+date: "2022-01-27 09:34:54"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -21,6 +21,24 @@ editor_options:
 
 Examples contain material we will discuss and use to learn R in class. These notes are *not* comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.
 
+
+## Plan for today
+- Did anyone have trouble making an RStudio Cloud account?
+  - [Here is the link to join the course workspace if you haven't already](https://rstudio.cloud/spaces/210747/join?access_code=S%2B2RP6rPpen%2BtHGCQ4wg3A%2F7yeuf9%2F%2Ft74uqnZYS)
+  - **IMPORTANT NOTE:** I and our TAs will be able to view your work. This is a feature but could also be a bug -- please don't write or store anything in your course projects that you don't want us to see. :wink:
+- R, RStudio, RStudio Cloud basics
+  - overview on this site, then move to rstudio.cloud
+  - together: `rcoding-intro.R`
+  - breakout groups: `rcoding-practice.R`
+- R Markdown basics
+  - overview on this site, then move to rstudio.cloud
+  - together: `rmarkdown-formatting-example.Rmd`
+  - breakout groups: `rmarkdown-practice.Rmd`
+- Questions? Concerns?
+- Feedback on class format welcome!
+  - slides vs website vs walking through code, etc.
+- [Instructions for Lab 1 are posted here](https://aem2850.toddgerarden.com/assignment/01-lab/)
+  - Due Monday at 11:59pm via canvas
 
 ## RStudio Cloud link
 
@@ -99,6 +117,10 @@ To _execute_ your new script, you can click on the _Run_ button on the upper rig
 ```
 
 To run one line at a time instead of the entire script, you can use Ctrl+↩ on Windows and ⌘+↩ on Mac.
+
+### Let's explore RStudio Cloud
+
+[Click here to access this week's Example RStudio Cloud Project](https://rstudio.cloud/spaces/210747/project/3486782)
 
 <!-- :::fyi -->
 <!-- **SETUP TIP** -->
