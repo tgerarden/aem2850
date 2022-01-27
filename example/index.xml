@@ -1,5 +1,39 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 26 Jan 2022 23:41:29 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Intro to R, RStudio, and RMarkdown</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Wed, 26 Jan 2022 23:41:29 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 27 Jan 2022 09:34:54 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Intro to R, RStudio, and RMarkdown</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Thu, 27 Jan 2022 09:34:54 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
 &lt;p>Examples contain material we will discuss and use to learn R in class. These notes are &lt;em>not&lt;/em> comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.&lt;/p>
+&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
+&lt;li>Did anyone have trouble making an RStudio Cloud account?
+&lt;ul>
+&lt;li>&lt;a href="https://rstudio.cloud/spaces/210747/join?access_code=S%2B2RP6rPpen%2BtHGCQ4wg3A%2F7yeuf9%2F%2Ft74uqnZYS" target="_blank" rel="noopener">Here is the link to join the course workspace if you haven&amp;rsquo;t already&lt;/a>&lt;/li>
+&lt;li>&lt;strong>IMPORTANT NOTE:&lt;/strong> I and our TAs will be able to view your work. This is a feature but could also be a bug &amp;ndash; please don&amp;rsquo;t write or store anything in your course projects that you don&amp;rsquo;t want us to see. 😉&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>R, RStudio, RStudio Cloud basics
+&lt;ul>
+&lt;li>overview on this site, then move to rstudio.cloud&lt;/li>
+&lt;li>together: &lt;code>rcoding-intro.R&lt;/code>&lt;/li>
+&lt;li>breakout groups: &lt;code>rcoding-practice.R&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>R Markdown basics
+&lt;ul>
+&lt;li>overview on this site, then move to rstudio.cloud&lt;/li>
+&lt;li>together: &lt;code>rmarkdown-formatting-example.Rmd&lt;/code>&lt;/li>
+&lt;li>breakout groups: &lt;code>rmarkdown-practice.Rmd&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Questions? Concerns?&lt;/li>
+&lt;li>Feedback on class format welcome!
+&lt;ul>
+&lt;li>slides vs website vs walking through code, etc.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/assignment/01-lab/" target="_blank" rel="noopener">Instructions for Lab 1 are posted here&lt;/a>
+&lt;ul>
+&lt;li>Due Monday at 11:59pm via canvas&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
 &lt;h2 id="rstudio-cloud-link">RStudio Cloud link&lt;/h2>
 &lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3486782" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s Example RStudio Cloud Project&lt;/a>&lt;/p>
 &lt;h2 id="getting-started">Getting started with R and RStudio&lt;/h2>
@@ -48,6 +82,8 @@
 &lt;pre>&lt;code>## [1] &amp;quot;welcome to RStudio&amp;quot;
 &lt;/code>&lt;/pre>
 &lt;p>To run one line at a time instead of the entire script, you can use Ctrl+↩ on Windows and ⌘+↩ on Mac.&lt;/p>
+&lt;h3 id="lets-explore-rstudio-cloud">Let&amp;rsquo;s explore RStudio Cloud&lt;/h3>
+&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3486782" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s Example RStudio Cloud Project&lt;/a>&lt;/p>
 &lt;!-- :::fyi -->
 &lt;!-- **SETUP TIP** -->
 &lt;!-- Change the option _Save workspace to .RData on exit_ to _Never_ and uncheck the _Restore .RData into workspace at start_. By default, when you exit R saves all the objects you have created into a file called .RData. This is done so that when you restart the session in the same folder, it will load these objects. I find that this causes confusion especially when sharing code with colleagues or peers. -->
