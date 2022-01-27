@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Readings, lectures, and videos | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Readings, lectures, and videos</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 25 Jan 2022 09:24:21 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Readings, lectures, and videos</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Welcome to AEM 2850!</title><link>https://aem2850.toddgerarden.com/content/01-content/</link><pubDate>Tue, 25 Jan 2022 09:24:21 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/01-content/</guid><description>&lt;h2 id="readings">Readings&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Welcome to AEM 2850!</title><link>https://aem2850.toddgerarden.com/content/01-content/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/01-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://aem2850.toddgerarden.com/syllabus/">Read the syllabus&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://aem2850.toddgerarden.com/schedule/">Review the schedule&lt;/a>&lt;/li>
@@ -12,7 +12,7 @@
 &lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://www.washingtonpost.com/news/wonk/wp/2018/06/15/study-charts-change-hearts-and-minds-better-than-words-do/?utm_term=.4474599c0d5e" target="_blank" rel="noopener">Study: Charts change hearts and minds better than words do&lt;/a>&lt;/li>
 &lt;li>&lt;i class="fas fa-podcast">&lt;/i> Tim Harford, &lt;a href="https://99percentinvisible.org/episode/florence-nightingale-data-viz-pioneer/" target="_blank" rel="noopener">&amp;ldquo;Florence Nightingale: Data Viz Pioneer,&amp;quot;&lt;/a> &lt;em>99% Invisible&lt;/em>&lt;/li>
 &lt;/ul>
-&lt;h2 id="guiding-questions">Guiding questions&lt;/h2>
+&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
 &lt;p>&lt;em>You don’t need to answer all of these—or even any of them! These are just here to help guide your thinking.&lt;/em>&lt;/p>
 &lt;ul>
 &lt;li>What is this course all about? &lt;a href="https://aem2850.toddgerarden.com/syllabus/#course-overview">I wonder if that&amp;rsquo;s on the syllabus&amp;hellip;&lt;/a>&lt;/li>
@@ -22,7 +22,7 @@
 &lt;li>Why do we visualize data?&lt;/li>
 &lt;li>What makes a great visualization?&lt;/li>
 &lt;/ul>
-&lt;h2 id="slides">Slides&lt;/h2>
+&lt;h3 id="slides">Slides&lt;/h3>
 &lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
 &lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/01-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/01-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
 &lt;!-- :::fyi -->
