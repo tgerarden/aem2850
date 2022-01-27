@@ -1,5 +1,7 @@
 ---
 title: "Lab 1"
+linktitle: "Lab 1"
+date: "`r format(Sys.time())`"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file

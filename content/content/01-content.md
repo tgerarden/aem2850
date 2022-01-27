@@ -1,8 +1,8 @@
 ---
 title: "Welcome to AEM 2850!"
 linktitle: "Welcome to AEM 2850!"
-date: "Jan 25, 2022"
-# date: "2022-01-26 15:22:54"
+# date: "Jan 25, 2022"
+date: "2022-01-26 23:40:12"
 menu:
   content:
     parent: Course content

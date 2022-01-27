@@ -1,5 +1,7 @@
 ---
 title: "Lab 1"
+linktitle: "Lab 1"
+date: "2022-01-26 23:41:10"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file

@@ -1,6 +1,7 @@
 ---
 title: "Intro to R, RStudio, and RMarkdown"
 linktitle: "Intro to R, RStudio, and RMarkdown"
+date: "2022-01-26 23:41:29"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
