@@ -31,9 +31,9 @@ You can do a lot of different things with this memo: discuss something you learn
 <!-- - How do you choose which kind of visualization to use? -->
 <!-- - What is the role of stories in presenting analysis? -->
 
-The course content for each day will also include a set of questions specific to that topic. *You do not have to answer all (or any) of these questions*. They exist to guide your thinking, that's all.
+The course content for each week will also include a set of questions specific to that topic. *You do not have to answer all (or any) of these questions*. They exist to guide your thinking, that's all.
 
-The TA will grade these memos using a check system:
+A TA will grade reflections using a check system:
 
 - ✔+: (*6 points (120%) in gradebook*) Reflection shows phenomenal thought and engagement with the course content. We will not assign these often.
 - ✔: (*5 points (100%) in gradebook*) Reflection is thoughtful, well-written, and shows engagement with the course content. This is the expected level of performance.
@@ -41,7 +41,7 @@ The TA will grade these memos using a check system:
 
 Notice that is essentially a pass/fail or completion-based system. We're not grading your writing ability; we're not counting the exact number of words you're writing; and we're not looking for encyclopedic citations of every single reading to prove that you did indeed read everything. We are simply looking for thoughtful engagement. Do good work and you'll get a ✓.
 
-You will write these using `R Markdown`, `knit` the completed reflection to a PDF document, and submit the resulting PDF file via canvas.
+Please submit your reflections via canvas. You can choose whether to write them using R Markdown or to use another one of the formats listed in the canvas assignments. I recommend that you use R Markdown to gain more practice with R and RStudio. If you use R Markdown, `knit` the completed reflection to a PDF document and submit the resulting PDF file via canvas.
 
 
 ### Labs
@@ -56,7 +56,7 @@ To practice, you will complete a brief set of exercises each week. These exercis
 
 As with the Reflections, this is essentially a pass/fail system. We're not grading your coding ability; we're not checking each line of code to make sure it produces some exact final figure; and we're not looking for perfect. Also note that a ✓ does not require 100% success. You will sometimes get stuck with weird errors that you can't solve, or the demands of pandemic living might occasionally become overwhelming. We are looking for good faith effort. Try hard, do good work, and you'll get a ✓.
 
-You may work together on the labs, but you must turn in your own answers. The default method will be to write these using `R Markdown`, `knit` the completed lab to a PDF document, and submit the resulting PDF file via canvas.
+You may work together on the labs, but you must turn in your own answers. The default method will be to write these using R Markdown, `knit` the completed lab to a PDF document, and submit the resulting PDF file via canvas.
 
 
 ### Mini projects

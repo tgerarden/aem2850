@@ -72,7 +72,7 @@ After taking this course, students will have the tools to complete basic tasks i
 5.	Utilize course concepts and tools for business applications
 
 ### Prerequisites
-- AEM2010, AEM2011, or equivalent (Spreadsheet Modeling)
+- AEM 2010, AEM 2011, or equivalent (Spreadsheet Modeling)
 - AEM 2100 or equivalent (Introductory Statistics)
 
 OR instructor’s approval
