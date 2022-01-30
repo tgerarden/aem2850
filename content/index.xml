@@ -1,4 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 26 Jan 2022 23:40:12 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Welcome to AEM 2850!</title><link>https://aem2850.toddgerarden.com/content/01-content/</link><pubDate>Wed, 26 Jan 2022 23:40:12 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/01-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 30 Jan 2022 15:42:41 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Basic base R</title><link>https://aem2850.toddgerarden.com/content/02-content/</link><pubDate>Sun, 30 Jan 2022 15:42:41 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/02-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/workflow-basics.html" target="_blank" rel="noopener">Read chapter 4: Workflow: basics&lt;/a> of &lt;em>R for Data Science&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/workflow-scripts.html" target="_blank" rel="noopener">Read chapter 6: Workflow: scripts&lt;/a> of &lt;em>R for Data Science&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/r-markdown.html" target="_blank" rel="noopener">Revisit chapter 27: R Markdown&lt;/a> of &lt;em>R for Data Science&lt;/em> as needed&lt;/li>
+&lt;/ul>
+&lt;h4 id="optional-readings">Optional readings&lt;/h4>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/workflow-projects.html" target="_blank" rel="noopener">Read chapter 8: Workflow: projects&lt;/a> of &lt;em>R for Data Science&lt;/em>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://rstudio-education.github.io/hopr/index.html" target="_blank" rel="noopener">&lt;em>Hands-On Programming with R&lt;/em>&lt;/a>, by Garrett Grolemund, is a more detailed introduction to the nuts and bolts of programming in R&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
+&lt;p>&lt;em>You don’t need to answer all of these—or even any of them! These are just here to help guide your thinking.&lt;/em>&lt;/p>
+&lt;ul>
+&lt;li>What are objects?&lt;/li>
+&lt;li>What is assignment?&lt;/li>
+&lt;li>What are some advantages of writing scripts vs working in the console?&lt;/li>
+&lt;li>What are some differences between &lt;code>.R&lt;/code> scripts and &lt;code>.Rmd&lt;/code> files?&lt;/li>
+&lt;li>What are the three types of content in an R Markdown file?&lt;/li>
+&lt;/ul>
+&lt;!-- ### Slides -->
+&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+&lt;!--
+&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/02-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/02-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
+-->
+&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item><item><title>Welcome to AEM 2850!</title><link>https://aem2850.toddgerarden.com/content/01-content/</link><pubDate>Wed, 26 Jan 2022 23:40:12 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/01-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://aem2850.toddgerarden.com/syllabus/">Read the syllabus&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://aem2850.toddgerarden.com/schedule/">Review the schedule&lt;/a>&lt;/li>
