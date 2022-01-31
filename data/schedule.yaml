@@ -19,7 +19,7 @@ lessons:
     # date_end: "June 11"
     content: "02-content"
     # example: "02-example"
-    # assignment: "02-lab"
+    assignment: "02-lab"
     bg: 2
 
   # - title: 'Assignments for sessions 1 and 2 due'
