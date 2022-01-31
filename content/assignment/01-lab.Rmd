@@ -1,6 +1,6 @@
 ---
-title: "Lab 1"
-linktitle: "Lab 1"
+title: "Week 1"
+linktitle: "Week 1"
 date: "`r format(Sys.time())`"
 output:
   blogdown::html_page:
@@ -17,6 +17,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-## RStudio Cloud link
+## Lab 1
 
 [Click here to access the RStudio Cloud Project for Lab 1 and follow the instructions in the file `lab-01.Rmd`.](https://rstudio.cloud/spaces/210747/project/3486884)
