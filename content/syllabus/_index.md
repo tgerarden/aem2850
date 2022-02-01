@@ -47,11 +47,10 @@ We will start the semester online using [the class zoom link from canvas](https:
 
 - Mondays 1:30pm - 3:30pm at [cornell.zoom.us/j/4786955504](https://cornell.zoom.us/j/4786955504?pwd=VitTc1hVSjJSVXovWGJlRG9VQm5TZz09)
 
-#### Undergraduate TA: Sophie McComb ([sm2397@cornell.edu](sm2397@cornell.edu))
+#### Undergraduate TA: Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu))
 
-- TBD
-<!-- - Mondays X - Y at [cornell.zoom.us/j/5679920082](https://cornell.zoom.us/j/5679920082?pwd=OWdhcjZ4OWFlWTFRWXV6R3U2VEx4QT09) -->
-<!-- - Fridays 12:30pm - 1:30pm at [cornell.zoom.us/j/5679920082](https://cornell.zoom.us/j/5679920082?pwd=OWdhcjZ4OWFlWTFRWXV6R3U2VEx4QT09) -->
+- Mondays 12:20pm - 1:20pm at [cornell.zoom.us/j/5679920082](https://cornell.zoom.us/j/5679920082?pwd=OWdhcjZ4OWFlWTFRWXV6R3U2VEx4QT09)
+- Fridays 10:00am - 11:00am at [cornell.zoom.us/j/5679920082](https://cornell.zoom.us/j/5679920082?pwd=OWdhcjZ4OWFlWTFRWXV6R3U2VEx4QT09)
 
 See below for tips on how to make the most of office hours and email.
 
@@ -314,7 +313,7 @@ We understand that our members represent a rich variety of backgrounds and persp
 
 ## Acknowledgements
 
-This site and many of the course materials are based on the course [Data Visualization with R](https://datavizs21.classes.andrewheiss.com) by [Andrew Heiss](https://andrewheiss.com). Other materials and inspiration came from [Claus Wilke](https://clauswilke.com), [Ivan Rudik](https://ivanrudik.com), [Justin Kirkpatrick](http://www.justinkirkpatrick.com), [Magdalena Bennett](https://www.magdalenabennett.com), [Ariel Ortiz-Bobea](http://ortiz-bobea.dyson.cornell.edu), and [Reza Moghimi](https://dyson.cornell.edu/faculty-research/faculty/am2393/).
+This site and many of the course materials build on the course [Data Visualization with R](https://datavizs21.classes.andrewheiss.com) by [Andrew Heiss](https://andrewheiss.com). Other materials and inspiration came from [Claus Wilke](https://clauswilke.com), [Grant McDermott](https://grantmcdermott.com), [Ivan Rudik](https://ivanrudik.com), [Justin Kirkpatrick](http://www.justinkirkpatrick.com), [Magdalena Bennett](https://www.magdalenabennett.com), [Ariel Ortiz-Bobea](http://ortiz-bobea.dyson.cornell.edu), and [Reza Moghimi](https://dyson.cornell.edu/faculty-research/faculty/am2393/).
 
 
 
