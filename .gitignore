@@ -1,18 +1,24 @@
 # IDEs
 .idea/
 
-# Hugo
+# hugo
 /resources/
 public/
 jsconfig.json
 node_modules/
 
-# Personal
+# personal
 .DS_Store
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
 
-# temp
+# survey data
+survey-responses/
+
+# teaching notes
+notes-for-next-year*
+
+# temp files
 draft-*

@@ -314,10 +314,7 @@ We understand that our members represent a rich variety of backgrounds and persp
 
 ## Acknowledgements
 
-This site and many of the course materials are based on the course [Data Visualization with R](https://datavizs21.classes.andrewheiss.com) by [Andrew Heiss](https://andrewheiss.com). Other materials and inspiration came from [Claus Wilke](https://clauswilke.com), [Ivan Rudik](https://ivanrudik.com), [Justin Kirkpatrick](http://www.justinkirkpatrick.com), [Magdalena Bennett](https://www.magdalenabennett.com), and [Reza Moghimi](https://dyson.cornell.edu/faculty-research/faculty/am2393/).
-
-<!-- AOB? -->
-
+This site and many of the course materials are based on the course [Data Visualization with R](https://datavizs21.classes.andrewheiss.com) by [Andrew Heiss](https://andrewheiss.com). Other materials and inspiration came from [Claus Wilke](https://clauswilke.com), [Ivan Rudik](https://ivanrudik.com), [Justin Kirkpatrick](http://www.justinkirkpatrick.com), [Magdalena Bennett](https://www.magdalenabennett.com), [Ariel Ortiz-Bobea](http://ortiz-bobea.dyson.cornell.edu), and [Reza Moghimi](https://dyson.cornell.edu/faculty-research/faculty/am2393/).
 
 
 
