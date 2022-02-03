@@ -1,7 +1,7 @@
 ---
 title: "Intro to R, RStudio, and RMarkdown"
 linktitle: "Intro to R, RStudio, and RMarkdown"
-date: "2022-01-27 09:34:54"
+date: "2022-02-02 22:04:31"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -167,36 +167,6 @@ When you are done composing your document, you can **knit** it by clicking Knit 
 
 Markdown is a set of formatting conventions for plain text files that is widely used (beyond R). We will use an example file on RStudio Cloud to learn about some basic text formatting using Markdown. You can also read more about this in [R for Data Science](https://r4ds.had.co.nz/r-markdown.html#text-formatting-with-markdown).
 
-## Installing R packages
-
-The functionality provided by a fresh install of R is only a small fraction of what is possible. In fact, we refer to what you get after your first install as _base R_. To access additional functionality, we can use add-ons made by developers. There are currently hundreds of these available from CRAN and many others shared via other repositories such as GitHub. However, because not everybody needs all available functionality, R instead makes different components available via _packages_. R makes it very easy to install packages from within R. For example, to install the __tidyverse__ package, which we will use throughout the semester, you would just type:
-
-
-```r
-install.packages("tidyverse")
-```
-
-In RStudio, you can also do this by navigating to the _Tools_ tab and selecting install packages.
-
-After installation is complete, we can then load the package into our current R session using the `library` function:
-
-
-```r
-library(tidyverse)
-```
-
-You only need to install a package once. After that, you can load it using `library` whenever you need it. The package remains loaded until we quit the R session (or `detach` it).
-
-Note that installing __tidyverse__ actually installs several packages. This commonly occurs when a package has *dependencies*, or uses functions from other packages. When you load a package using `library`, you also load its dependencies.
-
-You can see all the packages you have installed using the _Packages_ tab in RStudio or via the following function:
-
-
-```r
-installed.packages()
-```
-
-As we move through this course, we will learn more about packages and keep adding them to our toolbox.
 
 
 <!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** -->

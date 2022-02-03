@@ -43,6 +43,8 @@ We will start the semester online using [the class zoom link from canvas](https:
 
 ### TA office hours
 
+All TA office hours will be held in Warren 372 once classes are back in person.
+
 #### Graduate TA: Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
 
 - Mondays 1:30pm - 3:30pm at [cornell.zoom.us/j/4786955504](https://cornell.zoom.us/j/4786955504?pwd=VitTc1hVSjJSVXovWGJlRG9VQm5TZz09)

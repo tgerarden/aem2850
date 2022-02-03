@@ -18,7 +18,7 @@ lessons:
     # date_start: "June 7"
     # date_end: "June 11"
     content: "02-content"
-    # example: "02-example"
+    example: "02-example"
     assignment: "02-lab"
     bg: 2
 
