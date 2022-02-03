@@ -1,4 +1,38 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 27 Jan 2022 09:34:54 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Intro to R, RStudio, and RMarkdown</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Thu, 27 Jan 2022 09:34:54 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 02 Feb 2022 22:25:26 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Basic Base R</title><link>https://aem2850.toddgerarden.com/example/02-example/</link><pubDate>Wed, 02 Feb 2022 22:25:26 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/02-example/</guid><description>&lt;h2 id="rstudio-cloud-link">RStudio Cloud link&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3523530" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s Example RStudio Cloud Project&lt;/a>&lt;/p>
+&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
+&lt;li>Questions? 🙋‍♀️&lt;/li>
+&lt;li>As a group: briefly skim through &lt;code>basic-base-r-intro.R&lt;/code>&lt;/li>
+&lt;li>Then spend class working through &lt;code>basic-base-r-practice.R&lt;/code>:
+&lt;ul>
+&lt;li>We will explore data from &lt;a href="https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/" target="_blank" rel="noopener">this FiveThirtyEight article&lt;/a>&lt;/li>
+&lt;li>In breakout rooms: 1. Getting Comfortable with Data Frames&lt;/li>
+&lt;li>As a group: discuss results, answer questions&lt;/li>
+&lt;li>In breakout rooms: 2. Using Functions in Packages&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="https://aem2850.toddgerarden.com/assignment/02-lab/" target="_blank" rel="noopener">Instructions for this week&amp;rsquo;s lab will be posted here&lt;/a>
+&lt;ul>
+&lt;li>Due Monday at 11:59pm via canvas&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="installing-r-packages">Installing R packages&lt;/h2>
+&lt;p>The functionality provided by a fresh install of R is only a small fraction of what is possible. In fact, we refer to what you get after your first install as &lt;em>base R&lt;/em>. To access additional functionality, we can use add-ons made by developers. There are currently hundreds of these available from CRAN and many others shared via other repositories such as GitHub. However, because not everybody needs all available functionality, R instead makes different components available via &lt;em>packages&lt;/em>. R makes it very easy to install packages from within R. For example, to install the &lt;strong>tidyverse&lt;/strong> package, which we will use throughout the semester, you would just type:&lt;/p>
+&lt;pre>&lt;code class="language-r">install.packages(&amp;quot;tidyverse&amp;quot;)
+&lt;/code>&lt;/pre>
+&lt;p>In RStudio, you can also do this by navigating to the &lt;em>Tools&lt;/em> tab and selecting install packages.&lt;/p>
+&lt;p>After installation is complete, we can then load the package into our current R session using the &lt;code>library&lt;/code> function:&lt;/p>
+&lt;pre>&lt;code class="language-r">library(tidyverse)
+&lt;/code>&lt;/pre>
+&lt;p>You only need to install a package once if you are working with a local installation of R. On RStudio Cloud, you may sometimes need to install packages within multiple projects, but I will usually do this for you in advance. After that, you can load it using &lt;code>library&lt;/code> whenever you need it. The package remains loaded until we quit the R session (or &lt;code>detach&lt;/code> it).&lt;/p>
+&lt;p>Note that installing &lt;strong>tidyverse&lt;/strong> actually installs several packages. This commonly occurs when a package has &lt;em>dependencies&lt;/em>, or uses functions from other packages. When you load a package using &lt;code>library&lt;/code>, you also load its dependencies.&lt;/p>
+&lt;p>You can see all the packages you have installed using the &lt;em>Packages&lt;/em> tab in RStudio or via the following function:&lt;/p>
+&lt;pre>&lt;code class="language-r">installed.packages()
+&lt;/code>&lt;/pre>
+&lt;p>As we move through this course, we will learn more about packages and keep adding them to our toolbox.&lt;/p>
+&lt;!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** --></description></item><item><title>Intro to R, RStudio, and RMarkdown</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Wed, 02 Feb 2022 22:04:31 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
 &lt;p>Examples contain material we will discuss and use to learn R in class. These notes are &lt;em>not&lt;/em> comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.&lt;/p>
 &lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
@@ -124,18 +158,4 @@
 &lt;p>When you are done composing your document, you can &lt;strong>knit&lt;/strong> it by clicking Knit or by using the keyboard shorcut ⌘+⇧+K. This will process the file through several steps to produce your output in the format you specify.&lt;/p>
 &lt;h3 id="markdown-basics">Markdown basics&lt;/h3>
 &lt;p>Markdown is a set of formatting conventions for plain text files that is widely used (beyond R). We will use an example file on RStudio Cloud to learn about some basic text formatting using Markdown. You can also read more about this in &lt;a href="https://r4ds.had.co.nz/r-markdown.html#text-formatting-with-markdown" target="_blank" rel="noopener">R for Data Science&lt;/a>.&lt;/p>
-&lt;h2 id="installing-r-packages">Installing R packages&lt;/h2>
-&lt;p>The functionality provided by a fresh install of R is only a small fraction of what is possible. In fact, we refer to what you get after your first install as &lt;em>base R&lt;/em>. To access additional functionality, we can use add-ons made by developers. There are currently hundreds of these available from CRAN and many others shared via other repositories such as GitHub. However, because not everybody needs all available functionality, R instead makes different components available via &lt;em>packages&lt;/em>. R makes it very easy to install packages from within R. For example, to install the &lt;strong>tidyverse&lt;/strong> package, which we will use throughout the semester, you would just type:&lt;/p>
-&lt;pre>&lt;code class="language-r">install.packages(&amp;quot;tidyverse&amp;quot;)
-&lt;/code>&lt;/pre>
-&lt;p>In RStudio, you can also do this by navigating to the &lt;em>Tools&lt;/em> tab and selecting install packages.&lt;/p>
-&lt;p>After installation is complete, we can then load the package into our current R session using the &lt;code>library&lt;/code> function:&lt;/p>
-&lt;pre>&lt;code class="language-r">library(tidyverse)
-&lt;/code>&lt;/pre>
-&lt;p>You only need to install a package once. After that, you can load it using &lt;code>library&lt;/code> whenever you need it. The package remains loaded until we quit the R session (or &lt;code>detach&lt;/code> it).&lt;/p>
-&lt;p>Note that installing &lt;strong>tidyverse&lt;/strong> actually installs several packages. This commonly occurs when a package has &lt;em>dependencies&lt;/em>, or uses functions from other packages. When you load a package using &lt;code>library&lt;/code>, you also load its dependencies.&lt;/p>
-&lt;p>You can see all the packages you have installed using the &lt;em>Packages&lt;/em> tab in RStudio or via the following function:&lt;/p>
-&lt;pre>&lt;code class="language-r">installed.packages()
-&lt;/code>&lt;/pre>
-&lt;p>As we move through this course, we will learn more about packages and keep adding them to our toolbox.&lt;/p>
 &lt;!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** --></description></item></channel></rss>
