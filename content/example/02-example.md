@@ -1,7 +1,7 @@
 ---
 title: "Basic Base R"
 linktitle: "Basic Base R"
-date: "2022-02-02 22:25:26"
+date: "2022-02-03 22:03:36"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -17,9 +17,11 @@ editor_options:
   chunk_output_type: console
 ---
 
-## RStudio Cloud link
+## RStudio Cloud links
 
 [Click here to access this week's Example RStudio Cloud Project](https://rstudio.cloud/spaces/210747/project/3523530)
+
+[**Solutions:** click here to access a project with a completed version](https://rstudio.cloud/spaces/210747/project/3539271)
 
 
 ## Plan for today
@@ -30,8 +32,6 @@ editor_options:
   - In breakout rooms: 1. Getting Comfortable with Data Frames
   - As a group: discuss results, answer questions
   - In breakout rooms: 2. Using Functions in Packages
-- [Instructions for this week's lab will be posted here](https://aem2850.toddgerarden.com/assignment/02-lab/)
-  - Due Monday at 11:59pm via canvas
 
 
 ## Installing R packages

@@ -30,4 +30,4 @@ You can access this week's readings and guiding questions using the [class sched
 
 ## Lab 2
 
-TBD
+[Click here to access the RStudio Cloud Project for this week's lab and follow the instructions in the file `lab-02.Rmd`.](https://rstudio.cloud/spaces/210747/project/3532414)

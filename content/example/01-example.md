@@ -1,7 +1,7 @@
 ---
 title: "Intro to R, RStudio, and RMarkdown"
 linktitle: "Intro to R, RStudio, and RMarkdown"
-date: "2022-02-02 22:04:31"
+date: "2022-02-03 21:47:06"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -37,12 +37,12 @@ Examples contain material we will discuss and use to learn R in class. These not
 - Questions? Concerns?
 - Feedback on class format welcome!
   - slides vs website vs walking through code, etc.
-- [Instructions for Lab 1 are posted here](https://aem2850.toddgerarden.com/assignment/01-lab/)
-  - Due Monday at 11:59pm via canvas
+
 
 ## RStudio Cloud link
 
 [Click here to access this week's Example RStudio Cloud Project](https://rstudio.cloud/spaces/210747/project/3486782)
+
 
 ## Getting started with R and RStudio {#getting-started}
 

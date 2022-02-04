@@ -1,7 +1,7 @@
 ---
 title: "Basic base R"
 linktitle: "Basic base R"
-date: "2022-02-01 09:33:46"
+date: "2022-02-03 11:23:30"
 menu:
   content:
     parent: Course content
@@ -24,6 +24,8 @@ output:
 - <i class="fas fa-book"></i> [Revisit chapter 27: R Markdown](https://r4ds.had.co.nz/r-markdown.html) of *R for Data Science* as needed
 
 #### Optional readings
+
+- <i class="fas fa-external-link-square-alt"></i> [The Economic Guide To Picking A College Major](https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/)
 
 - <i class="fas fa-book"></i> [Read chapter 8: Workflow: projects](https://r4ds.had.co.nz/workflow-projects.html) of *R for Data Science*
 

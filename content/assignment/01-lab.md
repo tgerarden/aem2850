@@ -1,7 +1,7 @@
 ---
 title: "Week 1"
 linktitle: "Week 1"
-date: "2022-01-31 09:02:30"
+date: "2022-02-03 21:48:15"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -19,4 +19,4 @@ editor_options:
 
 ## Lab 1
 
-[Click here to access the RStudio Cloud Project for Lab 1 and follow the instructions in the file `lab-01.Rmd`.](https://rstudio.cloud/spaces/210747/project/3486884)
+[Click here to access the RStudio Cloud Project for this week's lab and follow the instructions in the file `lab-01.Rmd`.](https://rstudio.cloud/spaces/210747/project/3486884)
