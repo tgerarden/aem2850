@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 02 Feb 2022 22:25:26 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Basic Base R</title><link>https://aem2850.toddgerarden.com/example/02-example/</link><pubDate>Wed, 02 Feb 2022 22:25:26 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/02-example/</guid><description>&lt;h2 id="rstudio-cloud-link">RStudio Cloud link&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 03 Feb 2022 22:03:36 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Basic Base R</title><link>https://aem2850.toddgerarden.com/example/02-example/</link><pubDate>Thu, 03 Feb 2022 22:03:36 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/02-example/</guid><description>&lt;h2 id="rstudio-cloud-links">RStudio Cloud links&lt;/h2>
 &lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3523530" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s Example RStudio Cloud Project&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3539271" target="_blank" rel="noopener">&lt;strong>Solutions:&lt;/strong> click here to access a project with a completed version&lt;/a>&lt;/p>
 &lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
 &lt;li>Questions? 🙋‍♀️&lt;/li>
@@ -10,11 +11,6 @@
 &lt;li>In breakout rooms: 1. Getting Comfortable with Data Frames&lt;/li>
 &lt;li>As a group: discuss results, answer questions&lt;/li>
 &lt;li>In breakout rooms: 2. Using Functions in Packages&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;a href="https://aem2850.toddgerarden.com/assignment/02-lab/" target="_blank" rel="noopener">Instructions for this week&amp;rsquo;s lab will be posted here&lt;/a>
-&lt;ul>
-&lt;li>Due Monday at 11:59pm via canvas&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
@@ -32,7 +28,14 @@
 &lt;pre>&lt;code class="language-r">installed.packages()
 &lt;/code>&lt;/pre>
 &lt;p>As we move through this course, we will learn more about packages and keep adding them to our toolbox.&lt;/p>
-&lt;!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** --></description></item><item><title>Intro to R, RStudio, and RMarkdown</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Wed, 02 Feb 2022 22:04:31 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
+&lt;!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** --></description></item><item><title>Week 2</title><link>https://aem2850.toddgerarden.com/assignment/02-lab/</link><pubDate>Thu, 03 Feb 2022 21:48:18 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/02-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
+&lt;p>Please submit your reflection via canvas by Wednesday at 11:59pm.&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/assignment/#reflections" target="_blank" rel="noopener">Here are the guidelines for reflections.&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3511792" target="_blank" rel="noopener">Here is a project on RStudio Cloud that includes a template for reflections.&lt;/a>&lt;/p>
+&lt;p>You can access this week&amp;rsquo;s readings and guiding questions using the &lt;a href="https://aem2850.toddgerarden.com/schedule" target="_blank" rel="noopener">class schedule&lt;/a> under the &amp;ldquo;Content&amp;rdquo; tag.&lt;/p>
+&lt;h2 id="lab-2">Lab 2&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3532414" target="_blank" rel="noopener">Click here to access the RStudio Cloud Project for this week&amp;rsquo;s lab and follow the instructions in the file &lt;code>lab-02.Rmd&lt;/code>.&lt;/a>&lt;/p></description></item><item><title>Week 1</title><link>https://aem2850.toddgerarden.com/assignment/01-lab/</link><pubDate>Thu, 03 Feb 2022 21:48:15 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/01-lab/</guid><description>&lt;h2 id="lab-1">Lab 1&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3486884" target="_blank" rel="noopener">Click here to access the RStudio Cloud Project for this week&amp;rsquo;s lab and follow the instructions in the file &lt;code>lab-01.Rmd&lt;/code>.&lt;/a>&lt;/p></description></item><item><title>Intro to R, RStudio, and RMarkdown</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Thu, 03 Feb 2022 21:47:06 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
 &lt;p>Examples contain material we will discuss and use to learn R in class. These notes are &lt;em>not&lt;/em> comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.&lt;/p>
 &lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
@@ -60,11 +63,6 @@
 &lt;li>Feedback on class format welcome!
 &lt;ul>
 &lt;li>slides vs website vs walking through code, etc.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;a href="https://aem2850.toddgerarden.com/assignment/01-lab/" target="_blank" rel="noopener">Instructions for Lab 1 are posted here&lt;/a>
-&lt;ul>
-&lt;li>Due Monday at 11:59pm via canvas&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
@@ -158,14 +156,7 @@
 &lt;p>When you are done composing your document, you can &lt;strong>knit&lt;/strong> it by clicking Knit or by using the keyboard shorcut ⌘+⇧+K. This will process the file through several steps to produce your output in the format you specify.&lt;/p>
 &lt;h3 id="markdown-basics">Markdown basics&lt;/h3>
 &lt;p>Markdown is a set of formatting conventions for plain text files that is widely used (beyond R). We will use an example file on RStudio Cloud to learn about some basic text formatting using Markdown. You can also read more about this in &lt;a href="https://r4ds.had.co.nz/r-markdown.html#text-formatting-with-markdown" target="_blank" rel="noopener">R for Data Science&lt;/a>.&lt;/p>
-&lt;!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** --></description></item><item><title>Week 2</title><link>https://aem2850.toddgerarden.com/assignment/02-lab/</link><pubDate>Mon, 31 Jan 2022 09:05:54 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/02-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
-&lt;p>Please submit your reflection via canvas by Wednesday at 11:59pm.&lt;/p>
-&lt;p>&lt;a href="https://aem2850.toddgerarden.com/assignment/#reflections" target="_blank" rel="noopener">Here are the guidelines for reflections.&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3511792" target="_blank" rel="noopener">Here is a project on RStudio Cloud that includes a template for reflections.&lt;/a>&lt;/p>
-&lt;p>You can access this week&amp;rsquo;s readings and guiding questions using the &lt;a href="https://aem2850.toddgerarden.com/schedule" target="_blank" rel="noopener">class schedule&lt;/a> under the &amp;ldquo;Content&amp;rdquo; tag.&lt;/p>
-&lt;h2 id="lab-2">Lab 2&lt;/h2>
-&lt;p>TBD&lt;/p></description></item><item><title>Week 1</title><link>https://aem2850.toddgerarden.com/assignment/01-lab/</link><pubDate>Mon, 31 Jan 2022 09:02:30 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/01-lab/</guid><description>&lt;h2 id="lab-1">Lab 1&lt;/h2>
-&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3486884" target="_blank" rel="noopener">Click here to access the RStudio Cloud Project for Lab 1 and follow the instructions in the file &lt;code>lab-01.Rmd&lt;/code>.&lt;/a>&lt;/p></description></item><item><title>Installing R, RStudio, tidyverse, and tinytex</title><link>https://aem2850.toddgerarden.com/resource/install/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/resource/install/</guid><description>&lt;p>You will do all of your work in this class with the open source (and free!) programming language &lt;a href="https://cran.r-project.org/" target="_blank" rel="noopener">R&lt;/a>. You will use &lt;a href="https://www.rstudio.com/" target="_blank" rel="noopener">RStudio&lt;/a> as the main program to access R. Think of R as an engine and RStudio as a car dashboard—R handles all the calculations and the actual statistics, while RStudio provides a nice interface for running R code.&lt;/p>
+&lt;!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** --></description></item><item><title>Installing R, RStudio, tidyverse, and tinytex</title><link>https://aem2850.toddgerarden.com/resource/install/</link><pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/resource/install/</guid><description>&lt;p>You will do all of your work in this class with the open source (and free!) programming language &lt;a href="https://cran.r-project.org/" target="_blank" rel="noopener">R&lt;/a>. You will use &lt;a href="https://www.rstudio.com/" target="_blank" rel="noopener">RStudio&lt;/a> as the main program to access R. Think of R as an engine and RStudio as a car dashboard—R handles all the calculations and the actual statistics, while RStudio provides a nice interface for running R code.&lt;/p>
 &lt;h2 id="rstudiocloud">RStudio.cloud&lt;/h2>
 &lt;p>R is free, but it can sometimes be a pain to install and configure. To make life easier, you can (and should!) use the free &lt;a href="http://rstudio.cloud/" target="_blank" rel="noopener">RStudio.cloud&lt;/a> service &lt;em>initially&lt;/em>, which lets you run a full instance of RStudio in your web browser. This means you won&amp;rsquo;t have to install anything on your computer to get started with R! We will have a shared class workspace in RStudio.cloud that will let you quickly copy templates for labs and problem sets.&lt;/p>
 &lt;p>Go to &lt;a href="https://rstudio.cloud/" target="_blank" rel="noopener">https://rstudio.cloud/&lt;/a> and create an account. You&amp;rsquo;ll receive a link to join the shared class workspace separately. If you don&amp;rsquo;t get this link, let me know and I will invite you.&lt;/p>
@@ -655,7 +646,7 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;ul>
 &lt;li>&lt;a href="https://aem2850.toddgerarden.com/bib/references.bib">&lt;i class="fas fa-book">&lt;/i> &lt;code>references.bib&lt;/code>&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>You can open the file in &lt;a href="http://bibdesk.sourceforge.net/" target="_blank" rel="noopener">BibDesk on macOS&lt;/a>, &lt;a href="http://www.jabref.org/" target="_blank" rel="noopener">JabRef on Windows&lt;/a>, or &lt;a href="https://www.zotero.org/" target="_blank" rel="noopener">Zotero&lt;/a> or &lt;a href="https://www.mendeley.com/" target="_blank" rel="noopener">Mendeley&lt;/a> online.&lt;/p></description></item><item><title>Basic base R</title><link>https://aem2850.toddgerarden.com/content/02-content/</link><pubDate>Tue, 01 Feb 2022 09:33:46 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/02-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;p>You can open the file in &lt;a href="http://bibdesk.sourceforge.net/" target="_blank" rel="noopener">BibDesk on macOS&lt;/a>, &lt;a href="http://www.jabref.org/" target="_blank" rel="noopener">JabRef on Windows&lt;/a>, or &lt;a href="https://www.zotero.org/" target="_blank" rel="noopener">Zotero&lt;/a> or &lt;a href="https://www.mendeley.com/" target="_blank" rel="noopener">Mendeley&lt;/a> online.&lt;/p></description></item><item><title>Basic base R</title><link>https://aem2850.toddgerarden.com/content/02-content/</link><pubDate>Thu, 03 Feb 2022 11:23:30 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/02-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/workflow-basics.html" target="_blank" rel="noopener">Read chapter 4: Workflow: basics&lt;/a> of &lt;em>R for Data Science&lt;/em>&lt;/li>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/workflow-scripts.html" target="_blank" rel="noopener">Read chapter 6: Workflow: scripts&lt;/a> of &lt;em>R for Data Science&lt;/em>&lt;/li>
@@ -663,6 +654,9 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;/ul>
 &lt;h4 id="optional-readings">Optional readings&lt;/h4>
 &lt;ul>
+&lt;li>
+&lt;p>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/" target="_blank" rel="noopener">The Economic Guide To Picking A College Major&lt;/a>&lt;/p>
+&lt;/li>
 &lt;li>
 &lt;p>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/workflow-projects.html" target="_blank" rel="noopener">Read chapter 8: Workflow: projects&lt;/a> of &lt;em>R for Data Science&lt;/em>&lt;/p>
 &lt;/li>
