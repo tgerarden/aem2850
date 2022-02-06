@@ -1,4 +1,27 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 03 Feb 2022 11:23:30 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Basic base R</title><link>https://aem2850.toddgerarden.com/content/02-content/</link><pubDate>Thu, 03 Feb 2022 11:23:30 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/02-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 06 Feb 2022 14:21:07 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Welcome to the tidyverse</title><link>https://aem2850.toddgerarden.com/content/03-content/</link><pubDate>Sun, 06 Feb 2022 14:21:07 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/03-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/transform.html" target="_blank" rel="noopener">Read chapter 5: Data transformation&lt;/a> of &lt;em>R for Data Science&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;h4 id="optional-readings">Optional readings&lt;/h4>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/tibbles.html" target="_blank" rel="noopener">Chapter 10: Tibbles&lt;/a> of &lt;em>R for Data Science&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/pipes.html" target="_blank" rel="noopener">Chapter 18: Pipes&lt;/a> of &lt;em>R for Data Science&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/" target="_blank" rel="noopener">The Economic Guide To Picking A College Major&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
+&lt;ul>
+&lt;li>What do the key verbs of &lt;code>dplyr&lt;/code> do?&lt;/li>
+&lt;li>What class of objects do &lt;code>dplyr&lt;/code> verbs operate on?&lt;/li>
+&lt;li>How can you use &lt;code>dplyr&lt;/code> to summarize data by group?&lt;/li>
+&lt;li>What are tibbles?&lt;/li>
+&lt;li>What are pipes and what are they used for?&lt;/li>
+&lt;/ul>
+&lt;!-- ### Slides -->
+&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+&lt;!--
+&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/03-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/03-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
+-->
+&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item><item><title>Basic base R</title><link>https://aem2850.toddgerarden.com/content/02-content/</link><pubDate>Thu, 03 Feb 2022 11:23:30 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/02-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/workflow-basics.html" target="_blank" rel="noopener">Read chapter 4: Workflow: basics&lt;/a> of &lt;em>R for Data Science&lt;/em>&lt;/li>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/workflow-scripts.html" target="_blank" rel="noopener">Read chapter 6: Workflow: scripts&lt;/a> of &lt;em>R for Data Science&lt;/em>&lt;/li>
