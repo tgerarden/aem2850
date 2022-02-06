@@ -22,16 +22,12 @@ lessons:
     assignment: "02-lab"
     bg: 2
 
-  # - title: 'Assignments for sessions 1 and 2 due'
-  #   date: "June 14"
-  #   bg: 4
-
   - title: '<span class="content-title">Welcome to the tidyverse</span>'
     session: "Session 3"
     date: "Week 3"
     # date_start: "June 14"
     # date_end: "June 18"
-    # content: "03-content"
+    content: "03-content"
     # example: "03-example"
     # assignment: "03-lab"
     bg: 1
