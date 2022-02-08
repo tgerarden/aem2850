@@ -1,7 +1,7 @@
 ---
 title: "Basic Base R"
 linktitle: "Basic Base R"
-date: "2022-02-03 22:03:36"
+date: "2022-02-07 20:04:17"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file

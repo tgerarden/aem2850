@@ -22,6 +22,11 @@ editor_options:
 Examples contain material we will discuss and use to learn R in class. These notes are *not* comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.
 
 
+## RStudio Cloud link
+
+[Click here to access this week's Example RStudio Cloud Project](https://rstudio.cloud/spaces/210747/project/3486782)
+
+
 ## Plan for today
 - Did anyone have trouble making an RStudio Cloud account?
   - [Here is the link to join the course workspace if you haven't already](https://rstudio.cloud/spaces/210747/join?access_code=S%2B2RP6rPpen%2BtHGCQ4wg3A%2F7yeuf9%2F%2Ft74uqnZYS)
@@ -39,9 +44,12 @@ Examples contain material we will discuss and use to learn R in class. These not
   - slides vs website vs walking through code, etc.
 
 
-## RStudio Cloud link
+## Cheatsheets
 
-[Click here to access this week's Example RStudio Cloud Project](https://rstudio.cloud/spaces/210747/project/3486782)
+[Click here to download the RStudio IDE cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
+
+[Click here to download the rmarkdown cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf)
+
 
 
 ## Getting started with R and RStudio {#getting-started}

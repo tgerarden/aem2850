@@ -5,9 +5,7 @@ output:
   xaringan::moon_reader:
     lib_dir: "libs"
     css: ["xaringan-themer.css", "css/tdg-slides.css"]
-#    css: ["default", "css/ath-slides.css", "css/ath-inferno-fonts.css", "css/animate.css"]
 #    css: ['default', 'metropolis', 'metropolis-fonts']
-#    css: ['default', 'metropolis', 'metropolis-fonts', 'my-css.css']
     seal: false
     nature:
       highlightStyle: github
@@ -24,17 +22,15 @@ editor_options:
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
 library(xaringanthemer)
-style_mono_accent(base_color = "#B31B1B")
+style_mono_accent(base_color = "#B31B1B"
+                  #,text_font_size = "1.4rem"
+                  )
 ```
 
 ```{r setup, include=FALSE}
+library(knitr)
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
                       fig.retina = 3, fig.align = "center")
-```
-
-```{r packages-data, include=FALSE}
-library(tidyverse)
-# library(knitr)
 ```
 
 ```{r packages-where_were_from, include=FALSE}
@@ -74,7 +70,7 @@ Acknowledgements:
 
 # Announcements
 
-If you are new to the class, please review Hui's canvas announcement to help get up to speed
+If you are new to the class, please review canvas announcement
 
 Reminders:
 - New course content will be posted regularly at [aem2850.toddgerarden.com](https://aem2850.toddgerarden.com)
@@ -150,7 +146,7 @@ us_states <- map_data("state")
 countries <- map_data("world") %>% mutate(region = tolower(region))
 
 # EXTRACT DATA FROM PDF SUBMISSIONS ----
-dir <- "data/survey-responses" # dir <- "content/slides/data/survey-responses"
+dir <- "data/draft-survey-responses-jan31" # dir <- "content/slides/data/survey-responses"
 pdfs <- list.files(dir, full.names = TRUE)
 # could do this with lapply but for sake of time and glitches just loop
 where_im_from <- vector(mode = "character", length = length(pdfs))
@@ -486,7 +482,7 @@ Using at least four trailing dashes (`----`) creates a code section, which simpl
 
 --
 
-**Keyboard shortcut:** use `Ctrl/Cmd+Shift+c` in RStudio to (un)comment whole sections of highlighted code.
+**Keyboard shortcut:** use `Ctrl/Cmd+Shift+c` in RStudio to (un)comment whole sections of highlighted code
 
 
 ---
