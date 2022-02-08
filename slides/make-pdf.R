@@ -2,6 +2,10 @@
 
 ## OPTION 1: pagedown::chrome_print ----
 
+pagedown::chrome_print("content/slides/xx-slides.html")
+
+stopifnot(FALSE)
+
 lapply(list.files(pattern = "*slides*.html", recursive = T),
        function(file) {
          pagedown::chrome_print(file)

@@ -1,6 +1,4 @@
-/*
-Three column layout
-*/
+/* Three column layout */
 .pull-left-3 {
   float: left;
   width: 30%;
@@ -20,6 +18,19 @@ Three column layout
 }
 
 .pull-right-3 ~ * {
+  clear: both;
+}
+
+/* 2/3 left; 1/3 right */
+.more-left {
+  float: left;
+  width: 60%;
+}
+.less-right {
+  float: right;
+  width: 35%;
+}
+.more-right ~ * {
   clear: both;
 }
 

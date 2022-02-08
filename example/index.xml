@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 03 Feb 2022 22:03:36 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Basic Base R</title><link>https://aem2850.toddgerarden.com/example/02-example/</link><pubDate>Thu, 03 Feb 2022 22:03:36 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/02-example/</guid><description>&lt;h2 id="rstudio-cloud-links">RStudio Cloud links&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 07 Feb 2022 20:04:17 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Basic Base R</title><link>https://aem2850.toddgerarden.com/example/02-example/</link><pubDate>Mon, 07 Feb 2022 20:04:17 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/02-example/</guid><description>&lt;h2 id="rstudio-cloud-links">RStudio Cloud links&lt;/h2>
 &lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3523530" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s Example RStudio Cloud Project&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3539271" target="_blank" rel="noopener">&lt;strong>Solutions:&lt;/strong> click here to access a project with a completed version&lt;/a>&lt;/p>
 &lt;h2 id="plan-for-today">Plan for today&lt;/h2>
@@ -28,8 +28,10 @@
 &lt;pre>&lt;code class="language-r">installed.packages()
 &lt;/code>&lt;/pre>
 &lt;p>As we move through this course, we will learn more about packages and keep adding them to our toolbox.&lt;/p>
-&lt;!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** --></description></item><item><title>Intro to R, RStudio, and RMarkdown</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Thu, 03 Feb 2022 21:47:06 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
+&lt;!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** --></description></item><item><title>Intro to R, RStudio, and RMarkdown</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Mon, 07 Feb 2022 20:03:46 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
 &lt;p>Examples contain material we will discuss and use to learn R in class. These notes are &lt;em>not&lt;/em> comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.&lt;/p>
+&lt;h2 id="rstudio-cloud-link">RStudio Cloud link&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3486782" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s Example RStudio Cloud Project&lt;/a>&lt;/p>
 &lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
 &lt;li>Did anyone have trouble making an RStudio Cloud account?
@@ -59,8 +61,9 @@
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h2 id="rstudio-cloud-link">RStudio Cloud link&lt;/h2>
-&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3486782" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s Example RStudio Cloud Project&lt;/a>&lt;/p>
+&lt;h2 id="cheatsheets">Cheatsheets&lt;/h2>
+&lt;p>&lt;a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf" target="_blank" rel="noopener">Click here to download the RStudio IDE cheatsheet&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf" target="_blank" rel="noopener">Click here to download the rmarkdown cheatsheet&lt;/a>&lt;/p>
 &lt;h2 id="getting-started">Getting started with R and RStudio&lt;/h2>
 &lt;p>R is not a programming language like &lt;code>C&lt;/code> or &lt;code>Java&lt;/code>. It was not created by software engineers for software development. Instead, it was developed by statisticians as an interactive environment for data analysis. This interactivity makes it easy to explore data quickly, which is an indispensable feature for many tasks in business analytics, statistics, data science, and other fields.&lt;/p>
 &lt;p>If you have prior programming experience, you may be surprised by differences between R and other programming languages.&lt;/p>
