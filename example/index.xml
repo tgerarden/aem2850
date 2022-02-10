@@ -1,4 +1,30 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 07 Feb 2022 20:04:17 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Basic Base R</title><link>https://aem2850.toddgerarden.com/example/02-example/</link><pubDate>Mon, 07 Feb 2022 20:04:17 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/02-example/</guid><description>&lt;h2 id="rstudio-cloud-links">RStudio Cloud links&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 09 Feb 2022 22:16:17 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Welcome to the tidyverse</title><link>https://aem2850.toddgerarden.com/example/03-example/</link><pubDate>Wed, 09 Feb 2022 22:16:17 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/03-example/</guid><description>&lt;h2 id="rstudio-cloud-links">RStudio Cloud links&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3569822" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s Example RStudio Cloud Project&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3569863" target="_blank" rel="noopener">&lt;strong>Solutions:&lt;/strong> click here to access a project with a completed version&lt;/a>&lt;/p>
+&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
+&lt;li>Questions? 🙋‍♀️&lt;/li>
+&lt;li>Wrap up slides from Tuesday (&lt;code>dplyr::summarize&lt;/code>)&lt;/li>
+&lt;li>Work through &lt;code>intro-tidyverse-practice.R&lt;/code>:
+&lt;ul>
+&lt;li>We will revisit data from &lt;a href="https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/" target="_blank" rel="noopener">this FiveThirtyEight article&lt;/a>&lt;/li>
+&lt;li>On our own devices: 1. Getting Comfortable with Data Frames&lt;/li>
+&lt;li>As a group: discuss results, answer questions&lt;/li>
+&lt;li>On our own devices: 2. Using Functions in Packages&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="tidyverse-version">tidyverse version&lt;/h2>
+&lt;p>&lt;strong>Note:&lt;/strong> If you are working locally, make sure you are running at least &lt;strong>dplyr&lt;/strong> 1.0.0:&lt;/p>
+&lt;pre>&lt;code class="language-r"># packageVersion('dplyr')
+# install.packages('dplyr') # install updated version if &amp;lt; 1.0.0
+&lt;/code>&lt;/pre>
+&lt;h2 id="data-transformation-with-dplyr-cheatsheet">Data transformation with &lt;code>dplyr&lt;/code> cheatsheet&lt;/h2>
+&lt;p>&lt;a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf" target="_blank" rel="noopener">Click here to download the &lt;code>dplyr&lt;/code> cheatsheet&lt;/a>&lt;/p>
+&lt;!-- https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf -->
+&lt;!-- week 4: -->
+&lt;!-- https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf -->
+&lt;!-- https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf --></description></item><item><title>Basic Base R</title><link>https://aem2850.toddgerarden.com/example/02-example/</link><pubDate>Mon, 07 Feb 2022 20:04:17 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/02-example/</guid><description>&lt;h2 id="rstudio-cloud-links">RStudio Cloud links&lt;/h2>
 &lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3523530" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s Example RStudio Cloud Project&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3539271" target="_blank" rel="noopener">&lt;strong>Solutions:&lt;/strong> click here to access a project with a completed version&lt;/a>&lt;/p>
 &lt;h2 id="plan-for-today">Plan for today&lt;/h2>
