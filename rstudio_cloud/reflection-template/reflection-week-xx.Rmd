@@ -1,0 +1,23 @@
+---
+#########################################################
+# Steps to use this reflection template:
+#   1. Edit the title to include the correct week in place of XX
+#   2. Add your name to the author field of the yaml header
+#   3. Write your reflection below the yaml header
+#   4. Click on "Knit" directly above to render output (or Ctrl/Cmd-Shift-K)
+#   5. Download the resulting file reflection-week-01.pdf
+#   6. Upload reflection-week-01.pdf to canvas
+# You can make copies of the template to use each week
+#   1. Select the template file in the Files pane (using the tickbox)
+#   2. Within the Files pane, click More --> Copy
+# That way you can use this project for all your reflections this semester
+#########################################################
+title: "Reflection - Week XX"
+author: "Your Name Here"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: pdf_document
+---
+
+Write your reflection here.
+
+You are welcome (but not expected) to use markdown to customize formatting and code chunks to incorporate code and/or data.

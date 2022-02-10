@@ -22,18 +22,18 @@ lessons:
     assignment: "02-lab"
     bg: 2
 
-  - title: '<span class="content-title">Welcome to the tidyverse</span>'
+  - title: '<span class="content-title">Welcome to the tidyverse <br> Data transformation with dplyr</span>'
     session: "Session 3"
     date: "Week 3"
     # date_start: "June 14"
     # date_end: "June 18"
     content: "03-content"
-    # example: "03-example"
-    # assignment: "03-lab"
+    example: "03-example"
+    assignment: "03-lab"
     bg: 1
     bottomborder: True
 
-  - title: '<span class="content-title">Wrangling data</span>'
+  - title: '<span class="content-title">Data import with readr <br> Data tidying with tidyr</span>'
     session: "Session 4"
     date: "Week 4"
     # date_start: "June 14"
@@ -47,7 +47,7 @@ lessons:
   #   date: "June 21"
   #   bg: 4
 
-  - title: '<span class="content-title">Programming</span>'
+  - title: '<span class="content-title">Relational data</span>'
     session: "Session 5"
     date: "Week 5"
     # date_start: "June 21"

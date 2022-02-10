@@ -864,7 +864,7 @@ starwars %>%
 knitr::include_graphics("img/03/group_by_ungroup.png")
 ```
 
-Groups are persistent, `ungroup` removes them
+Groups are persistent (sort of), `ungroup` removes them
 
 ---
 class: inverse, center, middle

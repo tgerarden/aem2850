@@ -1,4 +1,0 @@
-blogdown::html_page:
-  fig_retina: 3
-  new_session: true
-  keep_md: true # do this to save results in .md file
