@@ -940,6 +940,7 @@ starwars %>% distinct(species)
 # Other dplyr goodies: window functions
 
 [Window functions](https://cran.r-project.org/web/packages/dplyr/vignettes/window-functions.html) make it easy to get leads and lags, percentiles, cumulative sums, etc.
+- These are often used in conjunction with grouped mutates
 - See `vignette("window-functions")`
 
 --
