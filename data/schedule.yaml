@@ -33,7 +33,7 @@ lessons:
     bg: 1
     bottomborder: True
 
-  - title: '<span class="content-title">Data import with readr <br> Data tidying with tidyr</span>'
+  - title: '<span class="content-title">Data import and tidying <br> Relational data</span>'
     session: "Session 4"
     date: "Week 4"
     # date_start: "June 14"
@@ -47,7 +47,7 @@ lessons:
   #   date: "June 21"
   #   bg: 4
 
-  - title: '<span class="content-title">Relational data</span>'
+  - title: '<span class="content-title">TBD</span>'
     session: "Session 5"
     date: "Week 5"
     # date_start: "June 21"

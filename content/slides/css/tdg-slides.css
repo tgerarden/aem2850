@@ -21,6 +21,35 @@
   clear: both;
 }
 
+/* Four column layout */
+.pull-left-4 {
+  float: left;
+  width: 24%;
+  padding: 0 0% 0 0;
+}
+
+.pull-midleft-4 {
+  float: left;
+  width: 24%;
+  padding: 0 1%;
+}
+
+.pull-midright-4 {
+  float: left;
+  width: 24%;
+  padding: 0 1%;
+}
+
+.pull-right-4 {
+  float: right;
+  width: 24%;
+  padding: 0 0 0 0%;
+}
+
+.pull-right-3 ~ * {
+  clear: both;
+}
+
 /* 2/3 left; 1/3 right */
 .more-left {
   float: left;

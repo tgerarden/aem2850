@@ -9,7 +9,7 @@ menu:
 type: docs
 # bibliography: "../../static/bib/references.bib"
 # csl: "../../static/bib/chicago-fullnote-bibliography-no-bib.csl"
-slides: "03-slides"
+slides: "04-slides"
 
 output:
   blogdown::html_page:
@@ -22,6 +22,7 @@ output:
 - <i class="fas fa-book"></i> [Skim chapter 11: Data import](https://r4ds.had.co.nz/data-import.html) of *R for Data Science*
   - Focus on sections 11.1, 11.2, and 11.5
 - <i class="fas fa-book"></i> [Read chapter 12: Tidy data](https://r4ds.had.co.nz/tidy-data.html) of *R for Data Science*
+- <i class="fas fa-book"></i> [Read chapter 13: Relational data](https://r4ds.had.co.nz/relational-data.html) of *R for Data Science*
 
 
 
@@ -31,11 +32,12 @@ output:
 
 ### Guiding questions
 
-- What types of files does `readr` read?
-- How do `readr` functions differ from their base R counterparts?
+- What types of files do `readr` functions read?
 - What is tidy data?
 - What three rules make a dataset tidy?
 - What basic steps/functions can be used to tidy a dataset?
+- What is relational data?
+- What is the difference between a mutating join and a filtering join?
 
 
 <!-- ### Slides -->
