@@ -56,6 +56,7 @@ Acknowledgements:
 <!-- [Andrew Heiss](https://datavizm20.classes.andrewheiss.com),  -->
 <!-- [Claus Wilke](https://wilkelab.org/SDS375/),  -->
 [Grant McDermott](https://github.com/uo-ec607/lectures),
+[Jenny Bryan](https://stat545.com/join-cheatsheet.html),
 [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
 
 ]
@@ -396,7 +397,7 @@ knitr::include_graphics("img/04/tidydata_3.jpg")
 ---
 name: pivot_longer
 
-# 1) tidyr::pivot_longer
+# Let's start with an untidy dataset
 
 ```{r pivot_longer1}
 stocks <- data.frame( # could use "tibble" instead of "data.frame" if you prefer
@@ -475,7 +476,7 @@ halftime_openers %>% separate(name, c("first_name", "last_name"))
 
 --
 
-This command is pretty smart. But to avoid ambiguity, you can also specify the separation character with `separate(..., sep=".")`
+This command is clever: it splits at non-alphanumeric values. To avoid ambiguity, you can specify the separation character with `separate(..., sep=".")`
 
 ---
 
@@ -581,9 +582,9 @@ Relations across >2 data tables are determined by the relations between each pai
 # Relational data verbs from dplyr
 
 1. **Mutating joins**: add new variables
-  - `inner_join()`
   - `left_join()`
   - `right_join()`
+  - `inner_join()`
   - `full_join()`
 
 2. **Filtering joins**: filter observations
@@ -612,9 +613,146 @@ You can visualize the operations [here](https://r4ds.had.co.nz/relational-data.h
 
 ---
 
-# Data: flights
+# Joins
 
-Let's use the data that comes with the [**nycflights13**](http://github.com/hadley/nycflights13) package
+Let's learn these join commands using two small data frames
+
+```{r echo = FALSE}
+superheroes <- tibble::tribble(
+       ~name, ~alignment,  ~gender,          ~publisher,
+   "Magneto",      "bad",   "male",            "Marvel",
+     "Storm",     "good", "female",            "Marvel",
+  "Mystique",      "bad", "female",            "Marvel",
+    "Batman",     "good",   "male",                "DC",
+     "Joker",      "bad",   "male",                "DC",
+  "Catwoman",      "bad", "female",                "DC",
+   "Hellboy",     "good",   "male", "Dark Horse Comics"
+  )
+
+publishers <- tibble::tribble(
+  ~publisher, ~yr_founded,
+        "DC",       1934L,
+    "Marvel",       1939L,
+     "Image",       1992L
+  )
+```
+
+.pull-left[
+```{r}
+superheroes
+```
+]
+
+.pull-right[
+```{r}
+publishers
+```
+]
+
+???
+Source: https://stat545.com/join-cheatsheet.html
+
+
+---
+
+# 1) dplyr::left_join(x, y)
+
+```{r ljoin}
+left_join(superheroes, publishers)
+```
+
+`left_join` is a **mutating join**: it adds variables to `x`
+
+`left_join` returns all rows from `x`
+
+---
+
+# 2) dplyr::right_join(x, y)
+
+```{r rjoin}
+right_join(superheroes, publishers)
+```
+
+`right_join` is a **mutating join**: it adds variables to `y`
+
+`right_join` returns all rows from `y`
+
+---
+
+# 3) dplyr::inner_join(x, y)
+
+```{r ijoin}
+inner_join(superheroes, publishers)
+```
+
+How is `inner_join` different from `left_join` and `right_join`?
+
+--
+
+`inner_join` returns all rows in `x` **AND** `y`
+
+---
+
+# 4) dplyr::full_join(x, y)
+
+```{r fjoin, eval = FALSE}
+full_join(superheroes, publishers) # how many rows will this produce?
+```
+
+--
+
+```{r fjoinb, echo = FALSE}
+full_join(superheroes, publishers)
+```
+
+`full_join` returns all rows in `x` **OR** `y`
+
+---
+
+# 5) dplyr::semi_join(x, y)
+
+.pull-left[
+```{r}
+superheroes
+```
+]
+
+.pull-right[
+```{r sjoin}
+semi_join(superheroes, publishers)
+```
+]
+
+`semi_join` is a **filtering join**: it keeps observations in `x` that have a match in `y`
+
+Note that the variables do not change
+
+---
+
+# 6) dplyr::anti_join(x, y)
+
+.pull-left[
+```{r}
+superheroes
+```
+]
+
+.pull-right[
+```{r ajoin}
+anti_join(superheroes, publishers)
+```
+]
+
+`anti_join` is a **filtering join**: it keeps obs. in `x` that **DO NOT** have a match in `y`
+
+Note that the variables do not change
+
+
+---
+
+# More on joins
+
+Now let's use the data that comes with the [**nycflights13**](http://github.com/hadley/nycflights13) package
 
 ```{r flights}
 library(nycflights13)
@@ -623,7 +761,7 @@ flights
 
 ---
 
-# Data: planes
+# More on joins
 
 ```{r planes}
 planes
@@ -631,7 +769,7 @@ planes
 
 ---
 
-# Joins
+# More on joins
 
 Let's perform a left join on the flights and planes data frames
 - I'm going subset columns after the join, but only to keep text on the slide
@@ -645,9 +783,11 @@ left_join(flights, planes) %>%
 
 ---
 
-# Joins
+# More on joins
 
-`dplyr` guessed which columns to join on, using columns with the same name:
+As before, `dplyr` guessed which columns to join on
+
+It uses columns with the same name:
 
 ```
 *## Joining, by = c("year", "tailnum")
@@ -667,7 +807,7 @@ Luckily, there's an easy way to avoid this problem. How?
 
 ---
 
-# Joins
+# More on joins
 
 We just need to be more explicit in the join call by using the `by = ` argument
 
@@ -682,7 +822,7 @@ left_join(flights,
 
 ---
 
-# Joins
+# More on joins
 
 What happens if we don't rename `year` before this join?
 
@@ -697,23 +837,6 @@ left_join(flights,
 --
 
 What is `year.x`? What is `year.y`?
-
-<!-- --- -->
-
-<!-- # Mutating joins -->
-
-<!-- 1. `inner_join` -->
-<!-- 2. `left_join` -->
-<!-- 3. `right_join` -->
-<!-- 4. `full_join` -->
-
-<!-- --- -->
-
-<!-- # Filtering joins -->
-
-<!-- 1. `semi_join` -->
-<!-- 2. `anti_join` -->
-
 
 ---
 class: inverse, center, middle
@@ -747,9 +870,9 @@ name: summary
 .pull-midright-4[
 ### Join
 #### dplyr
-1. `inner_join`
-2. `left_join`
-3. `right_join`
+1. `left_join`
+2. `right_join`
+3. `inner_join`
 4. `full_join`
 5. `semi_join`
 6. `anti_join`
