@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data import, tidy data, and relational data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Todd Gerarden" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/tdg-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+class: center middle main-title section-title-4
+
+# Data import, tidy data, and relational data
+
+.class-info[
+
+**Week 4**
+
+AEM 2850: R for Business Analytics&lt;br&gt;
+Cornell Dyson&lt;br&gt;
+Spring 2022
+
+Acknowledgements: 
+&lt;!-- [Andrew Heiss](https://datavizm20.classes.andrewheiss.com),  --&gt;
+&lt;!-- [Claus Wilke](https://wilkelab.org/SDS375/),  --&gt;
+[Grant McDermott](https://github.com/uo-ec607/lectures),
+[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+]
+
+
+---
+
+# Announcements
+
+**Late assignments will get a ✔− going forward**
+- If something comes up, email me and Hui in advance
+
+Reminders:
+- Submit assignments via canvas
+  - Lab 3 was due yesterday (Monday) at 11:59pm
+  - Reflection - Week 4 is due Wednesday at 11:59pm
+- Bring your laptop to class on Thursday
+
+Questions before we get started?
+
+---
+
+# Plan for today
+
+[Prologue](#prologue)
+
+[Data import](#readr)
+
+[Tidy data](#tidyr)
+  &lt;!-- - [pivot_longer](#pivot_longer) / [pivot_wider](#pivot_wider) --&gt;
+  &lt;!-- - [separate](#separate) --&gt;
+  &lt;!-- - [unite](#unite) --&gt;
+
+[Relational data](#joins)
+
+[Summary](#summary)
+
+
+---
+class: inverse, center, middle
+name: prologue
+
+# Prologue
+
+
+---
+
+# What are our concentrations?
+
+Take a guess: what's the most common concentration among classmates?
+
+--
+
+
+```
+## # A tibble: 39 × 1
+##    value                                                 
+##    &lt;chr&gt;                                                 
+##  1 Business Analytics (AEM) Interactive Technologies (IS)
+##  2 Finance                                               
+##  3 Business Analytics                                    
+##  4 Data Science and Finance                              
+##  5 Sustainable Business and Economic Policy              
+##  6 Finance                                               
+##  7 Finance                                               
+##  8 Business Analytics and Strategy                       
+##  9 Finance, Business Analytics                           
+## 10 Finance                                               
+## # … with 29 more rows
+```
+
+---
+
+# What are our concentrations?
+
+After some processing to get concentration counts, we get:
+
+
+```
+## # A tibble: 1 × 7
+##   accounting    ba  entr enviro finance  food strategy
+##        &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;   &lt;int&gt; &lt;int&gt;    &lt;int&gt;
+## 1          2    21     2      3      19     2        4
+```
+
+What is the "level of observation" in this data frame? (i.e., what are the rows?)
+
+--
+
+Is the best way to organize concentration counts?
+
+--
+
+How would you use counts to compute shares in this data frame?
+
+---
+
+# What are our "tidy" concentrations?
+
+Let's `pivot_longer` and `arrange` to get the top 3:
+
+
+```
+## # A tibble: 3 × 2
+##   concentration count
+##   &lt;chr&gt;         &lt;int&gt;
+## 1 ba               21
+## 2 finance          19
+## 3 strategy          4
+```
+
+--
+
+How would you use counts to compute shares in this data frame?
+
+--
+
+
+```r
+tidy_concentrations %&gt;% mutate(share = count / sum(count)) # easy!
+```
+
+
+```
+## # A tibble: 3 × 3
+##   concentration count  share
+##   &lt;chr&gt;         &lt;int&gt;  &lt;dbl&gt;
+## 1 ba               21 0.396 
+## 2 finance          19 0.358 
+## 3 strategy          4 0.0755
+```
+
+---
+class: inverse, center, middle
+name: readr
+
+# Data import
+
+
+---
+
+# Data import
+
+Plain-text rectangular files are a common way to store and share data:
+- comma delimited files (`readr::read_csv`)
+- tab delimited files (`readr::read_tsv`)
+- fixed width files (`readr::read_fwf`)
+
+We will just cover csv files since `readr` syntax is transferable
+
+---
+
+# Super bowl ads: a csv example
+
+&lt;img src="img/04/superbowl-ads.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+???
+Image source: [FiveThirtyEight](https://github.com/fivethirtyeight/superbowl-ads)
+
+---
+
+# Super bowl ads in csv format
+
+&lt;img src="img/04/superbowl-raw.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+???
+Data source: [FiveThirtyEight](https://github.com/fivethirtyeight/superbowl-ads)
+
+---
+
+# Super bowl ads in csv format
+
+&lt;img src="img/04/superbowl-excel.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Getting from a csv to a data frame
+
+How are data frames and csv files similar?
+
+--
+- both are rectangular
+- csv lines often correspond to rows
+- csv commas delineate columns
+
+--
+
+How are they different?
+
+--
+- csv files do not store column types!
+
+---
+
+# 1) readr::read_csv
+
+`read_csv` helps us get from point a to point b:
+- you give it the path to your csv file
+- it takes the first line of data as column names by default
+- it guesses column types and builds up a data frame
+
+Most csv files can be read using the defaults, so we will focus on that
+
+If you run into special cases, consult `?read_csv`
+
+---
+
+# 1) readr::read_csv
+
+
+```r
+ads &lt;- read_csv("data/superbowl.csv")
+```
+
+```
+## Rows: 247 Columns: 25
+```
+
+```
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## chr  (10): brand, superbowl_ads_dot_com_url, youtube_url, id, kind, etag, ti...
+## dbl   (7): year, view_count, like_count, dislike_count, favorite_count, comm...
+## lgl   (7): funny, show_product_quickly, patriotic, celebrity, danger, animal...
+## dttm  (1): published_at
+```
+
+```
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+--
+
+That was easy!
+
+---
+
+# Now we're back to our old tricks
+
+.pull-left[
+
+```r
+ads %&gt;% 
+  group_by(funny) %&gt;% 
+  count() %&gt;% 
+  arrange(desc(n))
+```
+
+```
+## # A tibble: 2 × 2
+## # Groups:   funny [2]
+##   funny     n
+##   &lt;lgl&gt; &lt;int&gt;
+## 1 TRUE    171
+## 2 FALSE    76
+```
+]
+
+.pull-right[
+
+```r
+ads %&gt;% 
+  group_by(brand) %&gt;% 
+  summarize(likes = sum(like_count, na.rm = T)) %&gt;% 
+  arrange(desc(likes))
+```
+
+```
+## # A tibble: 10 × 2
+##    brand      likes
+##    &lt;chr&gt;      &lt;dbl&gt;
+##  1 Doritos   326151
+##  2 NFL       224263
+##  3 Coca-Cola 160231
+##  4 Bud Light 104380
+##  5 Budweiser  88765
+##  6 Pepsi      14796
+##  7 Toyota      5316
+##  8 Hynudai     4204
+##  9 E-Trade     2624
+## 10 Kia         2127
+```
+]
+
+---
+
+# 2) readr::write_csv
+
+Use `write_csv` to write data to a `.csv`:
+
+
+```r
+write_csv(ads, "data/superbowl.csv") # overwrite the raw data (bad idea!)
+
+ads %&gt;% 
+  select(year, brand, youtube_url) %&gt;% 
+  write_csv("superbowl-urls.csv") # write modified output to a new file
+```
+
+---
+
+# csv is not always the best storage medium
+
+To preserve column specifications and save time when working in R, use `write_rds()` and `read_rds()` to save and open data frames in .RDS format
+
+For multiple objects, `save()` and `load()` are handy functions from base R that work with the .RData format
+
+---
+
+# Importing excel data
+
+Wait, what about getting data from excel spreadsheets?
+
+--
+
+Use `readxl::read_excel()` for data that is stored in `.xls` or `.xlsx` format
+
+`readxl` isn't loaded as part of the core tidyverse, so we need to load it first:
+
+
+```r
+library(readxl)
+excel_sheets("data/readxl/datasets.xlsx") # list the sheets in datasets.xlsx
+```
+
+```
+## [1] "iris"     "mtcars"   "chickwts" "quakes"
+```
+
+---
+
+# Importing excel data
+
+
+```r
+read_excel("data/readxl/datasets.xlsx", sheet = "mtcars")
+```
+
+```
+## # A tibble: 32 × 11
+##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  21       6  160    110  3.9   2.62  16.5     0     1     4     4
+##  2  21       6  160    110  3.9   2.88  17.0     0     1     4     4
+##  3  22.8     4  108     93  3.85  2.32  18.6     1     1     4     1
+##  4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
+##  5  18.7     8  360    175  3.15  3.44  17.0     0     0     3     2
+##  6  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
+##  7  14.3     8  360    245  3.21  3.57  15.8     0     0     3     4
+##  8  24.4     4  147.    62  3.69  3.19  20       1     0     4     2
+##  9  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2
+## 10  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4
+## # … with 22 more rows
+```
+
+---
+
+# Importing excel data
+
+Can also use arguments like `range` to get data using excel lingo
+
+
+```r
+read_excel("data/readxl/datasets.xlsx", 
+           range = "mtcars!A1:D6") # note the combination of sheet and cell range
+```
+
+```
+## # A tibble: 5 × 4
+##     mpg   cyl  disp    hp
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  21       6   160   110
+## 2  21       6   160   110
+## 3  22.8     4   108    93
+## 4  21.4     6   258   110
+## 5  18.7     8   360   175
+```
+
+
+---
+class: inverse, center, middle
+name: tidyr
+
+# Tidy data
+
+
+---
+
+# WHAT is "tidy" data?
+
+---
+
+&lt;img src="img/04/tidydata_1.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+&lt;img src="img/04/tidydata_2.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# WHY "tidy" data?
+
+---
+
+&lt;img src="img/04/tidydata_3.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# HOW can we "tidy" data?
+
+**Key tidyr verbs**
+
+1. `pivot_longer`: Pivot wide data into long format (updated version of `gather`) 
+
+2. `pivot_wider`: Pivot long data into wide format (updated version of `spread`) 
+
+3. `separate`: Split one column into multiple columns
+
+4. `unite`: Combine multiple columns into one
+
+
+---
+name: pivot_longer
+
+# 1) tidyr::pivot_longer
+
+
+```r
+stocks &lt;- data.frame( # could use "tibble" instead of "data.frame" if you prefer
+  time = as.Date('2009-01-01') + 0:1,
+  X = rnorm(2, 0, 1),
+  Y = rnorm(2, 0, 2),
+  Z = rnorm(2, 0, 4)
+  )
+stocks
+```
+
+```
+##         time          X          Y         Z
+## 1 2009-01-01  0.7412981 -1.8630388 -2.107859
+## 2 2009-01-02 -2.3184639  0.9238329  1.335474
+```
+
+We have 4 columns, the date and the stocks
+
+How do we get this in tidy form?
+
+---
+
+# 1) tidyr::pivot_longer
+
+We need to pivot the stock name columns `X`, `Y`, `Z` longer
+
+1. Choose columns using `X:Z` or `-time`
+2. Decide what variable holds the names: `names_to = "stock"`
+3. Decide what variable holds the values: `values_to = "price"`
+
+---
+
+# 1) tidyr::pivot_longer
+
+
+```r
+stocks %&gt;% pivot_longer(X:Z, names_to = "stock", values_to = "price")
+```
+
+```
+## # A tibble: 6 × 3
+##   time       stock  price
+##   &lt;date&gt;     &lt;chr&gt;  &lt;dbl&gt;
+## 1 2009-01-01 X      0.741
+## 2 2009-01-01 Y     -1.86 
+## 3 2009-01-01 Z     -2.11 
+## 4 2009-01-02 X     -2.32 
+## 5 2009-01-02 Y      0.924
+## 6 2009-01-02 Z      1.34
+```
+
+--
+
+Let's save the "tidy" (i.e., long) stocks data frame for use on the next slide
+
+
+```r
+tidy_stocks &lt;- stocks %&gt;% 
+  pivot_longer(-time, names_to = "stock", values_to = "price")
+```
+
+---
+name: pivot_wider
+
+# 2) tidyr::pivot_wider
+
+
+```r
+tidy_stocks %&gt;% pivot_wider(names_from = stock, values_from = price)
+```
+
+```
+## # A tibble: 2 × 4
+##   time            X      Y     Z
+##   &lt;date&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 2009-01-01  0.741 -1.86  -2.11
+## 2 2009-01-02 -2.32   0.924  1.34
+```
+
+```r
+tidy_stocks %&gt;% pivot_wider(names_from = time, values_from = price)
+```
+
+```
+## # A tibble: 3 × 3
+##   stock `2009-01-01` `2009-01-02`
+##   &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+## 1 X            0.741       -2.32 
+## 2 Y           -1.86         0.924
+## 3 Z           -2.11         1.34
+```
+
+--
+
+Note that the second example effectively transposed the original data
+
+---
+name: separate
+
+# 3) tidyr::separate
+
+
+
+
+```r
+halftime_openers &lt;- data.frame(name = c("Dr.Dre", "Snoop.Dogg"))
+halftime_openers
+```
+
+```
+##         name
+## 1     Dr.Dre
+## 2 Snoop.Dogg
+```
+
+--
+
+
+```r
+halftime_openers %&gt;% separate(name, c("first_name", "last_name")) 
+```
+
+```
+##   first_name last_name
+## 1         Dr       Dre
+## 2      Snoop      Dogg
+```
+
+--
+
+This command is pretty smart. But to avoid ambiguity, you can also specify the separation character with `separate(..., sep=".")`
+
+---
+
+# 3) tidyr::separate
+
+
+```r
+halftime_performers &lt;- data.frame(name = c("Dr..Dre", "Snoop.Dogg", "Eminem", "Mary.J.Blige",
+                                           "Kendrick.Lamar", "50.Cent", "Anderson..Paak"))
+```
+--
+
+```r
+halftime_performers %&gt;% separate(name, c("first_name", "last_name"))
+```
+
+```
+## Warning: Expected 2 pieces. Additional pieces discarded in 1 rows [4].
+```
+
+```
+## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 1 rows [3].
+```
+
+```
+##   first_name last_name
+## 1         Dr       Dre
+## 2      Snoop      Dogg
+## 3     Eminem      &lt;NA&gt;
+## 4       Mary         J
+## 5   Kendrick     Lamar
+## 6         50      Cent
+## 7   Anderson      Paak
+```
+
+What happened? Did we lose any information?
+
+???
+No "Blige", no . in "Dr." or ".Paak"
+
+---
+name: unite
+
+# 4) tidyr::unite
+
+
+```r
+gdp &lt;- data.frame(
+  yr = rep(2016, times = 4),
+  mnth = rep(1, times = 4),
+  dy = 1:4,
+  gdp = rnorm(4, mean = 100, sd = 2)
+  )
+gdp 
+```
+
+```
+##     yr mnth dy       gdp
+## 1 2016    1  1 100.02925
+## 2 2016    1  2  99.36958
+## 3 2016    1  3  99.93991
+## 4 2016    1  4  96.82156
+```
+
+---
+
+# 4) tidyr::unite
+
+
+```r
+# combine "yr", "mnth", and "dy" into one "date" column
+gdp %&gt;% unite(date, c("yr", "mnth", "dy"), sep = "-")
+```
+
+```
+##       date       gdp
+## 1 2016-1-1 100.02925
+## 2 2016-1-2  99.36958
+## 3 2016-1-3  99.93991
+## 4 2016-1-4  96.82156
+```
+
+---
+
+# 4) tidyr::unite
+
+Note that `unite` will automatically create a character variable:
+
+```r
+gdp_u &lt;- gdp %&gt;% unite(date, c("yr", "mnth", "dy"), sep = "-") %&gt;% as_tibble()
+gdp_u
+```
+
+```
+## # A tibble: 4 × 2
+##   date       gdp
+##   &lt;chr&gt;    &lt;dbl&gt;
+## 1 2016-1-1 100. 
+## 2 2016-1-2  99.4
+## 3 2016-1-3  99.9
+## 4 2016-1-4  96.8
+```
+
+--
+
+To convert it to something else (e.g., date or numeric), modify it using `mutate`
+
+---
+
+# 4) tidyr::unite
+
+
+```r
+library(lubridate) # the lubridate package has helpful date conversion functions
+gdp_u %&gt;% mutate(date = ymd(date))
+```
+
+```
+## # A tibble: 4 × 2
+##   date         gdp
+##   &lt;date&gt;     &lt;dbl&gt;
+## 1 2016-01-01 100. 
+## 2 2016-01-02  99.4
+## 3 2016-01-03  99.9
+## 4 2016-01-04  96.8
+```
+
+???
+https://lubridate.tidyverse.org/
+
+---
+
+# tidyr resources
+
+[Data tidying with tidyr : : CHEAT SHEET](https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf) (link downloads a pdf)
+
+[Vignette](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) (from the **tidyr** package)
+
+```r
+vignette("tidy-data")
+```
+
+[Original paper](https://vita.had.co.nz/papers/tidy-data.pdf) (Hadley Wickham, 2014 JSS)
+
+
+---
+class: inverse, center, middle
+name: joins
+
+# Relational data
+
+
+---
+
+# What are relational data?
+
+--
+
+Multiple tables of data with pairwise relations
+
+Relations across &gt;2 data tables are determined by the relations between each pair
+
+---
+
+# Relational data verbs from dplyr
+
+1. **Mutating joins**: add new variables
+  - `inner_join()`
+  - `left_join()`
+  - `right_join()`
+  - `full_join()`
+
+2. **Filtering joins**: filter observations
+  - `semi_join()`
+  - `anti_join()`
+
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # How do join verbs work? --&gt;
+
+
+&lt;!-- From Ivan Rudik's slides: --&gt;
+
+&lt;!-- We need two datasets (e.g., housing prices and pollution) --&gt;
+
+&lt;!-- Each dataset has the same set of **key** variables (e.g. county) --&gt;
+
+&lt;!-- When we join, we match up the two datasets on the key, and combine them into one --&gt;
+
+&lt;!-- In our housing example, each row of the joined dataset would now tell us the house price, the county it's in, and the county's pollution --&gt;
+
+???
+
+You can visualize the operations [here](https://r4ds.had.co.nz/relational-data.html)
+
+---
+
+# Data: flights
+
+Let's use the data that comes with the [**nycflights13**](http://github.com/hadley/nycflights13) package
+
+
+```r
+library(nycflights13)
+flights
+```
+
+```
+## # A tibble: 336,776 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # … with 336,766 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;
+```
+
+---
+
+# Data: planes
+
+
+```r
+planes
+```
+
+```
+## # A tibble: 3,322 × 9
+##    tailnum  year type          manufacturer   model  engines seats speed engine 
+##    &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  
+##  1 N10156   2004 Fixed wing m… EMBRAER        EMB-1…       2    55    NA Turbo-…
+##  2 N102UW   1998 Fixed wing m… AIRBUS INDUST… A320-…       2   182    NA Turbo-…
+##  3 N103US   1999 Fixed wing m… AIRBUS INDUST… A320-…       2   182    NA Turbo-…
+##  4 N104UW   1999 Fixed wing m… AIRBUS INDUST… A320-…       2   182    NA Turbo-…
+##  5 N10575   2002 Fixed wing m… EMBRAER        EMB-1…       2    55    NA Turbo-…
+##  6 N105UW   1999 Fixed wing m… AIRBUS INDUST… A320-…       2   182    NA Turbo-…
+##  7 N107US   1999 Fixed wing m… AIRBUS INDUST… A320-…       2   182    NA Turbo-…
+##  8 N108UW   1999 Fixed wing m… AIRBUS INDUST… A320-…       2   182    NA Turbo-…
+##  9 N109UW   1999 Fixed wing m… AIRBUS INDUST… A320-…       2   182    NA Turbo-…
+## 10 N110UW   1999 Fixed wing m… AIRBUS INDUST… A320-…       2   182    NA Turbo-…
+## # … with 3,312 more rows
+```
+
+---
+
+# Joins
+
+Let's perform a left join on the flights and planes data frames
+- I'm going subset columns after the join, but only to keep text on the slide
+
+--
+
+
+```r
+left_join(flights, planes) %&gt;%
+  select(year, month, day, dep_time, arr_time, carrier, flight, tailnum, type, model)
+```
+
+```
+## Joining, by = c("year", "tailnum")
+```
+
+```
+## # A tibble: 336,776 × 10
+##     year month   day dep_time arr_time carrier flight tailnum type  model
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;
+##  1  2013     1     1      517      830 UA        1545 N14228  &lt;NA&gt;  &lt;NA&gt; 
+##  2  2013     1     1      533      850 UA        1714 N24211  &lt;NA&gt;  &lt;NA&gt; 
+##  3  2013     1     1      542      923 AA        1141 N619AA  &lt;NA&gt;  &lt;NA&gt; 
+##  4  2013     1     1      544     1004 B6         725 N804JB  &lt;NA&gt;  &lt;NA&gt; 
+##  5  2013     1     1      554      812 DL         461 N668DN  &lt;NA&gt;  &lt;NA&gt; 
+##  6  2013     1     1      554      740 UA        1696 N39463  &lt;NA&gt;  &lt;NA&gt; 
+##  7  2013     1     1      555      913 B6         507 N516JB  &lt;NA&gt;  &lt;NA&gt; 
+##  8  2013     1     1      557      709 EV        5708 N829AS  &lt;NA&gt;  &lt;NA&gt; 
+##  9  2013     1     1      557      838 B6          79 N593JB  &lt;NA&gt;  &lt;NA&gt; 
+## 10  2013     1     1      558      753 AA         301 N3ALAA  &lt;NA&gt;  &lt;NA&gt; 
+## # … with 336,766 more rows
+```
+
+---
+
+# Joins
+
+`dplyr` guessed which columns to join on, using columns with the same name:
+
+```
+*## Joining, by = c("year", "tailnum")
+```
+
+There's a problem here: the variable `year` does not have a consistent meaning across our joining datasets
+
+--
+
+In `flights` it refers to the *year of flight*, in `planes` it refers to *year of construction*
+
+--
+
+Luckily, there's an easy way to avoid this problem. How?
+&lt;!-- - See if you can figure it out before turning to the next slide. --&gt;
+- Start with `?dplyr::join`
+
+---
+
+# Joins
+
+We just need to be more explicit in the join call by using the `by = ` argument
+
+
+```r
+left_join(flights,
+          planes %&gt;% rename(year_built = year), # not necessary w/ below line, but helpful
+*         by = "tailnum" # be specific about the joining column
+          ) %&gt;%
+  select(year, month, day, dep_time, arr_time, carrier, flight, tailnum, year_built, type, model) %&gt;%
+  head(5) # just to save vertical space on the slide
+```
+
+```
+## # A tibble: 5 × 11
+##    year month   day dep_time arr_time carrier flight tailnum year_built type    
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;   
+## 1  2013     1     1      517      830 UA        1545 N14228        1999 Fixed w…
+## 2  2013     1     1      533      850 UA        1714 N24211        1998 Fixed w…
+## 3  2013     1     1      542      923 AA        1141 N619AA        1990 Fixed w…
+## 4  2013     1     1      544     1004 B6         725 N804JB        2012 Fixed w…
+## 5  2013     1     1      554      812 DL         461 N668DN        1991 Fixed w…
+## # … with 1 more variable: model &lt;chr&gt;
+```
+
+---
+
+# Joins
+
+What happens if we don't rename `year` before this join?
+
+
+```r
+left_join(flights,
+          planes, # not renaming "year" to "year_built" this time
+          by = "tailnum") %&gt;%
+  select(contains("year"), month, day, dep_time, arr_time, carrier, flight, tailnum, type, model) %&gt;%
+  head(5) # just to save vertical space on the slide
+```
+
+```
+## # A tibble: 5 × 11
+##   year.x year.y month   day dep_time arr_time carrier flight tailnum type  model
+##    &lt;int&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt; &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;
+## 1   2013   1999     1     1      517      830 UA        1545 N14228  Fixe… 737-…
+## 2   2013   1998     1     1      533      850 UA        1714 N24211  Fixe… 737-…
+## 3   2013   1990     1     1      542      923 AA        1141 N619AA  Fixe… 757-…
+## 4   2013   2012     1     1      544     1004 B6         725 N804JB  Fixe… A320…
+## 5   2013   1991     1     1      554      812 DL         461 N668DN  Fixe… 757-…
+```
+
+--
+
+What is `year.x`? What is `year.y`?
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # Mutating joins --&gt;
+
+&lt;!-- 1. `inner_join` --&gt;
+&lt;!-- 2. `left_join` --&gt;
+&lt;!-- 3. `right_join` --&gt;
+&lt;!-- 4. `full_join` --&gt;
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # Filtering joins --&gt;
+
+&lt;!-- 1. `semi_join` --&gt;
+&lt;!-- 2. `anti_join` --&gt;
+
+
+---
+class: inverse, center, middle
+name: summary
+
+# Summary
+
+---
+
+# Key verbs
+
+.pull-left-4[
+### Import
+#### readr
+1. `read_csv`
+2. `write_csv`
+
+#### readxl
+1. `read_excel`
+]
+
+.pull-midleft-4[
+### Tidy
+#### tidyr
+1. `pivot_longer`
+2. `pivot_wider`
+3. `separate`
+4. `unite`
+]
+
+.pull-midright-4[
+### Join
+#### dplyr
+1. `inner_join`
+2. `left_join`
+3. `right_join`
+4. `full_join`
+5. `semi_join`
+6. `anti_join`
+]
+
+.pull-right-4[
+### Transform
+#### dplyr
+1. `filter`
+2. `arrange`
+3. `select`
+4. `mutate`
+5. `summarize`
+]
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

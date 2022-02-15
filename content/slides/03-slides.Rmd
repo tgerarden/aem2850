@@ -111,7 +111,7 @@ Take a guess: what's the most popular spectator sport among classmates?
 
 ```{r, echo = FALSE}
 library(magrittr)
-load("data/survey-responses/sports.RData")
+load("data/survey-responses/survey-data.RData")
 ```
 
 --

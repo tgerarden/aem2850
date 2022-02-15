@@ -1,7 +1,7 @@
 ---
 title: "Data import and tidying"
 linktitle: "Data import and tidying"
-date: "2022-02-13 20:43:44"
+date: "2022-02-14 15:20:12"
 menu:
   content:
     parent: Course content
@@ -26,8 +26,8 @@ output:
 
 
 
-<!-- #### Optional readings -->
-
+#### Optional readings
+- <i class="fas fa-external-link-square-alt"></i> [FiveThirtyEight: According To Super Bowl Ads, Americans Love America, Animals And Sex](https://projects.fivethirtyeight.com/super-bowl-ads/)
 
 
 ### Guiding questions
