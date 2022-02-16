@@ -252,7 +252,93 @@ If you run into special cases, consult `?read_csv`
 
 ---
 
+# An aside on paths
+
+First we need to figure out what path to give `read_csv`
+
+--
+
+We have several options:
+- absolute paths
+  - `/Users/todd/aem2850/slides/data/superbowl.csv`
+  - `C:\aem2850\slides\data\superbowl.csv`
+- relative paths
+  - `data/superbowl.csv`
+- links
+  - [`https://raw.githubusercontent.com/superbowl-ads.csv`](https://raw.githubusercontent.com/fivethirtyeight/superbowl-ads/main/superbowl-ads.csv)
+- others
+  - see `?read_csv`
+
+---
+
+# An aside on paths
+
+Relative paths are nice: work if you move R code to another directory or device
+
+**But what are they relative to?**
+
+--
+
+The working directory
+
+**But where is the working directory?**
+
+--
+
+**R scripts (.R)** in an R Project: default working directory is the project directory
+
+**R Markdown (.Rmd)**: default working directory is the location of the .Rmd file
+
+--
+
+In our RStudio Cloud projects, these will both be `/cloud/project`, which is the default directory for our projects and where we store our .Rmd templates
+
+---
+
+# An aside on paths
+
+More generally, can check your working directory using `getwd()`
+
+--
+
+For example, here's the working directory the .Rmd source code for these slides:
+```{r get-wd}
+getwd()
+```
+
+`setwd()` will alter the working directory
+
+---
+
+# An aside on paths
+
+Just for context, here is a list of (some) directories below the working directory
+
+```{r get-path-a, echo = FALSE}
+# list the directories below where this .Rmd file is
+fs::dir_tree(recurse = FALSE, type = "directory", glob = "*slides_*", invert = TRUE)
+```
+
+--
+
+Now list (some of) the .csv files in the folder `data`:
+
+```{r get-path-b, echo = FALSE}
+fs::dir_tree("data", glob = "*superbowl.csv") # could instead list the *.csv files within data
+```
+
+`data/superbowl.csv` is the relative path from our working directory to our csv
+
+
+???
+
+Omitted code that uses `fs::dir_tree` to print pretty directory trees
+
+---
+
 # 1) readr::read_csv
+
+So all we need to do is give that relative path to `read_csv`:
 
 ```{r read-ads}
 ads <- read_csv("data/superbowl.csv")
@@ -261,6 +347,9 @@ ads <- read_csv("data/superbowl.csv")
 --
 
 That was easy!
+
+???
+Note: readr intentionally never guesses that columns are integers as a safeguard ([source](https://github.com/tidyverse/readr/issues/1094#issuecomment-628612430))
 
 ---
 
@@ -747,96 +836,6 @@ anti_join(superheroes, publishers)
 
 Note that the variables do not change
 
-
----
-
-# More on joins
-
-Now let's use the data that comes with the [**nycflights13**](http://github.com/hadley/nycflights13) package
-
-```{r flights}
-library(nycflights13)
-flights
-```
-
----
-
-# More on joins
-
-```{r planes}
-planes
-```
-
----
-
-# More on joins
-
-Let's perform a left join on the flights and planes data frames
-- I'm going subset columns after the join, but only to keep text on the slide
-
---
-
-```{r join1}
-left_join(flights, planes) %>%
-  select(year, month, day, dep_time, arr_time, carrier, flight, tailnum, type, model)
-```
-
----
-
-# More on joins
-
-As before, `dplyr` guessed which columns to join on
-
-It uses columns with the same name:
-
-```
-*## Joining, by = c("year", "tailnum")
-```
-
-There's a problem here: the variable `year` does not have a consistent meaning across our joining datasets
-
---
-
-In `flights` it refers to the *year of flight*, in `planes` it refers to *year of construction*
-
---
-
-Luckily, there's an easy way to avoid this problem. How?
-<!-- - See if you can figure it out before turning to the next slide. -->
-- Start with `?dplyr::join`
-
----
-
-# More on joins
-
-We just need to be more explicit in the join call by using the `by = ` argument
-
-```{r join2, highlight.line = 4}
-left_join(flights,
-          planes %>% rename(year_built = year), # not necessary w/ below line, but helpful
-          by = "tailnum" # be specific about the joining column #<< 
-          ) %>%
-  select(year, month, day, dep_time, arr_time, carrier, flight, tailnum, year_built, type, model) %>%
-  head(5) # just to save vertical space on the slide
-```
-
----
-
-# More on joins
-
-What happens if we don't rename `year` before this join?
-
-```{r join2b, highlight.line = 4}
-left_join(flights,
-          planes, # not renaming "year" to "year_built" this time
-          by = "tailnum") %>%
-  select(contains("year"), month, day, dep_time, arr_time, carrier, flight, tailnum, type, model) %>%
-  head(5) # just to save vertical space on the slide
-```
-
---
-
-What is `year.x`? What is `year.y`?
 
 ---
 class: inverse, center, middle
