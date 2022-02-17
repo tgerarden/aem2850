@@ -22,13 +22,11 @@ The class is structured with three distinct bits. On Tuesday I will provide an o
 
 I highly encourage you to utilize Professor and TA office hours, especially if you have trouble with basic `R` programming. We will hold office hours at the following times:
 
-- Mondays 12:20pm - 1:20pm: TA Sophie McComb at [cornell.zoom.us/j/5679920082](https://cornell.zoom.us/j/5679920082?pwd=OWdhcjZ4OWFlWTFRWXV6R3U2VEx4QT09)
-- Mondays  1:30pm - 3:30pm: TA Hui Zhou at [cornell.zoom.us/j/4786955504](https://cornell.zoom.us/j/4786955504?pwd=VitTc1hVSjJSVXovWGJlRG9VQm5TZz09)
-- Tuesdays 11:00am - 12:00pm: Prof. Gerarden using [the class zoom link](https://cornell.zoom.us/j/98464434953?pwd=VDJuR0RhckttSTBJVVBqUXhDT3FxUT09)
-- Fridays  10:00am - 11:00am: TA Sophie McComb at [cornell.zoom.us/j/5679920082](https://cornell.zoom.us/j/5679920082?pwd=OWdhcjZ4OWFlWTFRWXV6R3U2VEx4QT09)
+- Mondays 12:20pm - 1:20pm: TA Sophie McComb in Warren 372
+- Mondays  1:30pm - 3:30pm: TA Hui Zhou in Warren 372
+- Tuesdays 11:00am - 12:00pm: Prof. Gerarden in Warren 466
+- Fridays  10:00am - 11:00am: TA Sophie McComb in Warren 372
 - Other times by appointment: Prof. Gerarden, at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
-
-All TA office hours will be held in Warren 372 once classes are back in person.
 
 You can also reach us by email. The best approach for generic, time-sensitive questions is to email all of us at the same time. You can do that with one click [here](mailto:gerarden@cornell.edu,hz423@cornell.edu,sm2397@cornell.edu).
 
