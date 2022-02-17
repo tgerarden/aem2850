@@ -1,0 +1,100 @@
+---
+#########################################################
+# Steps to complete this lab:
+#   1. Add your name to the author field of the yaml header
+#   2. Fill in the code chunks and use inline code to answer the questions 
+#   3. Click on "Knit" directly above to render output (or Ctrl/Cmd-Shift-K)
+#   4. Repeat steps 2-3 until you are satisfied with the final product
+#   5. Download the resulting file lab-02.pdf
+#   6. Upload lab-02.pdf to canvas
+#########################################################
+title: "Lab-02"
+author: "Write your name here"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: pdf_document
+urlcolor: blue
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(knitr)
+
+# Prep data: (you can ignore this for now)
+diamonds2 <- diamonds[, 1:7]
+i <- sapply(diamonds2, is.factor)
+diamonds2[i] <- lapply(diamonds2[i], as.character)
+```
+
+# Preface
+
+The goal of this assignment is to gain more familiarity with data frames -- think "spreadsheets" -- and how to work with them in R. While the examples so far may seem fairly trivial, the value of using a tool like R to work with data frames should become evident as we work with larger datasets and do more complicated things. Bear with us!
+
+In this lab we are providing some code snippets to serve as "scaffolding" to help guide you through each step. Over the course of the semester we will provide less scaffolding and more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
+
+## Diamonds
+
+We will work with the data frame `diamonds2` that has been derived from the `diamonds` data provided in the package **ggplot2**. Details of the original data are available [here](https://ggplot2.tidyverse.org/reference/diamonds.html). The data frame we will work with has `r ncol(diamonds2)` variables:
+
+
+```{r}
+head(diamonds2)
+```
+
+
+<!--- Please leave the code above unchanged. Questions start from here. --->
+
+
+## 1. Use both of the indexing operators [] and $ to get the price variable and assign it to a new object `price`. Print the head of `price`.
+```{r}
+price <- FALSE # Replace FALSE with your code for the [] version
+price <- FALSE # Replace FALSE with your code for the $ version
+head(price) # After you complete the preceding lines, this will not return FALSE
+```
+
+
+## 2. What are the mininum, maximum, and average prices of the diamonds?
+**Edit the inline code snippets to weave your answers to these questions into the provided text.**
+<!---Inline code reminder: Surround code with a back ticks and r. R replaces inline code with its results. For example: `r names(diamonds2)` gives the variable names of the diamonds2 data frame. See the the minimum price below for another example. Once you complete question 1 and compile the document, the 0 produced by `r min(price)` will automatically be replaced with the minimum price. Then you can write the inline code for the maximum and average prices. --->
+
+The minimum price is `r min(price)` dollars, the maximum price is `insert your inline code here` dollars, and the average price is `insert your inline code here` dollars.
+
+
+## 3. Use the indexing operator [] to find the most expensive diamond and assign it to a new object `bling`. What are the attributes of this diamond? 
+<!-- As for question 2, once you complete the code chunk below the inline code will automatically update with the correct values for carat and color, and your task is to write inline code for the remaining variables (clarity, depth, and table). -->
+``` {r}
+bling <- diamonds2[FALSE, ] # Replace FALSE with your code
+```
+The most expensive diamond is `r bling[,"carat"]` carats, the color `r bling[,"color"]`, clarity `inline code`, depth = `inline code`, and table = `inline code`.
+
+
+## 4. How many diamonds are included in this data set?
+<!-- Tip: Remember that rows in a data frame correspond to observations. In this case, observations are synonymous with diamonds. -->
+There are `inline code` diamonds in this data set.
+
+
+## 5. What are the different types of diamond cut?
+<!-- Replace FALSE with your code -->
+There are `r unique(FALSE)` different types of diamond cut.
+
+
+## 6. How many diamonds are there in the level of premium cut? 
+<!-- Tip: Use the [] to get the diamonds that are in the level of premium cut. Look back at the way you answered 1 and 3 if you have trouble. -->
+```{r}
+premium <- FALSE # Replace FALSE with your code
+```
+There are `r nrow(premium)` diamonds in the level of premium cut.
+
+
+## 7. What fraction of diamonds are more than 1 carat? 
+<!-- Tip: Find the number of diamonds that are more than 1 carat, and divide it by the total number of diamonds. -->
+```{r}
+# Your code goes here
+```
+Among all diamonds included in this dataset, a fraction of `inline code` are more than 1 carat.
+
+
+## 8. What is the average price of the diamonds with Very Good cut and color I?
+```{r}
+# Your code goes here
+```
+The average price of the diamonds with Very Good cut and color I is `inline code` dollars.

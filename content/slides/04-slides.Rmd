@@ -299,9 +299,7 @@ In our RStudio Cloud projects, these will both be `/cloud/project`, which is the
 
 More generally, can check your working directory using `getwd()`
 
---
-
-For example, here's the working directory the .Rmd source code for these slides:
+For example, here's the working directory for the slides' .Rmd source code:
 ```{r get-wd}
 getwd()
 ```
@@ -836,6 +834,115 @@ anti_join(superheroes, publishers)
 
 Note that the variables do not change
 
+
+---
+
+# Key variables
+
+How do `dplyr` join commands know what variables to use as **keys**?
+
+--
+
+By default, `*_join()` uses all variables that are common across `x` and `y`
+```{r}
+intersect(names(superheroes), names(publishers)) # variable used for matching before
+```
+
+--
+
+Alternatively, we can specify what to join `by`: `*_join(..., by = "publisher")`
+
+---
+
+# More on joins
+
+Let's explore this using the [**nycflights13**](https://github.com/tidyverse/nycflights13) data
+
+```{r flights}
+library(nycflights13)
+flights
+```
+
+---
+
+# More on joins
+
+```{r planes}
+planes
+```
+
+---
+
+# More on joins
+
+Let's perform a left join on the flights and planes data frames
+- I'm going subset columns after the join, just to keep text on the slide
+
+--
+
+```{r join1}
+left_join(flights, planes) %>%
+  select(year, month, day, dep_time, arr_time, carrier, flight, tailnum, type, model)
+```
+
+---
+
+# More on joins
+
+As before, `dplyr` guessed which columns to join on
+
+It uses columns with the same name:
+
+```
+*## Joining, by = c("year", "tailnum")
+```
+
+Does anyone see a potential problem here?
+
+--
+
+The variable `year` does not have a consistent meaning across the datasets
+
+--
+
+In `flights` it refers to the *year of flight*, in `planes` it refers to *year of construction*
+
+--
+
+Luckily we can avoid this by using the `by =` argument
+
+---
+
+# More on joins
+
+We just need to be more explicit in the join call by using the `by = ` argument
+
+```{r join2, highlight.line = 4}
+left_join(flights,
+          planes %>% rename(year_built = year), # not necessary w/ below line, but helpful
+          by = "tailnum" # be specific about the joining column #<< 
+          ) %>%
+  select(year, month, day, dep_time, arr_time, carrier, flight, tailnum, year_built, type, model) %>%
+  head(5) # just to save vertical space on the slide
+```
+
+---
+
+# More on joins
+
+What happens if we don't rename `year` before this join?
+
+```{r join2b, highlight.line = 4}
+left_join(flights,
+          planes, # not renaming "year" to "year_built" this time
+          by = "tailnum") %>%
+  select(contains("year"), month, day, dep_time, arr_time, carrier, flight, tailnum, type, model) %>%
+  head(5) # just to save vertical space on the slide
+```
+
+--
+
+What is `year.x`? What is `year.y`?
 
 ---
 class: inverse, center, middle

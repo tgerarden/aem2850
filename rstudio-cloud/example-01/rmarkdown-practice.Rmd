@@ -1,0 +1,51 @@
+---
+#############################################################
+#   Click on "Knit" in RStudio to render this worksheet.    #
+#   Acknowledgements: adapted from Claus O. Wilke           #
+#############################################################
+title: "Intro to R Markdown"
+author: "Write your name here"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: html_document
+---
+
+Much of the work in this class will be done via R Markdown documents. R Markdown documents are documents that combine text, R code, and R output, including figures. They are a great way to produce self-contained and documented statistical analyses.
+
+In this first worksheet, you will learn how to do some basic markdown editing. After you have made a change to the document, press "Knit HTML" in R Studio and see what kind of a result you get.
+
+Edit below this line.
+
+---------------------------------------------
+
+## 1. Basic Markdown editing
+
+Try out basic R Markdown features, as described here: https://rmarkdown.rstudio.com/authoring_basics.html. Write some text that is bold, and some that is in italics. Make a numbered list and a bulleted list. Make a nested list. Try the block-quote feature.
+
+## 2. Embedding R code
+
+R code embedded in R chunks will be executed and the output will be shown.
+```{r}
+# R code goes here
+x <- rnorm(10)    # random sample from normal distribution
+hist(x)           # plot density
+```
+
+Try increasing the number of draws from the normal distribution and see what happens.
+
+You can also write inline code. For example: the mean of x is `r mean(x)`.
+
+Now you try:
+
+1. What is the minimum value of x? 
+
+2. What is the maximum value of x?
+
+Note these numbers will change every time you run the file because x is a random sample.
+
+If you want to ensure reproducibility, you could first use the function `set.seed()`:
+```{r}
+# R code goes here
+set.seed(12345)
+x <- rnorm(10)    # random sample from normal distribution
+mean(x)           # compute x's mean
+```
