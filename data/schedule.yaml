@@ -43,24 +43,24 @@ lessons:
     assignment: "04-lab"
     bg: 1
 
-  # - title: 'Assignments for sessions 3 and 4 due'
-  #   date: "June 21"
-  #   bg: 4
-
-  - title: '<span class="content-title">TBD</span>'
-    session: "Session 5"
-    date: "Week 5"
-    # date_start: "June 21"
-    # date_end: "June 25"
-    # content: "05-content"
-    # example: "05-example"
-    # assignment: "05-lab"
-    bg: 2
-
   - title: '**Data Visualization Foundations**'
     header: True
 
   - title: '<span class="content-title">Mapping data to graphics</span>'
+    session: "Session 5"
+    date: "Week 5"
+    # date_start: "June 21"
+    # date_end: "June 25"
+    content: "05-content"
+    # example: "05-example"
+    # assignment: "05-lab"
+    bg: 2
+
+  - title: '*February break: no class on Mar 1*'
+    header: False
+
+
+  - title: '<span class="content-title">Amounts and proportions</span>'
     session: "Session 6"
     date: "Week 6"
     # date_start: "June 21"
@@ -70,11 +70,7 @@ lessons:
     # assignment: "06-lab"
     bg: 1
 
-  # - title: 'Assignments for sessions 5 and 6 due'
-  #   date: "June 28"
-  #   bg: 4
-
-  - title: '<span class="content-title">Amounts and proportions</span>'
+  - title: '<span class="content-title">Themes</span>'
     session: "Session 7"
     date: "Week 7"
     # date_start: "June 28"
@@ -84,7 +80,7 @@ lessons:
     # assignment: "07-lab"
     bg: 2
 
-  - title: '<span class="content-title">Themes</span>'
+  - title: '<span class="content-title">Uncertainty</span>'
     session: "Session 8"
     date: "Week 8"
     # date_start: "June 28"
@@ -94,17 +90,13 @@ lessons:
     # assignment: "08-lab"
     bg: 1
 
-  # - title: 'Assignments for sessions 7 and 8 due'
-  #   date: "July 5"
-  #   bg: 4
-
   - title: '<i class="fas fa-star"></i> **Mini project 1 due (programming)**'
     date: "Exact Date TBD"
     # assignment: "01-mini-project"
     bg: 3
     bottomborder: True
 
-  - title: '<span class="content-title">Uncertainty</span>'
+  - title: '<span class="content-title">Relationships</span>'
     session: "Session 9"
     date: "Week 9"
     # date_start: "July 5"
@@ -114,7 +106,7 @@ lessons:
     # assignment: "09-lab"
     bg: 1
 
-  - title: '<span class="content-title">Relationships</span>'
+  - title: '<span class="content-title">Comparisons</span>'
     session: "Session 10"
     date: "Week 10"
     # date_start: "July 5"
@@ -124,11 +116,13 @@ lessons:
     # assignment: "10-lab"
     bg: 2
 
-  # - title: 'Assignments for sessions 9 and 10 due'
-  #   date: "July 12"
-  #   bg: 4
+  - title: '*Spring break: no class on April 5, 7*'
+    header: False
 
-  - title: '<span class="content-title">Comparisons</span>'
+  - title: '**Special Topics**'
+    header: True
+
+  - title: '<span class="content-title">Annotations</span>'
     session: "Session 11"
     date: "Week 11"
     # date_start: "July 12"
@@ -138,10 +132,7 @@ lessons:
     # assignment: "11-lab"
     bg: 1
 
-  - title: '**Special Topics**'
-    header: True
-
-  - title: '<span class="content-title">Annotations</span>'
+  - title: '<span class="content-title">Time</span>'
     session: "Session 12"
     date: "Week 12"
     # date_start: "July 12"
@@ -151,16 +142,12 @@ lessons:
     # assignment: "12-lab"
     bg: 2
 
-  # - title: 'Assignments for sessions 11 and 12 due'
-  #   date: "July 19"
-  #   bg: 4
-
   - title: '<i class="fas fa-star"></i> **Mini project 2 due (dataviz)**'
     date: "Exact Date TBD"
     # assignment: "02-mini-project"
     bg: 3
 
-  - title: '<span class="content-title">Time</span>'
+  - title: '<span class="content-title">Space</span>'
     session: "Session 13"
     date: "Week 13"
     # date_start: "July 19"
@@ -170,8 +157,7 @@ lessons:
     # assignment: "13-lab"
     bg: 1
 
-  - title: '<span class="content-title">Space</span>'
-#  - title: '<span class="content-title">Interactivity</span>'
+  - title: '<span class="content-title">Text</span>'
     session: "Session 14"
     date: "Week 14"
     # date_start: "July 19"
@@ -180,11 +166,6 @@ lessons:
     # example: "14-example"
     # assignment: "14-lab"
     bg: 2
-
-  # - title: 'Assignments for sessions 13 and 14 due'
-  #   date: "July 26"
-  #   bg: 4
-  #   bottomborder: True
 
   - title: '**Conclusion**'
     header: True
@@ -198,10 +179,6 @@ lessons:
     # example: "15-example"
     # assignment: "15-lab"
     bg: 1
-
-  # - title: 'Assignment for session 15 due'
-  #   date: "July 26"
-  #   bg: 4
 
   - title: '<i class="fas fa-star"></i> **Final project due**' # (submit online by 11:59 PM)'
     date: "Exact Date TBD"
