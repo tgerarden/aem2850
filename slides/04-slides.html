@@ -579,9 +579,9 @@ stocks
 ```
 
 ```
-##         time         X           Y         Z
-## 1 2009-01-01  1.614301 -0.01930472  1.061836
-## 2 2009-01-02 -1.455784 -1.41667892 -2.207808
+##         time            X            Y         Z
+## 1 2009-01-01 -0.446183249 -2.117469041 -2.959865
+## 2 2009-01-02 -0.004907639  0.003805837  3.735180
 ```
 
 We have 4 columns, the date and the stocks
@@ -609,14 +609,14 @@ stocks %&gt;% pivot_longer(X:Z, names_to = "stock", values_to = "price")
 
 ```
 ## # A tibble: 6 × 3
-##   time       stock   price
-##   &lt;date&gt;     &lt;chr&gt;   &lt;dbl&gt;
-## 1 2009-01-01 X      1.61  
-## 2 2009-01-01 Y     -0.0193
-## 3 2009-01-01 Z      1.06  
-## 4 2009-01-02 X     -1.46  
-## 5 2009-01-02 Y     -1.42  
-## 6 2009-01-02 Z     -2.21
+##   time       stock    price
+##   &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;
+## 1 2009-01-01 X     -0.446  
+## 2 2009-01-01 Y     -2.12   
+## 3 2009-01-01 Z     -2.96   
+## 4 2009-01-02 X     -0.00491
+## 5 2009-01-02 Y      0.00381
+## 6 2009-01-02 Z      3.74
 ```
 
 --
@@ -641,10 +641,10 @@ tidy_stocks %&gt;% pivot_wider(names_from = stock, values_from = price)
 
 ```
 ## # A tibble: 2 × 4
-##   time           X       Y     Z
-##   &lt;date&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
-## 1 2009-01-01  1.61 -0.0193  1.06
-## 2 2009-01-02 -1.46 -1.42   -2.21
+##   time              X        Y     Z
+##   &lt;date&gt;        &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+## 1 2009-01-01 -0.446   -2.12    -2.96
+## 2 2009-01-02 -0.00491  0.00381  3.74
 ```
 
 ```r
@@ -655,9 +655,9 @@ tidy_stocks %&gt;% pivot_wider(names_from = time, values_from = price)
 ## # A tibble: 3 × 3
 ##   stock `2009-01-01` `2009-01-02`
 ##   &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;
-## 1 X           1.61          -1.46
-## 2 Y          -0.0193        -1.42
-## 3 Z           1.06          -2.21
+## 1 X           -0.446     -0.00491
+## 2 Y           -2.12       0.00381
+## 3 Z           -2.96       3.74
 ```
 
 --
@@ -756,11 +756,11 @@ gdp
 ```
 
 ```
-##     yr mnth dy       gdp
-## 1 2016    1  1  99.22901
-## 2 2016    1  2 101.99159
-## 3 2016    1  3 103.50551
-## 4 2016    1  4  98.10842
+##     yr mnth dy      gdp
+## 1 2016    1  1 98.67722
+## 2 2016    1  2 98.48572
+## 3 2016    1  3 97.30354
+## 4 2016    1  4 97.87655
 ```
 
 ---
@@ -774,11 +774,11 @@ gdp %&gt;% unite(date, c("yr", "mnth", "dy"), sep = "-")
 ```
 
 ```
-##       date       gdp
-## 1 2016-1-1  99.22901
-## 2 2016-1-2 101.99159
-## 3 2016-1-3 103.50551
-## 4 2016-1-4  98.10842
+##       date      gdp
+## 1 2016-1-1 98.67722
+## 2 2016-1-2 98.48572
+## 3 2016-1-3 97.30354
+## 4 2016-1-4 97.87655
 ```
 
 ---
@@ -796,10 +796,10 @@ gdp_u
 ## # A tibble: 4 × 2
 ##   date       gdp
 ##   &lt;chr&gt;    &lt;dbl&gt;
-## 1 2016-1-1  99.2
-## 2 2016-1-2 102. 
-## 3 2016-1-3 104. 
-## 4 2016-1-4  98.1
+## 1 2016-1-1  98.7
+## 2 2016-1-2  98.5
+## 3 2016-1-3  97.3
+## 4 2016-1-4  97.9
 ```
 
 --
@@ -820,10 +820,10 @@ gdp_u %&gt;% mutate(date = ymd(date))
 ## # A tibble: 4 × 2
 ##   date         gdp
 ##   &lt;date&gt;     &lt;dbl&gt;
-## 1 2016-01-01  99.2
-## 2 2016-01-02 102. 
-## 3 2016-01-03 104. 
-## 4 2016-01-04  98.1
+## 1 2016-01-01  98.7
+## 2 2016-01-02  98.5
+## 3 2016-01-03  97.3
+## 4 2016-01-04  97.9
 ```
 
 ???
@@ -842,6 +842,95 @@ vignette("tidy-data")
 ```
 
 [Original paper](https://vita.had.co.nz/papers/tidy-data.pdf) (Hadley Wickham, 2014 JSS)
+
+
+
+
+
+&lt;!-- HERE ARE SOME BITS ON TIDY DATA FROM ANDREW HEISS'S GGPLOT SLIDES --&gt;
+&lt;!-- THE ANIMATIONS ARE PARTICULARLY RELEVANT / HELPFUL FOR THIS --&gt;
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # Tidy data --&gt;
+
+&lt;!-- .box-inv-6[Each variable has its own column] --&gt;
+
+&lt;!-- -- --&gt;
+
+&lt;!-- .box-inv-6[Each observation has its own row] --&gt;
+
+&lt;!-- -- --&gt;
+
+&lt;!-- .box-inv-6[Each value has its own cell] --&gt;
+
+&lt;!-- -- --&gt;
+
+&lt;!-- .center[ --&gt;
+&lt;!-- &lt;figure&gt; --&gt;
+&lt;!--   &lt;img src="img/05/tidy-1.png" alt="Tidy data" title="Tidy data" width="70%"&gt; --&gt;
+&lt;!--   &lt;figcaption&gt;&lt;a href="https://r4ds.had.co.nz/tidy-data.html"&gt;From chapter 12 of &lt;em&gt;R for Data Science&lt;/em&gt;&lt;/a&gt;&lt;/figcaption&gt; --&gt;
+&lt;!-- &lt;/figure&gt; --&gt;
+&lt;!-- ] --&gt;
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # Untidy data example --&gt;
+
+&lt;!-- .box-inv-6[Real world data is often untidy, like this:] --&gt;
+
+&lt;!-- .center[ --&gt;
+&lt;!-- &lt;figure&gt; --&gt;
+&lt;!--   &lt;img src="img/05/untidy-example.png" alt="Example of untidy data" title="Example of untidy data" width="60%"&gt; --&gt;
+&lt;!-- &lt;/figure&gt; --&gt;
+&lt;!-- ] --&gt;
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # Tidy data example --&gt;
+
+&lt;!-- .box-inv-6[Here's the tidy version of that same data:] --&gt;
+
+&lt;!-- .center[ --&gt;
+&lt;!-- &lt;figure&gt; --&gt;
+&lt;!--   &lt;img src="img/05/tidy-example.png" alt="Example of tidy data" title="Example of tidy data" width="50%"&gt; --&gt;
+&lt;!-- &lt;/figure&gt; --&gt;
+&lt;!-- ] --&gt;
+
+&lt;!-- .box-6[This is plottable!] --&gt;
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # Wide vs. long --&gt;
+
+&lt;!-- .box-inv-6[Tidy data is also called "long" data] --&gt;
+
+&lt;!-- .center[ --&gt;
+&lt;!-- &lt;figure&gt; --&gt;
+&lt;!--   &lt;img src="img/05/original-dfs-tidy.png" alt="Example of tidy data" title="Example of tidy data" width="50%"&gt; --&gt;
+&lt;!-- &lt;/figure&gt; --&gt;
+&lt;!-- ] --&gt;
+
+&lt;!-- ??? --&gt;
+
+&lt;!-- Figure by Garrick Aden-Buie in [**tidyexplain**](https://github.com/gadenbuie/tidyexplain) --&gt;
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # Moving from wide to long --&gt;
+
+&lt;!-- .box-inv-6.tiny[Nowadays, `gather()` is called `pivot_longer()` and `spread()` is called `pivot_wider()`] --&gt;
+
+&lt;!-- .center[ --&gt;
+&lt;!-- &lt;img src="img/05/tidyr-spread-gather.gif" alt="Moving from wide to long" title="Moving from wide to long" width="35%"&gt; --&gt;
+&lt;!-- ] --&gt;
+
+&lt;!-- ??? --&gt;
+
+&lt;!-- Figure by Garrick Aden-Buie in [**tidyexplain**](https://github.com/gadenbuie/tidyexplain) --&gt;
+
+
+
 
 
 ---
