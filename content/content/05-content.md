@@ -1,7 +1,7 @@
 ---
 title: "Mapping data to graphics"
 linktitle: "Mapping data to graphics"
-date: "2022-02-21 21:00:21"
+date: "2022-02-21 21:07:48"
 menu:
   content:
     parent: Course content
@@ -25,7 +25,7 @@ output:
 
 
 #### Optional readings
-- <i class="fas fa-book"></i> [Chapter 3: Data visualization](https://r4ds.had.co.nz/data-visualisation.html#statistical-transformations) of *R for Data Science*
+- <i class="fas fa-book"></i> [Chapter 3: Data visualization](https://r4ds.had.co.nz/data-visualisation.html) of *R for Data Science*
 
 <!-- #### Other resources -->
 
