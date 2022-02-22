@@ -647,6 +647,95 @@ vignette("tidy-data")
 [Original paper](https://vita.had.co.nz/papers/tidy-data.pdf) (Hadley Wickham, 2014 JSS)
 
 
+
+
+
+<!-- HERE ARE SOME BITS ON TIDY DATA FROM ANDREW HEISS'S GGPLOT SLIDES -->
+<!-- THE ANIMATIONS ARE PARTICULARLY RELEVANT / HELPFUL FOR THIS -->
+
+<!-- --- -->
+
+<!-- # Tidy data -->
+
+<!-- .box-inv-6[Each variable has its own column] -->
+
+<!-- -- -->
+
+<!-- .box-inv-6[Each observation has its own row] -->
+
+<!-- -- -->
+
+<!-- .box-inv-6[Each value has its own cell] -->
+
+<!-- -- -->
+
+<!-- .center[ -->
+<!-- <figure> -->
+<!--   <img src="img/05/tidy-1.png" alt="Tidy data" title="Tidy data" width="70%"> -->
+<!--   <figcaption><a href="https://r4ds.had.co.nz/tidy-data.html">From chapter 12 of <em>R for Data Science</em></a></figcaption> -->
+<!-- </figure> -->
+<!-- ] -->
+
+<!-- --- -->
+
+<!-- # Untidy data example -->
+
+<!-- .box-inv-6[Real world data is often untidy, like this:] -->
+
+<!-- .center[ -->
+<!-- <figure> -->
+<!--   <img src="img/05/untidy-example.png" alt="Example of untidy data" title="Example of untidy data" width="60%"> -->
+<!-- </figure> -->
+<!-- ] -->
+
+<!-- --- -->
+
+<!-- # Tidy data example -->
+
+<!-- .box-inv-6[Here's the tidy version of that same data:] -->
+
+<!-- .center[ -->
+<!-- <figure> -->
+<!--   <img src="img/05/tidy-example.png" alt="Example of tidy data" title="Example of tidy data" width="50%"> -->
+<!-- </figure> -->
+<!-- ] -->
+
+<!-- .box-6[This is plottable!] -->
+
+<!-- --- -->
+
+<!-- # Wide vs. long -->
+
+<!-- .box-inv-6[Tidy data is also called "long" data] -->
+
+<!-- .center[ -->
+<!-- <figure> -->
+<!--   <img src="img/05/original-dfs-tidy.png" alt="Example of tidy data" title="Example of tidy data" width="50%"> -->
+<!-- </figure> -->
+<!-- ] -->
+
+<!-- ??? -->
+
+<!-- Figure by Garrick Aden-Buie in [**tidyexplain**](https://github.com/gadenbuie/tidyexplain) -->
+
+<!-- --- -->
+
+<!-- # Moving from wide to long -->
+
+<!-- .box-inv-6.tiny[Nowadays, `gather()` is called `pivot_longer()` and `spread()` is called `pivot_wider()`] -->
+
+<!-- .center[ -->
+<!-- <img src="img/05/tidyr-spread-gather.gif" alt="Moving from wide to long" title="Moving from wide to long" width="35%"> -->
+<!-- ] -->
+
+<!-- ??? -->
+
+<!-- Figure by Garrick Aden-Buie in [**tidyexplain**](https://github.com/gadenbuie/tidyexplain) -->
+
+
+
+
+
 ---
 class: inverse, center, middle
 name: joins
