@@ -1,7 +1,7 @@
 ---
 title: "Mapping data to graphics"
 linktitle: "Mapping data to graphics"
-date: "2022-02-23 22:02:56"
+date: "2022-02-23 22:17:09"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -26,6 +26,14 @@ editor_options:
 
 ## Plan for today
 - Questions? :raising_hand_woman:
+- Announcements:
+  - February break logistics:
+    - No office hours on Monday or Tuesday
+    - No class Tuesday
+  - Assignments:
+    - Reflection - Week 5 was due last night
+    - Reflection - Week 6 is due next Wednesday
+    - No lab due Monday due to February break
 - Work through `mapping-data-to-graphics-practice.R`
 
 
