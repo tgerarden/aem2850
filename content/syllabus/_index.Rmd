@@ -260,7 +260,7 @@ assignments <- tribble(
   ~Points,  ~Assignment,
   # 10      , "Class Participation",
   14 * 5  , "Reflections (14 x 5 points each)",
-  14 * 10 , "Labs (14 x 10 points each)",
+  13 * 10 , "Labs (13 x 10 points each)",
   50      , "Mini project 1",
   50      , "Mini project 2",
   130     , "Final project"

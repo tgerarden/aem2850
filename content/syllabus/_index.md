@@ -253,11 +253,11 @@ Each type of assignment will contribute to the final grade as follows:
 |Assignment                       | Points| Percent|
 |:--------------------------------|------:|-------:|
 |Reflections (14 x 5 points each) |     70|     16%|
-|Labs (14 x 10 points each)       |    140|     32%|
-|Mini project 1                   |     50|     11%|
-|Mini project 2                   |     50|     11%|
+|Labs (13 x 10 points each)       |    130|     30%|
+|Mini project 1                   |     50|     12%|
+|Mini project 2                   |     50|     12%|
 |Final project                    |    130|     30%|
-|Total                            |    440|    100%|
+|Total                            |    430|    100%|
 
 
 
