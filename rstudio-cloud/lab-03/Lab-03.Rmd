@@ -1,0 +1,144 @@
+---
+#########################################################
+# Steps to complete this lab:
+#   1. Add your name to the author field of the yaml header
+#   2. Fill in the code chunks and use inline code to answer the questions 
+#   3. Click on "Knit" directly above to render output (or Ctrl/Cmd-Shift-K)
+#   4. Repeat steps 2-3 until you are satisfied with the final product
+#   5. Download the resulting file lab-03.pdf
+#   6. Upload lab-03.pdf to canvas
+#########################################################
+title: "Lab-03"
+author: "Write your name here"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: pdf_document
+urlcolor: blue
+---
+
+```{r setup, include = FALSE}
+library(nycflights13)
+library(tidyverse)
+library(knitr)
+
+```
+
+# Preface
+
+The goal of this assignment is to help you gain more familiarity with using **dplyr** to transform data. In this lab we will continue providing some code snippets to serve as "scaffolding" to help guide you through each step. Over the course of the semester we will provide less scaffolding and more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
+
+## Flights
+
+We will work with the data table `flights` provided in the package **nycflights13**. The data table includes all domestic flights that departed NYC (i.e. JFK, LGA or EWR) in 2013. It has `r ncol(flights)` variables. Details of the package **nycflights13** are available [here](https://github.com/tidyverse/nycflights13). 
+
+``` {r}
+flights
+```
+
+<!--- Please leave the code above unchanged. Questions start from here. --->
+
+## 1. In this data set, `arr_delay` is a variable that records the arrival delays in minutes. Negative times represent early arrivals. Use dplyr::filter to find: (1) the flights that arrived more than two hours late, and (2) the flights that arrived earlier than scheduled. What is the proportion of flights that arrived more than two hours late? What is the proportion of flights that arrived earlier than scheduled time?
+<!-- Tip: Flights that arrived two hours late are those whose arrival delay is larger than 120 minutes. Flights that arrived earlier are those whose arrival delay is negative. -->
+```{r echo = TRUE}
+# Use dplyr::filter to find and count the flights that arrived more than two hours late
+two_hour_late <- flights %>%
+  filter(FALSE) %>%  # Replace FALSE with your code
+  count()
+
+# Use dplyr::filter to find and count the flights that arrived earlier than scheduled
+early_arr <- flights %>%  
+  filter(FALSE) %>%   # Replace FALSE with your code
+  count()
+
+# Count the total number of flights
+total <- count(flights)  
+
+```
+A proportion of `r round(two_hour_late/total, 2)` of the flights arrived more than two hours late. A proportion of `r round(early_arr/total, 2)` of the flights arrived earlier than scheduled time.
+
+
+## 2. How many flights have a missing `dep_time`? What other variables are missing? What might these rows represent?
+<!-- Tip: is.na() can help you find the missing values. Try to combine dplyr::filter with is.na(). -->
+``` {r echo = TRUE}
+flights %>%
+  filter(FALSE) %>% # Replace FALSE with your code
+  count()
+```
+These rows probably represent...
+
+
+## 3. Use at least two ways to select variables of `dep_time`, `sched_dep_time`, `dep_delay`, `arr_time`, `sched_arr_time`, `arr_delay`. Put `arr_delay` in the first column.
+<!-- Tip: Use dplyr::select to select variables. There are a few options: 
+(1) List variable names that you want to choose;
+(2) Use column numbers to index variables;
+(3) Use dplyr::contains to choose variables that contain a certain string; 
+(4) Use dplyr::starts_with or dplyr::ends_with to choose variables that start with or end with certain strings. 
+You can also use dplyr::relocate to reorder columns.
+-->
+
+``` {r echo = TRUE}
+# Method 1
+# Your code goes here
+
+# Method 2
+# Your code goes here
+```
+
+
+## 4. Use dplyr::arrange to sort flights by arrival delays in descending order. How long was the worst arrival delay?
+<!-- Tip: Use dplyr::arrange to sort flights by arrival delays in descending order. Since the worst delay is the first row, you can combine dplyr::filter with dplyr::row_number to get this row. You may use pull() to get the value of this delay time.
+Note: another approach you could take would be to use a conditional statement to filter for the maximum delay without needing to use arrange at all.
+-->
+``` {r echo = TRUE}
+worst_delay <- flights %>%
+  arrange(desc(FALSE)) %>% # sort flights by arrival delays in descending order
+  filter(FALSE) %>% # choose the first row
+  pull(arr_delay) 
+```
+The worst arrival delay was `inline code` minutes.
+
+
+## 5. Select `air_time` and `distance`. Generate a new varible `speed` that is calculated as `distance` divided by `air_time` (in miles/min). Then create a variable `mph` that contains speed in miles/hour.
+<!-- Tip: Use dplyr::mutate to generate this new variable. 
+-->
+``` {r echo = TRUE}
+flights %>%
+  select() %>%  # select `air_time` and `distance` here
+  mutate( # create a new variable `speed`
+    )  # create a new variable `mph`
+```
+
+
+## 6. Select `dep_time`. Currently `dep_time` is convenient to look at, but hard to compute with because it is not really a continuous number. Convert it to a more convenient representation of number of minutes since midnight. Add a new column `dep_time_min` to store the converted values.
+<!-- Tip: To get the departure times in the number of minutes, divide dep_time by 100 to get the hours since midnight and multiply by 60 and add the remainder of dep_time divided by 100. For example, 1504 represents 15:04 (or 3:04 PM), which is 904 minutes after midnight. To generalize this approach, you can use %/% and %% to split out the hour-digits from the minute-digits.
+The integer division operator %/% can give us the hour-digits: 1504 %/% 100 = 15
+The modulo operator %% can give us the minute-digits: 1504 %% 100 = 4
+-->
+
+``` {r echo = TRUE}
+# Your code goes here
+flights %>%
+  select() %>%
+  mutate(dep_hour = FALSE) %>% # split out the hour-digits
+  mutate(dep_min = FALSE) %>% # split out the minute-digits
+  mutate(dep_time_min = dep_hour * 60 + dep_min) # generate dep_time in the number of minutes since midnight
+```
+
+
+## 7. Calculate the average arrival delay by carrier. Which carrier has the worst delays? 
+<!-- Tip: Combine dplyr::group_by and dplyr::summarise to find the average arrival delay by carrier. Be careful! There are missing values in arr_delay. You want to ignore these missing values when calculating the mean. You can use mean(, na.rm = TRUE). 
+Note: dplyr::summarise and dplyr::summarize are synonyms, so you can use whichever you are most comfortable with.-->
+``` {r echo = TRUE}
+worst_delay_carrier <- flights %>%
+  group_by() %>%
+  summarise() %>%
+  arrange() %>%
+  filter() 
+```
+Carrier `inline code` has the worst delays.
+
+
+## 8. What time of day should you fly if you want to avoid delays as much as possible?
+``` {r echo = TRUE}
+# Your code goes here
+```
+The best time to fly to avoid delays is...
