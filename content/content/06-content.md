@@ -1,7 +1,7 @@
 ---
 title: "Amounts and proportions"
 linktitle: "Amounts and proportions"
-date: "2022-03-01 11:55:42"
+date: "2022-03-01 17:22:50"
 menu:
   content:
     parent: Course content
@@ -33,7 +33,6 @@ output:
 ### Guiding questions
 
 - How can bar charts help or hinder our ability to understand amounts?
-<!-- - Why should bar charts start at zero? -->
 - What are the pros and cons of grouped bars?
 - When are stacked bars useful?
 - What are some pros and cons of pie charts, stacked bars, and side-by-side bars for visualizing proportions?
