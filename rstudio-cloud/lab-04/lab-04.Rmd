@@ -111,6 +111,7 @@ The top three cities with the largest average population over 2010-2019 are `r t
 ```{r echo = TRUE}
 top3_sales <- tidy_txhouse %>% 
   semi_join() %>% 
+  filter() %>% 
   group_by() %>% 
   summarize() %>%
   arrange(desc())
