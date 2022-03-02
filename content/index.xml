@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 01 Mar 2022 17:22:50 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Amounts and proportions</title><link>https://aem2850.toddgerarden.com/content/06-content/</link><pubDate>Tue, 01 Mar 2022 17:22:50 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/06-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 02 Mar 2022 11:56:34 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Amounts</title><link>https://aem2850.toddgerarden.com/content/06-content/</link><pubDate>Wed, 02 Mar 2022 11:56:34 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/06-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-amounts.html" target="_blank" rel="noopener">Chapter 6: Visualizing amounts&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-proportions.html" target="_blank" rel="noopener">Chapter 10: Visualizing proportions&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
 &lt;/ul>
 &lt;!-- #### Optional readings -->
 &lt;!-- - &lt;i class="fas fa-external-link-square-alt">&lt;/i> [Engaging Readers with Square Pie/Waffle Charts](https://eagereyes.org/blog/2008/engaging-readers-with-square-pie-waffle-charts) -->
@@ -11,7 +10,6 @@
 &lt;li>How can bar charts help or hinder our ability to understand amounts?&lt;/li>
 &lt;li>What are the pros and cons of grouped bars?&lt;/li>
 &lt;li>When are stacked bars useful?&lt;/li>
-&lt;li>What are some pros and cons of pie charts, stacked bars, and side-by-side bars for visualizing proportions?&lt;/li>
 &lt;/ul>
 &lt;!-- ### Slides -->
 &lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
