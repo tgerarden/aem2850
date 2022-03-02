@@ -60,7 +60,7 @@ lessons:
     header: False
 
 
-  - title: '<span class="content-title">Amounts and proportions</span>'
+  - title: '<span class="content-title">Amounts</span>'
     session: "Session 6"
     date: "Week 6"
     # date_start: "June 21"
@@ -70,7 +70,7 @@ lessons:
     assignment: "06-lab"
     bg: 1
 
-  - title: '<span class="content-title">Themes</span>'
+  - title: '<span class="content-title">Proportions</span>'
     session: "Session 7"
     date: "Week 7"
     # date_start: "June 28"

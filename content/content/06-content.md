@@ -1,7 +1,7 @@
 ---
-title: "Amounts and proportions"
-linktitle: "Amounts and proportions"
-date: "2022-03-01 17:22:50"
+title: "Amounts"
+linktitle: "Amounts"
+date: "2022-03-02 11:56:34"
 menu:
   content:
     parent: Course content
@@ -20,7 +20,6 @@ output:
 ### Readings
 
 - <i class="fas fa-book"></i> [Chapter 6: Visualizing amounts](https://clauswilke.com/dataviz/visualizing-amounts.html) of *Fundamentals of Data Visualization*
-- <i class="fas fa-book"></i> [Chapter 10: Visualizing proportions](https://clauswilke.com/dataviz/visualizing-proportions.html) of *Fundamentals of Data Visualization*
 
 
 <!-- #### Optional readings -->
@@ -35,7 +34,6 @@ output:
 - How can bar charts help or hinder our ability to understand amounts?
 - What are the pros and cons of grouped bars?
 - When are stacked bars useful?
-- What are some pros and cons of pie charts, stacked bars, and side-by-side bars for visualizing proportions?
 
 
 <!-- ### Slides -->
