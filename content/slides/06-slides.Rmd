@@ -1,0 +1,722 @@
+---
+title: "Amounts"
+author: "Todd Gerarden"
+output:
+  xaringan::moon_reader:
+    lib_dir: "libs"
+    css: ["xaringan-themer.css", "css/tdg-slides.css"]
+#    css: ['default', 'metropolis', 'metropolis-fonts']
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%"
+      ratio: "16:9"
+      navigation:
+        scroll: false
+      # beforeInit: "libs/offline-mathjax.js"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(base_color = "#B31B1B",
+                  text_font_size = "1.4rem")
+xaringanExtra::use_xaringan_extra(c("tile_view"))
+```
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(warning = FALSE, message = FALSE, 
+                      #cache = TRUE,
+                      fig.retina = 3, fig.align = "center",
+                      fig.width=14, fig.height=7)
+```
+
+```{r packages-data, include=FALSE}
+library(tidyverse)
+```
+
+class: center middle main-title section-title-4
+
+# Amounts
+
+.class-info[
+
+**Week 6**
+
+AEM 2850: R for Business Analytics<br>
+Cornell Dyson<br>
+Spring 2022
+
+Acknowledgements: 
+[Andrew Heiss](https://datavizm20.classes.andrewheiss.com), 
+[Claus Wilke](https://wilkelab.org/SDS375/)
+<!-- [Grant McDermott](https://github.com/uo-ec607/lectures), -->
+<!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), -->
+<!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) -->
+
+]
+
+---
+
+# Announcements
+
+I hope you had a restorative February break
+
+Today we will cover slides and an example
+- Next lab is due Monday
+
+We will provide details on the first project in the next 0-1 weeks
+
+Questions before we get started?
+
+
+---
+
+# Plan for today
+
+[Prologue](#prologue)
+
+[Amounts](#amounts)
+
+[Plotting amounts using ggplot](#plotting-amounts)
+
+[example-06](#example)
+
+---
+class: inverse, center, middle
+name: prologue
+
+# Prologue
+
+---
+
+# R Markdown in real life
+
+.pull-left.center[
+
+<figure>
+  <img src="img/06/airbnb.png" alt="Airbnb's data science tools" title="Airbnb's data science tools" width="100%">
+</figure>
+
+.small[[Airbnb, ggplot, and rmarkdown](https://peerj.com/preprints/3182/)]
+
+]
+
+.pull-right.center[
+
+&nbsp;
+
+<figure>
+  <img src="img/06/uk-long.png" alt="UK Statistics pipeline" title="UK Statistics pipeline" width="100%">
+</figure>
+
+<figure>
+  <img src="img/06/uk-short.png" alt="UK Statistics pipeline, short" title="UK Statistics pipeline, short" width="55%">
+</figure>
+
+.small[[The UK's reproducible analysis pipeline](https://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/)]
+
+]
+
+???
+
+https://peerj.com/preprints/3182.pdf + https://gdsdata.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/ 
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+# Remember our concentrations?
+
+How might we visualize these data?
+
+.pull-left[
+```{r, echo = FALSE}
+load("data/survey-responses/survey-data.RData")
+concentrations %>% select(-response) %>% 
+  summarize_all(sum, na.rm = TRUE) %>% 
+  pivot_longer(everything(), names_to = "concentration", values_to = "count") %>% 
+  arrange(desc(count))
+```
+]
+
+--
+
+.pull-right[
+```{r, echo = FALSE}
+concentrations %>% select(-response) %>% 
+  summarize_all(sum, na.rm = TRUE) %>% 
+  pivot_longer(everything(), names_to = "concentration", values_to = "count") %>% 
+  ggplot(aes(x = fct_reorder(concentration, -count), y = count)) +
+  geom_col() +
+  theme_xaringan(text_font_size = 38) +
+  theme(axis.title.y = element_text(size = 40)) +
+  labs(x = NULL,
+       y = "Number of Concentrators")
+```
+]
+
+
+---
+
+# We could do the same thing with sports
+
+```{r, echo = FALSE}
+as_tibble(sports) %>% 
+  filter(!is.na(value)) %>% 
+  ggplot(aes(y = fct_rev(fct_infreq(value)))) + 
+  geom_bar() +
+  theme_xaringan(text_font_size = 38) +
+  theme(axis.title.y = element_text(size = 40)) +
+  labs(x = "Number of Fans",
+       y = NULL)
+```
+
+
+---
+
+# What are our favorite public companies?
+
+--
+
+```{r, echo = FALSE}
+companies %>%
+  filter(!is.na(company)) %>%
+  ggplot(aes(y = fct_rev(fct_infreq(company)))) +
+  geom_bar() +
+  theme_xaringan(text_font_size = 24) +
+  theme(axis.title.y = element_text(size = 40)) +
+  labs(x = "Number of Potential Investors?",
+       y = NULL)
+```
+
+
+
+
+---
+
+class: inverse, center, middle
+name: amounts
+
+# Amounts
+
+---
+
+# Yay bar plots!
+
+We are a lot better at visualizing line lengths than angles and areas
+
+.pull-left[
+
+```{r example-pie, echo=FALSE, fig.dim=c(4.8, 3), out.width="100%"}
+# example_df <- tribble(
+#   ~group, ~count,
+#   "President", 21,
+#   "Prime minister", 24,
+#   "King", 45,
+#   "General", 10
+# ) %>% 
+#   arrange(desc(count)) %>% 
+#   mutate(group = fct_inorder(group))
+
+# ggplot(example_df, aes(x = "", y = count, fill = group)) +
+#   geom_col() +
+#   coord_polar(theta = "y") +
+#   labs(fill = "Head of state") +
+#   theme_void()
+
+example_df <- concentrations %>% select(-response) %>% 
+  summarize_all(sum, na.rm = TRUE) %>% 
+  pivot_longer(everything(), names_to = "group", values_to = "count")
+
+ggplot(example_df, aes(x = "", y = count, fill = group)) +
+  geom_col() +
+  coord_polar(theta = "y") +
+  labs(fill = "Concentration") +
+  theme_void()
+
+```
+
+]
+
+--
+
+.pull-right[
+
+```{r example-bar, echo=FALSE, fig.dim=c(4.8, 3), out.width="100%"}
+ggplot(example_df, aes(x = fct_reorder(group, -count), y = count, fill = group)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = "Concentration", y = "Number of Concentrators") +
+  theme_minimal()
+```
+
+]
+
+---
+
+# Oh no bar plots!
+
+.center[
+<figure>
+  <img src="img/06/obamacareenrollment-fncchart.jpg" alt="Fox News Obamacare enrollment" title="Fox News Obamacare enrollment" width="85%">
+</figure>
+]
+
+---
+
+# What went wrong?
+
+.center[
+<figure>
+  <img src="img/06/obamacareenrollment-fncchart.jpg" alt="Fox News Obamacare enrollment" title="Fox News Obamacare enrollment" width="85%">
+</figure>
+]
+
+---
+
+# What went wrong?
+
+.pull-left.center[
+<figure>
+  <img src="img/06/female-height.png" alt="Average female height per country" title="Average female height per country" width="100%">
+</figure>
+]
+
+--
+
+.pull-right[
+
+**At least two problems:**
+
+1. truncated y axis
+2. area scales faster than height
+
+.small[This terrible figure was brought to us by one of you, thanks!]
+]
+
+---
+
+# Bar plots and summary statistics
+
+.pull-left[
+
+```{r animal-weight-bar, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
+set.seed(1234)
+animals <- tibble(animal = c(rep(c("Small cat", "Big cat"), each = 250), rep("Dog", 500))) %>% 
+  mutate(weight = case_when(
+    animal == "Small cat" ~ rnorm(n(), 20, 5),
+    animal == "Big cat" ~ rnorm(n(), 60, 5),
+    animal == "Dog" ~ rnorm(n(), 40, 10)
+  )) %>% 
+  mutate(animal_type = ifelse(str_detect(animal, "cat"), "Cats", "Dogs"))
+
+animals_mean <- animals %>% 
+  group_by(animal_type) %>% 
+  summarize(avg_weight = mean(weight))
+
+ggplot(animals_mean, aes(x = animal_type, y = avg_weight, fill = animal_type)) + 
+  geom_col() +
+  labs(x = NULL, y = "Average Weight") +
+  ylim(0, 75) +
+  guides(fill = "none")
+```
+
+]
+
+--
+
+.pull-right[
+
+```{r animal-weight-points, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
+ggplot(animals, aes(x = animal_type, y = weight, color = animal_type)) +
+  geom_point(size = 1) +
+  stat_summary(geom = "point", fun = "mean", size = 5, color = "darkred") +
+  labs(x = NULL, y = "Weight") +
+  ylim(0, 75) +
+  guides(color = "none")
+```
+
+]
+
+---
+
+# Show more data with strip plots
+
+.left-code[
+```{r strip-plot-basic, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
+ggplot(animals, 
+       aes(x = animal_type, 
+           y = weight, 
+           color = animal_type)) +
+  geom_point() + #<<
+  labs(x = NULL, y = "Weight") +
+  guides(color = "none")
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("strip-plot-basic", "png")`)
+]
+
+
+---
+
+# Jittering and transparency can also help
+
+.left-code[
+```{r strip-plot, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
+ggplot(animals, 
+       aes(x = animal_type, 
+           y = weight, 
+           color = animal_type)) +
+  geom_point(position = position_jitter(), #<<
+             size = 1, #<<
+             alpha = 0.5) + #<<
+  labs(x = NULL, y = "Weight") +
+  guides(color = "none")
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("strip-plot", "png")`)
+]
+
+---
+
+# General rules for bar charts
+
+Useful when the length of the bar is all that matters
+
+--
+
+Bar charts should always start at zero
+- Or: don't use bars!
+
+--
+
+Don't use bars for summary statistics. You throw away too much information.
+- We will come back to visualizing distributions / uncertainty
+
+
+---
+class: inverse, center, middle
+name: plotting-amounts
+
+# Plotting amounts using ggplot
+
+---
+
+# Plotting amounts using ggplot
+
+We'll use a summarized version of the gapminder dataset for examples
+
+```{r }
+library(gapminder)
+gapminder_continents <- gapminder %>% 
+  filter(year == 2007) %>%  # only look at 2007
+  count(continent) %>%  # get a count of continents
+  arrange(desc(n))  # sort by count, descending
+gapminder_continents
+```
+
+---
+
+# Start with a simple bar plot
+
+.left-code.small-code[
+
+```{r gapminder-bars, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+ggplot(data = gapminder_continents,
+       aes(x = continent, # map continent to x
+           y = n)) + # map n (num countries) to y
+  geom_col() # add bars
+```
+How could we improve this?
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("gapminder-bars", "png")`)
+
+]
+
+---
+
+# Add some color and labels
+
+.left-code.small-code[
+
+```{r gapminder-bars-colored, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+ggplot(gapminder_continents, 
+       aes(x = continent, y = n, 
+           fill = continent)) + #<<
+  geom_col() +
+  guides(fill = "none") + # omit fill legend #<<
+  labs(x = NULL, y = "Number of countries") #<<
+```
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("gapminder-bars-colored", "png")`)
+
+]
+
+---
+
+# Order by data value
+
+.left-code.small-code[
+
+```{r gapminder-bars-ordered, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+ggplot(gapminder_continents, 
+       aes(x = fct_reorder(continent, n),  #<<
+           y = n, fill = continent)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("gapminder-bars-ordered", "png")`)
+
+]
+
+---
+
+# Order by data value, descending
+
+.left-code.small-code[
+
+```{r gapminder-bars-reversed, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+ggplot(gapminder_continents, 
+       aes(x = fct_reorder(continent, -n), #<<
+           y = n, fill = continent)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("gapminder-bars-reversed", "png")`)
+
+]
+
+---
+
+# Another option is to encode order in the data
+
+.left-code.small-code[
+
+```{r gapminder-bars-fct_inorder, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+# use `fct_inorder` to order levels of continent 
+# based on how they appear in the data
+gapminder_ordered <- gapminder_continents %>% 
+  arrange(desc(n)) %>% # sort by count, descending
+  mutate(continent = fct_inorder(continent)) #<<
+ggplot(gapminder_ordered, 
+       aes(x = continent, #<<
+           y = n, fill = continent)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("gapminder-bars-fct_inorder", "png")`)
+
+]
+
+---
+
+# Wait, what about geom_bar?
+
+Use `geom_bar` to count and plot in one step
+
+.left-code[
+
+```{r geom_bar, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder %>% 
+  filter(year == 2007) %>%
+  ggplot(aes(x = continent, # note: no y aesthetic defined
+           fill = continent)) +
+  geom_bar() + #<<
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("geom_bar", "png")`)
+
+]
+
+---
+
+# Wait, what about geom_bar?
+
+Here we can reorder by frequency using `fct_infreq`
+
+.left-code[
+
+```{r geom_bar-ordered, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder %>% 
+  filter(year == 2007) %>%
+  ggplot(aes(x = fct_infreq(continent), #<<
+           fill = continent)) +
+  geom_bar() + #<<
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("geom_bar-ordered", "png")`)
+
+]
+
+---
+
+# We can also flip geom_col/bar axes
+
+.left-code[
+
+```{r geom_bar-y, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder %>% 
+  filter(year == 2007) %>%
+  ggplot(aes(y = fct_rev(fct_infreq(continent)), #<<
+           fill = continent)) +
+  geom_bar() + 
+  guides(fill = "none") +
+  labs(x = "Number of countries", y = NULL) #<<
+```
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("geom_bar-y", "png")`)
+
+]
+
+---
+
+# Grouped bar charts
+
+Use grouped bars for higher dimensional datasets
+
+Facets are another option we saw last week
+
+
+
+---
+
+# Alternatives: Lollipop charts
+
+Since the end of the bar is important, emphasize it the most
+
+.left-code[
+
+```{r lollipop, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+ggplot(gapminder_ordered,
+       aes(x = continent, y = n, 
+           color = continent)) +
+  geom_pointrange(aes(ymin = 0, ymax = n)) +
+  guides(color = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("lollipop", "png")`)
+
+]
+
+---
+
+# Alternatives: Waffle charts
+
+Show individual observations as squares
+
+.left-code[
+
+```{r waffle, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+# This has to be installed in a special way
+# install.packages("devtools") # do this once
+# devtools::install_github("hrbrmstr/waffle") # do this once
+library(waffle) # for geom_waffle
+
+ggplot(gapminder_ordered,
+       aes(x = continent, y = n, 
+           fill = continent)) +
+  geom_waffle(aes(values = n),  # waffle aesthetic
+              n_rows = 9,  # waffle options
+              flip = TRUE) +
+  labs(fill = NULL) +
+  coord_equal() +  # make all the squares square
+  theme_void()  # use a completely empty theme
+```
+
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("waffle", "png")`)
+
+]
+
+
+---
+
+# Alternatives: Dots instead of bars
+
+Dots are preferable if we want to truncate the axes
+
+.left-code[
+
+```{r dots, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder %>% 
+  filter(year == 2007, continent == "Americas") %>% 
+  ggplot(aes(x = lifeExp, 
+             y = fct_reorder(country, lifeExp))) +
+  geom_point() +
+  guides(color = "none") +
+  labs(x = "Life expectancy (years)", y = NULL) +
+  theme_minimal()
+```
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("dots", "png")`)
+
+]
+
+---
+class: inverse, center, middle
+name: example
+
+# example-06
+
