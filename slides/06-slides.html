@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Amounts</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Todd Gerarden" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/tdg-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+class: center middle main-title section-title-4
+
+# Amounts
+
+.class-info[
+
+**Week 6**
+
+AEM 2850: R for Business Analytics&lt;br&gt;
+Cornell Dyson&lt;br&gt;
+Spring 2022
+
+Acknowledgements: 
+[Andrew Heiss](https://datavizm20.classes.andrewheiss.com), 
+[Claus Wilke](https://wilkelab.org/SDS375/)
+&lt;!-- [Grant McDermott](https://github.com/uo-ec607/lectures), --&gt;
+&lt;!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), --&gt;
+&lt;!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) --&gt;
+
+]
+
+---
+
+# Announcements
+
+I hope you had a restorative February break
+
+Today we will cover slides and an example
+- Next lab is due Monday
+
+We will provide details on the first project in the next 0-1 weeks
+
+Questions before we get started?
+
+
+---
+
+# Plan for today
+
+[Prologue](#prologue)
+
+[Amounts](#amounts)
+
+[Plotting amounts using ggplot](#plotting-amounts)
+
+[example-06](#example)
+
+---
+class: inverse, center, middle
+name: prologue
+
+# Prologue
+
+---
+
+# R Markdown in real life
+
+.pull-left.center[
+
+&lt;figure&gt;
+  &lt;img src="img/06/airbnb.png" alt="Airbnb's data science tools" title="Airbnb's data science tools" width="100%"&gt;
+&lt;/figure&gt;
+
+.small[[Airbnb, ggplot, and rmarkdown](https://peerj.com/preprints/3182/)]
+
+]
+
+.pull-right.center[
+
+&amp;nbsp;
+
+&lt;figure&gt;
+  &lt;img src="img/06/uk-long.png" alt="UK Statistics pipeline" title="UK Statistics pipeline" width="100%"&gt;
+&lt;/figure&gt;
+
+&lt;figure&gt;
+  &lt;img src="img/06/uk-short.png" alt="UK Statistics pipeline, short" title="UK Statistics pipeline, short" width="55%"&gt;
+&lt;/figure&gt;
+
+.small[[The UK's reproducible analysis pipeline](https://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/)]
+
+]
+
+???
+
+https://peerj.com/preprints/3182.pdf + https://gdsdata.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/ 
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+# Remember our concentrations?
+
+How might we visualize these data?
+
+.pull-left[
+
+```
+## # A tibble: 7 × 2
+##   concentration count
+##   &lt;chr&gt;         &lt;int&gt;
+## 1 ba               21
+## 2 finance          19
+## 3 strategy          4
+## 4 enviro            3
+## 5 accounting        2
+## 6 entr              2
+## 7 food              2
+```
+]
+
+--
+
+.pull-right[
+&lt;img src="06-slides_files/figure-html/unnamed-chunk-2-1.png" width="1008" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+# We could do the same thing with sports
+
+&lt;img src="06-slides_files/figure-html/unnamed-chunk-3-1.png" width="1008" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# What are our favorite public companies?
+
+--
+
+&lt;img src="06-slides_files/figure-html/unnamed-chunk-4-1.png" width="1008" style="display: block; margin: auto;" /&gt;
+
+
+
+
+---
+
+class: inverse, center, middle
+name: amounts
+
+# Amounts
+
+---
+
+# Yay bar plots!
+
+We are a lot better at visualizing line lengths than angles and areas
+
+.pull-left[
+
+&lt;img src="06-slides_files/figure-html/example-pie-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+--
+
+.pull-right[
+
+&lt;img src="06-slides_files/figure-html/example-bar-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Oh no bar plots!
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/06/obamacareenrollment-fncchart.jpg" alt="Fox News Obamacare enrollment" title="Fox News Obamacare enrollment" width="85%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# What went wrong?
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/06/obamacareenrollment-fncchart.jpg" alt="Fox News Obamacare enrollment" title="Fox News Obamacare enrollment" width="85%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# What went wrong?
+
+.pull-left.center[
+&lt;figure&gt;
+  &lt;img src="img/06/female-height.png" alt="Average female height per country" title="Average female height per country" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+--
+
+.pull-right[
+
+**At least two problems:**
+
+1. truncated y axis
+2. area scales faster than height
+
+.small[This terrible figure was brought to us by one of you, thanks!]
+]
+
+---
+
+# Bar plots and summary statistics
+
+.pull-left[
+
+&lt;img src="06-slides_files/figure-html/animal-weight-bar-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+--
+
+.pull-right[
+
+&lt;img src="06-slides_files/figure-html/animal-weight-points-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Show more data with strip plots
+
+.left-code[
+
+```r
+ggplot(animals, 
+       aes(x = animal_type, 
+           y = weight, 
+           color = animal_type)) +
+* geom_point() +
+  labs(x = NULL, y = "Weight") +
+  guides(color = "none")
+```
+]
+
+.right-plot[
+![](06-slides_files/figure-html/strip-plot-basic-1.png)
+]
+
+
+---
+
+# Jittering and transparency can also help
+
+.left-code[
+
+```r
+ggplot(animals, 
+       aes(x = animal_type, 
+           y = weight, 
+           color = animal_type)) +
+* geom_point(position = position_jitter(),
+*            size = 1,
+*            alpha = 0.5) +
+  labs(x = NULL, y = "Weight") +
+  guides(color = "none")
+```
+]
+
+.right-plot[
+![](06-slides_files/figure-html/strip-plot-1.png)
+]
+
+---
+
+# General rules for bar charts
+
+Useful when the length of the bar is all that matters
+
+--
+
+Bar charts should always start at zero
+- Or: don't use bars!
+
+--
+
+Don't use bars for summary statistics. You throw away too much information.
+- We will come back to visualizing distributions / uncertainty
+
+
+---
+class: inverse, center, middle
+name: plotting-amounts
+
+# Plotting amounts using ggplot
+
+---
+
+# Plotting amounts using ggplot
+
+We'll use a summarized version of the gapminder dataset for examples
+
+
+```r
+library(gapminder)
+gapminder_continents &lt;- gapminder %&gt;% 
+  filter(year == 2007) %&gt;%  # only look at 2007
+  count(continent) %&gt;%  # get a count of continents
+  arrange(desc(n))  # sort by count, descending
+gapminder_continents
+```
+
+```
+## # A tibble: 5 × 2
+##   continent     n
+##   &lt;fct&gt;     &lt;int&gt;
+## 1 Africa       52
+## 2 Asia         33
+## 3 Europe       30
+## 4 Americas     25
+## 5 Oceania       2
+```
+
+---
+
+# Start with a simple bar plot
+
+.left-code.small-code[
+
+
+```r
+ggplot(data = gapminder_continents,
+       aes(x = continent, # map continent to x
+           y = n)) + # map n (num countries) to y
+  geom_col() # add bars
+```
+How could we improve this?
+]
+
+.right-plot[
+
+![](06-slides_files/figure-html/gapminder-bars-1.png)
+
+]
+
+---
+
+# Add some color and labels
+
+.left-code.small-code[
+
+
+```r
+ggplot(gapminder_continents, 
+       aes(x = continent, y = n, 
+*          fill = continent)) +
+  geom_col() +
+* guides(fill = "none") + # omit fill legend
+* labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](06-slides_files/figure-html/gapminder-bars-colored-1.png)
+
+]
+
+---
+
+# Order by data value
+
+.left-code.small-code[
+
+
+```r
+ggplot(gapminder_continents, 
+*      aes(x = fct_reorder(continent, n),
+           y = n, fill = continent)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](06-slides_files/figure-html/gapminder-bars-ordered-1.png)
+
+]
+
+---
+
+# Order by data value, descending
+
+.left-code.small-code[
+
+
+```r
+ggplot(gapminder_continents, 
+*      aes(x = fct_reorder(continent, -n),
+           y = n, fill = continent)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](06-slides_files/figure-html/gapminder-bars-reversed-1.png)
+
+]
+
+---
+
+# Another option is to encode order in the data
+
+.left-code.small-code[
+
+
+```r
+# use `fct_inorder` to order levels of continent 
+# based on how they appear in the data
+gapminder_ordered &lt;- gapminder_continents %&gt;% 
+  arrange(desc(n)) %&gt;% # sort by count, descending
+* mutate(continent = fct_inorder(continent))
+ggplot(gapminder_ordered, 
+*      aes(x = continent,
+           y = n, fill = continent)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](06-slides_files/figure-html/gapminder-bars-fct_inorder-1.png)
+
+]
+
+---
+
+# Wait, what about geom_bar?
+
+Use `geom_bar` to count and plot in one step
+
+.left-code[
+
+
+```r
+gapminder %&gt;% 
+  filter(year == 2007) %&gt;%
+  ggplot(aes(x = continent, # note: no y aesthetic defined
+           fill = continent)) +
+* geom_bar() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](06-slides_files/figure-html/geom_bar-1.png)
+
+]
+
+---
+
+# Wait, what about geom_bar?
+
+Here we can reorder by frequency using `fct_infreq`
+
+.left-code[
+
+
+```r
+gapminder %&gt;% 
+  filter(year == 2007) %&gt;%
+* ggplot(aes(x = fct_infreq(continent),
+           fill = continent)) +
+* geom_bar() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](06-slides_files/figure-html/geom_bar-ordered-1.png)
+
+]
+
+---
+
+# We can also flip geom_col/bar axes
+
+.left-code[
+
+
+```r
+gapminder %&gt;% 
+  filter(year == 2007) %&gt;%
+* ggplot(aes(y = fct_rev(fct_infreq(continent)),
+           fill = continent)) +
+  geom_bar() + 
+  guides(fill = "none") +
+* labs(x = "Number of countries", y = NULL)
+```
+]
+
+.right-plot[
+
+![](06-slides_files/figure-html/geom_bar-y-1.png)
+
+]
+
+---
+
+# Grouped bar charts
+
+Use grouped bars for higher dimensional datasets
+
+Facets are another option we saw last week
+
+
+
+---
+
+# Alternatives: Lollipop charts
+
+Since the end of the bar is important, emphasize it the most
+
+.left-code[
+
+
+```r
+ggplot(gapminder_ordered,
+       aes(x = continent, y = n, 
+           color = continent)) +
+  geom_pointrange(aes(ymin = 0, ymax = n)) +
+  guides(color = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](06-slides_files/figure-html/lollipop-1.png)
+
+]
+
+---
+
+# Alternatives: Waffle charts
+
+Show individual observations as squares
+
+.left-code[
+
+
+```r
+# This has to be installed in a special way
+# install.packages("devtools") # do this once
+# devtools::install_github("hrbrmstr/waffle") # do this once
+library(waffle) # for geom_waffle
+
+ggplot(gapminder_ordered,
+       aes(x = continent, y = n, 
+           fill = continent)) +
+  geom_waffle(aes(values = n),  # waffle aesthetic
+              n_rows = 9,  # waffle options
+              flip = TRUE) +
+  labs(fill = NULL) +
+  coord_equal() +  # make all the squares square
+  theme_void()  # use a completely empty theme
+```
+
+]
+
+.right-plot[
+
+![](06-slides_files/figure-html/waffle-1.png)
+
+]
+
+
+---
+
+# Alternatives: Dots instead of bars
+
+Dots are preferable if we want to truncate the axes
+
+.left-code[
+
+
+```r
+gapminder %&gt;% 
+  filter(year == 2007, continent == "Americas") %&gt;% 
+  ggplot(aes(x = lifeExp, 
+             y = fct_reorder(country, lifeExp))) +
+  geom_point() +
+  guides(color = "none") +
+  labs(x = "Life expectancy (years)", y = NULL) +
+  theme_minimal()
+```
+]
+
+.right-plot[
+
+![](06-slides_files/figure-html/dots-1.png)
+
+]
+
+---
+class: inverse, center, middle
+name: example
+
+# example-06
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
