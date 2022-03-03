@@ -26,7 +26,7 @@ editor_options:
 
 ## Plan for today
 - Questions? :raising_hand_woman:
-- Go through this week's [slides](/06-content)
+- Go through this week's [slides](/content/06-content)
 - Work through `amounts-practice.R`
 
 
