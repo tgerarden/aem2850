@@ -1,7 +1,7 @@
 ---
 title: "Amounts"
 linktitle: "Amounts"
-date: "2022-03-03 08:47:47"
+date: "2022-03-03 09:09:50"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -26,7 +26,7 @@ editor_options:
 
 ## Plan for today
 - Questions? :raising_hand_woman:
-- Go through this week's [slides](/content/06-content)
+- Go through this week's [slides](/content/06-content/)
 - Work through `amounts-practice.R`
 
 
