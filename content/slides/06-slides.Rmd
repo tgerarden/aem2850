@@ -443,7 +443,7 @@ gapminder_continents
 ggplot(data = gapminder_continents,
        aes(x = continent, # map continent to x
            y = n)) + # map n (num countries) to y
-  geom_col() # add bars
+  geom_col() # add bars #<<
 ```
 How could we improve this?
 ]
@@ -456,23 +456,72 @@ How could we improve this?
 
 ---
 
-# Add some color and labels
+# Add some color
+
+.left-code.small-code[
+
+```{r gapminder-bars-colored-legend, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+ggplot(gapminder_continents, 
+       aes(x = continent, y = n, 
+           fill = continent)) + # color bars #<<
+  geom_col()
+```
+
+Do we need the fill legend?
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("gapminder-bars-colored-legend", "png")`)
+
+]
+
+---
+
+# Add some color
 
 .left-code.small-code[
 
 ```{r gapminder-bars-colored, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
 ggplot(gapminder_continents, 
        aes(x = continent, y = n, 
-           fill = continent)) + #<<
+           fill = continent)) +
   geom_col() +
-  guides(fill = "none") + # omit fill legend #<<
-  labs(x = NULL, y = "Number of countries") #<<
+  guides(fill = "none") # omit fill legend #<<
 ```
+
+Is "n" a good axis title?
+
+Do we need "continent" at all?
 ]
 
 .right-plot[
 
 ![](`r knitr::fig_chunk("gapminder-bars-colored", "png")`)
+
+]
+
+---
+
+# Add some labels
+
+.left-code.small-code[
+
+```{r gapminder-bars-labeled, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+ggplot(gapminder_continents, 
+       aes(x = continent, y = n, 
+           fill = continent)) + 
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries") #<<
+```
+
+Is alphabetical the best ordering?
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("gapminder-bars-labeled", "png")`)
 
 ]
 

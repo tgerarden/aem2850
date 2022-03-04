@@ -358,7 +358,7 @@ gapminder_continents
 ggplot(data = gapminder_continents,
        aes(x = continent, # map continent to x
            y = n)) + # map n (num countries) to y
-  geom_col() # add bars
+* geom_col() # add bars
 ```
 How could we improve this?
 ]
@@ -371,7 +371,7 @@ How could we improve this?
 
 ---
 
-# Add some color and labels
+# Add some color
 
 .left-code.small-code[
 
@@ -379,16 +379,67 @@ How could we improve this?
 ```r
 ggplot(gapminder_continents, 
        aes(x = continent, y = n, 
-*          fill = continent)) +
-  geom_col() +
-* guides(fill = "none") + # omit fill legend
-* labs(x = NULL, y = "Number of countries")
+*          fill = continent)) + # color bars
+  geom_col()
 ```
+
+Do we need the fill legend?
+]
+
+.right-plot[
+
+![](06-slides_files/figure-html/gapminder-bars-colored-legend-1.png)
+
+]
+
+---
+
+# Add some color
+
+.left-code.small-code[
+
+
+```r
+ggplot(gapminder_continents, 
+       aes(x = continent, y = n, 
+           fill = continent)) +
+  geom_col() +
+* guides(fill = "none") # omit fill legend
+```
+
+Is "n" a good axis title?
+
+Do we need "continent" at all?
 ]
 
 .right-plot[
 
 ![](06-slides_files/figure-html/gapminder-bars-colored-1.png)
+
+]
+
+---
+
+# Add some labels
+
+.left-code.small-code[
+
+
+```r
+ggplot(gapminder_continents, 
+       aes(x = continent, y = n, 
+           fill = continent)) + 
+  geom_col() +
+  guides(fill = "none") +
+* labs(x = NULL, y = "Number of countries")
+```
+
+Is alphabetical the best ordering?
+]
+
+.right-plot[
+
+![](06-slides_files/figure-html/gapminder-bars-labeled-1.png)
 
 ]
 
