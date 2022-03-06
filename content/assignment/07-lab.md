@@ -1,7 +1,7 @@
 ---
 title: "Week 7"
 linktitle: "Week 7"
-date: "2022-03-06 14:52:10"
+date: "2022-03-06 14:55:16"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -19,9 +19,13 @@ editor_options:
 
 ## Reflection
 
-The reflection this week is a short survey on canvas.
+Please submit your reflection via canvas by Wednesday at 11:59pm.
 
-Please complete it by Wednesday at 11:59pm.
+[Here are the guidelines for reflections.](https://aem2850.toddgerarden.com/assignment/#reflections)
+
+[Here is a project on RStudio Cloud that includes a template for reflections.](https://rstudio.cloud/spaces/210747/project/3511792)
+
+You can access this week's readings and guiding questions using the [class schedule](https://aem2850.toddgerarden.com/schedule) under the "Content" tag.
 
 
 ## Lab
