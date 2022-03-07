@@ -1,5 +1,6 @@
 /* Small and large text */
 .small { font-size: 85% }
+.tiny { font-size: 65% }
 .large { font-size: 115% }
 
 /* Three column layout */

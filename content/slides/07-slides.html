@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Distributions</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Todd Gerarden" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/tdg-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+class: center middle main-title section-title-4
+
+# Distributions
+
+.class-info[
+
+**Week 7**
+
+AEM 2850: R for Business Analytics&lt;br&gt;
+Cornell Dyson&lt;br&gt;
+Spring 2022
+
+Acknowledgements: 
+[Andrew Heiss](https://datavizm20.classes.andrewheiss.com), 
+[Claus Wilke](https://wilkelab.org/SDS375/)
+&lt;!-- [Grant McDermott](https://github.com/uo-ec607/lectures), --&gt;
+&lt;!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), --&gt;
+&lt;!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) --&gt;
+
+]
+
+---
+
+# Announcements
+
+This week we are back to our old routine:
+- Today: slides
+- Wednesday: reflection is due
+- Thursday: work through an example
+- Monday: next lab is due
+
+First: discuss survey resonses and mini project 1
+
+Questions before we get started?
+
+
+---
+
+# Plan for today
+
+[Prologue](#prologue)
+
+[Mini Project 1](#mini-project-1)
+
+[Proportions: a brief interlude](#proportions)
+
+[Distributions](#distributions)
+
+---
+class: inverse, center, middle
+name: prologue
+
+# Prologue
+
+
+
+---
+
+# Thank you!
+
+I read all the Reflection - Week 6 survey responses
+
+I will briefly summarize some of the responses and share some reactions
+
+Please don't hesitate to provide feedback on how the course progresses!
+
+---
+
+# Please rate the pace overall:
+
+&lt;img src="07-slides_files/figure-html/unnamed-chunk-1-1.png" width="1008" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Please rate the difficulty overall:
+
+&lt;img src="07-slides_files/figure-html/unnamed-chunk-2-1.png" width="1008" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Please rate the workload overall:
+
+&lt;img src="07-slides_files/figure-html/unnamed-chunk-3-1.png" width="1008" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# RStudio Cloud versus a local install?
+
+&lt;img src="07-slides_files/figure-html/unnamed-chunk-4-1.png" width="1008" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Some themes:
+
+**Desire for more business applications**
+- We will work on this, especially on projects
+
+--
+
+**Several people requested guidance on installing/working locally**
+- I will post some basic guidance on this on the site
+- Come to office hours if you want help installing R+RStudio!
+
+--
+
+**Examples: make them more open-ended/challenging + work more as a group**
+- I will experiment with this!
+
+--
+
+**Interest in modeling, statistical methods, linear regression, etc.**
+
+---
+class: inverse, center, middle
+name: mini-project-1
+
+# Mini Project 1
+
+---
+
+# Mini Project 1
+
+Use R and the tidyverse to wrangle and visualize equities data
+
+#### Three parts:
+1. AAPL
+2. The S&amp;P 500
+3. Our Class Portfolio
+
+
+
+---
+
+# Mini Project 1: data
+
+
+```r
+sp500_companies
+```
+
+```
+## # A tibble: 504 × 7
+##    symbol company           identifier sedol  weight sector       local_currency
+##    &lt;chr&gt;  &lt;chr&gt;             &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;         
+##  1 AAPL   Apple Inc.        03783310   20462… 0.0701 Information… USD           
+##  2 MSFT   Microsoft Corpor… 59491810   25881… 0.0601 Information… USD           
+##  3 AMZN   Amazon.com Inc.   02313510   20000… 0.0349 Consumer Di… USD           
+##  4 GOOGL  Alphabet Inc. Cl… 02079K30   BYVY8… 0.0218 Communicati… USD           
+##  5 GOOG   Alphabet Inc. Cl… 02079K10   BYY88… 0.0203 Communicati… USD           
+##  6 TSLA   Tesla Inc         88160R10   B616C… 0.0185 Consumer Di… USD           
+##  7 BRK-B  Berkshire Hathaw… 08467070   20733… 0.0162 Financials   USD           
+##  8 NVDA   NVIDIA Corporati… 67066G10   23795… 0.0160 Information… USD           
+##  9 FB     Meta Platforms I… 30303M10   B7TL8… 0.0130 Communicati… USD           
+## 10 UNH    UnitedHealth Gro… 91324P10   29177… 0.0124 Health Care  USD           
+## # … with 494 more rows
+```
+
+---
+
+# Mini Project 1: data
+
+
+```r
+sp500_prices
+```
+
+```
+## # A tibble: 628,663 × 8
+##    symbol date        open  high   low close    volume adjusted
+##    &lt;chr&gt;  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1 AAPL   2017-01-03  29.0  29.1  28.7  29.0 115127600     27.3
+##  2 AAPL   2017-01-04  29.0  29.1  28.9  29.0  84472400     27.3
+##  3 AAPL   2017-01-05  29.0  29.2  29.0  29.2  88774400     27.4
+##  4 AAPL   2017-01-06  29.2  29.5  29.1  29.5 127007600     27.7
+##  5 AAPL   2017-01-09  29.5  29.9  29.5  29.7 134247600     28.0
+##  6 AAPL   2017-01-10  29.7  29.8  29.6  29.8  97848400     28.0
+##  7 AAPL   2017-01-11  29.7  30.0  29.6  29.9 110354400     28.1
+##  8 AAPL   2017-01-12  29.7  29.8  29.6  29.8 108344800     28.0
+##  9 AAPL   2017-01-13  29.8  29.9  29.7  29.8 104447600     28.0
+## 10 AAPL   2017-01-17  29.6  30.1  29.6  30   137759200     28.2
+## # … with 628,653 more rows
+```
+
+---
+
+# Mini Project 1: data
+
+
+```r
+our_companies
+```
+
+```
+## # A tibble: 22 × 2
+##    company                             n
+##    &lt;chr&gt;                           &lt;dbl&gt;
+##  1 Allbirds Inc                        1
+##  2 Alphabet Inc. Class A               1
+##  3 Anheuser Busch Inbev SA             1
+##  4 Apple Inc.                         11
+##  5 Berkshire Hathaway Inc. Class B     1
+##  6 Bumble Inc                          1
+##  7 Capri Holdings Ltd                  1
+##  8 Costco Wholesale Corporation        1
+##  9 Electronic Arts Inc.                1
+## 10 Levi Strauss &amp; Co.                  1
+## # … with 12 more rows
+```
+
+---
+
+# Mini Project 1: logistics
+
+Work in groups of 3 (assigned on canvas)
+
+Write report in R Markdown that summarizes your work, presents visualizations, and discusses takeaways
+
+Do not use any packages outside base R and the tidyverse
+
+No TA help for Part 3!
+
+
+---
+class: inverse, center, middle
+name: proportions
+
+# Proportions: a brief interlude
+
+---
+
+# Can we improve this survey visualization?
+
+&lt;img src="07-slides_files/figure-html/unnamed-chunk-8-1.png" width="1008" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Proportions
+
+.pull-left[
+&lt;img src="07-slides_files/figure-html/unnamed-chunk-9-1.png" width="1008" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+&lt;img src="07-slides_files/figure-html/unnamed-chunk-10-1.png" width="1008" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | &amp;nbsp; Pie chart &amp;nbsp; | &amp;nbsp; Stacked bars &amp;nbsp; | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | &amp;nbsp; Pie chart &amp;nbsp; | &amp;nbsp; Stacked bars &amp;nbsp; | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | &amp;nbsp; Pie chart &amp;nbsp; | &amp;nbsp; Stacked bars &amp;nbsp; | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...) | ✔ | ✖ | ✖
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | &amp;nbsp; Pie chart &amp;nbsp; | &amp;nbsp; Stacked bars &amp;nbsp; | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...) | ✔ | ✖ | ✖
+Visually appealing for small datasets | ✔ | ✖ | ✔
+]
+
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | &amp;nbsp; Pie chart &amp;nbsp; | &amp;nbsp; Stacked bars &amp;nbsp; | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...) | ✔ | ✖ | ✖
+Visually appealing for small datasets | ✔ | ✖ | ✔
+Works well for a large number of subsets | ✖ | ✖ | ✔ 
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | &amp;nbsp; Pie chart &amp;nbsp; | &amp;nbsp; Stacked bars &amp;nbsp; | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...) | ✔ | ✖ | ✖
+Visually appealing for small datasets | ✔ | ✖ | ✔
+Works well for a large number of subsets | ✖ | ✖ | ✔ 
+Works well for time series and similar | ✖ | ✔ | ✖
+]
+
+--
+
+No one visualization fits all scenarios!
+
+[//]: # "segment ends here"
+
+
+---
+
+class: inverse, center, middle
+name: distributions
+
+# Distributions
+
+
+
+---
+
+# Problems with single numbers
+  
+.pull-left[
+
+&lt;img src="07-slides_files/figure-html/animal-weight-bar-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+  
+]
+
+--
+  
+.pull-right[
+  
+&lt;img src="07-slides_files/figure-html/animal-weight-points-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+  
+# More information is (almost) always better
+  
+**Avoid visualizing single numbers when you have a whole range or distribution of numbers**
+
+--
+  
+Uncertainty in single variables
+
+--
+  
+Uncertainty across multiple variables
+
+--
+  
+Uncertainty in models and simulations
+
+---
+
+# Histograms
+
+What are they?
+
+--
+
+Put data into equally spaced buckets (or "bins"), plot how many rows are in each bucket
+
+---
+  
+# Histograms
+
+How would we use the grammar of graphics to make a histogram of `lifeExp`?
+
+
+```r
+library(gapminder)
+
+gapminder_2002 &lt;- gapminder %&gt;% 
+  filter(year == 2002)
+
+head(gapminder_2002)
+```
+
+```
+## # A tibble: 6 × 6
+##   country     continent  year lifeExp      pop gdpPercap
+##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+## 1 Afghanistan Asia       2002    42.1 25268405      727.
+## 2 Albania     Europe     2002    75.7  3508512     4604.
+## 3 Algeria     Africa     2002    71.0 31287142     5288.
+## 4 Angola      Africa     2002    41.0 10866106     2773.
+## 5 Argentina   Americas   2002    74.3 38331121     8798.
+## 6 Australia   Oceania    2002    80.4 19546792    30688.
+```
+
+---
+  
+# Histograms
+
+.left-code[
+
+```r
+ggplot(gapminder_2002,
+*      aes(x = lifeExp)) +
+* geom_histogram()
+```
+
+What if we mapped lifeExp to y?
+]
+
+.right-plot[
+  ![](07-slides_files/figure-html/basic-histogram-1.png)
+]
+
+
+---
+  
+# Histograms
+
+.left-code[
+
+```r
+ggplot(gapminder_2002,
+*      aes(y = lifeExp)) +
+  geom_histogram()
+```
+]
+
+.right-plot[
+  ![](07-slides_files/figure-html/basic-histogram-y-1.png)
+]
+
+
+---
+  
+# Histograms: bin width
+  
+No official rule for what makes a good bin width
+
+.pull-left-3[
+.center.small[Too narrow:]
+
+.center.tiny[`geom_histogram(binwidth = .2)`]
+
+&lt;img src="07-slides_files/figure-html/hist-too-narrow-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+  
+]
+
+--
+  
+.pull-middle-3[
+.center.small[Too wide:]
+
+.center.tiny[`geom_histogram(binwidth = 50)`]
+
+&lt;img src="07-slides_files/figure-html/hist-too-wide-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+  
+.pull-right-3[
+.center.small[(One type of) just right:]
+
+.center.tiny[`geom_histogram(binwidth = 2)`]
+  
+&lt;img src="07-slides_files/figure-html/hist-just-right-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+  
+# Histogram tips
+
+.pull-left[
+.center[Add a border to the bars&lt;br&gt;for readability]
+
+.center.tiny[`geom_histogram(..., color = "white")`]
+    
+&lt;img src="07-slides_files/figure-html/hist-border-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+  
+.pull-right[
+.center.small[Set the boundary;&lt;br&gt;bucket now 50–55, not 47.5–52.5]
+
+.center.tiny[`geom_histogram(..., boundary = 50)`]
+
+&lt;img src="07-slides_files/figure-html/hist-boundary-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+  
+# Density plots
+  
+What are they?
+
+--
+
+Estimates of the **probability *density* function** of a random variable
+
+--
+
+Histograms show raw counts; density plots show proportions (integrate to 1)
+
+--
+
+How would we use the grammar of graphics to make a density plot of `lifeExp`?
+
+---
+  
+# Density plots
+  
+.left-code[
+
+```r
+ggplot(gapminder_2002,
+*      aes(x = lifeExp)) +
+* geom_density()
+```
+]
+
+.right-plot[
+  ![](07-slides_files/figure-html/basic-density-1.png)
+]
+
+---
+  
+# Density plots: add some color
+  
+.left-code[
+
+```r
+ggplot(gapminder_2002,
+       aes(x = lifeExp)) +
+* geom_density(fill = "skyblue")
+```
+
+Reminder: we can use aesthetics as parameters inside a geom rather than inside an **aes()** statement
+
+Here we used **fill = "skyblue"**
+]
+
+.right-plot[
+  ![](07-slides_files/figure-html/basic-density-color-1.png)
+]
+
+---
+  
+# Density plots: bandwidths
+
+Different options for calculus change the plot shape
+
+.pull-left-3[
+.center.small[`bw = 1`]
+
+&lt;img src="07-slides_files/figure-html/gaussian-bw-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+  
+]
+
+--
+  
+.pull-middle-3[
+.center.small[`bw = 10`]
+
+&lt;img src="07-slides_files/figure-html/gaussian-bw-10-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+  
+.pull-right-3[
+.center.small[`bw = "nrd0"` &lt;small&gt;(default)&lt;/small&gt;]
+    
+&lt;img src="07-slides_files/figure-html/gaussian-bw-auto-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+  
+# Density plots: kernels
+  
+Different options for calculus change the plot shape
+
+.pull-left-3[
+.center.small[`kernel = "gaussian"`]
+
+&lt;img src="07-slides_files/figure-html/gaussian-kernel-gaussian-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+  
+]
+
+--
+  
+.pull-middle-3[
+.center.small[`"epanechnikov"`]
+
+&lt;img src="07-slides_files/figure-html/gaussian-kernel-epanechnikov-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+  
+.pull-right-3[
+.center.small[`"rectangular"`]
+
+&lt;img src="07-slides_files/figure-html/gaussian-kernel-rectangular-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+  
+# Box plots
+
+What are they?
+
+--
+
+Graphical representations of specific points in a distribution
+
+
+---
+  
+# Box plots
+  
+&lt;img src="07-slides_files/figure-html/boxplot-explanation-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+  
+# Box plots
+
+What are they?
+
+Show specific points in a distribution
+
+How would we use the grammar of graphics to make a boxplot of `lifeExp`?
+
+---
+  
+# Box plots
+
+.left-code[
+
+```r
+  ggplot(gapminder_2002,
+*        aes(x = lifeExp)) +
+*   geom_boxplot()
+```
+
+What do the y axis numbers mean?
+]
+
+.right-plot[
+  ![](07-slides_files/figure-html/basic-boxplot-1.png)
+]
+
+---
+  
+# Box plots
+
+Use `theme()` to customize the plot for this geom
+
+.left-code[
+
+```r
+  ggplot(gapminder_2002,
+         aes(x = lifeExp)) +
+    geom_boxplot() +
+* theme(axis.text.y = element_blank(),
+*       axis.ticks.y = element_blank(),
+*       panel.grid.major.y = element_blank(),
+*       panel.grid.minor.y = element_blank())
+```
+
+]
+
+.right-plot[
+  ![](07-slides_files/figure-html/basic-boxplot-no-y-1.png)
+]
+
+
+---
+  
+# Violin plots
+  
+.box-inv-4[Mirror density plot and flip]
+
+.box-4.small[Often helpful to overlay other things on it]
+
+.left-code[
+
+```r
+ggplot(gapminder_2002,
+       aes(x = "", 
+*          y = lifeExp)) +
+* geom_violin() +
+  geom_boxplot(width = 0.1)
+```
+]
+
+.right-plot[
+  ![](07-slides_files/figure-html/basic-violin-1.png)
+]
+
+---
+  
+# Uncertainty across multiple variables
+  
+Visualize the distribution of a single variable across groups
+
+--
+  
+Add a `fill` aesthetic or use faceting!
+
+---
+  
+# Multiple histograms
+  
+Fill with a different variable
+
+This is bad and really hard to read though
+
+.left-code[
+
+```r
+ggplot(gapminder_2002,
+       aes(x = lifeExp,
+           fill = continent)) +
+  geom_histogram(binwidth = 5, 
+                 color = "white", 
+                 boundary = 50)
+```
+]
+
+.right-plot[
+  ![](07-slides_files/figure-html/histogram-fill-1.png)
+]
+
+---
+  
+# Multiple histograms
+  
+Facet with a different variable
+
+.left-code[
+
+```r
+ggplot(gapminder_2002,
+       aes(x = lifeExp,
+           fill = continent)) +
+  geom_histogram(binwidth = 5, 
+                 color = "white", 
+                 boundary = 50) +
+  guides(fill = "none") +
+  facet_wrap(vars(continent))
+```
+]
+
+.right-plot[
+  ![](07-slides_files/figure-html/histogram-facet-1.png)
+]
+
+---
+  
+# Pyramid histograms
+  
+.left-code.small-code[
+
+```r
+gapminder_intervals &lt;- gapminder %&gt;% 
+  filter(year == 2002) %&gt;% 
+  mutate(africa = 
+           ifelse(continent == "Africa", 
+                  "Africa", 
+                  "Not Africa")) %&gt;% 
+      mutate(age_buckets = 
+               cut(lifeExp, 
+                   breaks = seq(30, 90, by = 5))) %&gt;% 
+      group_by(africa, age_buckets) %&gt;% 
+      summarize(total = n())
+    ggplot(gapminder_intervals, 
+           aes(y = age_buckets,
+               x = ifelse(africa == "Africa", 
+                          total, -total),
+               fill = africa)) +
+      geom_col(width = 1, color = "white")
+```
+
+.right-plot[
+  ![](07-slides_files/figure-html/gapminder-pyramid-1.png)
+]
+
+???
+  
+There's no way to use `geom_histogram()` to do this, but we can fake it with `geom_col()`
+
+---
+
+# Multiple densities: Transparency
+
+.left-code[
+
+```r
+ggplot(filter(gapminder_2002, 
+              continent != "Oceania"),
+       aes(x = lifeExp,
+           fill = continent)) +
+  geom_density(alpha = 0.5)
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/density-fill-1.png)
+]
+
+---
+
+# Multiple densities: Ridge plots
+
+.left-code[
+
+```r
+library(ggridges)
+
+ggplot(filter(gapminder_2002, 
+              continent != "Oceania"),
+       aes(x = lifeExp,
+           fill = continent,
+           y = continent)) +
+  geom_density_ridges()
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/density-ridges-1.png)
+]
+
+---
+
+# Multiple geoms: `gghalves`
+
+.left-code[
+
+```r
+library(gghalves)
+
+ggplot(filter(gapminder_2002, 
+              continent != "Oceania"),
+       aes(y = lifeExp,
+           x = continent,
+           color = continent)) +
+  geom_half_boxplot(side = "l") +
+  geom_half_point(side = "r") 
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/gghalves-1.png)
+]
+
+---
+
+# Multiple geoms: Raincloud plots
+
+.left-code[
+
+```r
+library(gghalves)
+
+ggplot(filter(gapminder_2002, 
+              continent != "Oceania"),
+       aes(y = lifeExp,
+           x = continent,
+           color = continent)) +
+  geom_half_point(side = "l", size = 0.3) + 
+  geom_half_boxplot(side = "l", width = 0.5, 
+                    alpha = 0.3, nudge = 0.1) +
+  geom_half_violin(aes(fill = continent), 
+                   side = "r") +
+  guides(fill = "none", color = "none") +
+* coord_flip()
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/raincloud-1.png)
+]
+
+---
+
+# Uncertainty in model outcomes
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/07/fivethirtyeight-outcomes.png" alt="FiveThirtyEight model outcomes plot" title="FiveThirtyEight model outcomes plot" width="55%"&gt;
+  &lt;figcaption&gt;FiveThirtyEight's 2018 midterms model outcomes plot&lt;/figcaption
+&lt;/figure&gt;
+  ]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
