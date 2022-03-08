@@ -124,7 +124,7 @@ Please don't hesitate to provide feedback on how the course progresses!
 --
 
 **Several people requested guidance on installing/working locally**
-- I will post some basic guidance on this on the site
+- I will post some basic guidance on the course site
 - Come to office hours if you want help installing R+RStudio!
 
 --
@@ -218,7 +218,7 @@ our_companies
 
 ```
 ## # A tibble: 22 × 2
-##    company                             n
+##    name                                n
 ##    &lt;chr&gt;                           &lt;dbl&gt;
 ##  1 Allbirds Inc                        1
 ##  2 Alphabet Inc. Class A               1
@@ -237,14 +237,14 @@ our_companies
 
 # Mini Project 1: logistics
 
-Work in groups of 3 (assigned on canvas)
+Work in groups of 3 (posted on canvas)
 
 Write report in R Markdown that summarizes your work, presents visualizations, and discusses takeaways
 
 Do not use any packages outside base R and the tidyverse
 
 No TA help for Part 3!
-
+- If you try but still need help, come to my office hours
 
 ---
 class: inverse, center, middle
@@ -276,7 +276,7 @@ name: proportions
 # Pros and cons of different approaches
 
 .small.center[
-               | &amp;nbsp; Pie chart &amp;nbsp; | &amp;nbsp; Stacked bars &amp;nbsp; | Side-by-side bars
+               | Pie chart | Stacked bars | Side-by-side bars
 :----------    | :-------: | :----------: | :---------------:
 Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
 ]
@@ -286,7 +286,7 @@ Allows easy comparison of relative proportions   | ✖ | ✖ | ✔
 # Pros and cons of different approaches
 
 .small.center[
-               | &amp;nbsp; Pie chart &amp;nbsp; | &amp;nbsp; Stacked bars &amp;nbsp; | Side-by-side bars
+               | Pie chart | Stacked bars | Side-by-side bars
 :----------    | :-------: | :----------: | :---------------:
 Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
 Shows data as proportions of a whole             | ✔ | ✔ | ✖
@@ -297,7 +297,7 @@ Shows data as proportions of a whole             | ✔ | ✔ | ✖
 # Pros and cons of different approaches
 
 .small.center[
-               | &amp;nbsp; Pie chart &amp;nbsp; | &amp;nbsp; Stacked bars &amp;nbsp; | Side-by-side bars
+               | Pie chart | Stacked bars | Side-by-side bars
 :----------    | :-------: | :----------: | :---------------:
 Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
 Shows data as proportions of a whole             | ✔ | ✔ | ✖
@@ -309,7 +309,7 @@ Emphasizes simple fractions (1/2, 1/3, ...) | ✔ | ✖ | ✖
 # Pros and cons of different approaches
 
 .small.center[
-               | &amp;nbsp; Pie chart &amp;nbsp; | &amp;nbsp; Stacked bars &amp;nbsp; | Side-by-side bars
+               | Pie chart | Stacked bars | Side-by-side bars
 :----------    | :-------: | :----------: | :---------------:
 Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
 Shows data as proportions of a whole             | ✔ | ✔ | ✖
@@ -323,7 +323,7 @@ Visually appealing for small datasets | ✔ | ✖ | ✔
 # Pros and cons of different approaches
 
 .small.center[
-               | &amp;nbsp; Pie chart &amp;nbsp; | &amp;nbsp; Stacked bars &amp;nbsp; | Side-by-side bars
+               | Pie chart | Stacked bars | Side-by-side bars
 :----------    | :-------: | :----------: | :---------------:
 Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
 Shows data as proportions of a whole             | ✔ | ✔ | ✖
@@ -337,7 +337,7 @@ Works well for a large number of subsets | ✖ | ✖ | ✔
 # Pros and cons of different approaches
 
 .small.center[
-               | &amp;nbsp; Pie chart &amp;nbsp; | &amp;nbsp; Stacked bars &amp;nbsp; | Side-by-side bars
+               | Pie chart | Stacked bars | Side-by-side bars
 :----------    | :-------: | :----------: | :---------------:
 Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
 Shows data as proportions of a whole             | ✔ | ✔ | ✖
@@ -504,7 +504,7 @@ No official rule for what makes a good bin width
 .pull-right-3[
 .center.small[(One type of) just right:]
 
-.center.tiny[`geom_histogram(binwidth = 2)`]
+.center.tiny[`geom_histogram(binwidth = 5)`]
   
 &lt;img src="07-slides_files/figure-html/hist-just-right-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
@@ -721,9 +721,7 @@ Use `theme()` to customize the plot for this geom
   
 # Violin plots
   
-.box-inv-4[Mirror density plot and flip]
-
-.box-4.small[Often helpful to overlay other things on it]
+Mirror density plot and flip
 
 .left-code[
 
@@ -731,8 +729,7 @@ Use `theme()` to customize the plot for this geom
 ggplot(gapminder_2002,
        aes(x = "", 
 *          y = lifeExp)) +
-* geom_violin() +
-  geom_boxplot(width = 0.1)
+* geom_violin()
 ```
 ]
 
@@ -742,12 +739,35 @@ ggplot(gapminder_2002,
 
 ---
   
+# Overalying geometries
+
+We can overlay multiple geometries to provide more information
+
+.left-code[
+
+```r
+ggplot(gapminder_2002,
+       aes(x = "", 
+           y = lifeExp)) +
+  geom_violin() +
+* geom_boxplot(width = 0.1)
+```
+]
+
+.right-plot[
+  ![](07-slides_files/figure-html/basic-violin-overlay-1.png)
+]
+
+---
+  
 # Uncertainty across multiple variables
   
-Visualize the distribution of a single variable across groups
+
+
+How could we visualize the distribution of a single variable across groups?
 
 --
-  
+
 Add a `fill` aesthetic or use faceting!
 
 ---
@@ -763,7 +783,7 @@ This is bad and really hard to read though
 ```r
 ggplot(gapminder_2002,
        aes(x = lifeExp,
-           fill = continent)) +
+*          fill = continent)) +
   geom_histogram(binwidth = 5, 
                  color = "white", 
                  boundary = 50)
@@ -789,8 +809,8 @@ ggplot(gapminder_2002,
   geom_histogram(binwidth = 5, 
                  color = "white", 
                  boundary = 50) +
-  guides(fill = "none") +
-  facet_wrap(vars(continent))
+* guides(fill = "none") +
+* facet_wrap(vars(continent))
 ```
 ]
 
@@ -799,13 +819,13 @@ ggplot(gapminder_2002,
 ]
 
 ---
-  
+
 # Pyramid histograms
-  
-.left-code.small-code[
+
+.left-code[
 
 ```r
-gapminder_intervals &lt;- gapminder %&gt;% 
+gapminder %&gt;% 
   filter(year == 2002) %&gt;% 
   mutate(africa = 
            ifelse(continent == "Africa", 
@@ -815,21 +835,22 @@ gapminder_intervals &lt;- gapminder %&gt;%
                cut(lifeExp, 
                    breaks = seq(30, 90, by = 5))) %&gt;% 
       group_by(africa, age_buckets) %&gt;% 
-      summarize(total = n())
-    ggplot(gapminder_intervals, 
-           aes(y = age_buckets,
-               x = ifelse(africa == "Africa", 
-                          total, -total),
-               fill = africa)) +
-      geom_col(width = 1, color = "white")
+      summarize(total = n()) %&gt;% 
+ggplot(aes(y = age_buckets,
+           x = ifelse(africa == "Africa", 
+                      total, -total),
+           fill = africa)) +
+  geom_col(width = 1, color = "white") + 
+  theme(legend.position = "bottom")
 ```
+]
 
 .right-plot[
   ![](07-slides_files/figure-html/gapminder-pyramid-1.png)
 ]
 
 ???
-  
+
 There's no way to use `geom_histogram()` to do this, but we can fake it with `geom_col()`
 
 ---
@@ -839,12 +860,16 @@ There's no way to use `geom_histogram()` to do this, but we can fake it with `ge
 .left-code[
 
 ```r
-ggplot(filter(gapminder_2002, 
-              continent != "Oceania"),
-       aes(x = lifeExp,
-           fill = continent)) +
-  geom_density(alpha = 0.5)
+gapminder_2002 %&gt;% 
+  filter(continent != "Oceania") %&gt;% 
+  ggplot(aes(x = lifeExp,
+             fill = continent)) +
+* geom_density(alpha = 0.5)
 ```
+
+But be careful, these can get confusing quickly
+
+With many groups, better to space them out using ridgeline plots
 ]
 
 .right-plot[
@@ -853,20 +878,26 @@ ggplot(filter(gapminder_2002,
 
 ---
 
-# Multiple densities: Ridge plots
+# Multiple densities: Ridgeline plots
 
 .left-code[
 
 ```r
-library(ggridges)
+*library(ggridges)
 
 ggplot(filter(gapminder_2002, 
               continent != "Oceania"),
        aes(x = lifeExp,
            fill = continent,
            y = continent)) +
-  geom_density_ridges()
+  guides(fill = "none") +
+  labs(y = NULL) +
+* geom_density_ridges()
 ```
+
+There is no explicit scale for the densities anymore (it is shared with y)
+
+With many densities, use a single fill color to prevent distraction
 ]
 
 .right-plot[
@@ -875,20 +906,21 @@ ggplot(filter(gapminder_2002,
 
 ---
 
-# Multiple geoms: `gghalves`
+# Multiple geoms: gghalves
 
 .left-code[
 
 ```r
-library(gghalves)
+*library(gghalves)
 
 ggplot(filter(gapminder_2002, 
               continent != "Oceania"),
        aes(y = lifeExp,
            x = continent,
            color = continent)) +
-  geom_half_boxplot(side = "l") +
-  geom_half_point(side = "r") 
+* geom_half_boxplot(side = "l") +
+* geom_half_point(side = "r") +
+  guides(color = "none")
 ```
 ]
 
@@ -903,19 +935,20 @@ ggplot(filter(gapminder_2002,
 .left-code[
 
 ```r
-library(gghalves)
+*library(gghalves)
 
 ggplot(filter(gapminder_2002, 
               continent != "Oceania"),
        aes(y = lifeExp,
            x = continent,
            color = continent)) +
-  geom_half_point(side = "l", size = 0.3) + 
-  geom_half_boxplot(side = "l", width = 0.5, 
-                    alpha = 0.3, nudge = 0.1) +
-  geom_half_violin(aes(fill = continent), 
-                   side = "r") +
+* geom_half_point(side = "l", size = 0.3) +
+* geom_half_boxplot(side = "l", width = 0.5,
+*                   alpha = 0.3, nudge = 0.1) +
+* geom_half_violin(aes(fill = continent),
+*                  side = "r") +
   guides(fill = "none", color = "none") +
+  labs(y = NULL) +
 * coord_flip()
 ```
 ]
@@ -923,6 +956,30 @@ ggplot(filter(gapminder_2002,
 .right-plot[
 ![](07-slides_files/figure-html/raincloud-1.png)
 ]
+
+---
+
+# Uncertainty in models and simulations
+
+We have already seen at least one example: `geom_smooth()`
+
+We will discuss these more next week
+
+Until then, here are a few real-world examples
+
+---
+
+# The needle
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/07/needle.gif" alt="2016 election needle" title="2016 election needle" width="65%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+Via https://www.vis4.net/blog/2016/11/jittery-gauges-election-forecast/
 
 ---
 
