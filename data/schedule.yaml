@@ -113,7 +113,7 @@ lessons:
 
   - title: '<i class="fas fa-star"></i> **Mini project 1 due**'
     date: "April 1"
-    # assignment: "01-mini-project"
+    assignment: "01-mini-project"
     bg: 3
     bottomborder: True
 
