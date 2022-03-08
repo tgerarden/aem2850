@@ -336,7 +336,7 @@ Allows easy comparison of relative proportions   | ✖ | ✖ | ✔
 # Pros and cons of different approaches
 
 .small.center[
-               | &nbsp; Pie chart &nbsp; | &nbsp; Stacked bars &nbsp; | Side-by-side bars
+               | Pie chart | Stacked bars | Side-by-side bars
 :----------    | :-------: | :----------: | :---------------:
 Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
 Shows data as proportions of a whole             | ✔ | ✔ | ✖
@@ -347,7 +347,7 @@ Shows data as proportions of a whole             | ✔ | ✔ | ✖
 # Pros and cons of different approaches
 
 .small.center[
-               | &nbsp; Pie chart &nbsp; | &nbsp; Stacked bars &nbsp; | Side-by-side bars
+               | Pie chart | Stacked bars | Side-by-side bars
 :----------    | :-------: | :----------: | :---------------:
 Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
 Shows data as proportions of a whole             | ✔ | ✔ | ✖
@@ -359,7 +359,7 @@ Emphasizes simple fractions (1/2, 1/3, ...) | ✔ | ✖ | ✖
 # Pros and cons of different approaches
 
 .small.center[
-               | &nbsp; Pie chart &nbsp; | &nbsp; Stacked bars &nbsp; | Side-by-side bars
+               | Pie chart | Stacked bars | Side-by-side bars
 :----------    | :-------: | :----------: | :---------------:
 Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
 Shows data as proportions of a whole             | ✔ | ✔ | ✖
@@ -373,7 +373,7 @@ Visually appealing for small datasets | ✔ | ✖ | ✔
 # Pros and cons of different approaches
 
 .small.center[
-               | &nbsp; Pie chart &nbsp; | &nbsp; Stacked bars &nbsp; | Side-by-side bars
+               | Pie chart | Stacked bars | Side-by-side bars
 :----------    | :-------: | :----------: | :---------------:
 Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
 Shows data as proportions of a whole             | ✔ | ✔ | ✖
@@ -387,7 +387,7 @@ Works well for a large number of subsets | ✖ | ✖ | ✔
 # Pros and cons of different approaches
 
 .small.center[
-               | &nbsp; Pie chart &nbsp; | &nbsp; Stacked bars &nbsp; | Side-by-side bars
+               | Pie chart | Stacked bars | Side-by-side bars
 :----------    | :-------: | :----------: | :---------------:
 Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
 Shows data as proportions of a whole             | ✔ | ✔ | ✖
@@ -886,9 +886,9 @@ ggplot(gapminder_2002,
 
 ---
   
-# Violin plots
+# Overalying geometries
 
-Often helpful to overlay other things on violin plots
+We can overlay multiple geometries to provide more information
 
 .left-code[
 ```{r basic-violin-overlay, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 2.75), out.width="100%"}
@@ -985,8 +985,10 @@ ggplot(aes(y = age_buckets,
            x = ifelse(africa == "Africa", 
                       total, -total),
            fill = africa)) +
-  geom_col(width = 1, color = "white")
+  geom_col(width = 1, color = "white") + 
+  theme(legend.position = "bottom")
 ```
+]
 
 .right-plot[
   ![](`r knitr::fig_chunk("gapminder-pyramid", "png")`)
@@ -1010,6 +1012,8 @@ gapminder_2002 %>%
 ```
 
 But be careful, these can get confusing quickly
+
+With many groups, better to space them out using ridgeline plots
 ]
 
 .right-plot[
@@ -1057,7 +1061,8 @@ ggplot(filter(gapminder_2002,
            x = continent,
            color = continent)) +
   geom_half_boxplot(side = "l") + #<<
-  geom_half_point(side = "r") #<<
+  geom_half_point(side = "r") + #<<
+  guides(color = "none")
 ```
 ]
 
@@ -1109,29 +1114,13 @@ Until then, here are a few real-world examples
 
 .center[
 <figure>
-  <img src="img/07/needle.gif" alt="2016 election needle" title="2016 election needle" width="50%">
+  <img src="img/07/needle.gif" alt="2016 election needle" title="2016 election needle" width="65%">
 </figure>
 ]
 
 ???
 
 Via https://www.vis4.net/blog/2016/11/jittery-gauges-election-forecast/
-
----
-
-# The needle
-
-.pull-left[
-<figure>
-  <img src="img/07/needle-ga.png" alt="Needle GA-7 2017" title="Needle GA-7 2017" width="100%">
-</figure>
-]
-
-.pull-right[
-<figure>
-  <img src="img/07/needle-tweets.png" alt="Twitter reactions to needle" title="Twitter reactions to needle" width="100%">
-</figure>
-]
 
 ---
 
