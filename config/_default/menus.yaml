@@ -17,9 +17,9 @@ main:
   - name: Assignments
     url: /assignment/
     weight: 6
-  # - name: Resources
-  #   url: /resource/
-  #   weight: 7
+  - name: Resources
+    url: /resource/
+    weight: 7
 #  - name: '<i class="fab fa-slack"></i>'
 #    url: "https://gsudatavizs21.slack.com"
 #    weight: 8
