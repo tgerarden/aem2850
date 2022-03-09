@@ -1,0 +1,149 @@
+---
+title: Installing R, RStudio, tidyverse, rmarkdown, and tinytex
+# date: "2021-03-09"
+menu:
+  resource:
+    parent: Guides
+type: docs
+weight: 1
+toc: yes
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+```
+
+You will do all of your work in this class with the open source (and free!) programming language [R](https://cran.r-project.org/). You will use [RStudio](https://www.rstudio.com/) as the main program to access R. Think of R as an engine and RStudio as a car dashboard—R handles all the calculations and the actual statistics, while RStudio provides a nice interface for running R code.
+
+
+## RStudio.cloud
+
+R is free, but it can sometimes be a pain to install and configure. To make life easier, this course uses [RStudio.cloud](http://rstudio.cloud/), which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R! We have a shared class workspace in RStudio.cloud that will let you quickly copy templates for labs and problem sets.
+
+Go to <https://rstudio.cloud/> and create an account. You'll receive a link to join the shared class workspace separately. If you don't get this link, let me know and I will invite you.
+
+
+## RStudio on your computer
+
+RStudio.cloud is convenient, but it can be slow and it is not designed to be able to handle larger datasets, more complicated analysis, or fancier graphics. Over the course of the semester, you might want to wean yourself off of RStudio.cloud and install all these things locally. This will also be handy in the future if you want to use R for other classes, jobs, etc.
+
+Here are some links to get set up for this class:
+
+### Install R
+
+First you need to install R itself (the engine).
+
+1. Go to the CRAN (Collective R Archive Network)[^cran] website: <https://cran.r-project.org/>
+2. Click on "Download R for `XXX`", where `XXX` is your operating system:
+
+    ```{r, echo=FALSE, out.width="60%"}
+    include_graphics("img/install-r-links.png", error = FALSE)
+    ```
+
+    - If you use macOS, scroll down to the first `.pkg` file in the list of files (in this picture, it's `R-4.1.2.pkg`) and download it.
+    
+        ```{r, echo=FALSE, out.width="60%"}
+        include_graphics("img/install-r-mac.png", error = FALSE)
+        ```
+    
+    - If you use Windows, click "base" (or click on the bolded "install R for the first time" link) and download it. 
+    
+        ```{r, echo=FALSE, out.width="100%"}
+        include_graphics("img/install-r-windows.png", error = FALSE)
+        ```
+
+3. Double click on the downloaded file (check your `Downloads` folder). Click yes through all the prompts to install like any other program.
+
+4. If you use macOS, [download and install XQuartz](https://www.xquartz.org/).[^custom] You do not need to do this on Windows.
+
+[^cran]: It's a goofy name, but CRAN is where most R packages—and R itself—lives.
+
+[^custom]: Alternatively, you can do a "custom install" of R and skip installing XQuartz as described on the page [R for macOS](https://cran.r-project.org/bin/macosx/).
+
+### Install RStudio
+
+Next, you need to install RStudio (the dashboard). Once both R and RStudio are installed, you can ignore R and only use RStudio. RStudio will use R automatically and you won't have to interact with R directly.
+
+1. Go to the free download location on RStudio's website: <https://www.rstudio.com/products/rstudio/download/#download>
+2. The website should automatically detect your operating system (macOS or Windows) and show a big download button for it. For example:
+
+    ```{r, echo=FALSE, out.width="50%"}
+    include_graphics("img/install-r-rstudio1.png", error = FALSE)
+    ```
+    
+    If not, scroll down a little to the large table and choose the version of RStudio that matches your operating system.
+
+    ```{r, echo=FALSE, out.width="100%"}
+    include_graphics("img/install-r-rstudio2.png", error = FALSE)
+    ```
+
+3. Double click on the downloaded file (again, check your `Downloads` folder). Click yes through all the prompts to install like any other program.
+
+Double click on RStudio to run it (check your applications folder or start menu).
+
+
+### Install `tidyverse`
+
+R packages are easy to install with RStudio. There are multiple ways to do it. Here are two ways to install [the tidyverse](https://www.tidyverse.org/) and all its dependencies from CRAN:
+
+1. Within RStudio, enter `install.packages("tidyverse")` in the R console.
+
+```{r, echo=FALSE, out.width="50%"}
+include_graphics("img/install-r-packages.png", error = FALSE)
+```
+
+2. Select the packages panel, click on "Install," type the name of the package you want to install, and press enter.
+
+```{r, echo=FALSE, out.width="50%"}
+include_graphics("img/install-r-package-panel.png", error = FALSE)
+```
+
+```{r, echo=FALSE, out.width="60%"}
+include_graphics("img/install-r-tidyverse.png", error = FALSE)
+```
+
+You'll see a bunch of output in the RStudio console as all the tidyverse packages and dependencies are installed. If you choose option 2, you might notice that RStudio implements your selection by generating the line of code `install.packages("tidyverse")` and entering it in the console.
+
+You can use either of these methods to install additional packages for your work. Packages just need to be installed once per device (and then loaded each time you want to use them).
+
+
+### Install `rmarkdown`
+
+Follow your preferred procedure from above to install `rmarkdown`.
+
+
+### Install `tinytex`
+
+**Note:** If you already have a LaTeX distribution installed on your device, you can skip this step.
+
+When you knit to PDF, R uses a special scientific typesetting program named LaTeX (pronounced "lay-tek"; for goofy nerdy reasons, the x is technically the "ch" sound in "Bach", but most people just say it as "k").
+
+LaTeX is neat and makes pretty documents, but it's a huge program—[the macOS version, for instance, is over 4 GB](https://tug.org/mactex/mactex-download.html)! To make life easier, there's [an R package named **TinyTeX**](https://yihui.org/tinytex/) that installs a minimal LaTeX program and that automatically deals with differences between macOS and Windows.
+
+Here's how to install **tinytex** so you can knit to pretty PDFs:
+
+1. Use the Packages in panel in RStudio to install **tinytex** like you did above with **tidyverse**. Alternatively, run `install.packages("tinytex")` in the console.
+2. Run `tinytex::install_tinytex()` in the console.
+3. Wait for a bit while R downloads and installs everything you need.
+4. The end! You should now be able to knit to PDF.
+
+### Reminder: come to office hours if you need help with this!
+
+## Downloading RStudio Cloud projects
+
+If you want to use your local installation of R to complete assignments, all you need to do is navigate to the class workspace on RStudio Cloud and click the download arrow ⬇️ to the right of the project you would like to download.
+
+```{r, echo=FALSE, out.width="80%"}
+include_graphics("img/download-cloud-project.png", error = FALSE)
+```
+
+Once the project is prepared for export, click the Download button:
+
+```{r, echo=FALSE, out.width="80%"}
+include_graphics("img/download-cloud-download.png", error = FALSE)
+```
+
+This will download the entire project directory to your computer. The downloaded folder will have a name like `3511792` (check your `Downloads` folder). You can move and rename the folder as you wish. If you double-click the `.Rproj` file within that directory, it will open an instance of RStudio on your machine with the working directory set to the project directory (either in your `Downloads` or wherever you moved it). You can then work with the files included in the project directory just as if you were working on RStudio Cloud.[^cloud-packages]
+
+
+[^cloud-packages]: The main exception to this is that I set up RStudio Cloud projects so they come with packages pre-installed in the cloud, and those packages are not included in the project files you downloaded, so you may need to install new packages the first time you use them.
