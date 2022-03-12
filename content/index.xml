@@ -1,7 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 07 Mar 2022 21:45:09 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Distributions</title><link>https://aem2850.toddgerarden.com/content/07-content/</link><pubDate>Mon, 07 Mar 2022 21:45:09 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/07-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 12 Mar 2022 14:21:34 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Relationships</title><link>https://aem2850.toddgerarden.com/content/08-content/</link><pubDate>Sat, 12 Mar 2022 14:21:34 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/08-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-associations.html" target="_blank" rel="noopener">Chapter 12&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://kieranhealy.org/blog/archives/2016/01/16/two-y-axes/" target="_blank" rel="noopener">Two Y-Axes&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;!-- - &lt;i class="fas fa-external-link-square-alt">&lt;/i> [Two Alternatives to Using a Second Y-Axis](http://stephanieevergreen.com/two-alternatives-to-using-a-second-y-axis/) &amp; [Illusion of success](http://junkcharts.typepad.com/junk_charts/2006/06/illusion_of_suc.html) &amp; [Dissecting two axes](http://junkcharts.typepad.com/junk_charts/2006/01/dissecting_two_.html) -->
+&lt;!-- - &lt;i class="fas fa-external-link-square-alt">&lt;/i> [Dual-Scaled Axes in Graphs: Are They Ever the Best Solution?](http://www.perceptualedge.com/articles/visual_business_intelligence/dual-scaled_axes.pdf) [@Few:2008] -->
+&lt;h4 id="optional-readings">Optional readings&lt;/h4>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://socviz.co/modeling.html#modeling" target="_blank" rel="noopener">Chapter 6: Working with models&lt;/a> of &lt;em>Data Visualization&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
+&lt;ul>
+&lt;li>How can you correctly and honestly communicate relationships between variables? How can you communicate the uncertainty in those relationships?&lt;/li>
+&lt;li>What are the dangers of visualizing two variables?&lt;/li>
+&lt;li>When is it appropriate to use two y-axes?&lt;/li>
+&lt;/ul>
+&lt;!-- ### Slides -->
+&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+&lt;!--
+&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/08-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/08-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
+-->
+&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item><item><title>Distributions</title><link>https://aem2850.toddgerarden.com/content/07-content/</link><pubDate>Sat, 12 Mar 2022 14:09:56 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/07-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/histograms-density-plots.html" target="_blank" rel="noopener">Chapter 7: Visualizing distributions&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://socviz.co/groupfacettx.html#histograms" target="_blank" rel="noopener">Section 4.6 Histograms and density plots&lt;/a> of &lt;em>Data Visualization&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://socviz.co/groupfacettx.html#histograms" target="_blank" rel="noopener">Section 4.6: Histograms and density plots&lt;/a> of &lt;em>Data Visualization&lt;/em>&lt;/li>
 &lt;/ul>
 &lt;h4 id="optional-readings">Optional readings&lt;/h4>
 &lt;ul>
