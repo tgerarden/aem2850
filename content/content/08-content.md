@@ -1,7 +1,7 @@
 ---
 title: "Relationships"
 linktitle: "Relationships"
-date: "2022-03-12 14:21:34"
+date: "2022-03-12 14:25:32"
 menu:
   content:
     parent: Course content
@@ -21,8 +21,6 @@ output:
 
 - <i class="fas fa-book"></i> [Chapter 12](https://clauswilke.com/dataviz/visualizing-associations.html) of *Fundamentals of Data Visualization*
 - <i class="fas fa-external-link-square-alt"></i> [Two Y-Axes](https://kieranhealy.org/blog/archives/2016/01/16/two-y-axes/)
-<!-- - <i class="fas fa-external-link-square-alt"></i> [Two Alternatives to Using a Second Y-Axis](http://stephanieevergreen.com/two-alternatives-to-using-a-second-y-axis/) & [Illusion of success](http://junkcharts.typepad.com/junk_charts/2006/06/illusion_of_suc.html) & [Dissecting two axes](http://junkcharts.typepad.com/junk_charts/2006/01/dissecting_two_.html) -->
-<!-- - <i class="fas fa-external-link-square-alt"></i> [Dual-Scaled Axes in Graphs: Are They Ever the Best Solution?](http://www.perceptualedge.com/articles/visual_business_intelligence/dual-scaled_axes.pdf) [@Few:2008] -->
 
 
 #### Optional readings
