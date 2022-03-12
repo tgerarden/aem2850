@@ -7,4 +7,4 @@ type: docs
 weight: -1
 ---
 
-I will use this page to share a bunch of extra resources and guides related to R, data, visualization, and other relevant topics. Enjoy!
+I will use this page to share extra resources and guides related to R, data, visualization, and other relevant topics. Enjoy!

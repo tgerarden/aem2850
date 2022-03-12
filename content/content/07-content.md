@@ -1,7 +1,7 @@
 ---
 title: "Distributions"
 linktitle: "Distributions"
-date: "2022-03-07 21:45:09"
+date: "2022-03-12 14:09:56"
 menu:
   content:
     parent: Course content
@@ -20,7 +20,7 @@ output:
 ### Readings
 
 - <i class="fas fa-book"></i> [Chapter 7: Visualizing distributions](https://clauswilke.com/dataviz/histograms-density-plots.html) of *Fundamentals of Data Visualization*
-- <i class="fas fa-book"></i> [Section 4.6 Histograms and density plots](https://socviz.co/groupfacettx.html#histograms) of *Data Visualization*
+- <i class="fas fa-book"></i> [Section 4.6: Histograms and density plots](https://socviz.co/groupfacettx.html#histograms) of *Data Visualization*
 
 
 #### Optional readings
