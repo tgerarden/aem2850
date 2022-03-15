@@ -88,7 +88,7 @@ lessons:
     # date_end: "July 2"
     content: "08-content"
     # example: "08-example"
-    # assignment: "08-lab"
+    assignment: "08-lab"
     bg: 1
 
   - title: '<span class="content-title">Time</span>'
