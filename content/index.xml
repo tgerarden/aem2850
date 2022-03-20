@@ -1,4 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 14 Mar 2022 21:47:59 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Relationships</title><link>https://aem2850.toddgerarden.com/content/08-content/</link><pubDate>Mon, 14 Mar 2022 21:47:59 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/08-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 20 Mar 2022 14:23:50 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Time</title><link>https://aem2850.toddgerarden.com/content/09-content/</link><pubDate>Sun, 20 Mar 2022 14:23:50 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/09-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/time-series.html" target="_blank" rel="noopener">Chapter 13&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-trends.html" target="_blank" rel="noopener">Chapter 14&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;h4 id="optional-readings">Optional readings&lt;/h4>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://flowingdata.com/2010/01/07/11-ways-to-visualize-changes-over-time-a-guide/" target="_blank" rel="noopener">11 Ways to Visualize Changes Over Time – A Guide&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
+&lt;ul>
+&lt;li>When is it okay (or not) to truncate the y-axis?&lt;/li>
+&lt;li>Many types of charts can communicate changes over time, but some are more appropriate in different situations. When is it best to use some of the different types (e.g., line graphs vs. area graphs vs. horizon charts vs. heatmaps, etc.)?&lt;/li>
+&lt;/ul>
+&lt;!-- ### Slides -->
+&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+&lt;!--
+&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/09-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/09-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
+-->
+&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item><item><title>Relationships</title><link>https://aem2850.toddgerarden.com/content/08-content/</link><pubDate>Mon, 14 Mar 2022 21:47:59 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/08-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-associations.html" target="_blank" rel="noopener">Chapter 12&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
 &lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://kieranhealy.org/blog/archives/2016/01/16/two-y-axes/" target="_blank" rel="noopener">Two Y-Axes&lt;/a>&lt;/li>
