@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Time</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Todd Gerarden" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/tdg-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+
+
+class: center, middle
+
+# Time
+
+.class-info[
+
+**Week 9**
+
+AEM 2850: R for Business Analytics&lt;br&gt;
+Cornell Dyson&lt;br&gt;
+Spring 2022
+
+Acknowledgements: 
+[Andrew Heiss](https://datavizm20.classes.andrewheiss.com)
+&lt;!-- [Claus Wilke](https://wilkelab.org/SDS375/) --&gt;
+&lt;!-- [Grant McDermott](https://github.com/uo-ec607/lectures), --&gt;
+&lt;!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), --&gt;
+&lt;!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) --&gt;
+
+]
+
+---
+
+# Announcements
+
+Reminders:
+- Mini Project 1 due April 1 ([link](https://aem2850.toddgerarden.com/assignment/01-mini-project/))
+
+Questions before we get started?
+
+
+---
+
+# Plan for today
+
+[Prologue: Axis issues](#axis-issues)
+
+[Visualizing time](#visualizing-time)
+
+[Starting, ending, and decomposing time](#decomposing)
+
+
+---
+class: inverse, center, middle
+name: axis-issues
+
+# Prologue: Axis issues
+
+---
+
+# Is truncating the y-axis misleading?
+
+&lt;img src="09-slides_files/figure-html/truncation-yes-no-1.png" width="864" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Don't be too extreme!
+
+It is actually more legal to truncate the y-axis than you might think
+
+When do you think it is okay to truncate?
+
+--
+
+When small movements matter
+
+--
+
+When the scale itself is distorted
+
+--
+
+When zero values are impossible
+
+---
+
+# When is it okay to truncate?
+
+.center[**When small movements matter**]
+
+--
+
+.pull-left[
+&lt;figure&gt;
+  &lt;img src="img/09/us_gdp_us_gdp_chartbuilder-3.png" alt="GDP not truncated, from Quartz" title="GDP not truncated, from Quartz" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+--
+
+.pull-right[
+&lt;figure&gt;
+  &lt;img src="img/09/us_gdp_us_gdp_chartbuilder-2.png" alt="GDP truncated, from Quartz" title="GDP truncated, from Quartz" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+Stock prices too
+
+https://qz.com/418083/its-ok-not-to-start-your-y-axis-at-zero/
+
+---
+
+# When is it okay to truncate?
+
+.center[**When the scale itself is distorted**]
+
+--
+
+.pull-left.center[
+&lt;figure&gt;
+  &lt;img src="img/09/uber-sign.jpg" alt="Sign in an Uber car about rating system" title="Sign in an Uber car about rating system" width="70%"&gt;
+&lt;/figure&gt;
+]
+
+--
+
+.pull-right.center[
+&lt;figure&gt;
+  &lt;img src="img/09/uber-scale.jpg" alt="Internal rating system at Uber" title="Internal rating system at Uber" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+https://www.buzzfeed.com/carolineodonovan/the-fault-in-five-stars
+
+http://www.businessinsider.com/leaked-charts-show-how-ubers-driver-rating-system-works-2015-2
+
+
+---
+
+# When is it okay to truncate?
+
+.center[**When zero values are impossible**]
+
+--
+
+.pull-left[
+&lt;figure&gt;
+  &lt;img src="img/09/oral_temperature_sara_bob_chartbuilder.png" alt="Temperature not truncated, from Quartz" title="Temperature not truncated, from Quartz" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+--
+
+.pull-right[
+&lt;figure&gt;
+  &lt;img src="img/09/oral_temperature_sara_bob_chartbuilder-1.png" alt="Temperature truncated, from Quartz" title="Temperature truncated, from Quartz" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+https://qz.com/418083/its-ok-not-to-start-your-y-axis-at-zero/
+
+---
+
+# Never on bar charts
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/06/obamacareenrollment-fncchart.jpg" alt="Fox News Obamacare enrollment" title="Fox News Obamacare enrollment" width="85%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Zero is okay too!
+
+Just because you don't *have to* start at 0 doesn't mean you should *never* start at 0
+
+Andrew Gelman's heuristic: **"If zero is in the neighborhood, invite it in."**
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/09/zero-in-the-neighborhood.png" alt="If zero is in the neighborhood, invite it in" title="If zero is in the neighborhood, invite it in" width="90%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+https://statmodeling.stat.columbia.edu/2021/12/17/graphing-advice-if-zero-is-in-the-neighborhood-invite-it-in/
+
+---
+
+# Keep axis scales consistent
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/09/fox-co-covid-cases.jpg" alt="FOX Colorado affiliate graph with COVID-19 cases" title="FOX Colorado affiliate graph with COVID-19 cases" width="55%"&gt;
+  &lt;figcaption&gt;FOX affiliate in Colorado reporting on COVID-19 cases&lt;/figcaption&gt;
+&lt;/figure&gt;
+]
+
+???
+
+http://freerangestats.info/blog/2020/04/06/crazy-fox-y-axis
+
+---
+
+# Keep scales consistent and flag missing data
+
+&amp;nbsp;
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/09/08fig21.jpg" alt="Good and bad treatment of missing values in x-axis" title="Good and bad treatment of missing values in x-axis" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+Alberto Cairo, *The Truthful Art*, chapter 8, figure 8.21
+
+---
+
+# Don’t impute across categories
+
+.pull-left[
+&lt;img src="09-slides_files/figure-html/likert-imputation-bad-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-right[
+&lt;img src="09-slides_files/figure-html/likert-good-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse, center, middle
+name: visualizing-time
+
+# Visualizing time
+
+---
+
+# Showing changes over time
+
+Time is just a variable that can be mapped to an aesthetic
+
+--
+
+Can be used as `x`, `y`, `color`, `fill`, `facet`, and even animation
+
+--
+
+Can use all sorts of `geom`s: lines, columns, points, heatmaps, densities, maps, etc.
+
+--
+
+In general, follow reading conventions to show time progression:
+
+→ &amp; ↓
+
+---
+
+# Time on x-axis + `geom_point()`
+
+.left-code[
+
+```r
+gme_prices %&gt;% 
+  ggplot(aes(x = date, y = adjusted)) +
+* geom_point(size = 0.5) +
+  labs(x = NULL, y = "Share price ($)",
+       title = "GME to the moon")
+```
+How would you add a line to this?
+]
+
+.right-plot[
+![](09-slides_files/figure-html/gme-point-1.png)
+]
+
+
+---
+
+# Time on x-axis + `geom_point()`
+
+.left-code[
+
+```r
+gme_prices %&gt;% 
+  ggplot(aes(x = date, y = adjusted)) +
+  geom_point(size = 0.5) +
+* geom_line() +
+  labs(x = NULL, y = "Share price ($)",
+       title = "GME to the moon")
+```
+]
+
+.right-plot[
+![](09-slides_files/figure-html/gme-point-line-1.png)
+]
+
+
+---
+
+# Time on x-axis: points vs lines
+
+Points emphasize observations
+
+Lines emphasize trends
+
+Using lines for time series is often fine since data are evenly spaced and usually complete
+
+But lines are effectively made-up data, so be careful how you use them!
+
+---
+
+# Time on x-axis + `geom_line/col()`
+
+.left-code[
+
+```r
+gme_prices %&gt;% 
+  ggplot(aes(x = date, y = adjusted)) +
+  geom_line() +
+  labs(x = NULL, y = "Share price ($)",
+       title = "GME to the moon")
+```
+]
+
+.right-plot[
+![](09-slides_files/figure-html/gme-1.png)
+]
+
+
+---
+
+# Time on x-axis + `geom_line/col()`
+
+Can also use a fill for the area under a line, **as long as the y-axis starts at zero**
+
+.left-code[
+
+```r
+gme_prices %&gt;% 
+  ggplot(aes(x = date, y = adjusted)) +
+* geom_area(fill = "skyblue", color = "black") +
+  labs(x = NULL, y = "Share price ($)",
+       title = "GME to the moon")
+```
+]
+
+.right-plot[
+![](09-slides_files/figure-html/gme-fill-1.png)
+]
+
+
+---
+
+# Line plots don't have to be boring
+
+.more-left.center[
+&lt;img src="09-slides_files/figure-html/covid-unemp-claims-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.less-right.center[
+&lt;figure&gt;
+  &lt;img src="img/09/nyt_2020-05-09.jpg" alt="Front page of the NYT, May 9, 2020" title="Front page of the NYT, May 9, 2020" width="90%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+Monthly change in jobs since end of WWII
+
+The New York Times front page, May 9, 2020
+
+https://www.nytimes.com/issue/todayspaper/2020/05/09/todays-new-york-times
+
+https://static01.nyt.com/images/2020/05/09/nytfrontpage/scan.pdf
+
+---
+
+# Time on x-axis + `geom_tile()`
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/09/08fig28.jpg" alt="Heat map by Jorge Camões" title="Heat map by Jorge Camões" title="Heat map by Jorge Camões" title="Heat map by Jorge Camões" width="85%"&gt;
+]
+
+???
+
+Alberto Cairo, *The Truthful Art*, chapter 8, figure 8.28
+
+---
+
+# Time on y-axis + `geom_density()`
+
+&lt;img src="09-slides_files/figure-html/density-ridges-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+.center[How would you make this plot?]
+
+---
+
+# Time on y-axis + `geom_density()`
+
+.left-code[
+
+```r
+gapminder %&gt;% 
+    mutate(year_factor = factor(year)) %&gt;% 
+    ggplot(
+      aes(x = lifeExp, 
+*         y = fct_rev(year_factor),# map time to y
+*         fill = after_stat(x)) # fill by x value
+      ) +
+*   geom_density_ridges_gradient( # add geom
+      color = "white", 
+      quantile_lines = TRUE, 
+*     quantiles = 2 # denote median
+      ) +
+    guides(fill = "none") +
+    scale_fill_viridis() + 
+    labs(x = "Life expectancy", 
+         y = NULL, fill = NULL) + 
+    theme_minimal()
+```
+]
+
+.right-plot[
+![](09-slides_files/figure-html/density-ridges-howto-1.png)
+]
+
+---
+
+# Time in animation + `geom_point()`
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/05/gapminder.gif" alt="Hans Rosling animation" title="Hans Rosling animation" width="65%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# How can we make this animation in R?
+
+First, how would we make a static plot of the data?
+
+--
+
+.left-code[
+
+```r
+gapminder %&gt;% 
+* ggplot(aes(gdpPercap, lifeExp,
+*            size = pop, color = country)) +
+* geom_point(alpha = 0.5, show.legend = FALSE) +
+* facet_wrap(~continent) +
+  scale_color_manual(
+    values = gapminder::country_colors
+    ) +
+  scale_size_continuous(range = c(1, 15)) +
+  scale_x_log10(labels = scales::dollar) +
+  theme_minimal(base_size = 14) +
+  labs(x = "GDP per capita", 
+       y = "Life expectancy",
+       title = "Year: 1952-2007")
+```
+]
+
+.right-plot[
+![](09-slides_files/figure-html/gapminder-static-1.png)
+]
+
+
+???
+
+https://towardsdatascience.com/how-to-create-animated-plots-in-r-adf53a775961
+
+---
+
+# Time in animation + `geom_point()`
+
+Second, let's use `gganimate` to visualize changes over time
+
+.left-code[
+
+```r
+*library(gganimate) # plot animation package
+
+gapminder %&gt;% 
+  ggplot(aes(gdpPercap, lifeExp, 
+             size = pop, color = country)) +
+  geom_point(alpha = 0.5, show.legend = FALSE) +
+  facet_wrap(~continent) +
+  scale_color_manual(
+    values = gapminder::country_colors
+    ) +
+  scale_size_continuous(range = c(1, 15)) +
+  scale_x_log10(labels = scales::dollar) +
+  theme_minimal(base_size = 14) +
+  labs(x = "GDP per capita", 
+       y = "Life expectancy",
+*      title = "Year: {frame_time}") +
+* transition_time(year) +
+* ease_aes('linear') # default progression
+```
+]
+
+--
+
+.right-plot[
+&lt;figure&gt;
+  &lt;img src="img/09/my-gapminder-animation.gif" alt="My Hans Rosling animation" title="My Hans Rosling animation" width="90%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+https://towardsdatascience.com/how-to-create-animated-plots-in-r-adf53a775961
+
+---
+
+# Time in animation + `geom_point()`
+
+Third, use `anim_save()` to write a `.gif` that you can text to your mom
+
+
+```r
+library(gganimate) # plot animation package
+
+my_gapminder_animation &lt;- gapminder %&gt;% 
+  ggplot(aes(gdpPercap, lifeExp, size = pop, color = country)) +
+  geom_point(alpha = 0.5, show.legend = FALSE) +
+  scale_color_manual(values = gapminder::country_colors) +
+  scale_size_continuous(range = c(1, 15)) +
+  scale_x_log10(labels = scales::dollar) +
+  facet_wrap(~continent) +
+  theme_minimal(base_size = 14) +
+  labs(x = "GDP per capita", 
+       y = "Life expectancy",
+       title = "Year: {frame_time}") +
+  transition_time(year) +
+  ease_aes('linear')
+
+*anim_save("content/slides/img/09/my-gapminder-animation.gif",
+*         my_gapminder_animation)
+```
+
+???
+
+https://towardsdatascience.com/how-to-create-animated-plots-in-r-adf53a775961
+
+---
+
+# Time in maps
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/09/08fig30.jpg" alt="Map by Jorge Camões" title="Map by Jorge Camões" width="55%"&gt;
+  &lt;figcaption&gt;Map of the spread of Walmart by Jorge Camões&lt;/figcaption&gt;
+&lt;/figure&gt;
+]
+
+???
+
+Alberto Cairo, *The Truthful Art*, chapter 8, figure 8.30
+
+---
+
+# Connected scatter plots
+
+.pull-left[
+Sometimes connected scatter plots of time series data make sense
+
+What is a connected scatter plot?
+
+Are solar panels in Japan a good use case?
+]
+
+.pull-right[
+&lt;img src="09-slides_files/figure-html/solar-data-facet-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Connected scatter plots
+
+.left-code[
+
+```r
+solar_data %&gt;% 
+* ggplot(aes(x = `Quantity (GW)`,  # not time
+*            y = `Price ($/Watt)`, # not time
+*            color = date)) +      # time!
+  geom_point() + 
+  geom_path() + # connect by time, not x
+  scale_x_log10() + 
+  scale_y_log10() + 
+  scale_color_viridis() +
+  guides(color = "none") +
+  theme_minimal()
+```
+
+Note the log axes
+]
+
+.right-plot[
+![](09-slides_files/figure-html/solar-data-connected-1.png)
+]
+
+
+---
+
+# Why might this make sense?
+
+.pull-left[
+&lt;img src="09-slides_files/figure-html/solar-data-connected-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-right[
+Looks a lot like a demand curve!
+
+`\(log(Q) = \alpha + \beta log(P) + \varepsilon\)`
+
+We could use OLS to estimate `\(\beta\)`
+
+How might we interpret `\(\beta\)`?
+]
+
+
+---
+
+# Often it's better to use multiple plots
+
+.pull-left[
+&lt;img src="09-slides_files/figure-html/unemp-inflation-path-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-right[
+&lt;img src="09-slides_files/figure-html/unemp-inflation-good-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Don't go wild with time mapping!
+
+.pull-left.center[
+&lt;figure&gt;
+  &lt;img src="img/09/covid-death-spiral.png" alt="COVID death rates" title="COVID death rates" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+--
+
+.pull-right.center[
+&lt;figure&gt;
+  &lt;img src="img/09/covid-death-line.png" alt="COVID death rates" title="COVID death rates" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+Image source: https://www.nytimes.com/2022/01/06/opinion/omicron-covid-us.html
+
+Discussion: https://junkcharts.typepad.com/junk_charts/2022/01/think-twice-before-you-spiral.html
+
+---
+class: inverse, center, middle
+name: decomposing
+
+# Starting, ending, and decomposing time
+
+---
+
+# You have to start (and end) somewhere
+
+You always have to choose a start and end point
+
+Start and end at reasonable times that help maintain the context of the story
+
+
+---
+
+# Measles vaccine was pretty effective
+
+&lt;img src="09-slides_files/figure-html/measles-partial-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+
+???
+
+Data sources listed here: 
+
+https://commons.m.wikimedia.org/wiki/File:Measles_US_1938-2019.png
+
+I used [this big PDF table from the CDC](https://web.archive.org/web/20190120205018/https://www.cdc.gov/vaccines/pubs/pinkbook/downloads/appendices/e/reported-cases.pdf), used some random online PDF → CSV converter, and cleaned up the data by hand in Excel:
+
+---
+
+# Measles vaccine was *incredible*!
+
+&lt;img src="09-slides_files/figure-html/measles-full-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Seasonality
+
+Don't mistake seasonality for actual trends
+
+
+
+.pull-left[
+
+&lt;img src="09-slides_files/figure-html/seasonality-zoomed-in-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+--
+
+.pull-right[
+
+&lt;img src="09-slides_files/figure-html/seasonality-zoomed-out-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Decomposition
+
+&lt;img src="09-slides_files/figure-html/retail-decomposition-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Birthday decomposition
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/09/bda_cover.png" alt="Bayesian Data Analysis cover" title="Bayesian Data Analysis cover" width="48%"&gt;
+  &lt;figcaption&gt;Cover of Andrew Gelman, et al., &lt;i&gt;Bayesian Data Analysis&lt;/i&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+]
+
+???
+
+http://www.stat.columbia.edu/~gelman/book/
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
