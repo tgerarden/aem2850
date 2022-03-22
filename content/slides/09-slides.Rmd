@@ -113,6 +113,8 @@ Questions before we get started?
 
 [Starting, ending, and decomposing time](#decomposing)
 
+[Dates and times in R](#working-with-time)
+
 
 ---
 class: inverse, center, middle
@@ -342,6 +344,7 @@ ggplot(fake_survey, aes(x = response, y = count)) +
   guides(color = "none")
 ```
 ]
+
 
 ---
 class: inverse, center, middle
@@ -727,7 +730,7 @@ Sometimes connected scatter plots of time series data make sense
 
 What is a connected scatter plot?
 
-Are solar panels in Japan a good use case?
+How would you make one using these data?
 ]
 
 .pull-right[
@@ -1076,3 +1079,138 @@ ggplot(sales_model_components, aes(x = year_month, y = value)) +
 
 http://www.stat.columbia.edu/~gelman/book/
 
+---
+class: inverse, center, middle
+name: working-with-time
+
+# Dates and times in R
+
+---
+
+# Are dates and times special?
+
+We made a bunch of plots without really thinking about data types
+
+We can map "dates" to x regardless of whether they are `date` or `numeric` objects
+
+.pull-left-3[
+```{r}
+class(gme_prices$date)
+```
+]
+
+.pull-middle-3[
+```{r}
+class(solar_data$date)
+```
+]
+
+.pull-right-3[
+```{r}
+class(measles$Year)
+```
+]
+
+When do we need to pay attention to the details?
+
+--
+
+- Converting from strings to dates
+
+--
+
+- Getting components of date-time data
+
+--
+
+- Computing time spans
+
+---
+
+# Dates and times in R
+
+R has "native" classes for storing calendar dates and times
+
+- For background, see `?Dates` and `?DateTimeClasses`
+
+--
+
+The `lubridate` package offers convenient tools for working with dates and times
+
+- See [`vignette("lubridate")`](https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html) and [Chapter 16 of R4DS](https://r4ds.had.co.nz/dates-and-times.html)
+
+---
+
+# Converting from strings to dates
+
+Use `lubridate::ymd` to parse dates with **y**ear, **m**onth, and **d**ay components
+
+```{r}
+independence_declared <- ymd("1776-07-04")
+independence_declared
+class(independence_declared)
+```
+
+--
+
+`lubridate` offers many other functions for parsing dates. For example:
+
+```{r}
+emancipation_proclaimed <- mdy("January 1, 1863")
+emancipation_proclaimed
+class(emancipation_proclaimed)
+```
+
+---
+
+# Getting components of date-time data
+
+What year was the Emancipation Proclamation?
+
+--
+
+```{r}
+year(emancipation_proclaimed)
+```
+
+--
+.pull-left[
+What day of the week was that?
+```{r}
+wday(emancipation_proclaimed)
+wday(emancipation_proclaimed, label = TRUE)
+```
+]
+
+--
+
+.pull-right[
+What month was that?
+
+```{r}
+month(emancipation_proclaimed)
+month(emancipation_proclaimed, label = TRUE)
+```
+]
+
+---
+
+# Computing time spans
+
+How many days passed between independence and emancipation?
+```{r}
+emancipation_proclaimed - independence_declared
+```
+
+--
+
+How many days are left until classes end?
+```{r}
+ymd(20220510) - today()
+```
+
+--
+
+These are **durations**
+
+See [Chapter 16 of R4DS](https://r4ds.had.co.nz/dates-and-times.html) for functions to compute **periods** and **intervals**
