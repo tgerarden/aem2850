@@ -212,21 +212,6 @@ https://statmodeling.stat.columbia.edu/2021/12/17/graphing-advice-if-zero-is-in-
 
 ---
 
-# Keep axis scales consistent
-
-.center[
-&lt;figure&gt;
-  &lt;img src="img/09/fox-co-covid-cases.jpg" alt="FOX Colorado affiliate graph with COVID-19 cases" title="FOX Colorado affiliate graph with COVID-19 cases" width="55%"&gt;
-  &lt;figcaption&gt;FOX affiliate in Colorado reporting on COVID-19 cases&lt;/figcaption&gt;
-&lt;/figure&gt;
-]
-
-???
-
-http://freerangestats.info/blog/2020/04/06/crazy-fox-y-axis
-
----
-
 # Keep scales consistent and flag missing data
 
 &amp;nbsp;
@@ -404,19 +389,6 @@ https://static01.nyt.com/images/2020/05/09/nytfrontpage/scan.pdf
 
 ---
 
-# Time on x-axis + `geom_tile()`
-
-.center[
-&lt;figure&gt;
-  &lt;img src="img/09/08fig28.jpg" alt="Heat map by Jorge Camões" title="Heat map by Jorge Camões" title="Heat map by Jorge Camões" title="Heat map by Jorge Camões" width="85%"&gt;
-]
-
-???
-
-Alberto Cairo, *The Truthful Art*, chapter 8, figure 8.28
-
----
-
 # Time on y-axis + `geom_density()`
 
 &lt;img src="09-slides_files/figure-html/density-ridges-1.png" width="90%" style="display: block; margin: auto;" /&gt;
@@ -425,7 +397,32 @@ Alberto Cairo, *The Truthful Art*, chapter 8, figure 8.28
 
 ---
 
-# Time on y-axis + `geom_density()`
+# Let's start simple
+
+.left-code[
+
+```r
+*library(ggridges) # geom_density_ridges() package
+
+gapminder %&gt;% 
+*   mutate(year_factor = factor(year)) %&gt;%
+    ggplot(
+      aes(x = lifeExp, 
+*         y = year_factor) # map time to y
+      ) +
+*   geom_density_ridges() # add geom
+```
+
+How could we modify this to follow ↓ convention for time?
+]
+
+.right-plot[
+![](09-slides_files/figure-html/density-ridges-howto-1.png)
+]
+
+---
+
+# Follow ↓ convention for time
 
 .left-code[
 
@@ -434,24 +431,128 @@ gapminder %&gt;%
     mutate(year_factor = factor(year)) %&gt;% 
     ggplot(
       aes(x = lifeExp, 
-*         y = fct_rev(year_factor),# map time to y
+*         y = fct_rev(year_factor)) # reverse year
+      ) +
+    geom_density_ridges()
+```
+
+How could we change the black lines to white?
+]
+
+.right-plot[
+![](09-slides_files/figure-html/density-ridges-howto-rev-1.png)
+]
+
+---
+
+# Add color to help visually separate densities
+
+.left-code[
+
+```r
+gapminder %&gt;% 
+    mutate(year_factor = factor(year)) %&gt;% 
+    ggplot(
+      aes(x = lifeExp, 
+          y = fct_rev(year_factor))
+      ) +
+    geom_density_ridges(
+*     color = "white"  # separate densities
+      )
+```
+
+How could we add a line at the median of each density?
+]
+
+.right-plot[
+![](09-slides_files/figure-html/density-ridges-howto-white-1.png)
+]
+
+---
+
+# Add a line at the median of each density
+
+.left-code[
+
+```r
+gapminder %&gt;% 
+    mutate(year_factor = factor(year)) %&gt;% 
+    ggplot(
+      aes(x = lifeExp, 
+          y = fct_rev(year_factor))
+      ) +
+    geom_density_ridges(
+      color = "white", 
+*     quantile_lines = TRUE, # add quantile lines
+*     quantiles = 2          # median
+      )
+```
+
+How could we add a color gradient to the densities?
+]
+
+.right-plot[
+![](09-slides_files/figure-html/density-ridges-howto-median-1.png)
+]
+
+---
+
+# Fill the densities along the x axis
+
+.left-code[
+
+```r
+gapminder %&gt;% 
+    mutate(year_factor = factor(year)) %&gt;% 
+    ggplot(
+      aes(x = lifeExp, 
+          y = fct_rev(year_factor),
 *         fill = after_stat(x)) # fill by x value
       ) +
-*   geom_density_ridges_gradient( # add geom
+*   geom_density_ridges_gradient(
+*     # this is a special geom to fill along x
       color = "white", 
       quantile_lines = TRUE, 
-*     quantiles = 2 # denote median
+      quantiles = 2
+      )
+```
+
+Use **after_stat** to shade the *densities*, not the data itself
+]
+
+.right-plot[
+![](09-slides_files/figure-html/density-ridges-howto-fill-1.png)
+]
+
+---
+
+# Finish by cleaning the plot up
+
+.left-code[
+
+```r
+gapminder %&gt;% 
+    mutate(year_factor = factor(year)) %&gt;% 
+    ggplot(
+      aes(x = lifeExp, 
+          y = fct_rev(year_factor),
+          fill = after_stat(x))
       ) +
-    guides(fill = "none") +
-    scale_fill_viridis() + 
-    labs(x = "Life expectancy", 
-         y = NULL, fill = NULL) + 
-    theme_minimal()
+    geom_density_ridges_gradient(
+      color = "white", 
+      quantile_lines = TRUE, 
+      quantiles = 2
+      ) +
+*   guides(fill = "none") +       # omit legend
+*   scale_fill_viridis() +        # nicer shading
+*   labs(x = "Life expectancy",   # modify label
+*        y = NULL, fill = NULL) + # omit labels
+*   theme_minimal()               # cleaner theme
 ```
 ]
 
 .right-plot[
-![](09-slides_files/figure-html/density-ridges-howto-1.png)
+![](09-slides_files/figure-html/density-ridges-howto-fancy-1.png)
 ]
 
 ---
@@ -503,7 +604,7 @@ https://towardsdatascience.com/how-to-create-animated-plots-in-r-adf53a775961
 
 ---
 
-# Time in animation + `geom_point()`
+# Converting a static plot to an animation
 
 Second, let's use `gganimate` to visualize changes over time
 
@@ -545,7 +646,7 @@ https://towardsdatascience.com/how-to-create-animated-plots-in-r-adf53a775961
 
 ---
 
-# Time in animation + `geom_point()`
+# Saving gifs
 
 Third, use `anim_save()` to write a `.gif` that you can text to your mom
 
@@ -825,15 +926,15 @@ When do we need to pay attention to the details?
 
 --
 
-- Converting from strings to dates
+1. Converting from strings to dates
 
 --
 
-- Getting components of date-time data
+2. Getting components of date-time data
 
 --
 
-- Computing time spans
+3. Computing time spans
 
 ---
 

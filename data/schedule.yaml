@@ -91,7 +91,7 @@ lessons:
     assignment: "08-lab"
     bg: 1
 
-  - title: '<span class="content-title">Time</span>'
+  - title: '<span class="content-title">Time <br> Working with dates and times</span>'
     session: "Session 9"
     date: "Week 9"
     # date_start: "July 5"
