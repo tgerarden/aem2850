@@ -35,10 +35,23 @@ opts_chunk$set(warning = FALSE, message = FALSE,
                       fig.width=14, fig.height=7)
 ```
 
-```{r, download-gme-prices, eval=FALSE, echo=FALSE}
+```{r, download-gme-prices, eval=FALSE}
+# do this once, manually
 tidyquant::tq_get("GME", get = "stock.prices", from = "1990-01-01") %>% 
-  write_csv(.,
-            "content/slides/data/gme-prices.csv")
+  write_csv(., "content/slides/data/gme-prices.csv")
+```
+
+```{r download-fred-data, eval=FALSE}
+# do this once, manually
+fred_raw <- tidyquant::tq_get(c("RSXFSN",  # Advance retail sales
+                                "GDPC1",  # GDP
+                                "ICSA",  # Initial unemployment claims
+                                "FPCPITOTLZGUSA",  # Inflation
+                                "UNRATE",  # Unemployment rate
+                                "USREC"),  # Recessions
+                              get = "economic.data",  # Use FRED
+                              from = "1990-01-01")
+write_csv(fred_raw, "content/slides/data/fred_raw.csv")
 ```
 
 ```{r packages-data, include=FALSE}

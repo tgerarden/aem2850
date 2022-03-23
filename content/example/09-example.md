@@ -1,7 +1,7 @@
 ---
 title: "Time"
 linktitle: "Time"
-date: "`r format(Sys.time())`"
+date: "2022-03-23 17:22:46"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
