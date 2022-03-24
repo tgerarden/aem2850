@@ -98,7 +98,7 @@ lessons:
     # date_end: "July 9"
     content: "09-content"
     example: "09-example"
-    # assignment: "09-lab"
+    assignment: "09-lab"
     bg: 1
 
   - title: '<span class="content-title">Space</span>'
