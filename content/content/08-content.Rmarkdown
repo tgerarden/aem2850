@@ -5,7 +5,7 @@ date: "`r format(Sys.time())`"
 menu:
   content:
     parent: Course content
-    weight: 1
+    weight: 8
 type: docs
 # bibliography: "../../static/bib/references.bib"
 # csl: "../../static/bib/chicago-fullnote-bibliography-no-bib.csl"
