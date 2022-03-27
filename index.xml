@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 24 Mar 2022 09:34:13 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 9</title><link>https://aem2850.toddgerarden.com/assignment/09-lab/</link><pubDate>Thu, 24 Mar 2022 09:34:13 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/09-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 27 Mar 2022 14:49:37 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 9</title><link>https://aem2850.toddgerarden.com/assignment/09-lab/</link><pubDate>Thu, 24 Mar 2022 09:34:13 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/09-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
 &lt;p>Please submit your reflection via canvas by Wednesday at 11:59pm.&lt;/p>
 &lt;p>&lt;a href="https://aem2850.toddgerarden.com/assignment/#reflections" target="_blank" rel="noopener">Here are the guidelines for reflections.&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3511792" target="_blank" rel="noopener">Here is a project on RStudio Cloud that includes a template for reflections.&lt;/a>&lt;/p>
@@ -420,7 +420,29 @@
 &lt;p>The main exception to this is that I set up RStudio Cloud projects so they come with packages pre-installed in the cloud, and those packages are not included in the project files you downloaded, so you may need to install new packages the first time you use them.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Time</title><link>https://aem2850.toddgerarden.com/content/09-content/</link><pubDate>Mon, 21 Mar 2022 22:12:18 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/09-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;/section></description></item><item><title>Space</title><link>https://aem2850.toddgerarden.com/content/10-content/</link><pubDate>Sun, 27 Mar 2022 14:49:37 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/10-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/geospatial-data.html" target="_blank" rel="noopener">Chapter 15&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fab fa-youtube">&lt;/i> &lt;a href="https://www.youtube.com/watch?v=kIID5FDi2JQ" target="_blank" rel="noopener">Why all world maps are wrong&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="optional-readings">Optional readings&lt;/h4>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="http://socviz.co/maps.html" target="_blank" rel="noopener">Chapter 7&lt;/a> of &lt;em>Data Visualization&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://r-spatial.org//r/2018/10/25/ggplot2-sf.html" target="_blank" rel="noopener">Drawing beautiful maps programmatically with R, sf and ggplot2&lt;/a>&lt;/li>
+&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://www.citylab.com/design/2015/06/when-maps-lie/396761/" target="_blank" rel="noopener">Bloomberg: When maps lie&lt;/a>&lt;/li>
+&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://xkcd.com/977/" target="_blank" rel="noopener">xkcd: Map projections&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
+&lt;ul>
+&lt;li>How can you know if a map projection is truthful or misleading?&lt;/li>
+&lt;li>What&amp;rsquo;s wrong (or not wrong) with using points on maps? Choropleths? Lines?&lt;/li>
+&lt;/ul>
+&lt;!-- ### Slides -->
+&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+&lt;!--
+&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/10-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/10-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
+-->
+&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item><item><title>Time</title><link>https://aem2850.toddgerarden.com/content/09-content/</link><pubDate>Mon, 21 Mar 2022 22:12:18 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/09-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/time-series.html" target="_blank" rel="noopener">Chapter 13&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-trends.html" target="_blank" rel="noopener">Chapter 14&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
