@@ -107,8 +107,8 @@ lessons:
     # date_start: "July 5"
     # date_end: "July 9"
     content: "10-content"
-    # example: "10-example"
-    # assignment: "10-lab"
+    example: "10-example"
+    assignment: "10-lab"
     bg: 2
 
   - title: '<i class="fas fa-star"></i> **Mini project 1 due**'
