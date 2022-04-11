@@ -18,12 +18,12 @@ output:
 ---
 
 ### Readings
-- <i class="fas fa-book"></i> [Chapter 13](https://clauswilke.com/dataviz/time-series.html) of *Fundamentals of Data Visualization*
-- <i class="fas fa-book"></i> [Chapter 14](https://clauswilke.com/dataviz/visualizing-trends.html) of *Fundamentals of Data Visualization*
+- <i class="fas fa-book"></i> [Chapter 13: Visualizing time series](https://clauswilke.com/dataviz/time-series.html) of *Fundamentals of Data Visualization*
+- <i class="fas fa-book"></i> [Chapter 14: Visualizing trends](https://clauswilke.com/dataviz/visualizing-trends.html) of *Fundamentals of Data Visualization*
 
 
 #### Optional readings
-- <i class="fas fa-book"></i> [Chapter 16](https://r4ds.had.co.nz/dates-and-times.html) of *R for Data Science*
+- <i class="fas fa-book"></i> [Chapter 16: Dates and times](https://r4ds.had.co.nz/dates-and-times.html) of *R for Data Science*
 - <i class="fas fa-external-link-square-alt"></i> [11 Ways to Visualize Changes Over Time – A Guide](https://flowingdata.com/2010/01/07/11-ways-to-visualize-changes-over-time-a-guide/)
 - <i class="fas fa-external-link-square-alt"></i> [Think twice before you spiral](https://junkcharts.typepad.com/junk_charts/2022/01/think-twice-before-you-spiral.html)
 
