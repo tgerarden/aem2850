@@ -150,6 +150,7 @@ The `schrute` package contains transcripts of all episodes of [The Office](https
 
 
 ```r
+library(schrute)
 theoffice # this is an object from the schrute package
 ```
 
@@ -346,27 +347,7 @@ So far we have used them as we would any other data
 
 --
 
-But sometimes we want to filter on, modify, or analyze strings
-
----
-
-# We saw an example way back in week 3
-
-
-```r
-starwars %&gt;% 
-* filter(stringr::str_detect(name, "Skywalker"))
-```
-
-```
-## # A tibble: 3 × 14
-##   name      height  mass hair_color skin_color eye_color birth_year sex   gender homeworld
-##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    
-## 1 Luke Sky…    172    77 blond      fair       blue            19   male  mascu… Tatooine 
-## 2 Anakin S…    188    84 blond      fair       blue            41.9 male  mascu… Tatooine 
-## 3 Shmi Sky…    163    NA black      fair       brown           72   fema… femin… Tatooine 
-## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
-```
+**But sometimes we'll want to filter on, modify, or analyze strings**
 
 ---
 
@@ -387,8 +368,22 @@ See `vignette("stringr")` for more
 
 # 1) stringr::str_length
 
+--
+
 `str_length` tells you the number of characters in a string
 
+--
+
+
+```r
+str_length("supercalifragilisticexpialidocious")
+```
+
+```
+## [1] 34
+```
+
+--
 
 ```r
 theoffice %&gt;% 
@@ -412,7 +407,11 @@ theoffice %&gt;%
 
 # 2) stringr::str_trim
 
+--
+
 `str_trim` removes leading/trailing whitespace
+
+--
 
 
 ```r
@@ -438,7 +437,55 @@ str_trim("            I went to Cornell, you ever heard of it?  ")
 
 # 3) stringr::str_detect
 
+--
+
 `str_detect` can be used to match patterns
+
+--
+
+.pull-left[
+
+```r
+first_4_characters &lt;- theoffice %&gt;% 
+  distinct(character) %&gt;% 
+  slice_head(n = 4) %&gt;% 
+  pull(character)
+first_4_characters
+```
+
+```
+## [1] "Michael" "Jim"     "Pam"     "Dwight"
+```
+]
+
+--
+
+.pull-right[
+
+```r
+str_detect(first_4_characters, "Dwight")
+```
+
+```
+## [1] FALSE FALSE FALSE  TRUE
+```
+
+```r
+str_detect(first_4_characters, "a")
+```
+
+```
+## [1]  TRUE FALSE  TRUE FALSE
+```
+]
+
+---
+
+# 3) stringr::str_detect
+
+`str_detect` is a powerful way to `filter` a data frame
+
+--
 
 
 ```r
@@ -468,7 +515,7 @@ theoffice %&gt;% select(season, episode, character, text) %&gt;%
 
 # 3) stringr::str_detect
 
-`str_detect` is case-sensitive
+`str_detect` is case-sensitive by default
 
 
 ```r
@@ -498,13 +545,73 @@ theoffice %&gt;% select(season, episode, character, text) %&gt;%
 
 # 3) stringr::str_detect
 
-Use `regex` to ignore case and control other details of pattern matching:
+You could use multiple calls to `str_detect`, or pass multiple arguments:
 
 
 ```r
 theoffice %&gt;% select(season, episode, character, text) %&gt;% 
   filter(str_detect(text, 
-*                   regex("Sale", ignore_case = TRUE)))
+*                   "sale|Sale")) # look for sale OR Sale
+```
+
+```
+## # A tibble: 391 × 4
+##    season episode character text                                                          
+##     &lt;int&gt;   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;                                                         
+##  1      1       2 Jim       This is my biggest sale of the year. They love me over there …
+##  2      1       2 Jim       Mr. Decker, we didn't lose your sale today, did we? Excellent…
+*##  3      1       3 Jim       That is a great offer. Thank you. I really think I should be …
+##  4      1       3 Jan       From sales?                                                   
+##  5      1       4 Michael   Look, look, look. I talked to corporate, about protecting the…
+##  6      1       5 Michael   All right, time, time out. Come on, sales, over here. Bring i…
+*##  7      1       6 Jan       Alan and I have created an incentive program to increase sale…
+##  8      1       6 Jan       We've created an incentive program to increase sales.         
+##  9      1       6 Jim       Plus you have so much more to talk to this girl about, You're…
+## 10      1       6 Stanley   I thought that was the incentive prize for the top salesperso…
+## # … with 381 more rows
+```
+
+---
+
+# 3) stringr::str_detect
+
+You could consolidate this -- regex parentheses are like in math
+
+
+```r
+theoffice %&gt;% select(season, episode, character, text) %&gt;% 
+  filter(str_detect(text, 
+*                   "(s|S)ale")) # look for sale OR Sale
+```
+
+```
+## # A tibble: 391 × 4
+##    season episode character text                                                          
+##     &lt;int&gt;   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;                                                         
+##  1      1       2 Jim       This is my biggest sale of the year. They love me over there …
+##  2      1       2 Jim       Mr. Decker, we didn't lose your sale today, did we? Excellent…
+##  3      1       3 Jim       That is a great offer. Thank you. I really think I should be …
+##  4      1       3 Jan       From sales?                                                   
+##  5      1       4 Michael   Look, look, look. I talked to corporate, about protecting the…
+##  6      1       5 Michael   All right, time, time out. Come on, sales, over here. Bring i…
+##  7      1       6 Jan       Alan and I have created an incentive program to increase sale…
+##  8      1       6 Jan       We've created an incentive program to increase sales.         
+##  9      1       6 Jim       Plus you have so much more to talk to this girl about, You're…
+## 10      1       6 Stanley   I thought that was the incentive prize for the top salesperso…
+## # … with 381 more rows
+```
+
+---
+
+# 3) stringr::str_detect
+
+You could `regex` to ignore all cases and control other pattern matching details
+
+
+```r
+theoffice %&gt;% select(season, episode, character, text) %&gt;% 
+  filter(str_detect(text, 
+*                   regex("Sale", ignore_case = TRUE))) # ignore case
 ```
 
 ```
@@ -524,11 +631,35 @@ theoffice %&gt;% select(season, episode, character, text) %&gt;%
 ## # … with 382 more rows
 ```
 
+
 ---
 
 # 3) stringr::str_detect
 
-`str_detect` can be combined with other functions to summarize data
+When I say ignore all cases, I mean IGNORE ALL CASES!
+
+
+```r
+theoffice %&gt;% select(season, episode, character, text) %&gt;% 
+  filter(str_detect(text, 
+                    regex("sale", ignore_case = TRUE))) %&gt;%
+* filter(!str_detect(text, "(s|S)ale")) # find non-standard form(s)
+```
+
+```
+## # A tibble: 1 × 4
+##   season episode character text                           
+##    &lt;int&gt;   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;                          
+## 1      3       3 Dwight    I HAVE EXCELLENT SALES NUMBERS!
+```
+
+---
+
+# 3) stringr::str_detect
+
+`str_detect` can be combined with familiar functions to summarize data
+
+--
 
 
 ```r
@@ -558,13 +689,13 @@ theoffice %&gt;%
 
 # 3) stringr::str_detect
 
-`str_detect` can be combined with other functions to summarize data
+`str_detect` can be combined with familiar functions to summarize data
 
 
 ```r
 theoffice %&gt;% 
   filter(str_detect(text, 
-                    regex("that's what she said", ignore_case = TRUE))) %&gt;% 
+*                   regex("that's what she said", ignore_case = TRUE))) %&gt;%
   count(character, sort = TRUE)
 ```
 
@@ -982,7 +1113,7 @@ hp1_data %&gt;%
 
 How would you make this?
 
-.small[This is not an endorsement of J. K. Rowling's [views on sex and gender](https://en.wikipedia.org/wiki/Political_views_of_J._K._Rowling#Transgender_people)]
+.small[This is not an endorsement of J. K. Rowling's [views on sex and gender](https://en.wikipedia.org/wiki/Political_views_of_J._K._Rowling#Transgender_people)!]
 
 ---
 
