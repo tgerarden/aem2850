@@ -155,18 +155,18 @@ theoffice # this is an object from the schrute package
 
 ```
 ## # A tibble: 55,130 × 12
-##    index season episode episode_name director   writer  character text   text_w_direction 
-##    &lt;int&gt;  &lt;int&gt;   &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;            
-##  1     1      1       1 Pilot        Ken Kwapis Ricky … Michael   All r… All right Jim. Y…
-##  2     2      1       1 Pilot        Ken Kwapis Ricky … Jim       Oh, I… Oh, I told you. …
-##  3     3      1       1 Pilot        Ken Kwapis Ricky … Michael   So yo… So you've come t…
-##  4     4      1       1 Pilot        Ken Kwapis Ricky … Jim       Actua… Actually, you ca…
-##  5     5      1       1 Pilot        Ken Kwapis Ricky … Michael   All r… All right. Well,…
-##  6     6      1       1 Pilot        Ken Kwapis Ricky … Michael   Yes, … [on the phone] Y…
-##  7     7      1       1 Pilot        Ken Kwapis Ricky … Michael   I've,… I've, uh, I've b…
-##  8     8      1       1 Pilot        Ken Kwapis Ricky … Pam       Well.… Well. I don't kn…
-##  9     9      1       1 Pilot        Ken Kwapis Ricky … Michael   If yo… If you think she…
-## 10    10      1       1 Pilot        Ken Kwapis Ricky … Pam       What?  What?            
+##    index season episode episode_name director   writer    character text  text_w_direction
+##    &lt;int&gt;  &lt;int&gt;   &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;           
+##  1     1      1       1 Pilot        Ken Kwapis Ricky Ge… Michael   All … All right Jim. …
+##  2     2      1       1 Pilot        Ken Kwapis Ricky Ge… Jim       Oh, … Oh, I told you.…
+##  3     3      1       1 Pilot        Ken Kwapis Ricky Ge… Michael   So y… So you've come …
+##  4     4      1       1 Pilot        Ken Kwapis Ricky Ge… Jim       Actu… Actually, you c…
+##  5     5      1       1 Pilot        Ken Kwapis Ricky Ge… Michael   All … All right. Well…
+##  6     6      1       1 Pilot        Ken Kwapis Ricky Ge… Michael   Yes,… [on the phone] …
+##  7     7      1       1 Pilot        Ken Kwapis Ricky Ge… Michael   I've… I've, uh, I've …
+##  8     8      1       1 Pilot        Ken Kwapis Ricky Ge… Pam       Well… Well. I don't k…
+##  9     9      1       1 Pilot        Ken Kwapis Ricky Ge… Michael   If y… If you think sh…
+## 10    10      1       1 Pilot        Ken Kwapis Ricky Ge… Pam       What? What?           
 ## # … with 55,120 more rows, and 3 more variables: imdb_rating &lt;dbl&gt;, total_votes &lt;int&gt;,
 ## #   air_date &lt;fct&gt;
 ```
@@ -360,11 +360,11 @@ starwars %&gt;%
 
 ```
 ## # A tibble: 3 × 14
-##   name     height  mass hair_color skin_color eye_color birth_year sex    gender homeworld
-##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;    
-## 1 Luke Sk…    172    77 blond      fair       blue            19   male   mascu… Tatooine 
-## 2 Anakin …    188    84 blond      fair       blue            41.9 male   mascu… Tatooine 
-## 3 Shmi Sk…    163    NA black      fair       brown           72   female femin… Tatooine 
+##   name      height  mass hair_color skin_color eye_color birth_year sex   gender homeworld
+##   &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    
+## 1 Luke Sky…    172    77 blond      fair       blue            19   male  mascu… Tatooine 
+## 2 Anakin S…    188    84 blond      fair       blue            41.9 male  mascu… Tatooine 
+## 3 Shmi Sky…    163    NA black      fair       brown           72   fema… femin… Tatooine 
 ## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
 
@@ -978,7 +978,182 @@ hp1_data %&gt;%
 
 # Token frequency: n-gram ratios
 
-&lt;img src="11-slides_files/figure-html/hp-se-she-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="11-slides_files/figure-html/hp-he-she-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+How would you make this?
+
+.small[This is not an endorsement of J. K. Rowling's [views on sex and gender](https://en.wikipedia.org/wiki/Political_views_of_J._K._Rowling#Transgender_people)]
+
+---
+
+# Token frequency: n-gram ratios
+
+1. Identify and count words associated with "he", "she"
+
+.pull-left[
+
+```r
+hp_pronouns &lt;- c("he", "she") # not apologizing for j k rowling here
+
+bigram_he_she_counts &lt;- hp %&gt;%
+  unnest_tokens(bigram, text, token = "ngrams", n = 2)  %&gt;%
+  count(bigram, sort = TRUE) %&gt;%
+  # split the bigram column into two columns
+  separate(bigram, c("word1", "word2"), sep = " ") %&gt;%
+* # only choose rows where the first word is he or she
+* filter(word1 %in% hp_pronouns) %&gt;%
+  # count unique pairs of words
+  count(word1, word2, wt = n, sort = TRUE) %&gt;%
+  rename(total = n)
+```
+]
+
+--
+
+.pull-right[
+
+```
+## # A tibble: 2,096 × 3
+##    word1 word2  total
+##    &lt;chr&gt; &lt;chr&gt;  &lt;int&gt;
+##  1 he    was     2490
+##  2 he    had     2138
+##  3 he    said    1270
+##  4 he    could    925
+##  5 she   said     615
+##  6 she   was      603
+##  7 he    looked   428
+##  8 he    did      386
+##  9 she   had      385
+## 10 he    would    349
+## # … with 2,086 more rows
+```
+]
+
+
+---
+
+# Token frequency: n-gram ratios
+
+2. Compute ratios for the most common bigrams
+
+.pull-left[
+
+```r
+word_ratios &lt;- bigram_he_she_counts %&gt;%
+  # look at each of the second words
+  group_by(word2) %&gt;%
+  # keep rows where the second word appears 10+ times
+  filter(sum(total) &gt; 10) %&gt;%
+  ungroup() %&gt;%
+  # pivot out the word1 column so that there's a column named "he" and one named "she"
+  pivot_wider(names_from = word1, values_from = total) %&gt;% 
+  # filter out missing he/she cases (subjective choice!)
+  filter(!is.na(he) &amp; !is.na(she)) %&gt;% 
+  # convert word2 counts to frequencies by he/she (normalization)
+  mutate_if(is.numeric, ~ (.) / sum(.)) %&gt;%
+  # compute logged ratio of the she counts to he counts
+  mutate(logratio = log2(she / he)) %&gt;%
+  # sort by that ratio
+  arrange(desc(logratio))
+
+word_ratios
+```
+]
+
+--
+
+.pull-right[
+
+```
+## # A tibble: 262 × 4
+##    word2          he     she logratio
+##    &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1 screamed 0.000171 0.00338     4.30
+##  2 shrieked 0.000228 0.00338     3.89
+##  3 snapped  0.000399 0.00386     3.27
+##  4 replied  0.000228 0.00217     3.25
+##  5 barked   0.000228 0.00169     2.89
+##  6 cried    0.000628 0.00338     2.43
+##  7 sounded  0.000685 0.00290     2.08
+##  8 say      0.000456 0.00169     1.89
+##  9 checked  0.000342 0.00121     1.82
+## 10 jerked   0.000342 0.00121     1.82
+## # … with 252 more rows
+```
+]
+
+---
+
+# Token frequency: n-gram ratios
+
+3. Rearrange the data for plotting
+
+.pull-left[
+
+```r
+plot_word_ratios &lt;- word_ratios %&gt;%
+  mutate(abslogratio = abs(logratio)) %&gt;%
+  group_by(logratio &lt; 0) %&gt;%
+  slice_max(abslogratio, n = 5) %&gt;%
+  ungroup()
+
+plot_word_ratios
+```
+]
+
+--
+
+.pull-right[
+
+```
+## # A tibble: 10 × 6
+##    word2            he      she logratio abslogratio `logratio &lt; 0`
+##    &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt; &lt;lgl&gt;         
+##  1 screamed   0.000171 0.00338      4.30        4.30 FALSE         
+##  2 shrieked   0.000228 0.00338      3.89        3.89 FALSE         
+##  3 snapped    0.000399 0.00386      3.27        3.27 FALSE         
+##  4 replied    0.000228 0.00217      3.25        3.25 FALSE         
+##  5 barked     0.000228 0.00169      2.89        2.89 FALSE         
+##  6 felt       0.0163   0.000966    -4.07        4.07 TRUE          
+##  7 remembered 0.00308  0.000242    -3.67        3.67 TRUE          
+##  8 yelled     0.00183  0.000242    -2.92        2.92 TRUE          
+##  9 heard      0.00976  0.00169     -2.53        2.53 TRUE          
+## 10 forced     0.00131  0.000242    -2.44        2.44 TRUE
+```
+]
+
+---
+
+# Token frequency: n-gram ratios
+
+4. Plot the data
+
+.pull-left.small-code[
+
+```r
+plot_word_ratios %&gt;% 
+  ggplot(aes(logratio, 
+             fct_reorder(word2, logratio), 
+             fill = logratio &lt; 0)) +
+  geom_col() +
+  labs(y = "How much more/less likely", x = NULL) +
+  scale_fill_manual(name = "", labels = c("More 'she'", "More 'he'"),
+                    values = c("#3D9970", "#FF851B"),
+                    guide = guide_legend(reverse = TRUE)) +
+  scale_x_continuous(breaks = seq(-3, 3),
+                     labels = c("8x", "4x", "2x",
+                                "Same", "2x", "4x", "8x")) +
+  theme_bw() +
+  theme(legend.position = "bottom")
+```
+]
+
+--
+
+.pull-right[
+&lt;img src="11-slides_files/figure-html/hp-he-she-plotr-1.png" width="85%" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 
