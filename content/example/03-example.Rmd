@@ -44,13 +44,7 @@ editor_options:
 ```
 
 
-## Data transformation with `dplyr` cheatsheet
+## Cheatsheets
 
 [Click here to download the `dplyr` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)
-
-<!-- https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf -->
-
-<!-- week 4: -->
-<!-- https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf -->
-<!-- https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf -->
 
