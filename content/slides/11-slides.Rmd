@@ -39,7 +39,6 @@ opts_chunk$set(warning = FALSE, message = FALSE,
 library(tidyverse)
 library(tidytext)
 # install.packages("textdata") # needed for AFINN and NRC sentiment lexicons
-library(schrute)
 
 # devtools::install_github("bradleyboehmke/harrypotter")
 library(harrypotter)
@@ -193,6 +192,7 @@ name: prologue
 The `schrute` package contains transcripts of all episodes of [The Office](https://www.imdb.com/title/tt0386676/) (US)
 
 ```{r}
+library(schrute)
 theoffice # this is an object from the schrute package
 ```
 
@@ -335,16 +335,7 @@ So far we have used them as we would any other data
 
 --
 
-But sometimes we want to filter on, modify, or analyze strings
-
----
-
-# We saw an example way back in week 3
-
-```{r filter2}
-starwars %>% 
-  filter(stringr::str_detect(name, "Skywalker")) #<<
-```
+**But sometimes we'll want to filter on, modify, or analyze strings**
 
 ---
 
@@ -365,8 +356,17 @@ See `vignette("stringr")` for more
 
 # 1) stringr::str_length
 
+--
+
 `str_length` tells you the number of characters in a string
 
+--
+
+```{r}
+str_length("supercalifragilisticexpialidocious")
+```
+
+--
 ```{r}
 theoffice %>% 
   distinct(character) %>% 
@@ -378,7 +378,11 @@ theoffice %>%
 
 # 2) stringr::str_trim
 
+--
+
 `str_trim` removes leading/trailing whitespace
+
+--
 
 ```{r}
 str_trim("I went to Cornell, you ever heard of it?            ")
@@ -394,7 +398,39 @@ str_trim("            I went to Cornell, you ever heard of it?  ")
 
 # 3) stringr::str_detect
 
+--
+
 `str_detect` can be used to match patterns
+
+--
+
+.pull-left[
+```{r}
+first_4_characters <- theoffice %>% 
+  distinct(character) %>% 
+  slice_head(n = 4) %>% 
+  pull(character)
+first_4_characters
+```
+]
+
+--
+
+.pull-right[
+```{r}
+str_detect(first_4_characters, "Dwight")
+
+str_detect(first_4_characters, "a")
+```
+]
+
+---
+
+# 3) stringr::str_detect
+
+`str_detect` is a powerful way to `filter` a data frame
+
+--
 
 ```{r}
 theoffice %>% select(season, episode, character, text) %>% 
@@ -406,7 +442,7 @@ theoffice %>% select(season, episode, character, text) %>%
 
 # 3) stringr::str_detect
 
-`str_detect` is case-sensitive
+`str_detect` is case-sensitive by default
 
 ```{r}
 theoffice %>% select(season, episode, character, text) %>% 
@@ -418,19 +454,59 @@ theoffice %>% select(season, episode, character, text) %>%
 
 # 3) stringr::str_detect
 
-Use `regex` to ignore case and control other details of pattern matching:
+You could use multiple calls to `str_detect`, or pass multiple arguments:
 
-```{r}
+```{r highlight.output = c(6, 10)}
 theoffice %>% select(season, episode, character, text) %>% 
   filter(str_detect(text, 
-                    regex("Sale", ignore_case = TRUE))) #<<
+                    "sale|Sale")) # look for sale OR Sale #<<
 ```
 
 ---
 
 # 3) stringr::str_detect
 
-`str_detect` can be combined with other functions to summarize data
+You could consolidate this -- regex parentheses are like in math
+
+```{r}
+theoffice %>% select(season, episode, character, text) %>% 
+  filter(str_detect(text, 
+                    "(s|S)ale")) # look for sale OR Sale #<<
+```
+
+---
+
+# 3) stringr::str_detect
+
+You could `regex` to ignore all cases and control other pattern matching details
+
+```{r}
+theoffice %>% select(season, episode, character, text) %>% 
+  filter(str_detect(text, 
+                    regex("Sale", ignore_case = TRUE))) # ignore case #<<
+```
+
+
+---
+
+# 3) stringr::str_detect
+
+When I say ignore all cases, I mean IGNORE ALL CASES!
+
+```{r}
+theoffice %>% select(season, episode, character, text) %>% 
+  filter(str_detect(text, 
+                    regex("sale", ignore_case = TRUE))) %>%
+  filter(!str_detect(text, "(s|S)ale")) # find non-standard form(s) #<<
+```
+
+---
+
+# 3) stringr::str_detect
+
+`str_detect` can be combined with familiar functions to summarize data
+
+--
 
 ```{r}
 theoffice %>% 
@@ -442,12 +518,12 @@ theoffice %>%
 
 # 3) stringr::str_detect
 
-`str_detect` can be combined with other functions to summarize data
+`str_detect` can be combined with familiar functions to summarize data
 
 ```{r}
 theoffice %>% 
   filter(str_detect(text, 
-                    regex("that's what she said", ignore_case = TRUE))) %>% 
+                    regex("that's what she said", ignore_case = TRUE))) %>% #<<
   count(character, sort = TRUE)
 ```
 
@@ -839,7 +915,7 @@ plot_word_ratios %>%
 
 How would you make this?
 
-.small[This is not an endorsement of J. K. Rowling's [views on sex and gender](https://en.wikipedia.org/wiki/Political_views_of_J._K._Rowling#Transgender_people)]
+.small[This is not an endorsement of J. K. Rowling's [views on sex and gender](https://en.wikipedia.org/wiki/Political_views_of_J._K._Rowling#Transgender_people)!]
 
 ---
 
