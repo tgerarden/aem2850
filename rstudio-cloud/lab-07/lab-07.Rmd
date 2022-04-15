@@ -1,0 +1,92 @@
+---
+#########################################################
+# Steps to complete this lab:
+#   1. Add your name to the author field of the yaml header
+#   2. Fill in the code chunks and use inline code to answer the questions 
+#   3. Click on "Knit" directly above to render output (or Ctrl/Cmd-Shift-K)
+#   4. Repeat steps 2-3 until you are satisfied with the final product
+#   5. Download the resulting file lab-xx.pdf
+#   6. Upload lab-xx.pdf to canvas
+# Note: this file will not Knit properly until it is (partially) completed
+# Reminder: to get around this and work interactively, you can run code chunks on their own
+# You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
+#########################################################
+title: "Lab-07"
+author: "hello, my name is"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: pdf_document
+urlcolor: blue
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(ggridges)
+
+# omit warnings and center plots by default
+library(knitr)
+opts_chunk$set(warning = FALSE, message = FALSE,
+               fig.align = "center")
+```
+
+# Preface
+
+The goal of this assignment is to help you gain more familiarity with using **ggplot** to visualize distributions. In this lab we provide no scaffolding and some more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
+
+## Data
+
+We will work with data on Airbnb reviews from [Inside Airbnb](http://insideairbnb.com).[^insideairbnb] For this lab, we will just use the `listing_id` and variables that summarize the date of each review, both of which are contained in `reviews.csv`. Start by importing these data and assigning them to a name.
+```{r}
+
+```
+
+
+## 1. We'll start by making some simple visualizations of the distribution of the number of reviews for each `listing_id`. First, make a histogram. Make the first bar start right at zero, customize the bins or binwidth to suit your tastes, and use a named color to delineate between bars. Only include listings with 250 reviews or fewer.
+```{r}
+
+```
+
+
+## 2. Make a density plot of the distribution of the number of reviews for each `listing_id`. Include listings with any number of reviews and use a log scale for the x axis.
+```{r}
+
+```
+
+
+## 3. Compute the total number of reviews for all listings each month and assign it to a name. Make three visualizations of the the proportion of reviews each month: pie, stacked bars, and side-by-side bars. When we read in these data, the tidyverse's `read_csv` parsed the data and stored all the variables as numbers, which are continuous. In reality, `month` is a discrete variable that only takes on 12 levels. You may want to use `factor()` to tell R to treat `month` accordingly. For the side-by-side bars, make sure the x axis is labeled with the integers 1 through 12. Which do you think is most effective for highlighting the months with the least and most reviews? Explain your logic.
+```{r}
+
+```
+
+
+## 4. Compute the total number of reviews in each month *for each listing*. Plot the density of this count variable, faceting by month. Only include listings with 50 reviews or fewer. What, if any, conclusions can you draw from the resulting plot?
+```{r}
+
+```
+
+
+## 5. Aggregate the reviews data to the listing level. For each listing, create two variables: the first year it received a review, and the total number of reviews it has received to date. Use the resulting data frame to make an overlapping density plot of the distribution of the number of reviews for properties which entered the market in each year. Fill by year, telling R you want to treat year as a discrete variable by encoding it as a factor (see `?factor()`). Adjust the opacity to make it more readable. What, if any, conclusions can you draw from the resulting plot?
+```{r}
+
+```
+
+
+## 6. Reproduce the plot above as a ridgeline plot instead of an overlapping density plot. Fill all the densities with a single named color of your choice and color them white.
+```{r}
+
+```
+
+
+## 7. The ridgeline plot above in 6 is problematic insofar as it suggests a non-zero probability that listings have negative reviews. Fix that. What can you learn from this visualization? Is anything about it surprising?
+```{r}
+
+```
+
+
+## 8. Combine the reviews data with the data in `listings.csv` that we also used in example-07 and use it to reveal and/or visualize something that you couldn't learn with just `reviews.csv` or just `listings.csv` on their own.
+```{r}
+
+```
+
+
+
+[^insideairbnb]: Inside Airbnb is a mission driven activist project with the objective to: *Provide data that quantifies the impact of short-term rentals on housing and residential communities; and also provides a platform to support advocacy for policies to protect our cities from the impacts of short-term rentals.*
