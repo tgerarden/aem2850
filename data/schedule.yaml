@@ -143,10 +143,10 @@ lessons:
     # assignment: "12-lab"
     bg: 2
 
-  - title: '<i class="fas fa-star"></i> **Mini project 2 due**'
-    date: "April 29"
-    # assignment: "02-mini-project"
-    bg: 3
+#  - title: '<i class="fas fa-star"></i> **Mini project 2 due**'
+#    date: "April 29"
+#    # assignment: "02-mini-project"
+#    bg: 3
 
   - title: '<span class="content-title">Prediction</span>'
     session: "Session 13"

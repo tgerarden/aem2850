@@ -242,7 +242,7 @@ Your grade in this course will be based on weekly reflections, labs, projects:
 
 <!-- **Class participation** can take many forms. The best form of participation is active participation during class. When we are on zoom you can do this using the zoom chat and hand-raising with camera and mic on. The bare minimum can best be described as “showing your presence and having some engagement” – questions typed in chat and questions posed after class count towards participation. To encourage some form of participation, I will often pose questions to the class. -->
 
-Please read [the assignments page](/assignments/) for more details on the assignments and their underlying rationale.
+Please read [the assignments page](/assignment/) for more details on the assignments and their underlying rationale.
 
 Each type of assignment will contribute to the final grade as follows:
 
