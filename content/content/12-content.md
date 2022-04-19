@@ -1,7 +1,7 @@
 ---
 title: "Functions"
 linktitle: "Functions"
-date: "2022-04-19 16:21:04"
+date: "2022-04-19 16:25:50"
 menu:
   content:
     parent: Course content
@@ -28,6 +28,7 @@ output:
 ### Guiding questions
 - When should you write a function?
 - What are some advantages of writing functions relative to copy-and-paste?
+- What is conditional execution?
 
 
 <!-- ### Slides -->
