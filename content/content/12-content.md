@@ -1,7 +1,7 @@
 ---
-title: "Functions"
-linktitle: "Functions"
-date: "2022-04-19 16:25:50"
+title: "Functions and iteration"
+linktitle: "Functions and iteration"
+date: "2022-04-20 16:13:19"
 menu:
   content:
     parent: Course content
@@ -31,11 +31,11 @@ output:
 - What is conditional execution?
 
 
-<!-- ### Slides -->
+### Slides
 
-<!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
 
-<!-- {{< blogdown/slide-buttons >}} -->
+{{< blogdown/slide-buttons >}}
 
-<!-- **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands. -->
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.
 
