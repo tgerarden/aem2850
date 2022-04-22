@@ -1,0 +1,95 @@
+---
+#########################################################
+# Steps to complete this lab:
+#   1. Add your name to the author field of the yaml header
+#   2. Fill in the code chunks and use inline code to answer the questions 
+#   3. Click on "Knit" directly above to render output (or Ctrl/Cmd-Shift-K)
+#   4. Repeat steps 2-3 until you are satisfied with the final product
+#   5. Download the resulting file lab-xx.pdf
+#   6. Upload lab-xx.pdf to canvas
+# Reminder: to work interactively, you can run code chunks on their own
+# You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
+#########################################################
+title: "Lab-12"
+author: "your name here"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: pdf_document
+urlcolor: blue
+---
+
+```{r setup, include = FALSE}
+library(tidyverse) # purrr is part of core tidyverse so loads here
+library(lubridate)
+
+# center plots by default
+library(knitr)
+knitr::opts_chunk$set(fig.align = "center",
+                      out.width = "85%")
+```
+
+# Preface
+
+The goal of this assignment is to help you gain familiarity with writing functions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
+
+## Data
+
+We will work with the monthly Zillow data from [Zillow Research](https://www.zillow.com/research/data/) that we have seen before. As a reminder, `Metro_median_sale_price_uc_sfrcondo_month.csv` contains raw monthly median sale price data. Smoothed and seasonally adjusted price data is in `Metro_median_sale_price_uc_sfrcondo_sm_sa_month.csv`.
+
+
+\newpage
+## 1. Write a function `tidy_data` to import and tidy sales price data in a few steps: (1) importing the appropriate file based on the input it receives, (2) dropping the observations for the region of "United States", (3) seperating `RegionName` into two variables `City` and `State`, (4) pivoting the data into the long structure, and (5) converting `date` into the date format and generating new variables of `year` and `month` indicating the year and month of the date. Call this function twice to tidy the raw and adjusted price data, and assign the output to `raw_tidy` and `adj_tidy`. What years do `raw_tidy` and `adj_tidy` cover, respectively?
+
+*Tip: Since the purpose this function is to import and tidy data, the argument of this function could be the csv file you want to work with.*
+
+```{r message = FALSE}
+
+```
+The raw price data span the years... The adjusted price data span...
+
+
+\newpage
+## 2. Can you modify the function in question 1 so that it can be used to tidy either the price data and the sales data, based on a second argument that specifies which one the user is asking for? What years do the sales data cover?
+
+*`Metro_sales_count_now_uc_sfrcondo_month.csv` contains monthly sales counts.*
+
+```{r message = FALSE}
+
+```
+The sales data covers...
+
+
+\newpage
+## 3. Write a function `plot_city_price` to plot the time series of raw price over time for one city. Call this function to make plots for New York, Chicago, and LA.
+
+``` {r, warning=FALSE, message=FALSE, fig.show="hold", out.width="30%"}
+# note: the code chunk options simplify output
+
+```
+
+
+\newpage
+## 4. Write a function `plot_price_density` to plot the density of adjusted price across MSAs for one year. Call this function to plot price densities for all years in `adj_tidy`. Use an imperative programming or functional programming technique to iterate over years; do not manually call the function once for each year.
+
+```{r, fig.show="hold", out.width="22%"}
+
+```
+
+
+\newpage
+## 5. Write a function `cum_price_change` to calculate the cumulative **adjusted** price change for any given time period for multiple cities. Call this function to get cumulative price changes for two periods 2018-1-1 to 2019-12-31, and 2020-1-1 to 2022-3-1, in New York, Chicago, and LA.
+*Note: use the same formula we used for financial returns to compute relative price changes (as opposed to price level changes in dollar terms).*
+
+```{r}
+
+```
+The median price in New York, Chicago, and Los Angeles...
+
+
+\newpage
+## 6. What else can you do? Write a function of your choice to do something interesting with the Zillow data.
+
+```{r}
+
+```
+
+
