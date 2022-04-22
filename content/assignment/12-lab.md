@@ -1,7 +1,7 @@
 ---
 title: "Week 12"
 linktitle: "Week 12"
-date: "2022-04-20 15:21:44"
+date: "2022-04-22 11:53:39"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -28,6 +28,6 @@ Please submit your reflection via canvas by Wednesday at 11:59pm.
 You can access this week's readings and guiding questions using the [class schedule](https://aem2850.toddgerarden.com/schedule) under the "Content" tag.
 
 
-<!-- ## Lab -->
+## Lab
 
-<!-- [Click here to access the RStudio Cloud Project for this week's lab and follow the instructions in the file `lab-12.Rmd`.]() -->
+[Click here to access the RStudio Cloud Project for this week's lab and follow the instructions in the file `lab-12.Rmd`.](https://rstudio.cloud/spaces/210747/project/3946465)
