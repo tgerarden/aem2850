@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 22 Apr 2022 11:53:39 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 12</title><link>https://aem2850.toddgerarden.com/assignment/12-lab/</link><pubDate>Fri, 22 Apr 2022 11:53:39 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/12-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 25 Apr 2022 15:37:30 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 12</title><link>https://aem2850.toddgerarden.com/assignment/12-lab/</link><pubDate>Fri, 22 Apr 2022 11:53:39 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/12-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
 &lt;p>Please submit your reflection via canvas by Wednesday at 11:59pm.&lt;/p>
 &lt;p>&lt;a href="https://aem2850.toddgerarden.com/assignment/#reflections" target="_blank" rel="noopener">Here are the guidelines for reflections.&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3511792" target="_blank" rel="noopener">Here is a project on RStudio Cloud that includes a template for reflections.&lt;/a>&lt;/p>
@@ -465,7 +465,26 @@
 &lt;p>The main exception to this is that I set up RStudio Cloud projects so they come with packages pre-installed in the cloud, and those packages are not included in the project files you downloaded, so you may need to install new packages the first time you use them.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Functions and iteration</title><link>https://aem2850.toddgerarden.com/content/12-content/</link><pubDate>Wed, 20 Apr 2022 16:13:19 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/12-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;/section></description></item><item><title>Predict</title><link>https://aem2850.toddgerarden.com/content/13-content/</link><pubDate>Mon, 25 Apr 2022 15:37:30 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/13-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/model-basics.html" target="_blank" rel="noopener">Chapter 23: Model basics&lt;/a> of &lt;em>R for Data Science&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;h4 id="optional-readings">Optional readings&lt;/h4>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/model-basics.html" target="_blank" rel="noopener">Chapter 1: Introduction&lt;/a> of &lt;em>An Introduction to Statistical Learning&lt;/em> (reference text)&lt;/li>
+&lt;/ul>
+&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
+&lt;ul>
+&lt;li>When is prediction useful?&lt;/li>
+&lt;li>When is inference useful?&lt;/li>
+&lt;li>Are all models equally useful for prediction and inference?&lt;/li>
+&lt;/ul>
+&lt;!-- ### Slides -->
+&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+&lt;!--
+&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/13-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/13-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
+-->
+&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item><item><title>Functions and iteration</title><link>https://aem2850.toddgerarden.com/content/12-content/</link><pubDate>Wed, 20 Apr 2022 16:13:19 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/12-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.had.co.nz/functions.html" target="_blank" rel="noopener">Chapter 19: Functions&lt;/a> of &lt;em>R for Data Science&lt;/em>&lt;/li>
 &lt;/ul>
