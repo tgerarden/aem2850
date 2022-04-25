@@ -1,5 +1,5 @@
 ---
-title: "Predict"
+title: "Prediction"
 linktitle: "Prediction"
 date: "`r format(Sys.time())`"
 menu:

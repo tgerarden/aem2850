@@ -1,7 +1,7 @@
 ---
-title: "Predict"
+title: "Prediction"
 linktitle: "Prediction"
-date: "2022-04-25 15:37:30"
+date: "2022-04-25 15:42:14"
 menu:
   content:
     parent: Course content
