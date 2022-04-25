@@ -1,0 +1,41 @@
+---
+title: "Predict"
+linktitle: "Prediction"
+date: "`r format(Sys.time())`"
+menu:
+  content:
+    parent: Course content
+    weight: 13
+type: docs
+# bibliography: "../../static/bib/references.bib"
+# csl: "../../static/bib/chicago-fullnote-bibliography-no-bib.csl"
+slides: "13-slides"
+
+output:
+  blogdown::html_page:
+    keep_md: true # do this to save results in .md file
+    toc: false
+---
+
+### Readings
+- <i class="fas fa-book"></i> [Chapter 23: Model basics](https://r4ds.had.co.nz/model-basics.html) of *R for Data Science*
+
+
+#### Optional readings
+- <i class="fas fa-book"></i> [Chapter 1: Introduction](https://r4ds.had.co.nz/model-basics.html) of *An Introduction to Statistical Learning* (reference text)
+
+
+### Guiding questions
+- When is prediction useful?
+- When is inference useful?
+- Are all models equally useful for prediction and inference?
+
+
+<!-- ### Slides -->
+
+<!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+
+<!-- {{< blogdown/slide-buttons >}} -->
+
+<!-- **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands. -->
+
