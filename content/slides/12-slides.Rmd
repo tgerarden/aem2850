@@ -96,7 +96,7 @@ name: prologue
 
 ---
 
-# Creative answers to Lab 11, Question 8
+# Creative answers to Lab 10, Question 8
 
 .pull-left[
 <figure>
@@ -115,7 +115,7 @@ name: prologue
 
 ---
 
-# Creative answers to Lab 11, Question 8
+# Creative answers to Lab 10, Question 8
 
 .center[
 <figure>
