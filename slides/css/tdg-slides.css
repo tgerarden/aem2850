@@ -105,3 +105,29 @@
   font-size: 0.6em;
 }
 
+
+/* Colors for prediction + causal inference slides */
+/* Pink text */
+.pink {
+  color: #e64173 !important;
+}
+/* Slate text: Cornell's Dark Grey */
+.slate {
+  color: #222222 !important;
+}
+/* Turquoise ("lightseagreen") text */
+.turquoise {
+  color: #44C1C4 !important;
+}
+/* Purple-ish ("slateblue") text */
+.purple {
+  color: #6A5ACD !important;
+}
+/* Orange ("orange") text */
+.orange {
+  color: #FFA500 !important;
+}
+/* White text */
+.white {
+  color: #ffffff !important;
+}
