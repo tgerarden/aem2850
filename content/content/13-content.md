@@ -1,7 +1,7 @@
 ---
 title: "Prediction"
 linktitle: "Prediction"
-date: "2022-04-26 01:19:14"
+date: "2022-04-26 11:10:12"
 menu:
   content:
     parent: Course content
@@ -22,7 +22,7 @@ output:
 
 
 #### Optional readings
-- <i class="fas fa-book"></i> [Chapter 1: Introduction](https://r4ds.had.co.nz/model-basics.html) of *An Introduction to Statistical Learning* (reference text)
+- <i class="fas fa-book"></i> [Chapter 1: Introduction](https://hastie.su.domains/ISLR2/ISLRv2_website.pdf) of *An Introduction to Statistical Learning* (reference text)
 
 
 ### Guiding questions
