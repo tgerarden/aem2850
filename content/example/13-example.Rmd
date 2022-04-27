@@ -1,0 +1,49 @@
+---
+title: "Prediction"
+linktitle: "Prediction"
+date: "`r format(Sys.time())`"
+output:
+  blogdown::html_page:
+    keep_md: true # do this to save results in .md file
+    toc: false
+    fig_caption: false
+menu:
+  examples:
+    parent: Examples
+    weight: 1
+type: docs
+weight: 1
+editor_options:
+  chunk_output_type: console
+---
+
+## RStudio Cloud links
+
+[Click here to access this week's Example RStudio Cloud Project](https://rstudio.cloud/spaces/210747/project/3971848)
+
+[**Solutions:** click here to access a project with a completed version](https://rstudio.cloud/spaces/210747/project/3971864)
+
+
+## Plan for today
+- RA job opportunity with Prof. Kevin Kniffin (see below and on canvas)
+- Reminder: final project groups due Friday on canvas!
+- Work through `prediction-practice.R` as a group
+
+
+## Research Assistant job opportunity
+
+Are you interested to work on "big data" research activities relating to career paths and workplace dynamics involving a wide range of industries, including scientists and sports?
+
+Do you have R programming experience? 😉
+
+Would you like to work on projects that will help to sharpen your programming and analytic skills?
+
+If so, please send a one-page resume to [Professor Kevin Kniffin](mailto:kmk276@cornell.edu).
+
+A few details:
+
+- Familiarity and experience using R is critical for the position.
+- Work will be up-to-approximately-5 hours-per-week with potential for more during the summer.
+- Location is flexible (work will be remote).
+- Pay will be competitive among RA positions.
+- Applications will be processed on a rolling basis with initial hiring likely by May 6, 2022.
