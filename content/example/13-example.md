@@ -1,7 +1,7 @@
 ---
 title: "Prediction"
 linktitle: "Prediction"
-date: "2022-04-27 17:00:11"
+date: "2022-04-27 21:05:41"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -25,9 +25,23 @@ editor_options:
 
 
 ## Plan for today
+- Reminder: final project groups due Friday [on canvas](https://canvas.cornell.edu/courses/38623/assignments/372321)!
+- Survey: what would you like to cover next week?
 - RA job opportunity with Prof. Kevin Kniffin (see below and on canvas)
-- Reminder: final project groups due Friday on canvas!
 - Work through `prediction-practice.R` as a group
+
+
+## Survey: what would you like to cover next week?
+
+We have one full week left of class and too many topics to cover! So I want to crowd-source our final topic to tailor the last bit of class to popular demand. Suggested topics are:
+
+- Causal inference
+- Classification
+- Functions (revisited)
+- Web scraping
+- Advanced R Markdown
+
+Please fill out [this canvas survey](https://canvas.cornell.edu/courses/38623/quizzes/87788) by Friday if you want your input to count!
 
 
 ## Research Assistant job opportunity
