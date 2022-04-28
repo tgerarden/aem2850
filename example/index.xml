@@ -1,12 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 27 Apr 2022 17:00:11 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Prediction</title><link>https://aem2850.toddgerarden.com/example/13-example/</link><pubDate>Wed, 27 Apr 2022 17:00:11 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/13-example/</guid><description>&lt;h2 id="rstudio-cloud-links">RStudio Cloud links&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 27 Apr 2022 21:05:41 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Prediction</title><link>https://aem2850.toddgerarden.com/example/13-example/</link><pubDate>Wed, 27 Apr 2022 21:05:41 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/13-example/</guid><description>&lt;h2 id="rstudio-cloud-links">RStudio Cloud links&lt;/h2>
 &lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3971848" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s Example RStudio Cloud Project&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3971864" target="_blank" rel="noopener">&lt;strong>Solutions:&lt;/strong> click here to access a project with a completed version&lt;/a>&lt;/p>
 &lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
+&lt;li>Reminder: final project groups due Friday &lt;a href="https://canvas.cornell.edu/courses/38623/assignments/372321" target="_blank" rel="noopener">on canvas&lt;/a>!&lt;/li>
+&lt;li>Survey: what would you like to cover next week?&lt;/li>
 &lt;li>RA job opportunity with Prof. Kevin Kniffin (see below and on canvas)&lt;/li>
-&lt;li>Reminder: final project groups due Friday on canvas!&lt;/li>
 &lt;li>Work through &lt;code>prediction-practice.R&lt;/code> as a group&lt;/li>
 &lt;/ul>
+&lt;h2 id="survey-what-would-you-like-to-cover-next-week">Survey: what would you like to cover next week?&lt;/h2>
+&lt;p>We have one full week left of class and too many topics to cover! So I want to crowd-source our final topic to tailor the last bit of class to popular demand. Suggested topics are:&lt;/p>
+&lt;ul>
+&lt;li>Causal inference&lt;/li>
+&lt;li>Classification&lt;/li>
+&lt;li>Functions (revisited)&lt;/li>
+&lt;li>Web scraping&lt;/li>
+&lt;li>Advanced R Markdown&lt;/li>
+&lt;/ul>
+&lt;p>Please fill out &lt;a href="https://canvas.cornell.edu/courses/38623/quizzes/87788" target="_blank" rel="noopener">this canvas survey&lt;/a> by Friday if you want your input to count!&lt;/p>
 &lt;h2 id="research-assistant-job-opportunity">Research Assistant job opportunity&lt;/h2>
 &lt;p>Are you interested to work on &amp;ldquo;big data&amp;rdquo; research activities relating to career paths and workplace dynamics involving a wide range of industries, including scientists and sports?&lt;/p>
 &lt;p>Do you have R programming experience? 😉&lt;/p>
