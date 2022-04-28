@@ -53,7 +53,7 @@ hitters <- hitters %>% select(-train) # remove train from hitters
 # 2. Linear regression using hitters_train ----
 # let's start by estimating three linear models and comparing their fit
 lm_null <- lm(Salary ~ 1, data = hitters_train) # just an intercept
-lm_small <- lm(Salary ~ _____ + _____ + _____, data = hitters_train) # a few variables
+lm_small <- lm(Salary ~ CHmRun + Years + Errors, data = hitters_train) # a few variables
 lm_big <- _____ # include all variables
 
 # what is the R-squared for these three models?
