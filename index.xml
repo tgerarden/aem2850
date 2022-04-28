@@ -1,4 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 26 Apr 2022 11:10:12 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 12</title><link>https://aem2850.toddgerarden.com/assignment/12-lab/</link><pubDate>Fri, 22 Apr 2022 11:53:39 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/12-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 27 Apr 2022 17:00:11 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Prediction</title><link>https://aem2850.toddgerarden.com/example/13-example/</link><pubDate>Wed, 27 Apr 2022 17:00:11 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/13-example/</guid><description>&lt;h2 id="rstudio-cloud-links">RStudio Cloud links&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3971848" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s Example RStudio Cloud Project&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3971864" target="_blank" rel="noopener">&lt;strong>Solutions:&lt;/strong> click here to access a project with a completed version&lt;/a>&lt;/p>
+&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
+&lt;li>RA job opportunity with Prof. Kevin Kniffin (see below and on canvas)&lt;/li>
+&lt;li>Reminder: final project groups due Friday on canvas!&lt;/li>
+&lt;li>Work through &lt;code>prediction-practice.R&lt;/code> as a group&lt;/li>
+&lt;/ul>
+&lt;h2 id="research-assistant-job-opportunity">Research Assistant job opportunity&lt;/h2>
+&lt;p>Are you interested to work on &amp;ldquo;big data&amp;rdquo; research activities relating to career paths and workplace dynamics involving a wide range of industries, including scientists and sports?&lt;/p>
+&lt;p>Do you have R programming experience? 😉&lt;/p>
+&lt;p>Would you like to work on projects that will help to sharpen your programming and analytic skills?&lt;/p>
+&lt;p>If so, please send a one-page resume to &lt;a href="mailto:kmk276@cornell.edu">Professor Kevin Kniffin&lt;/a>.&lt;/p>
+&lt;p>A few details:&lt;/p>
+&lt;ul>
+&lt;li>Familiarity and experience using R is critical for the position.&lt;/li>
+&lt;li>Work will be up-to-approximately-5 hours-per-week with potential for more during the summer.&lt;/li>
+&lt;li>Location is flexible (work will be remote).&lt;/li>
+&lt;li>Pay will be competitive among RA positions.&lt;/li>
+&lt;li>Applications will be processed on a rolling basis with initial hiring likely by May 6, 2022.&lt;/li>
+&lt;/ul></description></item><item><title>Week 13</title><link>https://aem2850.toddgerarden.com/assignment/13-lab/</link><pubDate>Wed, 27 Apr 2022 16:54:17 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/13-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
+&lt;p>Please submit your reflection via canvas by Wednesday at 11:59pm.&lt;/p>
+&lt;p>&lt;a href="https://aem2850.toddgerarden.com/assignment/#reflections" target="_blank" rel="noopener">Here are the guidelines for reflections.&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3511792" target="_blank" rel="noopener">Here is a project on RStudio Cloud that includes a template for reflections.&lt;/a>&lt;/p>
+&lt;p>You can access this week&amp;rsquo;s readings and guiding questions using the &lt;a href="https://aem2850.toddgerarden.com/schedule" target="_blank" rel="noopener">class schedule&lt;/a> under the &amp;ldquo;Content&amp;rdquo; tag.&lt;/p>
+&lt;!-- ## Lab -->
+&lt;!-- [Click here to access the RStudio Cloud Project for this week's lab and follow the instructions in the file `lab-12.Rmd`.]() --></description></item><item><title>Week 12</title><link>https://aem2850.toddgerarden.com/assignment/12-lab/</link><pubDate>Fri, 22 Apr 2022 11:53:39 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/12-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
 &lt;p>Please submit your reflection via canvas by Wednesday at 11:59pm.&lt;/p>
 &lt;p>&lt;a href="https://aem2850.toddgerarden.com/assignment/#reflections" target="_blank" rel="noopener">Here are the guidelines for reflections.&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3511792" target="_blank" rel="noopener">Here is a project on RStudio Cloud that includes a template for reflections.&lt;/a>&lt;/p>
