@@ -1,5 +1,6 @@
 ---
 title: R style suggestions 
+date: ""
 menu:
   resource:
     parent: Resources
