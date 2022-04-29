@@ -79,7 +79,7 @@ stopifnot(nrow(listings_test) == (nrow(listings) - nrow(listings_train)))
 
 
 \newpage
-## 1. Let's start by building OLS regression models to predict the price of airbnb listings. Use the training data in `listings_train` to build three OLS models: (1) `lm_null` that includes only an intercept as the explanatory variable; (2) `lm_small` that includes `room_type`, `host_is_superhost`, `host_listings_count`, `host_has_profile_pic`, and `host_identity_verified` as the explanatory variables; (3) `lm_big` with all variables except for price as the explanatory variables. Compute and store the mean squared error for all three models in a single data frame for comparison with other models we'll estimate later. Do prediction errors increase or decrease as we add more variables to the linear model? Why?
+## 1. Let's start by building OLS regression models to predict the price of airbnb listings. Use the training data in `listings_train` to build three OLS models: (1) `lm_null` that includes only an intercept as the explanatory variable; (2) `lm_small` that includes `accommodates`, `bedrooms`, and `beds` as the explanatory variables; (3) `lm_big` with all variables except for price as the explanatory variables. Compute and store the mean squared error for all three models in a single data frame for comparison with other models we'll estimate later. Do prediction errors increase or decrease as we add more variables to the linear model? Why?
 *Note: If you don't know where to start on this lab, review example-13-solutions on RStudio Cloud!*
 
 ```{r}
