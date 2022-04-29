@@ -1,6 +1,6 @@
 ---
 title: R style suggestions 
-date: ""
+date: "2022-01-25"
 menu:
   resource:
     parent: Resources

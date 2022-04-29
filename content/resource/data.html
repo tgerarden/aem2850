@@ -1,0 +1,46 @@
+<script src="data_files/header-attrs-2.11/header-attrs.js"></script>
+
+
+<p>There are a ton of places to find data related to business (as well as data on pretty much any topic you want) online:</p>
+<ul>
+<li><p><a href="https://www.kaggle.com/datasets"><strong>Kaggle</strong></a>: Kaggle hosts machine learning competitions. A byproduct of these competitions is a host of fascinating datasets that are generally free and open to the public. The datasets are sometimes accompanied with suggestions for how to analyze them. Here are a few examples:</p>
+<ul>
+<li><a href="https://www.kaggle.com/chasebank/bank-deposits">Chase Bank Branch Deposits, 2010–2016</a>: Records for every branch of Chase Bank in the United States. This dataset is not quite tidy and will require a little bit of reshaping with <code>gather()</code> or <code>pivot_longer()</code>, since there are individual columns of deposits per year.</li>
+<li><a href="https://www.kaggle.com/datasets/rikdifos/credit-card-approval-prediction">Credit Card Approvals</a>: a credit card dataset for prediction methods.</li>
+<li><a href="https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud">Credit Card Fraud Detection</a>: anonymous credit card transactions labeled as fraudulent or genuine.</li>
+<li><a href="https://www.kaggle.com/jiashenliu/515k-hotel-reviews-data-in-europe">515K Hotel Reviews Data in Europe</a>: 515,000 customer reviews and scoring of 1,493 luxury hotels across Europe.</li>
+<li><a href="https://www.kaggle.com/datasets/shivamb/netflix-shows">Netflix Movies and TV Shows</a></li>
+<li><a href="https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset">IBM HR Analytics Employee Attrition &amp; Performance</a>: simulated data created by IBM data scientists to model employee attrtition.</li>
+<li>And many, many more!</li>
+</ul></li>
+<li><p><a href="https://data.nasdaq.com/tools/r"><strong>Quandl</strong></a>: Nasdaq Data Link provides some datasets related to finance and economics for free (though many require a paid subscription). The datasets are listed in <a href="https://data.nasdaq.com/search?filters=%5B%22Free%22%5D">this data catalog</a>.</p></li>
+<li><p><a href="https://fred.stlouisfed.org"><strong>FRED</strong></a>: Economic Data from the St. Louis Fed.</p></li>
+<li><p><a href="https://finance.yahoo.com"><strong>Yahoo Finance</strong></a></p>
+<ul>
+<li>There are many ways to access data from Yahoo Finance. One option is to scrape data. Another is to use a package like <code>tidyquant</code> to <code>tq_get()</code> quantative data in a tibble format. This package can also be used to get data from FRED, Quandl, and other sources.</li>
+</ul></li>
+<li><p><a href="http://insideairbnb.com/get-the-data/"><strong>Inside Airbnb</strong></a>: Inside Airbnb is a mission-driven activist project with the objective to provide data that quantifies the impact of short-term rentals on housing and residential communities, as well as create a platform to support advocacy for policies to protect our cities from the impacts of short-term rentals. The post data for many different cities. Please note these <a href="http://insideairbnb.com/data-policies/">community guidelines</a>:
+&gt; - Only take the data you need
+&gt; - Do not scrape data from the site
+&gt; - Only download the data once. Do not write scripts that download the data every time they are executed.</p></li>
+<li><p><a href="https://www.yelp.com/dataset"><strong>Yelp Open Dataset</strong></a>: A subset of Yelp businesses, reviews, and user data for use in personal, educational, and academic purposes.</p>
+<ul>
+<li>Note: the data are stored in JSON files and will require special steps to import into data structures we are familiar with (e.g., by using the package <a href="https://cran.r-project.org/web/packages/jsonlite/index.html"><code>jsonlite</code></a>). Feel free to come to office hours for help with this.</li>
+</ul></li>
+<li><p><a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page"><strong>Taxi and Ridehailing Usage in New York City</strong></a></p></li>
+<li><p><a href="https://www.zillow.com/research/data/"><strong>Zillow Housing Data</strong></a></p></li>
+<li><p><a href="https://nijianmo.github.io/amazon/index.html"><strong>Amazon Review Data</strong></a></p>
+<ul>
+<li>Note: the data are stored in JSON files and will require special steps to import into data structures we are familiar with (e.g., by using the package <a href="https://cran.r-project.org/web/packages/jsonlite/index.html"><code>jsonlite</code></a>). Feel free to come to office hours for help with this.</li>
+<li>The same group provides a collection of dataset on many other platforms and topics <a href="https://cseweb.ucsd.edu/~jmcauley/datasets.html">here</a>.</li>
+</ul></li>
+<li><p><a href="https://archive.ics.uci.edu/ml/datasets/Bank+Marketing"><strong>Bank Marketing Data</strong></a>: data on direct marketing campaigns and whether they succeeded in convincing customers to make a deposit.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/ISLR/index.html"><strong>Data from Intro to Statistical Learning</strong></a>: The <code>ISLR</code> package contains several interesting (if dated and or/simulated) datasets:</p>
+<ul>
+<li><code>ISLR::Caravan</code> contains 5,822 real records on whether customers purchased a caravan insurance policy, along with product ownsership information and sociodemographic data based on their zip codes.</li>
+<li><code>ISLR::Default</code> is a simulated dataset of 10,000 credit card customers that can be used to predict which customers will default on their credit card debt.</li>
+<li><code>ISLR::OJ</code> contains 1,070 purchases of orange juice for two brands, along with customer and product characteristics (like prices) that could be used to study pricing strategies.</li>
+</ul></li>
+<li><p><a href="https://tinyletter.com/data-is-plural"><strong>Data is Plural Newsletter</strong></a>: Jeremy Singer-Vine sends a weekly newsletter of the most interesting public datasets he’s found. <a href="https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit#gid=0">He also has an archive of all the datasets he’s highlighted.</a></p></li>
+<li><p><a href="https://toolbox.google.com/datasetsearch"><strong>Google Dataset Search</strong></a>: Google indexes thousands of public datasets; search for them here.</p></li>
+</ul>

@@ -1,6 +1,6 @@
 ---
 title: Installing R, RStudio, tidyverse, rmarkdown, and tinytex
-# date: "2021-03-09"
+date: "2022-01-25"
 menu:
   resource:
     parent: Guides
