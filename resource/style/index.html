@@ -1,0 +1,301 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Wowchemy 5.4.0 for Hugo">
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media=print onload="this.media='all'">
+<meta name=description content="R style conventions R is fairly forgiving about how you type code (unlike other languages like Python, where miscounting spaces can ruin your code!). All of these things will do exactly the same thing:">
+<link rel=alternate hreflang=en-us href=https://aem2850.toddgerarden.com/resource/style/>
+<meta name=theme-color content="#B31B1B">
+<link rel=stylesheet href=/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin=anonymous media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css crossorigin=anonymous title=hl-light media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css crossorigin=anonymous title=hl-dark media=print onload="this.media='all'" disabled>
+<link rel=stylesheet href=/css/wowchemy.0955c4d33b0be4851935253be0520832.css>
+<link rel=manifest href=/manifest.webmanifest>
+<link rel=icon type=image/png href=/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_32x32_fill_lanczos_center_3.png>
+<link rel=apple-touch-icon type=image/png href=/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_180x180_fill_lanczos_center_3.png>
+<link rel=canonical href=https://aem2850.toddgerarden.com/resource/style/>
+<meta property="twitter:card" content="summary">
+<meta property="og:site_name" content="R for Business Analytics">
+<meta property="og:url" content="https://aem2850.toddgerarden.com/resource/style/">
+<meta property="og:title" content="R style suggestions | R for Business Analytics">
+<meta property="og:description" content="R style conventions R is fairly forgiving about how you type code (unlike other languages like Python, where miscounting spaces can ruin your code!). All of these things will do exactly the same thing:"><meta property="og:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png">
+<meta property="twitter:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
+<title>R style suggestions | R for Business Analytics</title>
+</head>
+<body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=f4d124537f1a5dab4ac613d774163bcc>
+<script src=/js/wowchemy-init.min.133800c88f3b5bb934932231fd94fed7.js></script>
+<div class=page-header>
+<header class=header--fixed>
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id=navbar-main>
+<div class=container-xl>
+<div class="d-none d-lg-inline-flex">
+<a class=navbar-brand href=/>R for Business Analytics</a>
+</div>
+<button type=button class=navbar-toggler data-toggle=collapse data-target=#navbar-content aria-controls=navbar-content aria-expanded=false aria-label="Toggle navigation">
+<span><i class="fas fa-bars"></i></span>
+</button>
+<div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+<a class=navbar-brand href=/>R for Business Analytics</a>
+</div>
+<div class="navbar-collapse main-menu-item collapse justify-content-end" id=navbar-content>
+<ul class="navbar-nav d-md-inline-flex">
+<li class=nav-item>
+<a class=nav-link href=/syllabus/><span>Syllabus</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/schedule/><span>Schedule</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/content/><span>Content</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/example/><span>Examples</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/assignment/><span>Assignments</span></a>
+</li>
+<li class=nav-item>
+<a class="nav-link active" href=/resource/><span>Resources</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://rstudio.cloud/ target=_blank rel=noopener><span><i class="fab fa-r-project"></i></span></a>
+</li>
+</ul>
+</div>
+<ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+</ul>
+</div>
+</nav>
+</header>
+</div>
+<div class=page-body>
+<article class=article>
+<div class="article-container pt-3">
+<h1>R style suggestions</h1>
+<div class=article-metadata>
+<span class=article-date>
+Jan 1, 0001
+</span>
+</div>
+</div>
+<div class=article-container>
+<div class=article-style>
+<h2 id=r-style-conventions>R style conventions</h2>
+<p>R is fairly forgiving about how you type code (unlike other languages like Python, where miscounting spaces can ruin your code!). All of these things will do exactly the same thing:</p>
+<pre><code class=language-r>mpg %&gt;% 
+  filter(cty &gt; 10, class == &quot;compact&quot;)
+
+mpg %&gt;% filter(cty &gt; 10, class == &quot;compact&quot;)
+
+mpg %&gt;% 
+  filter(cty &gt; 10, 
+         class == &quot;compact&quot;)
+
+mpg %&gt;% filter(cty&gt;10, class==&quot;compact&quot;)
+
+filter(mpg,cty&gt;10,class==&quot;compact&quot;)
+
+mpg %&gt;% 
+filter(cty &gt; 10, 
+                        class == &quot;compact&quot;)
+
+filter ( mpg,cty&gt;10,     class==&quot;compact&quot; )
+</code></pre>
+<p>But you&rsquo;ll notice that only a few of those iterations (the first three) are easily readable.</p>
+<p>To help improve readability and make it easier to share code with others, there&rsquo;s <a href=https://style.tidyverse.org/index.html target=_blank rel=noopener>an unofficial style guide for writing R code</a>. It&rsquo;s fairly short and just has lots of examples of good and bad ways of writing code (naming variables, dealing with long lines, using proper indentation levels, etc.)—you should glance through it some time.</p>
+<p>RStudio has a built-in way of cleaning up your code. Select some code, press <kbd>ctrl</kbd> + <kbd>i</kbd> (on Windows) or <kbd>⌘</kbd> + <kbd>i</kbd> (on macOS), and R will reformat the code for you. It&rsquo;s not always perfect, but it&rsquo;s really helpful for getting indentation right without having to manually hit <kbd>space</kbd> a billion times.</p>
+<h2 id=main-style-things-to-pay-attention-to-for-this-class>Main style things to pay attention to for this class</h2>
+<blockquote>
+<p><em>Note</em>: We won&rsquo;t grade you on this! If you submit something like <code>filter(mpg,cty>10,class=="compact")</code>, we might recommend adding spaces, but we won&rsquo;t take points off.</p>
+</blockquote>
+<h3 id=spacing>Spacing</h3>
+<blockquote>
+<p>See the <a href=https://style.tidyverse.org/syntax.html#spacing target=_blank rel=noopener>&ldquo;Spacing&rdquo; section</a> in the tidyverse style guide.</p>
+</blockquote>
+<p>Put spaces after commas (like in regular English):</p>
+<pre><code class=language-r># Good
+filter(mpg, cty &gt; 10)
+
+# Bad
+filter(mpg,cty &gt; 10)
+filter(mpg ,cty &gt; 10)
+filter(mpg , cty &gt; 10)
+</code></pre>
+<p>Put spaces around operators like <code>+</code>, <code>-</code>, <code>></code>, <code>=</code>, etc.:</p>
+<pre><code class=language-r># Good
+filter(mpg, cty &gt; 10)
+
+# Bad
+filter(mpg, cty&gt;10)
+filter(mpg, cty&gt; 10)
+filter(mpg, cty &gt;10)
+</code></pre>
+<p>Don&rsquo;t put spaces around parentheses that are parts of functions:</p>
+<pre><code class=language-r># Good
+filter(mpg, cty &gt; 10)
+
+# Bad
+filter (mpg, cty &gt; 10)
+filter ( mpg, cty &gt; 10)
+filter( mpg, cty &gt; 10 )
+</code></pre>
+<h3 id=long-lines>Long lines</h3>
+<blockquote>
+<p>See the <a href=https://style.tidyverse.org/syntax.html#long-lines target=_blank rel=noopener>&ldquo;Long lines&rdquo; section</a> in the tidyverse style guide.</p>
+</blockquote>
+<p>It&rsquo;s good practice to make sure your lines of code don&rsquo;t get too long. A good suggestion is to keep lines at a maximum of 80 characters. Instead of counting characters by hand (🥴), in RStudio go to &ldquo;Tools&rdquo; > &ldquo;Global Options&rdquo; > &ldquo;Code&rdquo; > &ldquo;Display&rdquo; and check the box for &ldquo;Show margin.&rdquo; You should now see a really thin line indicating 80 characters. Again, you can go beyond this—that&rsquo;s fine. It&rsquo;s just good practice to avoid going too far past it.</p>
+<p>You can add line breaks inside longer lines of code. Line breaks should come after commas, and things like function arguments should align within the function:</p>
+<pre><code class=language-r># Good
+filter(mpg, cty &gt; 10, class == &quot;compact&quot;)
+
+# Good
+filter(mpg, cty &gt; 10, 
+       class == &quot;compact&quot;)
+
+# Good
+filter(mpg,
+       cty &gt; 10,
+       class == &quot;compact&quot;)
+
+# Bad
+filter(mpg, cty &gt; 10, class %in% c(&quot;compact&quot;, &quot;pickup&quot;, &quot;midsize&quot;, &quot;subcompact&quot;, &quot;suv&quot;, &quot;2seater&quot;, &quot;minivan&quot;))
+
+# Good
+filter(mpg, 
+       cty &gt; 10, 
+       class %in% c(&quot;compact&quot;, &quot;pickup&quot;, &quot;midsize&quot;, &quot;subcompact&quot;, 
+                    &quot;suv&quot;, &quot;2seater&quot;, &quot;minivan&quot;))
+</code></pre>
+<h3 id=pipes--and-ggplot-layers->Pipes (<code>%>%</code>) and ggplot layers (<code>+</code>)</h3>
+<p>Put each step in a dplyr pipeline on separate lines, with the <code>%>%</code> at the end of the line, indented with two spaces:</p>
+<pre><code class=language-r># Good
+mpg %&gt;% 
+  filter(cty &gt; 10) %&gt;% 
+  group_by(class) %&gt;% 
+  summarize(avg_hwy = mean(hwy))
+
+# Bad
+mpg %&gt;% filter(cty &gt; 10) %&gt;% group_by(class) %&gt;% 
+  summarize(avg_hwy = mean(hwy))
+
+# Super bad
+mpg %&gt;% filter(cty &gt; 10) %&gt;% group_by(class) %&gt;% summarize(avg_hwy = mean(hwy))
+
+# Super bad and won't even work
+mpg %&gt;% 
+  filter(cty &gt; 10)
+  %&gt;% group_by(class)
+  %&gt;% summarize(avg_hwy = mean(hwy))
+</code></pre>
+<p>Put each layer of a ggplot plot on separate lines, with the <code>+</code> at the end of the line, indented with two spaces:</p>
+<pre><code class=language-r># Good
+ggplot(mpg, aes(x = cty, y = hwy, color = class)) +
+  geom_point() +
+  geom_smooth() +
+  theme_bw()
+
+# Bad
+ggplot(mpg, aes(x = cty, y = hwy, color = class)) +
+  geom_point() + geom_smooth() +
+  theme_bw()
+
+# Super bad
+ggplot(mpg, aes(x = cty, y = hwy, color = class)) + geom_point() + geom_smooth() + theme_bw()
+
+# Super bad and won't even work
+ggplot(mpg, aes(x = cty, y = hwy, color = class))
+  + geom_point()
+  + geom_smooth() 
+  + theme_bw()
+</code></pre>
+<h3 id=comments>Comments</h3>
+<blockquote>
+<p>See the <a href=https://style.tidyverse.org/syntax.html#comments target=_blank rel=noopener>&ldquo;Comments&rdquo; section</a> in the tidyverse style guide.</p>
+</blockquote>
+<p>Comments should start with a comment symbol and a single space: <code># </code></p>
+<pre><code class=language-r># Good
+
+#Bad
+
+    #Bad
+</code></pre>
+<p>If the comment is really short (and won&rsquo;t cause you to go over 80 characters in the line), you can include it in the same line as the code:</p>
+<pre><code class=language-r>mpg %&gt;% 
+  filter(cty &gt; 10) %&gt;%  # Only rows where cty is 10 +
+  group_by(class) %&gt;%  # Divide into class groups
+  summarize(avg_hwy = mean(hwy))  # Find the average hwy in each group
+</code></pre>
+<p>You can add extra spaces to get inline comments to align, if you want:</p>
+<pre><code class=language-r>mpg %&gt;% 
+  filter(cty &gt; 10) %&gt;%            # Only rows where cty is 10 +
+  group_by(class) %&gt;%             # Divide into class groups
+  summarize(avg_hwy = mean(hwy))  # Find the average hwy in each group
+</code></pre>
+<p>If the comment is really long, you can break it into multiple lines. RStudio can do this for you if you go to &ldquo;Code&rdquo; > &ldquo;Reflow comment&rdquo;</p>
+<pre><code class=language-r># Good
+# Happy families are all alike; every unhappy family is unhappy in its own way.
+# Everything was in confusion in the Oblonskys’ house. The wife had discovered
+# that the husband was carrying on an intrigue with a French girl, who had been
+# a governess in their family, and she had announced to her husband that she
+# could not go on living in the same house with him. This position of affairs
+# had now lasted three days, and not only the husband and wife themselves, but
+# all the members of their family and household, were painfully conscious of it.
+
+# Bad
+# Happy families are all alike; every unhappy family is unhappy in its own way. Everything was in confusion in the Oblonskys’ house. The wife had discovered that the husband was carrying on an intrigue with a French girl, who had been a governess in their family, and she had announced to her husband that she could not go on living in the same house with him. This position of affairs had now lasted three days, and not only the husband and wife themselves, but all the members of their family and household, were painfully conscious of it.
+</code></pre>
+<p>Though, if you&rsquo;re dealing with comments that are <em>that</em> long, consider putting the text in R Markdown instead and having it be actual prose.</p>
+</div>
+<div class="media author-card content-widget-hr">
+<div class=media-body>
+<h5 class=card-title><a href=https://aem2850.toddgerarden.com></a></h5>
+<ul class=network-icon aria-hidden=true>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class=page-footer>
+</div>
+<div id=modal class="modal fade" role=dialog>
+<div class=modal-dialog>
+<div class=modal-content>
+<div class=modal-header>
+<h5 class=modal-title>Cite</h5>
+<button type=button class=close data-dismiss=modal aria-label=Close>
+<span aria-hidden=true>&#215;</span>
+</button>
+</div>
+<div class=modal-body>
+<pre><code class="tex hljs"></code></pre>
+</div>
+<div class=modal-footer>
+<a class="btn btn-outline-primary my-1 js-copy-cite" href=# target=_blank>
+<i class="fas fa-copy"></i> Copy
+</a>
+<a class="btn btn-outline-primary my-1 js-download-cite" href=# target=_blank>
+<i class="fas fa-download"></i> Download
+</a>
+<div id=modal-error></div>
+</div>
+</div>
+</div>
+</div>
+<script src=/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js></script>
+<script src=https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/bryanbraun/anchorjs@4.2.2/anchor.min.js integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin=anonymous></script>
+<script>anchors.add()</script>
+<script id=page-data type=application/json>{"use_headroom":true}</script>
+<script src=/js/wowchemy-headroom.1cb9e2fc8399acee94eab837265b73bf.js type=module></script>
+<script src=/en/js/wowchemy.min.216188596c551a0582beb89fb0d646e2.js></script>
+</body>
+</html>
