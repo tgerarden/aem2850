@@ -237,7 +237,7 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 # Bad
 # Happy families are all alike; every unhappy family is unhappy in its own way. Everything was in confusion in the Oblonskys’ house. The wife had discovered that the husband was carrying on an intrigue with a French girl, who had been a governess in their family, and she had announced to her husband that she could not go on living in the same house with him. This position of affairs had now lasted three days, and not only the husband and wife themselves, but all the members of their family and household, were painfully conscious of it.
 &lt;/code>&lt;/pre>
-&lt;p>Though, if you&amp;rsquo;re dealing with comments that are &lt;em>that&lt;/em> long, consider putting the text in R Markdown instead and having it be actual prose.&lt;/p></description></item><item><title>Data</title><link>https://aem2850.toddgerarden.com/resource/data/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/resource/data/</guid><description>&lt;p>There are a ton of places to find data related to business (as well as data on pretty much any topic you want) online:&lt;/p>
+&lt;p>Though, if you&amp;rsquo;re dealing with comments that are &lt;em>that&lt;/em> long, consider putting the text in R Markdown instead and having it be actual prose.&lt;/p></description></item><item><title>Data</title><link>https://aem2850.toddgerarden.com/resource/data/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/resource/data/</guid><description>&lt;p>There are a ton of places to find data related to business online. Here are some examples:&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;p>&lt;a href="https://www.kaggle.com/datasets" target="_blank" rel="noopener">&lt;strong>Kaggle&lt;/strong>&lt;/a>: Kaggle hosts machine learning competitions. A byproduct of these competitions is a host of fascinating datasets that are generally free and open to the public. The datasets are sometimes accompanied with suggestions for how to analyze them. Here are a few examples:&lt;/p>
@@ -264,9 +264,10 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;/ul>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;a href="http://insideairbnb.com/get-the-data/" target="_blank" rel="noopener">&lt;strong>Inside Airbnb&lt;/strong>&lt;/a>: Inside Airbnb is a mission-driven activist project with the objective to provide data that quantifies the impact of short-term rentals on housing and residential communities, as well as create a platform to support advocacy for policies to protect our cities from the impacts of short-term rentals. The post data for many different cities. Please note these &lt;a href="http://insideairbnb.com/data-policies/" target="_blank" rel="noopener">community guidelines&lt;/a>:&lt;/p>
+&lt;p>&lt;a href="http://www.twitter.com" target="_blank" rel="noopener">&lt;strong>Twitter&lt;/strong>&lt;/a>: You could collect data on tweets that reference a specific company via &lt;a href="https://developer.twitter.com/en/docs/tutorials/getting-started-with-r-and-v2-of-the-twitter-api" target="_blank" rel="noopener">the twitter API&lt;/a> or by using a package like &lt;a href="https://cran.r-project.org/web/packages/twitteR/index.html" target="_blank" rel="noopener">&lt;code>twitteR&lt;/code>&lt;/a> to access the API. Then you could use this on its own or in conjunction with some other data (e.g., stock prices/returns) to do an analysis of consumer sentiment, for example.&lt;/p>
 &lt;/li>
-&lt;/ul>
+&lt;li>
+&lt;p>&lt;a href="http://insideairbnb.com/get-the-data/" target="_blank" rel="noopener">&lt;strong>Inside Airbnb&lt;/strong>&lt;/a>: Inside Airbnb is a mission-driven activist project with the objective to provide data that quantifies the impact of short-term rentals on housing and residential communities, as well as create a platform to support advocacy for policies to protect our cities from the impacts of short-term rentals. The post data for many different cities. Please note these &lt;a href="http://insideairbnb.com/data-policies/" target="_blank" rel="noopener">community guidelines&lt;/a>:&lt;/p>
 &lt;blockquote>
 &lt;ul>
 &lt;li>Only take the data you need&lt;/li>
@@ -274,11 +275,11 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;li>Only download the data once. Do not write scripts that download the data every time they are executed.&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
-&lt;ul>
+&lt;/li>
 &lt;li>
 &lt;p>&lt;a href="https://www.yelp.com/dataset" target="_blank" rel="noopener">&lt;strong>Yelp Open Dataset&lt;/strong>&lt;/a>: A subset of Yelp businesses, reviews, and user data for use in personal, educational, and academic purposes.&lt;/p>
 &lt;ul>
-&lt;li>Note: the data are stored in JSON files and will require special steps to import into data structures we are familiar with (e.g., by using the package &lt;a href="https://cran.r-project.org/web/packages/jsonlite/index.html" target="_blank" rel="noopener">&lt;code>jsonlite&lt;/code>&lt;/a>). Feel free to come to office hours for help with this.&lt;/li>
+&lt;li>Note: the data are stored in JSON files and will require special steps to import into data structures we are familiar with (e.g., by using the package &lt;a href="https://cran.r-project.org/web/packages/jsonlite/index.html" target="_blank" rel="noopener">&lt;code>jsonlite&lt;/code>&lt;/a>). Feel free to come to office hours for help.&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>
@@ -290,7 +291,7 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;li>
 &lt;p>&lt;a href="https://nijianmo.github.io/amazon/index.html" target="_blank" rel="noopener">&lt;strong>Amazon Review Data&lt;/strong>&lt;/a>&lt;/p>
 &lt;ul>
-&lt;li>Note: the data are stored in JSON files and will require special steps to import into data structures we are familiar with (e.g., by using the package &lt;a href="https://cran.r-project.org/web/packages/jsonlite/index.html" target="_blank" rel="noopener">&lt;code>jsonlite&lt;/code>&lt;/a>). Feel free to come to office hours for help with this.&lt;/li>
+&lt;li>Note: the data are stored in JSON files and will require special steps to import into data structures we are familiar with (e.g., by using the package &lt;a href="https://cran.r-project.org/web/packages/jsonlite/index.html" target="_blank" rel="noopener">&lt;code>jsonlite&lt;/code>&lt;/a>). Feel free to come to office hours for help.&lt;/li>
 &lt;li>The same group provides a collection of dataset on many other platforms and topics &lt;a href="https://cseweb.ucsd.edu/~jmcauley/datasets.html" target="_blank" rel="noopener">here&lt;/a>.&lt;/li>
 &lt;/ul>
 &lt;/li>

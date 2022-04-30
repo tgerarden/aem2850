@@ -1,7 +1,7 @@
 <script src="data_files/header-attrs-2.11/header-attrs.js"></script>
 
 
-<p>There are a ton of places to find data related to business (as well as data on pretty much any topic you want) online:</p>
+<p>There are a ton of places to find data related to business online. Here are some examples:</p>
 <ul>
 <li><p><a href="https://www.kaggle.com/datasets"><strong>Kaggle</strong></a>: Kaggle hosts machine learning competitions. A byproduct of these competitions is a host of fascinating datasets that are generally free and open to the public. The datasets are sometimes accompanied with suggestions for how to analyze them. Here are a few examples:</p>
 <ul>
@@ -19,19 +19,24 @@
 <ul>
 <li>There are many ways to access data from Yahoo Finance. One option is to scrape data. Another is to use a package like <code>tidyquant</code> to <code>tq_get()</code> quantative data in a tibble format. This package can also be used to get data from FRED, Quandl, and other sources.</li>
 </ul></li>
-<li><p><a href="http://insideairbnb.com/get-the-data/"><strong>Inside Airbnb</strong></a>: Inside Airbnb is a mission-driven activist project with the objective to provide data that quantifies the impact of short-term rentals on housing and residential communities, as well as create a platform to support advocacy for policies to protect our cities from the impacts of short-term rentals. The post data for many different cities. Please note these <a href="http://insideairbnb.com/data-policies/">community guidelines</a>:
-&gt; - Only take the data you need
-&gt; - Do not scrape data from the site
-&gt; - Only download the data once. Do not write scripts that download the data every time they are executed.</p></li>
+<li><p><a href="http://www.twitter.com"><strong>Twitter</strong></a>: You could collect data on tweets that reference a specific company via <a href="https://developer.twitter.com/en/docs/tutorials/getting-started-with-r-and-v2-of-the-twitter-api">the twitter API</a> or by using a package like <a href="https://cran.r-project.org/web/packages/twitteR/index.html"><code>twitteR</code></a> to access the API. Then you could use this on its own or in conjunction with some other data (e.g., stock prices/returns) to do an analysis of consumer sentiment, for example.</p></li>
+<li><p><a href="http://insideairbnb.com/get-the-data/"><strong>Inside Airbnb</strong></a>: Inside Airbnb is a mission-driven activist project with the objective to provide data that quantifies the impact of short-term rentals on housing and residential communities, as well as create a platform to support advocacy for policies to protect our cities from the impacts of short-term rentals. The post data for many different cities. Please note these <a href="http://insideairbnb.com/data-policies/">community guidelines</a>:</p>
+<blockquote>
+<ul>
+<li>Only take the data you need</li>
+<li>Do not scrape data from the site</li>
+<li>Only download the data once. Do not write scripts that download the data every time they are executed.</li>
+</ul>
+</blockquote></li>
 <li><p><a href="https://www.yelp.com/dataset"><strong>Yelp Open Dataset</strong></a>: A subset of Yelp businesses, reviews, and user data for use in personal, educational, and academic purposes.</p>
 <ul>
-<li>Note: the data are stored in JSON files and will require special steps to import into data structures we are familiar with (e.g., by using the package <a href="https://cran.r-project.org/web/packages/jsonlite/index.html"><code>jsonlite</code></a>). Feel free to come to office hours for help with this.</li>
+<li>Note: the data are stored in JSON files and will require special steps to import into data structures we are familiar with (e.g., by using the package <a href="https://cran.r-project.org/web/packages/jsonlite/index.html"><code>jsonlite</code></a>). Feel free to come to office hours for help.</li>
 </ul></li>
 <li><p><a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page"><strong>Taxi and Ridehailing Usage in New York City</strong></a></p></li>
 <li><p><a href="https://www.zillow.com/research/data/"><strong>Zillow Housing Data</strong></a></p></li>
 <li><p><a href="https://nijianmo.github.io/amazon/index.html"><strong>Amazon Review Data</strong></a></p>
 <ul>
-<li>Note: the data are stored in JSON files and will require special steps to import into data structures we are familiar with (e.g., by using the package <a href="https://cran.r-project.org/web/packages/jsonlite/index.html"><code>jsonlite</code></a>). Feel free to come to office hours for help with this.</li>
+<li>Note: the data are stored in JSON files and will require special steps to import into data structures we are familiar with (e.g., by using the package <a href="https://cran.r-project.org/web/packages/jsonlite/index.html"><code>jsonlite</code></a>). Feel free to come to office hours for help.</li>
 <li>The same group provides a collection of dataset on many other platforms and topics <a href="https://cseweb.ucsd.edu/~jmcauley/datasets.html">here</a>.</li>
 </ul></li>
 <li><p><a href="https://archive.ics.uci.edu/ml/datasets/Bank+Marketing"><strong>Bank Marketing Data</strong></a>: data on direct marketing campaigns and whether they succeeded in convincing customers to make a deposit.</p></li>
