@@ -1,6 +1,6 @@
 ---
 title: "Final project"
-date: "2022-05-19"
+date: "`r format(Sys.time())`"
 due_date: "2022-05-19"
 due_time: "4:30 PM"
 menu:
