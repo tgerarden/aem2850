@@ -181,7 +181,7 @@ lessons:
     # assignment: "15-lab"
     bg: 1
 
-  - title: '<i class="fas fa-star"></i> **Final project due during exam period**' # (submit online by 11:59 PM)'
+  - title: '<i class="fas fa-star"></i> **Final project due during exam period**'
     date: "May 19 at 4:30PM"
-    # assignment: "final-project"
+    assignment: "final-project"
     bg: 3
