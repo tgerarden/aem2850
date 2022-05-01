@@ -1,6 +1,6 @@
 ---
 title: "Final project"
-date: "2022-04-29 21:10:35"
+date: "2022-05-01 14:37:19"
 due_date: "2022-05-19"
 due_time: "4:30 PM"
 menu:
@@ -38,7 +38,7 @@ Either way you approach it, you need to figure out both your data and plan at th
 
 Teamwork makes the dream work.
 
-### Step 4. Submit your final project by May 19 at 4:30pm.
+### Step 4. Submit your final project by Thursday, May 19 at 4:30pm
 
 One submission per group.
 
