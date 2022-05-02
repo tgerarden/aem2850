@@ -34,6 +34,14 @@ Or you might want to start by sketching out a project idea and then thinking thr
 
 Either way you approach it, you need to figure out both your data and plan at this stage and then submit a few sentences describing them on canvas.
 
+**Note:** You will be expected to use programming and data visualization skills we have developed throughout class. In addition, **you are required to use at least one of the following special topics we covered in the last part of the semester**:
+
+- space
+- text
+- functions
+- prediction methods
+- web scraping
+
 ### Step 3. Execute your plan
 
 Teamwork makes the dream work.
@@ -52,8 +60,6 @@ We do not have any examples from past years sine this class is brand new. Here i
 - Use twitter data to study the relationship between a company's twitter activity (e.g., tweets, mentions, etc.) and some performance metric (e.g., excess daily returns in the stock market).
 - Construct a prediction model for future stock (or index) price movements based on past movements.
 - Develop a pricing strategy you would use if you were in charge of a specific product, and provide a sophisticated and compelling rationale for your strategy that is grounded in data.
-
-You will be expected to use programming and data visualization skills we have developed throughout class. In addition, **you are required to use at least one of the special topics we covered in the last part of the semester** (i.e., text, functions, prediction methods, and/or web scraping).
 
 
 ## Instructions
