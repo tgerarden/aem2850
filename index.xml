@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 01 May 2022 14:37:19 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 13</title><link>https://aem2850.toddgerarden.com/assignment/13-lab/</link><pubDate>Thu, 28 Apr 2022 23:09:11 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/13-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 02 May 2022 11:58:47 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 13</title><link>https://aem2850.toddgerarden.com/assignment/13-lab/</link><pubDate>Thu, 28 Apr 2022 23:09:11 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/13-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
 &lt;p>Please submit your reflection via canvas by Wednesday at 11:59pm.&lt;/p>
 &lt;p>&lt;a href="https://aem2850.toddgerarden.com/assignment/#reflections" target="_blank" rel="noopener">Here are the guidelines for reflections.&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3511792" target="_blank" rel="noopener">Here is a project on RStudio Cloud that includes a template for reflections.&lt;/a>&lt;/p>
@@ -720,7 +720,7 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;li>
 &lt;p>&lt;a href="https://toolbox.google.com/datasetsearch" target="_blank" rel="noopener">&lt;strong>Google Dataset Search&lt;/strong>&lt;/a>: Google indexes thousands of public datasets; search for them here.&lt;/p>
 &lt;/li>
-&lt;/ul></description></item><item><title>Final project</title><link>https://aem2850.toddgerarden.com/assignment/final-project/</link><pubDate>Sun, 01 May 2022 14:37:19 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/final-project/</guid><description>&lt;p>You&amp;rsquo;ve made it to the end of our whirlwind intro to R programming! Way to go!&lt;/p>
+&lt;/ul></description></item><item><title>Final project</title><link>https://aem2850.toddgerarden.com/assignment/final-project/</link><pubDate>Mon, 02 May 2022 11:58:47 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/final-project/</guid><description>&lt;p>You&amp;rsquo;ve made it to the end of our whirlwind intro to R programming! Way to go!&lt;/p>
 &lt;p>Now you get to show off all the tools you learned with an insightful and informative analysis of your own construction. For your final project, you will take a dataset, explore it, tinker with it, and use it to tell a nuanced story or produce a useful product.&lt;/p>
 &lt;p>I want this project to be as useful for you and your future career as possible, so you get to choose what data you use (within reason). I&amp;rsquo;ve linked to some suggested business datasets below, but you are welcome (and encouraged!) to look for other datasets that you are interested in.&lt;/p>
 &lt;h2 id="summary-of-key-steps-and-timeline">Summary of key steps and timeline&lt;/h2>
@@ -730,6 +730,14 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;p>Find some interesting data to work with! Ideally this would be related to business. &lt;a href="https://aem2850.toddgerarden.com/resource/data/">Here is a list of suggested data sources&lt;/a>. Any data we have used in the class is also fair game, though you would need to do something new and different with it.&lt;/p>
 &lt;p>Or you might want to start by sketching out a project idea and then thinking through how to get the necessary data. &lt;a href="#examples">See below for a list of example project ideas&lt;/a>.&lt;/p>
 &lt;p>Either way you approach it, you need to figure out both your data and plan at this stage and then submit a few sentences describing them on canvas.&lt;/p>
+&lt;p>&lt;strong>Note:&lt;/strong> You will be expected to use programming and data visualization skills we have developed throughout class. In addition, &lt;strong>you are required to use at least one of the following special topics we covered in the last part of the semester&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>space&lt;/li>
+&lt;li>text&lt;/li>
+&lt;li>functions&lt;/li>
+&lt;li>prediction methods&lt;/li>
+&lt;li>web scraping&lt;/li>
+&lt;/ul>
 &lt;h3 id="step-3-execute-your-plan">Step 3. Execute your plan&lt;/h3>
 &lt;p>Teamwork makes the dream work.&lt;/p>
 &lt;h3 id="step-4-submit-your-final-project-by-thursday-may-19-at-430pm">Step 4. Submit your final project by Thursday, May 19 at 4:30pm&lt;/h3>
@@ -743,7 +751,6 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;li>Construct a prediction model for future stock (or index) price movements based on past movements.&lt;/li>
 &lt;li>Develop a pricing strategy you would use if you were in charge of a specific product, and provide a sophisticated and compelling rationale for your strategy that is grounded in data.&lt;/li>
 &lt;/ul>
-&lt;p>You will be expected to use programming and data visualization skills we have developed throughout class. In addition, &lt;strong>you are required to use at least one of the special topics we covered in the last part of the semester&lt;/strong> (i.e., text, functions, prediction methods, and/or web scraping).&lt;/p>
 &lt;h2 id="instructions">Instructions&lt;/h2>
 &lt;p>More detailed instructions will be posted here soon!&lt;/p>
 &lt;!-- Here's what you'll need to do: -->
