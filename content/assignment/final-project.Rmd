@@ -34,7 +34,7 @@ Or you might want to start by sketching out a project idea and then thinking thr
 
 Either way you approach it, you need to figure out both your data and plan at this stage and then submit a few sentences describing them on canvas.
 
-**Note:** You will be expected to use programming and data visualization skills we have developed throughout class. In addition, **you are required to use at least one of the following special topics we covered in the last part of the semester**:
+**Note:** You are expected to use programming and data visualization skills we have developed throughout class. In addition, **you are required to use at least one of the following special topics we covered in the last part of the semester**:
 
 - space
 - text

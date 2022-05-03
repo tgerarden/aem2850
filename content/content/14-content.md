@@ -1,7 +1,7 @@
 ---
 title: "Web scraping"
 linktitle: "Web scraping"
-date: "2022-05-01 14:36:25"
+date: "2022-05-02 21:59:40"
 menu:
   content:
     parent: Course content
@@ -27,11 +27,11 @@ output:
 - What is the difference between client-side and server-side web scraping?
 
 
-<!-- ### Slides -->
+### Slides
 
-<!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
 
-<!-- {{< blogdown/slide-buttons >}} -->
+{{< blogdown/slide-buttons >}}
 
-<!-- **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands. -->
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.
 
