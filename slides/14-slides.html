@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Web scraping</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Todd Gerarden" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/tdg-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+
+class: center, middle
+
+# Web scraping
+
+.class-info[
+
+**Week 14**
+
+AEM 2850: R for Business Analytics&lt;br&gt;
+Cornell Dyson&lt;br&gt;
+Spring 2022
+
+&lt;!-- Acknowledgements:  --&gt;
+&lt;!-- [Andrew Heiss](https://datavizm20.classes.andrewheiss.com) --&gt;
+&lt;!-- [Claus Wilke](https://wilkelab.org/SDS375/) --&gt;
+&lt;!-- [Grant McDermott](https://github.com/uo-ec607/lectures) --&gt;
+&lt;!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), --&gt;
+&lt;!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) --&gt;
+&lt;!-- [Ed Rubin](https://github.com/edrubin/EC524W22) --&gt;
+]
+
+---
+
+# Announcements
+
+Final project groups posted on canvas
+
+Choose final project data and plan by this Thursday
+
+- More details in a few minutes
+
+Questions before we get started?
+
+---
+
+# Plan for today
+
+[Course evaluations](#course-evals)
+
+[Final project guidance](#final-project)
+
+[Web scraping basics](#web-scraping-basics)
+
+[Web scraping with rvest](#rvest)
+  - [Cornell sports](#cornell-sports)
+  - [College rankings](#college-rankings)
+
+---
+class: inverse, center, middle
+name: course-evals
+
+# Course evaluations
+
+---
+
+# Course evaluations
+
+I take feedback seriously and will use it to improve this course!
+
+Extra useful since this is the first offering of AEM 2850
+
+--
+
+Concrete suggestions are most helpful
+
+--
+
+**I would appreciate your feedback through two channels:**
+
+1. Reflection - Week 15 - Course Feedback Survey
+2. University course evaluations
+
+--
+
+Both will be anonymous
+
+---
+
+# University course evaluations
+
+Anonymous: we just get summary reports, after grades are submitted
+
+I will give you time to complete them in class next Tuesday
+
+**I will award a bonus point on Reflection 15 for completing evaluations**
+
+Thank you in advance for your feedback!
+
+---
+class: inverse, center, middle
+name: final-project
+
+# Final project
+
+---
+
+# Where to start?
+
+The final project is intentionally open-ended: I want you to choose a topic and dataset that are as interesting and useful to you as possible
+
+--
+
+Since we do not have examples from past years, here are a few random ideas:
+
+- Write a program to automate an investment plan
+- Use functions to compute business analytics metrics for different companies
+- Study the relationship twitter activity and a company's performance
+- Construct a prediction model for future stock price movements
+- Develop a pricing strategy for a specific product
+
+--
+
+See [the preliminary guidance](https://aem2850.toddgerarden.com/assignment/final-project/) on the course site for more details on these
+
+---
+
+# Key steps and timeline
+
+### ~~Step 1: Choose a group by Friday, April 29~~
+
+### Step 2: Choose data and make a plan by Thursday, May 5
+
+### Step 3: Execute your plan
+
+### Step 4: Submit your final project by Thursday, May 19 at 4:30pm
+
+---
+
+# Step 2: Choose data and make a plan
+
+I posted a list of data sources for inspiration [on the course site](https://aem2850.toddgerarden.com/resource/data/)
+
+You can also start by coming up with a project idea and then finding data
+
+--
+
+**Your project must use at least one of the following special topics:**
+
+- space
+- text
+- functions
+- prediction methods
+- web scraping
+
+--
+
+Submit a few sentences describing your data, plan, and special topic(s) on canvas
+
+---
+
+# Expectations and grading
+
+I will post more detailed instructions and a grading rubric over the next week
+
+What do I expect? How long should it be? etc.
+
+- As a rule of thumb, this project is worth 130/50 = 2.6x mini project 1
+- I will adjust my expectations accordingly
+- So you might want to adjust your effort
+
+Any questions?
+
+---
+class: inverse, center, middle
+name: web-scraping-basics
+
+# Web scraping basics
+
+---
+# What is web scraping?
+
+--
+
+Getting data or "content" off the web and onto our computers
+
+--
+
+We get content off the web all the time!
+- Copy and paste
+- Read and take notes
+- Screenshot
+
+--
+
+The goal of web **scraping** is to write computer code to help us automate this process and store the results in a machine-readable format
+
+
+---
+
+# Why would we want to scrape data?
+
+When is web scraping useful?
+
+--
+
+- When the data is publicly available
+
+- When you can't get the data in a more convenient format
+
+--
+
+When is web scraping not useful?
+
+--
+
+- When data is publicly available in other formats (e.g., csv)
+
+- When the site owner offers a way to access data directly
+
+--
+
+Web scraping is time consuming and costly (for both you and "them")
+
+---
+
+# Server-side vs client-side content
+
+### 1. Server-side
+
+- Host server "builds" site and sends HTML code that our browser renders
+- All the information is embedded in the website's HTML
+
+--
+
+### 2. Client-side
+
+- Site contains an empty template of HTML and CSS
+- When we visit, our browser sends a *request* to the host server
+- The server sends a *response* script that our browser uses to populate the HTML template with information we want
+
+--
+
+**We will focus on server-side web scraping due to time constraints**
+
+---
+
+# What is HTML?
+
+--
+
+HTML stands for "HyperText Markup Language" and looks like this:
+
+
+```r
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Page title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1 id='first'&gt;A heading&lt;/h1&gt;
+  &lt;p&gt;Some text &amp;amp; &lt;b&gt;some bold text.&lt;/b&gt;&lt;/p&gt;
+  &lt;img src='myimg.png' width='100' height='100'&gt;
+&lt;/body&gt;
+```
+
+---
+
+# What is HTML?
+
+HTML has a hierarchical structure formed by **elements** that consist of:
+1. a start tag
+  - optional attributes
+2. an end tag
+3. contents in between tags
+
+???
+
+Source: [https://rvest.tidyverse.org/articles/rvest.html](https://rvest.tidyverse.org/articles/rvest.html)
+
+
+---
+
+# What is HTML?
+
+HTML has a hierarchical structure formed by **elements** that consist of:
+1. a start tag (e.g., `&lt;h1&gt;`)
+  - optional attributes (e.g., `id='first'`)
+2. an end tag (e.g., `&lt;/h1&gt;`)
+3. contents in between tags (e.g., `A heading`)
+
+
+```r
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Page title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+* &lt;h1 id='first'&gt;A heading&lt;/h1&gt;
+  &lt;p&gt;Some text &amp;amp; &lt;b&gt;some bold text.&lt;/b&gt;&lt;/p&gt;
+  &lt;img src='myimg.png' width='100' height='100'&gt;
+&lt;/body&gt;
+```
+
+???
+
+Source: [https://rvest.tidyverse.org/articles/rvest.html](https://rvest.tidyverse.org/articles/rvest.html)
+
+
+---
+
+# What is HTML?
+
+**Elements**
+
+- There are over 100 HTML elements
+- Google tags to learn about them as needed
+
+--
+
+**Contents**
+
+- Most elements can have content in between start and end tags
+- Content can be text or more elements (as **children**)
+
+--
+
+**Attributes**
+
+- Attributes like `id` and `class` are used with CSS to control page appearance
+- These attributes are useful for scraping data
+
+???
+
+Source: [https://rvest.tidyverse.org/articles/rvest.html](https://rvest.tidyverse.org/articles/rvest.html)
+
+---
+
+# What is CSS?
+
+--
+
+CSS stands for **C**ascading **S**tyle **S**heets
+
+- Tool for defining visual appearance of HTML
+
+--
+
+**CSS selectors** help identify what we want to scrape
+
+--
+
+We will learn by example using the extension/bookmarklet [SelectorGadget](https://selectorgadget.com)
+
+???
+
+Source: [https://rvest.tidyverse.org/articles/rvest.html](https://rvest.tidyverse.org/articles/rvest.html)
+
+---
+class: inverse, center, middle
+name: rvest
+
+# Web scraping with rvest
+
+
+---
+
+# The rvest package
+
+[rvest](https://rvest.tidyverse.org/index.html) (as in "harvest") is part of the tidyverse
+
+
+```r
+library(rvest) # installed with tidyverse but needs to be loaded
+```
+
+--
+
+We will cover several functions that make it easy to scrape data from web pages:
+- `read_html` reads HTML, much like `read_csv` reads .csv files
+- `html_element(s)` find HTML elements using CSS selectors or XPath expressions
+- `html_text2` retrieves text from HTML elements
+- `html_table` parses HTML tables into data frames
+
+--
+
+Let's learn these commands by working through two examples
+
+---
+name: cornell-sports
+
+# Example 1: Cornell Big Red on Wikipedia
+
+How could we scrape a list of varsity sports?
+
+.center[
+&lt;figure&gt;
+  &lt;a href="https://en.wikipedia.org/wiki/Cornell_Big_Red"&gt;
+    &lt;img src="img/14/big-red.png" width="90%"&gt;
+  &lt;/a&gt;
+&lt;/figure&gt;
+]
+
+???
+
+Source: https://en.wikipedia.org/wiki/Cornell_Big_Red
+
+---
+
+# Option 1: use `dt` tag to get headings
+
+&lt;figure&gt;
+  &lt;img src="img/14/big-red-selector-text.png" width="100%"&gt;
+&lt;/figure&gt;
+
+???
+
+Source: https://en.wikipedia.org/wiki/Cornell_Big_Red
+
+---
+
+# Scraping text using `dt` tag
+
+Use `html_elements()` and `html_text2()` to extract the sports
+
+
+```r
+big_red &lt;- read_html("https://en.wikipedia.org/wiki/Cornell_Big_Red")
+
+big_red_text &lt;- big_red %&gt;% 
+* html_elements("dt") %&gt;% # dt tag is for terms in a description list
+* html_text2() # convert html to text
+
+head(big_red_text) # looks good!
+```
+
+```
+## [1] "Baseball"              "Men's basketball"      "Women's basketball"   
+## [4] "Men's cross country"   "Women's cross country" "Football"
+```
+
+--
+
+
+```r
+tail(big_red_text) # uh-oh...
+```
+
+```
+## [1] "MRDA"  "USARL" "NARL"  "MLR"   "USAR"  "WTT"
+```
+
+--
+
+That doesn't seem right...
+
+---
+
+# What went wrong?
+
+--
+
+.less-left[
+1. Got irrelevant data
+]
+
+.more-right[
+&lt;figure&gt;
+  &lt;img src="img/14/big-red-selector-external.png" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# What went wrong?
+
+.less-left[
+1. Got irrelevant data
+
+2. Didn't get relevant data
+]
+
+.more-right.center[
+&lt;figure&gt;
+  &lt;img src="img/14/big-red-selector-other.png" width="65%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Option 2: use `.wikitable` tag to get table
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/14/big-red-selector-table.png" width="80%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+Source: https://en.wikipedia.org/wiki/Cornell_Big_Red
+
+---
+
+# Scraping tables using `.wikitable` tag
+
+Use `html_element()` to extract the first table element
+
+
+```r
+big_red %&gt;% 
+* html_element(".wikitable")
+```
+
+```
+## {html_node}
+## &lt;table class="wikitable" style="float:right; clear:right; margin:0 0 1em 1em;"&gt;
+## [1] &lt;tbody&gt;\n&lt;tr&gt;\n&lt;th scope="col" style="background-color:#B31B1B;color:#FFF ...
+```
+
+---
+
+# Scraping tables using `.wikitable` tag
+
+Then use `html_table()` to convert the table into a data frame
+
+
+```r
+big_red %&gt;% 
+  html_element(".wikitable") %&gt;%
+* html_table() %&gt;%  # convert html to a data frame
+  head(8)
+```
+
+```
+## # A tibble: 8 × 2
+##   `Men's sports` `Women's sports`
+##   &lt;chr&gt;          &lt;chr&gt;           
+## 1 Baseball       Basketball      
+## 2 Basketball     Cross country   
+## 3 Cross country  Equestrian      
+## 4 Football       Fencing         
+## 5 Golf           Field hockey    
+## 6 Ice hockey     Gymnastics      
+## 7 Lacrosse       Ice hockey      
+## 8 Polo           Lacrosse
+```
+
+---
+name: college-rankings
+
+# Example 2: College rankings on Wikipedia
+
+How could we scrape college rankings?
+
+.center[
+&lt;figure&gt;
+  &lt;a href="https://en.wikipedia.org/wiki/College_and_university_rankings_in_the_United_States"&gt;
+    &lt;img src="img/14/college-rankings.png" width="90%"&gt;
+  &lt;/a&gt;
+&lt;/figure&gt;
+]
+
+???
+
+Source: https://en.wikipedia.org/wiki/College_and_university_rankings_in_the_United_States#U.S._News_&amp;_World_Report_Best_Colleges_Ranking
+
+---
+
+# Use `.wikitable` tag to get the first table
+
+
+```r
+rankings &lt;- read_html("https://en.wikipedia.org/wiki/College_and_university_rankings_in_the_United_States")
+
+first_table &lt;- rankings %&gt;% 
+  html_element(".wikitable") %&gt;% 
+  html_table()
+
+first_table
+```
+
+```
+## # A tibble: 21 × 5
+##    `Top national universiti… `2022 rank` ``    `Top liberal arts co… `2022 rank`
+##    &lt;chr&gt;                           &lt;int&gt; &lt;lgl&gt; &lt;chr&gt;                       &lt;int&gt;
+##  1 Princeton University                1 NA    Williams College                1
+##  2 Columbia University                 2 NA    Amherst College                 2
+##  3 Harvard University                  2 NA    Swarthmore College              3
+##  4 Massachusetts Institute …           2 NA    Pomona College                  4
+##  5 Yale University                     5 NA    Wellesley College               5
+##  6 Stanford University                 6 NA    Bowdoin College                 6
+##  7 University of Chicago               6 NA    United States Naval …           6
+##  8 University of Pennsylvan…           8 NA    Claremont McKenna Co…           8
+##  9 California Institute of …           9 NA    Carleton College                9
+## 10 Duke University                     9 NA    Middlebury College              9
+## # … with 11 more rows
+```
+
+---
+
+# Scraped data frames are data frames
+
+How does Cornell stack up?
+
+
+```r
+first_table %&gt;% 
+  select(c(1,2)) %&gt;% 
+  rename(uni = 1,
+         rank = 2) %&gt;% 
+  filter(str_detect(uni, "Cornell"))
+```
+
+```
+## # A tibble: 1 × 2
+##   uni                 rank
+##   &lt;chr&gt;              &lt;int&gt;
+## 1 Cornell University    17
+```
+
+---
+
+# What if CSS selectors match multiple tables?
+
+.pull-left[
+&lt;figure&gt;
+    &lt;img src="img/14/college-rankings-us-news.png" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+.pull-right[
+&lt;figure&gt;
+    &lt;img src="img/14/college-rankings-parents-dream.png" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# What if CSS selectors match multiple tables?
+
+#### Multiple options:
+
+#### 1. Tweak CSS selectors to uniquely identify element (if possible)
+
+#### 2. Scrape all of them, then use familiar R tools to extract data
+
+--
+
+Let's try option 2
+
+---
+
+# Scrape all the tables
+
+Use `html_elements()` to extract all matching elements
+
+
+```r
+all_tables &lt;- rankings %&gt;% 
+* html_elements(".wikitable") %&gt;% # get all the tables
+  html_table() # convert html to a data frame
+```
+
+--
+
+
+```r
+class(all_tables) # we get a list of tables
+```
+
+```
+## [1] "list"
+```
+
+```r
+length(all_tables) # 11 tables, to be exact
+```
+
+```
+## [1] 11
+```
+
+---
+
+# How could we extract individual tables?
+
+
+```
+## # A tibble: 3 × 2
+##   `Top national universities[13]` `2022 rank`
+##   &lt;chr&gt;                                 &lt;int&gt;
+## 1 Princeton University                      1
+## 2 Columbia University                       2
+## 3 Harvard University                        2
+```
+
+
+```
+## # A tibble: 3 × 2
+##   University                            `Students' Dream  College Ranking`
+##   &lt;chr&gt;                                                              &lt;int&gt;
+## 1 Stanford University                                                    1
+## 2 Harvard University                                                     2
+## 3 University of California, Los Angeles                                  3
+```
+
+
+```
+## # A tibble: 3 × 2
+##   University                            `Parents' Dream  College Ranking`
+##   &lt;chr&gt;                                                             &lt;int&gt;
+## 1 Stanford University                                                   1
+## 2 Princeton University                                                  2
+## 3 Massachusetts Institute of Technology                                 3
+```
+
+---
+
+# String matching!
+
+
+```r
+# use str_detect() to search for tables with "Parents"
+str_detect(all_tables, "Parents")
+```
+
+```
+##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+```
+
+--
+
+
+```r
+# or use str_which() to get position of matching object(s)
+str_which(all_tables, "Parents")
+```
+
+```
+## [1] 8
+```
+
+
+---
+
+# You are fulfilling your parents' dreams
+
+
+```r
+# now extract table(s) with "Parents"
+all_tables[str_detect(all_tables, "Parents")]
+```
+
+```
+## [[1]]
+## # A tibble: 10 × 2
+*##    University                            `Parents' Dream  College Ranking`
+##    &lt;chr&gt;                                                             &lt;int&gt;
+##  1 Stanford University                                                   1
+##  2 Princeton University                                                  2
+##  3 Massachusetts Institute of Technology                                 3
+##  4 Harvard University                                                    4
+##  5 New York University                                                   5
+##  6 University of Pennsylvania                                            6
+##  7 University of Michigan                                                7
+##  8 Duke University                                                       8
+##  9 University of California, Los Angeles                                 9
+*## 10 Cornell University                                                   10
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
