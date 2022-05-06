@@ -178,7 +178,7 @@ lessons:
     # date_end: "July 26"
     # content: "15-content"
     # example: "15-example"
-    # assignment: "15-lab"
+    assignment: "15-lab"
     bg: 1
 
   - title: '<i class="fas fa-star"></i> **Final project due during exam period**'
