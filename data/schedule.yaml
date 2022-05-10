@@ -171,7 +171,8 @@ lessons:
   - title: '**Conclusion**'
     header: True
 
-  - title: '<span class="content-title">Telling stories with data</span>'
+  - title: '<span class="content-title">Conclusion</span>'
+#Telling stories with data
     session: "Session 15"
     date: "Week 15"
     # date_start: "July 26"
