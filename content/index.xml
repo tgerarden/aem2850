@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 02 May 2022 21:59:40 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Web scraping</title><link>https://aem2850.toddgerarden.com/content/14-content/</link><pubDate>Mon, 02 May 2022 21:59:40 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/14-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 09 May 2022 21:26:53 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Conclusion</title><link>https://aem2850.toddgerarden.com/content/15-content/</link><pubDate>Mon, 09 May 2022 21:26:53 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/15-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/telling-a-story.html" target="_blank" rel="noopener">Chapter 9: Telling a story and making a point&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;!-- ### Guiding questions -->
+&lt;!-- - When is web scraping useful? -->
+&lt;!-- - What is html? -->
+&lt;!-- - What is the difference between client-side and server-side web scraping? -->
+&lt;!-- ### Slides -->
+&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+&lt;!--
+-->
+&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item><item><title>Web scraping</title><link>https://aem2850.toddgerarden.com/content/14-content/</link><pubDate>Mon, 02 May 2022 21:59:40 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/14-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://rvest.tidyverse.org/articles/rvest.html" target="_blank" rel="noopener">Web scraping 101&lt;/a> from &lt;code>vignette(&amp;quot;rvest&amp;quot;)&lt;/code>&lt;/li>
 &lt;/ul>
