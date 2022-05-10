@@ -58,9 +58,13 @@
 <li>Findings</li>
 </ul></li>
 </ol>
-<p>Do not include your source code in the memo unless you think it is crucial for communicating your methods or findings. Write the memo with a non-technical supervisor in mind—someone who will be more interested in your approach and findings than the code you wrote. But don’t forget the importance of clearly communicating key steps when the source code is not included in the primary deliverable!</p>
-<p>Follow R Markdown etiquette rules and style that we introduced throughout the semester in labs—don’t output extraneous messages or warnings, use nice formatting for tables, and adjust the dimensions for your figures as needed.</p>
-<p>You might want to customize your memo, for example by including section headings and a table of contents for clarity. <a href="https://bookdown.org/yihui/rmarkdown/pdf-document.html">This site</a> provides a summary of some basic options for PDF documents you may find helpful.</p>
+<p>Write the memo with a non-technical supervisor in mind—someone who will be more interested in your approach and findings than the code you wrote. But don’t forget the importance of clearly communicating key steps when the source code is not included in the primary deliverable!</p>
+<p><strong>Do not include your source code in the memo</strong> unless you think it is crucial for communicating your methods or findings. You can avoid printing the code in all the chunks in a document by including a code chunk with the following global option at the start of the .Rmd file (but below the yaml header):</p>
+<blockquote>
+<pre><code>knitr::opts_chunk$set(echo = FALSE)</code></pre>
+</blockquote>
+<p>Follow R Markdown etiquette rules and style that we introduced throughout the semester in labs—don’t output extraneous messages or warnings, use nice formatting for tables, and adjust the dimensions for your figures as needed. Some of this can be achieved by modifying code chunk options (see lab solutions for examples).</p>
+<p>You might want to customize your memo, for example by including section headings and a table of contents for clarity. <a href="https://bookdown.org/yihui/rmarkdown/pdf-document.html">This site</a> provides a summary of some basic options for PDF documents you may find helpful. You can also consult <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf">the rmarkdown cheat sheet</a>.</p>
 </div>
 <div id="grading-rubric" class="section level2">
 <h2>Grading rubric</h2>
@@ -69,7 +73,7 @@
 <div id="reminders" class="section level2">
 <h2>Reminders</h2>
 <ul>
-<li><p>Don’t forget to utilize your teaching staff! You can email us or set up appointments to get help. Prof. Gerarden has posted extra office hours by appointment at <a href="https://aem2850.youcanbook.me">aem2850.youcanbook.me</a>.</p></li>
+<li><p><strong>Don’t forget to utilize your teaching staff!</strong> You can email us or set up appointments to get help. Grad TA Hui will have office hours from 1-3pm on Friday, May 13. Prof. Gerarden has posted extra office hours by appointment at <a href="https://aem2850.youcanbook.me">aem2850.youcanbook.me</a>.</p></li>
 <li><p><strong>Part of your individual grade will be based on your contribution to the group.</strong> I will conduct an anonymous peer-review survey to help assess each person’s contribution.</p></li>
 <li><p><strong>You will be graded on both the content and its presentation.</strong> Follow best practices from class and readings when making visuals. Make each graphic clear and comprehensible (even on its own). When writing text to summarize your work and discuss takeaways, please be concise.</p>
 <p>To drive home the importance of presentation, here are some lessons learned from making COVID data dashboards (<a href="https://flowingdata.com/2022/04/06/lessons-learned-from-making-covid-dashboards/">source</a>):</p>

@@ -76,11 +76,17 @@ Use R to:
     - Analysis description
     - Findings
 
-  Do not include your source code in the memo unless you think it is crucial for communicating your methods or findings. Write the memo with a non-technical supervisor in mind—someone who will be more interested in your approach and findings than the code you wrote. But don't forget the importance of clearly communicating key steps when the source code is not included in the primary deliverable!
+  Write the memo with a non-technical supervisor in mind—someone who will be more interested in your approach and findings than the code you wrote. But don't forget the importance of clearly communicating key steps when the source code is not included in the primary deliverable!
+  
+  **Do not include your source code in the memo** unless you think it is crucial for communicating your methods or findings. You can avoid printing the code in all the chunks in a document by including a code chunk with the following global option at the start of the .Rmd file (but below the yaml header):
+  
+> ```
+knitr::opts_chunk$set(echo = FALSE)
+```
 
-  Follow R Markdown etiquette rules and style that we introduced throughout the semester in labs—don't output extraneous messages or warnings, use nice formatting for tables, and adjust the dimensions for your figures as needed.
-    
-  You might want to customize your memo, for example by including section headings and a table of contents for clarity. [This site](https://bookdown.org/yihui/rmarkdown/pdf-document.html) provides a summary of some basic options for PDF documents you may find helpful.
+  Follow R Markdown etiquette rules and style that we introduced throughout the semester in labs—don't output extraneous messages or warnings, use nice formatting for tables, and adjust the dimensions for your figures as needed. Some of this can be achieved by modifying code chunk options (see lab solutions for examples).
+  
+  You might want to customize your memo, for example by including section headings and a table of contents for clarity. [This site](https://bookdown.org/yihui/rmarkdown/pdf-document.html) provides a summary of some basic options for PDF documents you may find helpful. You can also consult [the rmarkdown cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf).
 
 
 ## Grading rubric
@@ -89,7 +95,7 @@ We will use [this rubric](final-project-rubric.xlsx) to grade the final product.
 
 
 ## Reminders
-- Don't forget to utilize your teaching staff! You can email us or set up appointments to get help. Prof. Gerarden has posted extra office hours by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me).
+- **Don't forget to utilize your teaching staff!** You can email us or set up appointments to get help. Grad TA Hui will have office hours from 1-3pm on Friday, May 13. Prof. Gerarden has posted extra office hours by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me).
 - **Part of your individual grade will be based on your contribution to the group.** I will conduct an anonymous peer-review survey to help assess each person's contribution.
 - **You will be graded on both the content and its presentation.** Follow best practices from class and readings when making visuals. Make each graphic clear and comprehensible (even on its own). When writing text to summarize your work and discuss takeaways, please be concise.
 
