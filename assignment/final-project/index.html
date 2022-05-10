@@ -27,8 +27,8 @@ Now you get to show off all the tools you learned with an insightful and informa
 <meta property="og:description" content="You&rsquo;ve made it to the end of our whirlwind intro to R programming! Way to go!
 Now you get to show off all the tools you learned with an insightful and informative analysis of your own construction."><meta property="og:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png">
 <meta property="twitter:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
-<meta property="article:published_time" content="2022-05-10T09:02:24+00:00">
-<meta property="article:modified_time" content="2022-05-10T09:02:24+00:00">
+<meta property="article:published_time" content="2022-05-10T15:22:33+00:00">
+<meta property="article:modified_time" content="2022-05-10T15:22:33+00:00">
 <title>Final project | R for Business Analytics</title>
 </head>
 <body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=8aa7f9fab930cf904df951e7fdfc2eef>
@@ -140,39 +140,45 @@ May 10, 2022
 </ul>
 </li>
 </ol>
-<p>Do not include your source code in the memo unless you think it is crucial for communicating your methods or findings. Write the memo with a non-technical supervisor in mind—someone who will be more interested in your approach and findings than the code you wrote. But don&rsquo;t forget the importance of clearly communicating key steps when the source code is not included in the primary deliverable!</p>
-<p>Follow R Markdown etiquette rules and style that we introduced throughout the semester in labs—don&rsquo;t output extraneous messages or warnings, use nice formatting for tables, and adjust the dimensions for your figures as needed.</p>
-<p>You might want to customize your memo, for example by including section headings and a table of contents for clarity. <a href=https://bookdown.org/yihui/rmarkdown/pdf-document.html target=_blank rel=noopener>This site</a> provides a summary of some basic options for PDF documents you may find helpful.</p>
-<h2 id=grading-rubric>Grading rubric</h2>
-<p>We will use <a href=final-project-rubric.xlsx>this rubric</a> to grade the final product.</p>
-<h2 id=reminders>Reminders</h2>
-<ul>
-<li>
-<p>Don&rsquo;t forget to utilize your teaching staff! You can email us or set up appointments to get help. Prof. Gerarden has posted extra office hours by appointment at <a href=https://aem2850.youcanbook.me target=_blank rel=noopener>aem2850.youcanbook.me</a>.</p>
-</li>
-<li>
-<p><strong>Part of your individual grade will be based on your contribution to the group.</strong> I will conduct an anonymous peer-review survey to help assess each person&rsquo;s contribution.</p>
-</li>
-<li>
-<p><strong>You will be graded on both the content and its presentation.</strong> Follow best practices from class and readings when making visuals. Make each graphic clear and comprehensible (even on its own). When writing text to summarize your work and discuss takeaways, please be concise.</p>
-<p>To drive home the importance of presentation, here are some lessons learned from making COVID data dashboards (<a href=https://flowingdata.com/2022/04/06/lessons-learned-from-making-covid-dashboards/ target=_blank rel=noopener>source</a>):</p>
+<p>Write the memo with a non-technical supervisor in mind—someone who will be more interested in your approach and findings than the code you wrote. But don&rsquo;t forget the importance of clearly communicating key steps when the source code is not included in the primary deliverable!</p>
+<p><strong>Do not include your source code in the memo</strong> unless you think it is crucial for communicating your methods or findings. You can avoid printing the code in all the chunks in a document by including a code chunk with the following global option at the start of the .Rmd file (but below the yaml header):</p>
 <blockquote>
-<p><em>Among the shared themes for the dashboards were simplicity and clarity. Whether you are producing visuals and analytical tools for policymakers or for the public, Blauer says, the same rules of thumb apply. <strong>“Don’t overcomplicate your visualization, make the conclusions as clear as possible, and speak in the most basic of plain-language terms,”</strong> she says.</em></p>
+<pre><code></code></pre>
 </blockquote>
-<blockquote>
-<p><em>Yet, as other data scientists point out, presenting data simply might not be enough to ensure viewers get the message. For one thing, <strong>attention to detail matters. Ritchie recalls how she and her team spent hours focused on the titles and subtitles of charts</strong>, “because that is ultimately what most people will look at”. And in those titles and subtitles, the analysts made sure to specify ‘confirmed’ deaths or ‘confirmed’ cases. “An emphasis on ‘confirmed’ is really important because we know that it’s an underestimate of the total,” says Ritchie. “It might seem very basic, but it’s really crucial to how you understand the data and the scale of the pandemic.”</em></p>
-</blockquote>
-</li>
-</ul>
-<h2 id=examples>Example project ideas</h2>
-<p>We do not have any examples from past years sine this class is brand new. Here is a list of off-the-cuff project ideas to give you a sense of the scope of the project and range of possibilities. You are welcome to use one of these, but that is not expected or required.</p>
-<ul>
-<li>Write a program to automate an investment plan. For example, you could write functions to take a set of stock tickers and derive portfolio weights for each ticker based on some (sensible) investment strategy. This could be done using a fixed time period of historical data or a user-specified time window.</li>
-<li>Use functions to compute business analytics metrics for different companies and/or time periods. For example you could use data from SEC filings to summarize the evolution of companies' fundamentals over time.</li>
-<li>Use twitter data to study the relationship between a company&rsquo;s twitter activity (e.g., tweets, mentions, etc.) and some performance metric (e.g., excess daily returns in the stock market).</li>
-<li>Construct a prediction model for future stock (or index) price movements based on past movements.</li>
-<li>Develop a pricing strategy you would use if you were in charge of a specific product, and provide a sophisticated and compelling rationale for your strategy that is grounded in data.</li>
-</ul>
+<p>knitr::opts_chunk$set(echo = FALSE)</p>
+<pre><code>
+  Follow R Markdown etiquette rules and style that we introduced throughout the semester in labs—don't output extraneous messages or warnings, use nice formatting for tables, and adjust the dimensions for your figures as needed. Some of this can be achieved by modifying code chunk options (see lab solutions for examples).
+  
+  You might want to customize your memo, for example by including section headings and a table of contents for clarity. [This site](https://bookdown.org/yihui/rmarkdown/pdf-document.html) provides a summary of some basic options for PDF documents you may find helpful. You can also consult [the rmarkdown cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf).
+
+
+## Grading rubric
+
+We will use [this rubric](final-project-rubric.xlsx) to grade the final product.
+
+
+## Reminders
+- **Don't forget to utilize your teaching staff!** You can email us or set up appointments to get help. Grad TA Hui will have office hours from 1-3pm on Friday, May 13. Prof. Gerarden has posted extra office hours by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me).
+- **Part of your individual grade will be based on your contribution to the group.** I will conduct an anonymous peer-review survey to help assess each person's contribution.
+- **You will be graded on both the content and its presentation.** Follow best practices from class and readings when making visuals. Make each graphic clear and comprehensible (even on its own). When writing text to summarize your work and discuss takeaways, please be concise.
+
+  To drive home the importance of presentation, here are some lessons learned from making COVID data dashboards ([source](https://flowingdata.com/2022/04/06/lessons-learned-from-making-covid-dashboards/)):
+
+  &gt; *Among the shared themes for the dashboards were simplicity and clarity. Whether you are producing visuals and analytical tools for policymakers or for the public, Blauer says, the same rules of thumb apply. **“Don’t overcomplicate your visualization, make the conclusions as clear as possible, and speak in the most basic of plain-language terms,”** she says.*
+
+  &gt; *Yet, as other data scientists point out, presenting data simply might not be enough to ensure viewers get the message. For one thing, **attention to detail matters. Ritchie recalls how she and her team spent hours focused on the titles and subtitles of charts**, “because that is ultimately what most people will look at”. And in those titles and subtitles, the analysts made sure to specify ‘confirmed’ deaths or ‘confirmed’ cases. “An emphasis on ‘confirmed’ is really important because we know that it’s an underestimate of the total,” says Ritchie. “It might seem very basic, but it’s really crucial to how you understand the data and the scale of the pandemic.”*
+
+
+## Example project ideas {#examples}
+
+We do not have any examples from past years sine this class is brand new. Here is a list of off-the-cuff project ideas to give you a sense of the scope of the project and range of possibilities. You are welcome to use one of these, but that is not expected or required.
+
+- Write a program to automate an investment plan. For example, you could write functions to take a set of stock tickers and derive portfolio weights for each ticker based on some (sensible) investment strategy. This could be done using a fixed time period of historical data or a user-specified time window.
+- Use functions to compute business analytics metrics for different companies and/or time periods. For example you could use data from SEC filings to summarize the evolution of companies' fundamentals over time.
+- Use twitter data to study the relationship between a company's twitter activity (e.g., tweets, mentions, etc.) and some performance metric (e.g., excess daily returns in the stock market).
+- Construct a prediction model for future stock (or index) price movements based on past movements.
+- Develop a pricing strategy you would use if you were in charge of a specific product, and provide a sophisticated and compelling rationale for your strategy that is grounded in data.
+</code></pre>
 </div>
 <div class="media author-card content-widget-hr">
 <div class=media-body>
