@@ -1,0 +1,226 @@
+---
+title: "Conclusion"
+author: "Todd Gerarden"
+output:
+  xaringan::moon_reader:
+    lib_dir: "libs"
+    css: ["xaringan-themer.css", "css/tdg-slides.css"]
+#    css: ['default', 'metropolis', 'metropolis-fonts']
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%"
+      ratio: "16:9"
+      navigation:
+        scroll: false
+      # beforeInit: "libs/offline-mathjax.js"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(base_color = "#B31B1B",
+                  text_font_size = "1.4rem")
+xaringanExtra::use_xaringan_extra(c("tile_view"))
+```
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(warning = FALSE, message = FALSE, 
+                      #cache = TRUE,
+                      fig.retina = 3, fig.align = "center",
+                      fig.width=14, fig.height=7)
+```
+
+```{r packages-data, include=FALSE}
+library(tidyverse)
+```
+
+
+
+class: center, middle
+
+# Conclusion
+
+.class-info[
+
+**Week 15**
+
+AEM 2850: R for Business Analytics<br>
+Cornell Dyson<br>
+Spring 2022
+
+<!-- Acknowledgements:  -->
+<!-- [Andrew Heiss](https://datavizm20.classes.andrewheiss.com) -->
+<!-- [Claus Wilke](https://wilkelab.org/SDS375/) -->
+<!-- [Grant McDermott](https://github.com/uo-ec607/lectures) -->
+<!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), -->
+<!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) -->
+<!-- [Ed Rubin](https://github.com/edrubin/EC524W22) -->
+]
+
+---
+
+# Announcements
+
+Lab-14 deadline extended to Wednesday
+
+Final project plan feedback on canvas
+
+Final project details, rubric [posted on course site](https://aem2850.toddgerarden.com/assignment/final-project/)
+
+Extra office hours appointments
+
+Questions before we get started?
+
+---
+
+# Plan for today
+
+[Course evaluations](#course-evals)
+
+[Final project guidance](#final-project)
+
+<!-- [Parting thoughts](#parting-thoughts) -->
+
+---
+class: inverse, center, middle
+name: course-evals
+
+# Course evaluations
+
+---
+
+# Course objectives reminder
+
+1. Develop basic proficiency in `R` programming
+2. Understand data structures and manipulation
+3. Describe effective techniques for data visualization and communication
+4. Construct effective data visualizations
+5. Utilize course concepts and tools for business applications
+
+---
+
+# Where we've been (weeks 1-4)
+
+1. **Develop basic proficiency in `R` programming**
+2. **Understand data structures and manipulation**
+3. Describe effective techniques for data visualization and communication
+4. Construct effective data visualizations
+5. Utilize course concepts and tools for business applications
+
+---
+
+# Where we've been (weeks 5-10)
+
+1. Develop basic proficiency in `R` programming
+2. Understand data structures and manipulation
+3. **Describe effective techniques for data visualization and communication**
+4. **Construct effective data visualizations**
+5. **Utilize course concepts and tools for business applications**
+
+---
+
+# Where we've been (weeks 11-15)
+
+1. **Develop basic proficiency in `R` programming**
+2. **Understand data structures and manipulation**
+3. **Describe effective techniques for data visualization and communication**
+4. **Construct effective data visualizations**
+5. **Utilize course concepts and tools for business applications**
+
+---
+
+# Where we're going next (weeks 15+)
+
+Last week we covered **web scraping** by popular demand
+
+This week we'll wrap up the course
+
+**Please feel free to come see me in office hours if you want to discuss topics we didn't have time to cover this semester**
+
+---
+
+# Course evaluations
+
+I take feedback seriously and will use it to improve this course!
+
+Extra useful since this is the first offering of AEM 2850
+
+--
+
+Concrete suggestions are most helpful
+
+--
+
+**I would appreciate your feedback through two channels:**
+
+1. Reflection - Week 15 - Course Feedback Survey
+2. University course evaluations
+
+--
+
+Both will be anonymous
+
+---
+
+# University course evaluations
+
+Anonymous: we just get summary reports, after grades are submitted
+
+I will give you time to complete them in class next Tuesday
+
+**I will award a bonus point on Reflection 15 for completing evaluations**
+
+Thank you in advance for your feedback!
+
+--
+
+**I will give you time now to complete evaluations in class**
+
+---
+class: inverse, center, middle
+name: final-project
+
+# Final project
+
+---
+
+# Key steps and timeline
+
+### ~~Step 1: Choose a group by Friday, April 29~~
+
+### ~~Step 2: Choose data and make a plan by Thursday, May 5~~
+
+### Step 3: Execute your plan
+
+### Step 4: Submit your final project by Thursday, May 19 at 4:30pm
+
+---
+
+# Expectations and grading
+
+I posted more detailed instructions and a grading rubric [on the course site](https://aem2850.toddgerarden.com/assignment/final-project/)
+
+Let's go through them now
+
+--
+
+Any questions?
+
+<!-- --- -->
+<!-- class: inverse, center, middle -->
+<!-- name: parting-thoughts -->
+
+<!-- # Parting thoughts -->
+
+
+<!-- GO BACK TO FIRST SLIDE DECK AND COPY IN SOME CONTENT? -->
+
+<!-- GET SOMETHING FROM ANDREW HEISS? -->
+
+<!-- LET THEM OUT EARLY! -->
+

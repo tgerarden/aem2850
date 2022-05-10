@@ -1,7 +1,7 @@
 ---
 title: "Conclusion"
 linktitle: "Conclusion"
-date: "2022-05-09 21:26:53"
+date: "2022-05-09 21:35:04"
 menu:
   content:
     parent: Course content
@@ -18,7 +18,7 @@ output:
 ---
 
 ### Readings
-- <i class="fas fa-book"></i> [Chapter 9: Telling a story and making a point](https://clauswilke.com/dataviz/telling-a-story.html) of *Fundamentals of Data Visualization*
+- <i class="fas fa-book"></i> [Chapter 29: Telling a story and making a point](https://clauswilke.com/dataviz/telling-a-story.html) of *Fundamentals of Data Visualization*
 
 
 <!-- ### Guiding questions -->
