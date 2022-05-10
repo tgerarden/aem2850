@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 09 May 2022 21:42:42 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 15</title><link>https://aem2850.toddgerarden.com/assignment/15-lab/</link><pubDate>Fri, 06 May 2022 13:10:38 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/15-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 10 May 2022 09:08:23 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 15</title><link>https://aem2850.toddgerarden.com/assignment/15-lab/</link><pubDate>Fri, 06 May 2022 13:10:38 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/15-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
 &lt;p>The reflection this week is a short survey on canvas.&lt;/p>
 &lt;p>Please complete it by Wednesday at 11:59pm.&lt;/p>
 &lt;h2 id="lab">Lab&lt;/h2>
@@ -737,7 +737,19 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;li>
 &lt;p>&lt;a href="https://toolbox.google.com/datasetsearch" target="_blank" rel="noopener">&lt;strong>Google Dataset Search&lt;/strong>&lt;/a>: Google indexes thousands of public datasets; search for them here.&lt;/p>
 &lt;/li>
-&lt;/ul></description></item><item><title>Final project</title><link>https://aem2850.toddgerarden.com/assignment/final-project/</link><pubDate>Mon, 09 May 2022 21:42:42 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/final-project/</guid><description>&lt;p>You&amp;rsquo;ve made it to the end of our whirlwind intro to R programming! Way to go!&lt;/p>
+&lt;/ul></description></item><item><title>Conclusion</title><link>https://aem2850.toddgerarden.com/content/15-content/</link><pubDate>Tue, 10 May 2022 09:08:23 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/15-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/telling-a-story.html" target="_blank" rel="noopener">Chapter 29: Telling a story and making a point&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://flowingdata.com/2018/06/28/why-people-make-bad-charts-and-what-to-do-when-it-happens/" target="_blank" rel="noopener">Why People Make Bad Charts (and What to Do When it Happens)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;!-- ### Guiding questions -->
+&lt;!-- - When is web scraping useful? -->
+&lt;!-- - What is html? -->
+&lt;!-- - What is the difference between client-side and server-side web scraping? -->
+&lt;h3 id="slides">Slides&lt;/h3>
+&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
+&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/15-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/15-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
+&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Final project</title><link>https://aem2850.toddgerarden.com/assignment/final-project/</link><pubDate>Tue, 10 May 2022 09:02:24 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/final-project/</guid><description>&lt;p>You&amp;rsquo;ve made it to the end of our whirlwind intro to R programming! Way to go!&lt;/p>
 &lt;p>Now you get to show off all the tools you learned with an insightful and informative analysis of your own construction. For your final project, you will take a dataset, explore it, tinker with it, and use it to tell a nuanced story or produce a useful product.&lt;/p>
 &lt;p>I want this project to be as useful for you and your future career as possible, so you get to choose what data you use (within reason). I&amp;rsquo;ve linked to some suggested business datasets below, but you are welcome (and encouraged!) to look for other datasets that you are interested in.&lt;/p>
 &lt;h2 id="summary-of-key-steps-and-timeline">Summary of key steps and timeline&lt;/h2>
@@ -772,10 +784,10 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;p>&lt;strong>Download&lt;/strong> a dataset and explore it using all the tools and tricks we learned in lectures, examples, and labs throughout the semester.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;strong>Find&lt;/strong> a story in the data. This could include patterns in the data like relationships and changes over time that could be visualized. Relationships could also be summarized using linear regression. You could build a prediction mdoel using OLS, ridge, or lasso. Alternatively, you could focus on analysis and visualization of spatial or textual data.&lt;/p>
+&lt;p>&lt;strong>Analyze&lt;/strong> the data according to your plan. This could include finding patterns in the data like relationships and changes over time that could be visualized and/or summarized using linear regression. You could build a prediction model using OLS, ridge, or lasso. Alternatively, you could focus on analysis and visualization of spatial or textual data. You could build a tool to guide investment strategy or evaluate firm performance. etc. etc.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;strong>Create&lt;/strong> multiple graphs to tell the story. You must use at least &lt;strong>three&lt;/strong> different chart &lt;em>types&lt;/em> (i.e., don&amp;rsquo;t just make three scatterplots or three maps).&lt;/p>
+&lt;p>&lt;strong>Create&lt;/strong> multiple graphs to illustrate your analysis. You must use at least &lt;strong>three&lt;/strong> different chart &lt;em>types&lt;/em> (i.e., don&amp;rsquo;t just make three scatter plots or three maps).&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>&lt;strong>Write&lt;/strong> a PDF memo using R Markdown to introduce your project, provide background on your data and the data cleaning process, and describe your figure and findings. You should include the following sections in the memo:&lt;/p>
@@ -820,19 +832,7 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;li>Use twitter data to study the relationship between a company&amp;rsquo;s twitter activity (e.g., tweets, mentions, etc.) and some performance metric (e.g., excess daily returns in the stock market).&lt;/li>
 &lt;li>Construct a prediction model for future stock (or index) price movements based on past movements.&lt;/li>
 &lt;li>Develop a pricing strategy you would use if you were in charge of a specific product, and provide a sophisticated and compelling rationale for your strategy that is grounded in data.&lt;/li>
-&lt;/ul></description></item><item><title>Conclusion</title><link>https://aem2850.toddgerarden.com/content/15-content/</link><pubDate>Mon, 09 May 2022 21:35:04 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/15-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/telling-a-story.html" target="_blank" rel="noopener">Chapter 29: Telling a story and making a point&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
-&lt;/ul>
-&lt;!-- ### Guiding questions -->
-&lt;!-- - When is web scraping useful? -->
-&lt;!-- - What is html? -->
-&lt;!-- - What is the difference between client-side and server-side web scraping? -->
-&lt;!-- ### Slides -->
-&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
-&lt;!--
--->
-&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item><item><title>Web scraping</title><link>https://aem2850.toddgerarden.com/content/14-content/</link><pubDate>Mon, 02 May 2022 21:59:40 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/14-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;/ul></description></item><item><title>Web scraping</title><link>https://aem2850.toddgerarden.com/content/14-content/</link><pubDate>Mon, 02 May 2022 21:59:40 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/14-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://rvest.tidyverse.org/articles/rvest.html" target="_blank" rel="noopener">Web scraping 101&lt;/a> from &lt;code>vignette(&amp;quot;rvest&amp;quot;)&lt;/code>&lt;/li>
 &lt;/ul>
