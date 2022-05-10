@@ -60,9 +60,7 @@
 </ol>
 <p>Write the memo with a non-technical supervisor in mind—someone who will be more interested in your approach and findings than the code you wrote. But don’t forget the importance of clearly communicating key steps when the source code is not included in the primary deliverable!</p>
 <p><strong>Do not include your source code in the memo</strong> unless you think it is crucial for communicating your methods or findings. You can avoid printing the code in all the chunks in a document by including a code chunk with the following global option at the start of the .Rmd file (but below the yaml header):</p>
-<blockquote>
-<pre><code>knitr::opts_chunk$set(echo = FALSE)</code></pre>
-</blockquote>
+<pre><code>  knitr::opts_chunk$set(echo = FALSE)</code></pre>
 <p>Follow R Markdown etiquette rules and style that we introduced throughout the semester in labs—don’t output extraneous messages or warnings, use nice formatting for tables, and adjust the dimensions for your figures as needed. Some of this can be achieved by modifying code chunk options (see lab solutions for examples).</p>
 <p>You might want to customize your memo, for example by including section headings and a table of contents for clarity. <a href="https://bookdown.org/yihui/rmarkdown/pdf-document.html">This site</a> provides a summary of some basic options for PDF documents you may find helpful. You can also consult <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf">the rmarkdown cheat sheet</a>.</p>
 </div>
