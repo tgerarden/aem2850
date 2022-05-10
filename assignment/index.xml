@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Assignment overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/assignment/</link><atom:link href="https://aem2850.toddgerarden.com/assignment/index.xml" rel="self" type="application/rss+xml"/><description>Assignment overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 06 May 2022 13:10:38 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Assignment overview</title><link>https://aem2850.toddgerarden.com/assignment/</link></image><item><title>Week 15</title><link>https://aem2850.toddgerarden.com/assignment/15-lab/</link><pubDate>Fri, 06 May 2022 13:10:38 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/15-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Assignment overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/assignment/</link><atom:link href="https://aem2850.toddgerarden.com/assignment/index.xml" rel="self" type="application/rss+xml"/><description>Assignment overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 09 May 2022 21:05:52 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Assignment overview</title><link>https://aem2850.toddgerarden.com/assignment/</link></image><item><title>Week 15</title><link>https://aem2850.toddgerarden.com/assignment/15-lab/</link><pubDate>Fri, 06 May 2022 13:10:38 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/15-lab/</guid><description>&lt;h2 id="reflection">Reflection&lt;/h2>
 &lt;p>The reflection this week is a short survey on canvas.&lt;/p>
 &lt;p>Please complete it by Wednesday at 11:59pm.&lt;/p>
 &lt;h2 id="lab">Lab&lt;/h2>
@@ -80,7 +80,7 @@
 &lt;p>You can access this week&amp;rsquo;s readings and guiding questions using the &lt;a href="https://aem2850.toddgerarden.com/schedule" target="_blank" rel="noopener">class schedule&lt;/a> under the &amp;ldquo;Content&amp;rdquo; tag.&lt;/p>
 &lt;h2 id="lab-2">Lab 2&lt;/h2>
 &lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3532414" target="_blank" rel="noopener">Click here to access the RStudio Cloud Project for this week&amp;rsquo;s lab and follow the instructions in the file &lt;code>lab-02.Rmd&lt;/code>.&lt;/a>&lt;/p></description></item><item><title>Week 1</title><link>https://aem2850.toddgerarden.com/assignment/01-lab/</link><pubDate>Thu, 03 Feb 2022 21:48:15 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/01-lab/</guid><description>&lt;h2 id="lab-1">Lab 1&lt;/h2>
-&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3486884" target="_blank" rel="noopener">Click here to access the RStudio Cloud Project for this week&amp;rsquo;s lab and follow the instructions in the file &lt;code>lab-01.Rmd&lt;/code>.&lt;/a>&lt;/p></description></item><item><title>Final project</title><link>https://aem2850.toddgerarden.com/assignment/final-project/</link><pubDate>Mon, 02 May 2022 11:58:47 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/final-project/</guid><description>&lt;p>You&amp;rsquo;ve made it to the end of our whirlwind intro to R programming! Way to go!&lt;/p>
+&lt;p>&lt;a href="https://rstudio.cloud/spaces/210747/project/3486884" target="_blank" rel="noopener">Click here to access the RStudio Cloud Project for this week&amp;rsquo;s lab and follow the instructions in the file &lt;code>lab-01.Rmd&lt;/code>.&lt;/a>&lt;/p></description></item><item><title>Final project</title><link>https://aem2850.toddgerarden.com/assignment/final-project/</link><pubDate>Mon, 09 May 2022 21:05:52 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/final-project/</guid><description>&lt;p>You&amp;rsquo;ve made it to the end of our whirlwind intro to R programming! Way to go!&lt;/p>
 &lt;p>Now you get to show off all the tools you learned with an insightful and informative analysis of your own construction. For your final project, you will take a dataset, explore it, tinker with it, and use it to tell a nuanced story or produce a useful product.&lt;/p>
 &lt;p>I want this project to be as useful for you and your future career as possible, so you get to choose what data you use (within reason). I&amp;rsquo;ve linked to some suggested business datasets below, but you are welcome (and encouraged!) to look for other datasets that you are interested in.&lt;/p>
 &lt;h2 id="summary-of-key-steps-and-timeline">Summary of key steps and timeline&lt;/h2>
@@ -90,7 +90,7 @@
 &lt;p>Find some interesting data to work with! Ideally this would be related to business. &lt;a href="https://aem2850.toddgerarden.com/resource/data/">Here is a list of suggested data sources&lt;/a>. Any data we have used in the class is also fair game, though you would need to do something new and different with it.&lt;/p>
 &lt;p>Or you might want to start by sketching out a project idea and then thinking through how to get the necessary data. &lt;a href="#examples">See below for a list of example project ideas&lt;/a>.&lt;/p>
 &lt;p>Either way you approach it, you need to figure out both your data and plan at this stage and then submit a few sentences describing them on canvas.&lt;/p>
-&lt;p>&lt;strong>Note:&lt;/strong> You will be expected to use programming and data visualization skills we have developed throughout class. In addition, &lt;strong>you are required to use at least one of the following special topics we covered in the last part of the semester&lt;/strong>:&lt;/p>
+&lt;p>&lt;strong>Note:&lt;/strong> You are expected to use programming and data visualization skills we have developed throughout class. In addition, &lt;strong>you are required to use at least one of the following special topics we covered in the last part of the semester&lt;/strong>:&lt;/p>
 &lt;ul>
 &lt;li>space&lt;/li>
 &lt;li>text&lt;/li>
@@ -101,7 +101,60 @@
 &lt;h3 id="step-3-execute-your-plan">Step 3. Execute your plan&lt;/h3>
 &lt;p>Teamwork makes the dream work.&lt;/p>
 &lt;h3 id="step-4-submit-your-final-project-by-thursday-may-19-at-430pm">Step 4. Submit your final project by Thursday, May 19 at 4:30pm&lt;/h3>
-&lt;p>One submission per group.&lt;/p>
+&lt;p>Upload the following files to canvas once for each group:&lt;/p>
+&lt;ol>
+&lt;li>Your memo &lt;strong>in PDF format&lt;/strong> (see full instructions below).&lt;/li>
+&lt;li>A &lt;strong>.zip file&lt;/strong> of your project directory that is self-contained: the .Rmd source file, .RProj, data files, etc. I should be able to open your project and knit your document with one click.&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>No late work will be accepted for this project since the final project counts as your final and the deadline is set by the university.&lt;/strong>&lt;/p>
+&lt;p>We will use &lt;a href="final-project-rubric.xlsx">this rubric&lt;/a> to grade the final product.&lt;/p>
+&lt;h2 id="instructions">Instructions&lt;/h2>
+&lt;p>Use R to:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Download&lt;/strong> a dataset and explore it using all the tools and tricks we learned in lectures, examples, and labs throughout the semester.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Find&lt;/strong> a story in the data. This could include patterns in the data like relationships and changes over time that could be visualized. Relationships could also be summarized using linear regression. You could build a prediction mdoel using OLS, ridge, or lasso. Alternatively, you could focus on analysis and visualization of spatial or textual data.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Create&lt;/strong> multiple graphs to tell the story. You must use at least &lt;strong>three&lt;/strong> different chart &lt;em>types&lt;/em> (i.e., don&amp;rsquo;t just make three scatterplots or three maps).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Write&lt;/strong> a PDF memo using R Markdown to introduce your project, provide background on your data and the data cleaning process, and describe your figure and findings. You should include the following sections in the memo:&lt;/p>
+&lt;ul>
+&lt;li>Executive summary&lt;/li>
+&lt;li>Data description&lt;/li>
+&lt;li>Data cleaning description&lt;/li>
+&lt;li>Analysis description&lt;/li>
+&lt;li>Findings&lt;/li>
+&lt;/ul>
+&lt;p>Do not include your source code in the memo unless you think it is crucial for communicating your methods or findings. Write the memo with a non-technical supervisor in mind—someone who will be more interested in your approach and findings than the code you wrote. But don&amp;rsquo;t forget the importance of clearly communicating key steps when the source code is not included in the primary deliverable!&lt;/p>
+&lt;p>Follow R Markdown etiquette rules and style that we introduced throughout the semester in labs—don&amp;rsquo;t output extraneous messages or warnings, use nice formatting for tables, and adjust the dimensions for your figures as needed.&lt;/p>
+&lt;p>You might want to customize your memo, for example by including section headings and a table of contents for clarity. &lt;a href="https://bookdown.org/yihui/rmarkdown/pdf-document.html" target="_blank" rel="noopener">This site&lt;/a> provides a summary of some basic options for PDF documents you may find helpful.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="grading-rubric">Grading rubric&lt;/h2>
+&lt;p>We will use &lt;a href="final-project-rubric.xlsx">this rubric&lt;/a> to grade the final product.&lt;/p>
+&lt;h2 id="reminders">Reminders&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>Don&amp;rsquo;t forget to utilize your teaching staff! You can email us or set up appointments to get help. Prof. Gerarden has posted extra office hours by appointment at &lt;a href="https://aem2850.youcanbook.me" target="_blank" rel="noopener">aem2850.youcanbook.me&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Part of your individual grade will be based on your contribution to the group.&lt;/strong> I will conduct an anonymous peer-review survey to help assess each person&amp;rsquo;s contribution.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>You will be graded on both the content and its presentation.&lt;/strong> Follow best practices from class and readings when making visuals. Make each graphic clear and comprehensible (even on its own). When writing text to summarize your work and discuss takeaways, please be concise.&lt;/p>
+&lt;p>To drive home the importance of presentation, here are some lessons learned from making COVID data dashboards (&lt;a href="https://flowingdata.com/2022/04/06/lessons-learned-from-making-covid-dashboards/" target="_blank" rel="noopener">source&lt;/a>):&lt;/p>
+&lt;blockquote>
+&lt;p>Among the shared themes for the dashboards were simplicity and clarity. Whether you are producing visuals and analytical tools for policymakers or for the public, Blauer says, the same rules of thumb apply. “Don’t overcomplicate your visualization, make the conclusions as clear as possible, and speak in the most basic of plain-language terms,” she says.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>Yet, as other data scientists point out, presenting data simply might not be enough to ensure viewers get the message. For one thing, attention to detail matters. Ritchie recalls how she and her team spent hours focused on the titles and subtitles of charts, “because that is ultimately what most people will look at”. And in those titles and subtitles, the analysts made sure to specify ‘confirmed’ deaths or ‘confirmed’ cases. “An emphasis on ‘confirmed’ is really important because we know that it’s an underestimate of the total,” says Ritchie. “It might seem very basic, but it’s really crucial to how you understand the data and the scale of the pandemic.”&lt;/p>
+&lt;/blockquote>
+&lt;/li>
+&lt;/ul>
 &lt;h2 id="examples">Example project ideas&lt;/h2>
 &lt;p>We do not have any examples from past years sine this class is brand new. Here is a list of off-the-cuff project ideas to give you a sense of the scope of the project and range of possibilities. You are welcome to use one of these, but that is not expected or required.&lt;/p>
 &lt;ul>
@@ -110,37 +163,7 @@
 &lt;li>Use twitter data to study the relationship between a company&amp;rsquo;s twitter activity (e.g., tweets, mentions, etc.) and some performance metric (e.g., excess daily returns in the stock market).&lt;/li>
 &lt;li>Construct a prediction model for future stock (or index) price movements based on past movements.&lt;/li>
 &lt;li>Develop a pricing strategy you would use if you were in charge of a specific product, and provide a sophisticated and compelling rationale for your strategy that is grounded in data.&lt;/li>
-&lt;/ul>
-&lt;h2 id="instructions">Instructions&lt;/h2>
-&lt;p>More detailed instructions will be posted here soon!&lt;/p>
-&lt;!-- Here's what you'll need to do: -->
-&lt;!-- 1. **Download** a dataset and explore it using all the tools and tricks we learned in lectures, examples, and labs throughout the semester -->
-&lt;!-- 2. **Find** a story in the data. This could include patterns in the data like relationships and changes over time that could be visualized. Relationships could also be summarized using linear regression. You could build a prediction mdoel using OLS, ridge, or lasso. Alternatively, you could focus on analysis and visualization of spatial or textual data.-->
-&lt;!-- 3. Use R to **create** multiple graphs to tell the story. You can make as many graphs as you want, but you must use at least **three** different chart types (i.e. don't just make three scatterplots or three maps). -->
-&lt;!-- 4. Export these figures as PDF files, place them in Adobe Illustrator (or InDesign or Gravit Designer or Inkscape), and **make** one combined graphic or handout where you tell the complete story. You have a lot of latitude in how you do this. You can make a graphic-heavy one-page handout. You can make something along the lines of the [this](https://www.wired.co.uk/article/nuclear-power-reactors-global), with one big graphic + smaller subgraphics + explanatory text. Just don't make a [goofy infographic](https://medium.com/@kazarnowicz/why-infographics-are-bad-3a2fa49673e2). Whatever you do, the final figure must include all the graphics, must have some explanatory text to help summarize the narrative, and must be well designed. -->
-&lt;!-- 5. **Export** the final graphic from Illustrator as a PDF and a PNG. -->
-&lt;!-- 6. **Write** a memo using R Markdown to introduce, frame, and describe your story and figure. [Use this template to get started](/files/your_name_finalproject.Rmd). You should include the following in the memo: -->
-&lt;!-- - Executive summary -->
-&lt;!-- - Background information and summary of the data -->
-&lt;!-- - Explanation, description, and code for each individual figure -->
-&lt;!-- - Explanation and description for the final figure -->
-&lt;!-- - Final figure should be included as an image (remember `![Caption goes here](path/to/file.png)`) -->
-&lt;!-- Remember to follow R Markdown etiquette rules and style—don't have it output extraneous messages or warnings, include summary tables in nice tables, adjust the dimensions for your figures, and remove the placeholder text that's in the template already (i.e. I don't want to see stuff like "Describe and show how you cleaned and reshaped the data" in the final report.) -->
-&lt;!-- **You should [download a full example of what a final project might look like](/projects/example_final.zip)** (but don't make your final combined visualization look exactly like this—show some creativity!) -->
-&lt;!-- ## Final deliverables -->
-&lt;!-- Upload the following files to canvas: -->
-&lt;!-- 1. A memo introducing and describing your final graphic (see full instructions above) -->
-&lt;!-- 2. A standalone PDF of your graphic exported from Illustrator -->
-&lt;!-- 3. A standalone PNG of your graphic exported from Illustrator -->
-&lt;!-- **No late work will be accepted for this project since it's the last project and it counts as your final.** -->
-&lt;!-- I will use [this rubric](/files/final-project-rubric.xlsx) to grade the final product: -->
-&lt;!-- - [&lt;i class="fas fa-file-excel">&lt;/i> `final-project-rubric.xlsx`](/files/final-project-rubric.xlsx) -->
-&lt;!-- I am happy to give feedback and help along the way—please don't hesitate to get help! My goal is for you to have a beautiful graphic in the end that you'll want to show off to all your friends, family, neighbors, employers, and strangers on the street—I'm not trying to trip you up or give you trick questions! -->
-&lt;!-- And that's it. **You're done!** Go out into the world now and make beautiful, insightful, and truthful graphics. -->
-&lt;!-- ## Expectations -->
-&lt;!-- Details to come soon. -->
-&lt;!-- Here I will add some stuff about how presentation matters, etc. etc. -->
-&lt;!-- Build off guidance and also grading of mini project 1 --></description></item><item><title>Mini project 1</title><link>https://aem2850.toddgerarden.com/assignment/01-mini-project/</link><pubDate>Wed, 09 Mar 2022 09:58:40 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/01-mini-project/</guid><description>&lt;h1 id="overview">Overview&lt;/h1>
+&lt;/ul></description></item><item><title>Mini project 1</title><link>https://aem2850.toddgerarden.com/assignment/01-mini-project/</link><pubDate>Wed, 09 Mar 2022 09:58:40 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/01-mini-project/</guid><description>&lt;h1 id="overview">Overview&lt;/h1>
 &lt;p>In this project, we will use tools from the tidyverse to wrangle and visualize data for firms in the S&amp;amp;P 500. In practice, if you were to use R for investment research in industry, you would want to use additional packages such as &lt;code>quantmod&lt;/code> and &lt;code>PerformanceAnalytics&lt;/code> that provide specialized functions to process and visualize financial data. We do not have time to go into the details of these packages in this course, but this project should give you a taste of how R can be used in financial modeling.&lt;/p>
 &lt;h1 id="details">Details&lt;/h1>
 &lt;p>Full instructions are posted in &lt;a href="https://canvas.cornell.edu/courses/38623/assignments/348809" target="_blank" rel="noopener">this canvas assignment&lt;/a> and in each group&amp;rsquo;s RStudio Cloud project.&lt;/p></description></item></channel></rss>
