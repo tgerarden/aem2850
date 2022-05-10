@@ -1,6 +1,6 @@
 ---
 title: "Final project"
-date: "2022-05-09 21:42:42"
+date: "2022-05-10 09:02:24"
 due_date: "2022-05-19"
 due_time: "4:30 PM"
 menu:
@@ -64,9 +64,9 @@ Use R to:
 
 1. **Download** a dataset and explore it using all the tools and tricks we learned in lectures, examples, and labs throughout the semester.
 
-2. **Find** a story in the data. This could include patterns in the data like relationships and changes over time that could be visualized. Relationships could also be summarized using linear regression. You could build a prediction mdoel using OLS, ridge, or lasso. Alternatively, you could focus on analysis and visualization of spatial or textual data.
+2. **Analyze** the data according to your plan. This could include finding patterns in the data like relationships and changes over time that could be visualized and/or summarized using linear regression. You could build a prediction model using OLS, ridge, or lasso. Alternatively, you could focus on analysis and visualization of spatial or textual data. You could build a tool to guide investment strategy or evaluate firm performance. etc. etc.
 
-3. **Create** multiple graphs to tell the story. You must use at least **three** different chart *types* (i.e., don't just make three scatterplots or three maps).
+3. **Create** multiple graphs to illustrate your analysis. You must use at least **three** different chart *types* (i.e., don't just make three scatter plots or three maps).
 
 4. **Write** a PDF memo using R Markdown to introduce your project, provide background on your data and the data cleaning process, and describe your figure and findings. You should include the following sections in the memo:
 

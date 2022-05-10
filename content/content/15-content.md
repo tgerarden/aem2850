@@ -1,7 +1,7 @@
 ---
 title: "Conclusion"
 linktitle: "Conclusion"
-date: "2022-05-09 21:35:04"
+date: "2022-05-10 09:08:23"
 menu:
   content:
     parent: Course content
@@ -9,7 +9,7 @@ menu:
 type: docs
 # bibliography: "../../static/bib/references.bib"
 # csl: "../../static/bib/chicago-fullnote-bibliography-no-bib.csl"
-# slides: "15-slides"
+slides: "15-slides"
 
 output:
   blogdown::html_page:
@@ -19,6 +19,7 @@ output:
 
 ### Readings
 - <i class="fas fa-book"></i> [Chapter 29: Telling a story and making a point](https://clauswilke.com/dataviz/telling-a-story.html) of *Fundamentals of Data Visualization*
+- <i class="fas fa-external-link-square-alt"></i> [Why People Make Bad Charts (and What to Do When it Happens)](https://flowingdata.com/2018/06/28/why-people-make-bad-charts-and-what-to-do-when-it-happens/)
 
 
 <!-- ### Guiding questions -->
@@ -27,11 +28,11 @@ output:
 <!-- - What is the difference between client-side and server-side web scraping? -->
 
 
-<!-- ### Slides -->
+### Slides
 
-<!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
 
-<!-- {{< blogdown/slide-buttons >}} -->
+{{< blogdown/slide-buttons >}}
 
-<!-- **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands. -->
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.
 
