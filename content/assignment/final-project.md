@@ -1,6 +1,6 @@
 ---
 title: "Final project"
-date: "2022-05-10 15:31:45"
+date: "2022-05-12 09:41:59"
 due_date: "2022-05-19"
 due_time: "4:30 PM"
 menu:
@@ -95,7 +95,7 @@ We will use [this rubric](final-project-rubric.xlsx) to grade the final product.
 
 
 ## Reminders
-- **Don't forget to utilize your teaching staff!** You can email us or set up appointments to get help. Grad TA Hui will have office hours from 1-3pm on Friday, May 13. Prof. Gerarden has posted extra office hours by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me).
+- **Don't forget to utilize your teaching staff!** You can email us or set up appointments to get help. Grad TA Hui will have office hours from 2-4pm on Friday, May 13. Prof. Gerarden has posted extra office hours by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me).
 - **Part of your individual grade will be based on your contribution to the group.** I will conduct an anonymous peer-review survey to help assess each person's contribution.
 - **You will be graded on both the content and its presentation.** Follow best practices from class and readings when making visuals. Make each graphic clear and comprehensible (even on its own). When writing text to summarize your work and discuss takeaways, please be concise.
 
