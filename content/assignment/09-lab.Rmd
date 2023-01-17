@@ -8,7 +8,7 @@ output:
     toc: false
     fig_caption: false
 menu:
-  examples:
+  assignment:
     parent: Assignments
     weight: 1
 type: docs

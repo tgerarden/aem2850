@@ -33,12 +33,6 @@ content:
   - name: Course content
     weight: 2
 
-lesson:
-  - name: Overview
-    weight: 1
-  - name: Lessons
-    weight: 2
-
 example:
   - name: Overview
     weight: 1
@@ -48,13 +42,13 @@ example:
 assignment:
   - name: Overview
     weight: 1
-  - name: Projects
+  - name: Assignments
     weight: 2
-  - name: Exercises
+  - name: Projects
     weight: 3
 
 resource:
-  - name: Resources
-    weight: 1
   - name: Guides
+    weight: 1
+  - name: Resources
     weight: 2

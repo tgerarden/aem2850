@@ -7,7 +7,8 @@ menu:
 type: docs
 weight: 1
 output:
-  blogdown::html_page
+  blogdown::html_page:
+    toc: true
 ---
 
 ### Readings
