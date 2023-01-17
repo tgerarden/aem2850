@@ -5,18 +5,18 @@ main:
   - name: Schedule
     url: /schedule/
     weight: 2
-  - name: Content
-    url: /content/
-    weight: 3
+#  - name: Content
+#    url: /content/
+#    weight: 3
 #  - name: Lessons
 #    url: /lesson/
 #    weight: 4
-  - name: Examples
-    url: /example/
-    weight: 5
-  - name: Assignments
-    url: /assignment/
-    weight: 6
+#  - name: Examples
+#    url: /example/
+#    weight: 5
+#  - name: Assignments
+#    url: /assignment/
+#    weight: 6
   - name: Resources
     url: /resource/
     weight: 7

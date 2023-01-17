@@ -17,7 +17,7 @@ Welcome to AEM 2850! I'd like to preface the syllabus with three points:
 
 1. **Your success in this class is important to me.** These are difficult times, and I am committed to making appropriate accommodations that meet your needs and that also allow you to complete the requirements of this course. My goal is for you to learn everything you want to learn in this class.
 
-2. **This course is a work in progress.** This is its first offering. This means you have a unique opportunity to help improve the class for yourself as well as for future students. Please take advantage of it! The best way to provide constructive feedback is by emailing me and/or the TA.
+2. **This course is a work in progress.** This is its second offering. This means you have a unique opportunity to help improve the class for yourself as well as for future students. Please take advantage of it! The best way to provide constructive feedback is by emailing me and/or the TAs.
 
 3. Get the semester off to a good start: **[read the syllabus](https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy)**!
 
@@ -32,7 +32,7 @@ Welcome to AEM 2850! I'd like to preface the syllabus with three points:
 
 ### Class
 
-Tuesdays and Thursdays 9:40 - 10:55 in Warren 150
+Tuesdays and Thursdays 9:40 - 10:55 in Warren B50
 
 ### My office hours
 
@@ -44,12 +44,12 @@ Tuesdays and Thursdays 9:40 - 10:55 in Warren 150
 
 #### Graduate TA: Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
 
-- Mondays 1:30pm - 3:30pm in Warren 372
+<!-- - Mondays 1:30pm - 3:30pm in Warren 372 -->
 
-#### Undergraduate TA: Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu))
+<!-- #### Undergraduate TA: Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu)) -->
 
-- Mondays 12:20pm - 1:20pm in Warren 372
-- Fridays 10:00am - 11:00am in Warren 372
+<!-- - Mondays 12:20pm - 1:20pm in Warren 372 -->
+<!-- - Fridays 10:00am - 11:00am in Warren 372 -->
 
 See below for tips on how to make the most of office hours and email.
 
@@ -70,10 +70,7 @@ After taking this course, students will have the tools to complete basic tasks i
 5.	Utilize course concepts and tools for business applications
 
 ### Prerequisites
-- AEM 2010, AEM 2011, or equivalent (Spreadsheet Modeling)
-- AEM 2100 or equivalent (Introductory Statistics)
-
-OR instructor’s approval
+- AEM 2010, AEM 2011, or equivalent (Spreadsheet Modeling) is helpful but not required
 
 <!-- ## Class Notes -->
 <!-- Enrollment preference given to Dyson students in the Business Analytics concentration. Non-Dyson students require permission of instructor. -->
@@ -151,7 +148,7 @@ Finally, there are some excellent tutorials on R available through [Rstudio Clou
 
 ## Success in this course
 
-I *promise* you can succeed in this class.
+I *know* you can succeed in this class.
 
 Learning R can be difficult at first—it's like learning a new language, just like Spanish, French, or Chinese. Hadley Wickham—the chief data scientist at RStudio and the author of some amazing R packages you'll be using like `ggplot2`—[made this wise observation](https://r-posts.com/advice-to-young-and-old-programmers-a-conversation-with-hadley-wickham/): 
 
@@ -159,12 +156,12 @@ Learning R can be difficult at first—it's like learning a new language, just l
 
 Even experienced programmers find themselves bashing their heads against seemingly intractable errors. If you're finding yourself taking way too long hitting your head against a wall and not understanding, take a break, talk to classmates, email me and the TAs, etc. 
 
-<img src="images/horst_error_tweet.png" width="80%" /><img src="images/gator_error.jpg" width="80%" />
+<img src="images/horst_error_tweet.png" width="75%" /><img src="images/gator_error.jpg" width="75%" />
 
 
 ## Course schedule
 
-The [schedule page](/schedule/) provides an overview of the topics we will cover. *Note:* the schedule will inevitably change throughout the semester as we develop the course together.
+The [schedule page](/schedule/) provides an overview of the topics we will cover. *Note:* the schedule will inevitably change throughout the semester as we go.
 
 
 ## Office hours and email
@@ -179,7 +176,7 @@ Office hours are set times dedicated to you.
  <!-- (most professors call these "office hours"; I don't^[There's fairly widespread misunderstanding about what office hours actually are! [Many students often think that they are the times I *shouldn't* be disturbed](https://www.chronicle.com/article/Can-This-Man-Change-How-Elite/245714/), which is the exact opposite of what they're for!]) -->
 This means that I or a TA will be in an office and/or on zoom neeting waiting for you to talk to us about whatever questions you have. This is the best and easiest way to find us and the best chance for discussing class material and concerns.
 
-I highly encourage you to utilize Professor and TA office hours, especially if you have trouble with basic `R` programming. [Times and locations are listed at the top of the syllabus](#zoom-links).
+I highly encourage you to utilize Professor and TA office hours, especially if you have trouble with basic `R` programming. [Times and locations are listed at the top of the syllabus](#meeting-times-and-locations).
 
 #### Email
 
@@ -200,13 +197,13 @@ Email is a blessing and a curse. Here are some tips to help us get the most out 
 
 ## Learning during a pandemic
 
-Life sucks right now. You probably aren't having the college experience of your dreams, to say the least.
+<!-- Life sucks right now. You probably aren't having the college experience of your dreams, to say the least. -->
 
 <!-- You most likely know people who have lost their jobs, have tested positive for COVID-19, have been hospitalized, or perhaps have even died. You all have increased (or possibly decreased) work responsibilities and increased family care responsibilities—you might be caring for extra people (young and/or old) right now, and you are likely facing uncertain job prospects. -->
 
 **I am fully committed to making sure that you learn everything you are hoping to learn from this class.** I will make whatever accommodations I can to help you finish your assignments, do well on your projects, and learn and understand the class material.
 
-If you need extra help, or if you need more time with something, or if you feel like you're behind or not understanding everything, **do not suffer in silence!** Talk to me! I will work with you. **I promise.** If you tell me you're having trouble, I will not judge you or think less of you. I hope you'll extend me the same grace.
+If you need extra help, or if you need more time with something, or if you feel like you're behind or not understanding everything, **do not suffer in silence!** Talk to me! I will work with you. If you tell me you're having trouble, I will not judge you or think less of you. I hope you'll extend me the same grace.
 
 You *never* owe me personal information about your health (mental or physical). But you are *always* welcome to talk to me about things you're going through. Even if I can't help you, I may know someone who can.
 
@@ -231,6 +228,8 @@ I want you to learn a lot in this class (R! the tidyverse! grammer of graphics!)
 ## Assignments and grading
 
 ### Assignments
+
+#### NOTE: THIS SECTION IS FROM SPRING 2022. IT WILL BE UPDATED SOON TO REFLECT CHANGES FOR SPRING 2023.
 
 Your grade in this course will be based on weekly reflections, labs, projects:
 
