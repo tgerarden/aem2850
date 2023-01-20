@@ -1,5 +1,5 @@
 ---
-title: "Welcome to AEM 2850!"
+title: "Welcome to AEM 2850 / 5850!"
 author: "Todd Gerarden"
 # acknowledgements: Andrew Heiss
 output:
@@ -43,15 +43,15 @@ xaringanExtra::use_xaringan_extra(c("tile_view"))
 
 class: center middle main-title section-title-4
 
-# Welcome to AEM 2850!
+# Welcome to AEM 2850 / 5850!
 
 .class-info[
 
 **Week 1**
 
-AEM 2850: R for Business Analytics<br>
+AEM 2850 / 5850 : R for Business Analytics<br>
 Cornell Dyson<br>
-Spring 2022
+Spring 2023
 
 Acknowledgements:
 [Andrew Heiss](https://datavizm20.classes.andrewheiss.com), 
@@ -67,15 +67,15 @@ class: title title-inv-7
 
 # Plan for today
 
-.box-1.medium.sp-after-half[Why take R for Business Analytics?]
+[Why take R for Business Analytics?](#r-business-analytics)
 
-.box-7.medium[Summary of key class details]
+[Summary of key class details](#class-details)
 
-.box-2.medium.sp-after-half[Facts, truth, and beauty]
+[Facts, truth, and beauty](#facts-truth-beauty)
 
-.box-3.medium.sp-after-half[Data, truth, and beauty]
+[Data, truth, and beauty](#data-truth-beauty)
 
-.box-6.medium.sp-after-half[Beautiful visualizations]
+[Beautiful visualizations](#beautiful-visualizations)
 
 
 
@@ -178,6 +178,46 @@ Practical tool that could help you get a job and then do said job
 
 --
 
+.pull-left.center[
+
+<figure>
+  <img src="img/01/airbnb.png" alt="Airbnb's data science tools" title="Airbnb's data science tools" width="100%">
+</figure>
+
+.small[[Airbnb, ggplot, and rmarkdown](https://peerj.com/preprints/3182/)]
+
+]
+
+.pull-right.center[
+
+&nbsp;
+
+<figure>
+  <img src="img/01/uk-long.png" alt="UK Statistics pipeline" title="UK Statistics pipeline" width="100%">
+</figure>
+
+<figure>
+  <img src="img/01/uk-short.png" alt="UK Statistics pipeline, short" title="UK Statistics pipeline, short" width="55%">
+</figure>
+
+.small[[The UK's reproducible analysis pipeline](https://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/)]
+
+]
+
+???
+
+https://peerj.com/preprints/3182.pdf + https://gdsdata.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/ 
+
+
+
+
+
+---
+
+# Why R for Life?
+
+Practical tool that could help you get a job and then do said job
+
 Open source
 
 --
@@ -232,7 +272,7 @@ class: title title-7
 
 # A bit about you
 
-Do you have any programming experience? (zoom poll)
+Do you have any programming experience?
 
 --
 
@@ -300,11 +340,11 @@ annotations, time, space, telling stories with data
 
 We will follow the same general process each week:
 
-- Do readings listed on the before Tuesday ([example: Week 1](https://aem2850.toddgerarden.com/content/01-content/))
+- Do readings listed on the course site before Tuesday ([example: Week 1](https://aem2850.toddgerarden.com/content/01-content/))
 
 - **Tuesday:** come to class, where I will summarize material for that week's topic
 
-- **Wednesday:** submit reflection on canvas by 11:59pm (starting with Week 2)
+- **Wednesday:** submit reflection on canvas by 11:59pm (starting with Week 2) **maybe -- TBD!**
 
 - **Thursday:** come to class, where we will work through hands-on examples
 
@@ -318,12 +358,12 @@ We will follow the same general process each week:
 
 We will have frequent, short assignments to develop and cement new skills.
 
-No prelims, no final exam.
-
 .pull-left[
-- **Reflections** are short weekly writing assignments, intended as an easy way to get points and a nudge to engage with readings
+<!-- - **Reflections** are short weekly writing assignments, intended as an easy way to get points and a nudge to engage with readings -->
 
 - **Labs** are short weekly homework assignments that require you to practice programming
+
+- **Prelims** are intended to assess programming and data visualization proficiency
 
 - **Projects** are intended to synthesize and reinforce individual skills, and to provide examples of their application to business and life more generally
 ]
@@ -344,7 +384,7 @@ assignments <- tribble(
 ```
 
 .pull.right[
-```{r show-assignments-table, echo=FALSE, results="asis"}
+```{r show-assignments-table, echo=FALSE, results="asis", eval=FALSE}
 library(knitr)
 bind_rows(assignments) %>%
   dplyr::select(Assignment, Points, Percent) %>% 
@@ -358,13 +398,15 @@ bind_rows(assignments) %>%
 
 ### Office hours:
 
-- Mondays  1:30pm - 3:30pm: TA Hui Zhou at [cornell.zoom.us/j/4786955504](https://cornell.zoom.us/j/4786955504?pwd=VitTc1hVSjJSVXovWGJlRG9VQm5TZz09)
-- Tuesdays 11:00am - 12:00pm: Prof. Gerarden using [the class zoom link](https://cornell.zoom.us/j/98464434953?pwd=VDJuR0RhckttSTBJVVBqUXhDT3FxUT09)
+- TAs: TBD
+<!-- - Grad TA Hui Zhou: Mondays 1:30pm - 3:30pm in Warren TBD -->
+<!-- - Undergrad TAs: TBD -->
+- Tuesdays 11:00am - 12:00pm: Prof. Gerarden in Warren 466
 - Other times by appointment: Prof. Gerarden, at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
 ### Email:
 
-You can also reach us by email. The best approach is to email both of us at the same time. You can do that with one click [here](mailto:gerarden@cornell.edu,hz423@cornell.edu). Please read the syllabus for tips on how to make the most of email.
+You can also reach us by email. The best approach is to email both me and Hui at the same time. You can do that with one click [here](mailto:gerarden@cornell.edu,hz423@cornell.edu). Please read the syllabus for tips on how to make the most of email.
 
 
 ---
@@ -375,7 +417,7 @@ You can also reach us by email. The best approach is to email both of us at the 
 [aem2850.toddgerarden.com](https://aem2850.toddgerarden.com)
 
 ### Site for submitting work: (↑)
-[canvas.cornell.edu/courses/38623](https://canvas.cornell.edu/courses/38623)
+[canvas.cornell.edu/courses/50706](https://canvas.cornell.edu/courses/50706)
 - viewing announcements
 - viewing grades
 - for convenience, you can also view and navigate the course site through canvas (Home, Syllabus)
@@ -405,7 +447,6 @@ You can also reach us by email. The best approach is to email both of us at the 
 ---
 
 layout: false
-name: class-questions
 class: center middle section-title section-title-2 animated fadeIn
 
 # Questions about the class?
@@ -831,13 +872,13 @@ ggplot(tibble(x = c(0, 70)), aes(x = x)) +
 
 ### Office hours:
 
-- Tuesdays 11:00am - 12:00pm: Prof. Gerarden using [the class zoom link](https://cornell.zoom.us/j/98464434953?pwd=VDJuR0RhckttSTBJVVBqUXhDT3FxUT09)
+- Tuesdays 11:00am - 12:00pm: Prof. Gerarden in Warren 466
 - Other times by appointment: Prof. Gerarden, at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
 ### Thursday:
 
 - Intro to `R`, `RStudio`, and `RMarkdown`
 - You will need your computer for coding exercises
-- Keep an eye out for a canvas announcement with instructions for getting set up on [RStudio.cloud](http://rstudio.cloud/)
+- See canvas announcement for instructions to get set up on [posit.cloud](http://posit.cloud/) (formerly rstudio.cloud)
 
 

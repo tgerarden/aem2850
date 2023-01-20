@@ -47,9 +47,9 @@ class: center middle main-title section-title-4
 
 **Week 6**
 
-AEM 2850: R for Business Analytics<br>
+AEM 2850 / 5850 : R for Business Analytics<br>
 Cornell Dyson<br>
-Spring 2022
+Spring 2023
 
 Acknowledgements: 
 [Andrew Heiss](https://datavizm20.classes.andrewheiss.com), 
@@ -91,50 +91,6 @@ class: inverse, center, middle
 name: prologue
 
 # Prologue
-
----
-
-# R Markdown in real life
-
-.pull-left.center[
-
-<figure>
-  <img src="img/06/airbnb.png" alt="Airbnb's data science tools" title="Airbnb's data science tools" width="100%">
-</figure>
-
-.small[[Airbnb, ggplot, and rmarkdown](https://peerj.com/preprints/3182/)]
-
-]
-
-.pull-right.center[
-
-&nbsp;
-
-<figure>
-  <img src="img/06/uk-long.png" alt="UK Statistics pipeline" title="UK Statistics pipeline" width="100%">
-</figure>
-
-<figure>
-  <img src="img/06/uk-short.png" alt="UK Statistics pipeline, short" title="UK Statistics pipeline, short" width="55%">
-</figure>
-
-.small[[The UK's reproducible analysis pipeline](https://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/)]
-
-]
-
-???
-
-https://peerj.com/preprints/3182.pdf + https://gdsdata.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/ 
-
-
-
-
-
-
-
-
-
-
 
 
 ---

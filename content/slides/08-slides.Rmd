@@ -50,9 +50,9 @@ class: center middle main-title section-title-4
 
 **Week 8**
 
-AEM 2850: R for Business Analytics<br>
+AEM 2850 / 5850 : R for Business Analytics<br>
 Cornell Dyson<br>
-Spring 2022
+Spring 2023
 
 Acknowledgements: 
 [Andrew Heiss](https://datavizm20.classes.andrewheiss.com)
