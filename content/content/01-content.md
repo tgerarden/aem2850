@@ -1,7 +1,7 @@
 ---
 title: "Welcome to AEM 2850 / 5850!"
 linktitle: "Welcome to AEM 2850 / 5850!"
-date: "`r format(Sys.time())`"
+date: "2023-01-20 15:30:55"
 menu:
   content:
     parent: Course content

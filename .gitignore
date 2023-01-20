@@ -7,6 +7,12 @@ public/
 jsconfig.json
 node_modules/
 
+# site customization
+layouts/_default/
+layouts/partials/docs_sidebar.html
+layouts/partials/docs_toc_foot.html
+layouts/partials/menu.html
+
 # personal
 .DS_Store
 .Rproj.user

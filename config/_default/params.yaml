@@ -62,11 +62,11 @@ teaching_assistant:
   email: hz423@cornell.edu
 
 course:
-  number: "AEM 2850"
+  number: "AEM 2850 / 5850"
   semester: "Spring 2023"
   days: "Tuesdays and Thursdays"
   time: "9:40am - 10:55am"
-  location: "Warren B50"
+  location: "Warren 150"
   dates: "January – May, 2023"
   copyrightYear: "2023"
 #  slack: "https://join.slack.com/t/msu-qs62738/shared_invite/zt-10u63bf0n-b0cePmz9NDhhw3MSUPBP5A"

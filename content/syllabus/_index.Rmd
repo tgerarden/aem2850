@@ -18,13 +18,13 @@ library(pander)
 library(knitr)
 ```
 
-Welcome to AEM 2850! I'd like to preface the syllabus with three points:
+Welcome to AEM 2850 / AEM 5850! I'd like to preface the syllabus with three points:
 
-1. **Your success in this class is important to me.** These are difficult times, and I am committed to making appropriate accommodations that meet your needs and that also allow you to complete the requirements of this course. My goal is for you to learn everything you want to learn in this class.
+1. **Your success in this class is important to me.** I am committed to making appropriate accommodations that meet your needs and that also allow you to complete the requirements of this course. My goal is for you to learn everything you want to learn in this class.
 
-2. **This course is a work in progress.** This is its second offering. This means you have a unique opportunity to help improve the class for yourself as well as for future students. Please take advantage of it! The best way to provide constructive feedback is by emailing me and/or the TAs.
+2. **This course is a work in progress.** This is its second offering. This means you have a unique opportunity to help improve the class for yourself as well as for future students. Please take advantage of it! The best way to provide constructive feedback throughout the semester is by emailing me and/or the TAs.
 
-3. Get the semester off to a good start: **[read the syllabus](https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy)**!
+3. **Get the semester off to a good start:** **[read the syllabus](https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy)**!
 
 
 
@@ -37,7 +37,7 @@ Welcome to AEM 2850! I'd like to preface the syllabus with three points:
 
 ### Class
 
-Tuesdays and Thursdays 9:40 - 10:55 in Warren B50
+Tuesdays and Thursdays 9:40 - 10:55 in Warren 150
 
 ### My office hours
 
@@ -49,9 +49,10 @@ Tuesdays and Thursdays 9:40 - 10:55 in Warren B50
 
 #### Graduate TA: Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
 
+Office hours TBD
 <!-- - Mondays 1:30pm - 3:30pm in Warren 372 -->
 
-<!-- #### Undergraduate TA: Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu)) -->
+<!-- #### Undergraduate TAs: Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu)) -->
 
 <!-- - Mondays 12:20pm - 1:20pm in Warren 372 -->
 <!-- - Fridays 10:00am - 11:00am in Warren 372 -->
@@ -74,7 +75,8 @@ After taking this course, students will have the tools to complete basic tasks i
 4.	Construct effective data visualizations
 5.	Utilize course concepts and tools for business applications
 
-### Prerequisites
+### Prerequisites:
+- There are none! This is introductory programming course
 - AEM 2010, AEM 2011, or equivalent (Spreadsheet Modeling) is helpful but not required
 
 <!-- ## Class Notes -->
@@ -138,11 +140,18 @@ RStudio.cloud is convenient, but it can be slow and it is not designed to be abl
 
 Programming can be difficult. Little errors in your code can cause hours of headache, even if you've been coding for years.
 
-Fortunately there are tons of online resources to help you with this. Two of the most important are [StackOverflow](https://stackoverflow.com/) (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and [RStudio Community](https://community.rstudio.com/) (a forum specifically designed for people using RStudio and the `tidyverse—that's you!).
+<!-- Fortunately there are tons of online resources to help you with this. Two of the most important are [StackOverflow](https://stackoverflow.com/) (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and [RStudio Community](https://community.rstudio.com/) (a forum specifically designed for people using RStudio and the `tidyverse—that's you!). -->
+
+Fortunately there are tons of online resources to help you with this. Three of the most important are:
+1. [StackOverflow](https://stackoverflow.com/): a Q&A site with tons of answers to all sorts of programming questions
+2. [RStudio Community](https://community.rstudio.com/): a forum specifically for RStudio and the `tidyverse` (that's you!)
+3. [ChatGPT](https://chat.openai.com): an AI-powered chatbot that can help debug code (among other things)
+
+All three of these tools, and others, are valuable resources that can help you learn and work. That said, they can also provide misleading or incorrect answers. I encourage you to use them as tools for debugging your code, not as replacements for you and your developing expertise.[^1]
 
 <!-- If you use Twitter, post R-related questions and content with [#rstats](https://twitter.com/search?q=%23rstats). The community there is exceptionally generous and helpful. -->
 
-Searching for help with R on Google can sometimes be tricky because the program name is, ya know, the letter R. Google is generally smart enough to figure out what you mean when you search for "r scatterplot", but if it does struggle, try searching for "rstats" instead (e.g., "rstats scatterplot"). Also, since most of your R work will deal with `tidyverse` packages like `ggplot2`, it's often easier to use those keywords instead of the letter "r" (e.g., "ggplot scatterplot"). 
+Searching for help with R online can sometimes be tricky because the program name is, ya know, the letter R. Search engines are generally smart enough to figure out what you mean when you search for "r scatterplot", but if it does struggle, try searching for "rstats" instead (e.g., "rstats scatterplot"). Also, since most of your R work will deal with `tidyverse` packages like `ggplot2`, it's often easier to use those keywords instead of the letter "r" (e.g., "ggplot scatterplot"). 
 
 Finally, there are some excellent tutorials on R available through [Rstudio Clould Primers](https://rstudio.cloud/learn/primers).
 
@@ -161,7 +170,7 @@ Learning R can be difficult at first—it's like learning a new language, just l
 
 Even experienced programmers find themselves bashing their heads against seemingly intractable errors. If you're finding yourself taking way too long hitting your head against a wall and not understanding, take a break, talk to classmates, email me and the TAs, etc. 
 
-```{r echo=FALSE, out.width="75%"}
+```{r echo=FALSE, out.width="70%"}
 # https://twitter.com/allison_horst/status/1213275783675822080
 knitr::include_graphics("images/horst_error_tweet.png", error = FALSE)
 knitr::include_graphics("images/gator_error.jpg", error = FALSE)
@@ -236,23 +245,27 @@ I want you to learn a lot in this class (R! the tidyverse! grammer of graphics!)
 
 ## Assignments and grading
 
-### Assignments
+#### NOTE: THIS SECTION WILL BE UPDATED SOON WITH CHANGES FOR SPRING 2023.
 
-#### NOTE: THIS SECTION IS FROM SPRING 2022. IT WILL BE UPDATED SOON TO REFLECT CHANGES FOR SPRING 2023.
+### Assignments
 
 Your grade in this course will be based on weekly reflections, labs, projects:
 
-- **Reflections** are short weekly writing assignments. They are intended as an easy way to get some points and a nudge to engage with readings.
+<!-- - **Reflections** are short weekly writing assignments. They are intended as an easy way to get some points and a nudge to engage with readings. -->
 
 - **Labs** are short weekly homework assignments that require you to practice programming.
 
+- **Prelims** are intended to assess programming and data visualization proficiency.
+
 - **Projects** are intended to synthesize and reinforce the individual skills you develop in class, and to provide examples of their application to business and life more generally.
+
+**Note: Students in AEM 5850** will have to complete a few extra assignments and meet slightly different requirements for the projects.
 
 <!-- **Class participation** can take many forms. The best form of participation is active participation during class. When we are on zoom you can do this using the zoom chat and hand-raising with camera and mic on. The bare minimum can best be described as “showing your presence and having some engagement” – questions typed in chat and questions posed after class count towards participation. To encourage some form of participation, I will often pose questions to the class. -->
 
 Please read [the assignments page](/assignment/) for more details on the assignments and their underlying rationale.
 
-Each type of assignment will contribute to the final grade as follows:
+<!-- Each type of assignment will contribute to the final grade as follows: -->
 
 ```{r assignments-grades, include=FALSE}
 assignments <- tribble(
@@ -269,7 +282,7 @@ assignments <- tribble(
 ```
 
 
-```{r show-assignments-table, echo=FALSE, results="asis"}
+```{r show-assignments-table, echo=FALSE, results="asis", eval=FALSE}
 assignments_total <- tibble(Assignment = "Total",
                             Points = sum(assignments$Points),
                             Percent = "100%")
@@ -341,3 +354,7 @@ This site and many of the course materials build on the course [Data Visualizati
 <!-- Once you have read this entire syllabus and [the assignments page](/assignment/), please [click here](mailto:gerarden@cornell.edu) and email me a picture of a *cute* Star Wars character.^[Baby Yoda, Babu Frik, porgs, etc. are all super fair game.] Brownie points if it's animated.  -->
 
 <!-- `r blogdown::shortcode("figure", src = "https://media.giphy.com/media/j4q4h9uWKWwnYT1k3Z/giphy.gif", alt = "Baby Yoda with IG-11", lightbox = "false")` -->
+
+[^1]: In economics jargon, you should view these tools as complements rather than substitutes to your labor. 
+
+<!-- If you think new and future tools like ChatGPT are going to be good substitutes for your labor, you probably don't think employers will demand the skills you are developing in this course, so you might as well drop it. -->

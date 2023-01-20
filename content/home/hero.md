@@ -20,7 +20,7 @@ design:
     text_color_light: true
 
 cta_note:
-  label: AEM 2850<br>Spring 2023<br>Dyson School of Applied Economics and Management<br>Cornell University
+  label: AEM 2850 / 5850<br>Spring 2023<br>Dyson School of Applied Economics and Management<br>Cornell University
 ---
 
 ****
