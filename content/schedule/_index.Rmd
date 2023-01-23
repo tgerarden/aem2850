@@ -39,7 +39,6 @@ You should follow this general process each week:
 
 - Do readings listed on the content page before Tuesday
 - Tuesday: come to class
-<!-- - Wednesday: submit reflection on canvas by 11:59pm (starting with Week 2) -->
 - Thursday: come to class, where we will work through examples
 - Work on the lab before the next Tuesday's class, attending [office hours](/syllabus/#meeting-times-and-locations) as needed
 - Monday: submit lab on canvas by 11:59pm

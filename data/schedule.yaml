@@ -60,6 +60,11 @@ lessons:
     header: False
 
 
+  - title: '<i class="fas fa-star"></i> **Prelim 1**'
+    date: "TBD"
+    # assignment: "final-project"
+    bg: 3
+
   - title: '<span class="content-title">Amounts</span>'
     # and Proportions
     session: "Session 6"
@@ -110,11 +115,6 @@ lessons:
     # example: "10-example"
     # assignment: "10-lab"
     bg: 2
-
-  - title: '<i class="fas fa-star"></i> **Prelim 1**'
-    date: "TBD"
-    # assignment: "final-project"
-    bg: 3
 
 #  - title: '<i class="fas fa-star"></i> **Mini project 1 due**'
 #    date: "April 1"
