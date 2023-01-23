@@ -19,8 +19,6 @@ You will get the most of out this class if you:
 Each type of assignment in this class helps with one of these strategies.
 
 
-#### NOTE: The exact assignment details and grade weights for Spring 2023 are still TBD.
-
 <!-- ### Reflections -->
 
 <!-- To encourage engagement with the course content, you'll need to write a ≈150 word reflection about the readings and lectures for the day. That's fairly short: there are ≈250 words on a typical double-spaced page in Microsoft Word (500 when single-spaced).  -->
