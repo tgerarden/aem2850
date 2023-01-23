@@ -36,7 +36,8 @@ Spring 2023
 
 Acknowledgements:
 [Andrew Heiss](https://datavizm20.classes.andrewheiss.com), 
-[Claus Wilke](https://wilkelab.org/SDS375/)
+[Claus Wilke](https://wilkelab.org/SDS375/), 
+[Laurent Bergé](https://sites.google.com/site/laurentrberge/)
 &lt;!-- [Grant McDermott](https://github.com/uo-ec607/lectures) --&gt;
 
 ]
@@ -50,11 +51,13 @@ class: title title-inv-7
 
 [Why take R for Business Analytics?](#r-business-analytics)
 
+[Introductions](#intros)
+
 [Summary of key class details](#class-details)
 
-[Facts, truth, and beauty](#facts-truth-beauty)
+[Teaser example](#teaser)
 
-[Data, truth, and beauty](#data-truth-beauty)
+&lt;!-- [Data, truth, and beauty](#data-truth-beauty) --&gt;
 
 [Beautiful visualizations](#beautiful-visualizations)
 
@@ -199,6 +202,22 @@ https://peerj.com/preprints/3182.pdf + https://gdsdata.blog.gov.uk/2017/03/27/re
 
 Practical tool that could help you get a job and then do said job
 
+.center[
+
+&lt;figure&gt;
+  &lt;img src="img/01/hilton-hackathon.jpg" alt="Hilton Hospitality Hackathon at Cornell" title="Hilton Hospitality Hackathon at Cornell" width="85%"&gt;
+&lt;/figure&gt;
+
+**Or start making money now!**
+
+]
+
+---
+
+# Why R for Life?
+
+Practical tool that could help you get a job and then do said job
+
 Open source
 
 --
@@ -217,6 +236,93 @@ Here are a few examples of other things you can do using R:
 
 
 
+
+---
+
+layout: false
+name: intros
+class: center middle section-title section-title-7 animated fadeIn
+
+# Introductions
+
+---
+
+layout: true
+class: title title-7
+
+---
+
+# A bit about me
+
+.pull-left[.center[
+&lt;figure&gt;
+  &lt;img src="img/01/me.jpg" alt="my kids" title="my kids" width="85%"&gt;
+&lt;/figure&gt;
+]]
+
+.pull-right[
+- Prof. Todd Gerarden
+
+- Economist
+
+- Joined Cornell in 2018
+
+- Interested in:
+  - Renewable energy policy
+  - Energy innovation
+  - Working with data
+]
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # A bit about our Graduate TA Hui Zhou --&gt;
+
+---
+
+# A bit about you
+
+Do you have any programming experience?
+
+--
+
+First course assignment will be to fill out a survey to tell us more about you
+
+
+---
+
+# Self-introductions
+
+.pull-left[
+1. Name: 
+  - 
+
+2. Where you're from:
+  - 
+  
+3. One other thing about you:
+  - 
+]
+
+---
+
+# Self-introductions
+
+.pull-left[
+1. Name: 
+  - Todd Gerarden
+
+2. Where you're from:
+  - Virginia, USA
+  
+3. One other thing about you:
+  - I rode a bicycle across the country
+]
+
+.pull-right[
+&lt;figure&gt;
+  &lt;img src="img/01/my-kids.jpg" alt="my kids" title="my kids" width="100%"&gt;
+&lt;/figure&gt;
+]
 
 ---
 
@@ -240,24 +346,6 @@ class: title title-7
 2. This course is a work in progress
 
 3. Get the semester off to a good start: **[read the syllabus](https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy)**!
-
----
-
-# A bit about me
-
----
-
-# A bit about our Graduate TA Hui Zhou
-
----
-
-# A bit about you
-
-Do you have any programming experience?
-
---
-
-First course assignment will be to use `RMarkdown` to fill out a survey to tell us more about you
 
 ---
 
@@ -325,8 +413,6 @@ We will follow the same general process each week:
 
 - **Tuesday:** come to class, where I will summarize material for that week's topic
 
-- **Wednesday:** submit reflection on canvas by 11:59pm (starting with Week 2) **maybe -- TBD!**
-
 - **Thursday:** come to class, where we will work through hands-on examples
 
 - Work on the lab before the next Tuesday’s class, attending office hours as needed
@@ -337,8 +423,6 @@ We will follow the same general process each week:
 
 # Assignments
 
-We will have frequent, short assignments to develop and cement new skills.
-
 .pull-left[
 &lt;!-- - **Reflections** are short weekly writing assignments, intended as an easy way to get points and a nudge to engage with readings --&gt;
 
@@ -346,7 +430,11 @@ We will have frequent, short assignments to develop and cement new skills.
 
 - **Prelims** are intended to assess programming and data visualization proficiency
 
-- **Projects** are intended to synthesize and reinforce individual skills, and to provide examples of their application to business and life more generally
+- The **group project** is intended to synthesize and reinforce skills in real-world applications
+
+- **Class participation** is the best way to learn the material, attendance is expected
+
+Students in AEM 5850 will complete extra assignments
 ]
 
 
@@ -354,6 +442,14 @@ We will have frequent, short assignments to develop and cement new skills.
 
 .pull.right[
 
+|Assignment          | Percent|
+|:-------------------|-------:|
+|Labs                |     35%|
+|Prelim 1            |     20%|
+|Prelim 2            |     20%|
+|Group project       |     20%|
+|Class participation |      5%|
+|Total               |    100%|
 ]
 
 ---
@@ -418,10 +514,10 @@ class: center middle section-title section-title-2 animated fadeIn
 ---
 
 layout: false
-name: facts-truth-beauty
+name: teaser
 class: center middle section-title section-title-2 animated fadeIn
 
-# Facts, truth, and beauty
+# Teaser example
 
 ---
 
@@ -430,124 +526,9 @@ class: title title-2
 
 ---
 
-# What is truth?
-
---
-
-.box-inv-2.medium[Core principles of the universe?]
-
---
-
-.box-inv-2.medium[Underlying trends in society?]
-
---
-
-.box-inv-2.medium[Something transcendental?]
-
---
-
-.box-inv-2.medium[Reality?]
-
----
-
-# How do we find truth?
-
---
-
-.box-inv-2.medium[Science!]
-
-.center[
-&lt;figure&gt;
-  &lt;img src="img/01/ndgt-scientism.png" alt="Neil deGrasse Tyson on science" title="Neil deGrasse Tyson on science" width="70%"&gt;
-&lt;/figure&gt;
-]
-
-???
-
-[Original tweet](https://twitter.com/neiltyson/status/345551599382446081)
-
----
-
-# But wait!
-
-.box-inv-2.medium.sp-after[Beware of scientism!]
-
-.box-2["… promotion of science as the best or only objective means by which society should determine normative and epistemological values"]
-
-???
-
-[Wikipedia](https://en.wikipedia.org/wiki/Scientism)
-
----
-
-# Science is not the only way
-
-.box-inv-2.medium[Art]
-
-.box-inv-2.medium[Music]
-
-.box-inv-2.medium[Literature]
-
-.box-inv-2.medium[Religion]
-
-.box-inv-2.medium[Nature]
-
-???
-
-None of these methods deal with raw facts, though!
-
----
-
-# In chat: Name one thing that is not factual…
-
-.box-inv-2[…but still reveals truth]
-
---
-
-&lt;br&gt;
-
-.pull-left[
-&lt;figure&gt;
-  &lt;img src="img/01/the-office.png" alt="the office" title="the office" width="100%"&gt;
-&lt;/figure&gt;
-]
-
---
-
-.pull-right[
-&lt;figure&gt;
-  &lt;img src="img/01/sour.png" alt="sour" title="sour" width="100%"&gt;
-&lt;/figure&gt;
-]
-
-???
-
-Sources: 
-
-- [the office](https://commons.wikimedia.org/wiki/File:The_Office_US_logo.svg)
-- [sour](https://commons.wikimedia.org/wiki/File:Sour_album_logo.png)
-
----
-
-layout: true
-class: title title-2
-
----
-
-# What does this have to do with AEM 2850?
-
-.box-inv-2.medium[Truth does not require science or facts]
-
-Facts alone do not necessarily reveal truth
-
-.box-inv-2.medium.sp-after[Truth comes from aesthetic combination of **content** and **form**]
-
-There is no single ideal combination of **content** and **form** for all **audiences**
-
-Keep this in mind as a guiding principle for analyzing, visualizing, and communicating data
+# How does this winter compare to last winter?
 
 
-&lt;!-- .box-2.medium[Facts require beauty to be true] --&gt;
 
 ---
 
@@ -561,6 +542,20 @@ class: center middle section-title section-title-3 animated fadeIn
 
 layout: true
 class: title title-3
+
+&lt;!-- --- --&gt;
+
+&lt;!-- # What does this have to do with AEM 2850? --&gt;
+
+&lt;!-- .box-inv-2.medium[Truth does not require science or facts] --&gt;
+
+&lt;!-- Facts alone do not necessarily reveal truth --&gt;
+
+&lt;!-- .box-inv-2.medium.sp-after[Truth comes from aesthetic combination of **content** and **form**] --&gt;
+
+&lt;!-- There is no single ideal combination of **content** and **form** for all **audiences** --&gt;
+
+&lt;!-- Keep this in mind as a guiding principle for analyzing, visualizing, and communicating data --&gt;
 
 ---
 
