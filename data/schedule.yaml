@@ -111,6 +111,11 @@ lessons:
     # assignment: "10-lab"
     bg: 2
 
+  - title: '<i class="fas fa-star"></i> **Prelim 1**'
+    date: "TBD"
+    # assignment: "final-project"
+    bg: 3
+
 #  - title: '<i class="fas fa-star"></i> **Mini project 1 due**'
 #    date: "April 1"
 #    # assignment: "01-mini-project"
@@ -182,7 +187,7 @@ lessons:
     # assignment: "15-lab"
     bg: 1
 
-#  - title: '<i class="fas fa-star"></i> **Final project due during exam period**'
-#    date: "May 19 at 4:30PM"
-#    # assignment: "final-project"
-#    bg: 3
+  - title: '<i class="fas fa-star"></i> **Prelim 2**'
+    date: "May 9 at 9:40AM"
+    # assignment: "final-project"
+    bg: 3

@@ -137,10 +137,10 @@ Programming can be difficult. Little errors in your code can cause hours of head
 
 <!-- Fortunately there are tons of online resources to help you with this. Two of the most important are [StackOverflow](https://stackoverflow.com/) (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and [RStudio Community](https://community.rstudio.com/) (a forum specifically designed for people using RStudio and the `tidyverse—that's you!). -->
 
-Fortunately there are tons of online resources to help you with this. Three of the most important are:
+Fortunately there are tons of online resources to help you with this. Two of the most important are:
 1. [StackOverflow](https://stackoverflow.com/): a Q&A site with tons of answers to all sorts of programming questions
 2. [RStudio Community](https://community.rstudio.com/): a forum specifically for RStudio and the `tidyverse` (that's you!)
-3. [ChatGPT](https://chat.openai.com): an AI-powered chatbot that can help debug code (among other things)
+<!-- 3. [ChatGPT](https://chat.openai.com): an AI-powered chatbot that can help debug code (among other things) -->
 
 All three of these tools, and others, are valuable resources that can help you learn and work. That said, they can also provide misleading or incorrect answers. I encourage you to use them as tools for debugging your code, not as replacements for you and your developing expertise.[^1]
 
@@ -246,11 +246,14 @@ Your grade in this course will be based on weekly reflections, labs, projects:
 
 - **Labs** are short weekly homework assignments that require you to practice programming.
 
-- **Prelims** are intended to assess programming and data visualization proficiency.
+- **Prelims** are intended to assess programming and data visualization proficiency. Prelims will be completed in class.
 
-- **Projects** are intended to synthesize and reinforce the individual skills you develop in class, and to provide examples of their application to business and life more generally.
+- The **group project** is intended to synthesize and reinforce the individual skills you develop in class, and to provide examples of their application to business and life more generally.
 
-**Note: Students in AEM 5850** will have to complete a few extra assignments and meet slightly different requirements for the projects.
+- **Class participation** and regular attendance is expected. Excessive absences and failure to complete weekly in-class examples will impact your final grade. There is no penalty for the first three absences (except for the in-class prelims, which are mandatory). If you miss class, you are still expected to complete the in-class examples for any classes that you miss. You do not need to notify the instructor that you will miss class unless you anticipate missing more than three classes.
+<!-- is intended to synthesize and reinforce the individual skills you develop in class, and to provide examples of their application to business and life more generally. -->
+
+**Note: Students in AEM 5850** will have to complete a few extra assignments and meet slightly different requirements for the project.
 
 <!-- **Class participation** can take many forms. The best form of participation is active participation during class. When we are on zoom you can do this using the zoom chat and hand-raising with camera and mic on. The bare minimum can best be described as “showing your presence and having some engagement” – questions typed in chat and questions posed after class count towards participation. To encourage some form of participation, I will often pose questions to the class. -->
 
@@ -262,6 +265,14 @@ Please read [the assignments page](/assignment/) for more details on the assignm
 
 
 
+|Assignment          | Percent|
+|:-------------------|-------:|
+|Labs                |     35%|
+|Prelim 1            |     20%|
+|Prelim 2            |     20%|
+|Group project       |     20%|
+|Class participation |      5%|
+|Total               |    100%|
 
 
 
@@ -269,10 +280,10 @@ Please read [the assignments page](/assignment/) for more details on the assignm
 
 | Grade | Range     | Grade | Range  | Grade | Range |
 |:-----:|:---------:|:-----:|:------:|:-----:|:-----:|
-| A+    | :unicorn: | A     | 92-100 | A-    | 90-91 |
-| B+    | 88-89     | B     | 82-87  | B-    | 80-81 |
-| C+    | 78-79     | C     | 72-77  | C-    | 70-71 |
-| D+    | 68-69     | D     | 62-67  | D-    | 60-61 |
+| A+    | :unicorn: | A     | 93-100 | A-    | 90-92 |
+| B+    | 87-89     | B     | 83-86  | B-    | 80-82 |
+| C+    | 77-79     | C     | 73-76  | C-    | 70-72 |
+| D+    | 67-69     | D     | 63-66  | D-    | 60-62 |
 | F     | <60       |       |        |       |       |
 
 
