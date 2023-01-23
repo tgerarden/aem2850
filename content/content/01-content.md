@@ -1,7 +1,7 @@
 ---
 title: "Welcome to AEM 2850 / 5850!"
 linktitle: "Welcome to AEM 2850 / 5850!"
-date: "2023-01-20 15:30:55"
+date: "2023-01-23 13:49:53"
 menu:
   content:
     parent: Course content
@@ -21,7 +21,7 @@ output:
 
 - [Read the syllabus](/syllabus/)
 - [Review the schedule](/schedule/)
-- [Read the assignments overview](/assignment/) (but note the details are subject to change!)
+- [Read the assignments overview](/assignment/)
 - <i class="fas fa-book"></i> [Skim the introduction](https://r4ds.had.co.nz/introduction.html) of *R for Data Science*
 - <i class="fas fa-book"></i> [Read chapter 27: R Markdown](https://r4ds.had.co.nz/r-markdown.html) of *R for Data Science*
 - <i class="fas fa-book"></i> [Skim chapter 1, through section 1.2](http://socviz.co/lookatdata.html) of *Data Visualization*

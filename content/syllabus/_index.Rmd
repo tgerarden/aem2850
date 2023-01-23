@@ -259,7 +259,7 @@ Your grade in this course will be based on weekly reflections, labs, projects:
 
 - The **group project** is intended to synthesize and reinforce the individual skills you develop in class, and to provide examples of their application to business and life more generally.
 
-- **Class participation** and regular attendance is expected. Excessive absences and failure to complete weekly in-class examples will impact your final grade. There is no penalty for the first three absences (except for the in-class prelims, which are mandatory). If you miss class, you are still expected to complete the in-class examples for any classes that you miss. You do not need to notify the instructor that you will miss class unless you anticipate missing more than three classes.
+- **Class participation** and regular attendance are expected. Excessive absences and failure to complete weekly in-class examples will impact your final grade. There is no penalty for the first three absences (except for the in-class prelims, which are mandatory). If you miss class, you are still expected to complete the in-class examples for any classes that you miss. You do not need to notify the instructor that you will miss class unless you anticipate missing more than three classes.
 
 **Note: Students in AEM 5850** will have to complete a few extra assignments and meet slightly different requirements for the project.
 
