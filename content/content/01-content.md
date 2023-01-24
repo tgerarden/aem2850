@@ -1,7 +1,7 @@
 ---
 title: "Welcome to AEM 2850 / 5850!"
 linktitle: "Welcome to AEM 2850 / 5850!"
-date: "2023-01-23 21:04:55"
+date: "2023-01-23 22:41:44"
 menu:
   content:
     parent: Course content
@@ -46,10 +46,10 @@ output:
 
 ### Teaser data
 
-Download the following files and follow the instructions from the slides:
-- [Weather stations in NY](/ny-stations.csv)
-- [Weather in NY in 2022](/ny-weather-2022.csv)
-- [Weather in NY in 2023](/ny-weather-2023.csv)
+Click the links to download the following files and then follow the instructions from the slides:
+- [Weather stations in NY](/slides/data/01-slides/ny-stations.csv)
+- [Weather in NY in 2022](/slides/data/01-slides/ny-weather-2022.csv)
+- [Weather in NY in 2023](/slides/data/01-slides/ny-weather-2023.csv)
 
 
 <!-- ### Slides -->
