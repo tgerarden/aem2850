@@ -70,8 +70,6 @@ class: title title-inv-7
 
 [Why take R for Business Analytics?](#r-business-analytics)
 
-[Introductions](#intros)
-
 [Summary of key class details](#class-details)
 
 [Teaser example](#teaser)
@@ -79,6 +77,8 @@ class: title title-inv-7
 [Just show me the data!](#show-me-the-data)
 
 [What makes a great visualization?](#beautiful-visualizations)
+
+[Self-introductions (time permitting)](#intros)
 
 
 ---
@@ -88,17 +88,6 @@ name: r-business-analytics
 class: center middle section-title section-title-2 animated fadeIn
 
 # Why take R for Business Analytics?
-
----
-
-# Why take R for Business Analytics?
-
-<br>
-
-.center[
-<img src = "img/01/Data_science_venn.svg", width = 60%></img>
-]
-
 
 ---
 
@@ -251,100 +240,10 @@ Here are a few examples of other things you can do using R:
 - Make interactive web apps
 - Much, much more
 
-
-
-
-
----
-
-layout: false
-name: intros
-class: center middle section-title section-title-7 animated fadeIn
-
-# Introductions
-
----
-
-layout: true
-class: title title-7
-
----
-
-# A bit about me
-
-.pull-left[.center[
-<figure>
-  <img src="img/01/me.jpg" alt="my kids" title="my kids" width="85%">
-</figure>
-]]
-
-.pull-right[
-- Prof. Todd Gerarden
-
-- Economist
-
-- Joined Cornell in 2018
-
-- Interested in:
-  - Renewable energy policy
-  - Innovation in energy tech
-  - Working with data
-]
-
-<!-- --- -->
-
-<!-- # A bit about our Graduate TA Hui Zhou -->
-
----
-
-# A bit about you
-
-Do you have any programming experience?
-
 --
 
-First course assignment will be to fill out a survey to tell us more about you
+Skills you develop in this course can also be used for other programming languages
 
---
-
-Today we'll do some brief self-introductions
-  - Goal is to foster a collaborative environment: Who's my professor? Who's in my class?
-
----
-
-# Self-introductions
-
-.pull-left[
-1. Name: 
-  - 
-
-2. Where you're from:
-  - 
-  
-3. One other thing about you:
-  - 
-]
-
----
-
-# Self-introductions
-
-.pull-left[
-1. Name: 
-  - Todd Gerarden
-
-2. Where you're from:
-  - Virginia, USA
-  
-3. One other thing about you:
-  - I rode a bicycle across the country
-]
-
-.pull-right[
-<figure>
-  <img src="img/01/my-kids.jpg" alt="my kids" title="my kids" width="100%">
-</figure>
-]
 
 ---
 
@@ -368,6 +267,72 @@ class: title title-7
 2. This course is a work in progress
 
 3. Get the semester off to a good start: **[read the syllabus](https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy)**!
+
+
+---
+
+# A bit about me
+
+.pull-left[.center[
+<figure>
+  <img src="img/01/me.jpg" alt="my kids" title="my kids" width="85%">
+</figure>
+]]
+
+.pull-right[
+- Prof. Todd Gerarden
+
+- Economist
+
+- Joined Cornell in 2018
+
+- Interested in:
+  - Renewable energy
+  - Innovation in energy tech
+  - Working with data
+]
+
+---
+
+# A bit about our TAs
+
+### Graduate TA
+
+Hui Zhou
+
+### Undergraduate TAs
+
+Sophie McComb
+
+Jonathan Gotian
+
+**We will post office hours and contact information on the course site and canvas**
+
+
+---
+
+# A bit about you
+
+Do you have any programming experience? (None is required or even expected!)
+
+--
+
+What programming language(s) have you used before?
+- R
+- Python
+- SQL
+- VBA
+- MATLAB
+- Stata
+- Other
+
+--
+
+First course assignment will be to fill out a survey to tell us more about you
+
+--
+
+We'll also do brief self-introductions at the end of class today if time permits
 
 ---
 
@@ -582,7 +547,7 @@ Feel free to work in small groups
 
 # How does 2023 compare to 2022 so far?
 
-Prep data:
+One way to do this in R. First, we'll need to import and prep the data:
 
 ```{r ithaca-weather-data}
 library(tidyverse); library(lubridate)
@@ -620,6 +585,8 @@ cornell_temps |>
   geom_point() + 
   theme_bw()
 ```
+
+What's wrong with this plot?
 ]
 
 .pull-right[
@@ -641,6 +608,8 @@ cornell_temps |>
   theme_bw() +
   theme(legend.position = "bottom") #<<
 ```
+
+What's wrong with this plot?
 ]
 
 .pull-right[
@@ -666,6 +635,10 @@ cornell_temps |>
        y = "Max. daily temperature (F)",  #<<
        color = "Year") #<<
 ```
+
+Two advantages of this approach are:
+1. we have a script to **reproduce** our work / share our methods with others
+2. we could **generalize** and **scale** this much more easily than manual work in excel (for example)
 ]
 
 .pull-right[
@@ -676,7 +649,7 @@ cornell_temps |>
 
 # How does 2023 compare to 2022 so far?
 
-We can easily imagine generalizing this approach to other years, months, outcomes, etc.
+For example we can **generalize** this approach to other weather outcomes:
 
 .pull-left[
 ```{r ithaca-weather-plot4, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
@@ -698,7 +671,7 @@ cornell_temps |>
   ![](`r knitr::fig_chunk("ithaca-weather-plot4", "png")`)
 ]
 
-Note: the NOAA data are published with a slight lag so this does not reflect snow since last week
+Note: NOAA publishes data with a slight lag so this does not reflect snow since last week
 
 
 ---
@@ -768,7 +741,7 @@ my_data <- dozen %>%
   select(x, y)
 ```
 
---
+**Here's another example:**
 
 .pull-left-3[
 ```{r head-datasaurus}
@@ -1026,6 +999,25 @@ ggplot(tibble(x = c(0, 70)), aes(x = x)) +
 
 ---
 
+# What's wrong? What's right?
+
+Plot of recent COVID levels in Ithaca Area wastewater
+
+.center[
+<figure>
+  <img src="img/01/covid-plot.png" alt="COVID in wastewater" title="COVID in wastewater" width="100%">
+</figure>
+]
+
+???
+
+- Aesthetic issues
+- Substantive issues
+- Perceptual issues
+- Honesty + judgment issues
+
+---
+
 # Plan for the rest of this week
 
 ### Office hours:
@@ -1039,4 +1031,60 @@ ggplot(tibble(x = c(0, 70)), aes(x = x)) +
 - You will need your computer for coding exercises
 - See canvas announcement for instructions to get set up on [posit.cloud](http://posit.cloud/) (formerly rstudio.cloud)
 
+
+---
+
+layout: false
+name: intros
+class: center middle section-title section-title-7 animated fadeIn
+
+# Introductions
+
+---
+
+layout: true
+class: title title-7
+
+---
+
+# Self-introductions
+
+Today we'll do some brief self-introductions
+  - Goal is to foster a collaborative environment: Who's my professor? Who's in my class?
+
+---
+
+# Self-introductions
+
+.pull-left[
+1. Name: 
+  - 
+
+2. Where you're from:
+  - 
+  
+3. One other thing about you:
+  - 
+]
+
+---
+
+# Self-introductions
+
+.pull-left[
+1. Name: 
+  - Todd Gerarden
+
+2. Where you're from:
+  - Virginia, USA
+  
+3. One other thing about you:
+  - I rode a bicycle across the country
+]
+
+.pull-right[
+<figure>
+  <img src="img/01/my-kids.jpg" alt="my kids" title="my kids" width="100%">
+</figure>
+]
 
