@@ -1,7 +1,7 @@
 ---
 title: "Welcome to AEM 2850 / 5850!"
 linktitle: "Welcome to AEM 2850 / 5850!"
-date: "2023-01-23 13:49:53"
+date: "2023-01-23 21:04:55"
 menu:
   content:
     parent: Course content
@@ -42,6 +42,14 @@ output:
 - Wait, should I read the syllabus? ([here's a hint](https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy))
 - Why do we visualize data?
 - What makes a great visualization?
+
+
+### Teaser data
+
+Download the following files and follow the instructions from the slides:
+- [Weather stations in NY](/ny-stations.csv)
+- [Weather in NY in 2022](/ny-weather-2022.csv)
+- [Weather in NY in 2023](/ny-weather-2023.csv)
 
 
 <!-- ### Slides -->

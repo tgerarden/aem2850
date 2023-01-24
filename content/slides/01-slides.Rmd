@@ -76,10 +76,9 @@ class: title title-inv-7
 
 [Teaser example](#teaser)
 
-[Data, truth, and beauty](#data-truth-beauty)
+[Just show me the data!](#show-me-the-data)
 
-[Beautiful visualizations](#beautiful-visualizations)
-
+[What makes a great visualization?](#beautiful-visualizations)
 
 
 ---
@@ -288,7 +287,7 @@ class: title title-7
 
 - Interested in:
   - Renewable energy policy
-  - Energy innovation
+  - Innovation in energy tech
   - Working with data
 ]
 
@@ -306,6 +305,10 @@ Do you have any programming experience?
 
 First course assignment will be to fill out a survey to tell us more about you
 
+--
+
+Today we'll do some brief self-introductions
+  - Goal is to foster a collaborative environment: Who's my professor? Who's in my class?
 
 ---
 
@@ -384,7 +387,7 @@ class: title title-7
 .pull-left[
 ### Programming Foundations
 
-`R`, `RStudio`, `Rmarkdown`, and the `tidyverse`
+`R`, `RStudio`, `R Markdown` / `Quarto`, the `tidyverse`
 ]
 
 .pull-right[
@@ -410,9 +413,9 @@ the grammar of graphics, `ggplot2`
 --
 
 .pull-left[
-### Special Topics (as time allows)
+### Special Topics
 
-annotations, time, space, telling stories with data
+annotations, time, space, etc.
 ]
 
 .pull-right[
@@ -430,7 +433,7 @@ We will follow the same general process each week:
 
 - Do readings listed on the course site before Tuesday ([example: Week 1](https://aem2850.toddgerarden.com/content/01-content/))
 
-- **Tuesday:** come to class, where I will summarize material for that week's topic
+- **Tuesday:** come to class, where we will discuss material for that week's topic
 
 - **Thursday:** come to class, where we will work through hands-on examples
 
@@ -453,7 +456,7 @@ We will follow the same general process each week:
 
 - **Class participation** is the best way to learn the material, attendance is expected
 
-Students in AEM 5850 will complete extra assignments
+Students in AEM 5850 complete extra assignments
 ]
 
 
@@ -498,7 +501,7 @@ bind_rows(assignments, assignments_total) %>%
 
 ### Email:
 
-You can also reach us by email. The best approach is to email both me and Hui at the same time. You can do that with one click [here](mailto:gerarden@cornell.edu,hz423@cornell.edu). Please read the syllabus for tips on how to make the most of email.
+You can also reach us by email. The best approach is to email both me and our grad TA Hui Zhou at the same time. You can do that with one click [here](mailto:gerarden@cornell.edu,hz423@cornell.edu). Please read the syllabus for tips on how to make the most of email.
 
 
 ---
@@ -558,17 +561,153 @@ class: title title-2
 
 ---
 
-# How does this winter compare to last winter?
+# How does 2023 compare to 2022 so far?
 
+Go to [aem2850.toddgerarden.com/content/01-content](https://aem2850.toddgerarden.com/content/01-content/)
+
+Click the links to download the following files:
+- [Weather stations in NY](https://aem2850.toddgerarden.com/slides/data/01-slides/ny-stations.csv)
+- [Weather in NY in 2022](https://aem2850.toddgerarden.com/slides/data/01-slides/ny-weather-2022.csv)
+- [Weather in NY in 2023](https://aem2850.toddgerarden.com/slides/data/01-slides/ny-weather-2023.csv)
+
+<!-- 1. Compute the difference in average temperature at Cornell University between January 2023 and January 2022 -->
+
+Make a plot that compares the evolution of daily max temps (TMAX) over January in 2022 and 2023
+
+Use any software you like!
+
+Feel free to work in small groups
+
+---
+
+# How does 2023 compare to 2022 so far?
+
+Prep data:
+
+```{r ithaca-weather-data}
+library(tidyverse); library(lubridate)
+
+# identify the Cornell station
+stations <- read_csv("data/01-slides/ny-stations.csv")
+cornell <- stations |>
+  filter(str_detect(NAME, "CORNELL"))
+  
+# read in and bind relevant data
+clean_data <- function(y, s, m) {
+  str_glue("data/01-slides/ny-weather-", y, ".csv") |>
+    read_csv() |>
+    inner_join(s, by = "STATION") |>
+    mutate(mon = month(DATE),
+           day = day(DATE),
+           year = year(DATE)) |>
+    filter(mon == m)
+}
+years <- c(2022, 2023)
+cornell_temps <- map(years, clean_data, cornell, 1) |>
+  bind_rows()
+```
+
+---
+
+# How does 2023 compare to 2022 so far?
+
+.pull-left[
+```{r ithaca-weather-plot1, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+# plot data
+cornell_temps |> 
+  ggplot(aes(x = day, 
+             y = TMAX)) + 
+  geom_point() + 
+  theme_bw()
+```
+]
+
+.pull-right[
+  ![](`r knitr::fig_chunk("ithaca-weather-plot1", "png")`)
+]
+
+---
+
+# How does 2023 compare to 2022 so far?
+
+.pull-left[
+```{r ithaca-weather-plot2, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+# plot data
+cornell_temps |> 
+  ggplot(aes(x = day, 
+             y = TMAX, 
+             color = as_factor(year))) + #<<
+  geom_point() + 
+  theme_bw() +
+  theme(legend.position = "bottom") #<<
+```
+]
+
+.pull-right[
+  ![](`r knitr::fig_chunk("ithaca-weather-plot2", "png")`)
+]
+
+---
+
+# How does 2023 compare to 2022 so far?
+
+.pull-left[
+```{r ithaca-weather-plot3, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+# plot data
+cornell_temps |> 
+  ggplot(aes(x = day, 
+             y = TMAX, 
+             color = as_factor(year))) + 
+  geom_point() + 
+  geom_smooth() +  #<<
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  labs(x = "Day of month",  #<<
+       y = "Max. daily temperature (F)",  #<<
+       color = "Year") #<<
+```
+]
+
+.pull-right[
+  ![](`r knitr::fig_chunk("ithaca-weather-plot3", "png")`)
+]
+
+---
+
+# How does 2023 compare to 2022 so far?
+
+We can easily imagine generalizing this approach to other years, months, outcomes, etc.
+
+.pull-left[
+```{r ithaca-weather-plot4, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+# plot data
+cornell_temps |> 
+  ggplot(aes(x = day, 
+             y = SNOW, #<<
+             color = as_factor(year))) + 
+  geom_point() + 
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  labs(x = "Day of month",
+       y = "Snowfall (inches)", #<<
+       color = "Year")
+```
+]
+
+.pull-right[
+  ![](`r knitr::fig_chunk("ithaca-weather-plot4", "png")`)
+]
+
+Note: the NOAA data are published with a slight lag so this does not reflect snow since last week
 
 
 ---
 
 layout: false
-name: data-truth-beauty
+name: show-me-the-data
 class: center middle section-title section-title-3 animated fadeIn
 
-# Data, truth, and beauty
+# Just show me the data!
 
 ---
 
@@ -588,6 +727,35 @@ class: title title-3
 <!-- There is no single ideal combination of **content** and **form** for all **audiences** -->
 
 <!-- Keep this in mind as a guiding principle for analyzing, visualizing, and communicating data -->
+
+---
+
+# Just show me the data!
+
+Data is very powerful, but raw data is not usually enough
+
+.pull-left[
+```{r ithaca-weather-mean1}
+cornell_temps |>
+  group_by(year) |>
+  summarize(mean_max = mean(TMAX))
+```
+
+What's wrong with this calculation?
+
+]
+
+--
+
+.pull-right[
+```{r ithaca-weather-mean2}
+cornell_temps |>
+  group_by(day) |>
+  filter(n() != 1) |>
+  group_by(year) |>
+  summarize(mean_max = mean(TMAX))
+```
+]
 
 ---
 
@@ -657,14 +825,13 @@ ggplot(filter(dozen, dataset != "bullseye"), aes(x = x, y = y)) +
   facet_wrap(vars(dataset))
 ```
 
-
 ---
 
 layout: false
 name: beautiful-visualizations
 class: center middle section-title section-title-6 animated fadeIn
 
-# Beautiful visualizations
+# What makes a great visualization?
 
 ---
 
@@ -868,7 +1035,7 @@ ggplot(tibble(x = c(0, 70)), aes(x = x)) +
 
 ### Thursday:
 
-- Intro to `R`, `RStudio`, and `RMarkdown`
+- Intro to `R`, `RStudio`, and `R Markdown` / `Quarto`
 - You will need your computer for coding exercises
 - See canvas announcement for instructions to get set up on [posit.cloud](http://posit.cloud/) (formerly rstudio.cloud)
 
