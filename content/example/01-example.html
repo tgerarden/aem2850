@@ -5,14 +5,14 @@
 <p>Examples contain material we will discuss and use to learn R in class. These notes are <em>not</em> comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.</p>
 <div id="rstudio-cloud-link" class="section level2">
 <h2>RStudio Cloud link</h2>
-<p><a href="https://rstudio.cloud/spaces/210747/project/3486782">Click here to access this week’s Example RStudio Cloud Project</a></p>
+<p><a href="https://posit.cloud/spaces/328615/content/5261002">Click here to access this week’s Example RStudio Cloud Project</a></p>
 </div>
 <div id="plan-for-today" class="section level2">
 <h2>Plan for today</h2>
 <ul>
 <li>Did anyone have trouble making an RStudio Cloud account?
 <ul>
-<li><a href="https://rstudio.cloud/spaces/210747/join?access_code=S%2B2RP6rPpen%2BtHGCQ4wg3A%2F7yeuf9%2F%2Ft74uqnZYS">Here is the link to join the course workspace if you haven’t already</a></li>
+<li><a href="https://posit.cloud/spaces/328615/join?access_code=ESw7-BIJDv5jgbg5syw2C-4y3aTq3FpNp8Ezsvvx">Here is the link to join the course workspace if you haven’t already</a></li>
 <li><strong>IMPORTANT NOTE:</strong> I and our TAs will be able to view your work. This is a feature but could also be a bug – please don’t write or store anything in your course projects that you don’t want us to see. :wink:</li>
 </ul></li>
 <li>R, RStudio, RStudio Cloud basics
@@ -21,11 +21,11 @@
 <li>together: <code>rcoding-intro.R</code></li>
 <li>breakout groups: <code>rcoding-practice.R</code></li>
 </ul></li>
-<li>R Markdown basics
+<li>R Markdown / Quarto basics
 <ul>
 <li>overview on this site, then move to rstudio.cloud</li>
-<li>together: <code>rmarkdown-formatting-example.Rmd</code></li>
-<li>breakout groups: <code>rmarkdown-practice.Rmd</code></li>
+<li>together: <code>markdown-formatting-example.qmd</code></li>
+<li>breakout groups: <code>quarto-practice.qmd</code></li>
 </ul></li>
 <li>Questions? Concerns?</li>
 <li>Feedback on class format welcome!
@@ -37,7 +37,7 @@
 <div id="cheatsheets" class="section level2">
 <h2>Cheatsheets</h2>
 <p><a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf">Click here to download the RStudio IDE cheatsheet</a></p>
-<p><a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf">Click here to download the rmarkdown cheatsheet</a></p>
+<p><a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf">Click here to download the rmarkdown cheatsheet</a> (Quarto is a new, unified authoring framework that builds on R Markdown so much of this still applies)</p>
 </div>
 <div id="getting-started" class="section level2">
 <h2>Getting started with R and RStudio</h2>
@@ -88,43 +88,44 @@
 </div>
 <div id="lets-explore-rstudio-cloud" class="section level3">
 <h3>Let’s explore RStudio Cloud</h3>
-<p><a href="https://rstudio.cloud/spaces/210747/project/3486782">Click here to access this week’s Example RStudio Cloud Project</a></p>
+<p><a href="https://posit.cloud/spaces/328615/content/5261002">Click here to access this week’s Example RStudio Cloud Project</a></p>
 <!-- :::fyi -->
 <!-- **SETUP TIP** -->
 <!--   Change the option _Save workspace to .RData on exit_ to _Never_ and uncheck the _Restore .RData into workspace at start_. By default, when you exit R saves all the objects you have created into a file called .RData. This is done so that when you restart the session in the same folder, it will load these objects. I find that this causes confusion especially when sharing code with colleagues or peers. -->
 <!-- ::: -->
 </div>
 </div>
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>R Markdown provides a unified authoring framework for data science, combining your code, its results, and your prose commentary. R Markdown documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.</p>
-<p>R Markdown files are designed to be used in three ways:</p>
+<div id="quarto-r-markdown" class="section level2">
+<h2>Quarto / R Markdown</h2>
+<p>Note: Quarto is a new, unified authoring framework that builds on R Markdown so if you are familiar with R Markdown it should be pretty easy to transition to Quarto.</p>
+<p>Quarto provides a unified authoring framework for data science, combining your code, its results, and your prose commentary. Quarto documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.</p>
+<p>Quarto files are designed to be used in three ways:</p>
 <ol style="list-style-type: decimal">
 <li><p>For communicating to decision makers, who want to focus on the conclusions, not the code behind the analysis.</p></li>
 <li><p>For collaborating with others (including future you!) who are interested in your conclusion <em>and</em> how you reached them.</p></li>
 <li><p>As an environment in which to <em>do</em> business analytics, where you can capture not only what you did, but also what you were thinking.</p></li>
 </ol>
 <p>All three of these are relevant for this course. Hopefully you can see how the first could be useful in business settings where you need to present a summary of ideas or findings to a decision maker.</p>
-<p>RStudio includes two links to Cheatsheets that are a great resource as you begin to work with R Markdown:</p>
+<p>RStudio includes two links to Cheatsheets for R Markdown that are a great resource as you begin to work with Quarto:</p>
 <ul>
 <li><p>R Markdown Cheat Sheet: <em>Help &gt; Cheatsheets &gt; R Markdown Cheat Sheet</em>,</p></li>
 <li><p>R Markdown Reference Guide: <em>Help &gt; Cheatsheets &gt; R Markdown Reference Guide</em>.</p></li>
 </ul>
-<p>See <a href="https://rmarkdown.rstudio.com">https://rmarkdown.rstudio.com</a> for a more detailed summary of R Markdown’s functionality.</p>
-<div id="r-markdown-basics" class="section level3">
-<h3>R Markdown basics</h3>
-<p>R Markdown files contain three types of content:</p>
+<p>See <a href="https://quarto.org">https://quarto.org</a> for a more detailed summary of Quarto’s functionality and .</p>
+<div id="quarto-basics" class="section level3">
+<h3>Quarto basics</h3>
+<p>Quarto files contain three types of content:</p>
 <ol style="list-style-type: decimal">
 <li>An (optional) <strong>YAML header</strong> surrounded by <code>---</code>s.</li>
 <li><strong>Chunks</strong> of R code surrounded by <code>```</code>.</li>
 <li>Text mixed with simple text formatting like <code># heading</code> and <code>_italics_</code>.</li>
 </ol>
 <p>You can edit each of these to affect the final output.</p>
-<p>When you are done composing your document, you can <strong>knit</strong> it by clicking Knit or by using the keyboard shorcut ⌘+⇧+K. This will process the file through several steps to produce your output in the format you specify.</p>
+<p>When you are done composing your document, you can <strong>render</strong> it by clicking Render or by using the keyboard shorcut ⌘+⇧+K. This will process the file through several steps to produce your output in the format you specify.</p>
 </div>
 <div id="markdown-basics" class="section level3">
 <h3>Markdown basics</h3>
-<p>Markdown is a set of formatting conventions for plain text files that is widely used (beyond R). We will use an example file on RStudio Cloud to learn about some basic text formatting using Markdown. You can also read more about this in <a href="https://r4ds.had.co.nz/r-markdown.html#text-formatting-with-markdown">R for Data Science</a>.</p>
+<p>Markdown is a set of formatting conventions for plain text files that is widely used (beyond R). We will use an example file on RStudio Cloud to learn about some basic text formatting using Markdown. You can also read more about this in <a href="https://r4ds.hadley.nz/quarto.html#sec-source-editor">R for Data Science (2e)</a>.</p>
 <!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** -->
 </div>
 </div>

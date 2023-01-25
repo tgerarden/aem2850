@@ -1,6 +1,6 @@
 ---
-title: "Intro to R, RStudio, and RMarkdown"
-linktitle: "Intro to R, RStudio, and RMarkdown"
+title: "Intro to R, RStudio, and Quarto"
+linktitle: "Intro to R, RStudio, and Quarto"
 date: "`r format(Sys.time())`"
 output:
   blogdown::html_page:
@@ -24,21 +24,21 @@ Examples contain material we will discuss and use to learn R in class. These not
 
 ## RStudio Cloud link
 
-[Click here to access this week's Example RStudio Cloud Project](https://rstudio.cloud/spaces/210747/project/3486782)
+[Click here to access this week's Example RStudio Cloud Project](https://posit.cloud/spaces/328615/content/5261002)
 
 
 ## Plan for today
 - Did anyone have trouble making an RStudio Cloud account?
-  - [Here is the link to join the course workspace if you haven't already](https://rstudio.cloud/spaces/210747/join?access_code=S%2B2RP6rPpen%2BtHGCQ4wg3A%2F7yeuf9%2F%2Ft74uqnZYS)
+  - [Here is the link to join the course workspace if you haven't already](https://posit.cloud/spaces/328615/join?access_code=ESw7-BIJDv5jgbg5syw2C-4y3aTq3FpNp8Ezsvvx)
   - **IMPORTANT NOTE:** I and our TAs will be able to view your work. This is a feature but could also be a bug -- please don't write or store anything in your course projects that you don't want us to see. :wink:
 - R, RStudio, RStudio Cloud basics
   - overview on this site, then move to rstudio.cloud
   - together: `rcoding-intro.R`
   - breakout groups: `rcoding-practice.R`
-- R Markdown basics
+- R Markdown / Quarto basics
   - overview on this site, then move to rstudio.cloud
-  - together: `rmarkdown-formatting-example.Rmd`
-  - breakout groups: `rmarkdown-practice.Rmd`
+  - together: `markdown-formatting-example.qmd`
+  - breakout groups: `quarto-practice.qmd`
 - Questions? Concerns?
 - Feedback on class format welcome!
   - slides vs website vs walking through code, etc.
@@ -48,7 +48,7 @@ Examples contain material we will discuss and use to learn R in class. These not
 
 [Click here to download the RStudio IDE cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf)
 
-[Click here to download the rmarkdown cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf)
+[Click here to download the rmarkdown cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf) (Quarto is a new, unified authoring framework that builds on R Markdown so much of this still applies)
 
 
 
@@ -126,7 +126,7 @@ To run one line at a time instead of the entire script, you can use Ctrl+↩ on 
 
 ### Let's explore RStudio Cloud
 
-[Click here to access this week's Example RStudio Cloud Project](https://rstudio.cloud/spaces/210747/project/3486782)
+[Click here to access this week's Example RStudio Cloud Project](https://posit.cloud/spaces/328615/content/5261002)
 
 <!-- :::fyi -->
 <!-- **SETUP TIP** -->
@@ -135,11 +135,13 @@ To run one line at a time instead of the entire script, you can use Ctrl+↩ on 
 <!-- ::: -->
 
 
-## R Markdown
+## Quarto / R Markdown
 
-R Markdown provides a unified authoring framework for data science, combining your code, its results, and your prose commentary. R Markdown documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.
+Note: Quarto is a new, unified authoring framework that builds on R Markdown so if you are familiar with R Markdown it should be pretty easy to transition to Quarto.
 
-R Markdown files are designed to be used in three ways:
+Quarto provides a unified authoring framework for data science, combining your code, its results, and your prose commentary. Quarto documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.
+
+Quarto files are designed to be used in three ways:
 
 1.  For communicating to decision makers, who want to focus on the conclusions, not the code behind the analysis.
 
@@ -149,17 +151,17 @@ R Markdown files are designed to be used in three ways:
 
 All three of these are relevant for this course. Hopefully you can see how the first could be useful in business settings where you need to present a summary of ideas or findings to a decision maker.
 
-RStudio includes two links to Cheatsheets that are a great resource as you begin to work with R Markdown:
+RStudio includes two links to Cheatsheets for R Markdown that are a great resource as you begin to work with Quarto:
 
 -   R Markdown Cheat Sheet: *Help \> Cheatsheets \> R Markdown Cheat Sheet*,
 
 -   R Markdown Reference Guide: *Help \> Cheatsheets \> R Markdown Reference Guide*.
 
-See [https://rmarkdown.rstudio.com](https://rmarkdown.rstudio.com) for a more detailed summary of R Markdown's functionality.
+See [https://quarto.org](https://quarto.org) for a more detailed summary of Quarto's functionality and .
 
-### R Markdown basics
+### Quarto basics
 
-R Markdown files contain three types of content:
+Quarto files contain three types of content:
 
 1.  An (optional) **YAML header** surrounded by `---`s.
 2.  **Chunks** of R code surrounded by ```` ``` ````.
@@ -167,11 +169,11 @@ R Markdown files contain three types of content:
 
 You can edit each of these to affect the final output.
 
-When you are done composing your document, you can **knit** it by clicking Knit or by using the keyboard shorcut ⌘+⇧+K. This will process the file through several steps to produce your output in the format you specify.
+When you are done composing your document, you can **render** it by clicking Render or by using the keyboard shorcut ⌘+⇧+K. This will process the file through several steps to produce your output in the format you specify.
 
 ### Markdown basics
 
-Markdown is a set of formatting conventions for plain text files that is widely used (beyond R). We will use an example file on RStudio Cloud to learn about some basic text formatting using Markdown. You can also read more about this in [R for Data Science](https://r4ds.had.co.nz/r-markdown.html#text-formatting-with-markdown).
+Markdown is a set of formatting conventions for plain text files that is widely used (beyond R). We will use an example file on RStudio Cloud to learn about some basic text formatting using Markdown. You can also read more about this in [R for Data Science (2e)](https://r4ds.hadley.nz/quarto.html#sec-source-editor).
 
 
 
