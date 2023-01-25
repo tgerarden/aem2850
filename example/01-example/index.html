@@ -22,12 +22,12 @@
 <meta property="twitter:card" content="summary">
 <meta property="og:site_name" content="R for Business Analytics">
 <meta property="og:url" content="https://aem2850.toddgerarden.com/example/01-example/">
-<meta property="og:title" content="Intro to R, RStudio, and RMarkdown | R for Business Analytics">
+<meta property="og:title" content="Intro to R, RStudio, and Quarto | R for Business Analytics">
 <meta property="og:description" content="Introduction to Examples Examples contain material we will discuss and use to learn R in class. These notes are not comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed."><meta property="og:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png">
 <meta property="twitter:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
-<meta property="article:published_time" content="2023-01-25T12:45:20+00:00">
-<meta property="article:modified_time" content="2023-01-25T12:45:20+00:00">
-<title>Intro to R, RStudio, and RMarkdown | R for Business Analytics</title>
+<meta property="article:published_time" content="2023-01-25T16:40:51+00:00">
+<meta property="article:modified_time" content="2023-01-25T16:40:51+00:00">
+<title>Intro to R, RStudio, and Quarto | R for Business Analytics</title>
 </head>
 <body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=8492f1a04989019e2f783414b45533e3>
 <script src=/js/wowchemy-init.min.133800c88f3b5bb934932231fd94fed7.js></script>
@@ -75,7 +75,7 @@
 <div class=page-body>
 <article class=article>
 <div class="article-container pt-3">
-<h1>Intro to R, RStudio, and RMarkdown</h1>
+<h1>Intro to R, RStudio, and Quarto</h1>
 <div class=article-metadata>
 <span class=article-date>
 Jan 25, 2023
@@ -87,12 +87,12 @@ Jan 25, 2023
 <h1 id=introduction-to-examples>Introduction to Examples</h1>
 <p>Examples contain material we will discuss and use to learn R in class. These notes are <em>not</em> comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.</p>
 <h2 id=rstudio-cloud-link>RStudio Cloud link</h2>
-<p><a href=https://rstudio.cloud/spaces/210747/project/3486782 target=_blank rel=noopener>Click here to access this week&rsquo;s Example RStudio Cloud Project</a></p>
+<p><a href=https://posit.cloud/spaces/328615/content/5261002 target=_blank rel=noopener>Click here to access this week&rsquo;s Example RStudio Cloud Project</a></p>
 <h2 id=plan-for-today>Plan for today</h2>
 <ul>
 <li>Did anyone have trouble making an RStudio Cloud account?
 <ul>
-<li><a href="https://rstudio.cloud/spaces/210747/join?access_code=S%2B2RP6rPpen%2BtHGCQ4wg3A%2F7yeuf9%2F%2Ft74uqnZYS" target=_blank rel=noopener>Here is the link to join the course workspace if you haven&rsquo;t already</a></li>
+<li><a href="https://posit.cloud/spaces/328615/join?access_code=ESw7-BIJDv5jgbg5syw2C-4y3aTq3FpNp8Ezsvvx" target=_blank rel=noopener>Here is the link to join the course workspace if you haven&rsquo;t already</a></li>
 <li><strong>IMPORTANT NOTE:</strong> I and our TAs will be able to view your work. This is a feature but could also be a bug &ndash; please don&rsquo;t write or store anything in your course projects that you don&rsquo;t want us to see. 😉</li>
 </ul>
 </li>
@@ -103,11 +103,11 @@ Jan 25, 2023
 <li>breakout groups: <code>rcoding-practice.R</code></li>
 </ul>
 </li>
-<li>R Markdown basics
+<li>R Markdown / Quarto basics
 <ul>
 <li>overview on this site, then move to rstudio.cloud</li>
-<li>together: <code>rmarkdown-formatting-example.Rmd</code></li>
-<li>breakout groups: <code>rmarkdown-practice.Rmd</code></li>
+<li>together: <code>markdown-formatting-example.qmd</code></li>
+<li>breakout groups: <code>quarto-practice.qmd</code></li>
 </ul>
 </li>
 <li>Questions? Concerns?</li>
@@ -119,7 +119,7 @@ Jan 25, 2023
 </ul>
 <h2 id=cheatsheets>Cheatsheets</h2>
 <p><a href=https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf target=_blank rel=noopener>Click here to download the RStudio IDE cheatsheet</a></p>
-<p><a href=https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf target=_blank rel=noopener>Click here to download the rmarkdown cheatsheet</a></p>
+<p><a href=https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf target=_blank rel=noopener>Click here to download the rmarkdown cheatsheet</a> (Quarto is a new, unified authoring framework that builds on R Markdown so much of this still applies)</p>
 <h2 id=getting-started>Getting started with R and RStudio</h2>
 <p>R is not a programming language like <code>C</code> or <code>Java</code>. It was not created by software engineers for software development. Instead, it was developed by statisticians as an interactive environment for data analysis. This interactivity makes it easy to explore data quickly, which is an indispensable feature for many tasks in business analytics, statistics, data science, and other fields.</p>
 <p>If you have prior programming experience, you may be surprised by differences between R and other programming languages.</p>
@@ -166,10 +166,11 @@ Jan 25, 2023
 </code></pre>
 <p>To run one line at a time instead of the entire script, you can use Ctrl+↩ on Windows and ⌘+↩ on Mac.</p>
 <h3 id=lets-explore-rstudio-cloud>Let&rsquo;s explore RStudio Cloud</h3>
-<p><a href=https://rstudio.cloud/spaces/210747/project/3486782 target=_blank rel=noopener>Click here to access this week&rsquo;s Example RStudio Cloud Project</a></p>
-<h2 id=r-markdown>R Markdown</h2>
-<p>R Markdown provides a unified authoring framework for data science, combining your code, its results, and your prose commentary. R Markdown documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.</p>
-<p>R Markdown files are designed to be used in three ways:</p>
+<p><a href=https://posit.cloud/spaces/328615/content/5261002 target=_blank rel=noopener>Click here to access this week&rsquo;s Example RStudio Cloud Project</a></p>
+<h2 id=quarto--r-markdown>Quarto / R Markdown</h2>
+<p>Note: Quarto is a new, unified authoring framework that builds on R Markdown so if you are familiar with R Markdown it should be pretty easy to transition to Quarto.</p>
+<p>Quarto provides a unified authoring framework for data science, combining your code, its results, and your prose commentary. Quarto documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.</p>
+<p>Quarto files are designed to be used in three ways:</p>
 <ol>
 <li>
 <p>For communicating to decision makers, who want to focus on the conclusions, not the code behind the analysis.</p>
@@ -182,7 +183,7 @@ Jan 25, 2023
 </li>
 </ol>
 <p>All three of these are relevant for this course. Hopefully you can see how the first could be useful in business settings where you need to present a summary of ideas or findings to a decision maker.</p>
-<p>RStudio includes two links to Cheatsheets that are a great resource as you begin to work with R Markdown:</p>
+<p>RStudio includes two links to Cheatsheets for R Markdown that are a great resource as you begin to work with Quarto:</p>
 <ul>
 <li>
 <p>R Markdown Cheat Sheet: <em>Help > Cheatsheets > R Markdown Cheat Sheet</em>,</p>
@@ -191,18 +192,18 @@ Jan 25, 2023
 <p>R Markdown Reference Guide: <em>Help > Cheatsheets > R Markdown Reference Guide</em>.</p>
 </li>
 </ul>
-<p>See <a href=https://rmarkdown.rstudio.com target=_blank rel=noopener>https://rmarkdown.rstudio.com</a> for a more detailed summary of R Markdown&rsquo;s functionality.</p>
-<h3 id=r-markdown-basics>R Markdown basics</h3>
-<p>R Markdown files contain three types of content:</p>
+<p>See <a href=https://quarto.org target=_blank rel=noopener>https://quarto.org</a> for a more detailed summary of Quarto&rsquo;s functionality and .</p>
+<h3 id=quarto-basics>Quarto basics</h3>
+<p>Quarto files contain three types of content:</p>
 <ol>
 <li>An (optional) <strong>YAML header</strong> surrounded by <code>---</code>s.</li>
 <li><strong>Chunks</strong> of R code surrounded by <code>```</code>.</li>
 <li>Text mixed with simple text formatting like <code># heading</code> and <code>_italics_</code>.</li>
 </ol>
 <p>You can edit each of these to affect the final output.</p>
-<p>When you are done composing your document, you can <strong>knit</strong> it by clicking Knit or by using the keyboard shorcut ⌘+⇧+K. This will process the file through several steps to produce your output in the format you specify.</p>
+<p>When you are done composing your document, you can <strong>render</strong> it by clicking Render or by using the keyboard shorcut ⌘+⇧+K. This will process the file through several steps to produce your output in the format you specify.</p>
 <h3 id=markdown-basics>Markdown basics</h3>
-<p>Markdown is a set of formatting conventions for plain text files that is widely used (beyond R). We will use an example file on RStudio Cloud to learn about some basic text formatting using Markdown. You can also read more about this in <a href=https://r4ds.had.co.nz/r-markdown.html#text-formatting-with-markdown target=_blank rel=noopener>R for Data Science</a>.</p>
+<p>Markdown is a set of formatting conventions for plain text files that is widely used (beyond R). We will use an example file on RStudio Cloud to learn about some basic text formatting using Markdown. You can also read more about this in <a href=https://r4ds.hadley.nz/quarto.html#sec-source-editor target=_blank rel=noopener>R for Data Science (2e)</a>.</p>
 </div>
 <div class="media author-card content-widget-hr">
 <div class=media-body>
