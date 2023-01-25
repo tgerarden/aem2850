@@ -1,0 +1,254 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Wowchemy 5.4.0 for Hugo">
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media=print onload="this.media='all'">
+<meta name=description content="Introduction to Examples Examples contain material we will discuss and use to learn R in class. These notes are not comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.">
+<link rel=alternate hreflang=en-us href=https://aem2850.toddgerarden.com/example/01-example/>
+<meta name=theme-color content="#B31B1B">
+<link rel=stylesheet href=/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin=anonymous media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css crossorigin=anonymous title=hl-light media=print onload="this.media='all'">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css crossorigin=anonymous title=hl-dark media=print onload="this.media='all'" disabled>
+<link rel=stylesheet href=/css/wowchemy.0955c4d33b0be4851935253be0520832.css>
+<link rel=manifest href=/manifest.webmanifest>
+<link rel=icon type=image/png href=/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_32x32_fill_lanczos_center_3.png>
+<link rel=apple-touch-icon type=image/png href=/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_180x180_fill_lanczos_center_3.png>
+<link rel=canonical href=https://aem2850.toddgerarden.com/example/01-example/>
+<meta property="twitter:card" content="summary">
+<meta property="og:site_name" content="R for Business Analytics">
+<meta property="og:url" content="https://aem2850.toddgerarden.com/example/01-example/">
+<meta property="og:title" content="Intro to R, RStudio, and RMarkdown | R for Business Analytics">
+<meta property="og:description" content="Introduction to Examples Examples contain material we will discuss and use to learn R in class. These notes are not comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed."><meta property="og:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png">
+<meta property="twitter:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
+<meta property="article:published_time" content="2023-01-25T12:45:20+00:00">
+<meta property="article:modified_time" content="2023-01-25T12:45:20+00:00">
+<title>Intro to R, RStudio, and RMarkdown | R for Business Analytics</title>
+</head>
+<body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=8492f1a04989019e2f783414b45533e3>
+<script src=/js/wowchemy-init.min.133800c88f3b5bb934932231fd94fed7.js></script>
+<div class=page-header>
+<header class=header--fixed>
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id=navbar-main>
+<div class=container-xl>
+<div class="d-none d-lg-inline-flex">
+<a class=navbar-brand href=/>R for Business Analytics</a>
+</div>
+<button type=button class=navbar-toggler data-toggle=collapse data-target=#navbar-content aria-controls=navbar-content aria-expanded=false aria-label="Toggle navigation">
+<span><i class="fas fa-bars"></i></span>
+</button>
+<div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+<a class=navbar-brand href=/>R for Business Analytics</a>
+</div>
+<div class="navbar-collapse main-menu-item collapse justify-content-end" id=navbar-content>
+<ul class="navbar-nav d-md-inline-flex">
+<li class=nav-item>
+<a class=nav-link href=/syllabus/><span>Syllabus</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/schedule/><span>Schedule</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/content/><span>Content</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/assignment/><span>Assignments</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=/resource/><span>Resources</span></a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://rstudio.cloud/ target=_blank rel=noopener><span><i class="fab fa-r-project"></i></span></a>
+</li>
+</ul>
+</div>
+<ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+</ul>
+</div>
+</nav>
+</header>
+</div>
+<div class=page-body>
+<article class=article>
+<div class="article-container pt-3">
+<h1>Intro to R, RStudio, and RMarkdown</h1>
+<div class=article-metadata>
+<span class=article-date>
+Jan 25, 2023
+</span>
+</div>
+</div>
+<div class=article-container>
+<div class=article-style>
+<h1 id=introduction-to-examples>Introduction to Examples</h1>
+<p>Examples contain material we will discuss and use to learn R in class. These notes are <em>not</em> comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.</p>
+<h2 id=rstudio-cloud-link>RStudio Cloud link</h2>
+<p><a href=https://rstudio.cloud/spaces/210747/project/3486782 target=_blank rel=noopener>Click here to access this week&rsquo;s Example RStudio Cloud Project</a></p>
+<h2 id=plan-for-today>Plan for today</h2>
+<ul>
+<li>Did anyone have trouble making an RStudio Cloud account?
+<ul>
+<li><a href="https://rstudio.cloud/spaces/210747/join?access_code=S%2B2RP6rPpen%2BtHGCQ4wg3A%2F7yeuf9%2F%2Ft74uqnZYS" target=_blank rel=noopener>Here is the link to join the course workspace if you haven&rsquo;t already</a></li>
+<li><strong>IMPORTANT NOTE:</strong> I and our TAs will be able to view your work. This is a feature but could also be a bug &ndash; please don&rsquo;t write or store anything in your course projects that you don&rsquo;t want us to see. 😉</li>
+</ul>
+</li>
+<li>R, RStudio, RStudio Cloud basics
+<ul>
+<li>overview on this site, then move to rstudio.cloud</li>
+<li>together: <code>rcoding-intro.R</code></li>
+<li>breakout groups: <code>rcoding-practice.R</code></li>
+</ul>
+</li>
+<li>R Markdown basics
+<ul>
+<li>overview on this site, then move to rstudio.cloud</li>
+<li>together: <code>rmarkdown-formatting-example.Rmd</code></li>
+<li>breakout groups: <code>rmarkdown-practice.Rmd</code></li>
+</ul>
+</li>
+<li>Questions? Concerns?</li>
+<li>Feedback on class format welcome!
+<ul>
+<li>slides vs website vs walking through code, etc.</li>
+</ul>
+</li>
+</ul>
+<h2 id=cheatsheets>Cheatsheets</h2>
+<p><a href=https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf target=_blank rel=noopener>Click here to download the RStudio IDE cheatsheet</a></p>
+<p><a href=https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf target=_blank rel=noopener>Click here to download the rmarkdown cheatsheet</a></p>
+<h2 id=getting-started>Getting started with R and RStudio</h2>
+<p>R is not a programming language like <code>C</code> or <code>Java</code>. It was not created by software engineers for software development. Instead, it was developed by statisticians as an interactive environment for data analysis. This interactivity makes it easy to explore data quickly, which is an indispensable feature for many tasks in business analytics, statistics, data science, and other fields.</p>
+<p>If you have prior programming experience, you may be surprised by differences between R and other programming languages.</p>
+<p>If you have no prior programming experience, you may initially be frustrated when learning R. That is normal! Learning to program is essentially learning to speak a new language. But in some ways it&rsquo;s even more difficult, because your interlocutor is a computer who isn&rsquo;t always great at telling you when you said something that made no sense.</p>
+<p>Regardless of your prior experience, if you are patient, you will come to appreciate the power of R for data analysis and data visualization.</p>
+<h2 id=r-and-the-r-console>R, and the R console</h2>
+<p>As we already discussed, R is the engine that will power our work. One way to control that engine is to use the <em>R console</em> to execute commands as you type them, or to run scripts you have already written. There are several ways to gain access to the R console. One way is to install R on your computer and open the built-in console, which looks like this:</p>
+<p>
+<figure>
+<div class="d-flex justify-content-center">
+<div class=w-100><img src=/example/images/01/Rconsole.png alt=Rconsole loading=lazy data-zoomable></div>
+</div></figure>
+</p>
+<p>However, most people don&rsquo;t use this console. Instead, they use an <em>integrated development environment</em> (or IDE) to write, debug, and execute their code.</p>
+<h2 id=rstudio>RStudio</h2>
+<p>The IDE we will use in this class is RStudio. RStudio includes an editor with many R-specific features, a console to execute your code, and other useful panes, including one to show figures or view html documents you produce. RStudio looks like this:</p>
+<p>
+<figure>
+<div class="d-flex justify-content-center">
+<div class=w-100><img src=/example/images/01/rstudio.png alt=rstudio loading=lazy data-zoomable></div>
+</div></figure>
+</p>
+<p>RStudio will be our launching pad for data science projects. It not only provides an editor for us to create and edit our scripts but also provides many other useful tools. In this section, we go over some of the basics.</p>
+<h3 id=rstudio-panes>RStudio panes</h3>
+<p>When you start RStudio for the first time, you will see three panes by default. The left pane shows the R console. On the right, the top pane includes tabs such as <em>Environment</em> and <em>History</em>, while the bottom pane shows five tabs: <em>File</em>, <em>Plots</em>, <em>Packages</em>, <em>Help</em>, and <em>Viewer</em> (these tabs may change in new versions). You can click on each tab to move across the different features.</p>
+<p>To start a new R script, you can click on File, then New File, then R Script.</p>
+<p>This starts a new pane on the left and it is here where you can start writing your script.</p>
+<h3 id=keyboard-shortcuts>Keyboard shortcuts</h3>
+<p>Many tasks we perform with the mouse can be achieved with a combination of key strokes instead, or keyboard shortcuts For example, we just showed how to use the mouse to start a new script, but you can also use a shortcut: Ctrl+⇧+N on Windows and ⌘+⇧+N on macs.</p>
+<p>Although using the mouse to explore RStudio&rsquo;s dropdown menus is a good place to start, <strong>I highly recommend that you memorize key bindings for the operations you use most</strong>. RStudio provides a useful cheat sheet with the most widely used commands. If you&rsquo;re on a mac, you can access a list of keyboard by pressing ⌥+⇧+K. You might want to keep this in mind so you can look up keyboard shortcuts when you find yourself doing the same point-and-click operations repeatedly.</p>
+<h3 id=tab-completion>Tab completion</h3>
+<p>One advantage of using RStudio is that it has context-aware tab completion. This means that when you start typing the name of a package, function, or object you want to use, RStudio will automatically suggest ways to complete your input. You can take advantage of this by scrolling through the suggestions using up/down arrows and hitting tab to use the selected completion.</p>
+<p>RStudio also does handy things like adding a close parentheses when you type an open parentheses, such as if you type <code>library(</code>.</p>
+<h3 id=running-commands-while-editing-scripts>Running commands while editing scripts</h3>
+<p>There are many editors specifically made for coding. These are useful because color and indentation are automatically added to make code more readable. RStudio is one of these editors, and it was specifically developed for R. One of the main advantages provided by RStudio over other editors is that we can test our code easily as we edit our scripts.</p>
+<p>You can see this by opening a new script. Give the script a name. You can do this through the editor by saving the current new unnamed script. To do this, click on the save icon or use the key binding Ctrl+S on Windows and ⌘+S on the Mac.</p>
+<p>When you ask for the document to be saved for the first time, RStudio will prompt you for a name. A good convention is to use a descriptive name, with lower case letters, no spaces, only hyphens to separate words, and then followed by the suffix <em>.R</em>. Call your script <em>my-first-script.R</em>.</p>
+<p>Now we are ready to start editing our first script. For example, you could write:</p>
+<pre><code class=language-r>print(&quot;welcome to RStudio&quot;)
+</code></pre>
+<p>If you do this and hit ↩ in the editor, nothing will happen in the console.</p>
+<p>To <em>execute</em> your new script, you can click on the <em>Run</em> button on the upper right side of the editing pane or use the keyboard shortcut: Ctrl+⇧+↩ on Windows or ⌘+⇧+↩ on Mac. When you do this, the console will show the command as well as its output:</p>
+<pre><code>## [1] &quot;welcome to RStudio&quot;
+</code></pre>
+<p>To run one line at a time instead of the entire script, you can use Ctrl+↩ on Windows and ⌘+↩ on Mac.</p>
+<h3 id=lets-explore-rstudio-cloud>Let&rsquo;s explore RStudio Cloud</h3>
+<p><a href=https://rstudio.cloud/spaces/210747/project/3486782 target=_blank rel=noopener>Click here to access this week&rsquo;s Example RStudio Cloud Project</a></p>
+<h2 id=r-markdown>R Markdown</h2>
+<p>R Markdown provides a unified authoring framework for data science, combining your code, its results, and your prose commentary. R Markdown documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.</p>
+<p>R Markdown files are designed to be used in three ways:</p>
+<ol>
+<li>
+<p>For communicating to decision makers, who want to focus on the conclusions, not the code behind the analysis.</p>
+</li>
+<li>
+<p>For collaborating with others (including future you!) who are interested in your conclusion <em>and</em> how you reached them.</p>
+</li>
+<li>
+<p>As an environment in which to <em>do</em> business analytics, where you can capture not only what you did, but also what you were thinking.</p>
+</li>
+</ol>
+<p>All three of these are relevant for this course. Hopefully you can see how the first could be useful in business settings where you need to present a summary of ideas or findings to a decision maker.</p>
+<p>RStudio includes two links to Cheatsheets that are a great resource as you begin to work with R Markdown:</p>
+<ul>
+<li>
+<p>R Markdown Cheat Sheet: <em>Help > Cheatsheets > R Markdown Cheat Sheet</em>,</p>
+</li>
+<li>
+<p>R Markdown Reference Guide: <em>Help > Cheatsheets > R Markdown Reference Guide</em>.</p>
+</li>
+</ul>
+<p>See <a href=https://rmarkdown.rstudio.com target=_blank rel=noopener>https://rmarkdown.rstudio.com</a> for a more detailed summary of R Markdown&rsquo;s functionality.</p>
+<h3 id=r-markdown-basics>R Markdown basics</h3>
+<p>R Markdown files contain three types of content:</p>
+<ol>
+<li>An (optional) <strong>YAML header</strong> surrounded by <code>---</code>s.</li>
+<li><strong>Chunks</strong> of R code surrounded by <code>```</code>.</li>
+<li>Text mixed with simple text formatting like <code># heading</code> and <code>_italics_</code>.</li>
+</ol>
+<p>You can edit each of these to affect the final output.</p>
+<p>When you are done composing your document, you can <strong>knit</strong> it by clicking Knit or by using the keyboard shorcut ⌘+⇧+K. This will process the file through several steps to produce your output in the format you specify.</p>
+<h3 id=markdown-basics>Markdown basics</h3>
+<p>Markdown is a set of formatting conventions for plain text files that is widely used (beyond R). We will use an example file on RStudio Cloud to learn about some basic text formatting using Markdown. You can also read more about this in <a href=https://r4ds.had.co.nz/r-markdown.html#text-formatting-with-markdown target=_blank rel=noopener>R for Data Science</a>.</p>
+</div>
+<div class="media author-card content-widget-hr">
+<div class=media-body>
+<h5 class=card-title><a href=https://aem2850.toddgerarden.com></a></h5>
+<ul class=network-icon aria-hidden=true>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class=page-footer>
+</div>
+<div id=modal class="modal fade" role=dialog>
+<div class=modal-dialog>
+<div class=modal-content>
+<div class=modal-header>
+<h5 class=modal-title>Cite</h5>
+<button type=button class=close data-dismiss=modal aria-label=Close>
+<span aria-hidden=true>&#215;</span>
+</button>
+</div>
+<div class=modal-body>
+<pre><code class="tex hljs"></code></pre>
+</div>
+<div class=modal-footer>
+<a class="btn btn-outline-primary my-1 js-copy-cite" href=# target=_blank>
+<i class="fas fa-copy"></i> Copy
+</a>
+<a class="btn btn-outline-primary my-1 js-download-cite" href=# target=_blank>
+<i class="fas fa-download"></i> Download
+</a>
+<div id=modal-error></div>
+</div>
+</div>
+</div>
+</div>
+<script src=/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js></script>
+<script src=https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/gh/bryanbraun/anchorjs@4.2.2/anchor.min.js integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin=anonymous></script>
+<script>anchors.add()</script>
+<script id=page-data type=application/json>{"use_headroom":true}</script>
+<script src=/js/wowchemy-headroom.1cb9e2fc8399acee94eab837265b73bf.js type=module></script>
+<script src=/en/js/wowchemy.min.216188596c551a0582beb89fb0d646e2.js></script>
+</body>
+</html>
