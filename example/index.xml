@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 25 Jan 2023 16:40:51 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Intro to R, RStudio, and Quarto</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Wed, 25 Jan 2023 16:40:51 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 25 Jan 2023 22:43:25 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Intro to R, RStudio, and Quarto</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Wed, 25 Jan 2023 22:43:25 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
 &lt;p>Examples contain material we will discuss and use to learn R in class. These notes are &lt;em>not&lt;/em> comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.&lt;/p>
 &lt;h2 id="rstudio-cloud-link">RStudio Cloud link&lt;/h2>
 &lt;p>&lt;a href="https://posit.cloud/spaces/328615/content/5261002" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s Example RStudio Cloud Project&lt;/a>&lt;/p>
@@ -87,7 +87,7 @@
 &lt;!-- Change the option _Save workspace to .RData on exit_ to _Never_ and uncheck the _Restore .RData into workspace at start_. By default, when you exit R saves all the objects you have created into a file called .RData. This is done so that when you restart the session in the same folder, it will load these objects. I find that this causes confusion especially when sharing code with colleagues or peers. -->
 &lt;!-- ::: -->
 &lt;h2 id="quarto--r-markdown">Quarto / R Markdown&lt;/h2>
-&lt;p>Note: Quarto is a new, unified authoring framework that builds on R Markdown so if you are familiar with R Markdown it should be pretty easy to transition to Quarto.&lt;/p>
+&lt;p>&lt;em>Note: Quarto is a new authoring framework that builds on R Markdown so if you are familiar with R Markdown it should be pretty easy to transition to Quarto.&lt;/em>&lt;/p>
 &lt;p>Quarto provides a unified authoring framework for data science, combining your code, its results, and your prose commentary. Quarto documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.&lt;/p>
 &lt;p>Quarto files are designed to be used in three ways:&lt;/p>
 &lt;ol>
@@ -111,7 +111,7 @@
 &lt;p>R Markdown Reference Guide: &lt;em>Help &amp;gt; Cheatsheets &amp;gt; R Markdown Reference Guide&lt;/em>.&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;p>See &lt;a href="https://quarto.org" target="_blank" rel="noopener">https://quarto.org&lt;/a> for a more detailed summary of Quarto&amp;rsquo;s functionality and .&lt;/p>
+&lt;p>See &lt;a href="https://quarto.org" target="_blank" rel="noopener">https://quarto.org&lt;/a> for more resources.&lt;/p>
 &lt;h3 id="quarto-basics">Quarto basics&lt;/h3>
 &lt;p>Quarto files contain three types of content:&lt;/p>
 &lt;ol>
