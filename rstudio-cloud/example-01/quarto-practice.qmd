@@ -1,17 +1,17 @@
 ---
 #############################################################
-#   Click on "Knit" in RStudio to render this worksheet.    #
+#   Click on "Render" in RStudio to render this worksheet.  #
 #   Acknowledgements: adapted from Claus O. Wilke           #
 #############################################################
-title: "Intro to R Markdown"
+title: "Intro to Quarto"
 author: "Write your name here"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-output: html_document
+format: pdf
 ---
 
-Much of the work in this class will be done via R Markdown documents. R Markdown documents are documents that combine text, R code, and R output, including figures. They are a great way to produce self-contained and documented statistical analyses.
+Much of the work in this class will be done via Quarto documents. Quarto documents are documents that combine text, R code, and R output, including figures. They are a great way to produce self-contained and documented statistical analyses.
 
-In this first worksheet, you will learn how to do some basic markdown editing. After you have made a change to the document, press "Knit HTML" in R Studio and see what kind of a result you get.
+In this first worksheet, you will learn how to do some basic markdown editing. After you have made a change to the document, press "Render" in R Studio and see what kind of a result you get.
 
 Edit below this line.
 
@@ -19,7 +19,7 @@ Edit below this line.
 
 ## 1. Basic Markdown editing
 
-Try out basic R Markdown features, as described here: https://rmarkdown.rstudio.com/authoring_basics.html. Write some text that is bold, and some that is in italics. Make a numbered list and a bulleted list. Make a nested list. Try the block-quote feature.
+Try out basic Markdown features, as described [here](https://quarto.org/docs/authoring/markdown-basics.html). Write some text that is bold, and some that is in italics. Make a numbered list and a bulleted list. Make a nested list. Try the block-quote feature.
 
 ## 2. Embedding R code
 

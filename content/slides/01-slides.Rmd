@@ -25,7 +25,9 @@ editor_options:
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
 library(xaringanthemer)
-style_mono_accent(base_color = "#B31B1B")
+style_mono_accent(base_color = "#B31B1B"
+                  #,text_font_size = "1.4rem"
+                  )
 ```
 
 ```{r setup, include=FALSE}
@@ -47,7 +49,7 @@ class: center middle main-title section-title-4
 
 .class-info[
 
-**Week 1**
+**Week 1.1**
 
 AEM 2850 / 5850 : R for Business Analytics<br>
 Cornell Dyson<br>

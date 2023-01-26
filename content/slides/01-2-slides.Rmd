@@ -23,7 +23,7 @@ editor_options:
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
 library(xaringanthemer)
 style_mono_accent(base_color = "#B31B1B"
-                  #,text_font_size = "1.4rem"
+                  ,text_font_size = "1.4rem"
                   )
 ```
 
@@ -31,14 +31,6 @@ style_mono_accent(base_color = "#B31B1B"
 library(knitr)
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
                       fig.retina = 3, fig.align = "center")
-```
-
-```{r packages-where_were_from, include=FALSE}
-# these packages are for the where we're from mapping exercise
-library(tidyverse)
-library(pdftools) # install.packages("pdftools")
-library(maps) # install.packages("maps"); install.packages("mapproj")
-# install.packages("viridis")
 ```
 
 ```{r xaringanExtra, echo=FALSE}
@@ -52,7 +44,7 @@ class: center middle main-title section-title-4
 
 .class-info[
 
-**Week 2**
+**Week 1.2**
 
 AEM 2850 / 5850 : R for Business Analytics<br>
 Cornell Dyson<br>
@@ -68,29 +60,9 @@ Acknowledgements:
 
 ---
 
-# Announcements
+# Plan for the rest of today
 
-If you are new to the class, please review canvas announcement
-
-Reminders:
-- New course content will be posted regularly at [aem2850.toddgerarden.com](https://aem2850.toddgerarden.com)
-- Bookmark [the schedule](https://aem2850.toddgerarden.com/schedule) and visit often
-- Submit assignments via canvas
-  - Lab 1 was due yesterday (Monday) at 11:59pm
-  - Reflection - Week 2 is due Wednesday at 11:59pm
-  - No penalties for late submissions this week
-
-We will have an undergraduate TA, Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu))
-- Poll: what times do you prefer for additional office hours?
-
-
----
-
-# Plan for today
-
-The plan for this week is to introduce ourselves to **base** R
-
-[Prologue: where we're from](#prologue)
+The plan for the rest of today is to introduce ourselves to **base** R
 
 [Introduction to base R](#intro)
 
@@ -98,196 +70,10 @@ The plan for this week is to introduce ourselves to **base** R
 
 ["Everything is an object"](#eobject)
 
-["Everything has a name"](#ename)
-
-[Indexing](#indexing)
-
-[Cleaning up](#cleaning)
-
----
-class: inverse, center, middle
-name: prologue
-
-# Prologue
-
-
-
----
-
-# How we feel about the course, in a few words
-
-<!-- I haven't read all the surveys yet, but here are some common phrases that came up: -->
-
-<br>
-
-> excited
-
-<br>
-
-> curious
-
-<br>
-
-> the vibes of this class are immaculate!
-
-<br>
-
---
-> nervous
-
-  
----
-
-# Where we're from
-
-```{r, prep-where_were_from, echo = FALSE}
-# GET MAP DATA ----
-us_states <- map_data("state")
-countries <- map_data("world") %>% mutate(region = tolower(region))
-
-# EXTRACT DATA FROM PDF SUBMISSIONS ----
-dir <- "data/draft-survey-responses-jan31" # dir <- "content/slides/data/survey-responses"
-pdfs <- list.files(dir, full.names = TRUE)
-# could do this with lapply but for sake of time and glitches just loop
-where_im_from <- vector(mode = "character", length = length(pdfs))
-for (i in 1:length(pdfs)) {
-  if(pdftools::pdf_text(pdfs[i]) == "") {
-    where_im_from[i] <- ""
-    next
-  }
-  lines <- pdfs[i] %>%
-    pdftools::pdf_text() %>%
-    readr::read_lines()
-  where_im_from[i] <- lines[6] %>%
-    stringr::str_replace(., ".*: ", "")
-  if( grepl("pronouns", where_im_from[i]) ) {
-    where_im_from[i] <- lines[7] %>%
-      stringr::str_replace(., ".*:", "")
-  }
-}
-rm(i, lines)
-
-where_were_from <- tibble(response = where_im_from) %>%
-  mutate(response = stringr::str_replace(response, ".*:", "")) %>% 
-  add_row(response = "arlington, virginia") %>% # add me
-  mutate(state = stringr::str_replace(response, ".*,", ""),
-         state = stringr::str_replace(state, "!", ""),
-         state = stringr::str_trim(state))
-rm(where_im_from)
-
-# correct missing values manually (one NY, one PA)
-missing <- which(rowSums(where_were_from=="")>0)
-whats_missing <- c("NY", "PA")
-for (i in 1:length(missing)) {
-  where_were_from[missing[i],] <- list("", whats_missing[i])
-}
-rm(missing, whats_missing, i)
-
-# clean up for merging to us_states
-plot_states <- tolower(where_were_from$state) %>%
-  recode("ny" = "new york",
-         "new york city" = "new york",
-         "nj" = "new jersey",
-         "ct" = "connecticut",
-         "new jersey!" = "new jersey",
-         "pa" = "pennsylvania",
-         "philadelphia" = "pennsylvania",
-         "fl" = "florida",
-         "id" = "idaho",
-         "south korea / california" = "south korea") %>%
-  as_tibble() %>%
-  rename(region = value) %>%
-  group_by(region) %>%
-  summarize(count = n())
-
-# clean up for merging to world
-not_us <- anti_join(plot_states, us_states, by = "region")
-us <- inner_join(plot_states, us_states, by = "region") %>%
-  select(region, count) %>% unique() %>%
-  mutate(region = "usa") %>%
-  group_by(region) %>% summarize(count = sum(count)) %>% ungroup()
-plot_countries <- rbind(not_us, us)
-rm(not_us, us)
-
-# SUMMARIZE SHARE OF STUDENTS FROM NY ----
-ny_share <- plot_states %>%
-  mutate(origin = ifelse(region=="new york", region, "other")) %>%
-  group_by(origin) %>% summarize(count = sum(count)) %>%
-  ungroup() %>% mutate(percent = count/sum(count)*100) %>%
-  select(origin, percent)
-```
-
-How can we use your `r length(pdfs)` PDF submissions to construct our origin story without having to read them one by one?
-
---
-
-- **Caveat:** This is based on submissions as of 10:07pm Monday night
-
---
-
-We can use R for this!
-
---
-
-I won't go through details now, but here is one way to approach it:
-
-- convert PDFs to plain text using `pdftools::pdf_text`
-- use tools from `readr` and `stringr` packages to clean up text and extract relevant bits
-- use `dplyr` functions to manipulate data
-- make maps using `maps` and `ggplot2::ggplot`
-
-By the end of the course you will be able to do most, if not all, of this
-
-
----
-
-# Are we all from New York?
-
-Are more or less than half of us from the state of New York?
-
---
-
-```{r}
-# step 1: do a bunch of data prep that's omitted for clarity
-# step 2: show us the answer!
-ny_share
-```
-
----
-
-# Are we all from New York?
-
-
-```{r us-map, echo = FALSE, fig.width=14, fig.height=7}
-# MAKE MAP OF STATES ----
-our_states <- left_join(us_states, plot_states, by = "region")
-
-ggplot(data = our_states,
-       mapping = aes(x = long, y = lat, group = group, fill = count)) +
-  geom_polygon(color = "gray90", size = 0.1) +
-  coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
-  theme_minimal(base_size = 24) +
-  viridis::scale_fill_viridis()
-```
-
-
----
-
-# Are we all from the U.S.?
-
-
-```{r world-map, echo = FALSE, fig.width=14, fig.height=7}
-# MAKE MAP OF COUNTRIES ----
-our_countries <- left_join(countries, plot_countries, by = "region")
-
-ggplot(data = our_countries,
-       mapping = aes(x = long, y = lat, group = group, fill = count)) +
-  geom_polygon(color = "gray90", size = 0.1) +
-  theme_minimal(base_size = 24) +
-  viridis::scale_fill_viridis()
-```
-
-
+**Reference material** (cut for time):
+  - ["Everything has a name"](#ename) (reserved words and namespace conflicts)
+  - [Indexing](#indexing)
+  - [Cleaning up](#cleaning)
 
 
 ---
@@ -296,7 +82,7 @@ name: intro
 
 # Introduction to base R
 
-(Some of this is review from Week 1)
+(Some of this is just for reference, since we covered it in example-01)
 
 ---
 
@@ -344,8 +130,9 @@ is.na(1:10)
 
 For value matching we can use: `%in%`
 
-To see whether an object is contained within (i.e., matches one of) a list of items, use `%in%`:
+To see whether an object is contained in a list of items, use `%in%`:
 ```{r}
+1:10
 4 %in% 1:10
 4 %in% 5:10
 ```
@@ -366,20 +153,20 @@ To evaluate whether two expressions are equal, we need to use **two** equal sign
 
 # Logic
 
-**Evaluation caveat:** What do you think will happen if we evaluate `0.1 + 0.2 == 0.3`?
+**Evaluation caveat:** What will happen if we evaluate `0.1 + 0.2 == 0.3`?
 
 --
 
 ```{r floating1}
 0.1 + 0.2 == 0.3
 ```
-Uh-oh! What went wrong here?
+<!-- Uh-oh! What went wrong here? -->
 
 --
 
-**Problem:** Computers represent numbers as binary (i.e., base 2) floating-points. More [here](https://floating-point-gui.de/basic/)
+**Problem:** Computers represent numbers as binary (i.e., base 2) floating-points
 - Fast and memory efficient, but can lead to unexpected behavior
-- Similar to how standard decimals can't precisely capture certain fractions (e.g., $\frac{1}{3} = 0.3333...$)
+- Similar to how decimals can't capture some fractions (e.g., $\frac{1}{3} = 0.3333...$)
 
 --
 
@@ -388,6 +175,9 @@ Uh-oh! What went wrong here?
 ```{r floating2}
 all.equal(0.1 + 0.2, 0.3)
 ```
+
+???
+More details [here](https://floating-point-gui.de/basic/)
 
 ---
 
@@ -408,9 +198,7 @@ a
 
 ---
 
-# Assignment
-
-### Assignment with `=`
+# Assignment with `=`
 
 You can also use `=` for assignment.
 
@@ -423,7 +211,7 @@ b
 
 ### Which assignment operator should you use?
 
-Most R users prefer `<-`, which can be inserted using the keyboard shortcut Alt/Option + -
+Most R users prefer `<-`, inserted using the keyboard shortcut Alt/Option + -
 
 <!-- , since `=` also has specific role for evaluation *within* functions -->
 
@@ -468,17 +256,17 @@ Use comments to document your logic in `.R` scripts and within `.Rmd` code chunk
 ```{r, eval = FALSE}
 # THIS IS A CODE SECTION ----
 # this is a comment
-vibe <- "immaculate" # iykyk
+winter <- "ski season" # iykyk
 ```
 
 --
 
-Comments should be concise and used only when necessary (unlike the comments above)
+Comments should be concise (unlike above)
 
 --
 
 Using at least four trailing dashes (`----`) creates a code section, which simplifies navigation and code folding
-- Also works with trailing equals (`====`) or pound signs (`====`)
+<!-- - Also works with trailing equals (`====`) or pound signs (`====`) -->
 
 --
 
@@ -549,9 +337,9 @@ Each row is an observation telling us the values of both `x` and `y`
 
 # Aside: built-in data frames
 
-Base R and packages have a bunch of built in data frames with special names you can call on
+Base R and packages have built-in data frames with special names you can call on
 
-As you may recall, we used `cars` on Thursday:
+As you may recall, we just used `cars`:
 
 .pull-left[
 ```{r}
@@ -574,8 +362,7 @@ plot(cars)
 Each object class has its own set of rules for determining valid operations
 
 ```{r d2}
-# Create a small data frame called "d"
-d <- data.frame(x = 1:2, y = 3:4) 
+d <- data.frame(x = 1:2, y = 3:4) # create a small data frame called "d"
 d
 ```
 
@@ -584,8 +371,7 @@ d
 At the same time, you can (usually) convert an object from one type to another
 
 ```{r mat}
-# Convert it to (i.e., create) a matrix call "mat"
-mat <- as.matrix(d)
+mat <- as.matrix(d) # convert it to (i.e., create) a matrix call "mat"
 mat
 ```
 
@@ -606,12 +392,10 @@ d
 # Ways to learn about objects
 
 Printing an object directly in the console is often handy
-- e.g., Type `d` and hit Enter
 
 --
 
 `View()` is very helpful, and has the same effect as clicking on the object in your RStudio *Environment* pane
-- e.g., Type `View(d)` and hit Enter
 
 --
 
@@ -663,7 +447,7 @@ The error message provides the answer to our question:
 
 R looked in our *Global Environment* and couldn't find `x`
 
-```{r environment, echo=FALSE, out.width='75%'}
+```{r environment, echo=FALSE, out.width='65%'}
 knitr::include_graphics("img/02/environment.png")
 ```
 
@@ -679,6 +463,12 @@ We have to tell R that `x` and `y` belong to the object `d`
 We will come back to this
 
 
+---
+class: inverse, center, middle
+
+# Reference material
+
+(We don't have time for the rest of this today)
 
 ---
 class: inverse, center, middle
@@ -781,6 +571,8 @@ What warning gets reported?
 --
 
 The warning *masked from 'package:X'* is about a **namespace conflict**
+
+???
 
 Here, both `dplyr` and the `stats` package (which gets loaded automatically when you start R) have functions named `filter` and `lag`
 
@@ -893,7 +685,7 @@ rnorm(n = 50, mean = 0, sd = 1) # take 50 draws from the standard normal distrib
 
 ---
 
-# Option 1: []
+# Option 1: [ ]
 
 We can use `[]` to index objects that we create in R
 ```{r}
@@ -904,10 +696,11 @@ a[c(4, 6)] ## Get the 4th and 6th elements
 
 ---
 
-# Option 1: []
+# Option 1: [ ]
 
 This also works on larger arrays (vectors, matrices, data frames, and lists)
 ```{r}
+starwars <- dplyr::starwars # assign for convenience
 starwars[1, 1] ## Show the cell corresponding to the 1st row & 1st column of the data frame.
 ```
 
@@ -924,9 +717,9 @@ starwars[1:3, 1]
 
 ---
 
-# Option 1: []
+# Option 1: [ ]
 
-We haven't discusssed them yet, but **lists** are a more complex type of array object in R
+We haven't discussed them yet, but **lists** are a more complex type of array object in R
 
 --
 
@@ -942,7 +735,7 @@ For example, you can have lists containing:
 
 ---
 
-# Option 1: []
+# Option 1: [ ]
 
 The relevance to indexing is that lists require two square brackets `[[]]` to index the parent list item and then the standard `[]` within that parent item. An example might help to illustrate:
 ```{r my_list, cache=T}

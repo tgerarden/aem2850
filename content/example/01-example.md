@@ -1,7 +1,7 @@
 ---
 title: "Intro to R, RStudio, and Quarto"
 linktitle: "Intro to R, RStudio, and Quarto"
-date: "2023-01-25 16:40:51"
+date: "2023-01-25 22:43:25"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -139,7 +139,7 @@ To run one line at a time instead of the entire script, you can use Ctrl+↩ on 
 
 ## Quarto / R Markdown
 
-Note: Quarto is a new, unified authoring framework that builds on R Markdown so if you are familiar with R Markdown it should be pretty easy to transition to Quarto.
+*Note: Quarto is a new authoring framework that builds on R Markdown so if you are familiar with R Markdown it should be pretty easy to transition to Quarto.*
 
 Quarto provides a unified authoring framework for data science, combining your code, its results, and your prose commentary. Quarto documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.
 
@@ -159,7 +159,7 @@ RStudio includes two links to Cheatsheets for R Markdown that are a great resour
 
 -   R Markdown Reference Guide: *Help \> Cheatsheets \> R Markdown Reference Guide*.
 
-See [https://quarto.org](https://quarto.org) for a more detailed summary of Quarto's functionality and .
+See [https://quarto.org](https://quarto.org) for more resources.
 
 ### Quarto basics
 
@@ -178,6 +178,4 @@ When you are done composing your document, you can **render** it by clicking Ren
 Markdown is a set of formatting conventions for plain text files that is widely used (beyond R). We will use an example file on RStudio Cloud to learn about some basic text formatting using Markdown. You can also read more about this in [R for Data Science (2e)](https://r4ds.hadley.nz/quarto.html#sec-source-editor).
 
 
-
 <!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** -->
-
