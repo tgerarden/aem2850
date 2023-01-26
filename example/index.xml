@@ -1,9 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 25 Jan 2023 22:43:25 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Intro to R, RStudio, and Quarto</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Wed, 25 Jan 2023 22:43:25 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 26 Jan 2023 09:18:43 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Intro to R, RStudio, and Quarto</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Thu, 26 Jan 2023 09:18:43 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
 &lt;p>Examples contain material we will discuss and use to learn R in class. These notes are &lt;em>not&lt;/em> comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.&lt;/p>
-&lt;h2 id="rstudio-cloud-link">RStudio Cloud link&lt;/h2>
-&lt;p>&lt;a href="https://posit.cloud/spaces/328615/content/5261002" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s Example RStudio Cloud Project&lt;/a>&lt;/p>
+&lt;h2 id="posit-cloud-link">Posit Cloud link&lt;/h2>
+&lt;p>&lt;em>Note: Posit Cloud was formerly known as RStudio Cloud. Posit Cloud hosts Jupyter projects as well as the RStudio projects we will use in this course.&lt;/em>&lt;/p>
+&lt;p>&lt;a href="https://posit.cloud/spaces/328615/content/5261002" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s example Posit Cloud project&lt;/a>&lt;/p>
 &lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
+&lt;li>Questions? Concerns?&lt;/li>
 &lt;li>Did anyone have trouble making an RStudio Cloud account?
 &lt;ul>
 &lt;li>&lt;a href="https://posit.cloud/spaces/328615/join?access_code=ESw7-BIJDv5jgbg5syw2C-4y3aTq3FpNp8Ezsvvx" target="_blank" rel="noopener">Here is the link to join the course workspace if you haven&amp;rsquo;t already&lt;/a>&lt;/li>
@@ -13,23 +15,22 @@
 &lt;li>R, RStudio, RStudio Cloud basics
 &lt;ul>
 &lt;li>overview on this site, then move to rstudio.cloud&lt;/li>
-&lt;li>together: &lt;code>rcoding-intro.R&lt;/code>&lt;/li>
-&lt;li>breakout groups: &lt;code>rcoding-practice.R&lt;/code>&lt;/li>
+&lt;li>together: &lt;code>r-coding-intro.R&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>R Markdown / Quarto basics
 &lt;ul>
 &lt;li>overview on this site, then move to rstudio.cloud&lt;/li>
-&lt;li>together: &lt;code>markdown-formatting-example.qmd&lt;/code>&lt;/li>
-&lt;li>breakout groups: &lt;code>quarto-practice.qmd&lt;/code>&lt;/li>
+&lt;li>together: &lt;code>quarto-formatting-example.qmd&lt;/code>&lt;/li>
+&lt;li>on your own: &lt;code>quarto-practice.qmd&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>Questions? Concerns?&lt;/li>
-&lt;li>Feedback on class format welcome!
+&lt;li>Quick overview of some base R basics
 &lt;ul>
-&lt;li>slides vs website vs walking through code, etc.&lt;/li>
+&lt;li>slides: &lt;a href="https://aem2850.toddgerarden.com/slides/01-2-slides.html">html&lt;/a> &lt;a href="https://aem2850.toddgerarden.com/slides/01-2-slides.pdf">PDF&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;/li>
+&lt;li>Feedback on class format welcome!&lt;/li>
 &lt;/ul>
 &lt;h2 id="cheatsheets">Cheatsheets&lt;/h2>
 &lt;p>&lt;a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf" target="_blank" rel="noopener">Click here to download the RStudio IDE cheatsheet&lt;/a>&lt;/p>
@@ -41,7 +42,7 @@
 &lt;p>Regardless of your prior experience, if you are patient, you will come to appreciate the power of R for data analysis and data visualization.&lt;/p>
 &lt;!-- However, like in other programming languages, you can save your work as scripts that can be easily executed at any moment. These scripts serve as a record of the analysis you performed, a key feature that facilitates reproducible work. -->
 &lt;h2 id="r-and-the-r-console">R, and the R console&lt;/h2>
-&lt;p>As we already discussed, R is the engine that will power our work. One way to control that engine is to use the &lt;em>R console&lt;/em> to execute commands as you type them, or to run scripts you have already written. There are several ways to gain access to the R console. One way is to install R on your computer and open the built-in console, which looks like this:&lt;/p>
+&lt;p>You can think of R analogously to the engine in a car: it will power our work. One way to control that engine is to use the &lt;em>R console&lt;/em> to execute commands as you type them, or to run scripts you have already written. There are several ways to gain access to the R console. One way is to install R on your computer and open the built-in console, which looks like this:&lt;/p>
 &lt;p>
 &lt;figure >
 &lt;div class="d-flex justify-content-center">
@@ -57,7 +58,7 @@
 &lt;div class="w-100" >&lt;img src="https://aem2850.toddgerarden.com/example/images/01/rstudio.png" alt="rstudio" loading="lazy" data-zoomable />&lt;/div>
 &lt;/div>&lt;/figure>
 &lt;/p>
-&lt;p>RStudio will be our launching pad for data science projects. It not only provides an editor for us to create and edit our scripts but also provides many other useful tools. In this section, we go over some of the basics.&lt;/p>
+&lt;p>RStudio will be our launching pad for data science projects. You can think of it as the dashboard in your car. It not only provides an editor for us to create and edit our scripts but also provides many other useful tools. In this section, we go over some of the basics.&lt;/p>
 &lt;h3 id="rstudio-panes">RStudio panes&lt;/h3>
 &lt;p>When you start RStudio for the first time, you will see three panes by default. The left pane shows the R console. On the right, the top pane includes tabs such as &lt;em>Environment&lt;/em> and &lt;em>History&lt;/em>, while the bottom pane shows five tabs: &lt;em>File&lt;/em>, &lt;em>Plots&lt;/em>, &lt;em>Packages&lt;/em>, &lt;em>Help&lt;/em>, and &lt;em>Viewer&lt;/em> (these tabs may change in new versions). You can click on each tab to move across the different features.&lt;/p>
 &lt;p>To start a new R script, you can click on File, then New File, then R Script.&lt;/p>
@@ -80,38 +81,30 @@
 &lt;pre>&lt;code>## [1] &amp;quot;welcome to RStudio&amp;quot;
 &lt;/code>&lt;/pre>
 &lt;p>To run one line at a time instead of the entire script, you can use Ctrl+↩ on Windows and ⌘+↩ on Mac.&lt;/p>
-&lt;h3 id="lets-explore-rstudio-cloud">Let&amp;rsquo;s explore RStudio Cloud&lt;/h3>
-&lt;p>&lt;a href="https://posit.cloud/spaces/328615/content/5261002" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s Example RStudio Cloud Project&lt;/a>&lt;/p>
+&lt;h3 id="lets-explore-posit-cloud">Let&amp;rsquo;s explore Posit Cloud&lt;/h3>
+&lt;p>&lt;a href="https://posit.cloud/spaces/328615/content/5261002" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s example Posit Cloud project&lt;/a>&lt;/p>
 &lt;!-- :::fyi -->
 &lt;!-- **SETUP TIP** -->
 &lt;!-- Change the option _Save workspace to .RData on exit_ to _Never_ and uncheck the _Restore .RData into workspace at start_. By default, when you exit R saves all the objects you have created into a file called .RData. This is done so that when you restart the session in the same folder, it will load these objects. I find that this causes confusion especially when sharing code with colleagues or peers. -->
 &lt;!-- ::: -->
 &lt;h2 id="quarto--r-markdown">Quarto / R Markdown&lt;/h2>
 &lt;p>&lt;em>Note: Quarto is a new authoring framework that builds on R Markdown so if you are familiar with R Markdown it should be pretty easy to transition to Quarto.&lt;/em>&lt;/p>
-&lt;p>Quarto provides a unified authoring framework for data science, combining your code, its results, and your prose commentary. Quarto documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.&lt;/p>
+&lt;p>Quarto provides a unified authoring framework for data science that combines your code, its results, and your prose commentary. Quarto documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.&lt;/p>
 &lt;p>Quarto files are designed to be used in three ways:&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>For communicating to decision makers, who want to focus on the conclusions, not the code behind the analysis.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>For collaborating with others (including future you!) who are interested in your conclusion &lt;em>and&lt;/em> how you reached them.&lt;/p>
+&lt;p>For collaborating with others (including future you!) who are interested in your conclusions &lt;em>and&lt;/em> how you reached them.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>As an environment in which to &lt;em>do&lt;/em> business analytics, where you can capture not only what you did, but also what you were thinking.&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>All three of these are relevant for this course. Hopefully you can see how the first could be useful in business settings where you need to present a summary of ideas or findings to a decision maker.&lt;/p>
-&lt;p>RStudio includes two links to Cheatsheets for R Markdown that are a great resource as you begin to work with Quarto:&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>R Markdown Cheat Sheet: &lt;em>Help &amp;gt; Cheatsheets &amp;gt; R Markdown Cheat Sheet&lt;/em>,&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>R Markdown Reference Guide: &lt;em>Help &amp;gt; Cheatsheets &amp;gt; R Markdown Reference Guide&lt;/em>.&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;p>See &lt;a href="https://quarto.org" target="_blank" rel="noopener">https://quarto.org&lt;/a> for more resources.&lt;/p>
+&lt;p>&lt;a href="https://quarto.org" target="_blank" rel="noopener">quarto.org&lt;/a> provides many more resources to help you as you begin to work with Quarto.&lt;/p>
+&lt;p>You may also find the &lt;a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf" target="_blank" rel="noopener">rmarkdown cheatsheet&lt;/a> helpful since much of it also applies to Quarto.&lt;/p>
 &lt;h3 id="quarto-basics">Quarto basics&lt;/h3>
 &lt;p>Quarto files contain three types of content:&lt;/p>
 &lt;ol>
@@ -123,4 +116,6 @@
 &lt;p>When you are done composing your document, you can &lt;strong>render&lt;/strong> it by clicking Render or by using the keyboard shorcut ⌘+⇧+K. This will process the file through several steps to produce your output in the format you specify.&lt;/p>
 &lt;h3 id="markdown-basics">Markdown basics&lt;/h3>
 &lt;p>Markdown is a set of formatting conventions for plain text files that is widely used (beyond R). We will use an example file on RStudio Cloud to learn about some basic text formatting using Markdown. You can also read more about this in &lt;a href="https://r4ds.hadley.nz/quarto.html#sec-source-editor" target="_blank" rel="noopener">R for Data Science (2e)&lt;/a>.&lt;/p>
-&lt;!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** --></description></item></channel></rss>
+&lt;!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** -->
+&lt;h2 id="basic-base-r-slides">Basic base R slides&lt;/h2>
+&lt;p>For the rest of class we will discuss some basics of base R using slides accessible via these links: &lt;a href="https://aem2850.toddgerarden.com/slides/01-2-slides.html">html&lt;/a> or &lt;a href="https://aem2850.toddgerarden.com/slides/01-2-slides.pdf">PDF&lt;/a>.&lt;/p></description></item></channel></rss>
