@@ -1,7 +1,7 @@
 ---
 title: "Intro to R, RStudio, and Quarto"
 linktitle: "Intro to R, RStudio, and Quarto"
-date: "2023-01-25 22:43:25"
+date: "2023-01-26 09:18:43"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -22,26 +22,28 @@ editor_options:
 Examples contain material we will discuss and use to learn R in class. These notes are *not* comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.
 
 
-## RStudio Cloud link
+## Posit Cloud link
 
-[Click here to access this week's Example RStudio Cloud Project](https://posit.cloud/spaces/328615/content/5261002)
+*Note: Posit Cloud was formerly known as RStudio Cloud. Posit Cloud hosts Jupyter projects as well as the RStudio projects we will use in this course.*
+
+[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5261002)
 
 
 ## Plan for today
+- Questions? Concerns?
 - Did anyone have trouble making an RStudio Cloud account?
   - [Here is the link to join the course workspace if you haven't already](https://posit.cloud/spaces/328615/join?access_code=ESw7-BIJDv5jgbg5syw2C-4y3aTq3FpNp8Ezsvvx)
   - **IMPORTANT NOTE:** I and our TAs will be able to view your work. This is a feature but could also be a bug -- please don't write or store anything in your course projects that you don't want us to see. :wink:
 - R, RStudio, RStudio Cloud basics
   - overview on this site, then move to rstudio.cloud
-  - together: `rcoding-intro.R`
-  - breakout groups: `rcoding-practice.R`
+  - together: `r-coding-intro.R`
 - R Markdown / Quarto basics
   - overview on this site, then move to rstudio.cloud
-  - together: `markdown-formatting-example.qmd`
-  - breakout groups: `quarto-practice.qmd`
-- Questions? Concerns?
+  - together: `quarto-formatting-example.qmd`
+  - on your own: `quarto-practice.qmd`
+- Quick overview of some base R basics
+  - slides: [html](/slides/01-2-slides.html) [PDF](/slides/01-2-slides.pdf)
 - Feedback on class format welcome!
-  - slides vs website vs walking through code, etc.
 
 
 ## Cheatsheets
@@ -66,7 +68,7 @@ Regardless of your prior experience, if you are patient, you will come to apprec
 
 ## R, and the R console
 
-As we already discussed, R is the engine that will power our work. One way to control that engine is to use the _R console_ to execute commands as you type them, or to run scripts you have already written. There are several ways to gain access to the R console. One way is to install R on your computer and open the built-in console, which looks like this:
+You can think of R analogously to the engine in a car: it will power our work. One way to control that engine is to use the _R console_ to execute commands as you type them, or to run scripts you have already written. There are several ways to gain access to the R console. One way is to install R on your computer and open the built-in console, which looks like this:
 
 ![Rconsole](/example/images/01/Rconsole.png)
 
@@ -78,7 +80,7 @@ The IDE we will use in this class is RStudio. RStudio includes an editor with ma
 
 ![rstudio](/example/images/01/rstudio.png)
 
-RStudio will be our launching pad for data science projects. It not only provides an editor for us to create and edit our scripts but also provides many other useful tools. In this section, we go over some of the basics.
+RStudio will be our launching pad for data science projects. You can think of it as the dashboard in your car. It not only provides an editor for us to create and edit our scripts but also provides many other useful tools. In this section, we go over some of the basics.
 
 ### RStudio panes
 
@@ -126,9 +128,9 @@ To _execute_ your new script, you can click on the _Run_ button on the upper rig
 
 To run one line at a time instead of the entire script, you can use Ctrl+↩ on Windows and ⌘+↩ on Mac.
 
-### Let's explore RStudio Cloud
+### Let's explore Posit Cloud
 
-[Click here to access this week's Example RStudio Cloud Project](https://posit.cloud/spaces/328615/content/5261002)
+[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5261002)
 
 <!-- :::fyi -->
 <!-- **SETUP TIP** -->
@@ -141,25 +143,22 @@ To run one line at a time instead of the entire script, you can use Ctrl+↩ on 
 
 *Note: Quarto is a new authoring framework that builds on R Markdown so if you are familiar with R Markdown it should be pretty easy to transition to Quarto.*
 
-Quarto provides a unified authoring framework for data science, combining your code, its results, and your prose commentary. Quarto documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.
+Quarto provides a unified authoring framework for data science that combines your code, its results, and your prose commentary. Quarto documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.
 
 Quarto files are designed to be used in three ways:
 
 1.  For communicating to decision makers, who want to focus on the conclusions, not the code behind the analysis.
 
-2.  For collaborating with others (including future you!) who are interested in your conclusion *and* how you reached them.
+2.  For collaborating with others (including future you!) who are interested in your conclusions *and* how you reached them.
 
 3.  As an environment in which to *do* business analytics, where you can capture not only what you did, but also what you were thinking.
 
 All three of these are relevant for this course. Hopefully you can see how the first could be useful in business settings where you need to present a summary of ideas or findings to a decision maker.
 
-RStudio includes two links to Cheatsheets for R Markdown that are a great resource as you begin to work with Quarto:
+[quarto.org](https://quarto.org) provides many more resources to help you as you begin to work with Quarto.
 
--   R Markdown Cheat Sheet: *Help \> Cheatsheets \> R Markdown Cheat Sheet*,
+You may also find the [rmarkdown cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf) helpful since much of it also applies to Quarto.
 
--   R Markdown Reference Guide: *Help \> Cheatsheets \> R Markdown Reference Guide*.
-
-See [https://quarto.org](https://quarto.org) for more resources.
 
 ### Quarto basics
 
@@ -179,3 +178,8 @@ Markdown is a set of formatting conventions for plain text files that is widely 
 
 
 <!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** -->
+
+
+## Basic base R slides
+
+For the rest of class we will discuss some basics of base R using slides accessible via these links: [html](/slides/01-2-slides.html) or [PDF](/slides/01-2-slides.pdf).
