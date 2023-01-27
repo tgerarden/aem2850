@@ -1,13 +1,13 @@
-# AEM 2850 - getting started with R
+# AEM 2850 / 5850 - getting started with R
 
 # Running code ----
 # First, try running the following line of code using the Run button above
-print("welcome to aem 2850")
+print("welcome to aem 2850 / 5850")
 
 # Note how the cursor automatically advances
 
 # Now, try running the following line of code using ⌘+↩ (mac) or Ctrl+↩ (pc)
-print("welcome to aem 2850")
+print("welcome to aem 2850 / 5850")
 
 
 # Arithmetic operations ----
