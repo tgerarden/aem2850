@@ -71,14 +71,18 @@ Acknowledgements:
 If you are new to the class, please review canvas announcements
 
 Reminders:
-- Bookmark [aem2850.toddgerarden.com/schedule](https://aem2850.toddgerarden.com/schedule) and visit often
+- New course content will be posted regularly at [aem2850.toddgerarden.com](https://aem2850.toddgerarden.com)
+- Bookmark [the schedule](https://aem2850.toddgerarden.com/schedule) and visit often
 - Submit assignments via canvas
-  - Lab 2 was due yesterday (Monday) at 11:59pm
-  - Reflection - Week 3 is due Wednesday at 11:59pm
+  - Lab 1 was due yesterday (Monday) at 11:59pm
+
+We will have an undergraduate TA, Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu))
+- Poll: what times do you prefer for additional office hours?
 
 **Bring your laptop to class on Thursday!**
 
 Questions before we get started?
+
 
 ---
 
@@ -102,6 +106,192 @@ class: inverse, center, middle
 name: prologue
 
 # Prologue
+
+
+---
+
+# How we feel about the course, in a few words
+
+<!-- I haven't read all the surveys yet, but here are some common phrases that came up: -->
+
+<br>
+
+> excited
+
+<br>
+
+> curious
+
+<br>
+
+> the vibes of this class are immaculate!
+
+<br>
+
+--
+> nervous
+
+  
+---
+
+# Where we're from
+
+```{r, prep-where_were_from, echo = FALSE}
+# GET MAP DATA ----
+us_states <- map_data("state")
+countries <- map_data("world") %>% mutate(region = tolower(region))
+
+# EXTRACT DATA FROM PDF SUBMISSIONS ----
+dir <- "data/draft-survey-responses-jan31" # dir <- "content/slides/data/survey-responses"
+pdfs <- list.files(dir, full.names = TRUE)
+# could do this with lapply but for sake of time and glitches just loop
+where_im_from <- vector(mode = "character", length = length(pdfs))
+for (i in 1:length(pdfs)) {
+  if(pdftools::pdf_text(pdfs[i]) == "") {
+    where_im_from[i] <- ""
+    next
+  }
+  lines <- pdfs[i] %>%
+    pdftools::pdf_text() %>%
+    readr::read_lines()
+  where_im_from[i] <- lines[6] %>%
+    stringr::str_replace(., ".*: ", "")
+  if( grepl("pronouns", where_im_from[i]) ) {
+    where_im_from[i] <- lines[7] %>%
+      stringr::str_replace(., ".*:", "")
+  }
+}
+rm(i, lines)
+
+where_were_from <- tibble(response = where_im_from) %>%
+  mutate(response = stringr::str_replace(response, ".*:", "")) %>% 
+  add_row(response = "arlington, virginia") %>% # add me
+  mutate(state = stringr::str_replace(response, ".*,", ""),
+         state = stringr::str_replace(state, "!", ""),
+         state = stringr::str_trim(state))
+rm(where_im_from)
+
+# correct missing values manually (one NY, one PA)
+missing <- which(rowSums(where_were_from=="")>0)
+whats_missing <- c("NY", "PA")
+for (i in 1:length(missing)) {
+  where_were_from[missing[i],] <- list("", whats_missing[i])
+}
+rm(missing, whats_missing, i)
+
+# clean up for merging to us_states
+plot_states <- tolower(where_were_from$state) %>%
+  recode("ny" = "new york",
+         "new york city" = "new york",
+         "nj" = "new jersey",
+         "ct" = "connecticut",
+         "new jersey!" = "new jersey",
+         "pa" = "pennsylvania",
+         "philadelphia" = "pennsylvania",
+         "fl" = "florida",
+         "id" = "idaho",
+         "south korea / california" = "south korea") %>%
+  as_tibble() %>%
+  rename(region = value) %>%
+  group_by(region) %>%
+  summarize(count = n())
+
+# clean up for merging to world
+not_us <- anti_join(plot_states, us_states, by = "region")
+us <- inner_join(plot_states, us_states, by = "region") %>%
+  select(region, count) %>% unique() %>%
+  mutate(region = "usa") %>%
+  group_by(region) %>% summarize(count = sum(count)) %>% ungroup()
+plot_countries <- rbind(not_us, us)
+rm(not_us, us)
+
+# SUMMARIZE SHARE OF STUDENTS FROM NY ----
+ny_share <- plot_states %>%
+  mutate(origin = ifelse(region=="new york", region, "other")) %>%
+  group_by(origin) %>% summarize(count = sum(count)) %>%
+  ungroup() %>% mutate(percent = count/sum(count)*100) %>%
+  select(origin, percent)
+```
+
+How can we use your `r length(pdfs)` PDF submissions to construct our origin story without having to read them one by one?
+
+--
+
+- **Caveat:** This is based on submissions as of 10:07pm Monday night
+
+--
+
+We can use R for this!
+
+--
+
+I won't go through details now, but here is one way to approach it:
+
+- convert PDFs to plain text using `pdftools::pdf_text`
+- use tools from `readr` and `stringr` packages to clean up text and extract relevant bits
+- use `dplyr` functions to manipulate data
+- make maps using `maps` and `ggplot2::ggplot`
+
+By the end of the course you will be able to do most, if not all, of this
+
+
+---
+
+# Are we all from New York?
+
+Are more or less than half of us from the state of New York?
+
+--
+
+```{r}
+# step 1: do a bunch of data prep that's omitted for clarity
+# step 2: show us the answer!
+ny_share
+```
+
+---
+
+# Are we all from New York?
+
+
+```{r us-map, echo = FALSE, fig.width=14, fig.height=7}
+# MAKE MAP OF STATES ----
+our_states <- left_join(us_states, plot_states, by = "region")
+
+ggplot(data = our_states,
+       mapping = aes(x = long, y = lat, group = group, fill = count)) +
+  geom_polygon(color = "gray90", size = 0.1) +
+  coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
+  theme_minimal(base_size = 24) +
+  viridis::scale_fill_viridis()
+```
+
+
+---
+
+# Are we all from the U.S.?
+
+
+```{r world-map, echo = FALSE, fig.width=14, fig.height=7}
+# MAKE MAP OF COUNTRIES ----
+our_countries <- left_join(countries, plot_countries, by = "region")
+
+ggplot(data = our_countries,
+       mapping = aes(x = long, y = lat, group = group, fill = count)) +
+  geom_polygon(color = "gray90", size = 0.1) +
+  theme_minimal(base_size = 24) +
+  viridis::scale_fill_viridis()
+```
+
+
+
+
+
+---
+class: inverse, center, middle
+name: prologue-week-3
+
+# Prologue (old week 3)
 
 ---
 
