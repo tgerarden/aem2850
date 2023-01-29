@@ -43,6 +43,12 @@ output:
 - Why do we visualize data?
 - What makes a great visualization?
 
+<!-- - What are objects? -->
+<!-- - What is assignment? -->
+<!-- - What are some advantages of writing scripts vs working in the console? -->
+<!-- - What are some differences between `.R` scripts and `.Rmd` files? -->
+<!-- - What are the three types of content in an R Markdown file? -->
+
 
 ### Teaser data
 

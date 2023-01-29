@@ -2,27 +2,27 @@ lessons:
   - title: '**Programming Foundations**'
     header: True
 
-  - title: '<span class="content-title">Welcome to AEM 2850! <br> Intro to R, RStudio, and RMarkdown</span>'
+  - title: '<span class="content-title">Welcome to AEM 2850! <br> Intro to R, RStudio, and RMarkdown <br> Basic base R</span>'
     session: "Session 1"
     date: "Week 1"
     # date_start: "June 7"
     # date_end: "June 11"
     content: "01-content"
     example: "01-example"
-    # assignment: "01-lab"
+    assignment: "01-lab"
     bg: 1
 
-  - title: '<span class="content-title">Basic base R</span>'
+  - title: '<span class="content-title">Welcome to the tidyverse <br> Data transformation with dplyr</span>'
     session: "Session 2"
     date: "Week 2"
     # date_start: "June 7"
     # date_end: "June 11"
-    # content: "02-content"
+    content: "02-content"
     # example: "02-example"
     # assignment: "02-lab"
     bg: 2
 
-  - title: '<span class="content-title">Welcome to the tidyverse <br> Data transformation with dplyr</span>'
+  - title: '<span class="content-title">Data import and tidying <br> Relational data</span>'
     session: "Session 3"
     date: "Week 3"
     # date_start: "June 14"
@@ -33,7 +33,7 @@ lessons:
     bg: 1
     bottomborder: True
 
-  - title: '<span class="content-title">Data import and tidying <br> Relational data</span>'
+  - title: '<span class="content-title">TBD</span>'
     session: "Session 4"
     date: "Week 4"
     # date_start: "June 14"
