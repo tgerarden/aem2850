@@ -46,7 +46,7 @@ lessons:
   - title: '**Data Visualization Foundations**'
     header: True
 
-  - title: '<span class="content-title">Mapping data to graphics</span>'
+  - title: '<span class="content-title">Mapping data to graphics <br> Amounts</span>'
     session: "Session 5"
     date: "Week 5"
     # date_start: "June 21"
@@ -60,12 +60,12 @@ lessons:
     header: False
 
 
-  - title: '<i class="fas fa-star"></i> **Prelim 1**'
-    date: "TBD"
+  - title: '<i class="fas fa-star"></i> **Prelim 1** in class'
+    date: "Mar 2 at 9:40AM"
     # assignment: "final-project"
     bg: 3
 
-  - title: '<span class="content-title">Amounts</span>'
+  - title: '<span class="content-title">No new content <br> (February break and Prelim 1)</span>'
     # and Proportions
     session: "Session 6"
     date: "Week 6"
@@ -187,7 +187,7 @@ lessons:
     # assignment: "15-lab"
     bg: 1
 
-  - title: '<i class="fas fa-star"></i> **Prelim 2**'
+  - title: '<i class="fas fa-star"></i> **Prelim 2 in class**'
     date: "May 9 at 9:40AM"
     # assignment: "final-project"
     bg: 3
