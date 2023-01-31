@@ -1,0 +1,45 @@
+
+
+<div id="posit-cloud-links" class="section level2">
+<h2>Posit Cloud links</h2>
+<p><a href="https://posit.cloud/spaces/328615/content/5261012">Click here to access this week’s example Posit Cloud project</a></p>
+<p><a href="https://posit.cloud/spaces/328615/content/5261013"><strong>Solutions:</strong> click here to access a project with a completed version</a> (released at the end of the week)</p>
+</div>
+<div id="plan-for-this-weeks-example" class="section level2">
+<h2>Plan for this week’s example</h2>
+<ul>
+<li>Questions? :raising_hand_woman:
+<!-- - Wrap up slides from Tuesday (`dplyr::summarize`) --></li>
+<li>Work through <code>intro-tidyverse-practice.R</code>:
+<ul>
+<li>We will explore data from <a href="https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/">this FiveThirtyEight article</a>
+<!-- - On our own devices: 1. Getting Comfortable with Data Frames -->
+<!-- - As a group: discuss results, answer questions -->
+<!-- - On our own devices: 2. Using Functions in Packages --></li>
+</ul></li>
+</ul>
+</div>
+<div id="cheatsheets" class="section level2">
+<h2>Cheatsheets</h2>
+<p><a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf">Click here to download the <code>dplyr</code> cheatsheet</a></p>
+</div>
+<div id="tidyverse-version" class="section level2">
+<h2>tidyverse version</h2>
+<p><strong>Note:</strong> If you are working locally, make sure you are running at least <strong>dplyr</strong> 1.0.0:</p>
+<pre class="r"><code># packageVersion(&#39;dplyr&#39;)
+# install.packages(&#39;dplyr&#39;) # install updated version if &lt; 1.0.0</code></pre>
+</div>
+<div id="installing-r-packages" class="section level2">
+<h2>Installing R packages</h2>
+<p>The functionality provided by a fresh install of R is only a small fraction of what is possible. In fact, we refer to what you get after your first install as <em>base R</em>. To access additional functionality, we can use add-ons made by developers. There are currently hundreds of these available from CRAN and many others shared via other repositories such as GitHub. However, because not everybody needs all available functionality, R instead makes different components available via <em>packages</em>. R makes it very easy to install packages from within R. For example, to install the <strong>tidyverse</strong> package, which we will use throughout the semester, you would just type:</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
+<p>In RStudio, you can also do this by navigating to the <em>Packages</em> pane or via the <em>Tools</em> menu &gt; Install Packages.</p>
+<p>After installation is complete, we can then load the package into our current R session using the <code>library</code> function:</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<p>You only need to install a package once if you are working with a local installation of R. On RStudio Cloud, you may sometimes need to install packages within multiple projects, but I will usually do this for you in advance. After that, you can load it using <code>library</code> whenever you need it. The package remains loaded until we quit the R session (or <code>detach</code> it).</p>
+<p>Note that installing <strong>tidyverse</strong> actually installs several packages. This commonly occurs when a package has <em>dependencies</em>, or uses functions from other packages. When you load a package using <code>library</code>, you also load its dependencies.</p>
+<p>You can see all the packages you have installed using the <em>Packages</em> tab in RStudio or via the following function:</p>
+<pre class="r"><code>installed.packages()</code></pre>
+<p>As we move through this course, we will learn more about packages and keep adding them to our toolbox.</p>
+<!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** -->
+</div>

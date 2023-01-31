@@ -1,4 +1,43 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 29 Jan 2023 14:37:43 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 1</title><link>https://aem2850.toddgerarden.com/assignment/01-lab/</link><pubDate>Sun, 29 Jan 2023 14:24:35 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/01-lab/</guid><description>&lt;h2 id="lab-1">Lab 1&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 31 Jan 2023 08:50:02 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Welcome to the tidyverse</title><link>https://aem2850.toddgerarden.com/example/02-example/</link><pubDate>Tue, 31 Jan 2023 08:50:02 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/02-example/</guid><description>&lt;h2 id="posit-cloud-links">Posit Cloud links&lt;/h2>
+&lt;p>&lt;a href="https://posit.cloud/spaces/328615/content/5261012" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s example Posit Cloud project&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://posit.cloud/spaces/328615/content/5261013" target="_blank" rel="noopener">&lt;strong>Solutions:&lt;/strong> click here to access a project with a completed version&lt;/a> (released at the end of the week)&lt;/p>
+&lt;h2 id="plan-for-this-weeks-example">Plan for this week&amp;rsquo;s example&lt;/h2>
+&lt;ul>
+&lt;li>Questions? 🙋‍♀️&lt;/li>
+&lt;/ul>
+&lt;!-- - Wrap up slides from Tuesday (`dplyr::summarize`) -->
+&lt;ul>
+&lt;li>Work through &lt;code>intro-tidyverse-practice.R&lt;/code>:
+&lt;ul>
+&lt;li>We will explore data from &lt;a href="https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/" target="_blank" rel="noopener">this FiveThirtyEight article&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;!-- - On our own devices: 1. Getting Comfortable with Data Frames -->
+&lt;!-- - As a group: discuss results, answer questions -->
+&lt;!-- - On our own devices: 2. Using Functions in Packages -->
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="cheatsheets">Cheatsheets&lt;/h2>
+&lt;p>&lt;a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf" target="_blank" rel="noopener">Click here to download the &lt;code>dplyr&lt;/code> cheatsheet&lt;/a>&lt;/p>
+&lt;h2 id="tidyverse-version">tidyverse version&lt;/h2>
+&lt;p>&lt;strong>Note:&lt;/strong> If you are working locally, make sure you are running at least &lt;strong>dplyr&lt;/strong> 1.0.0:&lt;/p>
+&lt;pre>&lt;code class="language-r"># packageVersion('dplyr')
+# install.packages('dplyr') # install updated version if &amp;lt; 1.0.0
+&lt;/code>&lt;/pre>
+&lt;h2 id="installing-r-packages">Installing R packages&lt;/h2>
+&lt;p>The functionality provided by a fresh install of R is only a small fraction of what is possible. In fact, we refer to what you get after your first install as &lt;em>base R&lt;/em>. To access additional functionality, we can use add-ons made by developers. There are currently hundreds of these available from CRAN and many others shared via other repositories such as GitHub. However, because not everybody needs all available functionality, R instead makes different components available via &lt;em>packages&lt;/em>. R makes it very easy to install packages from within R. For example, to install the &lt;strong>tidyverse&lt;/strong> package, which we will use throughout the semester, you would just type:&lt;/p>
+&lt;pre>&lt;code class="language-r">install.packages(&amp;quot;tidyverse&amp;quot;)
+&lt;/code>&lt;/pre>
+&lt;p>In RStudio, you can also do this by navigating to the &lt;em>Packages&lt;/em> pane or via the &lt;em>Tools&lt;/em> menu &amp;gt; Install Packages.&lt;/p>
+&lt;p>After installation is complete, we can then load the package into our current R session using the &lt;code>library&lt;/code> function:&lt;/p>
+&lt;pre>&lt;code class="language-r">library(tidyverse)
+&lt;/code>&lt;/pre>
+&lt;p>You only need to install a package once if you are working with a local installation of R. On RStudio Cloud, you may sometimes need to install packages within multiple projects, but I will usually do this for you in advance. After that, you can load it using &lt;code>library&lt;/code> whenever you need it. The package remains loaded until we quit the R session (or &lt;code>detach&lt;/code> it).&lt;/p>
+&lt;p>Note that installing &lt;strong>tidyverse&lt;/strong> actually installs several packages. This commonly occurs when a package has &lt;em>dependencies&lt;/em>, or uses functions from other packages. When you load a package using &lt;code>library&lt;/code>, you also load its dependencies.&lt;/p>
+&lt;p>You can see all the packages you have installed using the &lt;em>Packages&lt;/em> tab in RStudio or via the following function:&lt;/p>
+&lt;pre>&lt;code class="language-r">installed.packages()
+&lt;/code>&lt;/pre>
+&lt;p>As we move through this course, we will learn more about packages and keep adding them to our toolbox.&lt;/p>
+&lt;!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** --></description></item><item><title>Week 1</title><link>https://aem2850.toddgerarden.com/assignment/01-lab/</link><pubDate>Sun, 29 Jan 2023 14:24:35 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/01-lab/</guid><description>&lt;h2 id="lab-1">Lab 1&lt;/h2>
 &lt;p>This week&amp;rsquo;s lab is a short survey to help us get to know you: &lt;a href="https://forms.gle/42MmZxJ9PqEBywhQ9" target="_blank" rel="noopener">https://forms.gle/42MmZxJ9PqEBywhQ9&lt;/a>.&lt;/p>
 &lt;p>As with other labs throughout the semester, it is due Monday at 11:59pm (of the week following when we cover the material). The first lab should only take a few minutes and does not require any programming.&lt;/p></description></item><item><title>Intro to R, RStudio, and Quarto</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Thu, 26 Jan 2023 09:18:43 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
 &lt;p>Examples contain material we will discuss and use to learn R in class. These notes are &lt;em>not&lt;/em> comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.&lt;/p>
