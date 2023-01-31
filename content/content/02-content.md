@@ -1,7 +1,7 @@
 ---
 title: "Welcome to the tidyverse"
 linktitle: "Welcome to the tidyverse"
-date: "2023-01-29 14:37:43"
+date: "2023-01-31 09:37:08"
 menu:
   content:
     parent: Course content
@@ -36,3 +36,10 @@ output:
 - How can you use `dplyr` to summarize data by group?
 - What are pipes and what are they used for?
 
+### Slides
+
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
+
+{{< blogdown/slide-buttons >}}
+
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.
