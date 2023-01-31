@@ -17,9 +17,9 @@ editor_options:
   chunk_output_type: console
 ---
 
-## RStudio Cloud links
+## Posit Cloud links
 
-[Click here to access this week's Example RStudio Cloud Project](https://rstudio.cloud/spaces/210747/project/3674006)
+[Click here to access this week's example Posit Cloud project](https://rstudio.cloud/spaces/210747/project/3674006)
 
 [**Solutions:** click here to access a project with a completed version](https://rstudio.cloud/spaces/210747/project/3674011)
 

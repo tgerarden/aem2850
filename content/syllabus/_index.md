@@ -250,8 +250,7 @@ Your grade in this course will be based on weekly reflections, labs, projects:
 
 - The **group project** is intended to synthesize and reinforce the individual skills you develop in class, and to provide examples of their application to business and life more generally.
 
-- **Class participation** and regular attendance is expected. Excessive absences and failure to complete weekly in-class examples will impact your final grade. There is no penalty for the first three absences (except for the in-class prelims, which are mandatory). If you miss class, you are still expected to complete the in-class examples for any classes that you miss. You do not need to notify the instructor that you will miss class unless you anticipate missing more than three classes.
-<!-- is intended to synthesize and reinforce the individual skills you develop in class, and to provide examples of their application to business and life more generally. -->
+- **Class participation** and regular attendance are expected. Excessive absences and failure to complete weekly in-class examples will impact your final grade. There is no penalty for the first three absences (except for the in-class prelims, which are mandatory). If you miss class, you are still expected to complete the in-class examples for any classes that you miss. You do not need to notify the instructor that you will miss class unless you anticipate missing more than three classes.
 
 **Note: Students in AEM 5850** will have to complete a few extra assignments and meet slightly different requirements for the project.
 
@@ -312,7 +311,9 @@ Sharing of course materials is prohibited. These materials include, but are not 
 Life at Cornell can be complicated and challenging, especially during a pandemic. You might feel overwhelmed, experience anxiety or depression, or struggle with relationships or family responsibilities. [Counseling & Psychological Services (CAPS)](https://health.cornell.edu/services/mental-health-care) provides *confidential*, professional support for Cornell students. Please do not hesitate to contact CAPS for assistance.
 
 ### Accommodations for students with disabilities
-Your access in this course is important. Please give me your Student Disability Services (SDS) accommodation letter in the first three weeks of the semester so that we have adequate time to arrange your approved academic accommodations. If you need an immediate accommodation for equal access, please speak with me after class, [email me](mailto:gerarden@cornell.edu), or email SDS at [sds_cu@cornell.edu](mailto:sds_cu@cornell.edu).If the need arises for additional accommodations during the semester, please contact SDS.
+Your access in this course is important. In order to have adequate time to arrange your approved accommodation, please request your accommodation letter as soon as possible. If you need an immediate accommodation for equal access, please speak with me in person, [email me](mailto:gerarden@cornell.edu), and/or email SDS at [sds_cu@cornell.edu](mailto:sds_cu@cornell.edu). If the need arises for additional accommodations during the semester, please contact SDS.
+
+**For students with testing accommodations,** we are participating in the Alternative Testing Program for the Spring 2023 semester. If you are approved for exam accommodations, please request your exam accommodation(s) for this course and fill out an exam request form for each exam in this course via the [SDS student portal](https://cascade.accessiblelearning.com/Cornell/).
 
 ### Inclusivity
 We understand that our members represent a rich variety of backgrounds and perspectives. The Dyson School of Applied Economics and Management is committed to providing an atmosphere for learning that respects diversity. While working together to build this community we ask everyone to:

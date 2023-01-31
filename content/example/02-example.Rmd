@@ -1,6 +1,6 @@
 ---
-title: "Basic Base R"
-linktitle: "Basic Base R"
+title: "Welcome to the tidyverse"
+linktitle: "Welcome to the tidyverse"
 date: "`r format(Sys.time())`"
 output:
   blogdown::html_page:
@@ -17,21 +17,36 @@ editor_options:
   chunk_output_type: console
 ---
 
-## RStudio Cloud links
+## Posit Cloud links
 
-[Click here to access this week's Example RStudio Cloud Project](https://rstudio.cloud/spaces/210747/project/3523530)
+[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5261012)
 
-[**Solutions:** click here to access a project with a completed version](https://rstudio.cloud/spaces/210747/project/3539271)
+[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5261013) (released at the end of the week)
 
 
-## Plan for today
+## Plan for this week's example
 - Questions? :raising_hand_woman:
-- As a group: briefly skim through `basic-base-r-intro.R`
-- Then spend class working through `basic-base-r-practice.R`:
+<!-- - Wrap up slides from Tuesday (`dplyr::summarize`) -->
+- Work through `intro-tidyverse-practice.R`:
   - We will explore data from [this FiveThirtyEight article](https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/)
-  - In breakout rooms: 1. Getting Comfortable with Data Frames
-  - As a group: discuss results, answer questions
-  - In breakout rooms: 2. Using Functions in Packages
+  <!-- - On our own devices: 1. Getting Comfortable with Data Frames -->
+  <!-- - As a group: discuss results, answer questions -->
+  <!-- - On our own devices: 2. Using Functions in Packages -->
+
+
+## Cheatsheets
+
+[Click here to download the `dplyr` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)
+
+
+## tidyverse version
+
+**Note:** If you are working locally, make sure you are running at least **dplyr** 1.0.0:
+
+```{r dplyr_vers}
+# packageVersion('dplyr')
+# install.packages('dplyr') # install updated version if < 1.0.0
+```
 
 
 ## Installing R packages
@@ -42,7 +57,7 @@ The functionality provided by a fresh install of R is only a small fraction of w
 install.packages("tidyverse")
 ```
 
-In RStudio, you can also do this by navigating to the _Tools_ tab and selecting install packages.
+In RStudio, you can also do this by navigating to the _Packages_ pane or via the _Tools_ menu > Install Packages.
 
 After installation is complete, we can then load the package into our current R session using the `library` function:
 

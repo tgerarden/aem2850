@@ -18,7 +18,7 @@ lessons:
     # date_start: "June 7"
     # date_end: "June 11"
     content: "02-content"
-    # example: "02-example"
+    example: "02-example"
     # assignment: "02-lab"
     bg: 2
 
@@ -60,7 +60,7 @@ lessons:
     header: False
 
 
-  - title: '<i class="fas fa-star"></i> **Prelim 1** in class'
+  - title: '<i class="fas fa-star"></i> **Prelim 1 in class**'
     date: "Mar 2 at 9:40AM"
     # assignment: "final-project"
     bg: 3
@@ -173,19 +173,19 @@ lessons:
     # assignment: "14-lab"
     bg: 2
 
-  - title: '**Conclusion**'
-    header: True
+#  - title: '**Conclusion**'
+#    header: True
 
-  - title: '<span class="content-title">Conclusion</span>'
+#  - title: '<span class="content-title">Conclusion</span>'
 #Telling stories with data
-    session: "Session 15"
-    date: "Week 15"
-    # date_start: "July 26"
-    # date_end: "July 26"
-    # content: "15-content"
-    # # example: "15-example"
-    # assignment: "15-lab"
-    bg: 1
+#    session: "Session 15"
+#    date: "Week 15"
+#    # date_start: "July 26"
+#    # date_end: "July 26"
+#    # content: "15-content"
+#    # # example: "15-example"
+#    # assignment: "15-lab"
+#    bg: 1
 
   - title: '<i class="fas fa-star"></i> **Prelim 2 in class**'
     date: "May 9 at 9:40AM"
