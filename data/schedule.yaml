@@ -2,7 +2,7 @@ lessons:
   - title: '**Programming Foundations**'
     header: True
 
-  - title: '<span class="content-title">Welcome to AEM 2850! <br> Intro to R, RStudio, and RMarkdown</span>'
+  - title: '<span class="content-title">Welcome to AEM 2850! <br> Intro to R, RStudio, and RMarkdown <br> Basic base R</span>'
     session: "Session 1"
     date: "Week 1"
     # date_start: "June 7"
