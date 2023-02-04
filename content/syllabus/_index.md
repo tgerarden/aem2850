@@ -34,7 +34,7 @@ Welcome to AEM 2850 / AEM 5850! I'd like to preface the syllabus with three poin
 
 Tuesdays and Thursdays 9:40 - 10:55 in Warren 150
 
-### My office hours
+### Professor office hours
 
 - Tuesdays 11:00am - 12:00pm  in Warren 466
   - these are "drop-in" office hours---come at any time, in any number
@@ -42,10 +42,16 @@ Tuesdays and Thursdays 9:40 - 10:55 in Warren 150
 
 ### TA office hours
 
-#### Graduate TA: Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
+- Mondays 12:30pm - 3:30pm in Warren 372
+  - Undergraduate TA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu))
+  - Undergraduate TA Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu))
+  - Graduate TA Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
+- Fridays 10:30am - 11:30pm in Warren 372
+  - Graduate TA Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
 
-Office hours TBD
-<!-- - Mondays 1:30pm - 3:30pm in Warren 372 -->
+<!-- #### Graduate TA: Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu)) -->
+
+<!-- Office hours TBD -->
 
 <!-- #### Undergraduate TAs: Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu)) -->
 
