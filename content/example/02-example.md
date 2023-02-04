@@ -1,7 +1,7 @@
 ---
 title: "Welcome to the tidyverse"
 linktitle: "Welcome to the tidyverse"
-date: "2023-01-31 08:50:02"
+date: "2023-02-04 14:25:34"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -21,7 +21,7 @@ editor_options:
 
 [Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5261012)
 
-[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5261013) (released at the end of the week)
+[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5261013)
 
 
 ## Plan for this week's example

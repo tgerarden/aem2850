@@ -1,0 +1,37 @@
+---
+title: "Data import and tidying"
+linktitle: "Data import and tidying"
+date: "`r format(Sys.time())`"
+menu:
+  content:
+    parent: Course content
+    weight: 3
+type: docs
+# bibliography: "../../static/bib/references.bib"
+# csl: "../../static/bib/chicago-fullnote-bibliography-no-bib.csl"
+slides: "03-slides"
+
+output:
+  blogdown::html_page:
+    keep_md: true # do this to save results in .md file
+    toc: false
+---
+
+### Readings
+
+- <i class="fas fa-book"></i> [Skim chapter 8: Data import](https://r4ds.hadley.nz/data-import.html) of *R for Data Science (2e)*
+  - Focus on sections 8.1, 8.2, and 8.5
+- <i class="fas fa-book"></i> [Read chapter 6: Data tidying](https://r4ds.hadley.nz/data-tidy.html) of *R for Data Science (2e)*
+
+
+#### Optional readings
+- <i class="fas fa-external-link-square-alt"></i> [FiveThirtyEight: According To Super Bowl Ads, Americans Love America, Animals And Sex](https://projects.fivethirtyeight.com/super-bowl-ads/)
+
+
+### Guiding questions
+
+- What types of files do `readr` functions read?
+- What is tidy data?
+- What three rules make a dataset tidy?
+- What basic steps/functions can be used to tidy a dataset?
+

@@ -21,7 +21,7 @@ editor_options:
 
 [Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5261012)
 
-[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5261013) (released at the end of the week)
+[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5261013)
 
 
 ## Plan for this week's example
