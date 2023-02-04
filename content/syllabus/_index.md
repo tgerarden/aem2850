@@ -43,11 +43,11 @@ Tuesdays and Thursdays 9:40 - 10:55 in Warren 150
 ### TA office hours
 
 - Mondays 12:30pm - 3:30pm in Warren 372
-  - Undergraduate TA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu))
-  - Undergraduate TA Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu))
-  - Graduate TA Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
-- Fridays 10:30am - 11:30pm in Warren 372
-  - Graduate TA Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
+  - 12:30-2:30: Undergrad TA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu))
+  - 12:45-2:45: Undergrad TA Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu))
+  - 2:00-3:30: Grad TA Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
+- Fridays 10:30am - 11:30am in Warren 372
+  - Grad TA Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
 
 <!-- #### Graduate TA: Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu)) -->
 
@@ -58,8 +58,7 @@ Tuesdays and Thursdays 9:40 - 10:55 in Warren 150
 <!-- - Mondays 12:20pm - 1:20pm in Warren 372 -->
 <!-- - Fridays 10:00am - 11:00am in Warren 372 -->
 
-See below for tips on how to make the most of office hours and email.
-
+[See below for tips on how to make the most of office hours and email.](#office-hours-and-email).
 
 ## Course overview
 
@@ -112,7 +111,7 @@ We will draw on multiple textbooks, all of which are available online (**for fre
 
 <!-- - Alberto Cairo, *The Truthful Art: Data, Charts, and Maps for Communication* (Berkeley, California: New Riders, 2016) -->
 
-- [*R for Data Science*](https://r4ds.had.co.nz) by Hadley Wickham and Garrett Grolemund
+- [*R for Data Science (2e)*](https://r4ds.hadley.nz) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund
 
 - [*Data Visualization: A Practical Introduction*](http://socviz.co/) by Kieran Healy
 
@@ -129,11 +128,11 @@ We will draw on multiple textbooks, all of which are available online (**for fre
 
 You will do all of your analysis with the open source (and free!) programming language [R](https://cran.r-project.org/). You will use [RStudio](https://www.rstudio.com/) as the main program to access R. **Think of R as an engine and RStudio as a car dashboard**—R handles all the calculations produces the actual statistics and graphical output, while RStudio provides a nice interface for running R code.
 
-R is free, but it can sometimes be a pain to install and configure. To make life easier, we'll start by using the free [RStudio.cloud](http://rstudio.cloud/) service, which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R!
+R is free, but it can sometimes be a pain to install and configure. To make life easier, we'll start by using the free [Posit Cloud](https://posit.cloud/) service, which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R!
 
-<!-- We will have a shared class workspace in RStudio.cloud that will let you quickly copy templates for examples, exercises, and mini projects. -->
+<!-- We will have a shared class workspace in Posit Cloud that will let you quickly copy templates for examples, exercises, and mini projects. -->
 
-RStudio.cloud is convenient, but it can be slow and it is not designed to be able to handle larger datasets or more complicated analysis and graphics. You also can't use your own custom fonts with RStudio.cloud. So you'll want to install R, RStudio, and other R packages on your own computer and wean yourself off of RStudio.cloud over the first few weeks of the semester.
+Posit Cloud is convenient, but it can be slow and it is not designed to be able to handle larger datasets or more complicated analysis and graphics. You also can't use your own custom fonts with Posit Cloud. So you'll want to install R, RStudio, and other R packages on your own computer and wean yourself off of Posit Cloud over the first few weeks of the semester.
 
 <!-- You can [find instructions for installing R, RStudio, and all the tidyverse packages here.](/resource/install/) -->
 
@@ -154,7 +153,7 @@ All three of these tools, and others, are valuable resources that can help you l
 
 Searching for help with R online can sometimes be tricky because the program name is, ya know, the letter R. Search engines are generally smart enough to figure out what you mean when you search for "r scatterplot", but if it does struggle, try searching for "rstats" instead (e.g., "rstats scatterplot"). Also, since most of your R work will deal with `tidyverse` packages like `ggplot2`, it's often easier to use those keywords instead of the letter "r" (e.g., "ggplot scatterplot"). 
 
-Finally, there are some excellent tutorials on R available through [Rstudio Clould Primers](https://rstudio.cloud/learn/primers).
+Finally, there are some excellent tutorials on R available through [Posit Primers](https://posit.cloud/learn/primers).
 
 
 
