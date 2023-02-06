@@ -53,7 +53,7 @@ To practice, you will complete a brief set of exercises each week. These exercis
 
 <!-- This is essentially a pass/fail system. We're not grading your coding ability; we're not checking each line of code to make sure it produces some exact final figure; and we're not looking for perfect. Also note that a ✓ does not require 100% success. You will sometimes get stuck with weird errors that you can't solve, or the demands of pandemic living might occasionally become overwhelming. We are looking for good faith effort. Try hard, do good work, and you'll get a ✓. -->
 
-You may work together on the labs, but you must turn in your own answers. The default method will be to write these using R Markdown, knit the completed lab to a PDF document, and submit the resulting PDF file via canvas.
+You may work together on the labs, but you must turn in your own answers. The default method will be to write these using Quarto, knit the completed lab to a PDF document, and submit the resulting PDF file via canvas.
 
 
 ### Prelims

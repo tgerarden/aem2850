@@ -1,55 +1,923 @@
 ---
-class: inverse, center, middle
-name: prologue-week-3
+title: "Data import and tidying"
+author: "Todd Gerarden"
+output:
+  xaringan::moon_reader:
+    lib_dir: "libs"
+    css: ["xaringan-themer.css", "css/tdg-slides.css"]
+#    css: ['default', 'metropolis', 'metropolis-fonts']
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%"
+      ratio: "16:9"
+      navigation:
+        scroll: false
+      # beforeInit: "libs/offline-mathjax.js"
+editor_options: 
+  chunk_output_type: console
+---
 
-# Prologue (old week 3)
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(base_color = "#B31B1B",
+                  text_font_size = "1.4rem")
+xaringanExtra::use_xaringan_extra(c("tile_view"))
+```
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(#warning = FALSE, message = FALSE, 
+                      #cache = TRUE,
+                      fig.retina = 3, fig.align = "center",
+                      fig.width=14, fig.height=7)
+```
+
+```{r packages, include=FALSE}
+library(tidyverse)
+```
+
+
+class: center middle main-title section-title-4
+
+# Data import and tidying
+
+.class-info[
+
+**Week 3**
+
+AEM 2850 / 5850 : R for Business Analytics<br>
+Cornell Dyson<br>
+Spring 2023
+
+Acknowledgements: 
+<!-- [Andrew Heiss](https://datavizm20.classes.andrewheiss.com),  -->
+<!-- [Claus Wilke](https://wilkelab.org/SDS375/),  -->
+[Grant McDermott](https://github.com/uo-ec607/lectures),
+[Allison Horst](https://github.com/allisonhorst/stats-illustrations),
+[R4DS (2e)](https://r4ds.hadley.nz/data-tidy.html)
+
+]
+
 
 ---
 
-# What sports do we watch?
+# Announcements
 
-Take a guess: what's the most popular spectator sport among classmates?
+We will not assign any late penalties for the survey and lab-02
 
-```{r, echo = FALSE, eval = FALSE}
-library(magrittr)
+Late assignments will be penalized going forward
+- If something comes up, please email me and Hui **in advance**
+
+Reminders:
+- Submit assignments via canvas
+  - Lab-02 was due yesterday (Monday) at 11:59pm
+
+Questions before we get started?
+
+---
+
+# Plan for today
+
+[Prologue](#prologue)
+
+[Data import](#readr)
+
+[Tidy data](#tidyr)
+  - [pivot_longer](#pivot_longer)
+  - [pivot_wider](#pivot_wider)
+  - [separate](#separate)
+  - [unite](#unite)
+
+[Summary](#summary)
+
+
+---
+class: inverse, center, middle
+name: prologue
+
+# Prologue
+
+
+---
+
+# What are our concentrations?
+
+Take a guess: what's the most common concentration among classmates?
+
+--
+
+```{r, echo = FALSE}
 load("data/survey-responses/survey-data.RData")
+concentrations_raw |> 
+  select(program, concentration)
+```
+
+---
+
+# What are our concentrations?
+
+After some processing to get concentration counts, we get:
+
+```{r, echo = FALSE}
+concentrations |> select(-degree, -concentration, -program) |> 
+  summarize_all(sum, na.rm = TRUE) |> 
+   relocate(sort(tidyselect::peek_vars()))
+```
+
+What is the "level of observation" in this data frame? (i.e., what are the rows?)
+
+--
+
+Is the best way to organize concentration counts?
+
+--
+
+How would you use counts to compute shares in this data frame?
+
+---
+
+# What are our "tidy" concentrations?
+
+Let's `pivot_longer` and `arrange` to get the top 3:
+
+```{r, echo = FALSE}
+# now show off what we can do with pivot_longer()
+concentrations |> select(-degree, -concentration, -program) |> 
+  summarize_all(sum, na.rm = TRUE) |> 
+  pivot_longer(everything(), names_to = "concentration", values_to = "count") |> 
+  arrange(desc(count)) |> 
+  filter(concentration!="other") |> 
+  head(3)
 ```
 
 --
 
-```{r, echo = FALSE, eval = FALSE}
-sports
-```
+How would you use what we learned last week to compute shares?
 
 --
 
-Let's `count` and `arrange` to get the top 3:
+```{r, eval = FALSE}
+tidy_concentrations |> mutate(share = count / sum(count)) # easy!
+```
 
-```{r, echo = FALSE, eval = FALSE}
-# now show off what we can do with summarize()
-tibble::tibble(sport = sports) |> 
-  dplyr::count(sport) |> 
-  dplyr::arrange(desc(n)) |> 
+```{r, echo = FALSE}
+concentrations |> select(-degree, -concentration, -program) |> 
+  summarize_all(sum, na.rm = TRUE) |> 
+  pivot_longer(everything(), names_to = "concentration", values_to = "count") |> 
+  arrange(desc(count)) |> 
+  mutate(share = count / sum(count)) |> 
+  filter(concentration!="other") |> 
   head(3)
 ```
 
 ---
+class: inverse, center, middle
+name: readr
 
-# R can be used for sports analytics, too!
+# Data import
+
+
+---
+
+# Data import
+
+Plain-text rectangular files are a common way to store and share data:
+- comma delimited files (`readr::read_csv`)
+- tab delimited files (`readr::read_tsv`)
+- fixed width files (`readr::read_fwf`)
+
+We will just cover csv files since `readr` syntax is transferable
+
+---
+
+# Super bowl ads: a csv example
+
+```{r echo=FALSE, out.width='60%'}
+knitr::include_graphics("img/03/superbowl-ads.png")
+```
+
+???
+Image source: [FiveThirtyEight](https://github.com/fivethirtyeight/superbowl-ads)
+
+---
+
+# Super bowl ads in csv format
+
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/03/superbowl-raw.png")
+```
+
+???
+Data source: [FiveThirtyEight](https://github.com/fivethirtyeight/superbowl-ads)
+
+---
+
+# Super bowl ads in csv format
+
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/03/superbowl-excel.png")
+```
+
+---
+
+# Getting from a csv to a data frame
+
+How are data frames and csv files similar?
+
+--
+- both are rectangular
+- csv lines often correspond to rows
+- csv commas delineate columns
+
+--
+
+How are they different?
+
+--
+- csv files do not store column types!
+
+---
+
+# 1) readr::read_csv
+
+`read_csv` helps us get from point a to point b:
+- you give it the path to your csv file
+- it takes the first line of data as column names by default
+- it guesses column types and builds up a data frame
+
+Most csv files can be read using the defaults, so we will focus on that
+
+If you run into special cases, consult `?read_csv`
+
+---
+
+# An aside on paths
+
+First we need to figure out what path to give `read_csv`
+
+--
+
+We have several options:
+- absolute paths
+  - `/Users/todd/aem2850/slides/data/superbowl.csv`
+  - `C:\aem2850\slides\data\superbowl.csv`
+- relative paths
+  - `data/superbowl.csv`
+- links
+  - [`https://raw.githubusercontent.com/superbowl-ads.csv`](https://raw.githubusercontent.com/fivethirtyeight/superbowl-ads/main/superbowl-ads.csv)
+- others
+  - see `?read_csv`
+
+---
+
+# An aside on paths
+
+Relative paths are nice: work if you move R code to another directory or device
+
+**But what are they relative to?**
+
+--
+
+The working directory
+
+**But where is the working directory?**
+
+--
+
+**R scripts (.R)** in an R Project: default working directory is the project directory
+
+**Quarto (.qmd)**: default working directory is the location of the .qmd file
+
+--
+
+In our RStudio Cloud projects, these will both be `/cloud/project`, which is the default directory for our projects and where we store our .qmd templates
+
+---
+
+# An aside on paths
+
+More generally, can check your working directory using `getwd()`
+
+For example, here's the working directory for the slides' source code:
+```{r get-wd}
+getwd()
+```
+
+`setwd()` will alter the working directory
+
+---
+
+# An aside on paths
+
+Just for context, here is a list of (some) directories below the working directory
+
+```{r get-path-a, echo = FALSE}
+# list the directories below where this .Rmd file is
+fs::dir_tree(recurse = FALSE, type = "directory", glob = "*slides_*", invert = TRUE)
+```
+
+--
+
+Now list (some of) the .csv files in the folder `data`:
+
+```{r get-path-b, echo = FALSE}
+fs::dir_tree("data", glob = "*superbowl.csv") # could instead list the *.csv files within data
+```
+
+`data/superbowl.csv` is the relative path from our working directory to our csv
+
+
+???
+
+Omitted code that uses `fs::dir_tree` to print pretty directory trees
+
+---
+
+# 1) readr::read_csv
+
+So all we need to do is give that relative path to `read_csv`:
+
+```{r read-ads}
+ads <- read_csv("data/superbowl.csv")
+```
+
+--
+
+That was easy!
+
+???
+Note: readr intentionally never guesses that columns are integers as a safeguard ([source](https://github.com/tidyverse/readr/issues/1094#issuecomment-628612430))
+
+---
+
+# Now we're back to our old tricks
+
+.less-left[
+```{r}
+ads |> 
+  count(funny) |> 
+  arrange(desc(n))
+```
+]
+
+--
+
+.more-right[
+```{r}
+ads |> 
+  group_by(brand) |> 
+  summarize(likes = sum(like_count, na.rm = T)) |> 
+  arrange(desc(likes))
+```
+]
+
+---
+
+# 2) readr::write_csv
+
+Use `write_csv` to write data to a `.csv`:
+
+```{r write-ads, eval = FALSE}
+write_csv(ads, "data/superbowl.csv") # overwrite the raw data (bad idea!)
+
+ads |> 
+  select(year, brand, youtube_url) |> 
+  write_csv("superbowl-urls.csv") # write modified output to a new file
+```
+
+---
+
+# csv is not always the best storage medium
+
+To preserve column specifications and save time when working in R, use `write_rds()` and `read_rds()` to save and open data frames in .RDS format
+
+For multiple objects, `save()` and `load()` are handy functions from base R that work with the .RData format
+
+---
+
+# Importing excel data
+
+Wait, what about getting data from excel spreadsheets?
+
+--
+
+Use `readxl::read_excel()` for data that is stored in `.xls` or `.xlsx` format
+
+`readxl` isn't loaded as part of the core tidyverse, so we need to load it first:
+
+```{r readxl}
+library(readxl) # already installed as part of the tidyverse, but not loaded by default
+excel_sheets("data/readxl/datasets.xlsx") # list the sheets in datasets.xlsx
+```
+
+---
+
+# Importing excel data
+
+```{r}
+read_excel("data/readxl/datasets.xlsx", sheet = "mtcars")
+```
+
+---
+
+# Importing excel data
+
+Can also use arguments like `range` to get data using excel lingo
+
+```{r}
+read_excel("data/readxl/datasets.xlsx", 
+           range = "mtcars!A1:D6") # note the combination of sheet and cell range
+```
+
+
+---
+class: inverse, center, middle
+name: tidyr
+
+# Tidy data
+
+
+---
+
+# WHAT is "tidy" data?
+
+---
+
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/03/tidydata_1.jpg")
+```
+
+
+---
+
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/03/tidydata_2.jpg")
+```
+
+
+---
+
+# WHY "tidy" data?
+
+---
+
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/03/tidydata_3.jpg")
+```
+
+
+---
+
+# Which of these do you think is most tidy?
 
 .pull-left[
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/03/stephen-curry.png")
+```{r, eval=FALSE}
+table1
+#> # A tibble: 4 × 4
+#>   country      year  cases population
+#>   <chr>       <dbl>  <dbl>      <dbl>
+#> 1 Afghanistan  1999    745   19987071
+#> 2 Afghanistan  2000   2666   20595360
+#> 3 Brazil       1999  37737  172006362
+#> 4 Brazil       2000  80488  174504898
+```
+
+```{r, eval=FALSE}
+table2
+#> # A tibble: 4 × 3
+#>   country      year rate             
+#>   <chr>       <dbl> <chr>            
+#> 1 Afghanistan  1999 745/19987071     
+#> 2 Afghanistan  2000 2666/20595360    
+#> 3 Brazil       1999 37737/172006362  
+#> 4 Brazil       2000 80488/174504898  
 ```
 ]
 
 .pull-right[
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/03/kobe-bryant.png")
+```{r, eval=FALSE}
+table3
+#> # A tibble: 8 × 4
+#>   country      year type           count
+#>   <chr>       <dbl> <chr>          <dbl>
+#> 1 Afghanistan  1999 cases            745
+#> 2 Afghanistan  1999 population  19987071
+#> 3 Afghanistan  2000 cases           2666
+#> 4 Afghanistan  2000 population  20595360
+#> 5 Brazil       1999 cases          37737
+#> 6 Brazil       1999 population 172006362
+#> # … with 2 more rows
 ```
 ]
 
+--
+
+Here, `table1`. Though in general, it can depend on your objectives!
+
+---
+
+# Why is `table1` a good choice?
+
+The `dplyr` functions from last week are designed to work with tidy data:
+
+```{r, echo=FALSE}
+table1 <- tibble(
+  country = c("Afghanistan", "Afghanistan", "Brazil", "Brazil"),
+  year = c(1999, 2000, 1999, 2000),
+  cases = c(745, 2666, 37737, 80488),
+  population = c(19987071, 20595360, 172006362, 174504898)
+)
+```
+
+.pull-left[
+```{r}
+# compute rate per 10,000
+table1 |>
+  mutate(rate = cases / population * 10000)
+```
+]
+
+--
+
+.pull-right[
+```{r}
+# compute cases per year
+table1 |>
+  group_by(year) |> 
+  summarize(cases = sum(cases))
+```
+]
+
+
+---
+
+# Why is `table1` a good choice?
+
+The `ggplot2` functions we will learn are designed to work with tidy data:
+
+.pull-left[
+```{r ggplot2-example, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+# visualize changes over time
+table1 |> 
+  ggplot(aes(x = year, y = cases)) +
+  geom_line(aes(group = country)) +
+  geom_point(aes(color = country, 
+                 shape = country)) +
+  scale_x_continuous(breaks = c(1999, 2000)) +
+  theme_bw() +
+  theme(legend.position = "bottom")
+```
+]
+
+.pull-right[
+  ![](`r knitr::fig_chunk("ggplot2-example", "png")`)
+]
+
+
+---
+
+# HOW can we "tidy" data?
+
+**Key tidyr verbs**
+
+1. `pivot_longer`: Pivot wide data into long format (updated version of `gather`) 
+
+2. `pivot_wider`: Pivot long data into wide format (updated version of `spread`) 
+
+3. `separate`: Split one column into multiple columns
+
+4. `unite`: Combine multiple columns into one
+
+
+---
+name: pivot_longer
+
+# Let's start with an untidy dataset
+
+```{r, echo=FALSE}
+set.seed(12345)
+stocks <- tibble( # could use "tibble" instead of "data.frame" if you prefer
+  date = as.Date('2021-01-01') + 0:1,
+  X = rnorm(2, 0, 1),
+  Y = rnorm(2, 0, 2),
+  Z = rnorm(2, 0, 4)
+  )
+```
+
+```{r pivot_longer1}
+stocks
+```
+
+We have 4 columns, the date and the stocks
+
+Is this tidy?
+
+--
+
+No!
+1. stock names `X`, `Y`, `Z` are values, not variables
+2. cells contain prices, but there is no variable `price`
+
+Let's use `pivot_longer()` to get this in tidy form
+
+---
+
+# 1) tidyr::pivot_longer
+
+We need to pivot the stock name columns `X`, `Y`, `Z` "longer"
+
+We need to give three key pieces of information to `pivot_longer()`:
+
+1. Choose columns using `X:Z` or `-date`
+2. Decide what variable holds the names: `names_to = "stock"`
+3. Decide what variable holds the values: `values_to = "price"`
+
+--
+
+Here is what that syntax looks like:
+
+```{r pivot_longer1a, eval=FALSE}
+stocks |> 
+  pivot_longer(X:Z, names_to = "stock", values_to = "price")
+```
+
+---
+
+# 1) tidyr::pivot_longer
+
+Here is what that syntax does:
+
+```{r pivot_longer1b}
+stocks |> pivot_longer(X:Z, names_to = "stock", values_to = "price")
+```
+
+--
+
+Let's save the "tidy" (i.e., long) stocks data frame for later use
+
+```{r pivot_longer2}
+tidy_stocks <- stocks |> 
+  pivot_longer(-date, names_to = "stock", values_to = "price")
+```
+
+---
+
+# 1) tidyr::pivot_longer: How does it work?
+
+```{r, eval=FALSE}
+df |> 
+  pivot_longer(
+    cols = col1:col2,
+    names_to = "name",
+    values_to = "value"
+  )
+```
+
+.less-left[
+Existing variables such as `var` need to be repeated, once for each column in `cols`
+]
+
+.more-right[
+```{r echo=FALSE, out.width='85%'}
+knitr::include_graphics("img/03/pivot-longer-variables.png")
+```
+]
+
+---
+
+# 1) tidyr::pivot_longer: How does it work?
+
+```{r, eval=FALSE}
+df |> 
+  pivot_longer(
+    cols = col1:col2,
+    names_to = "name",
+    values_to = "value"
+  )
+```
+
+.less-left[
+Column names become values in a new variable, whose name is given by `names_to`
+  - repeated once for each row in the original dataset
+]
+
+.more-right[
+```{r echo=FALSE, out.width='85%'}
+knitr::include_graphics("img/03/pivot-longer-column-names.png")
+```
+]
+
+---
+
+# 1) tidyr::pivot_longer: How does it work?
+
+```{r, eval=FALSE}
+df |> 
+  pivot_longer(
+    cols = col1:col2,
+    names_to = "name",
+    values_to = "value"
+  )
+```
+
+.less-left[
+Cell values become values in a new variable, with a name given by `values_to`
+]
+
+.more-right[
+```{r echo=FALSE, out.width='85%'}
+knitr::include_graphics("img/03/pivot-longer-cell-values.png")
+```
+]
+
+
+---
+name: pivot_wider
+
+# 2) tidyr::pivot_wider
+
+```{r pivot_wider1a}
+tidy_stocks |> pivot_wider(names_from = stock, values_from = price)
+```
+
+--
+
+We just got our original data back!
+
+```{r}
+stocks
+```
+
+---
+
+# 2) tidyr::pivot_wider
+
+```{r pivot_wider1b}
+tidy_stocks |> pivot_wider(names_from = date, values_from = price)
+```
+
+--
+
+Reversing the arguments effectively transposed the original data
+
+```{r}
+stocks
+```
+
+
+---
+name: separate
+
+# 3) tidyr::separate
+
+```{r echo = FALSE, eval = FALSE}
+# economists <- data.frame(name = c("Adam.Smith", "Paul.Samuelson", "Milton.Friedman"))
+```
+
+```{r sep1}
+halftime_openers <- data.frame(name = c("Dr.Dre", "Snoop.Dogg")) # (from the 2022 super bowl)
+halftime_openers
+```
+
+--
+
+```{r sep1a}
+halftime_openers |> separate(name, c("first_name", "last_name")) 
+```
+
+--
+
+This command is clever: it splits at non-alphanumeric values. To avoid ambiguity, you can specify the separation character with `separate(..., sep=".")`
+
+---
+
+# 3) tidyr::separate
+
+```{r sep1b}
+halftime_performers <- data.frame(name = c("Dr..Dre", "Snoop.Dogg", "Eminem", "Mary.J.Blige",
+                                           "Kendrick.Lamar", "50.Cent", "Anderson..Paak"))
+```
+--
+```{r sep1c}
+halftime_performers |> separate(name, c("first_name", "last_name"))
+```
+
+What happened? Did we lose any information?
+
 ???
-Source: https://github.com/toddwschneider/ballr
+No "Blige", no . in "Dr." or ".Paak"
+
+---
+name: unite
+
+# 4) tidyr::unite
+
+Sometimes a single variable is stored in multiple columns:
+
+```{r unite1, echo=FALSE}
+gas_prices <- data.frame(
+  yr = rep(2023, times = 4),
+  mnth = rep(2, times = 4),
+  dy = 3:6,
+  price = c(3.567, 3.565, 3.563, 3.559)
+  )
+```
+
+```{r unite1a}
+gas_prices
+```
+
+---
+
+# 4) tidyr::unite
+
+```{r unite1b}
+# combine "yr", "mnth", and "dy" into one "date" column
+gp_u <- gas_prices |> unite(date, c("yr", "mnth", "dy"), sep = "-")
+gp_u
+```
+
+---
+
+# 4) tidyr::unite
+
+Note that `unite` will automatically create a character variable:
+```{r unite2, highlight.output=3}
+gp_u |> as_tibble() # print it as a tibble to see data types
+```
+
+--
+
+To convert it to something else (e.g., date or numeric), modify it using `mutate`
+
+---
+
+# 4) tidyr::unite
+
+```{r unite3, message=F, highlight.output=3}
+library(lubridate) # the tidyverse package lubridate is helpful for dates and times
+gp_u |> 
+  mutate(date = ymd(date)) |> # ymd() converts from strings to dates, more on that later
+  as_tibble()
+```
+
+???
+https://lubridate.tidyverse.org/
+
+---
+
+# tidyr resources
+
+[Data tidying with tidyr : : CHEAT SHEET](https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf) (link downloads a pdf)
+
+[Vignette](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) (from the **tidyr** package)
+```{r, eval = FALSE}
+vignette("tidy-data")
+```
+
+[Original paper](https://vita.had.co.nz/papers/tidy-data.pdf) (Hadley Wickham, 2014 JSS)
+
+
+---
+class: inverse, center, middle
+name: summary
+
+# Summary
+
+---
+
+# Key verbs so far
+
+.pull-left-3[
+### Import
+#### readr
+1. `read_csv`
+2. `write_csv`
+
+#### readxl
+1. `read_excel`
+]
+
+.pull-middle-3[
+### Tidy
+#### tidyr
+1. `pivot_longer`
+2. `pivot_wider`
+3. `separate`
+4. `unite`
+]
+
+.pull-right-3[
+### Transform
+#### dplyr
+1. `filter`
+2. `arrange`
+3. `select`
+4. `mutate`
+5. `summarize`
+]
 
 
