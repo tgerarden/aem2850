@@ -1,6 +1,6 @@
 ---
-title: "Data import, tidy data, and relational data"
-linktitle: "Data import, tidy data, and relational data"
+title: "Data import and tidying"
+linktitle: "Data import and tidying"
 date: "`r format(Sys.time())`"
 output:
   blogdown::html_page:
@@ -19,15 +19,16 @@ editor_options:
 
 ## Posit Cloud links
 
-[Click here to access this week's example Posit Cloud project](https://rstudio.cloud/spaces/210747/project/3606073)
+[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5370860)
 
-[**Solutions:** click here to access a project with a completed version](https://rstudio.cloud/spaces/210747/project/3606093)
+[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5370483)
+
 
 
 ## Plan for today
 - Questions? :raising_hand_woman:
 - Wrap up slides from Tuesday
-- Work through `import-tidy-join-practice.R`
+- Work through `import-tidy-practice.R`
 
 
 ## Cheatsheets

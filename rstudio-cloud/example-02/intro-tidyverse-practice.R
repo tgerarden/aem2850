@@ -1,4 +1,4 @@
-# AEM 2850 - Example 3
+# AEM 2850 - Example 2
 # Plan for today:
 # - Questions?
 # - Wrap up slides on dplyr
@@ -38,8 +38,8 @@ college_majors
 # use dplyr::select to print the variable major contained within college_majors
 select(college_majors, ______)
 
-# now do it with the tidyverse pipe (shortcut: Ctrl/Cmd + Shift + M)
-college_majors %>% select(______)
+# now do it with the pipe (shortcut: Ctrl/Cmd + Shift + M)
+college_majors |> select(______)
 
 # do it again, but with more whitespace to improve readability
 college_majors ______ 
@@ -51,19 +51,19 @@ college_majors
 # ______ # replace "______" with your answer
 
 # use dplyr::select to extract three variables: rank, major, and median salary
-college_majors %>% 
+college_majors |> 
   select(______, ______, ______)
 
 # use dplyr::select to move rank, major, and median salary to the "front" of the data frame
-college_majors %>% 
+college_majors |> 
   select(______, ______, ______, everything())
 
 # or: use dplyr::relocate to move rank, major, and median to the "front" of the data frame
-college_majors %>% 
+college_majors |> 
   ______(rank, major, median)
 
 # now use dplyr::select to get major, major_category, median salary and assign result to college_salaries
-college_salaries <- ______ %>% 
+college_salaries <- ______ |> 
   ______(______, ______, ______)
 
 # how many rows and columns does this new data frame have?
@@ -81,29 +81,29 @@ stopifnot(names(college_salaries) == c("major", "major_category", "median"))
 
 # DPLYR::FILTER -----
 # use dplyr::filter to find and print just the row where major takes on the value "Finance"
-college_salaries %>% 
+college_salaries |> 
   filter(major ______ "Finance")
 
 # use dplyr::filter to find and print just the row where major_category takes on the value "Business"
-college_salaries %>% 
+college_salaries |> 
   filter(major_category ______ "______")
 
 # now combine dplyr::filter with dplyr::select to print just
 # the major and median columns for majors within Business
-college_salaries %>% 
-  ______(______ ______ "______") %>% # subset majors within Business
+college_salaries |> 
+  ______(______ ______ "______") |> # subset majors within Business
   select(______, ______) # select major and median
 
 # now get just the majors, and assign the result to business_majors
-business_majors <- college_salaries %>% 
-  ______(______ ______ "______") %>% # subset majors within Business
+business_majors <- college_salaries |> 
+  ______(______ ______ "______") |> # subset majors within Business
   select(______)
 
 # let's zoom back out
 # how do majors rank by median earnings?
 ?fivethirtyeight::college_recent_grads # hint: what is the variable rank?
 # get just the variable major for the top 10 of all the majors
-college_majors %>% 
+college_majors |> 
   ______(______ ______ ______) ______ 
   ______(______)
 
@@ -128,12 +128,11 @@ ______ ______
 
 # DPLYR::MUTATE -----
 # let's revisit college_salaries with mutate
-college_salaries %>% 
-  ______(______ ______ ______) %>%   # get Business majors only
-  mutate(______ = median/______) %>% # then create a variable median_salary in thousands of dollars
-  ______(______ = median/120.92, # convert to gamestop shares (based on 2/9/22 prices)
-         bitcoins = median/43960.40) %>% # convert to bitcoins (based on 2/9/22 prices)
-  ______(______ ______ ______) # what majors pay more than 1 bitcoin?
+college_salaries |> 
+  ______(______ ______ ______) |>   # get Business majors only
+  mutate(______ = median/______) |> # then create a variable median_salary in thousands of dollars
+  ______(bitcoins = median/22890.90) |> # convert to bitcoins (based on 1/30/23 prices)
+  ______(______ ______ ______) # what majors pay more than 2 bitcoins per year?
 
 # let's clean up a bit
 ls() # what objects have you defined so far?
@@ -146,29 +145,29 @@ ls() # what objects are left?
 
 # DPLYR::SUMMARIZE -----
 # use dplyr::summarize to count the number of people across all majors
-college_majors %>% 
+college_majors |> 
   summarize(______ = sum(total))
 
 # what went wrong there? use dplyr::filter to figure it out
-college_majors %>% 
+college_majors |> 
   filter(______(total))
 
 # ok, take the sum excluding that major, in millions
-college_majors %>% 
+college_majors |> 
   ______(______ = sum(______, na.rm = TRUE)/10^6)
 
 
 # DPLYR::GROUP_BY -----
 # to make things more interesting, count students "by" major_category, in thousands
-college_majors %>% 
-  group_by(______) %>% 
+college_majors |> 
+  group_by(______) |> 
   ______(______ = sum(______, na.rm = TRUE)/10^3)
 
 # do it again, but now sort the data and compute category shares
-college_majors %>% 
-  ______(______) %>% 
-  ______(______ = sum(______, ______ = ______)/10^3) %>% 
-  ______(desc(______)) %>% # sort categories from most to least students
+college_majors |> 
+  ______(______) |> 
+  ______(______ = sum(______, ______ = ______)/10^3) |> 
+  ______(desc(______)) |> # sort categories from most to least students
   mutate(share = ______) # compute shares in percentage points
 
 
@@ -197,11 +196,11 @@ map("state", add = TRUE) # what did this do?
 # 2. Using Functions in Packages: Breakout Groups -----
 # your turn! see if you can find a way to use `map` to plot a map of new york
 ?maps::map # hint 1: use the help and take a look at the argument "regions"
-ggplot2::map_data("state") %>%  # hint 2: convert the maps data into our favorite object class: data frame! (ggplot2::map_data does this for us)
+ggplot2::map_data("state") |>  # hint 2: convert the maps data into our favorite object class: data frame! (ggplot2::map_data does this for us)
   as_tibble() # even better: convert it into a tibble for pretty printing
-ggplot2::map_data("state") %>% 
+ggplot2::map_data("state") |> 
   select(region) # hint 3: use select to isolate regions
-ggplot2::map_data("state") %>% 
+ggplot2::map_data("state") |> 
   distinct(region) # hint 4: use distinct() to remove duplicates
 ______ # insert your code to make a map of new york here
 # if it doesn't render properly the first time, try entering the command again
