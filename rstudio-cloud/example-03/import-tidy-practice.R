@@ -80,7 +80,7 @@ zhvi # let's take a look
 # did something go wrong? try using the `skip` argument to fix it
 ?read_excel # if you get stuck, use the console to get help!
 zhvi <- read_excel("______.xlsx", 
-                   sheet = "______",
+                   ______ = "______",
                    ______ = ______)
 zhvi # let's take a look
 
@@ -115,3 +115,41 @@ ______
 # challenge: compute the ratio of the price in 2/28/22 over the price in 1/31/00
 # which city has a higher ratio: ithaca or NYC?
 ______
+
+
+# PLEASE STOP HERE AND LET US KNOW THAT YOU ARE DONE
+
+
+# 4. Import, tidy, and transform retail sales data -----
+# the census publishes estimates of state-level Monthly State Retail Sales
+# at https://www.census.gov/retail/state_retail_sales.html
+# let's look at retail sales year-over-year percentage changes
+# use read_csv to read in data from the url https://www.census.gov/retail/mrts/www/statedata/state_retail_yy.csv and assign it to retail
+retail <- ______
+
+# use pivot_longer() to construct a data frame where the level of observation is 
+# the fips-stateabbr-naics-yearmonth, and the variable of interst is yoy_pct_change
+retail_tidy <- ______
+
+# what yearmonth had the highest yoy_pct_change for naics == "TOTAL" for the entire USA?
+______
+
+# what state had the highest yoy_pct_change for naics == "TOTAL" in february 2022?
+# hint: you could use filter to circumvent the non-numeric data in yoy_pct_change
+______
+
+# make a plot of yoy_pct_change over time for naics == "TOTAL" for the entire USA
+retail_tidy |> 
+  filter(______ == "USA" & naics == "______") |> 
+  mutate(yearmonth = str_replace(______, "______", "______"), # remove leading yy from yearmonth
+         date = lubridate::______(yearmonth)) |> # find a lubridate function similar to ymd() to convert yearmonth to a date
+  ggplot(aes(x = date, y = as.numeric(yoy_pct_change))) +
+  geom_col() +
+  theme_bw() +
+  labs(x = "Month",
+       y = "Year-over-Year Percentage Change",
+       title = "U.S. Retail Spending Over Time",
+       caption = "Data Source: U.S. Census Bureau's Monthly State Retail Sales")
+
+# challenge: replicate the plot above for Gasoline Stations in NY
+# how does it compare to the first plot?

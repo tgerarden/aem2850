@@ -3,32 +3,28 @@
 # Steps to complete this lab:
 #   1. Add your name to the author field of the yaml header
 #   2. Fill in the code chunks and use inline code to answer the questions 
-#   3. Click on "Knit" directly above to render output (or Ctrl/Cmd-Shift-K)
+#   3. Click on "Render" directly above to render output (or Ctrl/Cmd-Shift-K)
 #   4. Repeat steps 2-3 until you are satisfied with the final product
-#   5. Download the resulting file lab-03.pdf
-#   6. Upload lab-03.pdf to canvas
+#   5. Download the resulting file lab-02.pdf
+#   6. Upload lab-02.pdf to canvas
 #########################################################
-title: "Lab-03"
+title: "Lab-02"
 author: "Write your name here"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-output: pdf_document
+format: pdf
 urlcolor: blue
 ---
 
 ```{r setup, include = FALSE}
 library(nycflights13)
 library(tidyverse)
-library(knitr)
-
 ```
 
-# Preface
+## Preface
 
-The goal of this assignment is to help you gain more familiarity with using **dplyr** to transform data. In this lab we will continue providing some code snippets to serve as "scaffolding" to help guide you through each step. Over the course of the semester we will provide less scaffolding and more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
+The goal of this assignment is to help you gain familiarity with data frames -- think "spreadsheets" -- and how to use **dplyr** functions to transform data. In this lab we are providing some code snippets to serve as "scaffolding" to help guide you through each step. As always, please come to office hours and reach out to your teaching staff if you have any questions.
 
-## Flights
-
-We will work with the data table `flights` provided in the package **nycflights13**. The data table includes all domestic flights that departed NYC (i.e. JFK, LGA or EWR) in 2013. It has `r ncol(flights)` variables. Details of the package **nycflights13** are available [here](https://github.com/tidyverse/nycflights13). 
+We will work with the data table `flights` provided in the package **nycflights13**. The data table includes all domestic flights that departed NYC (i.e. JFK, LGA or EWR) in 2013. It has `r ncol(flights)` variables. Details of the package **nycflights13** are available [here](https://github.com/tidyverse/nycflights13).
 
 ``` {r}
 flights
@@ -40,13 +36,13 @@ flights
 <!-- Tip: Flights that arrived two hours late are those whose arrival delay is larger than 120 minutes. Flights that arrived earlier are those whose arrival delay is negative. -->
 ```{r echo = TRUE}
 # Use dplyr::filter to find and count the flights that arrived more than two hours late
-two_hour_late <- flights %>%
-  filter(FALSE) %>%  # Replace FALSE with your code
+two_hour_late <- flights |>
+  filter(FALSE) |>  # Replace FALSE with your code
   count()
 
 # Use dplyr::filter to find and count the flights that arrived earlier than scheduled
-early_arr <- flights %>%  
-  filter(FALSE) %>%   # Replace FALSE with your code
+early_arr <- flights |>  
+  filter(FALSE) |>   # Replace FALSE with your code
   count()
 
 # Count the total number of flights
@@ -59,8 +55,8 @@ A proportion of `r round(two_hour_late/total, 2)` of the flights arrived more th
 ## 2. How many flights have a missing `dep_time`? What other variables are missing? What might these rows represent?
 <!-- Tip: is.na() can help you find the missing values. Try to combine dplyr::filter with is.na(). -->
 ``` {r echo = TRUE}
-flights %>%
-  filter(FALSE) %>% # Replace FALSE with your code
+flights |>
+  filter(FALSE) |> # Replace FALSE with your code
   count()
 ```
 These rows probably represent...
@@ -89,9 +85,9 @@ You can also use dplyr::relocate to reorder columns.
 Note: another approach you could take would be to use a conditional statement to filter for the maximum delay without needing to use arrange at all.
 -->
 ``` {r echo = TRUE}
-worst_delay <- flights %>%
-  arrange(desc(FALSE)) %>% # sort flights by arrival delays in descending order
-  filter(FALSE) %>% # choose the first row
+worst_delay <- flights |>
+  arrange(desc(FALSE)) |> # sort flights by arrival delays in descending order
+  filter(FALSE) |> # choose the first row
   pull(arr_delay) 
 ```
 The worst arrival delay was `inline code` minutes.
@@ -101,8 +97,8 @@ The worst arrival delay was `inline code` minutes.
 <!-- Tip: Use dplyr::mutate to generate this new variable. 
 -->
 ``` {r echo = TRUE}
-flights %>%
-  select() %>%  # select `air_time` and `distance` here
+flights |>
+  select() |>  # select `air_time` and `distance` here
   mutate( # create a new variable `speed`
     )  # create a new variable `mph`
 ```
@@ -116,10 +112,10 @@ The modulo operator %% can give us the minute-digits: 1504 %% 100 = 4
 
 ``` {r echo = TRUE}
 # Your code goes here
-flights %>%
-  select() %>%
-  mutate(dep_hour = FALSE) %>% # split out the hour-digits
-  mutate(dep_min = FALSE) %>% # split out the minute-digits
+flights |>
+  select() |>
+  mutate(dep_hour = FALSE) |> # split out the hour-digits
+  mutate(dep_min = FALSE) |> # split out the minute-digits
   mutate(dep_time_min = dep_hour * 60 + dep_min) # generate dep_time in the number of minutes since midnight
 ```
 
@@ -128,10 +124,10 @@ flights %>%
 <!-- Tip: Combine dplyr::group_by and dplyr::summarise to find the average arrival delay by carrier. Be careful! There are missing values in arr_delay. You want to ignore these missing values when calculating the mean. You can use mean(, na.rm = TRUE). 
 Note: dplyr::summarise and dplyr::summarize are synonyms, so you can use whichever you are most comfortable with.-->
 ``` {r echo = TRUE}
-worst_delay_carrier <- flights %>%
-  group_by() %>%
-  summarise() %>%
-  arrange() %>%
+worst_delay_carrier <- flights |>
+  group_by() |>
+  summarise() |>
+  arrange() |>
   filter() 
 ```
 Carrier `inline code` has the worst delays.

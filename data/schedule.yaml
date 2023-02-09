@@ -29,7 +29,7 @@ lessons:
     # date_end: "June 18"
     content: "03-content"
     example: "03-example"
-    # assignment: "03-lab"
+    assignment: "03-lab"
     bg: 1
     bottomborder: True
 

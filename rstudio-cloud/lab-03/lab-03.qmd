@@ -3,7 +3,7 @@
 # Steps to complete this lab:
 #   1. Add your name to the author field of the yaml header
 #   2. Fill in the code chunks and use inline code to answer the questions 
-#   3. Click on "Knit" directly above to render output (or Ctrl/Cmd-Shift-K)
+#   3. Click on "Render" directly above to render output (or Ctrl/Cmd-Shift-K)
 #   4. Repeat steps 2-3 until you are satisfied with the final product
 #   5. Download the resulting file lab-xx.pdf
 #   6. Upload lab-xx.pdf to canvas
@@ -11,10 +11,10 @@
 # Reminder: to get around this and work interactively, you can run code chunks on their own
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
-title: "Lab-04"
+title: "Lab-03"
 author: "Write your name here"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-output: pdf_document
+format: pdf
 urlcolor: blue
 ---
 
@@ -45,10 +45,10 @@ This data set is ... because ...
 <!-- Tip: To aggregate `sales` and take the average of `price`, you can group the data by city and year. Then use dplyr::summarize to get the sum of sales and mean of price. -->
 
 ``` {r echo = TRUE}
-tidy_txhouse <- txhouse %>% 
-  pivot_wider() %>% 
-  group_by() %>% 
-  summarize() %>% 
+tidy_txhouse <- txhouse |> 
+  pivot_wider() |> 
+  group_by() |> 
+  summarize() |> 
   ungroup()
 tidy_txhouse
 ```  
@@ -59,21 +59,21 @@ tidy_txhouse
 -->
 
 ```{r echo = TRUE}
-tx_pop <- read_excel() %>%  
-  select() %>%  
+tx_pop <- read_excel() |>  
+  select() |>  # you can use "-" syntax to get all but the specified columns
   rename(region = 1) # this renames by position; you could also use rename(region = "...1") 
 tx_pop
 ```
 
 
 ## 4. Use tidyr::pivot_longer to tidy `tx_pop` and assign it to `tx_pop2`. What is the data type of variable `year`? Convert it to numeric and assign the data set to `tx_pop3`.
-<!-- Tip: You can use class() to find the data type. Use as.numeric() to convert to the numeric type. -->
+<!-- Tip: You can use class() to find the data type. Use as.numeric() to convert to numeric type. -->
 
 ```{r echo = TRUE}
-tx_pop2 <- tx_pop %>% 
+tx_pop2 <- tx_pop |> 
   pivot_longer()
 
-tx_pop3 <- tx_pop2 %>% 
+tx_pop3 <- tx_pop2 |> 
   mutate(year = FALSE) # use as.numeric() to convert to the numeric type
 ```
 Variable `year` in `tx_pop2` is of type `r class(tx_pop2$year)`.
@@ -83,49 +83,65 @@ Variable `year` in `tx_pop2` is of type `r class(tx_pop2$year)`.
 <!-- Tip: We have not learned about how to remove strings, so we are providing code for you in the code chunk. -->
 
 ```{r echo = TRUE}
-tidy_txpop <- tx_pop3 %>% 
-  separate() %>% 
+tidy_txpop <- tx_pop3 |> 
+  separate() |> 
   mutate(city = str_remove(city, " city"),
-         city = str_remove(city, " town")) %>% 
+         city = str_remove(city, " town")) |> 
   select()
 tidy_txpop
 ```
 
 
 ## 6. Find the top three cities that have the largest average population over 2010-2019. What are these cities?
-<!-- Tip: This question is similar to questions #7 and #8 of Lab 3. Please refer to Lab-03-solutions if you have no clue for this one.-->
+<!-- Tip: This question is similar to questions #7 and #8 of lab-02. Please refer to lab-02-solutions if you have no clue for this one.-->
 
 ```{r echo = TRUE}
-top3 <- tidy_txpop %>% 
-  group_by() %>% 
-  summarize() %>% 
-  arrange() %>% 
+top3 <- tidy_txpop |> 
+  group_by() |> 
+  summarize() |> 
+  arrange() |> 
   filter()
 ```
 The top three cities with the largest average population over 2010-2019 are `r top3$city`.
 
 
 ## 7. What are the total sales over 2010-2015 for each of the top three most populous cities?
-<!-- Tip: From question #6, we have found the three most populous cities in Taxes. We can use semi_join() to filter the `tidy_txhouse` data to get the observations only for these five cities. Then combine group_by() and summarize() to get the total sales of each city over 2010-2015. -->
+<!-- Tip: From question #6, we have found the three most populous cities in Taxes. You can filter the `tidy_txhouse` data based on your answer to #6. combine group_by() and summarize() to get the total sales of each city over 2010-2015. -->
+<!-- Note: Next week we'll learn how to use join operations, which provide another way to do this. -->
 
 ```{r echo = TRUE}
-top3_sales <- tidy_txhouse %>% 
-  semi_join() %>% 
-  filter() %>% 
-  group_by() %>% 
-  summarize() %>%
-  arrange(desc())
+top3_sales <- tidy_txhouse |> 
+  filter(_____ %in% top3$city) |> 
+  filter(_____) |> 
+  group_by(_____) |> 
+  summarize(sales = as.integer(_____(_____))) |> # as.integer is optional, for formatting
+  arrange(desc(_____))
 ```
-The total sales are `r top3_sales$sales[1]` in `r top3_sales$city[1]`, `inline code` in `inline code`, and `inline code` in `inline code`.
+The total sales are `r top3_sales$sales[1]` in `r top3_sales$city[1]`, `r insert-your-inline-code-here` in `r insert-your-inline-code-here`, and `r insert-your-inline-code-here` in `r insert-your-inline-code-here`.
 <!-- Note: don't worry about the formatting of these numbers, though you can try to put them in a prettier format if you would like. -->
 
 
-## 8. Create a data frame of sales, price, and population for all the city-year pairs that appear in both `tidy_txpop` and `tidy_txhouse`. Of these, which city had the most sales per capita in 2010? Can you think of a reason that place might have the most sales per capita?
+## 8. Use information from `tidy_txhouse` and `tidy_txpop` to compute sales in 2010 per ten thousand residents for Houston.
+<!-- Tip: For this week, we'll do this by creating two separate objects that contain the numbers we want to divide. Note: Next week we'll learn how to use join operations, which provide an easy way to do this at scale. -->
+
+```{r echo = TRUE}
+houston_sales <- tidy_txhouse |> 
+  filter() |> 
+  pull() # use pull to get the value(s) in sales without the data frame
+
+houston_pop <- tidy_txpop |> 
+  filter() |> 
+  pull() # use pull to get the value(s) in population without the data frame
+
+houston_spc <- round(_____ / _____ * _____) # round for pretty printing
+```
+Houston had `r houston_spc` sales per ten thousand residents in 2010.
+
+
+## 9. Replicate #8 for "South Padre Island" (also in the year 2010). Are sales per capita higher or lower than for Houston? Can you think of a reason that place might have the most sales per capita? (you can google the location to inform your answer)
 <!-- No tips this time! -->
 
 ```{r echo = TRUE}
 
 ```
-The place with the most sales per capita in 2010 was `r inline code here`.
-
-One possible reason this place had the most sales per capita is...
+South Padre Island had `r insert-your-inline-code-here` sales per ten thousand residents in 2010. That is higher (much higher!) than for Houston. One possible reason is that South Padre Island is a resort town, where a lot of properties may be bought by non-residents. These non-resident buyers would contribute to the number of property sales but not be included in the population counts.
