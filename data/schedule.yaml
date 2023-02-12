@@ -2,7 +2,7 @@ lessons:
   - title: '**Programming Foundations**'
     header: True
 
-  - title: '<span class="content-title">Welcome to AEM 2850! <br> Intro to R, RStudio, and RMarkdown <br> Basic base R</span>'
+  - title: '<span class="content-title">Welcome to AEM 2850! <br> Intro to R, RStudio, and Quarto</span>'
     session: "Session 1"
     date: "Week 1"
     # date_start: "June 7"
@@ -33,7 +33,7 @@ lessons:
     bg: 1
     bottomborder: True
 
-  - title: '<span class="content-title">TBD</span>'
+  - title: '<span class="content-title">Joins <br> Logic</span>'
     session: "Session 4"
     date: "Week 4"
     # date_start: "June 14"
@@ -43,10 +43,7 @@ lessons:
     # assignment: "04-lab"
     bg: 1
 
-  - title: '**Data Visualization Foundations**'
-    header: True
-
-  - title: '<span class="content-title">Mapping data to graphics <br> Amounts</span>'
+  - title: '<span class="content-title">TBD</span>'
     session: "Session 5"
     date: "Week 5"
     # date_start: "June 21"
@@ -58,7 +55,6 @@ lessons:
 
   - title: '*February break: no class on Feb 28*'
     header: False
-
 
   - title: '<i class="fas fa-star"></i> **Prelim 1 in class**'
     date: "Mar 2 at 9:40AM"
@@ -76,7 +72,10 @@ lessons:
     # assignment: "06-lab"
     bg: 1
 
-  - title: '<span class="content-title">Distributions</span>'
+  - title: '**Data Visualization Foundations**'
+    header: True
+
+  - title: '<span class="content-title">Mapping data to graphics <br> Amounts</span>'
     session: "Session 7"
     date: "Week 7"
     # date_start: "June 28"
@@ -86,7 +85,7 @@ lessons:
     # assignment: "07-lab"
     bg: 2
 
-  - title: '<span class="content-title">Relationships</span>'
+  - title: '<span class="content-title">Distributions</span>'
     session: "Session 8"
     date: "Week 8"
     # date_start: "June 28"
@@ -96,7 +95,7 @@ lessons:
     # assignment: "08-lab"
     bg: 1
 
-  - title: '<span class="content-title">Time <br> Working with dates and times</span>'
+  - title: '<span class="content-title">Relationships</span>'
     session: "Session 9"
     date: "Week 9"
     # date_start: "July 5"
@@ -106,7 +105,7 @@ lessons:
     # assignment: "09-lab"
     bg: 1
 
-  - title: '<span class="content-title">Space</span>'
+  - title: '<span class="content-title">Time <br> Working with dates and times</span>'
     session: "Session 10"
     date: "Week 10"
     # date_start: "July 5"
@@ -128,7 +127,7 @@ lessons:
   - title: '**Special Topics**'
     header: True
 
-  - title: '<span class="content-title">Text</span>'
+  - title: '<span class="content-title">Space</span>'
     session: "Session 11"
     date: "Week 11"
     # date_start: "July 12"
@@ -138,7 +137,7 @@ lessons:
     # assignment: "11-lab"
     bg: 1
 
-  - title: '<span class="content-title">Functions and iteration</span>'
+  - title: '<span class="content-title">Text</span>'
     session: "Session 12"
     date: "Week 12"
     # date_start: "July 12"
@@ -153,7 +152,7 @@ lessons:
 #    # # assignment: "02-mini-project"
 #    bg: 3
 
-  - title: '<span class="content-title">Prediction</span>'
+  - title: '<span class="content-title">Functions and iteration</span>'
     session: "Session 13"
     date: "Week 13"
     # date_start: "July 19"
