@@ -38,7 +38,7 @@ lessons:
     date: "Week 4"
     # date_start: "June 14"
     # date_end: "June 18"
-    # content: "04-content"
+    content: "04-content"
     # example: "04-example"
     # assignment: "04-lab"
     bg: 1
