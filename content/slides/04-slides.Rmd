@@ -1,5 +1,5 @@
 ---
-title: "Data import, tidy data, and relational data"
+title: "Joins and logic"
 author: "Todd Gerarden"
 output:
   xaringan::moon_reader:
@@ -42,7 +42,7 @@ library(tidyverse)
 
 class: center middle main-title section-title-4
 
-# Data import, tidy data, and relational data
+# Joins and logic
 
 .class-info[
 
@@ -57,7 +57,8 @@ Acknowledgements:
 <!-- [Claus Wilke](https://wilkelab.org/SDS375/),  -->
 [Grant McDermott](https://github.com/uo-ec607/lectures),
 [Jenny Bryan](https://stat545.com/join-cheatsheet.html),
-[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+<!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations), -->
+[R4DS (2e)](https://r4ds.hadley.nz)
 
 ]
 
@@ -66,26 +67,24 @@ Acknowledgements:
 
 # Announcements
 
-**Late assignments will get a ✔− going forward**
-- If something comes up, email me and Hui in advance
-
 Reminders:
 - Submit assignments via canvas
-  - Lab 3 was due yesterday (Monday) at 11:59pm
-  - Reflection - Week 4 is due Wednesday at 11:59pm
-- Bring your laptop to class on Thursday
+  - Lab-03 was due yesterday (Monday) at 11:59pm
 
 Questions before we get started?
 
 ---
 
-# Plan for today
+# Plan for this week
 
 [Prologue](#prologue)
 
-[Joins](#joins)
+[Joins (Tuesday)](#joins)
+  - [example-04-1](#example-04-1)
 
-[Summary](#summary)
+[Logic (Thursday)](#logic)
+  - [example-04-2](#example-04-2)
+
 
 
 ---
@@ -100,13 +99,13 @@ name: prologue
 
 Take a guess: what's the most popular spectator sport among classmates?
 
-```{r, echo = FALSE, eval = FALSE}
+```{r, echo = FALSE}
 load("data/survey-responses/survey-data.RData")
 ```
 
 --
 
-```{r, echo = FALSE, eval = FALSE}
+```{r, echo = FALSE}
 sports
 ```
 
@@ -114,11 +113,11 @@ sports
 
 Let's `count` and `arrange` to get the top 3:
 
-```{r, echo = FALSE, eval = FALSE}
+```{r, echo = FALSE}
 # now show off what we can do with summarize()
-tibble::tibble(sport = sports) |> 
-  dplyr::count(sport) |> 
-  dplyr::arrange(desc(n)) |> 
+tibble(sport = sports) |> # make a data frame with one column, sport
+  count(sport) |> 
+  arrange(desc(n)) |> 
   head(3)
 ```
 
@@ -146,7 +145,7 @@ Source: https://github.com/toddwschneider/ballr
 class: inverse, center, middle
 name: joins
 
-# Relational data
+# Joins
 
 
 ---
@@ -158,6 +157,14 @@ name: joins
 Multiple tables of data with pairwise relations
 
 Relations across >2 data tables are determined by the relations between each pair
+
+---
+
+# Relational data example: `nycflights13`
+
+```{r echo=FALSE, out.width='75%'}
+knitr::include_graphics("img/04/nycflights13-relational.png")
+```
 
 ---
 
@@ -191,7 +198,7 @@ Relations across >2 data tables are determined by the relations between each pai
 
 ???
 
-You can visualize the operations [here](https://r4ds.had.co.nz/relational-data.html)
+You can visualize the operations [here](https://r4ds.hadley.nz/joins.html)
 
 ---
 
@@ -201,18 +208,18 @@ Let's learn these join commands using two small data frames
 
 ```{r echo = FALSE}
 superheroes <- tibble::tribble(
-       ~name, ~alignment,  ~gender,          ~publisher,
-   "Magneto",      "bad",   "male",            "Marvel",
-     "Storm",     "good", "female",            "Marvel",
-  "Mystique",      "bad", "female",            "Marvel",
-    "Batman",     "good",   "male",                "DC",
-     "Joker",      "bad",   "male",                "DC",
-  "Catwoman",      "bad", "female",                "DC",
-   "Hellboy",     "good",   "male", "Dark Horse Comics"
+       ~name, ~alignment,          ~publisher,
+   "Magneto",      "bad",            "Marvel",
+     "Storm",     "good",            "Marvel",
+  "Mystique",      "bad",            "Marvel",
+    "Batman",     "good",                "DC",
+     "Joker",      "bad",                "DC",
+  "Catwoman",      "bad",                "DC",
+   "Hellboy",     "good", "Dark Horse Comics"
   )
 
 publishers <- tibble::tribble(
-  ~publisher, ~yr_founded,
+  ~publisher, ~year_founded,
         "DC",       1934L,
     "Marvel",       1939L,
      "Image",       1992L
@@ -278,7 +285,7 @@ How is `inner_join` different from `left_join` and `right_join`?
 # 4) dplyr::full_join(x, y)
 
 ```{r fjoin, eval = FALSE}
-full_join(superheroes, publishers) # how many rows will this produce?
+full_join(superheroes, publishers) # how many rows do you think this will produce?
 ```
 
 --
@@ -345,44 +352,44 @@ intersect(names(superheroes), names(publishers)) # variable used for matching be
 
 --
 
-Alternatively, we can specify what to join `by`: `*_join(..., by = "publisher")`
+Or, we can specify what to join by: `*_join(..., by = join_by(publisher))`
+
+.small[Note: before `dplyr` 1.1.0, the syntax was: `*_join(..., by = "publisher")`]
 
 ---
 
-# More on joins
-
-Let's explore this using the [**nycflights13**](https://github.com/tidyverse/nycflights13) data
+# Exploring keys
 
 ```{r flights}
-library(nycflights13)
-flights
+library(nycflights13) # let's explore keys using the nycflights13 data
+flights |> print(n = 8) # print the first 8 rows of flights
 ```
 
 ---
 
-# More on joins
+# Exploring keys
 
 ```{r planes}
-planes
+planes # print the first 10 rows of planes
 ```
 
 ---
 
-# More on joins
+# Let's perform a left join on flights and planes
 
-Let's perform a left join on the flights and planes data frames
-- I'm going subset columns after the join, just to keep text on the slide
+```{r join1}
+left_join(flights, planes) |> #<<
+  select(year:dep_time, arr_time, carrier:tailnum, type, model) |> # keep text to one slide
+  print(n = 5) # just to save vertical space on the slide
+```
 
 --
 
-```{r join1}
-left_join(flights, planes) %>%
-  select(year, month, day, dep_time, arr_time, carrier, flight, tailnum, type, model)
-```
+Uh-oh! What's up with `type` and `model`?
 
 ---
 
-# More on joins
+# Uh-oh!
 
 As before, `dplyr` guessed which columns to join on
 
@@ -404,35 +411,44 @@ In `flights` it refers to the *year of flight*, in `planes` it refers to *year o
 
 --
 
-Luckily we can avoid this by using the `by =` argument
+Luckily we can avoid this by using the argument `by = join_by(...)`
 
 ---
 
-# More on joins
+# What should we join flights and planes by?
 
-We just need to be more explicit in the join call by using the `by = ` argument
-
-```{r join2, highlight.line = 4}
-left_join(flights,
-          planes %>% rename(year_built = year), # not necessary w/ below line, but helpful
-          by = "tailnum" # be specific about the joining column #<< 
-          ) %>%
-  select(year, month, day, dep_time, arr_time, carrier, flight, tailnum, year_built, type, model) %>%
-  head(5) # just to save vertical space on the slide
+```{r echo=FALSE, out.width='75%'}
+knitr::include_graphics("img/04/nycflights13-relational.png")
 ```
 
 ---
 
-# More on joins
+# Specifying join keys
+
+We just need to be explicit in the join call by using the `by` argument
+
+```{r join2, highlight.line = 4}
+left_join(flights,
+          planes |> rename(year_built = year), # not necessary w/ below line, but helpful
+          by = join_by(tailnum) # be specific about the joining column #<< 
+          ) |>
+  select(year, month:dep_time, carrier, flight, tailnum, year_built, type, model) |>
+  print(n = 5) # just to save vertical space on the slide
+```
+
+---
+
+# Specifying join keys
 
 What happens if we don't rename `year` before this join?
 
 ```{r join2b, highlight.line = 4}
 left_join(flights,
-          planes, # not renaming "year" to "year_built" this time
-          by = "tailnum") %>%
-  select(contains("year"), month, day, dep_time, arr_time, carrier, flight, tailnum, type, model) %>%
-  head(5) # just to save vertical space on the slide
+          planes, # not renaming "year" to "year_built" this time #<< 
+          by = join_by(tailnum)
+          ) |>
+  select(contains("year"), month:dep_time, arr_time, carrier, flight, tailnum, type, model) |>
+  print(n = 4) # just to save vertical space on the slide
 ```
 
 --
@@ -443,7 +459,7 @@ What is `year.x`? What is `year.y`?
 class: inverse, center, middle
 name: summary
 
-# Summary
+# Summary of key verbs so far
 
 ---
 
@@ -489,4 +505,29 @@ name: summary
 5. `summarize`
 ]
 
+
+---
+class: center, middle
+name: example-04-1
+
+# [link to example-04-1](https://posit.cloud/spaces/328615/content/5413852)
+
+---
+class: inverse, center, middle
+name: logic
+
+# Logic
+
+
+---
+
+# Logic slides will be added for Thursday
+
+See <https://aem2850.toddgerarden.com/content/04-content/> for the updated version of these slides
+
+---
+class: center, middle
+name: example-04-2
+
+# [link to example-04-2](https://posit.cloud/spaces/328615/content/5413858)
 
