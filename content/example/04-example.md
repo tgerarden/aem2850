@@ -1,0 +1,43 @@
+---
+title: "Joins and logic"
+linktitle: "Joins and logic"
+date: "2023-02-13 21:03:13"
+output:
+  blogdown::html_page:
+    keep_md: true # do this to save results in .md file
+    toc: false
+    fig_caption: false
+menu:
+  examples:
+    parent: Examples
+    weight: 1
+type: docs
+weight: 1
+editor_options:
+  chunk_output_type: console
+---
+
+## Posit Cloud links
+
+### Joins (Tuesday)
+
+[Click here to access example-04-1 on Posit Cloud](https://posit.cloud/spaces/328615/content/5413852)
+
+[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5416231)
+
+### Logic (Thursday) 
+
+[Click here to access example-04-2 on Posit Cloud](https://posit.cloud/spaces/328615/content/5413858)
+
+[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5416235)
+
+
+## Plan for today
+- Questions? :raising_hand_woman:
+- Tuesday: work through `join-practice.R` in `example-04-1`
+- Thursday: work through `logic-practice.R` in `example-04-1`
+
+
+## Cheatsheets
+
+[Click here to download the `tidyr` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf)
