@@ -43,7 +43,7 @@ lessons:
     # assignment: "04-lab"
     bg: 1
 
-  - title: '<span class="content-title">TBD</span>'
+  - title: '<span class="content-title">Strings and regular expressions</span>'
     session: "Session 5"
     date: "Week 5"
     # date_start: "June 21"
