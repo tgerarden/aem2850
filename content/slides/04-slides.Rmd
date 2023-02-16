@@ -58,7 +58,8 @@ Acknowledgements:
 [Grant McDermott](https://github.com/uo-ec607/lectures),
 [Jenny Bryan](https://stat545.com/join-cheatsheet.html),
 <!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations), -->
-[R4DS (2e)](https://r4ds.hadley.nz)
+[R4DS (2e)](https://r4ds.hadley.nz),
+[Garrick Aden-Buie](https://github.com/gadenbuie/tidyexplain)
 
 ]
 
@@ -80,9 +81,12 @@ Questions before we get started?
 [Prologue](#prologue)
 
 [Joins (Tuesday)](#joins)
+  - [Join animations](#join-animations)
   - [example-04-1](#example-04-1)
 
 [Logic (Thursday)](#logic)
+  - [Boolean algebra](#boolean-algebra)
+  - [Conditional transformations](#conditionals)
   - [example-04-2](#example-04-2)
 
 
@@ -106,7 +110,7 @@ load("data/survey-responses/survey-data.RData")
 --
 
 ```{r, echo = FALSE}
-sports
+# sports
 ```
 
 --
@@ -114,11 +118,10 @@ sports
 Let's `count` and `arrange` to get the top 3:
 
 ```{r, echo = FALSE}
-# now show off what we can do with summarize()
-tibble(sport = sports) |> # make a data frame with one column, sport
-  count(sport) |> 
-  arrange(desc(n)) |> 
-  head(3)
+# tibble(sport = sports) |> # make a data frame with one column, sport
+#   count(sport) |> 
+#   arrange(desc(n)) |> 
+#   head(3)
 ```
 
 ---
@@ -457,6 +460,91 @@ What is `year.x`? What is `year.y`?
 
 ---
 class: inverse, center, middle
+name: join-animations
+
+# Join animations
+
+---
+
+# Left and right join
+
+.pull-left[
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/04/left-join.gif")
+```
+]
+
+.pull-right[
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/04/right-join.gif")
+```
+]
+
+???
+
+Source: <https://github.com/gadenbuie/tidyexplain>
+
+---
+
+# Multiple matches
+
+With multiple matches between `x` and `y`, all combinations of matches are returned
+
+```{r echo=FALSE, out.width='45%'}
+knitr::include_graphics("img/04/left-join-extra.gif")
+```
+
+`x2` is duplicated to join one row in `x` to multiple rows in `y`
+
+???
+
+Source: <https://github.com/gadenbuie/tidyexplain>
+
+---
+
+# Inner join and full join
+
+.pull-left[
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/04/inner-join.gif")
+```
+]
+
+.pull-right[
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/04/full-join.gif")
+```
+]
+
+???
+
+Source: <https://github.com/gadenbuie/tidyexplain>
+
+---
+
+# Semi join and anti join
+
+.pull-left[
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/04/semi-join.gif")
+```
+]
+
+--
+
+.pull-right[
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/04/anti-join.gif")
+```
+]
+
+
+???
+
+Source: <https://github.com/gadenbuie/tidyexplain>
+
+---
+class: inverse, center, middle
 name: summary
 
 # Summary of key verbs so far
@@ -521,9 +609,222 @@ name: logic
 
 ---
 
-# Logic slides will be added for Thursday
+# Logical vectors
 
-See <https://aem2850.toddgerarden.com/content/04-content/> for the updated version of these slides
+What are logical vectors, or logicals?
+
+--
+
+Logicals take on only three values: `TRUE`, `FALSE`, or `NA`
+
+Logical vectors are just vectors ("columns") that only contain `TRUE`, `FALSE`, or `NA`
+
+---
+
+# Logical vectors
+
+Can you think of any logical vectors we have worked with so far?
+
+--
+
+While we don't often see logical vectors in raw data, we use them all the time!
+
+Example: every time we make comparisons to `filter()` data we create _transient_ logical variables that are computed, used, and then thrown away
+
+---
+
+# Transient logical vectors
+
+We create a transient logical vector when we filter `flights` to Miami:
+
+```{r}
+library(nycflights13)
+flights |> 
+  select(carrier, flight, dest) |> 
+  filter(dest == "MIA")
+```
+
+---
+
+<!-- # What goes on under the hood of a filter -->
+
+# `filter(dest == "MIA")`: under the hood
+
+.pull-left[
+```{r, highlight.output=6}
+# create a logical vector from a comparison
+flights |> 
+  select(carrier, flight, dest) |> 
+  mutate(welcome_to_miami = dest == "MIA") #<<
+```
+]
+
+--
+
+.pull-right[
+```{r, highlight.output=4}
+flights |> 
+  select(carrier, flight, dest) |> 
+  mutate(welcome_to_miami = dest == "MIA") |> 
+  filter(welcome_to_miami) # then filter #<<
+```
+
+]
+
+---
+
+# Comparisons
+
+Numeric comparisons like `<`, `<=`, `>`, `>=`, `!=`, and `==` can be used to create logical vectors
+
+As we have seen, `==` is useful for comparing character vectors (i.e., strings)
+
+---
+
+# `is.na()`
+
+`is.na()` is a useful function for checking whether something is `NA`
+
+Why use `is.na(x)` when we could use `x == NA`?
+
+--
+
+```{r}
+x <- 2850
+is.na(x)
+```
+
+--
+
+```{r}
+x == NA
+```
+
+May seem odd but it makes sense when you think about concrete comparisons
+
+---
+name: boolean-algebra
+
+# Boolean algebra
+
+Use Boolean algebra to combine comparisons / logical vectors
+
+```{r echo=FALSE, out.width='80%'}
+knitr::include_graphics("img/04/boolean-algebra.png")
+```
+
+???
+
+Source: <https://r4ds.hadley.nz/logicals.html#boolean-algebra>
+
+---
+
+# Boolean operator examples
+
+.pull-left[
+```{r}
+flights |> 
+  select(carrier, flight, dest) |> 
+  filter(dest == "MIA" | dest == "MYR") #<<
+```
+]
+
+.pull-right[
+```{r}
+flights |> 
+  select(carrier, flight, dest) |> 
+  filter(carrier == "AA" & dest == "MIA") #<<
+```
+]
+
+---
+
+# %in%
+
+`x %in% y` is a useful tool for identifying whether a value in `x` is contained in `y`
+
+```{r eval=TRUE}
+flights |> 
+  select(carrier, flight, dest) |> 
+  filter(dest %in% c("MIA", "MYR")) #<<
+```
+
+---
+
+# Numeric operations on logical vectors
+
+Numeric operations treat `TRUE` as `1` and `FALSE` as `0`:
+
+```{r}
+x <- c(TRUE, TRUE, FALSE, FALSE, FALSE)
+```
+.pull-left[
+```{r}
+sum(x)
+mean(x)
+```
+]
+
+.pull-right[
+```{r}
+min(x)
+max(x)
+```
+]
+
+This can be handy when doing calculations that depend on conditions
+
+---
+name: conditionals
+
+# Conditional transformations
+
+`if_else()` can be used to do things based on a binary condition
+
+```{r}
+flights |> filter(dest == "MIA") |> 
+    select(carrier, flight, dest, sched_dep_time) |> 
+    mutate(too_early = if_else(sched_dep_time < 800, "too early!", "okay")) #<<
+```
+
+---
+
+# Conditional transformations
+
+`case_when()` is a more flexible approach that allows many different conditions
+
+.pull-left[
+```{r eval=FALSE}
+flights |> 
+  filter(dest == "MIA") |> 
+  select(carrier, flight, sched_dep_time) |> 
+  mutate(too_early = case_when( #<<
+    sched_dep_time < 600   ~ "too early!", #<<
+    sched_dep_time < 800   ~ "still early", #<<
+    sched_dep_time <= 2000 ~ "okay", #<<
+    sched_dep_time > 2000  ~ "late" #<<
+    ) #<<
+  ) #<<
+```
+Conditions are evaluated in order
+]
+
+.pull-right[
+```{r echo=FALSE}
+flights |> 
+  filter(dest == "MIA") |> 
+  select(carrier, flight, sched_dep_time) |> 
+  mutate(too_early = case_when( #<<
+    sched_dep_time < 600   ~ "too early!", #<<
+    sched_dep_time < 800   ~ "still early", #<<
+    sched_dep_time <= 2000 ~ "okay", #<<
+    sched_dep_time > 2000  ~ "late" #<<
+    ) #<<
+  ) #<<
+```
+]
+
+`condition ~ output` syntax is new; watch out for overlapping conditions!
 
 ---
 class: center, middle
