@@ -105,12 +105,15 @@ Take a guess: what's the most popular spectator sport among classmates?
 
 ```{r, echo = FALSE}
 load("data/survey-responses/survey-data.RData")
+n_sports <- 30
 ```
 
 --
 
+Here are the first `r n_sports` responses:
 ```{r, echo = FALSE}
-# sports
+sports[!(sports %in% c("don't really watch sports"))] |> # just for pretty printing
+  head(n_sports)
 ```
 
 --
@@ -118,10 +121,10 @@ load("data/survey-responses/survey-data.RData")
 Let's `count` and `arrange` to get the top 3:
 
 ```{r, echo = FALSE}
-# tibble(sport = sports) |> # make a data frame with one column, sport
-#   count(sport) |> 
-#   arrange(desc(n)) |> 
-#   head(3)
+tibble(sport = sports) |> # make a data frame with one column, sport
+  count(sport) |> 
+  arrange(desc(n)) |> 
+  head(3)
 ```
 
 ---
@@ -690,7 +693,7 @@ Why use `is.na(x)` when we could use `x == NA`?
 --
 
 ```{r}
-x <- 2850
+x <- 2850 + 5850
 is.na(x)
 ```
 
