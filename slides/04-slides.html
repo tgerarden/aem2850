@@ -88,13 +88,30 @@ Take a guess: what's the most popular spectator sport among classmates?
 
 --
 
+Here are the first 30 responses:
 
+```
+##  [1] "badminton"  "basketball" "baseball"   "baseball"   "baseball"  
+##  [6] "badminton"  "basketball" "basketball" "basketball" "badminton" 
+## [11] "gymnastics" "volleyball" "soccer"     "soccer"     "basketball"
+## [16] "gymnastics" "soccer"     "tennis"     "swimming"   "football"  
+## [21] "basketball" "Ski"        "volleyball" "soccer"     "basketball"
+## [26] "tennis"     "Formula 1"  "soccer"     "hockey"     "soccer"
+```
 
 --
 
 Let's `count` and `arrange` to get the top 3:
 
 
+```
+## # A tibble: 3 × 2
+##   sport          n
+##   &lt;chr&gt;      &lt;int&gt;
+## 1 basketball    10
+## 2 soccer         6
+## 3 badminton      3
+```
 
 ---
 
@@ -911,7 +928,7 @@ Why use `is.na(x)` when we could use `x == NA`?
 
 
 ```r
-x &lt;- 2850
+x &lt;- 2850 + 5850
 is.na(x)
 ```
 
@@ -1127,8 +1144,8 @@ flights |&gt;
 * mutate(too_early = case_when(
 *   sched_dep_time &lt; 600   ~ "too early!",
 *   sched_dep_time &lt; 800   ~ "still early",
-*   sched_dep_time &lt;= 2200 ~ "okay",
-*   sched_dep_time &gt; 2200  ~ "late"
+*   sched_dep_time &lt;= 2000 ~ "okay",
+*   sched_dep_time &gt; 2000  ~ "late"
 *   )
 * )
 ```
