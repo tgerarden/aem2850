@@ -17,6 +17,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Lab 3
+## Lab
 
 [Click here to access the Posit Cloud project for this week's lab and follow the instructions in the file `lab-03.qmd`.](https://posit.cloud/spaces/328615/content/5392334)
