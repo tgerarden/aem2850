@@ -1,6 +1,6 @@
 ---
-title: "Relationships"
-linktitle: "Relationships"
+title: "Distributions"
+linktitle: "Distributions"
 date: "`r format(Sys.time())`"
 menu:
   content:
@@ -19,19 +19,23 @@ output:
 
 ### Readings
 
-- <i class="fas fa-book"></i> [Chapter 12: Visualizing Associations](https://clauswilke.com/dataviz/visualizing-associations.html) of *Fundamentals of Data Visualization*
-- <i class="fas fa-external-link-square-alt"></i> [Two Y-Axes](https://kieranhealy.org/blog/archives/2016/01/16/two-y-axes/)
+- <i class="fas fa-book"></i> [Chapter 7: Visualizing distributions](https://clauswilke.com/dataviz/histograms-density-plots.html) of *Fundamentals of Data Visualization*
+- <i class="fas fa-book"></i> [Section 4.6: Histograms and density plots](https://socviz.co/groupfacettx.html#histograms) of *Data Visualization*
 
 
 #### Optional readings
-- <i class="fas fa-book"></i> [Chapter 6: Working with models](https://socviz.co/modeling.html#modeling) of *Data Visualization*
+
+- <i class="fas fa-book"></i> [Chapter 9: Visualizing many distributions](https://clauswilke.com/dataviz/boxplots-violins.html) of *Fundamentals of Data Visualization*
+
+<!-- - <i class="fas fa-external-link-square-alt"></i> Cédric Scherer, ["Visualizing distributions with raincloud plots with ggplot2"](https://www.cedricscherer.com/2021/06/06/visualizing-distributions-with-raincloud-plots-with-ggplot2/) -->
+<!-- - <i class="fas fa-external-link-square-alt"></i> [The Election Needle Is Back. Meet One of Its Creators.](https://www.nytimes.com/video/us/politics/100000006186649/needle-elections.html) -->
+<!-- https://www.nytimes.com/2018/03/13/upshot/needle-forecast-pennsylvania-special-election.html -->
 
 
 ### Guiding questions
 
-- How can you correctly and honestly communicate relationships between variables? How can you communicate the uncertainty in those relationships?
-- What are the dangers of visualizing two variables?
-- When is it appropriate to use two y-axes?
+- Why is it important to visualize all the variation in a variable?
+- What are some geometries that can be used to visualize distributions?
 
 
 ### Slides

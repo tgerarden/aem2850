@@ -1,6 +1,6 @@
 ---
-title: "Prediction"
-linktitle: "Prediction"
+title: "Functions and iteration"
+linktitle: "Functions and iteration"
 date: "`r format(Sys.time())`"
 menu:
   content:
@@ -18,17 +18,17 @@ output:
 ---
 
 ### Readings
-- <i class="fas fa-book"></i> [Chapter 23: Model basics](https://r4ds.had.co.nz/model-basics.html) of *R for Data Science*
+- <i class="fas fa-book"></i> [Chapter 19: Functions](https://r4ds.had.co.nz/functions.html) of *R for Data Science*
 
 
 #### Optional readings
-- <i class="fas fa-book"></i> [Chapter 1: Introduction](https://hastie.su.domains/ISLR2/ISLRv2_website.pdf) of *An Introduction to Statistical Learning* (reference text)
+- <i class="fas fa-book"></i> [Chapter 21: Iteration](https://r4ds.had.co.nz/iteration.html) of *R for Data Science*
 
 
 ### Guiding questions
-- When is prediction useful?
-- When is inference useful?
-- Are all models equally useful for prediction and inference?
+- When should you write a function?
+- What are some advantages of writing functions relative to copy-and-paste?
+- What is conditional execution?
 
 
 ### Slides

@@ -1,6 +1,6 @@
 ---
-title: "Time"
-linktitle: "Time"
+title: "Relationships"
+linktitle: "Relationships"
 date: "`r format(Sys.time())`"
 menu:
   content:
@@ -18,20 +18,20 @@ output:
 ---
 
 ### Readings
-- <i class="fas fa-book"></i> [Chapter 13: Visualizing time series](https://clauswilke.com/dataviz/time-series.html) of *Fundamentals of Data Visualization*
-- <i class="fas fa-book"></i> [Chapter 14: Visualizing trends](https://clauswilke.com/dataviz/visualizing-trends.html) of *Fundamentals of Data Visualization*
+
+- <i class="fas fa-book"></i> [Chapter 12: Visualizing Associations](https://clauswilke.com/dataviz/visualizing-associations.html) of *Fundamentals of Data Visualization*
+- <i class="fas fa-external-link-square-alt"></i> [Two Y-Axes](https://kieranhealy.org/blog/archives/2016/01/16/two-y-axes/)
 
 
 #### Optional readings
-- <i class="fas fa-book"></i> [Chapter 16: Dates and times](https://r4ds.had.co.nz/dates-and-times.html) of *R for Data Science*
-- <i class="fas fa-external-link-square-alt"></i> [11 Ways to Visualize Changes Over Time – A Guide](https://flowingdata.com/2010/01/07/11-ways-to-visualize-changes-over-time-a-guide/)
-- <i class="fas fa-external-link-square-alt"></i> [Think twice before you spiral](https://junkcharts.typepad.com/junk_charts/2022/01/think-twice-before-you-spiral.html)
+- <i class="fas fa-book"></i> [Chapter 6: Working with models](https://socviz.co/modeling.html#modeling) of *Data Visualization*
 
 
 ### Guiding questions
-- When is it okay (or not) to truncate the y-axis?
-- Many types of charts can communicate changes over time, but some are more appropriate in different situations. When is it best to use some of the different types (e.g., line graphs vs. area graphs vs. horizon charts vs. heatmaps, etc.)?
 
+- How can you correctly and honestly communicate relationships between variables? How can you communicate the uncertainty in those relationships?
+- What are the dangers of visualizing two variables?
+- When is it appropriate to use two y-axes?
 
 
 ### Slides

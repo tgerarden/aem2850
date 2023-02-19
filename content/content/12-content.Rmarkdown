@@ -1,6 +1,6 @@
 ---
-title: "Functions and iteration"
-linktitle: "Functions and iteration"
+title: "Text"
+linktitle: "Text"
 date: "`r format(Sys.time())`"
 menu:
   content:
@@ -18,17 +18,17 @@ output:
 ---
 
 ### Readings
-- <i class="fas fa-book"></i> [Chapter 19: Functions](https://r4ds.had.co.nz/functions.html) of *R for Data Science*
+- <i class="fas fa-book"></i> [Preface](https://www.tidytextmining.com/preface.html) of *Text Mining with R: A Tidy Approach*
 
 
 #### Optional readings
-- <i class="fas fa-book"></i> [Chapter 21: Iteration](https://r4ds.had.co.nz/iteration.html) of *R for Data Science*
+- <i class="fas fa-external-link-square-alt"></i> [How to Visualize Qualitative Data](http://annkemery.com/qual-dataviz/)
+- <i class="fas fa-external-link-square-alt"></i> [These are the words most associated with men and women, according to Facebook status updates](https://www.washingtonpost.com/news/the-intersect/wp/2016/05/28/these-are-the-words-most-associated-with-men-and-women-according-to-facebook-status-updates/)
 
 
 ### Guiding questions
-- When should you write a function?
-- What are some advantages of writing functions relative to copy-and-paste?
-- What is conditional execution?
+- Why is qualitative data difficult to visualize?
+- Why are word clouds so problematic? When is it (not) okay to use them? 
 
 
 ### Slides
