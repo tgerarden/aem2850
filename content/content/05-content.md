@@ -1,7 +1,7 @@
 ---
 title: "Strings and regular expressions"
 linktitle: "Strings and regular expressions"
-date: "`r format(Sys.time())`"
+date: "2023-02-19 15:33:21"
 menu:
   content:
     parent: Course content

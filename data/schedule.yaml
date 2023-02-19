@@ -48,9 +48,9 @@ lessons:
     date: "Week 5"
     # date_start: "June 21"
     # date_end: "June 25"
-    # content: "05-content"
+    content: "05-content"
     # example: "05-example"
-    # assignment: "05-lab"
+    assignment: "05-lab"
     bg: 2
 
   - title: '*February break: no class on Feb 28*'

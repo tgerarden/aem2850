@@ -1,6 +1,6 @@
 ---
-title: "Space"
-linktitle: "Space"
+title: "Time"
+linktitle: "Time"
 date: "`r format(Sys.time())`"
 menu:
   content:
@@ -18,20 +18,19 @@ output:
 ---
 
 ### Readings
-- <i class="fas fa-book"></i> [Chapter 15: Visualizing geospatial data](https://clauswilke.com/dataviz/geospatial-data.html) of *Fundamentals of Data Visualization*
-- <i class="fab fa-youtube"></i> [Why all world maps are wrong](https://www.youtube.com/watch?v=kIID5FDi2JQ)
+- <i class="fas fa-book"></i> [Chapter 13: Visualizing time series](https://clauswilke.com/dataviz/time-series.html) of *Fundamentals of Data Visualization*
+- <i class="fas fa-book"></i> [Chapter 14: Visualizing trends](https://clauswilke.com/dataviz/visualizing-trends.html) of *Fundamentals of Data Visualization*
 
 
 #### Optional readings
-- <i class="fas fa-book"></i> [Chapter 7: Draw maps](http://socviz.co/maps.html) of *Data Visualization*
-- <i class="fas fa-external-link-square-alt"></i> [Drawing beautiful maps programmatically with R, sf and ggplot2](https://r-spatial.org//r/2018/10/25/ggplot2-sf.html)
-- <i class="fas fa-external-link-square-alt"></i> [Bloomberg: When maps lie](https://www.citylab.com/design/2015/06/when-maps-lie/396761/)
-- <i class="fas fa-external-link-square-alt"></i> [xkcd: Map projections](https://xkcd.com/977/)
+- <i class="fas fa-book"></i> [Chapter 16: Dates and times](https://r4ds.had.co.nz/dates-and-times.html) of *R for Data Science*
+- <i class="fas fa-external-link-square-alt"></i> [11 Ways to Visualize Changes Over Time – A Guide](https://flowingdata.com/2010/01/07/11-ways-to-visualize-changes-over-time-a-guide/)
+- <i class="fas fa-external-link-square-alt"></i> [Think twice before you spiral](https://junkcharts.typepad.com/junk_charts/2022/01/think-twice-before-you-spiral.html)
 
 
 ### Guiding questions
-- How can you know if a map projection is truthful or misleading?
-- What's wrong (or not wrong) with using points on maps? Choropleths? Lines?
+- When is it okay (or not) to truncate the y-axis?
+- Many types of charts can communicate changes over time, but some are more appropriate in different situations. When is it best to use some of the different types (e.g., line graphs vs. area graphs vs. horizon charts vs. heatmaps, etc.)?
 
 
 

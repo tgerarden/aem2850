@@ -5,11 +5,11 @@ date: "`r format(Sys.time())`"
 menu:
   content:
     parent: Course content
-    weight: 6
+    weight: 7
 type: docs
 # bibliography: "../../static/bib/references.bib"
 # csl: "../../static/bib/chicago-fullnote-bibliography-no-bib.csl"
-slides: "06-slides"
+slides: "07-slides"
 
 output:
   blogdown::html_page:
