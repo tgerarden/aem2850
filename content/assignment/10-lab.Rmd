@@ -30,4 +30,4 @@ You can access this week's readings and guiding questions using the [class sched
 
 ## Lab
 
-[Click here to access the RStudio Cloud Project for this week's lab and follow the instructions in the file `lab-10.Rmd`.](https://rstudio.cloud/spaces/210747/project/3812305)
+[Click here to access the Posit Cloud project for this week's lab and follow the instructions in the file `lab-10.Rmd`.](https://rstudio.cloud/spaces/210747/project/3812305)

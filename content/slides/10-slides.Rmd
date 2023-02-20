@@ -1,5 +1,5 @@
 ---
-title: "Space"
+title: "Time"
 author: "Todd Gerarden"
 output:
   xaringan::moon_reader:
@@ -35,35 +35,59 @@ opts_chunk$set(warning = FALSE, message = FALSE,
                       fig.width=14, fig.height=7)
 ```
 
+```{r, download-gme-prices, eval=FALSE}
+# do this once, manually
+tidyquant::tq_get("GME", get = "stock.prices", from = "1990-01-01") %>% 
+  write_csv(., "content/slides/data/gme-prices.csv")
+```
+
+```{r download-fred-data, eval=FALSE}
+# do this once, manually
+fred_raw <- tidyquant::tq_get(c("RSXFSN",  # Advance retail sales
+                                "GDPC1",  # GDP
+                                "ICSA",  # Initial unemployment claims
+                                "FPCPITOTLZGUSA",  # Inflation
+                                "UNRATE",  # Unemployment rate
+                                "USREC"),  # Recessions
+                              get = "economic.data",  # Use FRED
+                              from = "1990-01-01")
+write_csv(fred_raw, "content/slides/data/fred_raw.csv")
+```
+
 ```{r packages-data, include=FALSE}
 library(tidyverse)
-library(sf)
+library(scales)
+library(viridis)
+library(gapminder)
+library(ggridges)
+library(scales)
+library(gganimate)
+library(lubridate)
+library(ggrepel)
 library(patchwork)
-library(glue)
-library(maps)
+library(tsibble)
+library(fable)
+library(ggtext)
 
 set.seed(1234)
 
-options("digits" = 2, "width" = 90)
-```
-
-```{r world-data, include=FALSE}
-world_shapes <- read_sf("data/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp") %>% 
-  filter(ISO_A3 != "ATA")
-```
-
-```{r county-data, include=FALSE}
-counties <- st_as_sf(map("county", plot = FALSE, fill = TRUE))
-counties <- subset(counties, grepl("new york,", counties$ID))
-counties <- counties %>% 
-  separate(ID, c("state", "county"), ",") %>% 
-  select(-state)
+gme_prices <- read_csv("data/gme-prices.csv")
+solar_data <- read_csv("data/solar-data.csv") %>% 
+  mutate(date = yq(paste0(year,"-",quarter))) %>% 
+  select(date, p, q) %>% 
+  mutate(q = q/1e3) %>%
+  rename("Price ($/Watt)" = p, "Quantity (GW)" = q)
+fred_raw <- read_csv("data/fred_raw.csv")
+measles <- read_csv("data/cdc-measles.csv") %>% 
+  group_by(Year) %>% 
+  slice(1) %>% 
+  ungroup()
 ```
 
 
 class: center, middle
 
-# Space
+# Time
 
 .class-info[
 
@@ -74,11 +98,11 @@ Cornell Dyson<br>
 Spring 2023
 
 Acknowledgements: 
-[Andrew Heiss](https://datavizm20.classes.andrewheiss.com), 
-[Claus Wilke](https://wilkelab.org/SDS375/), 
+[Andrew Heiss](https://datavizm20.classes.andrewheiss.com)
+<!-- [Claus Wilke](https://wilkelab.org/SDS375/) -->
 <!-- [Grant McDermott](https://github.com/uo-ec607/lectures), -->
 <!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), -->
-[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+<!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) -->
 
 ]
 
@@ -86,12 +110,8 @@ Acknowledgements:
 
 # Announcements
 
-Mini Project 1 due April 1 ([link](https://aem2850.toddgerarden.com/assignment/01-mini-project/))
-
-Extra office hours slots at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
-
-**Thursday's in-class example = this week's lab**
-- Idea is that you can complete it without working over break
+Reminders:
+- Mini Project 1 due April 1 ([link](https://aem2850.toddgerarden.com/assignment/01-mini-project/))
 
 Questions before we get started?
 
@@ -100,856 +120,1206 @@ Questions before we get started?
 
 # Plan for today
 
-[Prologue](#prologue)
+[Prologue: Axis issues](#axis-issues)
 
-[Adding data to maps as layers](#data-on-maps)
+[Visualizing time](#visualizing-time)
 
-[Geospatial visualizations in R](#gis-in-r)
+[Starting, ending, and decomposing time](#decomposing)
 
-[A quick primer on projections (for reference)](#projections)
+[Dates and times in R](#working-with-time)
 
-Disclaimer: I am not an expert on working with geospatial data. I just want to give you a sense of the possibilities!
 
 ---
 class: inverse, center, middle
-name: prologue
+name: axis-issues
 
-# Prologue
+# Prologue: Axis issues
 
 ---
 
-# John Snow and 1854 cholera epidemic
+# Is truncating the y-axis misleading?
 
-.pull-left.center[
+```{r truncation-yes-no, echo=FALSE, fig.width=12, fig.height=7}
+tibble(y = seq(0, 0.995, 0.005)) %>% 
+  mutate(fill = y <= 0.989) %>% 
+  ggplot(aes(ymin = y, ymax = y + 0.005, xmin = 0, xmax = 1, fill = fill)) +
+  geom_rect() +
+  annotate(geom = "text", x = 0.5, y = 0.995, label = "No", color = "#FFDC00",
+           family = "Fira Sans Condensed Black", fontface = "plain", size = 25) +
+  annotate(geom = "text", x = 0.5, y = 0.985, label = "Yes", color = "#FFDC00",
+           family = "Fira Sans Condensed Black", fontface = "plain", size = 25) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(labels = percent_format(accuracy = 0.1)) +
+  scale_fill_manual(values = c("#FF4136", "#0074D9"), guide = "none") +
+  labs(x = NULL, y = "Percent of the time") +
+  coord_cartesian(ylim = c(.98, 1)) +
+  theme_minimal(base_size = 25, base_family = "Fira Sans Condensed") +
+  theme(panel.grid = element_blank(),
+        axis.text.x = element_blank())
+```
+
+---
+
+# Don't be too extreme!
+
+It is actually more legal to truncate the y-axis than you might think
+
+When do you think it is okay to truncate?
+
+--
+
+When small movements matter
+
+--
+
+When the scale itself is distorted
+
+--
+
+When zero values are impossible
+
+---
+
+# When is it okay to truncate?
+
+.center[**When small movements matter**]
+
+--
+
+.pull-left[
 <figure>
-  <img src="img/10/john-snow-pic.jpg" alt="John Snow" title="John Snow" width="60%">
+  <img src="img/09/us_gdp_us_gdp_chartbuilder-3.png" alt="GDP not truncated, from Quartz" title="GDP not truncated, from Quartz" width="100%">
 </figure>
 ]
 
 --
 
 .pull-right[
-10% of the population of Soho died in a week (!!)
-
-Miasma theory said it was because the air was bad
+<figure>
+  <img src="img/09/us_gdp_us_gdp_chartbuilder-2.png" alt="GDP truncated, from Quartz" title="GDP truncated, from Quartz" width="100%">
+</figure>
 ]
 
 ???
 
-https://en.wikipedia.org/wiki/John_Snow
+Stock prices too
+
+https://qz.com/418083/its-ok-not-to-start-your-y-axis-at-zero/
 
 ---
 
-background-image: url("img/10/john-snow-cholera-map.jpg")
-background-position: center
-background-size: contain
+# When is it okay to truncate?
 
-???
+.center[**When the scale itself is distorted**]
 
-https://commons.wikimedia.org/wiki/File:Snow-cholera-map-1.jpg
-
----
-
-# The Broad Street pump
+--
 
 .pull-left.center[
 <figure>
-  <img src="img/10/john-snow-cholera-detail.jpg" alt="John Snow's 1854 cholera map" title="John Snow's 1854 cholera map" width="100%">
+  <img src="img/09/uber-sign.jpg" alt="Sign in an Uber car about rating system" title="Sign in an Uber car about rating system" width="70%">
 </figure>
 ]
+
+--
 
 .pull-right.center[
 <figure>
-  <img src="img/10/John_Snow_memorial_and_pub.jpg" alt="The Broad Street Pump" title="The Broad Street Pump" width="75%">
+  <img src="img/09/uber-scale.jpg" alt="Internal rating system at Uber" title="Internal rating system at Uber" width="100%">
 </figure>
 ]
 
 ???
 
-https://nl.wikibooks.org/wiki/Bestand:Snow-cholera-map.jpg
+https://www.buzzfeed.com/carolineodonovan/the-fault-in-five-stars
 
-https://upload.wikimedia.org/wikipedia/commons/c/cb/John_Snow_memorial_and_pub.jpg
+http://www.businessinsider.com/leaked-charts-show-how-ubers-driver-rating-system-works-2015-2
+
 
 ---
 
-# Geospatial data can help us...
+# When is it okay to truncate?
 
-Visualize business data for internal purposes
-
-Study business activities
+.center[**When zero values are impossible**]
 
 --
 
-- Example: Dyson Profs. Addoum, Ng, and Ortiz-Bobea have studied how extreme temperatures affect business sales, productivity, and earnings
-
-.center[
+.pull-left[
 <figure>
-  <img src="img/10/pic-jawad-addoum.jpg" alt="Jawad Addoum" title="Jawad Addoum" width="25%">
-  <img src="img/10/pic-david-ng.jpg" alt="David Ng" title="David Ng" width="25%">
-  <img src="img/10/pic-ariel-ortiz-bobea.jpg" alt="Ariel Ortiz-Bobea" title="Ariel Ortiz-Bobea" width="25%">
+  <img src="img/09/oral_temperature_sara_bob_chartbuilder.png" alt="Temperature not truncated, from Quartz" title="Temperature not truncated, from Quartz" width="100%">
 </figure>
 ]
 
+--
 
-
----
-
-# Addoum et al: Temperatures
-
-.center[
+.pull-right[
 <figure>
-  <img src="img/10/business-map-temps.png" alt="July 1999 temperatures" title="July 1999 temperatures" width="100%">
+  <img src="img/09/oral_temperature_sara_bob_chartbuilder-1.png" alt="Temperature truncated, from Quartz" title="Temperature truncated, from Quartz" width="100%">
 </figure>
 ]
 
 ???
 
-Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishment Sales, The Review of Financial Studies, Volume 33, Issue 3, March 2020, Pages 1331–1366, [https://doi.org/10.1093/rfs/hhz126](https://doi.org/10.1093/rfs/hhz126)
+https://qz.com/418083/its-ok-not-to-start-your-y-axis-at-zero/
 
 ---
 
-# Addoum et al: Temperature Shocks
+# Never on bar charts
 
 .center[
 <figure>
-  <img src="img/10/business-map-temps-anomalies.png" alt="July 1999 temperature anomalies" title="July 1999 temperature anomalies" width="100%">
+  <img src="img/06/obamacareenrollment-fncchart.jpg" alt="Fox News Obamacare enrollment" title="Fox News Obamacare enrollment" width="85%">
+</figure>
+]
+
+---
+
+# Zero is okay too!
+
+Just because you don't *have to* start at 0 doesn't mean you should *never* start at 0
+
+Andrew Gelman's heuristic: **"If zero is in the neighborhood, invite it in."**
+
+.center[
+<figure>
+  <img src="img/09/zero-in-the-neighborhood.png" alt="If zero is in the neighborhood, invite it in" title="If zero is in the neighborhood, invite it in" width="90%">
 </figure>
 ]
 
 ???
 
-Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishment Sales, The Review of Financial Studies, Volume 33, Issue 3, March 2020, Pages 1331–1366, [https://doi.org/10.1093/rfs/hhz126](https://doi.org/10.1093/rfs/hhz126)
+https://statmodeling.stat.columbia.edu/2021/12/17/graphing-advice-if-zero-is-in-the-neighborhood-invite-it-in/
 
 ---
 
-# Addoum et al: Establishments
+# Keep scales consistent and flag missing data
+
+&nbsp;
 
 .center[
 <figure>
-  <img src="img/10/business-map-locations.png" alt="U.S. business locations" title="U.S. business locations" width="95%">
+  <img src="img/09/08fig21.jpg" alt="Good and bad treatment of missing values in x-axis" title="Good and bad treatment of missing values in x-axis" width="100%">
 </figure>
 ]
 
 ???
 
-Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishment Sales, The Review of Financial Studies, Volume 33, Issue 3, March 2020, Pages 1331–1366, [https://doi.org/10.1093/rfs/hhz126](https://doi.org/10.1093/rfs/hhz126)
+Alberto Cairo, *The Truthful Art*, chapter 8, figure 8.21
 
 ---
 
-# Temperature Shocks and Establishment Sales
+# Don’t impute across categories
 
-.center[
-<figure>
-  <img src="img/10/business-map-temps-anomalies.png" alt="July 1999 temperature anomalies" title="July 1999 temperature anomalies" width="50%">
-  <img src="img/10/business-map-locations.png" alt="U.S. business locations" title="U.S. business locations" width="50%">
-</figure>
-]
+.pull-left[
+```{r likert-imputation-bad, echo=FALSE, fig.width=4.8, fig.height=4.2, out.width="100%"}
+fake_survey <- tribble(
+  ~response, ~count,
+  "Strongly agree", 5,
+  "Agree", 10,
+  "Neutral", 11,
+  "Disagree", 8,
+  "Strongly disagree", 2
+) %>% 
+  mutate(response = fct_rev(fct_inorder(response)))
 
-???
-
-Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishment Sales, The Review of Financial Studies, Volume 33, Issue 3, March 2020, Pages 1331–1366, [https://doi.org/10.1093/rfs/hhz126](https://doi.org/10.1093/rfs/hhz126)
-
----
-
-# Choropleth maps can be great
-
-.center[
-<figure>
-  <img src="img/10/business-map-temps-anomalies.png" alt="July 1999 temperature anomalies" title="July 1999 temperature anomalies" width="100%">
-</figure>
-]
-
-???
-
-Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishment Sales, The Review of Financial Studies, Volume 33, Issue 3, March 2020, Pages 1331–1366, [https://doi.org/10.1093/rfs/hhz126](https://doi.org/10.1093/rfs/hhz126)
-
----
-
-# Choropleth maps can be misleading. Why?
-
-.center[
-<figure>
-  <img src="img/10/white-house-framed-map.png" alt="White House framed map of election results" title="White House framed map of election results" width="42%">
-</figure>
-]
-
-???
-
-https://thehill.com/blogs/blog-briefing-room/332927-trump-will-hang-map-of-2016-election-results-in-the-white-house
-
----
-
-# Land doesn't vote
-
-.center[
-<video controls>
-  <source src="img/10/election-map.mp4" type="video/mp4">
-</video>
-]
-
-???
-
-https://demcastusa.com/2019/11/11/land-doesnt-vote-people-do-this-electoral-map-tells-the-real-story/
-
-[Cryptic command](https://stackoverflow.com/questions/31781238/using-ffmpeg-to-convert-gif-to-mp4-output-doesnt-play-on-android) to convert gif to mp4: 
-
-```text
-ffmpeg -r 30 -i input.gif -movflags faststart -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" out.mp4
+ggplot(fake_survey, aes(x = response, y = count, group = 1)) +
+  geom_line(size = 1, color = "grey50") +
+  geom_point(aes(color = response), size = 9) +
+  scale_color_viridis(discrete = TRUE) +
+  expand_limits(y = 0) +
+  labs(title = "This is BAD", x = NULL, y = "Count") +
+  guides(color = "none")
 ```
-
----
-
-# Cartogram heatmaps may be preferable
-
-.center[
-<figure>
-  <img src="img/10/538-hexagon-cartogram.png" alt="FiveThirtyEight hex cartogram" title="FiveThirtyEight hex cartogram" width="55%">
-</figure>
 ]
 
-Each hexagon corresponds to one electoral vote
+--
 
-???
-
-http://metrocosm.com/election-2016-map-3d/
-
----
-
-# Or: use other layers to represent data
-
-.center[
-<figure>
-  <img src="img/10/2016_election_map_large.png" alt="xkcd 2016 election map" title="xkcd 2016 election map" width="55%">
-</figure>
+.pull-right[
+```{r likert-good, echo=FALSE, fig.width=4.8, fig.height=4.2, out.width="100%"}
+ggplot(fake_survey, aes(x = response, y = count)) +
+  geom_pointrange(aes(ymin = 0, ymax = count, color = response), size = 2) +
+  scale_color_viridis(discrete = TRUE) +
+  labs(title = "This is BETTER", x = NULL, y = "Count") +
+  guides(color = "none")
+```
 ]
-
-???
-
-https://xkcd.com/1939/
 
 
 ---
 class: inverse, center, middle
-name: data-on-maps
+name: visualizing-time
 
-# Adding data to maps as layers
+# Visualizing time
 
 ---
 
-# Maps show data in a geospatial context
+# Showing changes over time
 
-```{r echo=FALSE, out.width='60%'}
-knitr::include_graphics("https://clauswilke.com/dataviz/geospatial_data_files/figure-html/sfbay-overview-1.png")
+Time is just a variable that can be mapped to an aesthetic
+
+--
+
+Can be used as `x`, `y`, `color`, `fill`, `facet`, and even animation
+
+--
+
+Can use all sorts of `geom`s: lines, columns, points, heatmaps, densities, maps, etc.
+
+--
+
+In general, follow reading conventions to show time progression:
+
+→ & ↓
+
+---
+
+# Time on x-axis + `geom_point()`
+
+.left-code[
+```{r gme-point, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+gme_prices %>% 
+  ggplot(aes(x = date, y = adjusted)) +
+  geom_point(size = 0.5) + #<<
+  labs(x = NULL, y = "Share price ($)",
+       title = "GME to the moon")
 ```
-
-???
-
-Wind turbines in the San Francisco Bay Area
-
-Figure from [Claus O. Wilke. Fundamentals of Data Visualization. O'Reilly, 2019.](https://clauswilke.com/dataviz)
-
----
-
-# Maps are composed of several distinct layers
-
-```{r echo=FALSE, out.width='60%'}
-knitr::include_graphics("https://clauswilke.com/dataviz/geospatial_data_files/figure-html/sfbay-layers-1.png")
-```
-
-???
-
-Wind turbines in the San Francisco Bay Area
-
-Figure from [Claus O. Wilke. Fundamentals of Data Visualization. O'Reilly, 2019.](https://clauswilke.com/dataviz)
-
----
-
-# The idea of aesthetic mappings still applies
-
-```{r echo=FALSE, out.width='60%'}
-knitr::include_graphics("https://clauswilke.com/dataviz/geospatial_data_files/figure-html/shiloh-map-1.png")
-```
-
-???
-
-Location of individual wind turbines in the Shiloh Wind Farm
-
-Figure from [Claus O. Wilke. Fundamentals of Data Visualization. O'Reilly, 2019.](https://clauswilke.com/dataviz)
-
----
-
-# Examples: maps with lines
-
-.center[
-<figure>
-  <img src="img/10/CA_Migration_v2_101-01.png" alt="Net migration between California and other states" title="Net migration between California and other states" width="65%">
-  <figcaption><a href="https://www.census.gov/dataviz/visualizations/051/" target="_blank">US Census Bureau: Net migration between California and other states</a></figcaption>
-</figure>
+How would you add a line to this?
 ]
 
-???
-
-https://www.census.gov/dataviz/visualizations/051/
-
----
-
-# Examples: maps with points
-
-.center[
-<figure>
-  <img src="img/10/nyt-ukraine-refugees.png" alt="Refugees from Ukraine" title="Refugees from Ukraine" width="70%">
-  <figcaption><a href="https://www.nytimes.com/interactive/2022/03/15/opinion/ukraine-refugee-crisis.html" target="_blank">The New York Times, "Refugees from Ukraine, since Feb. 24"</a></figcaption>
-</figure>
+.right-plot[
+![](`r knitr::fig_chunk("gme-point", "png")`)
 ]
 
-???
-
-https://www.nytimes.com/interactive/2022/03/15/opinion/ukraine-refugee-crisis.html
 
 ---
 
-# Examples: maps with points
+# Time on x-axis + `geom_point()`
 
-.center[
-<figure>
-  <img src="img/10/dc-photo-locations-small.jpg" alt="DC photo locations by locals and tourists" title="DC photo locations by locals and tourists" width="52%">
-  <figcaption><a href="https://www.flickr.com/photos/walkingsf/4672195208/in/album-72157624209158632/" target="_blank">Photos taken in DC: blue = locals; red = tourists; yellow = unknown</a></figcaption>
-</figure>
+.left-code[
+```{r gme-point-line, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+gme_prices %>% 
+  ggplot(aes(x = date, y = adjusted)) +
+  geom_point(size = 0.5) +
+  geom_line() + #<<
+  labs(x = NULL, y = "Share price ($)",
+       title = "GME to the moon")
+```
 ]
 
-???
+.right-plot[
+![](`r knitr::fig_chunk("gme-point-line", "png")`)
+]
 
-https://www.flickr.com/photos/walkingsf/4672195208/in/album-72157624209158632/
-
----
-class: inverse, center, middle
-name: gis-in-r
-
-# Geospatial visualizations in R
 
 ---
 
-# Aesthetic mappings meet mapping
+# Time on x-axis: points vs lines
 
-```{r lat-long-example, echo=FALSE, fig.width=7, fig.height=7}
-point_example <- tibble(x = 2, y = 1) %>%
-  mutate(label = glue("{x} x, {y} y\n{y} lat, {x} lon"))
-lat_labs <- tibble(x = -3, y = seq(-2, 3, 1), label = "Latitude")
-lon_labs <- tibble(x = seq(-2, 3, 1), y = -2, label = "Longitude")
+Points emphasize observations
+
+Lines emphasize trends
+
+Using lines for time series is often fine since data are evenly spaced and usually complete
+
+But lines are effectively made-up data, so be careful how you use them!
+
+---
+
+# Time on x-axis + `geom_line/col()`
+
+.left-code[
+```{r gme, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+gme_prices %>% 
+  ggplot(aes(x = date, y = adjusted)) +
+  geom_line() +
+  labs(x = NULL, y = "Share price ($)",
+       title = "GME to the moon")
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("gme", "png")`)
+]
+
+
+---
+
+# Time on x-axis + `geom_line/col()`
+
+Can also use a fill for the area under a line, **as long as the y-axis starts at zero**
+
+.left-code[
+```{r gme-fill, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+gme_prices %>% 
+  ggplot(aes(x = date, y = adjusted)) +
+  geom_area(fill = "skyblue", color = "black") + #<<
+  labs(x = NULL, y = "Share price ($)",
+       title = "GME to the moon")
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("gme-fill", "png")`)
+]
+
+
+---
+
+# Line plots don't have to be boring
+
+.more-left.center[
+```{r covid-unemp-claims, echo=FALSE, fig.width=6, fig.height=4, out.width="100%"}
+# Wrangle the recession dates so that we just have start and end dates
+recessions_raw <- fred_raw %>% 
+  filter(symbol == "USREC") %>% 
+  mutate(recession_delta = price - lag(price)) %>% 
+  filter(recession_delta != 0)
+
+recessions_fake_end <- recessions_raw %>% 
+  bind_rows(tibble(date = ymd("2021-06-01"),
+                   recession_delta = -1))
+
+recessions <- tibble(start = filter(recessions_fake_end, recession_delta == 1)$date,
+                     end = filter(recessions_fake_end, recession_delta == -1)$date)
+
+claims <- fred_raw %>% 
+  filter(symbol == "ICSA") %>% 
+  rename(claims = price)
 
 ggplot() +
-  geom_point(data = point_example, aes(x = x, y = y), size = 5) +
-  geom_label(data = point_example, aes(x = x, y = y, label = label),
-             nudge_y = 0.8, size = 8,
-             family = "Fira Sans Condensed",) +
-  geom_text(data = lat_labs, aes(x = x, y = y, label = label),
-            hjust = 0.5, vjust = -0.3, size = 6,
-            family = "Fira Sans Condensed",) +
-  geom_text(data = lon_labs, aes(x = x, y = y, label = label),
-            hjust = 1.1, vjust = -0.5, angle = 90, size = 6,
-            family = "Fira Sans Condensed", ) +
-  geom_hline(yintercept = 0) +
-  geom_vline(xintercept = 0) +
-  scale_x_continuous(breaks = seq(-2, 3, 1)) +
-  scale_y_continuous(breaks = seq(-2, 3, 1)) +
-  coord_equal(xlim = c(-3.5, 3), ylim = c(-3, 3)) +
-  labs(x = NULL, y = NULL, caption = "via @sarahbellmaps") +
-  # labs(x = NULL, y = NULL) +
-  theme_minimal(base_family = "Fira Sans Condensed") +
-  theme(panel.grid.minor = element_blank(),
-        axis.text = element_blank(),
-        plot.caption = element_text(size = rel(1), margin = margin(t = 15), color = "grey50"))
+  geom_rect(data = recessions, aes(xmin = start, xmax = end, ymin = -Inf, ymax = Inf),
+            fill = "#FF851B", alpha = 0.2) +
+  geom_line(data = claims, aes(x = date, y = claims), size = 0.5, color = "#85144b") +
+  scale_x_date(date_breaks = "5 years", date_labels = "%Y") +
+  scale_y_continuous(labels = comma) +
+  labs(x = NULL, y = "Initial unemployment claims",
+       title = "HOLY CRAP",
+       caption = "Source: Initial weekly unemployment claims (ICSA); FRED\nRecessions highlighted in orange") +
+  theme_bw(base_family = "Fira Sans Condensed") +
+  theme(plot.title = element_text(face = "bold"),
+        panel.grid.minor.x = element_blank())
+
 ```
+]
 
----
-
-# The **sf** package: simple features in R
-
-```{r echo=FALSE, out.width='75%'}
-knitr::include_graphics("img/10/sf.png")
-```
+.less-right.center[
+<figure>
+  <img src="img/09/nyt_2020-05-09.jpg" alt="Front page of the NYT, May 9, 2020" title="Front page of the NYT, May 9, 2020" width="90%">
+</figure>
+]
 
 ???
 
-Source: [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+Monthly change in jobs since end of WWII
+
+The New York Times front page, May 9, 2020
+
+https://www.nytimes.com/issue/todayspaper/2020/05/09/todays-new-york-times
+
+https://static01.nyt.com/images/2020/05/09/nytfrontpage/scan.pdf
 
 ---
 
-# Shapefiles
+# Time on y-axis + `geom_density()`
 
-Geographic information is shared as **shapefiles**
+```{r density-ridges, echo=FALSE, fig.width=7, fig.height=3.25, out.width="90%"}
+gapminder %>% 
+    mutate(year_factor = factor(year)) %>% 
+    ggplot(
+      aes(x = lifeExp, 
+          y = fct_rev(year_factor), 
+          fill = after_stat(x))
+      ) +
+    geom_density_ridges_gradient(
+      color = "white", 
+      quantile_lines = TRUE, 
+      quantiles = 2
+      ) +
+    guides(fill = "none") +
+    scale_fill_viridis() + 
+    labs(x = "Life expectancy", 
+         y = NULL, fill = NULL) + 
+    theme_minimal()
+```
 
---
+.center[How would you make this plot?]
 
-These are *not* like regular single CSV files!
+---
 
---
+# Let's start simple
 
-Shapefiles come as zipped files with a bunch of different files inside
+.left-code[
+```{r density-ridges-howto, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+library(ggridges) # geom_density_ridges() package #<<
+
+gapminder %>% 
+    mutate(year_factor = factor(year)) %>% #<<
+    ggplot(
+      aes(x = lifeExp, 
+          y = year_factor) # map time to y #<<
+      ) +
+    geom_density_ridges() # add geom #<<
+```
+
+How could we modify this to follow ↓ convention for time?
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("density-ridges-howto", "png")`)
+]
+
+---
+
+# Follow ↓ convention for time
+
+.left-code[
+```{r density-ridges-howto-rev, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+gapminder %>% 
+    mutate(year_factor = factor(year)) %>% 
+    ggplot(
+      aes(x = lifeExp, 
+          y = fct_rev(year_factor)) # reverse year #<<
+      ) +
+    geom_density_ridges()
+```
+
+How could we change the black lines to white?
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("density-ridges-howto-rev", "png")`)
+]
+
+---
+
+# Add color to help visually separate densities
+
+.left-code[
+```{r density-ridges-howto-white, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+gapminder %>% 
+    mutate(year_factor = factor(year)) %>% 
+    ggplot(
+      aes(x = lifeExp, 
+          y = fct_rev(year_factor))
+      ) +
+    geom_density_ridges(
+      color = "white"  # separate densities #<<
+      )
+```
+
+How could we add a line at the median of each density?
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("density-ridges-howto-white", "png")`)
+]
+
+---
+
+# Add a line at the median of each density
+
+.left-code[
+```{r density-ridges-howto-median, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+gapminder %>% 
+    mutate(year_factor = factor(year)) %>% 
+    ggplot(
+      aes(x = lifeExp, 
+          y = fct_rev(year_factor))
+      ) +
+    geom_density_ridges(
+      color = "white", 
+      quantile_lines = TRUE, # add quantile lines #<<
+      quantiles = 2          # median #<<
+      )
+```
+
+How could we add a color gradient to the densities?
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("density-ridges-howto-median", "png")`)
+]
+
+---
+
+# Fill the densities along the x axis
+
+.left-code[
+```{r density-ridges-howto-fill, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+gapminder %>% 
+    mutate(year_factor = factor(year)) %>% 
+    ggplot(
+      aes(x = lifeExp, 
+          y = fct_rev(year_factor),
+          fill = after_stat(x)) # fill by x value #<<
+      ) +
+    geom_density_ridges_gradient( #<<
+      # this is a special geom to fill along x #<<
+      color = "white", 
+      quantile_lines = TRUE, 
+      quantiles = 2
+      )
+```
+
+Use **after_stat** to shade the *densities*, not the data itself
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("density-ridges-howto-fill", "png")`)
+]
+
+---
+
+# Finish by cleaning the plot up
+
+.left-code[
+```{r density-ridges-howto-fancy, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+gapminder %>% 
+    mutate(year_factor = factor(year)) %>% 
+    ggplot(
+      aes(x = lifeExp, 
+          y = fct_rev(year_factor),
+          fill = after_stat(x))
+      ) +
+    geom_density_ridges_gradient(
+      color = "white", 
+      quantile_lines = TRUE, 
+      quantiles = 2
+      ) +
+    guides(fill = "none") +       # omit legend #<<
+    scale_fill_viridis() +        # nicer shading #<<
+    labs(x = "Life expectancy",   # modify label #<<
+         y = NULL, fill = NULL) + # omit labels #<<
+    theme_minimal()               # cleaner theme #<<
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("density-ridges-howto-fancy", "png")`)
+]
+
+---
+
+# Time in animation + `geom_point()`
 
 .center[
 <figure>
-  <img src="img/10/shapefile-raw.png" alt="Shapefile folder structure" title="Shapefile folder structure" width="65%">
+  <img src="img/05/gapminder.gif" alt="Hans Rosling animation" title="Hans Rosling animation" width="65%">
 </figure>
 ]
 
 ---
 
-# `sf` makes it easy in R
+# How can we make this animation in R?
 
-**Simple features** standardize how spatial objects are represented by computers
-
---
-
-`sf` represents simple features as native R objects
+First, how would we make a static plot of the data?
 
 --
-
-Goal is to present information about *spatial geometries* according to some *attribute* (e.g., population, business data, etc.)
-
---
-
-To make it easy to combine *attributes* with *spatial geometries*, `sf` stores feature geometries in the data frame column `geometry`
-
----
-
-# Structure of an `sf` data frame
-
-.small-code[
-```{r demo-read-shapefile, eval=FALSE}
-library(sf)
-world_shapes <- read_sf("data/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp")
-world_shapes %>% select(TYPE, GEOUNIT, ISO_A3, geometry)
-```
-
-```{r show-shapefile, echo=FALSE}
-world_shapes %>% 
-  select(TYPE, GEOUNIT, ISO_A3, geometry)
-```
-]
-
----
-
-# `sf` data frames are data frames
-
-```{r}
-class(world_shapes)
-world_shapes %>% 
-  filter(NAME == "United States of America") %>% 
-  select(NAME, TYPE, ISO_A3, geometry)
-```
-
----
-
-# The magic `geometry` column
-
-To make a map using `ggplot`, all you need to do is &nbsp; `+ geom_sf()`
 
 .left-code[
-```{r simple-map, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-world_shapes %>% 
-  ggplot() +
-  geom_sf() #<<
+```{r gapminder-static, tidy=FALSE, fig.show="hide", fig.dim=c(8, 6), out.width="100%"}
+gapminder %>% 
+  ggplot(aes(gdpPercap, lifeExp,  #<<
+             size = pop, color = country)) + #<<
+  geom_point(alpha = 0.5, show.legend = FALSE) + #<<
+  facet_wrap(~continent) + #<<
+  scale_color_manual(
+    values = gapminder::country_colors
+    ) +
+  scale_size_continuous(range = c(1, 15)) +
+  scale_x_log10(labels = scales::dollar) +
+  theme_minimal(base_size = 14) +
+  labs(x = "GDP per capita", 
+       y = "Life expectancy",
+       title = "Year: 1952-2007")
 ```
 ]
 
 .right-plot[
-![](`r knitr::fig_chunk("simple-map", "png")`)
+![](`r knitr::fig_chunk("gapminder-static", "png")`)
 ]
+
+
+???
+
+https://towardsdatascience.com/how-to-create-animated-plots-in-r-adf53a775961
 
 ---
 
-# Changing projections
+# Converting a static plot to an animation
 
-Use `coord_sf()` to change projections (see end for background on projections)
+Second, let's use `gganimate` to visualize changes over time
 
 .left-code[
-```{r change-projection, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-world_shapes %>% 
-  ggplot() +
-  geom_sf() +
-  coord_sf(crs = "+proj=merc") #<<
+```{r gapminder-dynamic, eval=FALSE, tidy=FALSE, message=FALSE}
+library(gganimate) # plot animation package #<<
+
+gapminder %>% 
+  ggplot(aes(gdpPercap, lifeExp, 
+             size = pop, color = country)) +
+  geom_point(alpha = 0.5, show.legend = FALSE) +
+  facet_wrap(~continent) +
+  scale_color_manual(
+    values = gapminder::country_colors
+    ) +
+  scale_size_continuous(range = c(1, 15)) +
+  scale_x_log10(labels = scales::dollar) +
+  theme_minimal(base_size = 14) +
+  labs(x = "GDP per capita", 
+       y = "Life expectancy",
+       title = "Year: {frame_time}") + #<<
+  transition_time(year) + #<<
+  ease_aes('linear') # default progression #<<
 ```
 ]
-
-.right-plot[
-![](`r knitr::fig_chunk("change-projection", "png")`)
-]
-
----
-
-# Changing projections
-
-Use `coord_sf()` to change projections (see end for background on projections)
-
-.left-code[
-```{r change-projection1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-world_shapes %>% 
-  ggplot() +
-  geom_sf() +
-  coord_sf(crs = "+proj=robin") #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("change-projection1", "png")`)
-]
-
----
-
-# Let's zoom in on New York
-
-.left-code[
-```{r nys-map, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-# counties object created in the background
-head(counties, 5)
-counties %>% #<<
-  ggplot() + #<<
-  geom_sf()  #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("nys-map", "png")`)
-]
-
----
-
-# We can filter like normal
-
-All regular data frame operations work
-
-.left-code[
-```{r filter-map-data, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-counties %>% 
-  filter(county == "tompkins") %>%  #<<
-  ggplot() +
-  geom_sf()
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("filter-map-data", "png")`)
-]
-
----
-
-# We can use aesthetics like normal
-
-All regular ggplot layers and aesthetics work
-
-.left-code[
-```{r add-aes, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-counties %>%
-  ggplot(aes(fill = (county=="tompkins"))) + #<<
-  geom_sf() +
-  guides(fill = "none") + # omit legend
-  scale_fill_viridis_d()  # nicer colors
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("add-aes", "png")`)
-]
-
----
-
-# We can do a lot more!
-
-`sf` is for all GIS stuff
 
 --
 
-Draw maps
+.right-plot[
+<figure>
+  <img src="img/09/my-gapminder-animation.gif" alt="My Hans Rosling animation" title="My Hans Rosling animation" width="90%">
+</figure>
+]
 
---
+???
 
-Calculate distances between points
-
---
-
-Count observations in a given area
-
---
-
-Anything else related to geography!
-
---
-
-See [here](https://bookdown.org/robinlovelace/geocompr/intro.html) or [here](https://bookdown.org/lexcomber/brunsdoncomber2e/Ch5.html) for full textbooks
-
+https://towardsdatascience.com/how-to-create-animated-plots-in-r-adf53a775961
 
 ---
 
-# Example: compute the area of NY counties
+# Saving gifs
 
-```{r}
-counties %>% 
-  mutate(area = st_area(counties)) # sf::st_area() computes areas #<<
+Third, use `anim_save()` to write a `.gif` that you can text to your mom
+
+```{r gapminder-animation, eval=FALSE, tidy=FALSE, fig.dim=c(8, 6), out.width="100%"}
+library(gganimate) # plot animation package
+
+my_gapminder_animation <- gapminder %>% 
+  ggplot(aes(gdpPercap, lifeExp, size = pop, color = country)) +
+  geom_point(alpha = 0.5, show.legend = FALSE) +
+  scale_color_manual(values = gapminder::country_colors) +
+  scale_size_continuous(range = c(1, 15)) +
+  scale_x_log10(labels = scales::dollar) +
+  facet_wrap(~continent) +
+  theme_minimal(base_size = 14) +
+  labs(x = "GDP per capita", 
+       y = "Life expectancy",
+       title = "Year: {frame_time}") +
+  transition_time(year) +
+  ease_aes('linear')
+
+anim_save("content/slides/img/09/my-gapminder-animation.gif",  #<<
+          my_gapminder_animation) #<<
 ```
 
+???
+
+https://towardsdatascience.com/how-to-create-animated-plots-in-r-adf53a775961
+
 ---
 
-# Fill counties by area
+# Time in maps
+
+.center[
+<figure>
+  <img src="img/09/08fig30.jpg" alt="Map by Jorge Camões" title="Map by Jorge Camões" width="55%">
+  <figcaption>Map of the spread of Walmart by Jorge Camões</figcaption>
+</figure>
+]
+
+???
+
+Alberto Cairo, *The Truthful Art*, chapter 8, figure 8.30
+
+---
+
+# Connected scatter plots
+
+.pull-left[
+Sometimes connected scatter plots of time series data make sense
+
+What is a connected scatter plot?
+
+How would you make one using these data?
+]
+
+.pull-right[
+```{r solar-data-facet, echo=FALSE, fig.dim=c(4, 3), out.width="100%"}
+solar_data %>% 
+  pivot_longer(-date, 
+               names_to = "key", 
+               values_to = "value") %>% 
+  ggplot(aes(x = date, 
+             y = value, 
+             color = key)) + 
+  geom_line() + 
+  facet_wrap(~key, ncol = 1, 
+             scales = "free_y") + 
+  guides(color = "none") +
+  theme_minimal() + 
+  labs(x = NULL, y = NULL) +
+  scale_y_continuous(limits = c(0,NA))
+```
+]
+
+---
+
+# Connected scatter plots
 
 .left-code[
-```{r nys-add-aes, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-counties %>% 
-  mutate(area = as.numeric(st_area(counties))) %>% #<<
-  ggplot(aes(fill = area)) + #<<
-  geom_sf() +
-  scale_fill_viridis_c(alpha = 0.5) +
+```{r solar-data-connected, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+solar_data %>% 
+  ggplot(aes(x = `Quantity (GW)`,  # not time #<<
+             y = `Price ($/Watt)`, # not time #<<
+             color = date)) +      # time! #<<
+  geom_point() + 
+  geom_path() + # connect by time, not x #<<
+  scale_x_log10() + 
+  scale_y_log10() + 
+  scale_color_viridis() +
+  guides(color = "none") +
+  theme_minimal()
+```
+
+Note the log axes
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("solar-data-connected", "png")`)
+]
+
+
+---
+
+# Is this a good use case?
+
+.pull-left[
+```{r solar-data-connected-2, echo=FALSE, fig.dim=c(4, 3), out.width="100%"}
+solar_data %>% 
+  ggplot(aes(x = `Quantity (GW)`,  # not time #<<
+             y = `Price ($/Watt)`, # not time #<<
+             color = date)) +      # time! #<<
+  geom_point() + 
+  geom_path() + # connect by time, not x #<<
+  geom_smooth(method = "lm", alpha = 0.5) +
+  scale_x_log10() +
+  scale_y_log10() +
+  scale_color_viridis() +
+  guides(color = "none") +
   theme_minimal()
 ```
 ]
 
-.right-plot[
-![](`r knitr::fig_chunk("nys-add-aes", "png")`)
+--
+
+.pull-right[
+Looks a lot like a demand curve!
+
+$log(Q) = \alpha + \beta log(P) + \varepsilon$
+
+We could use OLS to estimate $\beta$
+
+How might we interpret $\beta$?
+]
+
+
+---
+
+# Often it's better to use multiple plots
+
+.pull-left[
+```{r unemp-inflation-path, echo=FALSE, fig.width=4.8, fig.height=4.2, out.width="100%"}
+unemp_inflation <- fred_raw %>% 
+  filter(symbol %in% c("UNRATE", "FPCPITOTLZGUSA")) %>% 
+  pivot_wider(id_cols = date, names_from = symbol, values_from = price) %>% 
+  rename(inflation = FPCPITOTLZGUSA, unemployment = UNRATE) %>% 
+  mutate(year = year(date)) %>% 
+  mutate_at(vars(inflation, unemployment), ~ . / 100) %>% 
+  filter(year >= 1990, year < 2020) %>% 
+  arrange(date)
+
+unemp_inflation_small <- unemp_inflation %>% 
+  group_by(year) %>% 
+  summarize(inflation = mean(inflation, na.rm = TRUE),
+            unemployment = mean(unemployment))
+
+ggplot(unemp_inflation_small, aes(x = unemployment, y = inflation)) +
+  geom_path(size = 1, color = "grey50") +
+  geom_point() +
+  geom_text_repel(aes(label = year), vjust = -0.5, family = "Fira Sans Condensed") +
+  scale_x_continuous(labels = percent_format(accuracy = 1)) +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  labs(x = "Unemployment", y = "Inflation") +
+  theme_minimal(base_family = "Fira Sans Condensed")
+```
+]
+
+--
+
+.pull-right[
+```{r unemp-inflation-good, echo=FALSE, fig.width=4.8, fig.height=4.2, out.width="100%"}
+plot_inflation <- ggplot(drop_na(unemp_inflation, inflation), 
+                         aes(x = date, y = inflation)) +
+  geom_line(size = 1, color = "#F012BE") +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  labs(x = NULL, y = "Inflation") +
+  theme_minimal(base_family = "Fira Sans Condensed")
+
+plot_unempl <- ggplot(unemp_inflation, aes(x = date, y = unemployment)) +
+  geom_line(size = 1, color = "#FF851B") +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  labs(x = NULL, y = "Unemployment") +
+  theme_minimal(base_family = "Fira Sans Condensed")
+
+plot_inflation / plot_unempl
+```
+
 ]
 
 ---
 
-# No `geometry` column?
+# Don't go wild with time mapping!
 
-Make your own with `st_as_sf()`
-
-.less-left.small-code[
-```{r convert-fake, echo=FALSE}
-other_data <- tribble(
-  ~city, ~long, ~lat,
-  "Cornell", -76.475266, 42.454323,
-  "Cancun", -86.84656, 21.17429
-)
-```
-
-```{r show-other}
-other_data
-```
+.pull-left.center[
+<figure>
+  <img src="img/09/covid-death-spiral.png" alt="COVID death rates" title="COVID death rates" width="100%">
+</figure>
 ]
 
 --
 
-.more-right.small-code[
-```{r show-converted}
-other_data %>% 
-  st_as_sf(coords = c("long", "lat"), #<< 
-           crs = st_crs("EPSG:4326")) #<<
+.pull-right.center[
+<figure>
+  <img src="img/09/covid-death-line.png" alt="COVID death rates" title="COVID death rates" width="100%">
+</figure>
+]
+
+???
+
+Image source: https://www.nytimes.com/2022/01/06/opinion/omicron-covid-us.html
+
+Discussion: https://junkcharts.typepad.com/junk_charts/2022/01/think-twice-before-you-spiral.html
+
+---
+class: inverse, center, middle
+name: decomposing
+
+# Starting, ending, and decomposing time
+
+---
+
+# You have to start (and end) somewhere
+
+You always have to choose start and end points
+
+Start and end at reasonable times that help maintain the context of your story
+
+
+---
+
+# Measles vaccine was pretty effective
+
+```{r measles-partial, echo=FALSE, fig.width=6, fig.height=3.75, out.width="75%"}
+measles_1963 <- filter(measles, Year == 1963)
+
+ggplot(measles, aes(x = Year, y = Cases)) +
+  geom_line(size = 1, color = "#3D9970") +
+  scale_y_continuous(labels = comma) +
+  annotate(geom = "segment", x = 1963, xend = 1963, 
+           y = 320000, yend = 360000,
+           arrow = arrow(angle = 15, length = unit(0.3, "lines")),
+           color = "#F012BE", size = 0.5) +
+  annotate(geom = "text", x = 1963, y = 300000, 
+           label = "Vaccine introduced in 1963", hjust = 0.5, vjust = 0.5,
+           family = "Fira Sans Condensed", color = "#F012BE") +
+  annotate(geom = "point", x = measles_1963$Year, y = measles_1963$Cases, 
+           color = "#F012BE", size = 2) +
+  coord_cartesian(xlim = c(1960, 1965), ylim = c(0, 500000)) +
+  labs(x = NULL, y = "Cases per year", 
+       caption = "Source: CDC, Epidemiology and Prevention of\nVaccine-Preventable Diseases, 13th Edition") +
+  theme_minimal(base_family = "Fira Sans Condensed")
 ```
+
+
+???
+
+Data sources listed here: 
+
+https://commons.m.wikimedia.org/wiki/File:Measles_US_1938-2019.png
+
+I used [this big PDF table from the CDC](https://web.archive.org/web/20190120205018/https://www.cdc.gov/vaccines/pubs/pinkbook/downloads/appendices/e/reported-cases.pdf), used some random online PDF → CSV converter, and cleaned up the data by hand in Excel:
+
+---
+
+# Measles vaccine was *incredible*!
+
+```{r measles-full, echo=FALSE, fig.width=6, fig.height=3.75, out.width="75%"}
+ggplot(measles, aes(x = Year, y = Cases)) +
+  geom_line(size = 1, color = "#3D9970") +
+  scale_x_continuous(breaks = seq(1950, 2020, 10)) +
+  scale_y_continuous(labels = comma) +
+  annotate(geom = "segment", x = 1967, xend = 1965, 
+           y = measles_1963$Cases, yend = measles_1963$Cases,
+           arrow = arrow(angle = 15, length = unit(0.3, "lines")),
+           color = "#F012BE", size = 0.5) +
+  annotate(geom = "text", x = 1967.5, y = measles_1963$Cases, 
+           label = "Vaccine introduced in 1963", hjust = 0, vjust = 0.5,
+           family = "Fira Sans Condensed", color = "#F012BE") +
+  annotate(geom = "point", x = measles_1963$Year, y = measles_1963$Cases, 
+           color = "#F012BE", size = 2) +
+  labs(x = NULL, y = "Cases per year", 
+       caption = "Source: CDC, Epidemiology and Prevention of\nVaccine-Preventable Diseases, 13th Edition") +
+  theme_minimal(base_family = "Fira Sans Condensed")
+```
+
+---
+
+# Seasonality
+
+Don't mistake seasonality for actual trends
+
+```{r process-fred-seasonality, echo=FALSE}
+# Clean up retail sales data
+retail_sales <- fred_raw %>%
+  filter(symbol == "RSXFSN") %>%
+  filter(date > "1999-12-31") %>%
+  rename(sales = price) %>%
+  mutate(year_month = yearmonth(date)) %>%
+  as_tsibble(index = year_month, key = symbol)
+
+# Decompose sales
+sales_model <- retail_sales %>%
+  # Probably best to use multiplicative errors, but then the values are less
+  # easily interpretable
+  model(ets = ETS(sales ~ error("A") + trend("Ad") + season("A")))
+
+# Tidy decomposed data
+sales_model_components <- sales_model %>%
+  components() %>%
+  select(-slope) %>%
+  pivot_longer(cols = c(sales, level, season, remainder),
+               names_to = "component", values_to = "value") %>%
+  filter(year_month > yearmonth(ymd("1999-12-31"))) %>%
+  mutate(is_component = component != "sales") %>%
+  mutate(component = recode(component, sales = "Total retail sales in the United States, 2000–2019",
+                            level = "Trend",
+                            season = "Seasonality",
+                            remainder = "Remainder")) %>%
+  mutate(component = fct_inorder(component))
+```
+
+.pull-left[
+
+```{r seasonality-zoomed-in, echo=FALSE, fig.width=4.8, fig.height=3.75, out.width="100%"}
+ggplot(filter(retail_sales,
+              date >= "2019-01-01",
+              date <= "2019-12-31"),
+       aes(x = date, y = sales)) +
+  geom_line(size = 1, color = "#85144b") +
+  scale_x_date(breaks = "1 month", date_labels = "%B",
+               guide = guide_axis(n.dodge = 2)) +
+  scale_y_continuous(labels = comma) +
+  labs(x = NULL, y = "Millions of dollars",
+       title = "Total 2019 retail sales in the United States",
+       caption = "Source: RSXFSN from FRED") +
+  theme_minimal(base_family = "Fira Sans Condensed") +
+  theme(panel.grid.minor.x = element_blank(),
+        plot.title = element_text(face = "bold", size = rel(1.3)))
+```
+
+]
+
+--
+
+.pull-right[
+
+```{r seasonality-zoomed-out, echo=FALSE, fig.width=4.8, fig.height=3.75, out.width="100%"}
+ggplot(retail_sales,
+       aes(x = date, y = sales)) +
+  geom_rect(data = filter(recessions, start > "1999-12-31"),
+            aes(xmin = start, xmax = end, ymin = -Inf, ymax = Inf),
+            inherit.aes = FALSE, fill = "#B10DC9", alpha = 0.1) +
+  geom_line(size = 0.5, color = "#85144b") +
+  scale_y_continuous(labels = comma) +
+  labs(x = NULL, y = "Millions of dollars",
+       title = "Total retail sales in the United States, 2000–2019",
+       caption = "Source: RSXFSN from FRED. Recessions highlighted in <span style='color: #B10DC9;'>purple</span>.") +
+  theme_minimal(base_family = "Fira Sans Condensed") +
+  theme(plot.title = element_text(face = "bold", size = rel(1.3)),
+        plot.caption = element_markdown())
+```
+
 ]
 
 ---
 
-# `geom_sf()` is today’s standard
+# Seasonal adjustment
 
-You'll sometimes find older tutorials and StackOverflow answers about using `geom_map()` or **ggmap** or other things
+```{r retail-decomposition, echo=FALSE, fig.width=6, fig.height=4.35, out.width="65%"}
+ggplot(sales_model_components, aes(x = year_month, y = value)) +
+  geom_rect(data = filter(recessions, start > "1999-12-31"),
+            aes(xmin = start, xmax = end, ymin = -Inf, ymax = Inf),
+            inherit.aes = FALSE, fill = "#B10DC9", alpha = 0.1) +
+  geom_line(aes(color = is_component), size = 0.5) +
+  scale_x_yearmonth(expand = c(0, 0)) +
+  scale_y_continuous(labels = comma) +
+  scale_color_manual(values = c("grey60", "#111111")) +
+  labs(x = NULL, y = "Millions of dollars",
+       caption = "Source: RSXFSN from FRED. Recessions highlighted in <span style='color: #B10DC9;'>purple</span>.") +
+  guides(color = "none") +
+  facet_wrap(vars(component), ncol = 1, scales = "free_y") +
+  theme_minimal(base_family = "Fira Sans Condensed") +
+  theme(strip.text = element_text(hjust = 0, face = "bold", size = rel(1.3)),
+        plot.caption = element_markdown())
+```
 
---
-
-Those still work, but they don't use the same magical **sf** system with easy-to-convert projections and other GIS stuff
-
---
-
-Stick with **sf** and `geom_sf()` and your life will be easy
 
 ---
 
-# Where to find shapefiles
-
---
-
-[Natural Earth](https://www.naturalearthdata.com/) for international maps
-
---
-
-[US Census Bureau](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html) for US maps
-
---
-
-For anything else…
-
---
+# Birthday decomposition
 
 .center[
 <figure>
-  <img src="img/10/shapefile-search.png" alt="Search for shapefiles" title="Search for shapefiles" width="50%">
+  <img src="img/09/bda_cover.png" alt="Bayesian Data Analysis cover" title="Bayesian Data Analysis cover" width="48%">
+  <figcaption>Cover of Andrew Gelman, et al., <i>Bayesian Data Analysis</i></figcaption>
 </figure>
 ]
 
+???
+
+http://www.stat.columbia.edu/~gelman/book/
+
+---
+class: inverse, center, middle
+name: working-with-time
+
+# Dates and times in R
+
 ---
 
-# Scales
+# Are dates and times special?
+
+We made a bunch of plots without really thinking about data types
+
+We can map "dates" to x regardless of whether they are `date` or `numeric` objects
 
 .pull-left-3[
-<figure>
-  <img src="img/10/download_thumbs_10m.jpg" alt="10m scale" title="10m scale" width="100%">
-</figure>
-
-.small.center[1:10m = 1:10,000,000]
-
-.small.center[1 cm = 100 km]
+```{r}
+class(gme_prices$date)
+```
 ]
 
 .pull-middle-3[
-<figure>
-  <img src="img/10/download_thumbs_50m.jpg" alt="50m scale" title="50m scale" width="100%">
-</figure>
-
-.small.center[1:50m = 1:50,000,000]
-
-.small.center[ 1cm = 500 km]
+```{r}
+class(solar_data$date)
+```
 ]
 
 .pull-right-3[
-<figure>
-  <img src="img/10/download_thumbs_110m.jpg" alt="110m scale" title="110m scale" width="100%">
-</figure>
+```{r}
+class(measles$Year)
+```
+]
 
-.small.center[1:110m = 1:110,000,000]
+When do we need to pay attention to the details?
 
-.small.center[1 cm = 1,100 km]
+--
+
+1. Converting from strings to dates
+
+--
+
+2. Getting components of date-time data
+
+--
+
+3. Computing time spans
+
+---
+
+# Dates and times in R
+
+R has "native" classes for storing calendar dates and times
+
+- For background, see `?Dates` and `?DateTimeClasses`
+
+--
+
+The `lubridate` package offers convenient tools for working with dates and times
+
+- See [`vignette("lubridate")`](https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html) and [Chapter 16 of R4DS](https://r4ds.had.co.nz/dates-and-times.html)
+
+---
+
+# Converting from strings to dates
+
+Use `lubridate::ymd` to parse dates with **y**ear, **m**onth, and **d**ay components
+
+```{r}
+independence_declared <- ymd("1776-07-04")
+independence_declared
+class(independence_declared)
+```
+
+--
+
+`lubridate` offers many other functions for parsing dates. For example:
+
+```{r}
+emancipation_proclaimed <- mdy("January 1, 1863")
+emancipation_proclaimed
+class(emancipation_proclaimed)
+```
+
+---
+
+# Getting components of date-time data
+
+What year was the Emancipation Proclamation?
+
+--
+
+```{r}
+year(emancipation_proclaimed)
+```
+
+--
+.pull-left[
+What day of the week was that?
+```{r}
+wday(emancipation_proclaimed)
+wday(emancipation_proclaimed, label = TRUE)
+```
 ]
 
 --
 
-&nbsp;
+.pull-right[
+What month was that?
 
-Using too high of a resolution makes your maps slow and huge
-
----
-class: inverse, center, middle
-name: projections
-
-# A quick primer on projections
-
----
-
-# A quick primer on projections
-
-[All world maps are wrong according to Vox](https://www.youtube.com/watch?v=kIID5FDi2JQ). Why?
-
---
-
-Impossible to represent spherical surface as a plane without distortions
-
---
-
-Projections "project" 3D surface down to 2D
-
---
-
-Some preserve land shape, some preserve size, etc.
-
---
-
-Let's look at some examples
-
+```{r}
+month(emancipation_proclaimed)
+month(emancipation_proclaimed, label = TRUE)
+```
+]
 
 ---
 
-# World projections
+# Computing time spans
 
-```{r projections, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
-base_map <- ggplot() + 
-  geom_sf(data = world_shapes, fill = "#B2B1F9", size = 0.1, color = "#0D0887") +
-  theme_void(base_family = "Fira Sans Condensed") + 
-  theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "lines"),
-        plot.title = element_text(margin = margin(b = 3), face = "bold"),
-        plot.caption = element_text(family = "Consolas", color = "grey50"))
-
-# Longitude/latitude
-map_lat_lon <- base_map +
-  coord_sf(crs = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_def") +
-  labs(title = "Longitude-latitude")
-
-# Robinson
-map_robinson <- base_map +
-  coord_sf(crs = "+proj=robin") +
-  # coord_sf(crs = 54030, datum = NA) +  # Robinson
-  labs(title = "Robinson")
-
-# Mercator (ew)
-map_mercator <- base_map +
-  coord_sf(crs = "+proj=merc") +
-  # coord_sf(crs = 54004, datum = NA) +  # Mercator
-  labs(title = "Mercator")
-
-# Gall Peters
-map_gall_peters <- base_map +
-  coord_sf(crs = st_crs("ESRI:54002"), datum = NA) +  # Gall Peters / Equidistant cylindrical
-  labs(title = "Gall-Peters")
-
-(map_lat_lon / map_mercator) | (map_gall_peters / map_robinson) 
-
-# Equal earth
-# base_map +
-#   coord_sf(crs = "+proj=eqearth +wktext") +  # Equal earth 
-#   labs(title = "Equal Earth",
-#        caption = 'crs = "+proj=eqearth +wktext"')
+How many days passed between independence and emancipation?
+```{r}
+emancipation_proclaimed - independence_declared
 ```
 
----
+--
 
-# US projections
-
-```{r us-projections, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
-us_states <- read_sf("data/cb_2018_us_state_20m/cb_2018_us_state_20m.shp")
-
-states_48 <- us_states %>% 
-  filter(!(STUSPS %in% c("HI", "AK", "PR")))
-
-map_nad83 <- ggplot() +
-  geom_sf(data = states_48, fill = "#B2B1F9", size = 0.25, color = "#0D0887") +
-  labs(title = "NAD83") +
-  coord_sf(crs = st_crs("EPSG:4269"), datum = NA) +
-  theme_void(base_family = "Fira Sans Condensed") + 
-  theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "lines"),
-        plot.title = element_text(margin = margin(b = 3), face = "bold"),
-        plot.caption = element_text(family = "Consolas", color = "grey50"))
-
-map_albers <- ggplot() +
-  geom_sf(data = states_48, fill = "#B2B1F9", size = 0.25, color = "#0D0887") +
-  labs(title = "Albers") +
-  coord_sf(crs = st_crs("ESRI:102003"), datum = NA) +
-  theme_void(base_family = "Fira Sans Condensed") + 
-  theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "lines"),
-        plot.title = element_text(margin = margin(b = 3), face = "bold"),
-        plot.caption = element_text(family = "Consolas", color = "grey50"))
-
-map_nad83 | map_albers
+How many days are left until classes end?
+```{r}
+ymd(20220510) - today()
 ```
 
----
-
-# Which projection is best?
-
 --
 
-None of them
+These are **durations**
 
---
-
-There are no good or bad projections
-
---
-
-There are good and bad projections for a particular use case
-
----
-
-# Reference: Finding projection codes
-
-[spatialreference.org](https://spatialreference.org/ref/epsg/)
-
-[epsg.io](https://epsg.io/)
-
-[proj.org](https://proj.org/operations/projections/index.html)
-
-.small[[This](https://www.earthdatascience.org/courses/earth-analytics/spatial-data-r/understand-epsg-wkt-and-other-crs-definition-file-types/) is an excellent overview of how this all works]
-
-.small[And [this](https://web.archive.org/web/20200225021219/https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/OverviewCoordinateReferenceSystems.pdf) is a really really helpful overview of all these moving parts]
-
----
-class: inverse, center, middle
-
-# Have a nice spring break!
-
+See [Chapter 16 of R4DS](https://r4ds.had.co.nz/dates-and-times.html) for functions to compute **periods** and **intervals**

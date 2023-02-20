@@ -1,5 +1,5 @@
 ---
-title: "Relationships"
+title: "Distributions"
 author: "Todd Gerarden"
 output:
   xaringan::moon_reader:
@@ -37,14 +37,11 @@ opts_chunk$set(warning = FALSE, message = FALSE,
 
 ```{r packages-data, include=FALSE}
 library(tidyverse)
-library(broom)
-library(scales)
-set.seed(1234)
 ```
 
 class: center middle main-title section-title-4
 
-# Relationships
+# Distributions
 
 .class-info[
 
@@ -55,8 +52,8 @@ Cornell Dyson<br>
 Spring 2023
 
 Acknowledgements: 
-[Andrew Heiss](https://datavizm20.classes.andrewheiss.com)
-<!-- [Claus Wilke](https://wilkelab.org/SDS375/) -->
+[Andrew Heiss](https://datavizm20.classes.andrewheiss.com), 
+[Claus Wilke](https://wilkelab.org/SDS375/)
 <!-- [Grant McDermott](https://github.com/uo-ec607/lectures), -->
 <!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), -->
 <!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) -->
@@ -67,9 +64,13 @@ Acknowledgements:
 
 # Announcements
 
-Reminders:
-- Mini Project 1 due April 1 ([link](https://aem2850.toddgerarden.com/assignment/01-mini-project/))
-- Local R install instructions posted ([link](https://aem2850.toddgerarden.com/resource/install/))
+This week we are back to our old routine:
+- Today: slides
+- Wednesday: reflection is due
+- Thursday: work through an example
+- Monday: next lab is due
+
+First: discuss survey resonses and mini project 1
 
 Questions before we get started?
 
@@ -78,1170 +79,1056 @@ Questions before we get started?
 
 # Plan for today
 
-<!-- [Prologue](#prologue) -->
+[Prologue](#prologue)
 
-[The dangers of dual y-axes](#dual-y-axes)
+[Mini Project 1](#mini-project-1)
 
-[Visualizing correlations](#correlations)
+[Proportions: a brief interlude](#proportions)
 
-[Visualizing regressions](#regressions)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[Distributions](#distributions)
 
 ---
 class: inverse, center, middle
-name: dual-y-axes
+name: prologue
 
-# The dangers of dual y-axes
+# Prologue
 
----
+```{r read-survey-responses, include=FALSE}
+# load data
+survey <- read_csv("data/survey-responses-midsemester/survey_responses.csv")
+summary_questions <- survey %>% 
+  select(id, contains(":"))
+names(summary_questions) <- str_replace( names(summary_questions), ".*: ", "")
 
-# Oh no!
-
-.small.center[
-<figure>
-  <img src="img/08/chart.png" alt="Spurious correlation between divorce rate and margarine consumption" title="Spurious correlation between divorce rate and margarine consumption" width="100%">
-  <figcaption>Source: <a href="https://www.tylervigen.com/spurious-correlations" target="_blank">Tyler Vigen's spurious correlations</a></figcaption>
-</figure>
-]
-
----
-
-# Why not use double y-axes?
-
---
-
-You have to choose where the y-axes start and stop, which means...
-
---
-
-...you can force the two trends to line up however you want!
-
-
----
-
-# It even happens in *The Economist*!
-
-.center[
-<figure>
-  <img src="img/08/economist-dogs.png" alt="Dog neck size and weight in The Economist" title="Dog neck size and weight in The Economist" width="90%">
-</figure>
-]
-
-???
-
-<https://medium.economist.com/mistakes-weve-drawn-a-few-8cdd8a42d368>
-
----
-
-# The rare triple y-axis
-
-.small.center[
-<figure>
-  <img src="img/08/triple-y-axis.png" alt="Acemoglu and Restrepo triple y-axis" title="Acemoglu and Restrepo triple y-axis" width="60%">
-  <figcaption>Source: Daron Acemoglu and Pascual Restrepo, "The Race Between Man and Machine: Implications of Technology for Growth, Factor Shares and Employment"</figcaption>
-</figure>
-]
-
-???
-
-Daron Acemoglu and Pascual Restrepo, ["The Race Between Man and Machine: Implications of Technology for Growth, Factor Shares and Employment"](https://economics.mit.edu/files/10866)
-
----
-
-# When is it defensible?
-
---
-
-When the two axes measure the same thing
-
---
-
-```{r ithaca-weather-dual-nice, echo=FALSE, message=FALSE, fig.dim=c(7, 3), out.width="100%"}
-ithaca_weather <- read_csv("data/ithaca-weather-2021.csv")
-
-ggplot(ithaca_weather, aes(x = DATE, y = TMAX)) +
-  geom_line() +
-  geom_smooth() +
-  scale_y_continuous(sec.axis = 
-                       sec_axis(trans = ~ (32 - .) * -5/9,
-                                name = "Celsius")) +
-  labs(x = NULL, y = "Fahrenheit",
-       title = "Daily high temperatures at Cornell",
-       subtitle = "January 1 2021–December 31, 2021",
-       caption = "Source: NOAA") +
-  theme_minimal() +
-  theme(plot.title = element_text(face = "bold"))
+# make a function for plotting responses
 ```
 
 ---
 
-# How could we make this plot in R?
+# Thank you!
+
+I read all the Reflection - Week 6 survey responses
+
+I will briefly summarize some of the responses and share some reactions
+
+Please don't hesitate to provide feedback on how the course progresses!
+
+---
+
+# Please rate the pace overall:
+
+```{r, echo=FALSE}
+summary_questions %>% 
+  ggplot(aes(x = fct_relevel(`Please rate the pace overall:`,
+                                "too slow", "about right", "too fast")
+                                )) +
+  geom_bar() +
+  labs(x = NULL,
+       y = "number of students") +
+  theme_xaringan()
+```
+
+
+---
+
+# Please rate the difficulty overall:
+
+```{r, echo=FALSE}
+summary_questions %>% 
+  ggplot(aes(x = fct_relevel(`Please rate the difficulty overall:`,
+                                "too easy", "about right", "too difficult")
+                                )) +
+  geom_bar() +
+  labs(x = NULL,
+       y = "number of students") +
+  theme_xaringan()
+```
+
+
+---
+
+# Please rate the workload overall:
+
+```{r, echo=FALSE}
+summary_questions %>% 
+  group_by(`Please rate the workload overall:`) %>% count() %>% ungroup() %>% 
+  add_row(`Please rate the workload overall:` = "too little", n = 0) %>% 
+  ggplot(aes(x = fct_relevel(`Please rate the workload overall:`,
+                                "too little", "about right", "too much"),
+             y = n)) +
+  geom_col() +
+  labs(x = NULL,
+       y = "number of students") +
+  theme_xaringan()
+```
+
+
+---
+
+# RStudio Cloud versus a local install?
+
+```{r, echo=FALSE}
+summary_questions %>% 
+  rename(preference = contains("preference")) %>% 
+  ggplot(aes(x = preference)) +
+  geom_bar() +
+  labs(x = NULL,
+       y = "number of students") +
+  theme_xaringan()
+```
+
+
+---
+
+# Some themes:
+
+**Desire for more business applications**
+- We will work on this, especially on projects
+
+--
+
+**Several people requested guidance on installing/working locally**
+- I will post some basic guidance on the course site
+- Come to office hours if you want help installing R+RStudio!
+
+--
+
+**Examples: make them more open-ended/challenging + work more as a group**
+- I will experiment with this!
+
+--
+
+**Interest in modeling, statistical methods, linear regression, etc.**
+
+---
+class: inverse, center, middle
+name: mini-project-1
+
+# Mini Project 1
+
+---
+
+# Mini Project 1
+
+Use R and the tidyverse to wrangle and visualize equities data
+
+#### Three parts:
+1. AAPL
+2. The S&P 500
+3. Our Class Portfolio
+
+```{r load-project-data, include=FALSE}
+load("../../rstudio-cloud/mini-project-01/sp500.RData")
+our_companies <- read_csv("../../rstudio-cloud/mini-project-01/our-companies.csv")
+```
+
+---
+
+# Mini Project 1: data
 
 ```{r}
-ithaca_weather <- 
-  read_csv("data/ithaca-weather-2021.csv")
+sp500_companies
+```
 
-ithaca_weather %>% 
-  select(STATION, NAME, DATE, TMAX, SNOW)
+---
+
+# Mini Project 1: data
+
+```{r}
+sp500_prices
+```
+
+---
+
+# Mini Project 1: data
+
+```{r}
+our_companies
+```
+
+---
+
+# Mini Project 1: logistics
+
+Work in groups of 3 (posted on canvas)
+
+Write report in R Markdown that summarizes your work, presents visualizations, and discusses takeaways
+
+Do not use any packages outside base R and the tidyverse
+
+No TA help for Part 3!
+- If you try but still need help, come to my office hours
+
+---
+class: inverse, center, middle
+name: proportions
+
+# Proportions: a brief interlude
+
+---
+
+# Can we improve this survey visualization?
+
+```{r, echo=FALSE}
+summary_questions %>% 
+  rename(preference = contains("preference")) %>% 
+  ggplot(aes(x = preference)) +
+  geom_bar() +
+  labs(x = NULL,
+       y = "number of students") +
+  theme_xaringan()
 ```
 
 
 ---
 
-# Making the base plot in R
+# Proportions
 
-.left-code[
-```{r ithaca-weather-single, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-ggplot(ithaca_weather, 
-       aes(x = DATE, y = TMAX)) +
-  geom_line() +                           #<<
-  geom_smooth() +                         #<<
-  labs(x = NULL, y = "Fahrenheit")
-```
-
-How could we add a second axis?
-
-Do any functions come to mind?
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("ithaca-weather-single", "png")`)
-]
-
----
-
-# Adding a second scale in R
-
-.left-code[
-```{r ithaca-weather-dual, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-ggplot(ithaca_weather, 
-       aes(x = DATE, y = TMAX)) +
-  geom_line() +
-  geom_smooth() +
-  scale_y_continuous(                     #<<
-    sec.axis =                            #<<
-      sec_axis(trans = ~ (. - 32) * 5/9,  #<<
-               name = "Celsius")          #<<
-  ) +                                     #<<
-  labs(x = NULL, y = "Fahrenheit")
-```
-
-We provided this formula for the **trans**formation argument:
-
-.center[`Celsius = (Fahrenheit - 32) * 5/9`]
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("ithaca-weather-dual", "png")`)
-]
-
----
-
-# Adding a second scale in R
-
-.left-code[
-```{r cars-dual, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
-car_counts <- mpg %>% 
-  group_by(drv) %>% summarize(total = n())
-
-total_cars <- sum(car_counts$total)
-
-ggplot(car_counts,
-       aes(x = drv, y = total, fill = drv)) +
+.pull-left[
+```{r, echo=FALSE}
+summary_questions %>% 
+  rename(preference = contains("preference")) %>% 
+  group_by(preference) %>% count() %>% 
+  ggplot(aes(x = n, y = "", fill = fct_rev(preference))) +
   geom_col() +
-  scale_y_continuous(               #<<
-    sec.axis = sec_axis(            #<<
-      trans = ~ . / total_cars,     #<<
-      labels = scales::percent)) +  #<<
+  coord_polar() +
+  scale_x_continuous(
+    name = NULL, breaks = NULL
+  ) +
+  scale_xaringan_fill_discrete(direction = -1) +
+  labs(x = NULL,
+       y = NULL,
+       fill = NULL) +
+  theme_xaringan(text_font_size = 50)
+```
+]
+
+.pull-right[
+```{r, echo=FALSE}
+summary_questions %>% 
+  rename(preference = contains("preference")) %>% 
+  ggplot(aes(x = "", fill = preference)) +
+  geom_bar(position = "fill") +
+  coord_flip() +
+  scale_xaringan_fill_discrete() +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  labs(x = NULL,
+       y = "share of students",
+       fill = NULL) +
+  theme_xaringan(text_font_size = 50) +
+  theme(axis.title.x = element_text(size = 44)) +
+  theme(legend.position = "bottom")
+```
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...) | ✔ | ✖ | ✖
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...) | ✔ | ✖ | ✖
+Visually appealing for small datasets | ✔ | ✖ | ✔
+]
+
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...) | ✔ | ✖ | ✖
+Visually appealing for small datasets | ✔ | ✖ | ✔
+Works well for a large number of subsets | ✖ | ✖ | ✔ 
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...) | ✔ | ✖ | ✖
+Visually appealing for small datasets | ✔ | ✖ | ✔
+Works well for a large number of subsets | ✖ | ✖ | ✔ 
+Works well for time series and similar | ✖ | ✔ | ✖
+]
+
+--
+
+No one visualization fits all scenarios!
+
+[//]: # "segment ends here"
+
+
+---
+
+class: inverse, center, middle
+name: distributions
+
+# Distributions
+
+```{r, include=FALSE}
+theme_xaringan_restore_defaults() # revert to ggplot2 defaults for remainder
+theme_set(theme_gray(base_size = 18)) # increase base text size
+```
+
+---
+
+# Problems with single numbers
+  
+.pull-left[
+
+```{r animal-weight-bar, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
+set.seed(1234)
+animals <- tibble(animal = c(rep(c("Small cat", "Big cat"), each = 250), rep("Dog", 500))) %>% 
+  mutate(weight = case_when(
+    animal == "Small cat" ~ rnorm(n(), 20, 5),
+    animal == "Big cat" ~ rnorm(n(), 60, 5),
+    animal == "Dog" ~ rnorm(n(), 40, 10)
+  )) %>% 
+  mutate(animal_type = ifelse(str_detect(animal, "cat"), "Cats", "Dogs"))
+
+animals_mean <- animals %>% 
+  group_by(animal_type) %>% 
+  summarize(avg_weight = mean(weight))
+
+ggplot(animals_mean, aes(x = animal_type, y = avg_weight, fill = animal_type)) + 
+  geom_col() +
+  labs(x = NULL, y = "Weight") +
+  ylim(0, 75) +
   guides(fill = "none")
 ```
-This makes it a lot easier to see proportions with side-by-side bars!
+  
+]
 
-Note: **total_cars** is not in **car_counts**
+--
+  
+.pull-right[
+  
+```{r animal-weight-points, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
+ggplot(animals, aes(x = animal_type, y = weight, color = animal_type)) +
+  geom_point(position = position_jitter(height = 0), size = 1) +
+  stat_summary(geom = "point", fun = "mean", size = 5, color = "darkred") +
+  labs(x = NULL, y = "Weight") +
+  guides(color = "none")
+```
+]
+
+---
+  
+# More information is (almost) always better
+  
+**Avoid visualizing single numbers when you have a whole range or distribution of numbers**
+
+--
+  
+Uncertainty in single variables
+
+--
+  
+Uncertainty across multiple variables
+
+--
+  
+Uncertainty in models and simulations
+
+---
+
+# Histograms
+
+What are they?
+
+--
+
+Put data into equally spaced buckets (or "bins"), plot how many rows are in each bucket
+
+---
+  
+# Histograms
+
+How would we use the grammar of graphics to make a histogram of `lifeExp`?
+
+```{r basic-histogram-data}
+library(gapminder)
+
+gapminder_2002 <- gapminder %>% 
+  filter(year == 2002)
+
+head(gapminder_2002)
+```
+
+---
+  
+# Histograms
+
+.left-code[
+```{r basic-histogram, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
+ggplot(gapminder_2002,
+       aes(x = lifeExp)) + #<<
+  geom_histogram() #<<
+```
+
+What if we mapped lifeExp to y?
 ]
 
 .right-plot[
-![](`r knitr::fig_chunk("cars-dual", "png")`)
+  ![](`r knitr::fig_chunk("basic-histogram", "png")`)
+]
+
+
+---
+  
+# Histograms
+
+.left-code[
+```{r basic-histogram-y, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
+ggplot(gapminder_2002,
+       aes(y = lifeExp)) + #<<
+  geom_histogram()
+```
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("basic-histogram-y", "png")`)
+]
+
+
+---
+  
+# Histograms: bin width
+  
+No official rule for what makes a good bin width
+
+.pull-left-3[
+.center.small[Too narrow:]
+
+.center.tiny[`geom_histogram(binwidth = .2)`]
+
+```{r hist-too-narrow, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
+ggplot(gapminder_2002, aes(x = lifeExp)) +
+  geom_histogram(binwidth = 0.2)
+```
+  
+]
+
+--
+  
+.pull-middle-3[
+.center.small[Too wide:]
+
+.center.tiny[`geom_histogram(binwidth = 50)`]
+
+```{r hist-too-wide, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
+ggplot(gapminder_2002, aes(x = lifeExp)) +
+  geom_histogram(binwidth = 50)
+```
+]
+
+--
+  
+.pull-right-3[
+.center.small[(One type of) just right:]
+
+.center.tiny[`geom_histogram(binwidth = 5)`]
+  
+```{r hist-just-right, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
+ggplot(gapminder_2002, aes(x = lifeExp)) +
+  geom_histogram(binwidth = 5)
+```
+]
+
+---
+  
+# Histogram tips
+
+.pull-left[
+.center[Add a border to the bars<br>for readability]
+
+.center.tiny[`geom_histogram(..., color = "white")`]
+    
+```{r hist-border, echo=FALSE, fig.dim=c(4.5, 3), out.width="100%"}
+ggplot(gapminder_2002, aes(x = lifeExp)) +
+  geom_histogram(binwidth = 5, color = "white")
+```
+]
+
+--
+  
+.pull-right[
+.center.small[Set the boundary;<br>bucket now 50–55, not 47.5–52.5]
+
+.center.tiny[`geom_histogram(..., boundary = 50)`]
+
+```{r hist-boundary, echo=FALSE, fig.dim=c(4.5, 3), out.width="100%"}
+ggplot(gapminder_2002, aes(x = lifeExp)) +
+  geom_histogram(binwidth = 5, color = "white", boundary = 50)
+```
+
+]
+
+---
+  
+# Density plots
+  
+What are they?
+
+--
+
+Estimates of the **probability *density* function** of a random variable
+
+--
+
+Histograms show raw counts; density plots show proportions (integrate to 1)
+
+--
+
+How would we use the grammar of graphics to make a density plot of `lifeExp`?
+
+---
+  
+# Density plots
+  
+.left-code[
+```{r basic-density, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
+ggplot(gapminder_2002,
+       aes(x = lifeExp)) + #<<
+  geom_density() #<<
+```
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("basic-density", "png")`)
+]
+
+---
+  
+# Density plots: add some color
+  
+.left-code[
+```{r basic-density-color, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
+ggplot(gapminder_2002,
+       aes(x = lifeExp)) +
+  geom_density(fill = "skyblue") #<<
+```
+
+Reminder: we can use aesthetics as parameters inside a geom rather than inside an **aes()** statement
+
+Here we used **fill = "skyblue"**
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("basic-density-color", "png")`)
+]
+
+---
+  
+# Density plots: bandwidths
+
+Different options for calculus change the plot shape
+
+.pull-left-3[
+.center.small[`bw = 1`]
+
+```{r gaussian-bw-1, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
+ggplot(gapminder_2002, aes(x = lifeExp)) +
+  geom_density(fill = "skyblue",
+               kernel = "gaussian", bw = 1)
+```
+  
+]
+
+--
+  
+.pull-middle-3[
+.center.small[`bw = 10`]
+
+```{r gaussian-bw-10, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
+ggplot(gapminder_2002, aes(x = lifeExp)) +
+  geom_density(fill = "skyblue",
+               kernel = "gaussian", bw = 10)
+```
+]
+
+--
+  
+.pull-right-3[
+.center.small[`bw = "nrd0"` <small>(default)</small>]
+    
+```{r gaussian-bw-auto, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
+ggplot(gapminder_2002, aes(x = lifeExp)) +
+  geom_density(fill = "skyblue",
+               kernel = "gaussian")
+```
+]
+
+---
+  
+# Density plots: kernels
+  
+Different options for calculus change the plot shape
+
+.pull-left-3[
+.center.small[`kernel = "gaussian"`]
+
+```{r gaussian-kernel-gaussian, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
+ggplot(gapminder_2002, aes(x = lifeExp)) +
+  geom_density(fill = "skyblue",
+               kernel = "gaussian")
+```
+  
+]
+
+--
+  
+.pull-middle-3[
+.center.small[`"epanechnikov"`]
+
+```{r gaussian-kernel-epanechnikov, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
+ggplot(gapminder_2002, aes(x = lifeExp)) +
+  geom_density(fill = "skyblue",
+               kernel = "epanechnikov")
+```
+]
+
+--
+  
+.pull-right-3[
+.center.small[`"rectangular"`]
+
+```{r gaussian-kernel-rectangular, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
+ggplot(gapminder_2002, aes(x = lifeExp)) +
+  geom_density(fill = "skyblue",
+               kernel = "rectangular")
+```
+]
+
+---
+  
+# Box plots
+
+What are they?
+
+--
+
+Graphical representations of specific points in a distribution
+
+
+---
+  
+# Box plots
+  
+```{r boxplot-explanation, echo=FALSE, fig.width=8, fig.height=3.5, out.width="100%"}
+hwy_50 <- quantile(mpg$hwy, 0.5)
+hwy_25 <- quantile(mpg$hwy, 0.25)
+hwy_75 <- quantile(mpg$hwy, 0.75)
+hwy_iqr <- hwy_75 - hwy_25
+
+# Technically this should just be hwy_75 + 1.5 * IQR, but ggplot does odd things
+# with small datasets
+hwy_min <- boxplot.stats(mpg$hwy)$stats[1]
+hwy_max <- boxplot.stats(mpg$hwy)$stats[5]
+
+hwy_out <- boxplot.stats(mpg$hwy)$out
+
+ggplot(mpg, aes(x = hwy)) +
+  geom_boxplot(fill = "#F7F7F7", color = "#B31B1B") +
+  annotate(geom = "text", x = hwy_50, y = 0.48, label = "Median", fontface = "bold") +
+  annotate(geom = "segment", x = hwy_50, xend = hwy_50, y = 0.44, yend = 0.4,
+           arrow = arrow(length = unit(0.3, "lines"))) +
+  annotate(geom = "text", x = hwy_25, y = 0.48, label = "25%", fontface = "bold") +
+  annotate(geom = "segment", x = hwy_25, xend = hwy_25, y = 0.44, yend = 0.4,
+           arrow = arrow(length = unit(0.3, "lines"))) +
+  annotate(geom = "text", x = hwy_75, y = 0.48, label = "75%", fontface = "bold") +
+  annotate(geom = "segment", x = hwy_75, xend = hwy_75, y = 0.44, yend = 0.4,
+           arrow = arrow(length = unit(0.3, "lines"))) +
+  annotate(geom = "text", x = hwy_25 + 0.5 * hwy_iqr, y = -0.52, 
+           label = "Interquartile range (IQR)", fontface = "bold") +
+  annotate(geom = "segment", x = c(hwy_25, hwy_75), xend = c(hwy_25, hwy_75), 
+           y = -0.46, yend = -0.4, arrow = arrow(length = unit(0.3, "lines"))) +
+  annotate(geom = "segment", x = hwy_25, xend = hwy_75, y = -0.46, yend = -0.46) +
+  annotate(geom = "text", x = hwy_min, y = 0.15, label = "Minimum\n25% − (1.5 × IQR)",
+           hjust = 0, lineheight = 1, fontface = "bold") +
+  annotate(geom = "segment", x = hwy_min, xend = hwy_min, y = 0.06, yend = 0.02,
+           arrow = arrow(length = unit(0.3, "lines"))) +
+  annotate(geom = "text", x = hwy_max, y = 0.15, label = "Maximum\n75% + (1.5 × IQR)",
+           hjust = 1, lineheight = 1, fontface = "bold") +
+  annotate(geom = "segment", x = hwy_max, xend = hwy_max, y = 0.06, yend = 0.02,
+           arrow = arrow(length = unit(0.3, "lines")))  +
+  annotate(geom = "text", x = min(hwy_out) + 0.5 * (max(hwy_out) - min(hwy_out)), y = -0.16, 
+           label = "Outliers", fontface = "bold") +
+  annotate(geom = "segment", x = c(min(hwy_out), max(hwy_out)), xend = c(min(hwy_out), max(hwy_out)), 
+           y = -0.1, yend = -0.04, arrow = arrow(length = unit(0.3, "lines"))) +
+  annotate(geom = "segment", x = min(hwy_out), xend = max(hwy_out),
+           y = -0.1, yend = -0.1) +
+  labs(x = "Highway MPG") +
+  theme_minimal() +
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.title.y = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank())
+```
+
+---
+  
+# Box plots
+
+What are they?
+
+Show specific points in a distribution
+
+How would we use the grammar of graphics to make a boxplot of `lifeExp`?
+
+---
+  
+# Box plots
+
+.left-code[
+```{r basic-boxplot, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 2.75), out.width="100%"}
+  ggplot(gapminder_2002,
+         aes(x = lifeExp)) + #<<
+    geom_boxplot() #<<
+```
+
+What do the y axis numbers mean?
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("basic-boxplot", "png")`)
+]
+
+---
+  
+# Box plots
+
+Use `theme()` to customize the plot for this geom
+
+.left-code[
+```{r basic-boxplot-no-y, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 2.75), out.width="100%"}
+  ggplot(gapminder_2002,
+         aes(x = lifeExp)) +
+    geom_boxplot() +
+  theme(axis.text.y = element_blank(), #<<
+        axis.ticks.y = element_blank(), #<<
+        panel.grid.major.y = element_blank(), #<<
+        panel.grid.minor.y = element_blank()) #<<
+```
+
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("basic-boxplot-no-y", "png")`)
+]
+
+
+---
+  
+# Violin plots
+  
+Mirror density plot and flip
+
+.left-code[
+```{r basic-violin, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 2.75), out.width="100%"}
+ggplot(gapminder_2002,
+       aes(x = "", 
+           y = lifeExp)) + #<<
+  geom_violin() #<<
+```
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("basic-violin", "png")`)
+]
+
+---
+  
+# Overalying geometries
+
+We can overlay multiple geometries to provide more information
+
+.left-code[
+```{r basic-violin-overlay, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 2.75), out.width="100%"}
+ggplot(gapminder_2002,
+       aes(x = "", 
+           y = lifeExp)) +
+  geom_violin() +
+  geom_boxplot(width = 0.1) #<<
+```
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("basic-violin-overlay", "png")`)
+]
+
+---
+  
+# Uncertainty across multiple variables
+  
+```{r, include=FALSE}
+theme_set(theme_gray(base_size = 16)) # decrease base text size
+```
+
+How could we visualize the distribution of a single variable across groups?
+
+--
+
+Add a `fill` aesthetic or use faceting!
+
+---
+  
+# Multiple histograms
+  
+Fill with a different variable
+
+This is bad and really hard to read though
+
+.left-code[
+```{r histogram-fill, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 2.75), out.width="100%"}
+ggplot(gapminder_2002,
+       aes(x = lifeExp,
+           fill = continent)) + #<<
+  geom_histogram(binwidth = 5, 
+                 color = "white", 
+                 boundary = 50)
+```
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("histogram-fill", "png")`)
+]
+
+---
+  
+# Multiple histograms
+  
+Facet with a different variable
+
+.left-code[
+```{r histogram-facet, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.25), out.width="100%"}
+ggplot(gapminder_2002,
+       aes(x = lifeExp,
+           fill = continent)) +
+  geom_histogram(binwidth = 5, 
+                 color = "white", 
+                 boundary = 50) +
+  guides(fill = "none") + #<<
+  facet_wrap(vars(continent)) #<<
+```
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("histogram-facet", "png")`)
 ]
 
 ---
 
-# Alternative 1: Use multiple plots
+# Pyramid histograms
+
+.left-code[
+```{r gapminder-pyramid, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
+gapminder %>% 
+  filter(year == 2002) %>% 
+  mutate(africa = 
+           ifelse(continent == "Africa", 
+                  "Africa", 
+                  "Not Africa")) %>% 
+      mutate(age_buckets = 
+               cut(lifeExp, 
+                   breaks = seq(30, 90, by = 5))) %>% 
+      group_by(africa, age_buckets) %>% 
+      summarize(total = n()) %>% 
+ggplot(aes(y = age_buckets,
+           x = ifelse(africa == "Africa", 
+                      total, -total),
+           fill = africa)) +
+  geom_col(width = 1, color = "white") + 
+  theme(legend.position = "bottom")
+```
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("gapminder-pyramid", "png")`)
+]
+
+???
+
+There's no way to use `geom_histogram()` to do this, but we can fake it with `geom_col()`
+
+---
+
+# Multiple densities: Transparency
+
+.left-code[
+```{r density-fill, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
+gapminder_2002 %>% 
+  filter(continent != "Oceania") %>% 
+  ggplot(aes(x = lifeExp,
+             fill = continent)) +
+  geom_density(alpha = 0.5) #<<
+```
+
+But be careful, these can get confusing quickly
+
+With many groups, better to space them out using ridgeline plots
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("density-fill", "png")`)
+]
+
+---
+
+# Multiple densities: Ridgeline plots
+
+.left-code[
+```{r density-ridges, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
+library(ggridges) #<<
+
+ggplot(filter(gapminder_2002, 
+              continent != "Oceania"),
+       aes(x = lifeExp,
+           fill = continent,
+           y = continent)) +
+  guides(fill = "none") +
+  labs(y = NULL) +
+  geom_density_ridges() #<<
+```
+
+There is no explicit scale for the densities anymore (it is shared with y)
+
+With many densities, use a single fill color to prevent distraction
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("density-ridges", "png")`)
+]
+
+---
+
+# Multiple geoms: gghalves
+
+.left-code[
+```{r gghalves, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
+library(gghalves) #<<
+
+ggplot(filter(gapminder_2002, 
+              continent != "Oceania"),
+       aes(y = lifeExp,
+           x = continent,
+           color = continent)) +
+  geom_half_boxplot(side = "l") + #<<
+  geom_half_point(side = "r") + #<<
+  guides(color = "none")
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("gghalves", "png")`)
+]
+
+---
+
+# Multiple geoms: Raincloud plots
+
+.left-code[
+```{r raincloud, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
+library(gghalves) #<<
+
+ggplot(filter(gapminder_2002, 
+              continent != "Oceania"),
+       aes(y = lifeExp,
+           x = continent,
+           color = continent)) +
+  geom_half_point(side = "l", size = 0.3) +  #<<
+  geom_half_boxplot(side = "l", width = 0.5,  #<<
+                    alpha = 0.3, nudge = 0.1) + #<<
+  geom_half_violin(aes(fill = continent),  #<<
+                   side = "r") + #<<
+  guides(fill = "none", color = "none") +
+  labs(y = NULL) +
+  coord_flip()  #<<
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("raincloud", "png")`)
+]
+
+---
+
+# Uncertainty in models and simulations
+
+We have already seen at least one example: `geom_smooth()`
+
+We will discuss these more next week
+
+Until then, here are a few real-world examples
+
+---
+
+# The needle
 
 .center[
 <figure>
-  <figcaption>Solar panels in Japan</figcaption>
-  <img src="img/08/solar-innovation-Japan.png" alt="Japanese solar market timeline" title="Japanese solar market timeline" width="75%">
+  <img src="img/07/needle.gif" alt="2016 election needle" title="2016 election needle" width="65%">
 </figure>
 ]
 
 ???
 
-Source: Gerarden (2021) "Demanding Innovation: The Impact of Consumer Subsidies on Solar Panel Production Costs"
+Via https://www.vis4.net/blog/2016/11/jittery-gauges-election-forecast/
 
 ---
 
-# Alternative 1: Use multiple plots
-
-.left-code[
-```{r ithaca-weather-patchwork, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
-library(patchwork) #<<
-
-temp_plot <- ggplot(ithaca_weather, 
-                    aes(x = DATE, 
-                        y = TMAX)) +
-  geom_line() + geom_smooth() +
-  labs(x = NULL, y = "Fahrenheit")
-
-snow_plot <- ggplot(ithaca_weather,   #<<
-                     aes(x = DATE,    #<<
-                         y = SNOW)) + #<<
-  geom_col() + 
-  labs(x = NULL, y = "Snowfall (inches)")
-
-temp_plot + snow_plot +              #<<
-  plot_layout(ncol = 1,              #<<
-              heights = c(0.7, 0.3)) #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("ithaca-weather-patchwork", "png")`)
-]
-
-
----
-
-# Alternative 2: Use another aesthetic
+# Uncertainty in model outcomes
 
 .center[
 <figure>
-  <img src="img/05/gapminder-screenshot.png" alt="Animated gapminder data" title="Animated gapminder data" width="70%">
+  <img src="img/07/fivethirtyeight-outcomes.png" alt="FiveThirtyEight model outcomes plot" title="FiveThirtyEight model outcomes plot" width="55%">
+  <figcaption>FiveThirtyEight's 2018 midterms model outcomes plot</figcaption
 </figure>
-]
-
----
-
-class: inverse, center, middle
-name: correlations
-
-# Visualizing correlations
-
----
-
-# What does "correlation" mean to you?
-
---
-
-$$
-\rho_{X, Y} = \frac{\operatorname{cov}(X, Y)}{\sigma_X \sigma_Y}
-$$
-As the value of X goes up, Y tends to go up (or down) a lot/a little/not at all
-
-Says nothing about *how much* Y changes when X changes
-
----
-
-# Correlation values
-
-.pull-left[
-&nbsp;
-
-<table>
-  <tr>
-    <th class="cell-left">$$\rho$$</th>
-    <th class="cell-left">Rough meaning</th>
-  </tr>
-  <tr>
-    <td class="cell-left">±0.1–0.3&emsp;</td>
-    <td class="cell-left">Modest</td>
-  </tr>
-  <tr>
-    <td class="cell-left">±0.3–0.5</td>
-    <td class="cell-left">Moderate</td>
-  </tr>
-  <tr>
-    <td class="cell-left">±0.5–0.8</td>
-    <td class="cell-left">Strong</td>
-  </tr>
-  <tr>
-    <td class="cell-left">±0.8–0.9</td>
-    <td class="cell-left">Very strong</td>
-  </tr>
-</table>
-]
-
-.pull-right[
-
-```{r correlation-grid, echo=FALSE, fig.dim=c(4.8, 4.2), out.width="100%"}
-make_correlated_data <- function(r, n = 200) {
-  MASS::mvrnorm(n = n, 
-                mu = c(0, 0), 
-                Sigma = matrix(c(1, r, r, 1), nrow = 2), 
-                empirical = TRUE) %>% 
-    magrittr::set_colnames(c("x", "y")) %>% 
-    as_tibble()
-}
-
-cor_grid <- tibble(r = c(0.2, 0.4, 0.75, 0.9)) %>% 
-  mutate(data = map(r, make_correlated_data)) %>% 
-  unnest(data)
-
-ggplot(cor_grid, aes(x = x, y = y)) +
-  geom_point(size = 2, color = "white", fill = "black", pch = 21) +
-  facet_wrap(vars(r), labeller = label_both) +
-  # theme_minimal() +
-  theme(strip.text = element_text(face = "bold", size = rel(1.3), hjust = 0))
-```
-
-]
-
-
----
-
-# Scatter plots
-
-The humble scatter plot is often the best place to start when studying the association between two variables
-
---
-
-**Example:** max and min temperature in Ithaca each day of the year
-  - Do you think they are highly correlated, somewhat correlated, or not at all correlated?
-  - What sign do you think this correlation has?
-  - How would you make a scatter plot of these data in R?
-
----
-
-# Scatter plots
-
-.left-code[
-```{r ithaca-weather-scatterplot-1, tidy=FALSE, message=FALSE, warning=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ithaca_weather %>% 
-  ggplot(aes(x = TMIN, y = TMAX)) +
-  geom_point()
-
-cor(ithaca_weather$TMIN, 
-    ithaca_weather$TMAX) %>% 
-  round(., 3)
-```
-
-What about min temp and snowfall?
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("ithaca-weather-scatterplot-1", "png")`)
-]
-
----
-
-# Scatter plots
-
-.left-code[
-```{r ithaca-weather-scatterplot-2, tidy=FALSE, message=FALSE, warning=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ithaca_weather %>% 
-  ggplot(aes(x = TMIN, y = SNOW)) +
-  geom_point()
-
-cor(ithaca_weather$TMIN, 
-    ithaca_weather$SNOW) %>% 
-  round(., 3)
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("ithaca-weather-scatterplot-2", "png")`)
-]
-
----
-  
-# Scatter plot matrices
-
-.left-code[
-```{r scatterplot-matrix, tidy=FALSE, message=FALSE, warning=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-  library(GGally)
-  
-cars_smaller <- mtcars %>% 
-  select(mpg, cyl, gear, hp, qsec)
-  
-ggpairs(cars_smaller)
-```
-Scatter plots can be scaled up to matrices for several variables
-
-For many variables, correlograms or correlation coefficients often better
-
-]
-
-.right-plot[
-  ![](`r knitr::fig_chunk("scatterplot-matrix", "png")`)
-]
-
----
-
-# Correlograms: Heatmaps
-
-```{r cor-heatmap, echo=FALSE, message=FALSE, fig.dim=c(8, 3.5), out.width="100%"}
-cars_cor <- mtcars %>% 
-  select(mpg, cyl, gear, hp, qsec) %>% 
-  cor()
-
-cars_cor[lower.tri(cars_cor)] <- NA
-
-cars_cor_long <- cars_cor %>% 
-  as.data.frame() %>% 
-  rownames_to_column("measure2") %>% 
-  pivot_longer(cols = -measure2,
-               names_to = "measure1",
-               values_to = "cor") %>% 
-  mutate(nice_cor = round(cor, 2)) %>% 
-  mutate(measure1 = fct_inorder(measure1),
-         measure2 = fct_inorder(measure2)) %>% 
-  filter(!is.na(cor)) %>% 
-  filter(measure2 != measure1)
-
-ggplot(cars_cor_long, aes(x = measure2, y = measure1, fill = cor)) +
-  geom_tile() +
-  geom_text(aes(label = nice_cor)) +
-  scale_fill_gradient2(low = "#E16462", mid = "white", high = "#0D0887",
-                       limits = c(-1, 1)) +
-  labs(x = NULL, y = NULL) +
-  coord_equal() +
-  theme_minimal() +
-  theme(panel.grid = element_blank())
-```
-
-
----
-
-# Correlograms: Points
-
-```{r cor-points, echo=FALSE, message=FALSE, fig.dim=c(8, 3.5), out.width="100%"}
-ggplot(cars_cor_long, aes(x = measure2, y = measure1, color = cor)) +
-  geom_point(aes(size = abs(cor))) +
-  scale_color_gradient2(low = "#E16462", mid = "white", high = "#0D0887",
-                        limits = c(-1, 1)) +
-  scale_size_area(max_size = 15, limits = c(-1, 1), guide = "none") +
-  labs(x = NULL, y = NULL) +
-  coord_equal() +
-  theme_minimal() +
-  theme(panel.grid = element_blank())
-```
-
----
-
-class: inverse, center, middle
-name: regressions
-
-# Visualizing regressions
-
----
-
-# Drawing lines with math
-
-$$
-y = mx + b
-$$
-
-<table>
-  <tr>
-    <td class="cell-center">\(y\)</td>
-    <td class="cell-left">&ensp;A number</td>
-  </tr>
-  <tr>
-    <td class="cell-center">\(x\)</td>
-    <td class="cell-left">&ensp;A number</td>
-  </tr>
-  <tr>
-    <td class="cell-center">\(m\)</td>
-    <td class="cell-left">&ensp;Slope (\(\frac{\text{rise}}{\text{run}}\))</td>
-  </tr>
-  <tr>
-    <td class="cell-center">\(b\)</td>
-    <td class="cell-left">&ensp;y-intercept</td>
-  </tr>
-</table>
-
----
-
-# Slopes and intercepts
-
-.pull-left[
-
-$$
-y = 2x - 1
-$$
-
-```{r simple-line-1, echo=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-ggplot(data = tibble(x = 0:5), aes(x = x)) +
-  stat_function(fun = function(x) 2 * x - 1, 
-                color = "#BF3984", size = 1.5) +
-  geom_vline(xintercept = 0) +
-  geom_hline(yintercept = 0) +
-  scale_x_continuous(breaks = 0:5) +
-  scale_y_continuous(breaks = -1:9) +
-  theme(panel.grid.minor = element_blank())
-```
-
-]
-
---
-
-.pull-right[
-
-$$
-y = -0.5x + 6
-$$
-
-```{r simple-line-2, echo=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-ggplot(data = tibble(x = 0:14), aes(x = x)) +
-  stat_function(fun = function(x) -0.5 * x + 6, 
-                color = "#BF3984", size = 1.5) +
-  geom_vline(xintercept = 0) +
-  geom_hline(yintercept = 0) +
-  scale_x_continuous(breaks = 0:14) +
-  scale_y_continuous(breaks = -1:9) +
-  theme(panel.grid.minor = element_blank())
-```
-
-]
-
----
-
-# Drawing lines with stats
-
-$$
-y = \beta_0 + \beta_1 x_1 + \varepsilon
-$$
-
-<table>
-  <tr>
-    <td class="cell-center">\(y\)</td>
-    <td class="cell-center">\(y\)</td>
-    <td class="cell-left">&ensp;Outcome variable (DV)</td>
-  </tr>
-  <tr>
-    <td class="cell-center">\(x\)</td>
-    <td class="cell-center">\(x_1\)</td>
-    <td class="cell-left">&ensp;Explanatory variable (IV)</td>
-  </tr>
-  <tr>
-    <td class="cell-center">\(m\)</td>
-    <td class="cell-center">\(\beta_1\)</td>
-    <td class="cell-left">&ensp;Slope</td>
-  </tr>
-  <tr>
-    <td class="cell-center">\(b\)</td>
-    <td class="cell-center">\(\beta_0\)</td>
-    <td class="cell-left">&ensp;y-intercept</td>
-  </tr>
-  <tr>
-    <td class="cell-center">&emsp;&emsp;</td>
-    <td class="cell-center">&emsp;\(\varepsilon\)&emsp;</td>
-    <td class="cell-left">&ensp;Error (residuals)</td>
-  </tr>
-</table>
-
----
-
-# Drawing lines with stats
-
-.pull-left[
-
-```{r cars-line, echo=FALSE, fig.dim=c(4.8, 4.2), out.width="100%"}
-ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point() +
-  geom_smooth(method = "lm", formula = "y ~ x")
-```
-
-]
-
---
-
-.pull-right[
-
-```{r cars-residuals, echo=FALSE, fig.dim=c(4.8, 4.2), out.width="100%"}
-cars_model <- lm(hwy ~ displ, data = mpg)
-cars_fitted <- augment(cars_model, se_fit = TRUE)
-
-ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point() +
-  geom_smooth(method = "lm", formula = "y ~ x") +
-  geom_segment(data = cars_fitted, 
-               aes(x = displ, xend = displ,
-                   y = hwy, yend = .fitted))
-```
-
-]
-
----
-
-# Building models in R
-
-Base R has some basic modeling tools:
-```{r model-template, eval=FALSE}
-name_of_model <- lm(<Y> ~ <X>, data = <DATA>) # estimate model
-
-summary(name_of_model) # see model details
-```
-
---
-
-The `broom` package provides helpful tools for tidying model output:
-```{r broom examples, eval=FALSE}
-library(broom)
-
-# convert model estimates to a data frame for plotting
-tidy(name_of_model)
-
-# convert model diagnostics to a data frame
-glance(name_of_model)
-```
-
----
-
-# Modeling displacement and highway MPG
-
-.pull-left[
-$$
-\text{hwy} = \beta_0 + \beta_1 \text{displ} + \varepsilon
-$$
-
-```{r build-car-model}
-car_model <- lm(hwy ~ displ,
-                data = mpg)
-```
-
-Note how we didn't write anything for the $\beta_0$ or $\varepsilon$ terms
-
-]
-
---
-
-.pull-right[
-```{r print-cars-model}
-car_model
-```
-]
-
----
-
-# Modeling displacement and highway MPG
-```{r summarize-car-model}
-summary(car_model)
-```
-
----
-
-# Modeling displacement and highway MPG
-
-```{r tidy-car-model}
-tidy(car_model, conf.int = TRUE)
-```
-
---
-
-```{r glance-car-model}
-glance(car_model)
-```
-
----
-
-# Interpretation for a continuous variable
-
-$$
-y = \beta_0 + \beta_1 x_1 + \varepsilon
-$$
-
---
-
-A one unit increase in $x_1$ is *associated* with a $\beta_1$ change in $y$, on average
-
---
-
-$$
-\text{hwy} = \beta_0 + \beta_1 \text{displ} + \varepsilon
-$$
-
-$$
-\widehat{\text{hwy}} = 35.7 + (-3.53) \times \text{displ}
-$$
-On average, a one unit increase in displacement is associated with 3.53 lower highway MPG
-
---
-
-**This is easy to visualize: it's a line!**
-
----
-
-# Visualization of a continuous variable
-
-.pull-left[
-```{r tidy-car-model-small}
-tidy(car_model) %>% 
-  select(term, estimate)
-```
-
-$$
-\widehat{\text{hwy}} = 35.7 + (-3.53) \times \text{displ}
-$$
-]
-
-.pull-right[
-```{r cars-line-again, echo=FALSE, fig.dim=c(4.8, 4.2), out.width="100%"}
-ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point() +
-  scale_x_continuous(limits = c(0, 7)) +
-  scale_y_continuous(limits = c(10, NA))
-```
-
-]
-
----
-
-# Visualization of a continuous variable
-
-.pull-left[
-```{r tidy-car-model-small-again-again}
-tidy(car_model) %>% 
-  select(term, estimate)
-```
-
-$$
-\widehat{\text{hwy}} = 35.7 + (-3.53) \times \text{displ}
-$$
-]
-
-.pull-right[
-```{r cars-line-again-again, echo=FALSE, fig.dim=c(4.8, 4.2), out.width="100%"}
-ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point() +
-  geom_smooth(method = "lm", formula = "y ~ x", fullrange = TRUE, se = FALSE) +
-  scale_x_continuous(limits = c(0, 7)) +
-  scale_y_continuous(limits = c(10, NA))
-```
-
-]
-
----
-
-# Multiple regression
-
-We're not limited to just one explanatory variable!
-
---
-
-$$
-y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_n x_n + \varepsilon
-$$
-
-&nbsp;
-
---
-
-```{r build-car-model-big}
-car_model_big <- lm(hwy ~ displ + cyl + drv,
-                    data = mpg)
-```
-
-$$
-\widehat{\text{hwy}} = \widehat{\beta}_0 + \widehat{\beta}_1 \text{displ} + \widehat{\beta}_2 \text{cyl} + \widehat{\beta}_3 \text{drv:f} + \widehat{\beta}_4 \text{drv:r}
-$$
-
----
-
-# Modeling lots of things and MPG
-
-.small-code[
-```{r tidy-car-model-big}
-tidy(car_model_big, conf.int = TRUE)
-```
-]
-
---
-
-$$
-\begin{aligned}
-\widehat{\text{hwy}} =&\ 33.1 + (-1.12) \times \text{displ} + (-1.45) \times \text{cyl} \ + \\
-&(5.04) \times \text{drv:f} + (4.89) \times \text{drv:r}
-\end{aligned}
-$$
-
----
-
-# Sliders and switches
-
-.center[
-<figure>
-  <img src="img/08/slider-switch-plain-80.jpg" alt="Switch and slider" title="Switch and slider" width="100%">
-</figure>
-]
-
----
-
-# Sliders and switches
-
-.center[
-<figure>
-  <img src="img/08/slider-switch-annotated-80.jpg" alt="Switch and slider" title="Switch and slider" width="100%">
-</figure>
-]
-
----
-
-# Interpretation for continuous variables
-
-$$
-y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_n x_n + \varepsilon
-$$
-
---
-
-***Holding everything else constant***, a one unit increase in $x_n$ is *associated* with a $\beta_n$ change in $y$, on average
-
---
-
-$$
-\begin{aligned}
-\widehat{\text{hwy}} =&\ 33.1 + (-1.12) \times \text{displ} + (-1.45) \times \text{cyl} \ + \\
-&(5.04) \times \text{drv:f} + (4.89) \times \text{drv:r}
-\end{aligned}
-$$
-
-On average, a one unit increase in displacement is associated with 1.12 lower highway MPG, holding everything else constant
-
---
-
-.tiny[
-Aside: for the earlier model we had said
-
-> On average, a one unit increase in displacement is associated with 3.53 lower highway MPG
-]
-
----
-
-# Interpretation for categorical variables
-
-$$
-y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_n x_n + \varepsilon
-$$
-
---
-
-***Holding everything else constant***, $y$ is $\beta_n$ units larger (or smaller) for category $x_n$ than for the omitted category, on average
-
-$$
-\begin{aligned}
-\widehat{\text{hwy}} =&\ 33.1 + (-1.12) \times \text{displ} + (-1.45) \times \text{cyl} \ + \\
-&(5.04) \times \text{drv:f} + (4.89) \times \text{drv:r}
-\end{aligned}
-$$
-
---
-
-On average, front-wheel drive cars have 5.04 higher highway MPG than 4-wheel-drive cars, holding everything else constant
-
----
-
-# Good luck visualizing all this!
-
-&nbsp;
-
-.large[You can't just draw a line! There are too many moving parts!]
-
----
-
-# Main problems
-
---
-
-Each coefficient has its own estimate and standard errors
-
---
-
-**Solution:** Plot the coefficients and their errors with a *coefficient plot*
-
---
-
-The results change as you move each slider up and down and flip each switch on and off
-
---
-
-**Solution:** Plot the *marginal effects* for the coefficients you're interested in
-
----
-
-# Coefficient plots
-
-Convert the model results to a data frame with `tidy()`
-
-.small-code[
-```{r tidy-coef-plot-cars}
-car_model_big <- lm(hwy ~ displ + cyl + drv, data = mpg)
-
-car_coefs <- tidy(car_model_big, conf.int = TRUE) %>% 
-  filter(term != "(Intercept)")  # we can typically skip plotting the intercept, so remove it
-car_coefs
-```
-]
-
----
-
-# Coefficient plots
-
-Plot the point estimate and confidence intervals with `geom_pointrange()`
-
-.left-code[
-```{r coef-plot-cars, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
-ggplot(car_coefs,
-       aes(x = estimate, 
-           y = fct_rev(term))) +
-  geom_pointrange(aes(xmin = conf.low, 
-                      xmax = conf.high)) +
-  geom_vline(xintercept = 0, color = "red")
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("coef-plot-cars", "png")`)
-]
-
----
-
-# Marginal effects plots
-
-**Remember that we interpret individual coefficients while holding the others constant**
-
-We move one slider while leaving all the other sliders and switches alone
-
---
-
-**Same principle applies to visualizing the effect**
-
---
-
-Plug a bunch of values into the model and find the predicted outcome
-
---
-
-Plot the values and predicted outcome
-
----
-
-# Marginal effects plots
-
-Create a data frame of values you want to manipulate and values you want to hold constant
-
---
-
-Must include all the explanatory variables in the model
-
----
-
-# Marginal effects plots
-
-.small-code[
-```{r build-simple-new-data}
-cars_new_data <- tibble(displ = seq(2, 7, by = 0.1),  # create grid for displ
-                        cyl = mean(mpg$cyl),          # hold cylinders at its mean
-                        drv = "f")                    # drive: front-wheel
-
-cars_new_data
-```
-]
-
----
-
-# Marginal effects plots
-
-Plug each of those rows of data into the model with `augment()`
-
-```{r agument-simple-cars-data}
-predicted_mpg <- augment(car_model_big,           # our estimated model
-                         newdata = cars_new_data, # our new data for plotting
-                         se_fit = TRUE)
-
-head(predicted_mpg)
-```
-
----
-
-# Marginal effects plots
-
-Plot the fitted values for each row
-
-We made predictions for front-wheel drive cars with cylinders held at their mean
-
-.left-code[
-```{r mfx-plot-cars, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
-ggplot(predicted_mpg,
-       aes(x = displ, y = .fitted)) +
-  geom_ribbon(aes(ymin = .fitted + 
-                    (-1.96 * .se.fit),
-                  ymax = .fitted + 
-                    (1.96 * .se.fit)),
-              fill = "#5601A4", 
-              alpha = 0.5) +
-  geom_line(size = 1, color = "#5601A4")
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mfx-plot-cars", "png")`)
-]
-
----
-
-# Multiple effects at once
-
-We can also move multiple sliders and switches at the same time!
-
---
-
-What's the marginal effect of increasing displacement across the front-, rear-, and four-wheel drive cars?
-
---
-
-How would you approach this?
-
----
-
-# Multiple effects at once
-
-Create a new dataset with varying displacement *and* varying drive, holding cylinders at its mean
-
-The `expand_grid()` function comes in handy for this
-
---
-
-`expand_grid()` creates a data frame with every possible combination of the variables you supply
-
----
-
-# Multiple effects at once
-
-```{r build-complex-new-data}
-cars_new_data_fancy <- expand_grid(displ = seq(2, 7, by = 0.1),  # create grid for displ
-                                   cyl = mean(mpg$cyl),          # hold cylinders at its mean
-                                   drv = c("f", "r", "4"))       # drive: front-wheel
-                                   
-cars_new_data_fancy
-```
-
----
-
-# Multiple effects at once
-
-Plug each of those rows of data into the model with `augment()`
-
-.small-code[
-```{r agument-complex-cars-data}
-predicted_mpg_fancy <- augment(car_model_big,                 # our estimated model
-                               newdata = cars_new_data_fancy, # our new data for plotting
-                               se_fit = TRUE)
-
-head(predicted_mpg_fancy)
-```
-]
-
----
-
-# Multiple effects at once
-
-Plot the fitted values for each row
-
-Cylinders held at their mean; colored/filled by drive
-
-.left-code[
-```{r mfx-plot-cars-fancy, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
-ggplot(predicted_mpg_fancy,
-       aes(x = displ, y = .fitted)) +
-  geom_ribbon(aes(ymin = .fitted + 
-                    (-1.96 * .se.fit),
-                  ymax = .fitted + 
-                    (1.96 * .se.fit),
-                  fill = drv),
-              alpha = 0.5) +
-  geom_line(aes(color = drv), size = 1)
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mfx-plot-cars-fancy", "png")`)
-]
-
----
-
-# Multiple effects at once
-
-.box-inv-6[Plot the fitted values for each row]
-
-.box-6.small[Cylinders held at their mean; colored/filled/facetted by drive]
-
-.left-code[
-```{r mfx-plot-cars-fancy-facet, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
-ggplot(predicted_mpg_fancy,
-       aes(x = displ, y = .fitted)) +
-  geom_ribbon(aes(ymin = .fitted + 
-                    (-1.96 * .se.fit),
-                  ymax = .fitted + 
-                    (1.96 * .se.fit),
-                  fill = drv),
-              alpha = 0.5) +
-  geom_line(aes(color = drv), size = 1) + 
-  guides(fill = "none", color = "none") + #<<
-  facet_wrap(vars(drv)) #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mfx-plot-cars-fancy-facet", "png")`)
-]
-
----
-
-# Not just OLS!
-
-.box-inv-6[These plots are for an OLS model built with `lm()`]
-
-.pull-left[
-![](`r knitr::fig_chunk("coef-plot-cars", "png")`)
-]
-
-.pull-right[
-![](`r knitr::fig_chunk("mfx-plot-cars-fancy-facet", "png")`)
-]
-
----
-
-# Any type of statistical model
-
-The same techniques work for pretty much any model R can run
-
---
-
-.small[OLS with high-dimensional fixed effects]
-
-.small[Logistic, probit, and multinomial regression (ordered and unordered)]
-
-.small[Multilevel (i.e., mixed and random effects) regression]
-
-.small[Bayesian models]
-
-.small[Machine learning models]
-
---
-
-If it has coefficients and/or makes predictions, you can (and should) visualize it!
+  ]

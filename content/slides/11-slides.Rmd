@@ -1,5 +1,5 @@
 ---
-title: "Text"
+title: "Space"
 author: "Todd Gerarden"
 output:
   xaringan::moon_reader:
@@ -37,36 +37,33 @@ opts_chunk$set(warning = FALSE, message = FALSE,
 
 ```{r packages-data, include=FALSE}
 library(tidyverse)
-library(tidytext)
-# install.packages("textdata") # needed for AFINN and NRC sentiment lexicons
+library(sf)
+library(patchwork)
+library(glue)
+library(maps)
 
-# devtools::install_github("bradleyboehmke/harrypotter")
-library(harrypotter)
 set.seed(1234)
 
 options("digits" = 2, "width" = 90)
+```
 
-hp <- tibble(book = c("Philosopher's Stone", "Chamber of Secrets", 
-                      "Prisoner of Azkaban", "Goblet of Fire", 
-                      "Order of the Phoenix", "Half-Blood Prince",
-                      "Deathly Hallows"),
-             raw_text = list(philosophers_stone, chamber_of_secrets, 
-                             prisoner_of_azkaban, goblet_of_fire, 
-                             order_of_the_phoenix, half_blood_prince,
-                             deathly_hallows)) %>% 
-  mutate(text_data = map(raw_text, ~{
-    tibble(text = .x) %>% 
-      mutate(chapter = 1:n())
-  })) %>% 
-  select(book, text_data) %>% 
-  unnest(text_data) %>% 
-  mutate(book = fct_inorder(book))
+```{r world-data, include=FALSE}
+world_shapes <- read_sf("data/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp") %>% 
+  filter(ISO_A3 != "ATA")
+```
+
+```{r county-data, include=FALSE}
+counties <- st_as_sf(map("county", plot = FALSE, fill = TRUE))
+counties <- subset(counties, grepl("new york,", counties$ID))
+counties <- counties %>% 
+  separate(ID, c("state", "county"), ",") %>% 
+  select(-state)
 ```
 
 
 class: center, middle
 
-# Text
+# Space
 
 .class-info[
 
@@ -77,11 +74,11 @@ Cornell Dyson<br>
 Spring 2023
 
 Acknowledgements: 
-[Andrew Heiss](https://datavizm20.classes.andrewheiss.com)
-<!-- [Claus Wilke](https://wilkelab.org/SDS375/),  -->
+[Andrew Heiss](https://datavizm20.classes.andrewheiss.com), 
+[Claus Wilke](https://wilkelab.org/SDS375/), 
 <!-- [Grant McDermott](https://github.com/uo-ec607/lectures), -->
 <!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), -->
-<!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) -->
+[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
 
 ]
 
@@ -89,14 +86,12 @@ Acknowledgements:
 
 # Announcements
 
-I hope you had a nice spring break!
+Mini Project 1 due April 1 ([link](https://aem2850.toddgerarden.com/assignment/01-mini-project/))
 
-Reminder: [Cornell still requires masks in classrooms as of now](https://covid.cornell.edu/prevention/face-coverings/)
+Extra office hours slots at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
-Mini project 1 grades will be posted soon
-- Peer-review survey forthcoming
-
-Mini project 2 details will be released in the next 0-1 weeks
+**Thursday's in-class example = this week's lab**
+- Idea is that you can complete it without working over break
 
 Questions before we get started?
 
@@ -105,79 +100,15 @@ Questions before we get started?
 
 # Plan for today
 
-[Course progress](#progress)
-
 [Prologue](#prologue)
 
-[Working with strings in R](#working-with-strings)
+[Adding data to maps as layers](#data-on-maps)
 
-[Text mining with R](#tidytext)
+[Geospatial visualizations in R](#gis-in-r)
 
----
-class: inverse, center, middle
-name: progress
+[A quick primer on projections (for reference)](#projections)
 
-# Course progress
-
----
-
-# Course objectives reminder
-
-1. Develop basic proficiency in `R` programming
-2. Understand data structures and manipulation
-3. Describe effective techniques for data visualization and communication
-4. Construct effective data visualizations
-5. Utilize course concepts and tools for business applications
-
----
-
-# Where we've been (weeks 1-4)
-
-1. **Develop basic proficiency in `R` programming**
-2. **Understand data structures and manipulation**
-3. Describe effective techniques for data visualization and communication
-4. Construct effective data visualizations
-5. Utilize course concepts and tools for business applications
-
----
-
-# Where we've been (weeks 5-10)
-
-1. Develop basic proficiency in `R` programming
-2. Understand data structures and manipulation
-3. **Describe effective techniques for data visualization and communication**
-4. **Construct effective data visualizations**
-5. **Utilize course concepts and tools for business applications**
-
----
-
-# Where we're going next (weeks 11+)
-
-1. Develop basic proficiency in `R` programming
-2. Understand data structures and manipulation
-3. Describe effective techniques for data visualization and communication
-4. Construct effective data visualizations
-5. Utilize course concepts and tools for business applications
-
-All of the above, plus special topics! Tentative plan:
-- Week 11: Text
-- Week 12: Functions and iteration
-- Week 13: Prediction
-- Week 14: Causal inference
-- Week 15: Wrap up
-
----
-
-# Schedule overview
-
-#### Weeks 1-4: Programming Foundations
-
-#### Weeks 5-10: Data Visualization Foundations
-
-#### Weeks 11+: Special Topics (mix of programming and dataviz)
-
-See [aem2850.toddgerarden.com/schedule](https://aem2850.toddgerarden.com/schedule/) for details
-
+Disclaimer: I am not an expert on working with geospatial data. I just want to give you a sense of the possibilities!
 
 ---
 class: inverse, center, middle
@@ -187,1007 +118,838 @@ name: prologue
 
 ---
 
-# Text comes in many forms
+# John Snow and 1854 cholera epidemic
 
-The `schrute` package contains transcripts of all episodes of [The Office](https://www.imdb.com/title/tt0386676/) (US)
-
-```{r}
-library(schrute)
-theoffice # this is an object from the schrute package
-```
-
----
-
-# Text can be analyzed in many ways
-
-&nbsp;
-
-.center[
+.pull-left.center[
 <figure>
-  <img src="img/11/word-cloud.png" alt="Bad word cloud" title="Bad word cloud" width="85%">
+  <img src="img/10/john-snow-pic.jpg" alt="John Snow" title="John Snow" width="60%">
 </figure>
 ]
 
----
-
-# Take word clouds, the pie chart of text
-
-**Why are word clouds bad?**
-
 --
-
-- Poor grammar (of graphics)
-  - Usually the only aesthetic is size
-  - Color, position, etc. contain no content
-- Raw word frequency is not always informative
-
---
-
-**Why are word clouds good?**
-
---
-
-- Can visualize one-word descriptions
-- Can highlight a single dominant word or phrase
-- Can make before/after comparisons
-
----
-
-# Some cases are okay
-
-.pull-left[
-.center[
-<figure>
-  <img src="img/11/email-word-cloud.jpg" alt="What Happened? word cloud" title="What Happened? word cloud" width="100%">
-</figure>
-]
-]
 
 .pull-right[
-Trump word cloud is uninformative
+10% of the population of Soho died in a week (!!)
 
-Clinton word cloud is okay
-- Highlights email as the **single** dominant narrative about Hillary Clinton prior to the 2016 election
+Miasma theory said it was because the air was bad
 ]
 
 ???
 
-https://twitter.com/s_soroka/status/907941270735278085
+https://en.wikipedia.org/wiki/John_Snow
 
 ---
 
-# Twitter before and after breakups (4-grams)
-
-.center[
-<figure>
-  <img src="img/11/breakups.png" alt="Twitter word cloud before and after breakups" title="Twitter word cloud before and after breakups" width="100%">
-</figure>
-]
-
---
-
-Better yet: use other methods to analyze and visualize text
-
-???
-
-Twitter before and after breakups
-
-https://arxiv.org/abs/1409.5980
-
-https://www.vice.com/en/article/ezvaba/what-our-breakups-look-like-on-twitter
-
----
-
-background-image: url("img/11/he-she-julia.png")
-background-position: center
-background-size: cover
-
-???
-
-https://pudding.cool/2017/08/screen-direction/
-
----
-
-background-image: url("img/11/minimap-1.png")
+background-image: url("img/10/john-snow-cholera-map.jpg")
 background-position: center
 background-size: contain
 
 ???
 
-https://juliasilge.com/blog/song-lyrics-across/
-
----
-class: inverse, center, middle
-name: working-with-strings
-
-# Working with strings in R
+https://commons.wikimedia.org/wiki/File:Snow-cholera-map-1.jpg
 
 ---
 
-# Strings are nothing new
-
-.pull-left[
-```{r highlight.output = 3}
-nycflights13::flights %>% 
-  select(carrier, tailnum, origin, dest)
-```
-]
-
-.pull-right[
-```{r highlight.output = 3}
-read_csv("data/our-companies.csv") %>% 
-  select(name)
-```
-
-]
----
-
-# Strings in R
-
-Strings are also referred to as "characters" (abbreviated `chr`)
-
-Strings can be stored in many ways:
-- Vectors
-- Data frame columns
-- Elements in a list
-
-So far we have used them as we would any other data
-
---
-
-**But sometimes we'll want to filter on, modify, or analyze strings**
-
----
-
-# The stringr package
-
-`stringr` is loaded as part of the core tidyverse
-
-All `stringr` functions have intuitive names that start with `str_`
-
-We will cover a few handy functions:
-1. `str_length`
-2. `str_trim`
-3. `str_detect`
-
-See `vignette("stringr")` for more
-
----
-
-# 1) stringr::str_length
-
---
-
-`str_length` tells you the number of characters in a string
-
---
-
-```{r}
-str_length("supercalifragilisticexpialidocious")
-```
-
---
-```{r}
-theoffice %>% 
-  distinct(character) %>% 
-  slice_head(n = 5) %>% 
-  mutate(name_length = str_length(character)) #<<
-```
-
----
-
-# 2) stringr::str_trim
-
---
-
-`str_trim` removes leading/trailing whitespace
-
---
-
-```{r}
-str_trim("I went to Cornell, you ever heard of it?            ")
-```
-
---
-
-```{r}
-str_trim("            I went to Cornell, you ever heard of it?  ")
-```
-
----
-
-# 3) stringr::str_detect
-
---
-
-`str_detect` can be used to match patterns
-
---
-
-.pull-left[
-```{r}
-first_4_characters <- theoffice %>% 
-  distinct(character) %>% 
-  slice_head(n = 4) %>% 
-  pull(character)
-first_4_characters
-```
-]
-
---
-
-.pull-right[
-```{r}
-str_detect(first_4_characters, "Dwight")
-
-str_detect(first_4_characters, "a")
-```
-]
-
----
-
-# 3) stringr::str_detect
-
-`str_detect` is a powerful way to `filter` a data frame
-
---
-
-```{r}
-theoffice %>% select(season, episode, character, text) %>% 
-  filter(str_detect(text,    # where to match a pattern #<<
-                    "sale")) # what pattern to match #<<
-```
-
----
-
-# 3) stringr::str_detect
-
-`str_detect` is case-sensitive by default
-
-```{r}
-theoffice %>% select(season, episode, character, text) %>% 
-  filter(str_detect(text, 
-                    "Sale")) # sale and Sale produce different output #<<
-```
-
----
-
-# 3) stringr::str_detect
-
-You could use multiple calls to `str_detect`, or pass multiple arguments:
-
-```{r highlight.output = c(6, 10)}
-theoffice %>% select(season, episode, character, text) %>% 
-  filter(str_detect(text, 
-                    "sale|Sale")) # look for sale OR Sale #<<
-```
-
----
-
-# 3) stringr::str_detect
-
-You could consolidate this -- regex parentheses are like in math
-
-```{r}
-theoffice %>% select(season, episode, character, text) %>% 
-  filter(str_detect(text, 
-                    "(s|S)ale")) # look for sale OR Sale #<<
-```
-
----
-
-# 3) stringr::str_detect
-
-You could `regex` to ignore all cases and control other pattern matching details
-
-```{r}
-theoffice %>% select(season, episode, character, text) %>% 
-  filter(str_detect(text, 
-                    regex("Sale", ignore_case = TRUE))) # ignore case #<<
-```
-
-
----
-
-# 3) stringr::str_detect
-
-When I say ignore all cases, I mean IGNORE ALL CASES!
-
-```{r}
-theoffice %>% select(season, episode, character, text) %>% 
-  filter(str_detect(text, 
-                    regex("sale", ignore_case = TRUE))) %>%
-  filter(!str_detect(text, "(s|S)ale")) # find non-standard form(s) #<<
-```
-
----
-
-# 3) stringr::str_detect
-
-`str_detect` can be combined with familiar functions to summarize data
-
---
-
-```{r}
-theoffice %>% 
-  filter(str_detect(text, regex("Sale", ignore_case = TRUE))) %>% 
-  count(character, sort = TRUE) #<<
-```
-
----
-
-# 3) stringr::str_detect
-
-`str_detect` can be combined with familiar functions to summarize data
-
-```{r}
-theoffice %>% 
-  filter(str_detect(text, 
-                    regex("that's what she said", ignore_case = TRUE))) %>% #<<
-  count(character, sort = TRUE)
-```
-
----
-
-# 3) stringr::str_detect
-
-`str_detect` with regular expressions can be very powerful
-
-```{r highlight.output = c(5,6)}
-theoffice %>% select(character, text) %>% 
-  filter(str_detect(text, "assistant.*manager")) %>% #<<
-  slice_head(n = 10)
-```
-
-
----
-class: inverse, center, middle
-name: tidytext
-
-# Text mining with R
-
----
-
-# Core concepts and techniques
-
---
-
-Tokens, lemmas, and parts of speech
-
---
-
-Sentiment analysis
-
---
-
-tf-idf
-
---
-
-Topics and LDA
-
---
-
-Fingerprinting
-
----
-
-# Core concepts and techniques
-
-**Tokens**, lemmas, and parts of speech
-
-**Sentiment analysis**
-
-**tf-idf**
-
-Topics and LDA
-
-Fingerprinting
-
-**We will cover tokens, sentiment analysis, and tf-idf** (time permitting)
-
----
-
-# The tidytext package
-
-.pull-left[
-We will use the `tidytext` package
-
-`tidytext` brings tidy data concepts and `tidyverse` tools to text analysis
+# The Broad Street pump
+
+.pull-left.center[
+<figure>
+  <img src="img/10/john-snow-cholera-detail.jpg" alt="John Snow's 1854 cholera map" title="John Snow's 1854 cholera map" width="100%">
+</figure>
 ]
 
 .pull-right.center[
 <figure>
-  <img src="img/11/cover.png" alt="Tidy text mining with R" title="Tidy text mining with R" width="80%">
+  <img src="img/10/John_Snow_memorial_and_pub.jpg" alt="The Broad Street Pump" title="The Broad Street Pump" width="75%">
 </figure>
 ]
 
 ???
 
-https://www.tidytextmining.com/
+https://nl.wikibooks.org/wiki/Bestand:Snow-cholera-map.jpg
 
-
----
-
-# Regular text
-
-```{r show-hp1, echo=FALSE, comment=NA}
-harrypotter::philosophers_stone[1] %>% 
-  str_trunc(100 * 14) %>% 
-  str_wrap(100) %>% 
-  cat("\n")
-```
+https://upload.wikimedia.org/wikipedia/commons/c/cb/John_Snow_memorial_and_pub.jpg
 
 ---
 
-# Text as data
+# Geospatial data can help us...
 
-Text can be stored in data frames as character strings
+Visualize business data for internal purposes
 
-Here, each row corresponds to a chapter
-
-```{r tidy-hp1, echo=FALSE}
-hp1_data <- tibble(text = harrypotter::philosophers_stone) %>%
-  mutate(
-    chapter = 1:n() # here, each row is a chapter #<<
-    ) %>% 
-  relocate(chapter)
-```
-
-```{r tidy-hp1-print}
-head(hp1_data)
-```
-
----
-
-# Tidy text and tokens
-
-Tidy text format: a table with one **token** per row
+Study business activities
 
 --
 
-What is a token?
+- Example: Dyson Profs. Addoum, Ng, and Ortiz-Bobea have studied how extreme temperatures affect business sales, productivity, and earnings
 
---
-
-- Any meaningful unit of text used for analysis
-
---
-
-- Often words, but also letters, n-grams, sentences, paragraphs, chapters, etc.
-
---
-
-The relevant token depends on the analysis you are doing
-
---
-
-So the definition of tidy text depends on what you are doing!
-
---
-
-**Tokenization** is the process of splitting text into tokens
-
----
-
-# Tokenization: words
-
-`tidytext::unnest_tokens` tokenizes **words** by default
-- Optionally: characters, ngrams, sentences, lines, paragraphs, etc.
-
---
-
-.pull-left[
-```{r hp1-word, eval=FALSE}
-hp1_data %>% 
-  unnest_tokens(  # convert data to tokens
-    input = text, # split text column #<<
-    output = word,# make new word column #<<
-    ) %>%
-  relocate(word)  # move new column to front
-```
-.small[Note: `unnest_tokens()` expects **output** before **input** if you don't name arguments]
+.center[
+<figure>
+  <img src="img/10/pic-jawad-addoum.jpg" alt="Jawad Addoum" title="Jawad Addoum" width="25%">
+  <img src="img/10/pic-david-ng.jpg" alt="David Ng" title="David Ng" width="25%">
+  <img src="img/10/pic-ariel-ortiz-bobea.jpg" alt="Ariel Ortiz-Bobea" title="Ariel Ortiz-Bobea" width="25%">
+</figure>
 ]
 
+
+
+---
+
+# Addoum et al: Temperatures
+
+.center[
+<figure>
+  <img src="img/10/business-map-temps.png" alt="July 1999 temperatures" title="July 1999 temperatures" width="100%">
+</figure>
+]
+
+???
+
+Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishment Sales, The Review of Financial Studies, Volume 33, Issue 3, March 2020, Pages 1331–1366, [https://doi.org/10.1093/rfs/hhz126](https://doi.org/10.1093/rfs/hhz126)
+
+---
+
+# Addoum et al: Temperature Shocks
+
+.center[
+<figure>
+  <img src="img/10/business-map-temps-anomalies.png" alt="July 1999 temperature anomalies" title="July 1999 temperature anomalies" width="100%">
+</figure>
+]
+
+???
+
+Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishment Sales, The Review of Financial Studies, Volume 33, Issue 3, March 2020, Pages 1331–1366, [https://doi.org/10.1093/rfs/hhz126](https://doi.org/10.1093/rfs/hhz126)
+
+---
+
+# Addoum et al: Establishments
+
+.center[
+<figure>
+  <img src="img/10/business-map-locations.png" alt="U.S. business locations" title="U.S. business locations" width="95%">
+</figure>
+]
+
+???
+
+Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishment Sales, The Review of Financial Studies, Volume 33, Issue 3, March 2020, Pages 1331–1366, [https://doi.org/10.1093/rfs/hhz126](https://doi.org/10.1093/rfs/hhz126)
+
+---
+
+# Temperature Shocks and Establishment Sales
+
+.center[
+<figure>
+  <img src="img/10/business-map-temps-anomalies.png" alt="July 1999 temperature anomalies" title="July 1999 temperature anomalies" width="50%">
+  <img src="img/10/business-map-locations.png" alt="U.S. business locations" title="U.S. business locations" width="50%">
+</figure>
+]
+
+???
+
+Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishment Sales, The Review of Financial Studies, Volume 33, Issue 3, March 2020, Pages 1331–1366, [https://doi.org/10.1093/rfs/hhz126](https://doi.org/10.1093/rfs/hhz126)
+
+---
+
+# Choropleth maps can be great
+
+.center[
+<figure>
+  <img src="img/10/business-map-temps-anomalies.png" alt="July 1999 temperature anomalies" title="July 1999 temperature anomalies" width="100%">
+</figure>
+]
+
+???
+
+Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishment Sales, The Review of Financial Studies, Volume 33, Issue 3, March 2020, Pages 1331–1366, [https://doi.org/10.1093/rfs/hhz126](https://doi.org/10.1093/rfs/hhz126)
+
+---
+
+# Choropleth maps can be misleading. Why?
+
+.center[
+<figure>
+  <img src="img/10/white-house-framed-map.png" alt="White House framed map of election results" title="White House framed map of election results" width="42%">
+</figure>
+]
+
+???
+
+https://thehill.com/blogs/blog-briefing-room/332927-trump-will-hang-map-of-2016-election-results-in-the-white-house
+
+---
+
+# Land doesn't vote
+
+.center[
+<video controls>
+  <source src="img/10/election-map.mp4" type="video/mp4">
+</video>
+]
+
+???
+
+https://demcastusa.com/2019/11/11/land-doesnt-vote-people-do-this-electoral-map-tells-the-real-story/
+
+[Cryptic command](https://stackoverflow.com/questions/31781238/using-ffmpeg-to-convert-gif-to-mp4-output-doesnt-play-on-android) to convert gif to mp4: 
+
+```text
+ffmpeg -r 30 -i input.gif -movflags faststart -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" out.mp4
+```
+
+---
+
+# Cartogram heatmaps may be preferable
+
+.center[
+<figure>
+  <img src="img/10/538-hexagon-cartogram.png" alt="FiveThirtyEight hex cartogram" title="FiveThirtyEight hex cartogram" width="55%">
+</figure>
+]
+
+Each hexagon corresponds to one electoral vote
+
+???
+
+http://metrocosm.com/election-2016-map-3d/
+
+---
+
+# Or: use other layers to represent data
+
+.center[
+<figure>
+  <img src="img/10/2016_election_map_large.png" alt="xkcd 2016 election map" title="xkcd 2016 election map" width="55%">
+</figure>
+]
+
+???
+
+https://xkcd.com/1939/
+
+
+---
+class: inverse, center, middle
+name: data-on-maps
+
+# Adding data to maps as layers
+
+---
+
+# Maps show data in a geospatial context
+
+```{r echo=FALSE, out.width='60%'}
+knitr::include_graphics("https://clauswilke.com/dataviz/geospatial_data_files/figure-html/sfbay-overview-1.png")
+```
+
+???
+
+Wind turbines in the San Francisco Bay Area
+
+Figure from [Claus O. Wilke. Fundamentals of Data Visualization. O'Reilly, 2019.](https://clauswilke.com/dataviz)
+
+---
+
+# Maps are composed of several distinct layers
+
+```{r echo=FALSE, out.width='60%'}
+knitr::include_graphics("https://clauswilke.com/dataviz/geospatial_data_files/figure-html/sfbay-layers-1.png")
+```
+
+???
+
+Wind turbines in the San Francisco Bay Area
+
+Figure from [Claus O. Wilke. Fundamentals of Data Visualization. O'Reilly, 2019.](https://clauswilke.com/dataviz)
+
+---
+
+# The idea of aesthetic mappings still applies
+
+```{r echo=FALSE, out.width='60%'}
+knitr::include_graphics("https://clauswilke.com/dataviz/geospatial_data_files/figure-html/shiloh-map-1.png")
+```
+
+???
+
+Location of individual wind turbines in the Shiloh Wind Farm
+
+Figure from [Claus O. Wilke. Fundamentals of Data Visualization. O'Reilly, 2019.](https://clauswilke.com/dataviz)
+
+---
+
+# Examples: maps with lines
+
+.center[
+<figure>
+  <img src="img/10/CA_Migration_v2_101-01.png" alt="Net migration between California and other states" title="Net migration between California and other states" width="65%">
+  <figcaption><a href="https://www.census.gov/dataviz/visualizations/051/" target="_blank">US Census Bureau: Net migration between California and other states</a></figcaption>
+</figure>
+]
+
+???
+
+https://www.census.gov/dataviz/visualizations/051/
+
+---
+
+# Examples: maps with points
+
+.center[
+<figure>
+  <img src="img/10/nyt-ukraine-refugees.png" alt="Refugees from Ukraine" title="Refugees from Ukraine" width="70%">
+  <figcaption><a href="https://www.nytimes.com/interactive/2022/03/15/opinion/ukraine-refugee-crisis.html" target="_blank">The New York Times, "Refugees from Ukraine, since Feb. 24"</a></figcaption>
+</figure>
+]
+
+???
+
+https://www.nytimes.com/interactive/2022/03/15/opinion/ukraine-refugee-crisis.html
+
+---
+
+# Examples: maps with points
+
+.center[
+<figure>
+  <img src="img/10/dc-photo-locations-small.jpg" alt="DC photo locations by locals and tourists" title="DC photo locations by locals and tourists" width="52%">
+  <figcaption><a href="https://www.flickr.com/photos/walkingsf/4672195208/in/album-72157624209158632/" target="_blank">Photos taken in DC: blue = locals; red = tourists; yellow = unknown</a></figcaption>
+</figure>
+]
+
+???
+
+https://www.flickr.com/photos/walkingsf/4672195208/in/album-72157624209158632/
+
+---
+class: inverse, center, middle
+name: gis-in-r
+
+# Geospatial visualizations in R
+
+---
+
+# Aesthetic mappings meet mapping
+
+```{r lat-long-example, echo=FALSE, fig.width=7, fig.height=7}
+point_example <- tibble(x = 2, y = 1) %>%
+  mutate(label = glue("{x} x, {y} y\n{y} lat, {x} lon"))
+lat_labs <- tibble(x = -3, y = seq(-2, 3, 1), label = "Latitude")
+lon_labs <- tibble(x = seq(-2, 3, 1), y = -2, label = "Longitude")
+
+ggplot() +
+  geom_point(data = point_example, aes(x = x, y = y), size = 5) +
+  geom_label(data = point_example, aes(x = x, y = y, label = label),
+             nudge_y = 0.8, size = 8,
+             family = "Fira Sans Condensed",) +
+  geom_text(data = lat_labs, aes(x = x, y = y, label = label),
+            hjust = 0.5, vjust = -0.3, size = 6,
+            family = "Fira Sans Condensed",) +
+  geom_text(data = lon_labs, aes(x = x, y = y, label = label),
+            hjust = 1.1, vjust = -0.5, angle = 90, size = 6,
+            family = "Fira Sans Condensed", ) +
+  geom_hline(yintercept = 0) +
+  geom_vline(xintercept = 0) +
+  scale_x_continuous(breaks = seq(-2, 3, 1)) +
+  scale_y_continuous(breaks = seq(-2, 3, 1)) +
+  coord_equal(xlim = c(-3.5, 3), ylim = c(-3, 3)) +
+  labs(x = NULL, y = NULL, caption = "via @sarahbellmaps") +
+  # labs(x = NULL, y = NULL) +
+  theme_minimal(base_family = "Fira Sans Condensed") +
+  theme(panel.grid.minor = element_blank(),
+        axis.text = element_blank(),
+        plot.caption = element_text(size = rel(1), margin = margin(t = 15), color = "grey50"))
+```
+
+---
+
+# The **sf** package: simple features in R
+
+```{r echo=FALSE, out.width='75%'}
+knitr::include_graphics("img/10/sf.png")
+```
+
+???
+
+Source: [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+---
+
+# Shapefiles
+
+Geographic information is shared as **shapefiles**
+
 --
 
-.pull-right[
-```{r hp1-wordr, echo=FALSE}
-hp1_data %>% 
-  unnest_tokens(   # convert data to tokens
-    input = text,   # split text column #<<
-    output = word, # make new word column #<<
-    ) %>%
-  relocate(word) # move new column to front #<<
+These are *not* like regular single CSV files!
+
+--
+
+Shapefiles come as zipped files with a bunch of different files inside
+
+.center[
+<figure>
+  <img src="img/10/shapefile-raw.png" alt="Shapefile folder structure" title="Shapefile folder structure" width="65%">
+</figure>
+]
+
+---
+
+# `sf` makes it easy in R
+
+**Simple features** standardize how spatial objects are represented by computers
+
+--
+
+`sf` represents simple features as native R objects
+
+--
+
+Goal is to present information about *spatial geometries* according to some *attribute* (e.g., population, business data, etc.)
+
+--
+
+To make it easy to combine *attributes* with *spatial geometries*, `sf` stores feature geometries in the data frame column `geometry`
+
+---
+
+# Structure of an `sf` data frame
+
+.small-code[
+```{r demo-read-shapefile, eval=FALSE}
+library(sf)
+world_shapes <- read_sf("data/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp")
+world_shapes %>% select(TYPE, GEOUNIT, ISO_A3, geometry)
+```
+
+```{r show-shapefile, echo=FALSE}
+world_shapes %>% 
+  select(TYPE, GEOUNIT, ISO_A3, geometry)
 ```
 ]
 
 ---
 
-# We can treat tokens like any other data
+# `sf` data frames are data frames
 
-.pull-left[
-For example, we can count them:
-
-```{r hp1-word-count, eval=FALSE}
-hp1_data %>% 
-  unnest_tokens(
-    input = text, 
-    output = word, 
-    ) %>%        
-  count(word, sort = TRUE) #<<
+```{r}
+class(world_shapes)
+world_shapes %>% 
+  filter(NAME == "United States of America") %>% 
+  select(NAME, TYPE, ISO_A3, geometry)
 ```
-]
-
-.pull-right[
-```{r hp1-word-countr, echo=FALSE}
-hp1_data %>% 
-  unnest_tokens(
-    input = text, 
-    output = word, 
-    ) %>%        
-  count(word, sort = TRUE) #<<
-```
-]
-
-What do you notice about the most common words?
 
 ---
 
-# Raw word frequency is not always informative
+# The magic `geometry` column
+
+To make a map using `ggplot`, all you need to do is &nbsp; `+ geom_sf()`
 
 .left-code[
-```{r word-count-plot, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-hp1_data %>% 
-  unnest_tokens(word, text) %>% 
-  count(word, sort = TRUE) %>% 
-  slice_max(order_by = n, # order rows by count #<<
-            n = 10) %>%   # slice top 10 rows #<<
-  ggplot(aes(x = n, 
-             y = fct_reorder(word, n))) +
-  geom_col() +
-  labs(x = NULL, y = NULL) +
-  theme_bw()
+```{r simple-map, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+world_shapes %>% 
+  ggplot() +
+  geom_sf() #<<
 ```
-
-How can we make this better?
 ]
 
 .right-plot[
-![](`r knitr::fig_chunk("word-count-plot", "png")`)
+![](`r knitr::fig_chunk("simple-map", "png")`)
 ]
 
 ---
 
-# Stop words
+# Changing projections
 
-We can filter out common **stop words** that we want to ignore
-
-```{r show-stop-words}
-stop_words # this is an object from the tidytext package
-```
-
----
-
-# Token frequency: words
+Use `coord_sf()` to change projections (see end for background on projections)
 
 .left-code[
-```{r hp-words, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-hp1_data %>% 
-  unnest_tokens(word, text) %>% 
-  anti_join(stop_words, by = "word") %>% #<<
-  count(word, sort = TRUE) %>% 
-  slice_max(order_by = n,
-            n = 10) %>%
-  ggplot(aes(x = n, 
-             y = fct_reorder(word, n))) +
-  geom_col() +
-  labs(x = NULL, y = NULL) +
-  theme_bw()
+```{r change-projection, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+world_shapes %>% 
+  ggplot() +
+  geom_sf() +
+  coord_sf(crs = "+proj=merc") #<<
 ```
-
-That's better!
 ]
 
 .right-plot[
-![](`r knitr::fig_chunk("hp-words", "png")`)
+![](`r knitr::fig_chunk("change-projection", "png")`)
 ]
-
 
 ---
 
-# Tokenization: n-grams
+# Changing projections
 
-**n** contiguous tokens are an **n-gram**
+Use `coord_sf()` to change projections (see end for background on projections)
 
-Example: two consecutive words are a bigram
+.left-code[
+```{r change-projection1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+world_shapes %>% 
+  ggplot() +
+  geom_sf() +
+  coord_sf(crs = "+proj=robin") #<<
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("change-projection1", "png")`)
+]
+
+---
+
+# Let's zoom in on New York
+
+.left-code[
+```{r nys-map, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+# counties object created in the background
+head(counties, 5)
+counties %>% #<<
+  ggplot() + #<<
+  geom_sf()  #<<
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("nys-map", "png")`)
+]
+
+---
+
+# We can filter like normal
+
+All regular data frame operations work
+
+.left-code[
+```{r filter-map-data, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+counties %>% 
+  filter(county == "tompkins") %>%  #<<
+  ggplot() +
+  geom_sf()
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("filter-map-data", "png")`)
+]
+
+---
+
+# We can use aesthetics like normal
+
+All regular ggplot layers and aesthetics work
+
+.left-code[
+```{r add-aes, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+counties %>%
+  ggplot(aes(fill = (county=="tompkins"))) + #<<
+  geom_sf() +
+  guides(fill = "none") + # omit legend
+  scale_fill_viridis_d()  # nicer colors
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("add-aes", "png")`)
+]
+
+---
+
+# We can do a lot more!
+
+`sf` is for all GIS stuff
 
 --
 
-.pull-left[
-```{r hp1-bigram, eval=FALSE}
-hp1_data %>% 
-  unnest_tokens(
-    input = text, 
-    output = bigram,  # new column bigram #<<
-    token = "ngrams", # we want ngrams #<<
-    n = 2) %>%        # we want bigrams #<<
-  relocate(bigram)
-```
-]
-
-.pull-right[
-```{r hp1-bigramr, echo=FALSE}
-hp1_data %>% 
-  unnest_tokens(
-    input = text, 
-    output = bigram,  # call new column bigram #<<
-    token = "ngrams", # we want ngrams #<<
-    n = 2) %>%        # we want bigrams #<<
-  relocate(bigram)
-```
-]
-
----
-
-# Token frequency: n-grams
-
-```{r hp-bigrams, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
-hp_bigrams <- hp %>% 
-  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>% 
-  separate(bigram, c("word1", "word2"), sep = " ") %>% 
-  filter(!word1 %in% stop_words$word) %>%
-  filter(!word2 %in% stop_words$word) %>% 
-  unite(bigram, word1, word2, sep = " ") %>% 
-  group_by(book) %>% 
-  count(bigram, sort = TRUE) %>% 
-  top_n(3, n) %>% 
-  ungroup() %>% 
-  mutate(bigram = fct_inorder(bigram))
-
-ggplot(hp_bigrams, aes(x = n, y = fct_rev(bigram), fill = book)) +
-  geom_col() +
-  guides(fill = "none") +
-  labs(x = NULL, y = NULL) +
-  scale_fill_viridis_d() +
-  facet_wrap(vars(book), scales = "free_y") +
-  theme_bw()
-```
-
----
-
-# Token frequency: n-gram ratios
-
-```{r hp-he-she, cache = TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="75%"}
-hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
-
-bigram_he_she_counts <- hp %>%
-  unnest_tokens(bigram, text, token = "ngrams", n = 2)  %>%
-  count(bigram, sort = TRUE) %>%
-  # split the bigram column into two columns
-  separate(bigram, c("word1", "word2"), sep = " ") %>%
-  # only choose rows where the first word is he or she #<<
-  filter(word1 %in% hp_pronouns) %>% #<<
-  # count unique pairs of words
-  count(word1, word2, wt = n, sort = TRUE) %>%
-  rename(total = n)
-
-word_ratios <- bigram_he_she_counts %>%
-  # look at each of the second words
-  group_by(word2) %>%
-  # keep rows where the second word appears 10+ times
-  filter(sum(total) > 10) %>%
-  ungroup() %>%
-  # pivot out the word1 column so that there's a column named "he" and one named "she"
-  pivot_wider(names_from = word1, values_from = total) %>% 
-  # filter out missing he/she cases (subjective choice!)
-  filter(!is.na(he) & !is.na(she)) %>% 
-  # convert word2 counts to frequencies by he/she (normalization)
-  mutate_if(is.numeric, ~ (.) / sum(.)) %>%
-  # compute logged ratio of the she counts to he counts
-  mutate(logratio = log2(she / he)) %>%
-  # sort by that ratio
-  arrange(desc(logratio))
-
-plot_word_ratios <- word_ratios %>%
-  # this gets the words in the right order---we take the absolute value, select
-  # only rows where the log ratio is bigger than 0, and then take the top 15 words
-  mutate(abslogratio = abs(logratio)) %>%
-  group_by(logratio < 0) %>%
-  slice_max(abslogratio, n = 5) %>%
-  ungroup()
-
-plot_word_ratios %>% 
-  ggplot(aes(logratio, 
-             fct_reorder(word2, logratio), 
-             fill = logratio < 0)) +
-  geom_col() +
-  labs(y = "How much more/less likely", x = NULL) +
-  scale_fill_manual(name = "", labels = c("More 'she'", "More 'he'"),
-                    values = c("#3D9970", "#FF851B"),
-                    guide = guide_legend(reverse = TRUE)) +
-  scale_x_continuous(breaks = seq(-3, 3),
-                     labels = c("8x", "4x", "2x",
-                                "Same", "2x", "4x", "8x")) +
-  theme_bw() +
-  theme(legend.position = "bottom")
-```
-
-How would you make this?
-
-.small[This is not an endorsement of J. K. Rowling's [views on sex and gender](https://en.wikipedia.org/wiki/Political_views_of_J._K._Rowling#Transgender_people)!]
-
----
-
-# Token frequency: n-gram ratios
-
-1. Identify and count words associated with "he", "she"
-
-.pull-left[
-```{r hp-he-she-counts, eval=FALSE}
-hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
-
-bigram_he_she_counts <- hp %>%
-  unnest_tokens(bigram, text, token = "ngrams", n = 2)  %>%
-  count(bigram, sort = TRUE) %>%
-  # split the bigram column into two columns
-  separate(bigram, c("word1", "word2"), sep = " ") %>%
-  # only choose rows where the first word is he or she #<<
-  filter(word1 %in% hp_pronouns) %>% #<<
-  # count unique pairs of words
-  count(word1, word2, wt = n, sort = TRUE) %>%
-  rename(total = n)
-```
-]
+Draw maps
 
 --
 
-.pull-right[
-```{r hp-he-she-countsr, echo=FALSE}
-hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
+Calculate distances between points
 
-hp %>%
-  unnest_tokens(bigram, text, token = "ngrams", n = 2)  %>%
-  count(bigram, sort = TRUE) %>%
-  # split the bigram column into two columns
-  separate(bigram, c("word1", "word2"), sep = " ") %>%
-  # only choose rows where the first word is he or she #<<
-  filter(word1 %in% hp_pronouns) %>% #<<
-  # count unique pairs of words
-  count(word1, word2, wt = n, sort = TRUE) %>%
-  rename(total = n)
-```
-]
+--
+
+Count observations in a given area
+
+--
+
+Anything else related to geography!
+
+--
+
+See [here](https://bookdown.org/robinlovelace/geocompr/intro.html) or [here](https://bookdown.org/lexcomber/brunsdoncomber2e/Ch5.html) for full textbooks
 
 
 ---
 
-# Token frequency: n-gram ratios
+# Example: compute the area of NY counties
 
-2. Compute ratios for the most common bigrams
+```{r}
+counties %>% 
+  mutate(area = st_area(counties)) # sf::st_area() computes areas #<<
+```
 
-.pull-left[
-```{r hp-he-she-ratios, eval=FALSE}
-word_ratios <- bigram_he_she_counts %>%
-  # look at each of the second words
-  group_by(word2) %>%
-  # keep rows where the second word appears 10+ times
-  filter(sum(total) > 10) %>%
-  ungroup() %>%
-  # pivot out the word1 column so that there's a column named "he" and one named "she"
-  pivot_wider(names_from = word1, values_from = total) %>% 
-  # filter out missing he/she cases (subjective choice!)
-  filter(!is.na(he) & !is.na(she)) %>% 
-  # convert word2 counts to frequencies by he/she (normalization)
-  mutate_if(is.numeric, ~ (.) / sum(.)) %>%
-  # compute logged ratio of the she counts to he counts
-  mutate(logratio = log2(she / he)) %>%
-  # sort by that ratio
-  arrange(desc(logratio))
+---
 
-word_ratios
+# Fill counties by area
+
+.left-code[
+```{r nys-add-aes, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+counties %>% 
+  mutate(area = as.numeric(st_area(counties))) %>% #<<
+  ggplot(aes(fill = area)) + #<<
+  geom_sf() +
+  scale_fill_viridis_c(alpha = 0.5) +
+  theme_minimal()
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("nys-add-aes", "png")`)
+]
+
+---
+
+# No `geometry` column?
+
+Make your own with `st_as_sf()`
+
+.less-left.small-code[
+```{r convert-fake, echo=FALSE}
+other_data <- tribble(
+  ~city, ~long, ~lat,
+  "Cornell", -76.475266, 42.454323,
+  "Cancun", -86.84656, 21.17429
+)
+```
+
+```{r show-other}
+other_data
 ```
 ]
 
 --
 
-.pull-right[
-```{r hp-he-she-ratiosr, echo=FALSE}
-bigram_he_she_counts %>%
-  # look at each of the second words
-  group_by(word2) %>%
-  # keep rows where the second word appears 10+ times
-  filter(sum(total) > 10) %>%
-  ungroup() %>%
-  # pivot out the word1 column so that there's a column named "he" and one named "she"
-  pivot_wider(names_from = word1, values_from = total) %>% 
-  # filter out missing he/she cases (subjective choice!)
-  filter(!is.na(he) & !is.na(she)) %>% 
-  # convert word2 counts to frequencies by he/she (normalization)
-  mutate_if(is.numeric, ~ (.) / sum(.)) %>%
-  # compute logged ratio of the she counts to he counts
-  mutate(logratio = log2(she / he)) %>%
-  # sort by that ratio
-  arrange(desc(logratio))
+.more-right.small-code[
+```{r show-converted}
+other_data %>% 
+  st_as_sf(coords = c("long", "lat"), #<< 
+           crs = st_crs("EPSG:4326")) #<<
 ```
 ]
 
 ---
 
-# Token frequency: n-gram ratios
+# `geom_sf()` is today’s standard
 
-3. Rearrange the data for plotting
+You'll sometimes find older tutorials and StackOverflow answers about using `geom_map()` or **ggmap** or other things
 
-.pull-left[
-```{r hp-he-she-rearrange, eval=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
-plot_word_ratios <- word_ratios %>%
-  mutate(abslogratio = abs(logratio)) %>%
-  group_by(logratio < 0) %>%
-  slice_max(abslogratio, n = 5) %>%
-  ungroup()
+--
 
-plot_word_ratios
-```
+Those still work, but they don't use the same magical **sf** system with easy-to-convert projections and other GIS stuff
+
+--
+
+Stick with **sf** and `geom_sf()` and your life will be easy
+
+---
+
+# Where to find shapefiles
+
+--
+
+[Natural Earth](https://www.naturalearthdata.com/) for international maps
+
+--
+
+[US Census Bureau](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html) for US maps
+
+--
+
+For anything else…
+
+--
+
+.center[
+<figure>
+  <img src="img/10/shapefile-search.png" alt="Search for shapefiles" title="Search for shapefiles" width="50%">
+</figure>
+]
+
+---
+
+# Scales
+
+.pull-left-3[
+<figure>
+  <img src="img/10/download_thumbs_10m.jpg" alt="10m scale" title="10m scale" width="100%">
+</figure>
+
+.small.center[1:10m = 1:10,000,000]
+
+.small.center[1 cm = 100 km]
+]
+
+.pull-middle-3[
+<figure>
+  <img src="img/10/download_thumbs_50m.jpg" alt="50m scale" title="50m scale" width="100%">
+</figure>
+
+.small.center[1:50m = 1:50,000,000]
+
+.small.center[ 1cm = 500 km]
+]
+
+.pull-right-3[
+<figure>
+  <img src="img/10/download_thumbs_110m.jpg" alt="110m scale" title="110m scale" width="100%">
+</figure>
+
+.small.center[1:110m = 1:110,000,000]
+
+.small.center[1 cm = 1,100 km]
 ]
 
 --
 
-.pull-right[
-```{r hp-he-she-rearranger, echo=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
-word_ratios %>%
-  # this gets the words in the right order---we take the absolute value, select
-  # only rows where the log ratio is bigger than 0, and then take the top 15 words
-  mutate(abslogratio = abs(logratio)) %>%
-  group_by(logratio < 0) %>%
-  slice_max(abslogratio, n = 5) %>%
-  ungroup()
-```
-]
+&nbsp;
+
+Using too high of a resolution makes your maps slow and huge
+
+---
+class: inverse, center, middle
+name: projections
+
+# A quick primer on projections
 
 ---
 
-# Token frequency: n-gram ratios
+# A quick primer on projections
 
-4. Plot the data
-
-.pull-left.small-code[
-```{r hp-he-she-plot, eval=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
-plot_word_ratios %>% 
-  ggplot(aes(logratio, 
-             fct_reorder(word2, logratio), 
-             fill = logratio < 0)) +
-  geom_col() +
-  labs(y = "How much more/less likely", x = NULL) +
-  scale_fill_manual(name = "", labels = c("More 'she'", "More 'he'"),
-                    values = c("#3D9970", "#FF851B"),
-                    guide = guide_legend(reverse = TRUE)) +
-  scale_x_continuous(breaks = seq(-3, 3),
-                     labels = c("8x", "4x", "2x",
-                                "Same", "2x", "4x", "8x")) +
-  theme_bw() +
-  theme(legend.position = "bottom")
-```
-]
+[All world maps are wrong according to Vox](https://www.youtube.com/watch?v=kIID5FDi2JQ). Why?
 
 --
 
-.pull-right[
-```{r hp-he-she-plotr, echo=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
-plot_word_ratios %>% 
-  ggplot(aes(logratio, 
-             fct_reorder(word2, logratio), 
-             fill = logratio < 0)) +
-  geom_col() +
-  labs(y = "How much more/less likely", x = NULL) +
-  scale_fill_manual(name = "", labels = c("More 'she'", "More 'he'"),
-                    values = c("#3D9970", "#FF851B"),
-                    guide = guide_legend(reverse = TRUE)) +
-  scale_x_continuous(breaks = seq(-3, 3),
-                     labels = c("8x", "4x", "2x",
-                                "Same", "2x", "4x", "8x")) +
-  theme_bw() +
-  theme(legend.position = "bottom")
-```
-]
-
----
-
-# Sentiment analysis
-
-Simple approach: quantify sentiment of each word in a corpus, then sum them up
+Impossible to represent spherical surface as a plane without distortions
 
 --
 
-.pull-left-3.small-code[
-```{r comment=NA}
-get_sentiments("bing")
-```
-]
+Projections "project" 3D surface down to 2D
 
 --
 
-.pull-middle-3.small-code[
-```{r comment=NA}
-get_sentiments("afinn")
-```
-]
+Some preserve land shape, some preserve size, etc.
 
 --
 
-.pull-right-3.small-code[
-```{r comment=NA}
-get_sentiments("nrc")
-```
-]
+Let's look at some examples
+
 
 ---
 
-# Harry Potter sentiment analysis
+# World projections
 
-```{r hp-net-sentiment, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
-# https://rstudio-pubs-static.s3.amazonaws.com/300624_8260952d1f0346969e65f41a97006bf5.html
-hp_sentiment <- hp %>%
-  unnest_tokens(word, text) %>%
-  group_by(book) %>%
-  mutate(word_count = 1:n(),
-         index = word_count %/% 500 + 1) %>%
-  inner_join(get_sentiments("bing")) %>%
-  count(book, index = index, sentiment) %>%
-  pivot_wider(names_from = sentiment, values_from = n) %>%
-  mutate(net_sentiment = positive - negative)
+```{r projections, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
+base_map <- ggplot() + 
+  geom_sf(data = world_shapes, fill = "#B2B1F9", size = 0.1, color = "#0D0887") +
+  theme_void(base_family = "Fira Sans Condensed") + 
+  theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "lines"),
+        plot.title = element_text(margin = margin(b = 3), face = "bold"),
+        plot.caption = element_text(family = "Consolas", color = "grey50"))
 
-ggplot(hp_sentiment,
-       aes(x = index, y = net_sentiment, fill = net_sentiment > 0)) +
-  geom_col() +
-  guides(fill = "none") +
-  labs(x = NULL, y = "Net sentiment") +
-  facet_wrap(vars(book), scales = "free_x") +
-  theme_bw()
+# Longitude/latitude
+map_lat_lon <- base_map +
+  coord_sf(crs = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_def") +
+  labs(title = "Longitude-latitude")
+
+# Robinson
+map_robinson <- base_map +
+  coord_sf(crs = "+proj=robin") +
+  # coord_sf(crs = 54030, datum = NA) +  # Robinson
+  labs(title = "Robinson")
+
+# Mercator (ew)
+map_mercator <- base_map +
+  coord_sf(crs = "+proj=merc") +
+  # coord_sf(crs = 54004, datum = NA) +  # Mercator
+  labs(title = "Mercator")
+
+# Gall Peters
+map_gall_peters <- base_map +
+  coord_sf(crs = st_crs("ESRI:54002"), datum = NA) +  # Gall Peters / Equidistant cylindrical
+  labs(title = "Gall-Peters")
+
+(map_lat_lon / map_mercator) | (map_gall_peters / map_robinson) 
+
+# Equal earth
+# base_map +
+#   coord_sf(crs = "+proj=eqearth +wktext") +  # Equal earth 
+#   labs(title = "Equal Earth",
+#        caption = 'crs = "+proj=eqearth +wktext"')
 ```
 
 ---
 
-# tf-idf
+# US projections
 
-Term frequency-inverse document frequency
+```{r us-projections, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
+us_states <- read_sf("data/cb_2018_us_state_20m/cb_2018_us_state_20m.shp")
 
-tf-idf is a measure of how important a term is to a document within a broader collection or corpus
+states_48 <- us_states %>% 
+  filter(!(STUSPS %in% c("HI", "AK", "PR")))
 
-$$
-\begin{aligned}
-tf(\text{term}) &= \frac{n_{\text{term}}}{n_{\text{terms in document}}} \\
-idf(\text{term}) &= \ln{\left(\frac{n_{\text{documents}}}{n_{\text{documents containing term}}}\right)} \\
-tf\text{-}idf(\text{term}) &= tf(\text{term}) \times idf(\text{term})
-\end{aligned}
-$$
+map_nad83 <- ggplot() +
+  geom_sf(data = states_48, fill = "#B2B1F9", size = 0.25, color = "#0D0887") +
+  labs(title = "NAD83") +
+  coord_sf(crs = st_crs("EPSG:4269"), datum = NA) +
+  theme_void(base_family = "Fira Sans Condensed") + 
+  theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "lines"),
+        plot.title = element_text(margin = margin(b = 3), face = "bold"),
+        plot.caption = element_text(family = "Consolas", color = "grey50"))
+
+map_albers <- ggplot() +
+  geom_sf(data = states_48, fill = "#B2B1F9", size = 0.25, color = "#0D0887") +
+  labs(title = "Albers") +
+  coord_sf(crs = st_crs("ESRI:102003"), datum = NA) +
+  theme_void(base_family = "Fira Sans Condensed") + 
+  theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "lines"),
+        plot.title = element_text(margin = margin(b = 3), face = "bold"),
+        plot.caption = element_text(family = "Consolas", color = "grey50"))
+
+map_nad83 | map_albers
+```
 
 ---
 
-# Harry Potter tf-idf
+# Which projection is best?
 
-```{r hp-tf-idf, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
-# Get a list of words in all the books
-hp_words <- hp %>% 
-  unnest_tokens(word, text) %>% 
-  count(book, word, sort = TRUE)
+--
 
-# Add the tf-idf for these words
-hp_tf_idf <- hp_words %>% 
-  bind_tf_idf(word, book, n) %>% 
-  arrange(desc(tf_idf))
+None of them
 
-# Get the top 3 words in each book
-hp_tf_idf_plot <- hp_tf_idf %>% 
-  group_by(book) %>% 
-  slice_max(tf_idf, n = 3) %>% 
-  ungroup()
+--
 
-ggplot(hp_tf_idf_plot, aes(y = fct_reorder(word, tf_idf), x = tf_idf, fill = book)) +
-  geom_col() +
-  guides(fill = "none") +
-  labs(y = "tf-idf", x = NULL) +
-  facet_wrap(~ book, scales = "free") +
-  labs(y = NULL) +
-  theme_bw()
-```
+There are no good or bad projections
+
+--
+
+There are good and bad projections for a particular use case
+
+---
+
+# Reference: Finding projection codes
+
+[spatialreference.org](https://spatialreference.org/ref/epsg/)
+
+[epsg.io](https://epsg.io/)
+
+[proj.org](https://proj.org/operations/projections/index.html)
+
+.small[[This](https://www.earthdatascience.org/courses/earth-analytics/spatial-data-r/understand-epsg-wkt-and-other-crs-definition-file-types/) is an excellent overview of how this all works]
+
+.small[And [this](https://web.archive.org/web/20200225021219/https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/OverviewCoordinateReferenceSystems.pdf) is a really really helpful overview of all these moving parts]
+
+---
+class: inverse, center, middle
+
+# Have a nice spring break!
 

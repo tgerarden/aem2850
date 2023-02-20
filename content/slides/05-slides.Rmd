@@ -1,5 +1,5 @@
 ---
-title: "Mapping data to graphics"
+title: "Strings and regular expressions"
 author: "Todd Gerarden"
 output:
   xaringan::moon_reader:
@@ -37,14 +37,14 @@ opts_chunk$set(warning = FALSE, message = FALSE,
 
 ```{r packages-data, include=FALSE}
 library(tidyverse)
-library(ggthemes)
-library(flair)
-library(gapminder)
+
+# options("digits" = 2, "width" = 90)
 ```
 
-class: center middle main-title section-title-4
 
-# Mapping data to graphics
+class: center, middle
+
+# Strings and regular expressions
 
 .class-info[
 
@@ -55,11 +55,12 @@ Cornell Dyson<br>
 Spring 2023
 
 Acknowledgements: 
-[Andrew Heiss](https://datavizm20.classes.andrewheiss.com), 
-<!-- [Claus Wilke](https://wilkelab.org/SDS375/), -->
+<!-- [Andrew Heiss](https://datavizm20.classes.andrewheiss.com), -->
+<!-- [Claus Wilke](https://wilkelab.org/SDS375/),  -->
 <!-- [Grant McDermott](https://github.com/uo-ec607/lectures), -->
 <!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), -->
-[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+<!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) -->
+[R4DS (2e)](https://r4ds.hadley.nz)
 
 ]
 
@@ -67,11 +68,11 @@ Acknowledgements:
 
 # Announcements
 
-Next week is February break
-- No Lab due next week
-- Yes Reflection due Wednesday, March 2
+No lab due next Monday (February break)
 
-We will provide details on the first project in the next 1-2 weeks
+Prelim 1 will be next Thursday, March 2 at 9:40am in class
+  - Will cover everything including this week's material
+  - We are still writing the prelim, will provide more guidance Thursday and via canvas
 
 Questions before we get started?
 
@@ -80,66 +81,11 @@ Questions before we get started?
 
 # Plan for today
 
-[Course progress](#progress)
+[Prologue: clarifying group operations](#prologue)
 
-[Prologue](#prologue)
+[Working with strings in R](#working-with-strings)
 
-[Data, aesthetics, & the grammar of graphics](#grammar-of-graphics)
-
-[Grammatical layers](#grammatical-layers)
-
-[Aesthetics in extra dimensions](#extra-dimensions)
-
-[Tidy data revisited](#tidy-data)
-
-
----
-class: inverse, center, middle
-name: progress
-
-# Course progress
-
----
-
-# Course objectives reminder
-
-1. Develop basic proficiency in `R` programming
-2. Understand data structures and manipulation
-3. Describe effective techniques for data visualization and communication
-4. Construct effective data visualizations
-5. Utilize course concepts and tools for business applications
-
----
-
-# Where we've been
-
-1. **Develop basic proficiency in `R` programming**
-2. **Understand data structures and manipulation**
-3. Describe effective techniques for data visualization and communication
-4. Construct effective data visualizations
-5. Utilize course concepts and tools for business applications
-
----
-
-# Where we're going next
-
-1. Develop basic proficiency in `R` programming
-2. Understand data structures and manipulation
-3. **Describe effective techniques for data visualization and communication**
-4. **Construct effective data visualizations**
-5. Utilize course concepts and tools for business applications
-
----
-
-# Schedule overview
-
-#### Weeks 1-4: Programming Foundations
-
-#### Weeks 5-10: Data Visualization Foundations
-
-#### Weeks 11+: Special Topics (mix of programming and dataviz)
-
-See [aem2850.toddgerarden.com/schedule](https://aem2850.toddgerarden.com/schedule/) for details
+[Regular expressions](#regex)
 
 
 ---
@@ -148,1431 +94,536 @@ name: prologue
 
 # Prologue
 
+---
+
+# Group operations
+
+Lab-04 included the following question:
+
+> **3. Calculate the average housing price for each of the cities that are in `tidy_txhouse` and in `tidy_txpop` over the period 2010 through 2012. Which city has the highest average housing price? Which city has the lowest average housing price?**
+
+--
+
+This is a good example question to provide more detail on `group_by()` and `ungroup()`, which I mentioned in passing during week 2
+
+*Aside: if we penalize you on this question due to confusion about the "and in" vs "but not in" verbiage in the question, reach out via email and we will regrade them.*
+
+```{r, echo=FALSE}
+tidy_txhouse <- read_csv("data/05-slides/tidy_txhouse.csv", show_col_types = FALSE)
+tx_pop_city <- read_csv("data/05-slides/tidy_txpop.csv", show_col_types = FALSE) |> 
+  distinct(city)
+```
 
 ---
 
-class: bg-full bg-y-75
-background-image: url("img/05/napoleon-retreat.jpg")
+# Reminder: dplyr::group_by
 
-???
+`summarize` is particularly useful in combination with `group_by`:
 
-Source: [Wikipedia](https://en.wikipedia.org/wiki/File:National_Museum_in_Poznan_-_Przej%C5%9Bcie_przez_Berezyn%C4%99.JPG)
+```{r}
+semi_join(tidy_txhouse, tx_pop_city) |>   # for cities in tidy_txhouse and tx_pop_city
+  filter(2010 <= year & year <= 2012) |>  # for years 2010-2012
+  group_by(city) |>                       # for each city #<< 
+  summarize(mean_price = mean(price))     # compute the mean price #<<
+```
 
 ---
 
-# Do you know anything about Napoleon's retreat from Moscow?
+# Groups are persistent (sort of)
 
----
+.pull-left[
+```{r, highlight.output = c(2, 5, 6, 7)}
+semi_join(tidy_txhouse, tx_pop_city) |>
+  filter(2010 <= year & year <= 2012) |>
+  group_by(city) |> 
+  print(n = 5)
+```
+]
 
-# Long distance!
+--
 
-.center[
-<figure>
-  <img src="img/05/napoleon-google-maps.png" alt="Moscow to Vilnius" width="90%">
-  <figcaption>Moscow to Vilnius</figcaption>
-</figure>
+.pull-right[
+```{r, highlight.output = 4}
+semi_join(tidy_txhouse, tx_pop_city) |>
+  filter(2010 <= year & year <= 2012) |>
+  group_by(city) |> 
+  summarize(mean_price = mean(price)) |> 
+  print(n = 5)
+```
+No groups?!
 ]
 
 ---
 
-# Very cold!
+# Groups are persistent (sort of)
 
-```{r minard-temps, echo=FALSE, warning=FALSE, fig.width=12, fig.height=6.5}
-# https://github.com/vincentarelbundock/Rdatasets/tree/master/csv/HistData
-minard_temps <- read_csv("data/Minard.temp.csv") %>% 
-  uncount(days) %>% 
-  mutate(day_index = 1:n())
+.pull-left[
+`summarize()` drops the last group variable, so the output is not grouped by `city`
 
-ggplot(minard_temps, aes(x = day_index, y = temp)) +
-  geom_line(color = "#4472C4", size = 3) + 
-  labs(x = "Days since retreat from Moscow", y = "°C") +
-  theme_gdocs(base_size = 30)
+By contrast `mutate()` does not unroll group variables unless you explicitly ask it to
+]
+
+.pull-right[
+```{r, highlight.output = c(2, 5, 6, 7)}
+semi_join(tidy_txhouse, tx_pop_city) |>
+  filter(2010 <= year & year <= 2012) |>
+  group_by(city) |> 
+  mutate(mean_price = mean(price))
 ```
+]
 
 ---
 
-# Lots of people died!
+# Groups affect filter operations!
 
-```{r minard-deaths, echo=FALSE, fig.height=6.5, fig.width=6.5}
-minard_deaths <- tribble(
-  ~status, ~count,
-  "Died", 422000,
-  "Survived", 10000
-)
-
-ggplot(minard_deaths, aes(x = "", y = count, fill = status)) +
-  geom_col() + 
-  coord_polar(theta = "y") +
-  scale_fill_manual(values = c("#FFC000", "#4472C4"), name = NULL) +
-  labs(title = "Napoleon’s Grande Armée") +
-  theme_void(base_family = "sans", base_size = 30) +
-  theme(legend.position = "bottom")
+.pull-left[
+```{r}
+semi_join(tidy_txhouse, tx_pop_city) |>
+  filter(2010 <= year & year <= 2012) |>
+  group_by(city) |> 
+  summarize(mean_price = mean(price)) |> #<<
+  filter(mean_price == max(mean_price)) #<<
 ```
+
+Looks good!
+]
+
+--
+
+.pull-right[
+```{r, highlight.output = 2}
+semi_join(tidy_txhouse, tx_pop_city) |>
+  filter(2010 <= year & year <= 2012) |>
+  group_by(city) |> 
+  mutate(mean_price = mean(price)) |> #<<
+  filter(mean_price == max(mean_price)) |>  #<<
+  head(5)
+```
+
+What went wrong?
+]
 
 ---
 
-# "Probably the best statistical graphic ever"
+# Reminder: dplyr::ungroup
 
-```{r echo=FALSE, out.width='85%'}
-knitr::include_graphics("img/05/minard.png")
+```{r echo=FALSE, out.width='65%'}
+knitr::include_graphics("img/02/group_by_ungroup.png")
 ```
 
-
-???
-
-Source: [Wikimedia Commons](https://upload.wikimedia.org/wikipedia/commons/2/29/Minard.png)
+Groups are persistent (sort of), `ungroup` removes them
 
 ---
 
+# Groups affect filter operations!
+
+.pull-left[
+One way to get around this is to use `ungroup()` or `group_by()` with no arguments
+
+Now we get Austin and only Austin
+
+But we still get multiple rows, when we only need/want one
+]
+
+.pull-left[
+```{r, highlight.output = 2}
+semi_join(tidy_txhouse, tx_pop_city) |>
+  filter(2010 <= year & year <= 2012) |>
+  group_by(city) |> 
+  mutate(mean_price = mean(price)) |> 
+  ungroup() |> #<<
+  filter(mean_price == max(mean_price)) |> 
+  head(5)
+```
+]
+
+
+---
 class: inverse, center, middle
-name: grammar-of-graphics
+name: working-with-strings
 
-# Data, aesthetics,<br>& the grammar of graphics
+# Working with strings in R
 
 ---
 
-# Mapping data to aesthetics
+# Strings are nothing new
 
-.pull-left.center[
-
-<figure>
-  <img src="img/05/gg-book.jpg" alt="ZZZ" title="ZZZ" width="55%">
-</figure>
-
+.pull-left[
+```{r highlight.output = 3}
+nycflights13::flights |> 
+  select(carrier, tailnum, origin, dest)
+```
 ]
 
 .pull-right[
+```{r highlight.output = 3, include=FALSE}
+read_csv("data/our-companies.csv") |> 
+  select(name)
+```
 
-### Data
-
-A column in a dataset
-
-### Aesthetics
-
-Visual properties of a graph
-
-Position, shape, color, etc.
+```{r highlight.output = 3}
+tx_pop_city |> 
+  select(city)
+```
 
 ]
 
 ---
 
-# Mapping data to aesthetics
+# Strings in R
 
-<table>
-  <tr>
-    <th class="cell-left">Data</th>
-    <th class="cell-left">Aesthetic</th>
-    <th class="cell-left">Graphic/Geometry</th>
-  </tr>
-  <tr>
-    <td class="cell-left">Longitude</td>
-    <td class="cell-left">Position (x-axis)&emsp;</td>
-    <td class="cell-left">Point</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Latitude</td>
-    <td class="cell-left">Position (y-axis)</td>
-    <td class="cell-left">Point</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Army size</td>
-    <td class="cell-left">Size</td>
-    <td class="cell-left">Path</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Army direction&emsp;</td>
-    <td class="cell-left">Color</td>
-    <td class="cell-left">Path</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Date</td>
-    <td class="cell-left">Position (x-axis)</td>
-    <td class="cell-left">Line + text</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Temperature</td>
-    <td class="cell-left">Position (y-axis)</td>
-    <td class="cell-left">Line + text</td>
-  </tr>
-</table>
+Strings are also referred to as "characters" (abbreviated `chr`)
+
+Strings can be stored in many ways:
+- Vectors
+- **Data frame columns**
+- Elements in a list
+
+So far we have used them as we would any other data
+
+--
+
+**But sometimes we'll want to filter on, modify, or analyze strings**
 
 ---
 
-# Mapping data to aesthetics using ggplot
+# The stringr package
 
-<table>
-  <tr>
-    <th class="cell-left">Data</th>
-    <th class="cell-left"><code class="remark-inline-code">aes()</code></th>
-    <th class="cell-left"><code class="remark-inline-code">geom</code></th>
-  </tr>
-  <tr>
-    <td class="cell-left">Longitude</td>
-    <td class="cell-left"><code class="remark-inline-code">x</code></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">Latitude</td>
-    <td class="cell-left"><code class="remark-inline-code">y</code></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">Army size</td>
-    <td class="cell-left"><code class="remark-inline-code">size</code></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_path()</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">Army direction&emsp;</td>
-    <td class="cell-left"><code class="remark-inline-code">color</code>&emsp;</td>
-    <td class="cell-left"><code class="remark-inline-code">geom_path()</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">Date</td>
-    <td class="cell-left"><code class="remark-inline-code">x</code></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_line() + geom_text()</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">Temperature</td>
-    <td class="cell-left"><code class="remark-inline-code">y</code></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_line() + geom_text()</code></td>
-  </tr>
-</table>
+`stringr` is loaded as part of the core tidyverse
+
+All `stringr` functions have intuitive names that start with `str_`
+
+We will cover a bunch of handy functions today:
+1. `str_length`
+2. `str_trim`
+3. `str_c` and `str_glue`
+4. `str_detect`
+5. `str_count`
+6. `str_replace`
+
+See `vignette("stringr")` for more
 
 ---
 
-# Barebones `ggplot2::ggplot()` template
+# We'll use data from The Office
 
-```{r show-ggplot-template, echo=FALSE, tidy=FALSE}
-decorate('
-library(tidyverse) # tidyverse loads the package ggplot2
+The `schrute` package contains transcripts of all episodes of [The Office](https://www.imdb.com/title/tt0386676/) (US)
 
-ggplot(data = DATA,
-       mapping = aes(AESTHETIC MAPPINGS)) +
-  GEOM_FUNCTION() 
-', eval = FALSE) %>% 
-  flair("DATA", background = "#CBB5FF", before = "<b>", after = "</b>") %>% 
-  flair("GEOM_FUNCTION", background = "#FFDFD1", before = "<b>", after = "</b>") %>% 
-  flair("AESTHETIC MAPPINGS", background = "#FFD0CF", before = "<b>", after = "</b>")%>% 
-  knit_print.with_flair() # temporary bug fix
+```{r}
+library(schrute)
+theoffice # this is an object from the schrute package
+```
+
+
+---
+
+# 1) stringr::str_length
+
+--
+
+`str_length` tells you the number of characters in a string
+
+--
+
+```{r}
+str_length("supercalifragilisticexpialidocious")
+```
+
+--
+```{r}
+theoffice |> 
+  distinct(character) |> 
+  slice_head(n = 5) |> 
+  mutate(name_length = str_length(character)) #<<
 ```
 
 ---
 
-# Mapping from `troops` to aesthetics
+# 2) stringr::str_trim
 
-```{r minard-troops, echo=FALSE, warning=FALSE}
-# https://github.com/vincentarelbundock/Rdatasets/tree/master/csv/HistData
-troops <- read_csv("data/Minard.troops.csv") %>% 
-  select(longitude = long, latitude = lat, direction, survivors)
-```
+--
 
-```{r head-troops, echo=FALSE}
-troops %>% 
-  slice(1:2) %>% 
-  mutate_all(as.character) %>% 
-  bind_rows(tibble(longitude = "…", latitude = "…", direction = "…", survivors = "…")) %>% 
-  knitr::kable(format = "html")
+`str_trim` removes leading/trailing whitespace
+
+--
+
+```{r}
+str_trim("I went to Cornell, you ever heard of it?            ")
 ```
 
 --
 
-```{r ggplot-template-example1, echo=FALSE}
-decorate('
-ggplot(data = troops,
-       mapping = aes(x = longitude,
-                     y = latitude,
-                     color = direction,
-                     size = survivors)) +
-  geom_path()
-', eval = FALSE) %>%
-  flair("troops", background = "#CBB5FF", before = "<b>", after = "</b>") %>% 
-  flair("geom_path", background = "#FFDFD1", before = "<b>", after = "</b>") %>% 
-  flair_rx("x = longitude|y = latitude|color = direction|size = survivors", 
-           background = "#FFD0CF", before = "<b>", after = "</b>") %>% 
-  knit_print.with_flair() # temporary bug fix
+```{r}
+str_trim("            I went to Cornell, you ever heard of it?  ")
+```
+
+
+---
+
+# 3) stringr::str_c
+
+--
+
+We have seen `c()` combine arguments into a vector or list
+
+Similarly, `str_c()` combines arguments into a character vector:
+```{r}
+str_c("a", "b", "c", "1", "2", "3")
+```
+
+Here, it combined three numbers into a single number
+
+But we can also use it within data frames to combine strings at scale
+
+---
+
+# 3) stringr::str_c
+
+Here's an example of multiple columns in a data frame being combined into one:
+
+```{r}
+theoffice |> slice_head(n = 1) |> 
+  select(character, text)
+```
+
+```{r, eval=FALSE}
+theoffice |> slice_head(n = 1) |> 
+    transmute(line = str_c(character, " said: ", text)) # mutate and keep only line #<<
+```
+
+--
+
+```{r, echo=FALSE}
+theoffice |> slice_head(n = 1) |> 
+    transmute(line = str_c(character, " said: ", text)) # mutate and keep only line #<<
 ```
 
 ---
 
-# Probably not the best statistical graphic ever
+# 3) stringr::str_c
 
-But it's a solid start!
+`str_c()` will automatically recycle fixed arguments like **" said: "** that are shorter than `character` and `text`:
 
-```{r show-basic-minard, echo=FALSE, fig.width=16, fig.height=8, out.width="85%"}
-ggplot(data = troops,
-       mapping = aes(x = longitude,
-                     y = latitude,
-                     color = direction,
-                     size = survivors)) +
-  geom_path(lineend = "round", linejoin = "mitre") + 
-  scale_size_continuous(range = c(1, 20),
-                        labels = scales::comma) +
-  theme_gray(base_size = 20) +
-  theme(legend.position = "bottom")
+```{r}
+theoffice |> slice_head(n = 3) |> 
+    transmute(line = str_c(character, " said: ", text))
 ```
+
+--
+
+`str_c()` and `str_glue()` work well with `mutate()` and `transmute()` because their output is the same length as their inputs
 
 ---
 
-# What did you think of the Hans Rosling video?
+# 3) stringr::str_glue
 
-```{r echo=FALSE, out.width='75%'}
-knitr::include_graphics("img/05/gapminder-screenshot.png")
+`str_glue()` provides similar functionality, but different syntax:
+
+```{r}
+theoffice |> slice_head(n = 3) |> 
+    transmute(line = str_glue("{character} said: {text}")) # note the different syntax #<<
 ```
 
-???
+Items inside `{}` are evaluated as if they are outside the quotes
 
-Source: [Gapminder](https://www.gapminder.org/tools/#$chart-type=bubbles)
+This can be handy when combining many fixed and variable strings
 
 ---
-
-# Mapping from health and wealth to aesthetics
-
-.pull-left[
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/05/gapminder-screenshot.png")
-```
-]
-
-.pull-right[
-<table>
-  <tr>
-    <th class="cell-left">Data</th>
-    <th class="cell-left"><code class="remark-inline-code">aes()</code></th>
-    <th class="cell-left"><code class="remark-inline-code">geom</code></th>
-  </tr>
-  <tr>
-    <td class="cell-left">Wealth</td>
-    <td class="cell-left">?</td>
-    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">Health</td>
-    <td class="cell-left">?</td>
-    <td class="cell-left">?</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Continent</td>
-    <td class="cell-left"><code class="remark-inline-code">color</code></td>
-    <td class="cell-left">?</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Population</td>
-    <td class="cell-left">?</td>
-    <td class="cell-left">?</td>
-  </tr>
-</table>
-]
-
----
-
-# Mapping from health and wealth to aesthetics
-
-.pull-left[
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/05/gapminder-screenshot.png")
-```
-]
-
-.pull-right[
-<table>
-  <tr>
-    <th class="cell-left">Data</th>
-    <th class="cell-left"><code class="remark-inline-code">aes()</code></th>
-    <th class="cell-left"><code class="remark-inline-code">geom</code></th>
-  </tr>
-  <tr>
-    <td class="cell-left">Wealth</td>
-    <td class="cell-left"><code class="remark-inline-code">x</code></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">Health</td>
-    <td class="cell-left"><code class="remark-inline-code">y</code></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">Continent</td>
-    <td class="cell-left"><code class="remark-inline-code">color</code></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">Population</td>
-    <td class="cell-left"><code class="remark-inline-code">size</code>&emsp;</td>
-    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
-  </tr>
-</table>
-]
-
----
-
-# Mapping from `gapminder` to aesthetics
-```{r gapminder-data, echo=FALSE, warning=FALSE}
-gapminder_2007 <- gapminder %>% 
-  filter(year == 2007) %>% 
-  select(country, continent, gdpPercap, lifeExp, pop)
-```
-
-```{r head-gapminder-mask, echo=FALSE}
-gapminder_2007 %>% 
-  slice(1:2) %>% 
-  mutate_all(as.character) %>% 
-  bind_rows(tibble(country = "…", continent = "…", gdpPercap = "…", lifeExp = "…", pop = "…")) %>% 
-  knitr::kable(format = "html", align = "ccccc")
-```
-
-```{r gapminder-example-mask, echo=FALSE}
-decorate('
-ggplot(data = gapminder,
-       mapping = aes(x = gdpPercap,
-                     y = lifeExp,
-                     color = continent,
-                     size = pop)) +
-  geom_point() +
-  scale_x_log10()
-', eval = FALSE) %>%
-  flair("gapminder", background = "#CBB5FF", before = "<b>", after = "</b>") %>% 
-  flair("geom_point", background = "#FFDFD1", before = "<b>", after = "</b>") %>% 
-  flair_rx("x = gdpPercap|y = lifeExp|color = continent|size = pop", 
-           background = "#FFD0CF", before = "<b>", after = "</b>") %>% 
-  mask("gdpPercap") %>% 
-  mask("lifeExp") %>% 
-  mask("continent") %>% 
-  mask("pop") %>% 
-  mask("point") %>% 
-  knit_print.with_flair() # temporary bug fix
-```
-
----
-
-# Mapping from `gapminder` to aesthetics
-
-```{r head-gapminder, echo=FALSE}
-gapminder_2007 %>% 
-  slice(1:2) %>% 
-  mutate_all(as.character) %>% 
-  bind_rows(tibble(country = "…", continent = "…", gdpPercap = "…", lifeExp = "…", pop = "…")) %>% 
-  knitr::kable(format = "html", align = "ccccc")
-```
-
-```{r gapminder-example, echo=FALSE}
-decorate('
-ggplot(data = gapminder,
-       mapping = aes(x = gdpPercap,
-                     y = lifeExp,
-                     color = continent,
-                     size = pop)) +
-  geom_point() +
-  scale_x_log10()
-', eval = FALSE) %>%
-  flair("gapminder", background = "#CBB5FF", before = "<b>", after = "</b>") %>% 
-  flair("geom_point", background = "#FFDFD1", before = "<b>", after = "</b>") %>% 
-  flair_rx("x = gdpPercap|y = lifeExp|color = continent|size = pop", 
-           background = "#FFD0CF", before = "<b>", after = "</b>") %>% 
-  knit_print.with_flair() # temporary bug fix
-```
-
----
-
-# Health and wealth
-
-```{r show-basic-gapminder, echo=FALSE, fig.width=12, fig.height=5.5, out.width="100%"}
-ggplot(data = gapminder_2007,
-       mapping = aes(x = gdpPercap,
-                     y = lifeExp,
-                     color = continent,
-                     size = pop)) +
-  geom_point() +
-  scale_x_log10() +
-  scale_size_continuous(range = c(1, 15),
-                        labels = scales::comma) +
-  theme_gray(base_size = 20)
-```
-
----
-
 class: inverse, center, middle
-name: grammatical-layers
+name: regex
 
-# Grammatical layers
+# Regular expressions
 
 ---
 
-# Grammar components as layers
+# Regular expressions
+
+...
+
+<!-- https://r4ds.hadley.nz/regexps.html#sec-reg-basics -->
+
+---
+
+# 4) stringr::str_detect
+
+--
+
+`str_detect` can be used to match patterns
+
+--
 
 .pull-left[
-So far we know about data, aesthetics, and geometries
-
-Think of these components as **layers**
-
-Add them to foundational `ggplot()` with `+`
-]
-
-.pull-right[
-
-&nbsp;
-
-![](img/05/ggplot-layers-short@4x.png)
-]
-
-???
-
-Layer analogy borrowed from [Thomas Lin Pedersen](https://www.data-imaginist.com/) and his ["Drawing Anything with ggplot2" workshop](https://github.com/thomasp85/ggplot2_workshop).
-
----
-
-# Possible aesthetics
-
-.pull-left-3.center[
-
-`color` (discrete)
-
-```{r aes-color-discrete, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
-eg <- tribble(
-  ~x, ~y, ~size, ~x1,
-  "A", 1, 5, 1,
-  "B", 1, 10, 2,
-  "C", 1, 15, 3
-)
-
-# Color, discrete
-ggplot(eg, aes(x = x, y = y, color = x)) +
-  geom_point(size = 30) +
-  guides(color = "none") +
-  theme(axis.text.y = element_blank(),
-        axis.ticks = element_blank())
-```
-
-`color` (continuous)
-
-```{r aes-color-continuous, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
-# Color, continuous
-ggplot(eg, aes(x = x1, y = y, color = x1)) +
-  geom_point(size = 30) +
-  guides(color = "none") +
-  coord_cartesian(xlim = c(0.5, 3.5)) +
-  theme(axis.text.y = element_blank(),
-        axis.ticks = element_blank())
-```
-]
-
-.pull-middle-3.center[
-
-`size`
-
-```{r aes-size, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
-# Size
-ggplot(eg, aes(x = x, y = y, size = x)) +
-  geom_point() +
-  scale_size_discrete(range = c(2, 30)) +
-  guides(size = "none") +
-  theme(axis.text.y = element_blank(),
-        axis.ticks = element_blank())
-```
-
-`fill`
-
-```{r aes-fill, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
-# Fill
-ggplot(eg, aes(x = x, y = y, fill = x)) +
-  geom_point(size = 30, pch = 21, stroke = 5) +
-  guides(fill = "none") +
-  theme(axis.text.y = element_blank(),
-        axis.ticks = element_blank())
-```
-]
-
-.pull-right-3.center[
-
-`shape`
-
-```{r aes-shape, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
-# Shape
-ggplot(eg, aes(x = x, y = y, shape = x)) +
-  geom_point(size = 30) +
-  guides(shape = "none") +
-  theme(axis.text.y = element_blank(),
-        axis.ticks = element_blank())
-```
-
-`alpha` (opacity)
-
-```{r aes-alpha, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
-# Alpha
-ggplot(eg, aes(x = x, y = y, alpha = x)) +
-  geom_point(size = 30) +
-  guides(alpha = "none") +
-  theme(axis.text.y = element_blank(),
-        axis.ticks = element_blank())
-```
-]
-
----
-
-# Possible geoms
-
-<table>
-  <tr>
-    <th class="cell-left"></th>
-    <th class="cell-left">Example geom</th>
-    <th class="cell-left">What it makes</th>
-  </tr>
-  <tr>
-    <td class="cell-left"><img src="img/05/geom_bar.png"></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_col()</code></td>
-    <td class="cell-left">Bar charts</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><img src="img/05/geom_text.png"></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_text()</code></td>
-    <td class="cell-left">Text</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><img src="img/05/geom_point.png"></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
-    <td class="cell-left">Points</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><img src="img/05/geom_boxplot.png"></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_boxplot()</code>&emsp;</td>
-    <td class="cell-left">Boxplots</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><img src="img/05/geom_sf.png"></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_sf()</code></td>
-    <td class="cell-left">Maps</td>
-  </tr>
-</table>
-
----
-
-# Possible geoms
-
-There are dozens of possible geoms
-
-Over the next several weeks we will cover a number of them
-
-See [the **ggplot2** documentation](https://ggplot2.tidyverse.org/reference/index.html#section-layer-geoms) for examples of all the different geom layers
-
----
-
-# Additional layers
-
-.pull-left[
-There are many other grammatical layers we can use to describe graphs!
-
-We can sequentially add layers to the foundational `ggplot()` plot to create complex figures
-
-I will give you a quick preview, don't worry about all the details for now
-]
-
-.pull-right[
-![](img/05/ggplot-layers@4x.png)
-]
-
----
-
-# Scales
-
-Scales change the properties of the variable mapping
-
-<table>
-  <tr>
-    <th class="cell-left">Example layer</th>
-    <th class="cell-left">What it does</th>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">scale_x_continuous()</code></td>
-    <td class="cell-left">Make the x-axis continuous</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">scale_x_continuous(breaks = 1:5)&ensp;</code></td>
-    <td class="cell-left">Manually specify axis ticks</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">scale_x_log10()</code></td>
-    <td class="cell-left">Log the x-axis</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">scale_color_gradient()</code></td>
-    <td class="cell-left">Use a gradient</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">scale_fill_viridis_d()</code></td>
-    <td class="cell-left">Fill with discrete viridis colors</td>
-  </tr>
-</table>
-
----
-
-# Scales
-
-.pull-left[
-
-.center[`scale_x_log10()`]
-
-```{r scale-example-1, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp, color = continent, size = pop)) +
-  geom_point() +
-  scale_x_log10()
+```{r}
+first_4_characters <- theoffice |> 
+  distinct(character) |> 
+  slice_head(n = 4) |> 
+  pull(character)
+first_4_characters
 ```
 ]
 
 --
 
 .pull-right[
+```{r}
+str_detect(first_4_characters, "Dwight")
 
-.center[`scale_color_viridis_d()`]
-
-```{r scale-example-2, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp, color = continent, size = pop)) +
-  geom_point() +
-  scale_x_log10() +
-  scale_color_viridis_d()
+str_detect(first_4_characters, "a")
 ```
 ]
 
 ---
 
-# Facets
+# 4) stringr::str_detect
 
-Facets show subplots for different subsets of data
-
-<table>
-  <tr>
-    <th class="cell-left">Example layer</th>
-    <th class="cell-left">What it does</th>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">facet_wrap(vars(continent))</code></td>
-    <td class="cell-left">Plot for each continent</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">facet_wrap(vars(continent, year))</code>&emsp;</td>
-    <td class="cell-left">Plot for each continent/year</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">facet_wrap(..., ncol = 1)</code></td>
-    <td class="cell-left">Put all facets in one column</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">facet_wrap(..., nrow = 1)</code></td>
-    <td class="cell-left">Put all facets in one row</td>
-  </tr>
-</table>
-
----
-
-# Facets
-
-.pull-left[
-
-.center.small[`facet_wrap(vars(continent))`]
-
-```{r facet-example-1, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp, color = continent, size = pop)) +
-  geom_point() +
-  scale_x_log10() +
-  facet_wrap(vars(continent))
-```
-]
+`str_detect` is a powerful way to `filter` a data frame
 
 --
 
-.pull-right[
-
-.center.small[`facet_wrap(vars(continent, year))`]
-
-```{r facet-example-2, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(filter(gapminder, year %in% c(2002, 2007)), 
-       aes(x = gdpPercap, y = lifeExp, color = continent, size = pop)) +
-  geom_point() +
-  scale_x_log10() +
-  facet_wrap(vars(year, continent), nrow = 2)
+```{r}
+theoffice |> select(season, episode, character, text) |> 
+  filter(str_detect(text,    # where to match a pattern #<<
+                    "sale")) # what pattern to match #<<
 ```
-]
 
 ---
 
-# Coordinates
+# 4) stringr::str_detect
 
-Change the coordinate system
+`str_detect` is case-sensitive by default
 
-<table>
-  <tr>
-    <th class="cell-left">Example layer</th>
-    <th class="cell-left">What it does</th>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">coord_cartesian(ylim = c(1, 10))</code>&emsp;</td>
-    <td class="cell-left">Zoom in where y is 1–10</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">coord_flip()</code></td>
-    <td class="cell-left">Switch x and y</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">coord_polar()</code></td>
-    <td class="cell-left">Use polar coordinates</td>
-  </tr>
-</table>
+```{r}
+theoffice |> select(season, episode, character, text) |> 
+  filter(str_detect(text, 
+                    "Sale")) # sale and Sale produce different output #<<
+```
 
 ---
 
-# Coordinates
+# 4) stringr::str_detect
 
-.pull-left[
+You could use multiple calls to `str_detect`, or pass multiple arguments:
 
-.center.small[`coord_cartesian(ylim = c(70, 80), xlim = c(10000, 30000))`]
-
-```{r coord-example-1, echo=FALSE, fig.dim=c(4.8, 3.25), out.width="100%"}
-ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp, color = continent, size = pop)) +
-  geom_point() +
-  scale_x_log10() +
-  coord_cartesian(ylim = c(70, 80), xlim = c(10000, 30000))
+```{r highlight.output = c(6, 10)}
+theoffice |> select(season, episode, character, text) |> 
+  filter(str_detect(text, 
+                    "sale|Sale")) # look for sale OR Sale #<<
 ```
-]
+
+---
+
+# 4) stringr::str_detect
+
+You could consolidate this -- regex parentheses are like in math
+
+```{r}
+theoffice |> select(season, episode, character, text) |> 
+  filter(str_detect(text, 
+                    "(s|S)ale")) # look for sale OR Sale #<<
+```
+
+---
+
+# 4) stringr::str_detect
+
+You could `regex` to ignore all cases and control other pattern matching details
+
+```{r}
+theoffice |> select(season, episode, character, text) |> 
+  filter(str_detect(text, 
+                    regex("Sale", ignore_case = TRUE))) # ignore case #<<
+```
+
+
+---
+
+# 4) stringr::str_detect
+
+When I say ignore all cases, I mean IGNORE ALL CASES!
+
+```{r}
+theoffice |> select(season, episode, character, text) |> 
+  filter(str_detect(text, 
+                    regex("sale", ignore_case = TRUE))) |>
+  filter(!str_detect(text, "(s|S)ale")) # find non-standard form(s) #<<
+```
+
+---
+
+# 4) stringr::str_detect
+
+`str_detect` can be combined with familiar functions to summarize data
 
 --
 
-.pull-right[
-
-.center.small[`coord_flip()`]
-
-```{r coord-example-2, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp, color = continent, size = pop)) +
-  geom_point() +
-  scale_x_log10() + 
-  coord_flip()
-```
-]
-
----
-
-# Labels
-
-Add labels to the plot with a single `labs()` layer
-
-<table>
-  <tr>
-    <th class="cell-left">Example layer</th>
-    <th class="cell-left">What it does</th>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">labs(title = "Neat title")</code></td>
-    <td class="cell-left">Title</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">labs(caption = "Something")</td>
-    <td class="cell-left">Caption</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">labs(y = "Something")</td>
-    <td class="cell-left">y-axis</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">labs(size = "Population")</code></td>
-    <td class="cell-left">Title of size legend</td>
-  </tr>
-</table>
-
----
-
-# Labels
-
-.left-code[
-```{r labels-example, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(gapminder_2007, 
-       aes(x = gdpPercap, y = lifeExp, 
-           color = continent, size = pop)) +
-  geom_point() +
-  scale_x_log10() +
-  labs(title = "Health and wealth go together",
-       subtitle = "Data from 2007",
-       x = "Wealth (GDP per capita)",
-       y = "Health (life expectancy)",
-       color = "Continent",
-       size = "Population",
-       caption = "Source: The Gapminder Project")
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("labels-example", "png")`)
-]
-
----
-
-# Theme
-
-`theme()` can be used to change the appearance of anything in a plot
-
-Lots of themes built in and available from other packages
-
-<table>
-  <tr>
-    <th class="cell-left">Example layer</th>
-    <th class="cell-left">What it does</th>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">theme_grey()</code></td>
-    <td class="cell-left">Default grey background</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">theme_bw()</td>
-    <td class="cell-left">Black and white</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">theme_dark()</td>
-    <td class="cell-left">Dark</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><code class="remark-inline-code">theme_minimal()</code></td>
-    <td class="cell-left">Minimal</td>
-  </tr>
-</table>
-
----
-
-# Theme
-
-.pull-left[
-
-.center.small[`theme_dark()`]
-
-```{r theme-example-1, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp, color = continent, size = pop)) +
-  geom_point() +
-  scale_x_log10() +
-  theme_dark()
-```
-]
-
---
-
-.pull-right[
-
-.center.small[`theme_minimal()`]
-
-```{r theme-example-2, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp, color = continent, size = pop)) +
-  geom_point() +
-  scale_x_log10() + 
-  theme_minimal()
-```
-]
-
----
-
-# Theme
-
-There are collections of pre-built themes online, like [the **ggthemes** package](https://jrnold.github.io/ggthemes/)
-
-.center[
-<figure>
-  <img src="img/05/ggthemes.png" alt="ggthemes" title="ggthemes" width="55%">
-</figure>
-]
-
----
-
-# Theme
-
-Organizations often make their own custom themes, like [the BBC](https://bbc.github.io/rcookbook/)
-
-.center[
-<figure>
-  <img src="img/05/bbc-cookbook.png" alt="ggthemes" title="ggthemes" width="80%">
-</figure>
-]
-
----
-
-# Theme
-
-Make individual theme adjustments with `theme()`
-
-```{r example-theme-options, eval=FALSE, tidy=FALSE}
-theme_bw() + 
-theme(legend.position = "bottom",
-      plot.title = element_text(face = "bold"),
-      panel.grid = element_blank(),
-      axis.title.y = element_text(face = "italic"))
+```{r}
+theoffice |> 
+  filter(str_detect(text, regex("Sale", ignore_case = TRUE))) |> 
+  count(character, sort = TRUE) #<<
 ```
 
 ---
 
-# So many possibilities!
+# 4) stringr::str_detect
 
-.pull-left[
-![](img/05/ggplot-layers@4x.png)
-]
+`str_detect` can be combined with familiar functions to summarize data
 
-.pull-right[
-These were just a few examples
-
-See [the **ggplot2** documentation](https://ggplot2.tidyverse.org/reference/index.html) for examples of everything you can do
-]
-
----
-
-# Putting it all together
-
-We can build a plot sequentially to see how each grammatical layer changes its appearance
-
-For illustrative purposes, let's use data on cars from the data frame `ggplot2::mpg`
-
-```{r head-mpg, echo=FALSE}
-mpg %>% 
-  filter(manufacturer=="volkswagen") %>% 
-  slice(1:2) %>% 
-  select(manufacturer, model, year, trans, displ, hwy, drv) %>% 
-  mutate_all(as.character) %>% 
-  bind_rows(tibble(manufacturer = "…", model = "…", year = "…", trans = "…", displ = "…", hwy = "…", drv = "…")) %>% 
-  knitr::kable(format = "html")
+```{r}
+theoffice |> 
+  filter(str_detect(text, 
+                    regex("that's what she said", ignore_case = TRUE))) |> #<<
+  count(character, sort = TRUE)
 ```
 
 ---
 
-.left-code[
-### Start with data and aesthetics
+# 4) stringr::str_detect
 
-```{r mpg-layers-1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,                              #<<
-       aes(x = displ, # engine displacement     #<<
-           y = hwy, # highway mpg               #<<
-           color = drv))  # type of drive train #<<
-```
-]
+`str_detect` with regular expressions can be very powerful
 
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-1", "png")`)
-]
-
----
-
-.left-code[
-### Add a point geom
-
-```{r mpg-layers-2, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-2", "png")`)
-]
-
----
-
-.left-code[
-### Add a smooth geom
-
-```{r mpg-layers-3, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth() #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-3", "png")`)
-]
-
----
-
-.left-code[
-### Make it straight
-
-```{r mpg-layers-4, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-4", "png")`)
-]
-
----
-
-.left-code[
-### Use a viridis color scale
-
-```{r mpg-layers-5, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-5", "png")`)
-]
-
----
-
-.left-code[
-### Facet by drive train type
-
-```{r mpg-layers-6, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-6", "png")`)
-]
-
----
-
-.left-code[
-### Add labels
-
-```{r mpg-layers-7, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) +
-  labs(x = "Displacement", y = "Highway MPG",  #<<
-       color = "Drive",   #<<
-       title = "Larger engines have lower fuel economy",  #<<
-       subtitle = "Displacement measures engine size")  #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-7", "png")`)
-]
-
----
-
-.left-code[
-### Add a theme
-
-```{r mpg-layers-8, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) +
-  labs(x = "Displacement", y = "Highway MPG",
-       color = "Drive",
-       title = "Larger engines get lower mileage",
-       subtitle = "Displacement measures engine size") +
-  theme_bw() #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-8", "png")`)
-]
-
----
-
-.left-code[
-### Modify the theme
-
-```{r mpg-layers-9, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg, 
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) +
-  labs(x = "Displacement", y = "Highway MPG",
-       color = "Drive",
-       title = "Larger engines get lower mileage",
-       subtitle = "Displacement measures engine size") +
-  theme_bw() +
-  theme(legend.position = "bottom", #<<
-        plot.title = element_text(face = "bold")) #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-9", "png")`)
-]
-
----
-
-.left-code[
-### Finished!
-
-```{r mpg-layers-finished, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg, 
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") + 
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) +
-  labs(x = "Displacement", y = "Highway MPG",
-       color = "Drive",
-       title = "Larger engines get lower mileage",
-       subtitle = "Displacement measures engine size") +
-  theme_bw() +
-  theme(legend.position = "bottom",
-        plot.title = element_text(face = "bold"))
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-finished", "png")`)
-]
-
----
-
-# A true grammar
-
-.pull-left[
-You have probably made graphics in Excel by searching through menus for a specific chart type, and then reshaping your data to work with it
-
-With the grammar of graphics, we don't talk about specific chart **types**
-]
-
-.pull-right[
-.center[
-<figure>
-  <img src="img/05/excel-chart-types.png" alt="Excel chart types" title="Excel chart types" width="85%">
-</figure>
-]
-]
-
----
-
-# A true grammar
-
-.pull-left[
-With the grammar of graphics, we talk about specific chart **elements**
-
-- .small[Map a column to the x-axis, fill by a variable, `geom_col()` to get stacked bars]
-
-- .small[Geoms can be interchangable (e.g., `geom_violin()` and `geom_boxplot()`)]
-
-This grammar is portable to other software like Tableau, which is [built on the grammar of graphics](https://www.tableau.com/about/blog/2015/4/getting-know-lee-wilkinson-tableaus-new-vp-statistics-38654)
-]
-
-.pull-right[
-![](img/05/ggplot-layers@4x.png)
-]
-
----
-
-# Describing graphs with the grammar
-
-.left-code[
-.box-2.small[Map wealth to the x-axis, health to the y-axis, add points, color by continent, size by population, scale the y-axis with a log, and facet by year]
-
-```{r describe-1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(data = filter(gapminder, year %in% c(2002, 2007)), 
-       mapping = aes(x = gdpPercap,
-                     y = lifeExp,
-                     color = continent,
-                     size = pop)) +
-  geom_point() +
-  scale_x_log10() + 
-  facet_wrap(vars(year), ncol = 1)
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("describe-1", "png")`)
-]
-
----
-
-# Describing graphs with the grammar
-
-.left-code[
-.box-2.small[Map health to the x-axis, add a histogram with bins for every 5 years, fill and facet by continent]
-
-```{r describe-2, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(data = gapminder_2007, 
-       mapping = aes(x = lifeExp,
-                     fill = continent)) +
-  geom_histogram(binwidth = 5, 
-                 color = "white") +
-  guides(fill = "none") +  # Turn off legend
-  facet_wrap(vars(continent))
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("describe-2", "png")`)
-]
-
----
-
-# Describing graphs with the grammar
-
-.left-code[
-.box-2.small[Map continent to the x-axis, health to the y-axis, add boxplots, fill by continent]
-
-```{r describe-3, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(data = gapminder, 
-       mapping = aes(x = continent,
-                     y = lifeExp,
-                     fill = continent)) +
-  geom_boxplot() +
-  guides(fill = "none")  # Turn off legend
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("describe-3", "png")`)
-]
-
----
-
-# Describing graphs with the grammar
-
-.left-code[
-.box-2.small[Map continent to the x-axis, health to the y-axis, add violin plots, fill by continent]
-
-```{r describe-4, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(data = gapminder, 
-       mapping = aes(x = continent,
-                     y = lifeExp,
-                     fill = continent)) +
-  geom_violin() + # we only had to change this! #<<
-  guides(fill = "none")  # Turn off legend
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("describe-4", "png")`)
-]
-
----
-
-class: inverse, center, middle
-name: tidy-data
-
-# Tidy data revisited
-
----
-
-# Tidy data revisited
-
-`ggplot()` is incredibly flexible
-
-For `ggplot()` to work its magic, your data frame needs to be **tidy**
-
-This requires a bit of upfront work, but it pays off
-
-Note that we never modified `mpg` or `gapminder` in the process of making a dozen different plots
-
----
-
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/05/tidydata_7.jpg")
+```{r highlight.output = c(5,6)}
+theoffice |> select(character, text) |> 
+  filter(str_detect(text, "assistant.*manager")) |> #<<
+  slice_head(n = 10)
 ```
 
 ---
 
-class: inverse, center, middle
-name: extra-dimensions
+# 5) stringr::str_count
 
-# Aesthetics in<br>extra dimensions
+`str_count()` can be used to count the number of matches in a string
 
----
-
-# Time
-
-.left-code[
-Use **gganimate** to map variables to a time aesthetic
-
-```{r gganimate-example, tidy=FALSE, eval=FALSE}
-ggplot(gapminder, aes(x = gdpPercap, y = lifeExp, 
-                      size = pop, color = country)) +
-  geom_point(alpha = 0.7) +
-  scale_size(range = c(2, 12)) +
-  scale_x_log10(labels = scales::dollar) +
-  guides(size = "none", color = "none") +
-  facet_wrap(~continent) +
-  # Special gganimate stuff
-  labs(title = 'Year: {frame_time}', 
-       x = 'GDP per capita', 
-       y = 'life expectancy') +
-  transition_time(year) +
-  ease_aes('linear')
+```{r}
+theoffice |> 
+  distinct(character) |> 
+  slice_head(n = 5) |> 
+  mutate(
+    name = str_to_lower(character), # one way to avoid case sensitivity
+    m_s = str_count(name, "m"), #<<
+    i_s = str_count(name, "i") #<<
+  )
 ```
-]
-
-.right-plot[
-![](img/05/gapminder.gif)
-]
 
 ---
 
-# Sound
+# 5) stringr::str_count with regex
 
-Combine audio and visual to highlight internal rhyming schemes in music
+Character classes, defined by `[]`, let you match a set of characters; `^` can be used to invert character class matches
 
-.small[<http://graphics.wsj.com/hamilton/>]
-
-.center[
-<figure>
-  <img src="img/05/hamilton.png" alt="Daveed Diggs in 'Washington On Your Side'" title="Daveed Diggs in 'Washington On Your Side'" width="65%">
-</figure>
-]
-
----
-
-# Sound
-
-.center[
-<figure>
-  <img src="img/05/hamilton-1.png" alt="Daveed Diggs in 'Washington On Your Side'" title="Daveed Diggs in 'Washington On Your Side'" width="75%">
-</figure>
-
-<figure>
-  <img src="img/05/hamilton-2.png" alt="Kendrick Lamar in 'good kid, m.A.A.d city'" title="Kendrick Lamar in 'good kid, m.A.A.d city'" width="75%">
-</figure>
-]
+```{r}
+theoffice |> 
+  distinct(character) |> 
+  slice_head(n = 5) |> 
+  mutate(
+    name = str_to_lower(character),
+    vowels = str_count(name, "[aeiou]"), # count matches of ANY of these characters #<<
+    consonants = str_count(name, "[^aeiou]") # count matches of everything EXCEPT these characters #<<
+  )
+```
 
 ---
 
-# Animation, time, and sound
+# 6) stringr::str_replace
 
-.center[
-<iframe width="800" height="450" src="https://www.youtube.com/embed/__Jgp18tCnE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-]
-
-???
-
-Erika Navarro for the Weather Channel: <https://www.pewtrusts.org/en/research-and-analysis/articles/2018/12/03/the-weather-channel-uses-animation-to-show-dangers-of-storm-surge>
+<!-- https://r4ds.hadley.nz/regexps.html#replace-values -->
 

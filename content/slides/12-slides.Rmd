@@ -1,5 +1,5 @@
 ---
-title: "Functions and iteration"
+title: "Text"
 author: "Todd Gerarden"
 output:
   xaringan::moon_reader:
@@ -37,14 +37,36 @@ opts_chunk$set(warning = FALSE, message = FALSE,
 
 ```{r packages-data, include=FALSE}
 library(tidyverse)
+library(tidytext)
+# install.packages("textdata") # needed for AFINN and NRC sentiment lexicons
 
-load("data/sp500.RData")
+# devtools::install_github("bradleyboehmke/harrypotter")
+library(harrypotter)
+set.seed(1234)
+
+options("digits" = 2, "width" = 90)
+
+hp <- tibble(book = c("Philosopher's Stone", "Chamber of Secrets", 
+                      "Prisoner of Azkaban", "Goblet of Fire", 
+                      "Order of the Phoenix", "Half-Blood Prince",
+                      "Deathly Hallows"),
+             raw_text = list(philosophers_stone, chamber_of_secrets, 
+                             prisoner_of_azkaban, goblet_of_fire, 
+                             order_of_the_phoenix, half_blood_prince,
+                             deathly_hallows)) %>% 
+  mutate(text_data = map(raw_text, ~{
+    tibble(text = .x) %>% 
+      mutate(chapter = 1:n())
+  })) %>% 
+  select(book, text_data) %>% 
+  unnest(text_data) %>% 
+  mutate(book = fct_inorder(book))
 ```
 
 
 class: center, middle
 
-# Functions and iteration
+# Text
 
 .class-info[
 
@@ -55,9 +77,9 @@ Cornell Dyson<br>
 Spring 2023
 
 Acknowledgements: 
-<!-- [Andrew Heiss](https://datavizm20.classes.andrewheiss.com) -->
-[Claus Wilke](https://wilkelab.org/SDS375/)
-<!-- [Grant McDermott](https://github.com/uo-ec607/lectures) -->
+[Andrew Heiss](https://datavizm20.classes.andrewheiss.com)
+<!-- [Claus Wilke](https://wilkelab.org/SDS375/),  -->
+<!-- [Grant McDermott](https://github.com/uo-ec607/lectures), -->
 <!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), -->
 <!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) -->
 
@@ -67,11 +89,14 @@ Acknowledgements:
 
 # Announcements
 
-Mini project 1 graded, will discuss at end of class
+I hope you had a nice spring break!
 
-Mini project 2 canceled
+Reminder: [Cornell still requires masks in classrooms as of now](https://covid.cornell.edu/prevention/face-coverings/)
 
-Final project details to come (due May 19 at 4:30pm)
+Mini project 1 grades will be posted soon
+- Peer-review survey forthcoming
+
+Mini project 2 details will be released in the next 0-1 weeks
 
 Questions before we get started?
 
@@ -80,13 +105,77 @@ Questions before we get started?
 
 # Plan for today
 
+[Course progress](#progress)
+
 [Prologue](#prologue)
 
-[Functions and iteration](#functions)
+[Text mining with R](#tidytext)
 
-[Example 12](#example)
+---
+class: inverse, center, middle
+name: progress
 
-[Mini project 1](#mini-project-1)
+# Course progress
+
+---
+
+# Course objectives reminder
+
+1. Develop basic proficiency in `R` programming
+2. Understand data structures and manipulation
+3. Describe effective techniques for data visualization and communication
+4. Construct effective data visualizations
+5. Utilize course concepts and tools for business applications
+
+---
+
+# Where we've been (weeks 1-4)
+
+1. **Develop basic proficiency in `R` programming**
+2. **Understand data structures and manipulation**
+3. Describe effective techniques for data visualization and communication
+4. Construct effective data visualizations
+5. Utilize course concepts and tools for business applications
+
+---
+
+# Where we've been (weeks 5-10)
+
+1. Develop basic proficiency in `R` programming
+2. Understand data structures and manipulation
+3. **Describe effective techniques for data visualization and communication**
+4. **Construct effective data visualizations**
+5. **Utilize course concepts and tools for business applications**
+
+---
+
+# Where we're going next (weeks 11+)
+
+1. Develop basic proficiency in `R` programming
+2. Understand data structures and manipulation
+3. Describe effective techniques for data visualization and communication
+4. Construct effective data visualizations
+5. Utilize course concepts and tools for business applications
+
+All of the above, plus special topics! Tentative plan:
+- Week 11: Text
+- Week 12: Functions and iteration
+- Week 13: Prediction
+- Week 14: Causal inference
+- Week 15: Wrap up
+
+---
+
+# Schedule overview
+
+#### Weeks 1-4: Programming Foundations
+
+#### Weeks 5-10: Data Visualization Foundations
+
+#### Weeks 11+: Special Topics (mix of programming and dataviz)
+
+See [aem2850.toddgerarden.com/schedule](https://aem2850.toddgerarden.com/schedule/) for details
+
 
 ---
 class: inverse, center, middle
@@ -96,593 +185,764 @@ name: prologue
 
 ---
 
-# Creative answers to Lab 10, Question 8
+# Text comes in many forms
 
-.pull-left[
-<figure>
-  <img src="img/12/prologue2.png" width="100%">
-</figure>
-]
+The `schrute` package contains transcripts of all episodes of [The Office](https://www.imdb.com/title/tt0386676/) (US)
 
---
-
-.pull-right[
-<figure>
-  <img src="img/12/prologue1.png" width="85%">
-</figure>
-"I went to San Diego this spring break"
-]
+```{r}
+library(schrute)
+theoffice # this is an object from the schrute package
+```
 
 ---
 
-# Creative answers to Lab 10, Question 8
+# Text can be analyzed in many ways
+
+&nbsp;
 
 .center[
 <figure>
-  <img src="img/12/prologue3.png" width="75%">
+  <img src="img/11/word-cloud.png" alt="Bad word cloud" title="Bad word cloud" width="85%">
 </figure>
 ]
 
 ---
-class: inverse, center, middle
-name: functions
 
-# Functions and iteration
+# Take word clouds, the pie chart of text
 
----
-
-# We often run similar code multiple times
-
-.left-code[
-```{r stock-plot-aapl, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-sp500_prices %>% 
-  filter(symbol == "AAPL") %>% 
-  ggplot(aes(x = date, y = adjusted)) +
-  geom_line() +
-  labs(x = NULL,
-       y = "Share price ($)",
-       title = "Symbol: AAPL") +
-  scale_x_date(date_breaks = "1 year",
-               date_labels = "%Y") +
-  scale_y_continuous(limits = c(0, NA)) +
-  theme_bw()
-```
-]
+**Why are word clouds bad?**
 
 --
 
-.right-plot[
-![](`r knitr::fig_chunk("stock-plot-aapl", "png")`)
-]
-
----
-
-# We often run similar code multiple times
-
-.left-code[
-```{r stock-plot-nvda, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-sp500_prices %>% 
-  filter(symbol == "NVDA") %>% #<<
-  ggplot(aes(x = date, y = adjusted)) +
-  geom_line() +
-  labs(x = NULL,
-       y = "Share price ($)",
-       title = "Symbol: NVDA") + #<<
-  scale_x_date(date_breaks = "1 year",
-               date_labels = "%Y") +
-  scale_y_continuous(limits = c(0, NA)) +
-  theme_bw()
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("stock-plot-nvda", "png")`)
-]
-
----
-
-# We often run similar code multiple times
-
-.left-code[
-```{r stock-plot-tsla, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-sp500_prices %>% 
-  filter(symbol == "TSLA") %>% #<<
-  ggplot(aes(x = date, y = adjusted)) +
-  geom_line() +
-  labs(x = NULL,
-       y = "Share price ($)",
-       title = "Symbol: TSLA") + #<<
-  scale_x_date(date_breaks = "1 year",
-               date_labels = "%Y") +
-  scale_y_continuous(limits = c(0, NA)) +
-  theme_bw()
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("stock-plot-tsla", "png")`)
-]
-
----
-
-# How can we avoid duplication and mistakes?
+- Poor grammar (of graphics)
+  - Usually the only aesthetic is size
+  - Color, position, etc. contain no content
+- Raw word frequency is not always informative
 
 --
 
-1. Avoid hard-coding specific values
-
-2. Define a function
-
-3. Automate calling the function
-
-4. Write a more general function
-
-5. Use these concepts in a tidy pipeline
+**Why are word clouds good?**
 
 --
 
-We will focus on steps 1-3 due to time constraints
+- Can visualize one-word descriptions
+- Can highlight a single dominant word or phrase
+- Can make before/after comparisons
 
 ---
 
-# Step 1: Avoid hard-coding specific values
-
-What is "hard-coded" here?
-
-.left-code[
-```{r stock-plot-aapl1a, eval=FALSE}
-sp500_prices %>% 
-  filter(symbol == "AAPL") %>% 
-  ggplot(aes(x = date, y = adjusted)) +
-  geom_line() +
-  labs(x = NULL,
-       y = "Share price ($)",
-       title = "Symbol: AAPL") +
-  scale_x_date(date_breaks = "1 year",
-               date_labels = "%Y") +
-  scale_y_continuous(limits = c(0, NA)) +
-  theme_bw()
-```
-]
-
----
-
-# Step 1: Avoid hard-coding specific values
-
-How can we avoid this hard-coding?
-
-.left-code[
-```{r stock-plot-aapl1b, eval=FALSE}
-sp500_prices %>% 
-  filter(symbol == "AAPL") %>% #<<
-  ggplot(aes(x = date, y = adjusted)) +
-  geom_line() +
-  labs(x = NULL,
-       y = "Share price ($)",
-       title = "Symbol: AAPL") + #<<
-  scale_x_date(date_breaks = "1 year",
-               date_labels = "%Y") +
-  scale_y_continuous(limits = c(0, NA)) +
-  theme_bw()
-```
-]
-
----
-
-# Step 1: Avoid hard-coding specific values
-
-.left-code[
-```{r stock-plot-aapl2, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-library(glue) # evaluate R code inside strings
-symbol_choice <- "AAPL" #<<
-
-sp500_prices %>% 
-  filter(symbol == symbol_choice) %>% #<<
-  ggplot(aes(x = date, y = adjusted)) +
-  geom_line() +
-  labs(x = NULL,
-       y = "Share price ($)",
-       title = glue("Symbol: {symbol_choice}")) + #<<
-  scale_x_date(date_breaks = "1 year",
-               date_labels = "%Y") +
-  scale_y_continuous(limits = c(0, NA)) +
-  theme_bw()
-```
-**glue()** allows us to put the contents of **symbol_choice** in the plot's title
-]
-
---
-
-.right-plot[
-![](`r knitr::fig_chunk("stock-plot-aapl2", "png")`)
-]
-
----
-
-# Step 1: Avoid hard-coding specific values
-
-.left-code[
-```{r stock-plot-nvda2, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-library(glue) # evaluate R code inside strings
-symbol_choice <- "NVDA" #<<
-
-sp500_prices %>% 
-  filter(symbol == symbol_choice) %>%
-  ggplot(aes(x = date, y = adjusted)) +
-  geom_line() +
-  labs(x = NULL,
-       y = "Share price ($)",
-       title = glue("Symbol: {symbol_choice}")) +
-  scale_x_date(date_breaks = "1 year",
-               date_labels = "%Y") +
-  scale_y_continuous(limits = c(0, NA)) +
-  theme_bw()
-```
-Now **symbol_choice** is the only thing that changes
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("stock-plot-nvda2", "png")`)
-]
-
----
-
-# Step 1: Avoid hard-coding specific values
-
-.left-code[
-```{r stock-plot-tsla2, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-library(glue) # evaluate R code inside strings
-symbol_choice <- "TSLA" #<<
-
-sp500_prices %>% 
-  filter(symbol == symbol_choice) %>%
-  ggplot(aes(x = date, y = adjusted)) +
-  geom_line() +
-  labs(x = NULL,
-       y = "Share price ($)",
-       title = glue("Symbol: {symbol_choice}")) +
-  scale_x_date(date_breaks = "1 year",
-               date_labels = "%Y") +
-  scale_y_continuous(limits = c(0, NA)) +
-  theme_bw()
-```
-Now **symbol_choice** is the only thing that changes
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("stock-plot-tsla2", "png")`)
-]
-
-
----
-
-# Step 2: Define a function
-
---
-
-.left-code[
-```{r eval = FALSE}
-make_plot <- function(symbol_choice) { #<<
-  sp500_prices %>% 
-    filter(symbol == symbol_choice) %>%
-    ggplot(aes(x = date, y = adjusted)) +
-    geom_line() +
-    labs(x = NULL,
-         y = "Share price ($)",
-         title = glue("Symbol: {symbol_choice}")) +
-    scale_x_date(date_breaks = "1 year",
-                 date_labels = "%Y") +
-    scale_y_continuous(limits = c(0, NA)) +
-    theme_bw()
-} #<<
-```
-]
-
-.pull-right[
-Three key steps:
-1. Pick a **name**
-2. List **arguments** inside `function()`
-3. Put code in the **body** of the function, delimited by `{...}`
-
-Easiest to write the body on a test case, *then* convert it into a function
-]
-
----
-
-# Step 2: Define a function
-
-.left-code[
-```{r stock-plot-aapl3, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-make_plot <- function(symbol_choice) {
-  sp500_prices %>% 
-    filter(symbol == symbol_choice) %>%
-    ggplot(aes(x = date, y = adjusted)) +
-    geom_line() +
-    labs(x = NULL,
-         y = "Share price ($)",
-         title = glue("Symbol: {symbol_choice}")) +
-    scale_x_date(date_breaks = "1 year",
-                 date_labels = "%Y") +
-    scale_y_continuous(limits = c(0, NA)) +
-    theme_bw()
-}
-
-make_plot("AAPL") #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("stock-plot-aapl3", "png")`)
-]
-
----
-
-# Step 2: Define a function
+# Some cases are okay
 
 .pull-left[
-```{r fig.dim=c(4, 3), out.width="100%"}
-make_plot("NVDA") #<<
+.center[
+<figure>
+  <img src="img/11/email-word-cloud.jpg" alt="What Happened? word cloud" title="What Happened? word cloud" width="100%">
+</figure>
+]
+]
+
+.pull-right[
+Trump word cloud is uninformative
+
+Clinton word cloud is okay
+- Highlights email as the **single** dominant narrative about Hillary Clinton prior to the 2016 election
+]
+
+???
+
+https://twitter.com/s_soroka/status/907941270735278085
+
+---
+
+# Twitter before and after breakups (4-grams)
+
+.center[
+<figure>
+  <img src="img/11/breakups.png" alt="Twitter word cloud before and after breakups" title="Twitter word cloud before and after breakups" width="100%">
+</figure>
+]
+
+--
+
+Better yet: use other methods to analyze and visualize text
+
+???
+
+Twitter before and after breakups
+
+https://arxiv.org/abs/1409.5980
+
+https://www.vice.com/en/article/ezvaba/what-our-breakups-look-like-on-twitter
+
+---
+
+background-image: url("img/11/he-she-julia.png")
+background-position: center
+background-size: cover
+
+???
+
+https://pudding.cool/2017/08/screen-direction/
+
+---
+
+background-image: url("img/11/minimap-1.png")
+background-position: center
+background-size: contain
+
+???
+
+https://juliasilge.com/blog/song-lyrics-across/
+
+
+---
+class: inverse, center, middle
+name: tidytext
+
+# Text mining with R
+
+---
+
+# Core concepts and techniques
+
+--
+
+Tokens, lemmas, and parts of speech
+
+--
+
+Sentiment analysis
+
+--
+
+tf-idf
+
+--
+
+Topics and LDA
+
+--
+
+Fingerprinting
+
+---
+
+# Core concepts and techniques
+
+**Tokens**, lemmas, and parts of speech
+
+**Sentiment analysis**
+
+**tf-idf**
+
+Topics and LDA
+
+Fingerprinting
+
+**We will cover tokens, sentiment analysis, and tf-idf** (time permitting)
+
+---
+
+# The tidytext package
+
+.pull-left[
+We will use the `tidytext` package
+
+`tidytext` brings tidy data concepts and `tidyverse` tools to text analysis
+]
+
+.pull-right.center[
+<figure>
+  <img src="img/11/cover.png" alt="Tidy text mining with R" title="Tidy text mining with R" width="80%">
+</figure>
+]
+
+???
+
+https://www.tidytextmining.com/
+
+
+---
+
+# Regular text
+
+```{r show-hp1, echo=FALSE, comment=NA}
+harrypotter::philosophers_stone[1] %>% 
+  str_trunc(100 * 14) %>% 
+  str_wrap(100) %>% 
+  cat("\n")
+```
+
+---
+
+# Text as data
+
+Text can be stored in data frames as character strings
+
+Here, each row corresponds to a chapter
+
+```{r tidy-hp1, echo=FALSE}
+hp1_data <- tibble(text = harrypotter::philosophers_stone) %>%
+  mutate(
+    chapter = 1:n() # here, each row is a chapter #<<
+    ) %>% 
+  relocate(chapter)
+```
+
+```{r tidy-hp1-print}
+head(hp1_data)
+```
+
+---
+
+# Tidy text and tokens
+
+Tidy text format: a table with one **token** per row
+
+--
+
+What is a token?
+
+--
+
+- Any meaningful unit of text used for analysis
+
+--
+
+- Often words, but also letters, n-grams, sentences, paragraphs, chapters, etc.
+
+--
+
+The relevant token depends on the analysis you are doing
+
+--
+
+So the definition of tidy text depends on what you are doing!
+
+--
+
+**Tokenization** is the process of splitting text into tokens
+
+---
+
+# Tokenization: words
+
+`tidytext::unnest_tokens` tokenizes **words** by default
+- Optionally: characters, ngrams, sentences, lines, paragraphs, etc.
+
+--
+
+.pull-left[
+```{r hp1-word, eval=FALSE}
+hp1_data %>% 
+  unnest_tokens(  # convert data to tokens
+    input = text, # split text column #<<
+    output = word,# make new word column #<<
+    ) %>%
+  relocate(word)  # move new column to front
+```
+.small[Note: `unnest_tokens()` expects **output** before **input** if you don't name arguments]
+]
+
+--
+
+.pull-right[
+```{r hp1-wordr, echo=FALSE}
+hp1_data %>% 
+  unnest_tokens(   # convert data to tokens
+    input = text,   # split text column #<<
+    output = word, # make new word column #<<
+    ) %>%
+  relocate(word) # move new column to front #<<
+```
+]
+
+---
+
+# We can treat tokens like any other data
+
+.pull-left[
+For example, we can count them:
+
+```{r hp1-word-count, eval=FALSE}
+hp1_data %>% 
+  unnest_tokens(
+    input = text, 
+    output = word, 
+    ) %>%        
+  count(word, sort = TRUE) #<<
 ```
 ]
 
 .pull-right[
-```{r fig.dim=c(4, 3), out.width="100%"}
-make_plot("TSLA") #<<
+```{r hp1-word-countr, echo=FALSE}
+hp1_data %>% 
+  unnest_tokens(
+    input = text, 
+    output = word, 
+    ) %>%        
+  count(word, sort = TRUE) #<<
+```
+]
+
+What do you notice about the most common words?
+
+---
+
+# Raw word frequency is not always informative
+
+.left-code[
+```{r word-count-plot, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+hp1_data %>% 
+  unnest_tokens(word, text) %>% 
+  count(word, sort = TRUE) %>% 
+  slice_max(order_by = n, # order rows by count #<<
+            n = 10) %>%   # slice top 10 rows #<<
+  ggplot(aes(x = n, 
+             y = fct_reorder(word, n))) +
+  geom_col() +
+  labs(x = NULL, y = NULL) +
+  theme_bw()
+```
+
+How can we make this better?
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("word-count-plot", "png")`)
+]
+
+---
+
+# Stop words
+
+We can filter out common **stop words** that we want to ignore
+
+```{r show-stop-words}
+stop_words # this is an object from the tidytext package
+```
+
+---
+
+# Token frequency: words
+
+.left-code[
+```{r hp-words, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+hp1_data %>% 
+  unnest_tokens(word, text) %>% 
+  anti_join(stop_words, by = "word") %>% #<<
+  count(word, sort = TRUE) %>% 
+  slice_max(order_by = n,
+            n = 10) %>%
+  ggplot(aes(x = n, 
+             y = fct_reorder(word, n))) +
+  geom_col() +
+  labs(x = NULL, y = NULL) +
+  theme_bw()
+```
+
+That's better!
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("hp-words", "png")`)
+]
+
+
+---
+
+# Tokenization: n-grams
+
+**n** contiguous tokens are an **n-gram**
+
+Example: two consecutive words are a bigram
+
+--
+
+.pull-left[
+```{r hp1-bigram, eval=FALSE}
+hp1_data %>% 
+  unnest_tokens(
+    input = text, 
+    output = bigram,  # new column bigram #<<
+    token = "ngrams", # we want ngrams #<<
+    n = 2) %>%        # we want bigrams #<<
+  relocate(bigram)
+```
+]
+
+.pull-right[
+```{r hp1-bigramr, echo=FALSE}
+hp1_data %>% 
+  unnest_tokens(
+    input = text, 
+    output = bigram,  # call new column bigram #<<
+    token = "ngrams", # we want ngrams #<<
+    n = 2) %>%        # we want bigrams #<<
+  relocate(bigram)
+```
+]
+
+---
+
+# Token frequency: n-grams
+
+```{r hp-bigrams, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
+hp_bigrams <- hp %>% 
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>% 
+  separate(bigram, c("word1", "word2"), sep = " ") %>% 
+  filter(!word1 %in% stop_words$word) %>%
+  filter(!word2 %in% stop_words$word) %>% 
+  unite(bigram, word1, word2, sep = " ") %>% 
+  group_by(book) %>% 
+  count(bigram, sort = TRUE) %>% 
+  top_n(3, n) %>% 
+  ungroup() %>% 
+  mutate(bigram = fct_inorder(bigram))
+
+ggplot(hp_bigrams, aes(x = n, y = fct_rev(bigram), fill = book)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = NULL, y = NULL) +
+  scale_fill_viridis_d() +
+  facet_wrap(vars(book), scales = "free_y") +
+  theme_bw()
+```
+
+---
+
+# Token frequency: n-gram ratios
+
+```{r hp-he-she, cache = TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="75%"}
+hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
+
+bigram_he_she_counts <- hp %>%
+  unnest_tokens(bigram, text, token = "ngrams", n = 2)  %>%
+  count(bigram, sort = TRUE) %>%
+  # split the bigram column into two columns
+  separate(bigram, c("word1", "word2"), sep = " ") %>%
+  # only choose rows where the first word is he or she #<<
+  filter(word1 %in% hp_pronouns) %>% #<<
+  # count unique pairs of words
+  count(word1, word2, wt = n, sort = TRUE) %>%
+  rename(total = n)
+
+word_ratios <- bigram_he_she_counts %>%
+  # look at each of the second words
+  group_by(word2) %>%
+  # keep rows where the second word appears 10+ times
+  filter(sum(total) > 10) %>%
+  ungroup() %>%
+  # pivot out the word1 column so that there's a column named "he" and one named "she"
+  pivot_wider(names_from = word1, values_from = total) %>% 
+  # filter out missing he/she cases (subjective choice!)
+  filter(!is.na(he) & !is.na(she)) %>% 
+  # convert word2 counts to frequencies by he/she (normalization)
+  mutate_if(is.numeric, ~ (.) / sum(.)) %>%
+  # compute logged ratio of the she counts to he counts
+  mutate(logratio = log2(she / he)) %>%
+  # sort by that ratio
+  arrange(desc(logratio))
+
+plot_word_ratios <- word_ratios %>%
+  # this gets the words in the right order---we take the absolute value, select
+  # only rows where the log ratio is bigger than 0, and then take the top 15 words
+  mutate(abslogratio = abs(logratio)) %>%
+  group_by(logratio < 0) %>%
+  slice_max(abslogratio, n = 5) %>%
+  ungroup()
+
+plot_word_ratios %>% 
+  ggplot(aes(logratio, 
+             fct_reorder(word2, logratio), 
+             fill = logratio < 0)) +
+  geom_col() +
+  labs(y = "How much more/less likely", x = NULL) +
+  scale_fill_manual(name = "", labels = c("More 'she'", "More 'he'"),
+                    values = c("#3D9970", "#FF851B"),
+                    guide = guide_legend(reverse = TRUE)) +
+  scale_x_continuous(breaks = seq(-3, 3),
+                     labels = c("8x", "4x", "2x",
+                                "Same", "2x", "4x", "8x")) +
+  theme_bw() +
+  theme(legend.position = "bottom")
+```
+
+How would you make this?
+
+.small[This is not an endorsement of J. K. Rowling's [views on sex and gender](https://en.wikipedia.org/wiki/Political_views_of_J._K._Rowling#Transgender_people)!]
+
+---
+
+# Token frequency: n-gram ratios
+
+1. Identify and count words associated with "he", "she"
+
+.pull-left[
+```{r hp-he-she-counts, eval=FALSE}
+hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
+
+bigram_he_she_counts <- hp %>%
+  unnest_tokens(bigram, text, token = "ngrams", n = 2)  %>%
+  count(bigram, sort = TRUE) %>%
+  # split the bigram column into two columns
+  separate(bigram, c("word1", "word2"), sep = " ") %>%
+  # only choose rows where the first word is he or she #<<
+  filter(word1 %in% hp_pronouns) %>% #<<
+  # count unique pairs of words
+  count(word1, word2, wt = n, sort = TRUE) %>%
+  rename(total = n)
+```
+]
+
+--
+
+.pull-right[
+```{r hp-he-she-countsr, echo=FALSE}
+hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
+
+hp %>%
+  unnest_tokens(bigram, text, token = "ngrams", n = 2)  %>%
+  count(bigram, sort = TRUE) %>%
+  # split the bigram column into two columns
+  separate(bigram, c("word1", "word2"), sep = " ") %>%
+  # only choose rows where the first word is he or she #<<
+  filter(word1 %in% hp_pronouns) %>% #<<
+  # count unique pairs of words
+  count(word1, word2, wt = n, sort = TRUE) %>%
+  rename(total = n)
 ```
 ]
 
 
 ---
 
-# Rules of thumb about functions
+# Token frequency: n-gram ratios
 
---
+2. Compute ratios for the most common bigrams
 
-- You can never write too many functions
+.pull-left[
+```{r hp-he-she-ratios, eval=FALSE}
+word_ratios <- bigram_he_she_counts %>%
+  # look at each of the second words
+  group_by(word2) %>%
+  # keep rows where the second word appears 10+ times
+  filter(sum(total) > 10) %>%
+  ungroup() %>%
+  # pivot out the word1 column so that there's a column named "he" and one named "she"
+  pivot_wider(names_from = word1, values_from = total) %>% 
+  # filter out missing he/she cases (subjective choice!)
+  filter(!is.na(he) & !is.na(she)) %>% 
+  # convert word2 counts to frequencies by he/she (normalization)
+  mutate_if(is.numeric, ~ (.) / sum(.)) %>%
+  # compute logged ratio of the she counts to he counts
+  mutate(logratio = log2(she / he)) %>%
+  # sort by that ratio
+  arrange(desc(logratio))
 
---
-
-- When you find yourself writing the same code 2-3 times, put it into a function
-
---
-
-- A function should be no longer than 20-40 lines
-
---
-
-- If a function is getting too long, break it into smaller functions
-
-
----
-
-# Step 3: Automate calling the function
-
-Individual function calls are hard to scale
-
-```{r, eval=FALSE}
-make_plot("AAPL")
-make_plot("NVDA")
-make_plot("TSLA")
-```
-
-What if we wanted to make this plot for every company in the S&P 500?
-
-How could you automate these function calls?
-
---
-
-1. Imperative programming (for loops)
-
-2. Functional programming (map functions)
-
----
-
-# Step 3: Automate calling the function
-
-The `purrr` packages provides `map` functions that take a vector as input, apply a **function** to each element of the vector, and return the results in a new vector:
-
-```{r, eval = FALSE}
-map(some_vector, some_function)
-```
-
-- `map` functions are basically identical to base R's `apply` functions
-
---
-
-**How can we use map to make plots for AAPL, NVDA, and TSLA?**
-
---
-
-```{r}
-symbols <- c("AAPL", "NVDA", "TSLA")
-plots <- map(symbols, make_plot)
-```
-
---
-
-Here `map` takes each element of the vector `symbols` and uses it as input for our function `make_plot()`
-
----
-
-# Step 3: Automate calling the function
-
-`map` returns a **list**. In this example, it's a list of plots that we assigned to `plots`:
-
-.small-code[
-```{r}
-class(plots)
+word_ratios
 ```
 ]
+
+--
+
+.pull-right[
+```{r hp-he-she-ratiosr, echo=FALSE}
+bigram_he_she_counts %>%
+  # look at each of the second words
+  group_by(word2) %>%
+  # keep rows where the second word appears 10+ times
+  filter(sum(total) > 10) %>%
+  ungroup() %>%
+  # pivot out the word1 column so that there's a column named "he" and one named "she"
+  pivot_wider(names_from = word1, values_from = total) %>% 
+  # filter out missing he/she cases (subjective choice!)
+  filter(!is.na(he) & !is.na(she)) %>% 
+  # convert word2 counts to frequencies by he/she (normalization)
+  mutate_if(is.numeric, ~ (.) / sum(.)) %>%
+  # compute logged ratio of the she counts to he counts
+  mutate(logratio = log2(she / he)) %>%
+  # sort by that ratio
+  arrange(desc(logratio))
+```
+]
+
+---
+
+# Token frequency: n-gram ratios
+
+3. Rearrange the data for plotting
+
+.pull-left[
+```{r hp-he-she-rearrange, eval=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
+plot_word_ratios <- word_ratios %>%
+  mutate(abslogratio = abs(logratio)) %>%
+  group_by(logratio < 0) %>%
+  slice_max(abslogratio, n = 5) %>%
+  ungroup()
+
+plot_word_ratios
+```
+]
+
+--
+
+.pull-right[
+```{r hp-he-she-rearranger, echo=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
+word_ratios %>%
+  # this gets the words in the right order---we take the absolute value, select
+  # only rows where the log ratio is bigger than 0, and then take the top 15 words
+  mutate(abslogratio = abs(logratio)) %>%
+  group_by(logratio < 0) %>%
+  slice_max(abslogratio, n = 5) %>%
+  ungroup()
+```
+]
+
+---
+
+# Token frequency: n-gram ratios
+
+4. Plot the data
+
+.pull-left.small-code[
+```{r hp-he-she-plot, eval=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
+plot_word_ratios %>% 
+  ggplot(aes(logratio, 
+             fct_reorder(word2, logratio), 
+             fill = logratio < 0)) +
+  geom_col() +
+  labs(y = "How much more/less likely", x = NULL) +
+  scale_fill_manual(name = "", labels = c("More 'she'", "More 'he'"),
+                    values = c("#3D9970", "#FF851B"),
+                    guide = guide_legend(reverse = TRUE)) +
+  scale_x_continuous(breaks = seq(-3, 3),
+                     labels = c("8x", "4x", "2x",
+                                "Same", "2x", "4x", "8x")) +
+  theme_bw() +
+  theme(legend.position = "bottom")
+```
+]
+
+--
+
+.pull-right[
+```{r hp-he-she-plotr, echo=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
+plot_word_ratios %>% 
+  ggplot(aes(logratio, 
+             fct_reorder(word2, logratio), 
+             fill = logratio < 0)) +
+  geom_col() +
+  labs(y = "How much more/less likely", x = NULL) +
+  scale_fill_manual(name = "", labels = c("More 'she'", "More 'he'"),
+                    values = c("#3D9970", "#FF851B"),
+                    guide = guide_legend(reverse = TRUE)) +
+  scale_x_continuous(breaks = seq(-3, 3),
+                     labels = c("8x", "4x", "2x",
+                                "Same", "2x", "4x", "8x")) +
+  theme_bw() +
+  theme(legend.position = "bottom")
+```
+]
+
+---
+
+# Sentiment analysis
+
+Simple approach: quantify sentiment of each word in a corpus, then sum them up
 
 --
 
 .pull-left-3.small-code[
-```{r fig.dim=c(4, 3), out.width="100%"}
-plots[[1]]
+```{r comment=NA}
+get_sentiments("bing")
 ```
 ]
 
 --
 
 .pull-middle-3.small-code[
-```{r fig.dim=c(4, 3), out.width="100%"}
-plots[[2]]
+```{r comment=NA}
+get_sentiments("afinn")
 ```
 ]
 
 --
 
 .pull-right-3.small-code[
-```{r fig.dim=c(4, 3), out.width="100%"}
-plots[[3]]
+```{r comment=NA}
+get_sentiments("nrc")
 ```
 ]
 
 ---
 
-# Step 3: Automate calling the function
+# Harry Potter sentiment analysis
 
-This scales really easily!
+```{r hp-net-sentiment, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
+# https://rstudio-pubs-static.s3.amazonaws.com/300624_8260952d1f0346969e65f41a97006bf5.html
+hp_sentiment <- hp %>%
+  unnest_tokens(word, text) %>%
+  group_by(book) %>%
+  mutate(word_count = 1:n(),
+         index = word_count %/% 500 + 1) %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(book, index = index, sentiment) %>%
+  pivot_wider(names_from = sentiment, values_from = n) %>%
+  mutate(net_sentiment = positive - negative)
 
-.small-code[
-```{r}
-all_symbols <- sp500_prices %>% distinct(symbol) %>% pull() # get all the symbols in the S&P 500 #<<
-all_plots <- map(all_symbols, make_plot) # make a plot for each of the symbols
-```
-]
-
---
-
-.pull-left-3[
-```{r, warnings = FALSE}
-length(all_symbols)
-length(all_plots)
-```
-]
-
---
-
-.pull-middle-3[
-```{r fig.dim=c(4, 3), out.width="100%"}
-all_plots[[279]]
-```
-]
-
---
-
-.pull-right-3[
-```{r fig.dim=c(4, 3), out.width="100%"}
-all_plots[[504]]
-```
-]
-
----
-
-# The map functions
-
-The `purrr` package provides a family of `map` functions that return different types of output:
-
-- `map()` makes a list
-- `map_lgl()` makes a logical vector
-- `map_int()` makes an integer vector
-- `map_dbl()` makes a double vector
-- `map_chr()` makes a character vector
-
----
-
-# What about `for` loops?
-
-For loops work too!
-
-```{r, eval=FALSE}
-symbols <- c("AAPL", "NVDA", "TSLA")
-plots <- vector("list", length(symbols)) # 1. allocate space for output
-for (i in seq_along(symbols)) {          # 2. specify the sequence to loop over
-  plots[[i]] <- make_plot(symbols[i])    # 3. specify what to do in each iteration
-}
-```
-
---
-
-But functional programming is more concise:
-```{r, eval=FALSE}
-symbols <- c("AAPL", "NVDA", "TSLA")
-plots <- map(symbols, make_plot)
+ggplot(hp_sentiment,
+       aes(x = index, y = net_sentiment, fill = net_sentiment > 0)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Net sentiment") +
+  facet_wrap(vars(book), scales = "free_x") +
+  theme_bw()
 ```
 
 ---
 
-# Why not use `for` loops?
+# tf-idf
 
---
+Term frequency-inverse document frequency
 
-- They often require us to think about data logistics (indexing)
+tf-idf is a measure of how important a term is to a document within a broader collection or corpus
 
---
-
-- They encourage iterative thinking over conceptual thinking
-
---
-
-- Typically require more code, which often means more errors
-
---
-
-- Harder to parallelize or otherwise optimize
-
---
-
-**But there is nothing wrong with using them!**
-
-
----
-class: inverse, center, middle
-name: example
-
-# Example 12
-
----
-class: inverse, center, middle
-name: mini-project-1
-
-# Mini project 1
+$$
+\begin{aligned}
+tf(\text{term}) &= \frac{n_{\text{term}}}{n_{\text{terms in document}}} \\
+idf(\text{term}) &= \ln{\left(\frac{n_{\text{documents}}}{n_{\text{documents containing term}}}\right)} \\
+tf\text{-}idf(\text{term}) &= tf(\text{term}) \times idf(\text{term})
+\end{aligned}
+$$
 
 ---
 
-# Overall feedback
+# Harry Potter tf-idf
 
-Overall I was happy with everyone's work
+```{r hp-tf-idf, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
+# Get a list of words in all the books
+hp_words <- hp %>% 
+  unnest_tokens(word, text) %>% 
+  count(book, word, sort = TRUE)
 
-This assignment was meant to push you, and it was cool to see everyone take different approaches to solve new problems
+# Add the tf-idf for these words
+hp_tf_idf <- hp_words %>% 
+  bind_tf_idf(word, book, n) %>% 
+  arrange(desc(tf_idf))
 
----
+# Get the top 3 words in each book
+hp_tf_idf_plot <- hp_tf_idf %>% 
+  group_by(book) %>% 
+  slice_max(tf_idf, n = 3) %>% 
+  ungroup()
 
-# Grade summary
+ggplot(hp_tf_idf_plot, aes(y = fct_reorder(word, tf_idf), x = tf_idf, fill = book)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(y = "tf-idf", x = NULL) +
+  facet_wrap(~ book, scales = "free") +
+  labs(y = NULL) +
+  theme_bw()
+```
 
-50 points total
-
-- Median: 41
-- Average: 39
-
-These are raw group scores, don't reflect any adjustments for peer feedback yet
-
-I will post these scores and annotated PDFs on canvas
-
-Please contact me if you have questions, see math errors, etc.
-
----
-
-# Specific feedback
-
-Common challenges:
-- Graph labels that were unclear, unreadable, or absent
-- Incorrect calculations
-  - Portfolio returns that exceed returns for every stock in the portfolio
-- Not submitting code
-- Overall presentation
-  - No names on reports (!)
-  - Including the Logistics and Expectations for my perusal
-
---
-
-**Keep these in mind for the final project!**
