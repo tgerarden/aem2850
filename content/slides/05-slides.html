@@ -51,7 +51,8 @@ No lab due next Monday (February break)
 
 Prelim 1 will be next Thursday, March 2 at 9:40am in class
   - Will cover everything including this week's material
-  - We are still writing the prelim, will provide more guidance Thursday and via canvas
+  - We will provide more guidance Thursday and via canvas
+  - Please contact me and SDS **as soon as possible** if you are eligible for testing accommodations and are not yet registered
 
 Questions before we get started?
 
@@ -65,6 +66,8 @@ Questions before we get started?
 [Working with strings in R](#working-with-strings)
 
 [Regular expressions](#regex)
+
+[Working with regular expressions in R](#working-with-regex)
 
 
 ---
@@ -623,9 +626,296 @@ name: regex
 
 # Regular expressions
 
-...
+What are regular expressions?
 
-&lt;!-- https://r4ds.hadley.nz/regexps.html#sec-reg-basics --&gt;
+--
+
+A concise, powerful way for describing patterns within strings
+
+--
+
+Regular expressions are a generic tool, not something specific to R
+
+--
+
+Let's use the names of some characters from The Office as examples:
+
+
+```r
+characters &lt;- theoffice |&gt; distinct(character) |&gt; slice_head(n = 10) |&gt; pull(character)
+characters
+```
+
+```
+##  [1] "Michael"     "Jim"         "Pam"         "Dwight"      "Jan"        
+##  [6] "Michel"      "Todd Packer" "Phyllis"     "Stanley"     "Oscar"
+```
+
+---
+
+# Pattern basics
+
+The simplest patterns consist of literal characters
+
+.pull-left[
+
+```r
+characters
+```
+
+
+```
+##  [1] "Michael"     "Jim"         "Pam"        
+##  [4] "Dwight"      "Jan"         "Michel"     
+##  [7] "Todd Packer" "Phyllis"     "Stanley"    
+## [10] "Oscar"
+```
+]
+
+.pull-right[
+What do you think this will return?
+
+
+```r
+str_view(characters, pattern = "J")
+```
+]
+
+--
+
+.pull-left[
+`str_view()` is a handy utility to see how patterns match
+]
+
+.pull-right[
+
+```
+## [2] │ &lt;J&gt;im
+## [5] │ &lt;J&gt;an
+```
+Literal pattern matches are case-sensitive by default
+]
+
+
+---
+
+# Meta-characters
+
+Punctuation characters like `.`, `+`, `*`, `[`, `]`, and `?` are **meta-characters** with special meanings
+
+The most common one is `.`, which will match any character
+
+--
+
+What do you think these statements will return?
+
+.pull-left[
+
+```r
+str_view(characters, pattern = "J.m")
+```
+]
+
+.pull-right[
+
+```r
+str_view(characters, pattern = "J.n")
+```
+]
+
+--
+
+.pull-left[
+
+```
+## [2] │ &lt;Jim&gt;
+```
+]
+
+.pull-right[
+
+```
+## [5] │ &lt;Jan&gt;
+```
+]
+
+---
+
+# Meta-characters
+
+What do you think these statements will return?
+
+.pull-left[
+
+```r
+str_view(characters, pattern = "J..")
+```
+]
+
+.pull-right[
+
+```r
+str_view(characters, pattern = "J...")
+```
+]
+
+--
+
+.pull-left[
+
+```
+## [2] │ &lt;Jim&gt;
+## [5] │ &lt;Jan&gt;
+```
+]
+
+.pull-right[
+
+]
+
+---
+
+# Quantifiers
+
+Quantifiers control how many times a pattern can match:
+
+- `?` makes a pattern optional -- it matches 0 or 1 times
+- `+` lets a pattern repeat -- it matches at least once
+- `*` lets a pattern be optional or repeat
+
+--
+
+What do you think this statement will return?
+
+
+```r
+str_view(characters, "M.*l") # match strings with M, then any number of any characters, then l
+```
+
+--
+
+
+```
+## [1] │ &lt;Michael&gt;
+## [6] │ &lt;Michel&gt;
+```
+
+---
+
+# Character classes
+
+.pull-left[
+`[]` lets you match a set of characters
+
+
+```r
+str_view(characters, "[aeiou]") # vowels
+```
+
+```
+##  [1] │ M&lt;i&gt;ch&lt;a&gt;&lt;e&gt;l
+##  [2] │ J&lt;i&gt;m
+##  [3] │ P&lt;a&gt;m
+##  [4] │ Dw&lt;i&gt;ght
+##  [5] │ J&lt;a&gt;n
+##  [6] │ M&lt;i&gt;ch&lt;e&gt;l
+##  [7] │ T&lt;o&gt;dd P&lt;a&gt;ck&lt;e&gt;r
+##  [8] │ Phyll&lt;i&gt;s
+##  [9] │ St&lt;a&gt;nl&lt;e&gt;y
+## [10] │ Osc&lt;a&gt;r
+```
+]
+
+--
+
+.pull-right[
+`^` inverts character class matches
+
+
+```r
+str_view(characters, "[^aeiou]") # NOT vowels
+```
+
+```
+##  [1] │ &lt;M&gt;i&lt;c&gt;&lt;h&gt;ae&lt;l&gt;
+##  [2] │ &lt;J&gt;i&lt;m&gt;
+##  [3] │ &lt;P&gt;a&lt;m&gt;
+##  [4] │ &lt;D&gt;&lt;w&gt;i&lt;g&gt;&lt;h&gt;&lt;t&gt;
+##  [5] │ &lt;J&gt;a&lt;n&gt;
+##  [6] │ &lt;M&gt;i&lt;c&gt;&lt;h&gt;e&lt;l&gt;
+##  [7] │ &lt;T&gt;o&lt;d&gt;&lt;d&gt;&lt; &gt;&lt;P&gt;a&lt;c&gt;&lt;k&gt;e&lt;r&gt;
+##  [8] │ &lt;P&gt;&lt;h&gt;&lt;y&gt;&lt;l&gt;&lt;l&gt;i&lt;s&gt;
+##  [9] │ &lt;S&gt;&lt;t&gt;a&lt;n&gt;&lt;l&gt;e&lt;y&gt;
+## [10] │ &lt;O&gt;&lt;s&gt;&lt;c&gt;a&lt;r&gt;
+```
+]
+
+---
+
+# Alternation
+
+Last one! Hang in there!
+
+--
+
+`|` allows you to search for one or more alternative patterns
+
+This should seem familiar...
+
+--
+
+What do you think these statements will return?
+
+.pull-left[
+
+```r
+str_view(characters, "J.m|P.m")
+```
+]
+
+.pull-right[
+
+```r
+str_view(characters, "S.*|O.*")
+```
+]
+
+--
+
+.pull-left[
+
+```
+## [2] │ &lt;Jim&gt;
+## [3] │ &lt;Pam&gt;
+```
+]
+
+.pull-right[
+
+```
+##  [9] │ &lt;Stanley&gt;
+## [10] │ &lt;Oscar&gt;
+```
+]
+
+
+---
+
+# More patterns
+
+See [Chapter 17 of R4DS (2e)](https://r4ds.hadley.nz/regexps.html#pattern-details) for more on:
+- **escaping**: matching meta-character as if they were literal strings
+- **anchors**: match the start or end of a strong
+- **character classes** (continued)
+- **quantifiers** (continued)
+- **operator precedence**: parentheses, etc.
+- **grouping**: back references, etc.
+
+---
+class: inverse, center, middle
+name: working-with-regex
+
+# Working with regular expressions in R
 
 ---
 
@@ -633,7 +923,7 @@ name: regex
 
 --
 
-`str_detect` can be used to match patterns
+`str_detect` can be used to match patterns and return a logical vector
 
 --
 
@@ -673,6 +963,12 @@ str_detect(first_4_characters, "a")
 ```
 ]
 
+--
+
+&lt;br&gt;
+
+How could we fit this into our current workflow?
+
 ---
 
 # 4) stringr::str_detect
@@ -709,7 +1005,7 @@ theoffice |&gt; select(season, episode, character, text) |&gt;
 
 # 4) stringr::str_detect
 
-`str_detect` is case-sensitive by default
+Literal pattern matches with `str_detect` are case-sensitive
 
 
 ```r
@@ -769,7 +1065,7 @@ theoffice |&gt; select(season, episode, character, text) |&gt;
 
 # 4) stringr::str_detect
 
-You could consolidate this -- regex parentheses are like in math
+You could consolidate this: regex parentheses are like in math
 
 
 ```r
@@ -799,7 +1095,7 @@ theoffice |&gt; select(season, episode, character, text) |&gt;
 
 # 4) stringr::str_detect
 
-You could `regex` to ignore all cases and control other pattern matching details
+Or use `regex()` to ignore all cases and control other pattern matching details
 
 
 ```r
@@ -948,7 +1244,7 @@ theoffice |&gt;
   distinct(character) |&gt; 
   slice_head(n = 5) |&gt; 
   mutate(
-    name = str_to_lower(character), # one way to avoid case sensitivity
+    name = str_to_lower(character), # another way to avoid case sensitivity
 *   m_s = str_count(name, "m"),
 *   i_s = str_count(name, "i")
   )
@@ -968,8 +1264,6 @@ theoffice |&gt;
 ---
 
 # 5) stringr::str_count with regex
-
-Character classes, defined by `[]`, let you match a set of characters; `^` can be used to invert character class matches
 
 
 ```r
@@ -994,9 +1288,42 @@ theoffice |&gt;
 ## 5 Jan       jan          1          2
 ```
 
+Reminder: `[]` let you match a set of characters; `^` inverts character class matches
+
 ---
 
 # 6) stringr::str_replace
+
+As the name suggests, `str_replace()` can be used to modify patterns in strings
+
+
+```r
+characters
+```
+
+```
+##  [1] "Michael"     "Jim"         "Pam"         "Dwight"      "Jan"        
+##  [6] "Michel"      "Todd Packer" "Phyllis"     "Stanley"     "Oscar"
+```
+
+```r
+str_replace(characters, "Dw", "Duhw") # jim's office pronunciation guide
+```
+
+```
+##  [1] "Michael"     "Jim"         "Pam"         "Duhwight"    "Jan"        
+##  [6] "Michel"      "Todd Packer" "Phyllis"     "Stanley"     "Oscar"
+```
+
+---
+
+# 6) stringr::str_replace
+
+`str_replace()` replaces the first match of a pattern
+
+`str_replace_all()` replaces all matches of a pattern
+
+These functions pair naturally with `mutate()` just like `str_c()`, `str_glue()`, and `str_count()`
 
 &lt;!-- https://r4ds.hadley.nz/regexps.html#replace-values --&gt;
 

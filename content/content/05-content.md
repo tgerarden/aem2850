@@ -1,7 +1,7 @@
 ---
 title: "Strings and regular expressions"
 linktitle: "Strings and regular expressions"
-date: "2023-02-19 15:33:21"
+date: "2023-02-21 09:38:07"
 menu:
   content:
     parent: Course content
@@ -30,3 +30,10 @@ output:
 - What are regular expressions?
 - What is a pattern?
 
+### Slides
+
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
+
+{{< blogdown/slide-buttons >}}
+
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.
