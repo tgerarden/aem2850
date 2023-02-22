@@ -1,6 +1,6 @@
 ---
-title: "Time"
-linktitle: "Time"
+title: "Relationships"
+linktitle: "Relationships"
 date: "`r format(Sys.time())`"
 output:
   blogdown::html_page:
@@ -19,18 +19,18 @@ editor_options:
 
 ## Posit Cloud links
 
-[Click here to access this week's example Posit Cloud project](https://rstudio.cloud/spaces/210747/project/3781232)
+[Click here to access this week's example Posit Cloud project](https://rstudio.cloud/spaces/210747/project/3746296)
 
-[**Solutions:** click here to access a project with a completed version](https://rstudio.cloud/spaces/210747/project/3781260)
+[**Solutions:** click here to access a project with a completed version](https://rstudio.cloud/spaces/210747/project/3746303)
 
 
 ## Plan for today
 - Questions? :raising_hand_woman:
 - Finish up slides from Tuesday
-- Work through `time-practice.R`
+- Work through `relationships-practice.R`
 
 
 ## Cheatsheets
 
-[Click here to download the `lubridate` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/lubridate.pdf)
+[Click here to download the `ggplot` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)
 

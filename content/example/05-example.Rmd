@@ -1,6 +1,6 @@
 ---
-title: "Mapping data to graphics"
-linktitle: "Mapping data to graphics"
+title: "Strings and regular expressions"
+linktitle: "Strings and regular expressions"
 date: "`r format(Sys.time())`"
 output:
   blogdown::html_page:
@@ -19,36 +19,23 @@ editor_options:
 
 ## Posit Cloud links
 
-[Click here to access this week's example Posit Cloud project](https://rstudio.cloud/spaces/210747/project/3640869)
+[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5470040)
 
-[**Solutions:** click here to access a project with a completed version](https://rstudio.cloud/spaces/210747/project/3640871)
+[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5470044)
+
 
 
 ## Plan for today
+- Prelim 1
+  - No office hours during February break
+  - Hui plans to hold office hours Wednesday, March 1 (see canvas for details)
+  <!-- - Prelim will be distributed on Posit Cloud at 9:40am -->
+  <!-- - Complete and submit via canvas by 10:55am (penalties may apply for late submissions) -->
 - Questions? :raising_hand_woman:
-- Announcements:
-  - February break logistics:
-    - No office hours on Monday or Tuesday
-    - No class Tuesday
-  - Assignments:
-    - Reflection - Week 5 was due last night
-    - Reflection - Week 6 is due next Wednesday
-    - No lab due Monday due to February break
-- Work through `mapping-data-to-graphics-practice.R`
+- Work through `strings-practice.R`
 
 
 ## Cheatsheets
 
-[Click here to download the `ggplot` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)
-
-
-## Meet the palmer penguins
-
-Data and graphics from [Allison Horst's package `palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/)
-
-<!-- ![palmerpenguins](/example/images/05/palmerpenguins.png) -->
-
-![meet the penguins](/example/images/05/lter_penguins.png)
-
-![bill_depth](/example/images/05/culmen_depth.png)
+[Click here to download the `stringr` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf)
 

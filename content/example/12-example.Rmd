@@ -1,6 +1,6 @@
 ---
-title: "Functions and iteration"
-linktitle: "Functions and iteration"
+title: "Text"
+linktitle: "Text"
 date: "`r format(Sys.time())`"
 output:
   blogdown::html_page:
@@ -19,17 +19,18 @@ editor_options:
 
 ## Posit Cloud links
 
-[Click here to access this week's example Posit Cloud project](https://rstudio.cloud/spaces/210747/project/3935045)
+[Click here to access this week's example Posit Cloud project](https://rstudio.cloud/spaces/210747/project/3902108)
 
-[**Solutions:** click here to access a project with a completed version](https://rstudio.cloud/spaces/210747/project/3935046)
+[**Solutions:** click here to access a project with a completed version](https://rstudio.cloud/spaces/210747/project/3902113)
 
 
 ## Plan for today
-- Short lecture
-- Work through `functions-practice.R`
+- Questions? :raising_hand_woman:
+- Work through `text-practice.R`
+- Happy to discuss slides, but want to make sure you have a chance to practice new skills
 
 
 ## Cheatsheets
 
-[Click here to download the `purrr` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/purrr.pdf)
+[Click here to download the `stringr` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf)
 

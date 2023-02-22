@@ -1,6 +1,6 @@
 ---
-title: "Text"
-linktitle: "Text"
+title: "Space"
+linktitle: "Space"
 date: "`r format(Sys.time())`"
 output:
   blogdown::html_page:
@@ -19,18 +19,15 @@ editor_options:
 
 ## Posit Cloud links
 
-[Click here to access this week's example Posit Cloud project](https://rstudio.cloud/spaces/210747/project/3902108)
-
-[**Solutions:** click here to access a project with a completed version](https://rstudio.cloud/spaces/210747/project/3902113)
+This week's example will be lab 10. [Click here to access the RStudio Cloud Project for this week's lab and follow the instructions in the file `lab-10.Rmd`.](https://rstudio.cloud/spaces/210747/project/3812305)
 
 
 ## Plan for today
 - Questions? :raising_hand_woman:
-- Work through `text-practice.R`
-- Happy to discuss slides, but want to make sure you have a chance to practice new skills
+- Work through `lab-10.R`
 
 
 ## Cheatsheets
 
-[Click here to download the `stringr` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf)
+[Click here to download the `sf` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/sf.pdf)
 
