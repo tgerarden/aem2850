@@ -1,16 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 22 Feb 2023 11:41:47 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Strings and regular expressions</title><link>https://aem2850.toddgerarden.com/example/05-example/</link><pubDate>Wed, 22 Feb 2023 11:41:47 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/05-example/</guid><description>&lt;h2 id="posit-cloud-links">Posit Cloud links&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 23 Feb 2023 09:34:04 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Strings and regular expressions</title><link>https://aem2850.toddgerarden.com/example/05-example/</link><pubDate>Thu, 23 Feb 2023 09:34:04 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/05-example/</guid><description>&lt;h2 id="posit-cloud-links">Posit Cloud links&lt;/h2>
 &lt;p>&lt;a href="https://posit.cloud/spaces/328615/content/5470040" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s example Posit Cloud project&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://posit.cloud/spaces/328615/content/5470044" target="_blank" rel="noopener">&lt;strong>Solutions:&lt;/strong> click here to access a project with a completed version&lt;/a>&lt;/p>
-&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;h2 id="announcements">Announcements&lt;/h2>
 &lt;ul>
-&lt;li>Prelim 1
+&lt;li>Office hours
 &lt;ul>
 &lt;li>No office hours during February break&lt;/li>
-&lt;li>Hui plans to hold office hours Wednesday, March 1 (see canvas for details)&lt;/li>
+&lt;li>We will hold office hours Wednesday, March 1 (see canvas)&lt;/li>
 &lt;/ul>
-&lt;!-- - Prelim will be distributed on Posit Cloud at 9:40am -->
-&lt;!-- - Complete and submit via canvas by 10:55am (penalties may apply for late submissions) -->
 &lt;/li>
+&lt;li>Prelim 1
+&lt;ul>
+&lt;li>Will be similar in structure to labs, though slightly more open-ended questions and less direct guidance&lt;/li>
+&lt;li>Prelim will be distributed on Posit Cloud at 9:40am&lt;/li>
+&lt;li>Complete and submit via canvas by 10:55am (penalties may apply)&lt;/li>
+&lt;li>Submit &lt;strong>both&lt;/strong> the .pdf output &lt;strong>and&lt;/strong> all your code within your .qmd file (self-contained)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
 &lt;li>Questions? 🙋‍♀️&lt;/li>
 &lt;li>Work through &lt;code>strings-practice.R&lt;/code>&lt;/li>
 &lt;/ul>
