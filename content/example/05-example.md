@@ -1,7 +1,7 @@
 ---
 title: "Strings and regular expressions"
 linktitle: "Strings and regular expressions"
-date: "2023-02-22 11:41:47"
+date: "2023-02-23 09:34:04"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -25,12 +25,18 @@ editor_options:
 
 
 
-## Plan for today
-- Prelim 1
+## Announcements
+- Office hours
   - No office hours during February break
-  - Hui plans to hold office hours Wednesday, March 1 (see canvas for details)
-  <!-- - Prelim will be distributed on Posit Cloud at 9:40am -->
-  <!-- - Complete and submit via canvas by 10:55am (penalties may apply for late submissions) -->
+  - We will hold office hours Wednesday, March 1 (see canvas)
+- Prelim 1
+  - Will be similar in structure to labs, though slightly more open-ended questions and less direct guidance
+  - Prelim will be distributed on Posit Cloud at 9:40am
+  - Complete and submit via canvas by 10:55am (penalties may apply)
+  - Submit **both** the .pdf output **and** all your code within your .qmd file (self-contained)
+
+
+## Plan for today
 - Questions? :raising_hand_woman:
 - Work through `strings-practice.R`
 
