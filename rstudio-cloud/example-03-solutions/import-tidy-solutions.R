@@ -153,7 +153,8 @@ retail <- read_csv("https://www.census.gov/retail/mrts/www/statedata/state_retai
 retail_tidy <- retail |> 
   pivot_longer(starts_with("yy"), # this is one of many ways to specify the columns to pivot
                names_to = "yearmonth", 
-               values_to = "yoy_pct_change")
+               values_to = "yoy_pct_change") |> 
+  mutate(yoy_pct_change = as.numeric(yoy_pct_change)) # convert yot_pct_change into numbers
 
 # what yearmonth had the highest yoy_pct_change for naics == "TOTAL" for the entire USA?
 retail_tidy |> 
