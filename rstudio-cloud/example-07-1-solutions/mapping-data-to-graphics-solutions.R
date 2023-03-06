@@ -1,4 +1,4 @@
-# AEM 2850 - Example 5
+# AEM 2850 - Example 7
 # Plan for today:
 # - Questions?
 # - On our own devices: work through this script
@@ -13,23 +13,120 @@ library(tidyverse) # load the core tidyverse packages
 # install.packages("palmerpenguins")
 library(palmerpenguins)
 
-# use theme_set to get clean plots without having to specify the theme each time
-theme_set(theme_minimal()) # set the current theme to theme_minimal()
-# you can use theme_set(theme()) to return to defaults if you prefer
 
-# data prep for 2. Aesthetic mappings
-temperatures <- read_csv("https://wilkelab.org/SDS375/datasets/tempnormals.csv") %>%
-  mutate(
-    location = factor(
-      location, levels = c("Death Valley", "Houston", "San Diego", "Chicago")
-    )
-  ) %>%
-  select(location, day_of_year, month, temperature)
-temps_houston <- filter(temperatures, location == "Houston")
+# 1. Putting it all together -----
+# let's build a plot sequentially to see how each grammatical layer changes its appearance
+
+?mpg # background on data
+
+names(mpg) # what are the column names?
+
+# let's start with data and aesthetics:
+# map `displ` to x, `hwy` to y, and `drv` to color
+mpg |>
+  ggplot(aes(x = displ,
+             y = hwy,
+             color = drv))
+# what do you see? why?
+# no data! because we have not added any geometry layers
+
+# now copy and paste your code from above, and add a point geom
+mpg |>
+  ggplot(aes(x = displ,
+             y = hwy,
+             color = drv)) +
+  geom_point()
+
+# now copy and paste, and add a smooth geom
+mpg |>
+  ggplot(aes(x = displ,
+             y = hwy,
+             color = drv)) +
+  geom_point() +
+  geom_smooth()
+
+# let's modify that to make the smooth geom linear
+mpg |>
+  ggplot(aes(x = displ,
+             y = hwy,
+             color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+
+# now add the viridis color scale scale_color_viridis_d()
+mpg |>
+  ggplot(aes(x = displ,
+             y = hwy,
+             color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_viridis_d()
+
+# facet by drive train type
+mpg |>
+  ggplot(aes(x = displ,
+             y = hwy,
+             color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_viridis_d() +
+  facet_wrap(vars(drv), ncol = 1)
+
+# add labels
+mpg |>
+  ggplot(aes(x = displ,
+             y = hwy,
+             color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_viridis_d() +
+  facet_wrap(vars(drv), ncol = 1) +
+  labs(x = "Displacement", y = "Highway MPG",
+       color = "Drive",
+       title = "Larger engines use more fuel",
+       subtitle = "Displacement measures engine size")
+
+# add a theme: + theme_bw()
+mpg |>
+  ggplot(aes(x = displ,
+             y = hwy,
+             color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_viridis_d() +
+  facet_wrap(vars(drv), ncol = 1) +
+  labs(x = "Displacement", y = "Highway MPG",
+       color = "Drive",
+       title = "Larger engines use more fuel",
+       subtitle = "Displacement measures engine size") +
+  theme_bw()
+
+# modify the theme
+mpg |>
+  ggplot(aes(x = displ,
+             y = hwy,
+             color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_viridis_d() +
+  facet_wrap(vars(drv), ncol = 1) +
+  labs(x = "Displacement", y = "Highway MPG",
+       color = "Drive",
+       title = "Larger engines use more fuel",
+       subtitle = "Displacement measures engine size") +
+  theme_bw() +
+  theme(legend.position = "bottom",
+        plot.title = element_text(face =))
+
+# finished! (note: slides contain for a slide version of this process)
 
 
 
-# 1. Warm up -----
+# THE REST OF THESE EXERCISES ARE HERE OPTIONAL, FOR REFERENCE ----
+
+
+
+# 2. Independent warm up -----
 # let's practice mapping from data to aesthetics using palmerpenguins::penguins
 
 ?penguins # background on data
@@ -38,28 +135,28 @@ names(penguins) # what are the column names?
 
 # first, let's visualize body mass and flipper length for penguins
 # map flipper_length_mm to the x-axis, body_mass_g to the y-axis, and add points
-penguins %>%
+penguins |>
   ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point()
 # is this data pattern intuitive?
 
 # now map bill_length_mm to the x-axis, bill_depth_mm to the y-axis, and add points
-penguins %>%
+penguins |>
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
   geom_point()
 # now add a line of best fit
-penguins %>%
+penguins |>
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
   geom_point() +
   geom_smooth(method = "lm")
 # is this data pattern intuitive?
 
 # augment the mapping: color by species
-penguins %>%
+penguins |>
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_point()
 # now add a line of best fit
-penguins %>%
+penguins |>
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_point() +
   geom_smooth(method = "lm")
@@ -71,7 +168,7 @@ penguins %>%
 
 
 # now facet by species
-penguins %>%
+penguins |>
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   geom_point() +
   geom_smooth(method = "lm") +
@@ -79,34 +176,43 @@ penguins %>%
 
 # PLEASE STOP HERE AND LET US KNOW THAT YOU ARE DONE
 # if you are waiting, try the following additions to our mapping:
-# 1.1: map sex to color, add points, and facet by species (but don't add lines)
+# 2.1: map sex to color, add points, and facet by species (but don't add lines)
 # REMOVE CODE EXAMPLE HERE!
-penguins %>%
+penguins |>
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = sex)) +
   geom_point() +
   facet_wrap(~species)
 
-# 1.2: why is there a color for sex that is labeled NA? make a version of the plot without it
-penguins %>%
-  filter(!is.na(sex)) %>%
+# 2.2: why is there a color for sex that is labeled NA? make a version of the plot without it
+penguins |>
+  filter(!is.na(sex)) |>
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = sex)) +
   geom_point() +
   facet_wrap(~species)
 
-# 1.3: make a new plot: map flipper_length_mm to x, bill_length_mm to y,
+# 2.3: make a new plot: map flipper_length_mm to x, bill_length_mm to y,
 # species to color and shape, add points, and add a linear fit for each species
-penguins %>%
-  filter(!is.na(sex)) %>%
+penguins |>
+  filter(!is.na(sex)) |>
   ggplot(aes(x = flipper_length_mm, y = bill_length_mm,
              color = species, shape = species)) +
   geom_point() +
   geom_smooth(method = "lm")
 
 
-# 2. Aesthetic mappings ----
+# 3. Aesthetic mappings ----
 # Acknowledgement: Claus O. Wilke (https://wilkelab.org/SDS375/schedule.html)
+# data prep for 3. Aesthetic mappings
+temperatures <- read_csv("https://wilkelab.org/SDS375/datasets/tempnormals.csv") |>
+  mutate(
+    location = factor(
+      location, levels = c("Death Valley", "Houston", "San Diego", "Chicago")
+    )
+  ) |>
+  select(location, day_of_year, month, temperature)
+temps_houston <- filter(temperatures, location == "Houston")
 
-# let's work with data on average temperature for each day of the year for Houston, TX, birthplace of queen bey:
+# let's work with data on average temperature for each day of the year for Houston, TX, birthplace of Queen Bey:
 temps_houston
 
 # recall our barebones ggplot template:
@@ -142,15 +248,15 @@ ggplot(temps_houston, aes(x = temperature, y = month)) +
 
 # PLEASE STOP HERE AND LET US KNOW THAT YOU ARE DONE
 # if you are waiting, try the following changes to that last plot:
-# 2.1: replace `geom_boxplot` with `geom_violin`
+# 3.1: replace `geom_boxplot` with `geom_violin`
 ggplot(temps_houston, aes(x = temperature, y = month)) +
   geom_violin()
-# 2.2: replace `geom_boxplot` with `geom_jitter`
+# 3.2: replace `geom_boxplot` with `geom_jitter`
 ggplot(temps_houston, aes(x = temperature, y = month)) +
   geom_jitter()
 
 
-# 3. Adding color ----
+# 4. Adding color ----
 # next let's work with the dataset `temperatures`, contains data for three more locations:
 temperatures
 
@@ -195,23 +301,23 @@ ggplot(temperatures, aes(x = month, y = temperature, color = location)) +
 
 
 
-## 4. Additional, open-ended exercises that we did in class ----
-temperatures %>%
+## 5. Additional, open-ended exercises that we did in class (Spring) ----
+temperatures |>
   ggplot(aes(x = day_of_year, y = temperature, color = location)) +
   geom_line()
 
 
-temperatures %>%
+temperatures |>
   ggplot(aes(x = month, y = location, fill = temperature)) +
   geom_tile()
 
 
-temps_houston %>%
+temps_houston |>
   ggplot(aes(x = temperature)) +
   geom_histogram()
 
 
-temperatures %>%
-  filter(location %in% c("Houston", "Chicago")) %>%
+temperatures |>
+  filter(location %in% c("Houston", "Chicago")) |>
   ggplot(aes(x = temperature, fill = location)) +
   geom_histogram()

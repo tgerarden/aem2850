@@ -1,7 +1,7 @@
 ---
 title: "Mapping data to graphics and amounts"
 linktitle: "Mapping data to graphics and amounts"
-date: "`r format(Sys.time())`"
+date: "2023-03-06 14:02:52"
 menu:
   content:
     parent: Course content

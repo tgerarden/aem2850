@@ -7,11 +7,12 @@
 #   4. Repeat steps 2-3 until you are satisfied with the final product
 #   5. Download the resulting file lab-xx.pdf
 #   6. Upload lab-xx.pdf to canvas
-# Reminder: to work interactively, you can run code chunks on their own
+# Note: this file will not Knit properly until it is (partially) completed
+# Reminder: to get around this and work interactively, you can run code chunks on their own
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
 title: "Lab-10"
-author: "your name here"
+author: "Answer Key"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: pdf_document
 urlcolor: blue
@@ -19,7 +20,8 @@ urlcolor: blue
 
 ```{r setup, include = FALSE}
 library(tidyverse)
-library(sf)
+library(GGally)
+library(broom)
 
 # omit warnings and center plots by default
 library(knitr)
@@ -30,102 +32,91 @@ opts_chunk$set(warning = FALSE, message = FALSE,
 
 # Preface
 
-The goal of this assignment is to help you gain more familiarity with using **ggplot** to visualize geospatial data. As always, please come to office hours and reach out to your teaching staff if you have any questions.
+The goal of this assignment is to help you gain more familiarity with using **ggplot** to visualize relationships. In this lab we provide less scaffolding and more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
 
-## Knitting
-
-Since the maps in this lab contain a lot of data, knitting may be slower than usual. We recommend running your code interactively (e.g., in chunks) so you can work on each problem separately without needing to knit the entire document repeatedly. Then you can knit the final product for submission when ready.
+FYI: in this assignment we added `\newpage` before some questions to keep question statements, code blocks, and output together.
 
 ## Data
 
-We will work with data on Airbnb listings from [Inside Airbnb](http://insideairbnb.com).[^insideairbnb] For this lab, we will start by using listing location data contained in `listings.csv`. Each row corresponds to a listing `id`, and variables summarize the key details for that listing. Import these data and assign them to a name.
+We will work with data on Airbnb listings from [Inside Airbnb](http://insideairbnb.com).[^insideairbnb] For this lab, we will use numeric reviews data contained in `review_summary.csv`. Each row corresponds to a listing `id`, and variables summarize all the reviews for that listing. For context, [here is the reviews page](https://www.airbnb.com/rooms/2595/reviews) for the first listing in the data. In the top left corner you can see that Airbnb reviews include an overall rating (`review_scores_rating`) and several sub-ratings for specific things (e.g., cleanliness, stored in the column `review_scores_cleanliness`). Start by importing these data and assigning them to a name.
 ```{r}
 
 ```
 
 
 \newpage
-## 1. We'll start by plotting locations without formally treating them as spatial data. Use `geom_point()` to make a scatter plot of listing locations. Adjust the transparency to make it easier to see which locations have higher and lower densities of listings. Color by borough (e.g., Bronx, Brooklyn, etc.).
+# Part 1: Exploring the Data
 
+## 1. We'll start by making a simple visualization of a relationship in the reviews data. Make a scatter plot of `review_scores_rating` on the y-axis and `review_scores_accuracy` on the x-axis. What can you learn from this visualization about the individual ratings and their relationship?
 ```{r}
 
 ```
+
 
 
 \newpage
-## 2. Use `read_sf()` to read in the shapefile `nybb_22a/nybb.shp` and assign it to `boroughs`. Then use `geom_sf()` to plot the spatial data contained in `boroughs`, and `fill` by `BoroName`.
-
+## 2. To help see patterns more clearly, modify your plot from 1 by setting `alpha = 0.05` for points and adding a smoothed conditional mean using `geom_smooth()`.
 ```{r}
 
 ```
+
 
 
 \newpage
-## 3. Now we'll combine the listings data with these spatial data. Use `count()` or `summarize()` to count the number of listings in each borough. Join the resulting data frame with `boroughs`. Use `geom_sf()` to plot the boroughs as in 2, but now `fill` by the number of Airbnb listings in each borough to make a choropleth map. Add `scale_fill_viridis_c()` to alter the default fill colors.[^viridis-tidyverse]
+## 3. Use `GGally::ggpairs` to make a scatter plot matrix to visualize pairwise relationships for the review scores for accuracy, cleanliness, and location. Which of these pairwise combinations is most correlated? Which is least correlated?
 ```{r}
 
 ```
+
+
 
 
 \newpage
-## 4. Now use the joined data to compute the number of listings per square mile, then use that to recreate your choropleth map from 3. Do the patterns look similar to or different from the map you created in 3? Do you think one is better than the other? Why or why not?
-*Hint: print `boroughs` and look at the type information for `geometry` to try to figure out what units `Shape_Area` is in, and/or use google to try to figure it out.*
+# Part 2: Extracing Insights from the Data
+
+In this part of the lab, we will use the reviews data to learn about consumer preferences. Put yourself in the shoes of an entrepreneur who wants to build an Airbnb hosting business. Before making any investments, you need to develop a strategy for your business. You know that reviews are important, and so you want to find ways to boost your ratings (so you can then increase your occupancy rates and/or prices in order to stack loot and join [the FIRE movement](https://en.wikipedia.org/wiki/FIRE_movement)). But your capital and time are limited so you want to figure out how to allocate them. In order to maximize your **overall** ratings, should you prioritize accuracy, cleanliness, checkin, communication, location, or value?[^endogeneity]
+
+
+## 4. Estimate a univariate model for `review_scores_rating` as a function of `review_scores_accuracy`. Use `summary()` to print the results. How do you interpret the relationship between these variables in practical terms?
 ```{r}
+# estimate univariate model
+
+
+# summarize univariate model
 
 ```
+
 
 
 \newpage
-## 5. Let's do some data work. Use `st_as_sf()` to convert the Airbnb listings in Manhattan to an `sf` data frame. Set the coordinate reference system by including the argument `crs = st_crs("WGS84")` in your call to `st_as_sf()`. Assign this new object to `listing_locations`.
+## 5. Estimate a multivariate regression with `review_scores_rating` as the dependent variable and all the other `review_scores_*` variables as independent variables. Make a coefficient plot with point estimates and confidence intervals. Omit the intercept. Order the coefficients in the plot according to the magnitude of the estimate. Which sub-rating has the largest coefficient? Which has the smallest?
 ```{r}
+# estimate multivariate model
+
+
+# tidy the estimates
+
+
+# make a coefficient plot
 
 ```
 
-## Next, create a sf data frame with one row that contains the location of Times Square. Use the same coordinate reference system ("WGS84").
-*Hint: see slide 41 from Tuesday's lecture if you aren't sure where to start.*
-```{r}
-
-```
-
-## Use `mutate()` and `st_distance()` to create a new variable in `listing_locations` that contains the distance between each listing and Times Square. 
-*Tip: it will simplify plotting if you convert the distance measure to a numeric in order to strip the units (meters). You may also want to convert from meters to kilometers.*
-```{r}
-
-```
-
-## Finally, plot the listings in Manhattan and `color` by the distance to Times Square. Add `scale_color_viridis_c()` to customize the color scheme.
-*Optional: start with the `boroughs` map of Manhattan and add points for an aesthetically pleasing result.*
-```{r}
-
-```
 
 
 \newpage
-## 6. Read in `review_summary.csv`.[^review-data] Isolate the properties with at least 10 reviews and `review_scores_location` of at least 4. Join the `review_scores_location` variable to `listing_locations`. Make a scatter plot of the listings using `geom_sf()`, and `color` by `review_scores_location`. Make sure there are no listings with missing values for `review_scores_location` on the plot. Adjust transparency as needed. Does proximity to Times Square seem to matter for location ratings?
-*Optional: start with the `boroughs` map of Manhattan and add points for an aesthetically pleasing result.*
-
+## 6. Make a plot that visualizes marginal effects from both regression models, focusing on the relationship between `review_scores_rating` and `review_scores_accuracy`. For the multivariate visualization, hold all the other sub-ratings at their means. You can choose how to present them. For example: you could overlay them on one plot with a common y-axis, use faceting to make two separate plots, use the approach from the temperature/snow example in class to create a single plot with two subplots, or make two separate plots. When making your choice, think about what you want to convey and how you can do that accurately and effectively.
 ```{r}
+
 
 ```
 
 
-\newpage
-## 7. Use a linear regression model to confirm your visual analysis of whether proximity to Times Square matters for location ratings. Use `review_scores_location` as the dependent variable and distance to Times Square as the independent variable. Print a `summary()` of the results and comment on your findings. Do you think this is a good model of location ratings?
-```{r}
-
-```
-
-
-\newpage
-## 8. Do something else interesting with these data, or with other spatial data. You could analyze other airbnb rating measures, or use other variables like price. You could compute the distance to wherever you will spend spring break, or make a map of that location. Or just stop here and go enjoy your break. Your choice!
+## 7. Use your results from 5 to revisit the qualitative question from 4: How do you interpret the relationship between `review_scores_rating` and `review_scores_accuracy` using the multivariate regression results? How does this affect your understanding of the univariate regression results?
 
 
 
 
-
-
-
-
+## 8. What do the multivariate regression results tell you about the preferences of reviewers? How could you use them to inform your business strategy?
 
 
 
@@ -133,6 +124,4 @@ We will work with data on Airbnb listings from [Inside Airbnb](http://insideairb
 
 [^insideairbnb]: Inside Airbnb is a mission driven activist project with the objective to: *Provide data that quantifies the impact of short-term rentals on housing and residential communities; and also provides a platform to support advocacy for policies to protect our cities from the impacts of short-term rentals.*
 
-[^viridis-tidyverse]: Several `viridis` scales are loaded with `tidyverse`, since they are included in the package `ggplot2` we have used for all our plots.
-
-[^review-data]: As a reminder from a previous assignment: each row corresponds to a listing `id`, and variables summarize all the reviews for that listing. For context, [here is the reviews page](https://www.airbnb.com/rooms/2595/reviews) for the first listing in the data. In the top left corner you can see that Airbnb reviews include an overall rating (`review_scores_rating`) and several sub-ratings for specific things (e.g., cleanliness, stored in the column `review_scores_cleanliness`).
+[^endogeneity]: For now let's keep things simple and put aside the fact that your costs would vary by location and that value ratings will depend on price, which you are also going to be choosing...

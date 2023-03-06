@@ -12,7 +12,7 @@
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
 title: "Lab-08"
-author: "Answer Key"
+author: "hello, my name is"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: pdf_document
 urlcolor: blue
@@ -20,108 +20,73 @@ urlcolor: blue
 
 ```{r setup, include = FALSE}
 library(tidyverse)
-library(GGally)
-library(broom)
+library(ggridges)
 
 # omit warnings and center plots by default
 library(knitr)
 opts_chunk$set(warning = FALSE, message = FALSE,
-               fig.align = "center",
-               out.width = "85%")
+               fig.align = "center")
 ```
 
 # Preface
 
-The goal of this assignment is to help you gain more familiarity with using **ggplot** to visualize relationships. In this lab we provide less scaffolding and more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
-
-FYI: in this assignment we added `\newpage` before some questions to keep question statements, code blocks, and output together.
+The goal of this assignment is to help you gain more familiarity with using **ggplot** to visualize distributions. In this lab we provide no scaffolding and some more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
 
 ## Data
 
-We will work with data on Airbnb listings from [Inside Airbnb](http://insideairbnb.com).[^insideairbnb] For this lab, we will use numeric reviews data contained in `review_summary.csv`. Each row corresponds to a listing `id`, and variables summarize all the reviews for that listing. For context, [here is the reviews page](https://www.airbnb.com/rooms/2595/reviews) for the first listing in the data. In the top left corner you can see that Airbnb reviews include an overall rating (`review_scores_rating`) and several sub-ratings for specific things (e.g., cleanliness, stored in the column `review_scores_cleanliness`). Start by importing these data and assigning them to a name.
+We will work with data on Airbnb reviews from [Inside Airbnb](http://insideairbnb.com).[^insideairbnb] For this lab, we will just use the `listing_id` and variables that summarize the date of each review, both of which are contained in `reviews.csv`. Start by importing these data and assigning them to a name.
 ```{r}
 
 ```
 
 
-\newpage
-# Part 1: Exploring the Data
-
-## 1. We'll start by making a simple visualization of a relationship in the reviews data. Make a scatter plot of `review_scores_rating` on the y-axis and `review_scores_accuracy` on the x-axis. What can you learn from this visualization about the individual ratings and their relationship?
+## 1. We'll start by making some simple visualizations of the distribution of the number of reviews for each `listing_id`. First, make a histogram. Make the first bar start right at zero, customize the bins or binwidth to suit your tastes, and use a named color to delineate between bars. Only include listings with 250 reviews or fewer.
 ```{r}
 
 ```
 
 
-
-\newpage
-## 2. To help see patterns more clearly, modify your plot from 1 by setting `alpha = 0.05` for points and adding a smoothed conditional mean using `geom_smooth()`.
+## 2. Make a density plot of the distribution of the number of reviews for each `listing_id`. Include listings with any number of reviews and use a log scale for the x axis.
 ```{r}
 
 ```
 
 
-
-\newpage
-## 3. Use `GGally::ggpairs` to make a scatter plot matrix to visualize pairwise relationships for the review scores for accuracy, cleanliness, and location. Which of these pairwise combinations is most correlated? Which is least correlated?
+## 3. Compute the total number of reviews for all listings each month and assign it to a name. Make three visualizations of the the proportion of reviews each month: pie, stacked bars, and side-by-side bars. When we read in these data, the tidyverse's `read_csv` parsed the data and stored all the variables as numbers, which are continuous. In reality, `month` is a discrete variable that only takes on 12 levels. You may want to use `factor()` to tell R to treat `month` accordingly. For the side-by-side bars, make sure the x axis is labeled with the integers 1 through 12. Which do you think is most effective for highlighting the months with the least and most reviews? Explain your logic.
 ```{r}
 
 ```
 
 
-
-
-\newpage
-# Part 2: Extracing Insights from the Data
-
-In this part of the lab, we will use the reviews data to learn about consumer preferences. Put yourself in the shoes of an entrepreneur who wants to build an Airbnb hosting business. Before making any investments, you need to develop a strategy for your business. You know that reviews are important, and so you want to find ways to boost your ratings (so you can then increase your occupancy rates and/or prices in order to stack loot and join [the FIRE movement](https://en.wikipedia.org/wiki/FIRE_movement)). But your capital and time are limited so you want to figure out how to allocate them. In order to maximize your **overall** ratings, should you prioritize accuracy, cleanliness, checkin, communication, location, or value?[^endogeneity]
-
-
-## 4. Estimate a univariate model for `review_scores_rating` as a function of `review_scores_accuracy`. Use `summary()` to print the results. How do you interpret the relationship between these variables in practical terms?
+## 4. Compute the total number of reviews in each month *for each listing*. Plot the density of this count variable, faceting by month. Only include listings with 50 reviews or fewer. What, if any, conclusions can you draw from the resulting plot?
 ```{r}
-# estimate univariate model
-
-
-# summarize univariate model
 
 ```
 
 
-
-\newpage
-## 5. Estimate a multivariate regression with `review_scores_rating` as the dependent variable and all the other `review_scores_*` variables as independent variables. Make a coefficient plot with point estimates and confidence intervals. Omit the intercept. Order the coefficients in the plot according to the magnitude of the estimate. Which sub-rating has the largest coefficient? Which has the smallest?
+## 5. Aggregate the reviews data to the listing level. For each listing, create two variables: the first year it received a review, and the total number of reviews it has received to date. Use the resulting data frame to make an overlapping density plot of the distribution of the number of reviews for properties which entered the market in each year. Fill by year, telling R you want to treat year as a discrete variable by encoding it as a factor (see `?factor()`). Adjust the opacity to make it more readable. What, if any, conclusions can you draw from the resulting plot?
 ```{r}
-# estimate multivariate model
-
-
-# tidy the estimates
-
-
-# make a coefficient plot
 
 ```
 
 
-
-\newpage
-## 6. Make a plot that visualizes marginal effects from both regression models, focusing on the relationship between `review_scores_rating` and `review_scores_accuracy`. For the multivariate visualization, hold all the other sub-ratings at their means. You can choose how to present them. For example: you could overlay them on one plot with a common y-axis, use faceting to make two separate plots, use the approach from the temperature/snow example in class to create a single plot with two subplots, or make two separate plots. When making your choice, think about what you want to convey and how you can do that accurately and effectively.
+## 6. Reproduce the plot above as a ridgeline plot instead of an overlapping density plot. Fill all the densities with a single named color of your choice and color them white.
 ```{r}
-
 
 ```
 
 
-## 7. Use your results from 5 to revisit the qualitative question from 4: How do you interpret the relationship between `review_scores_rating` and `review_scores_accuracy` using the multivariate regression results? How does this affect your understanding of the univariate regression results?
+## 7. The ridgeline plot above in 6 is problematic insofar as it suggests a non-zero probability that listings have negative reviews. Fix that. What can you learn from this visualization? Is anything about it surprising?
+```{r}
+
+```
 
 
+## 8. Combine the reviews data with the data in `listings.csv` that we also used in example-07 and use it to reveal and/or visualize something that you couldn't learn with just `reviews.csv` or just `listings.csv` on their own.
+```{r}
 
-
-## 8. What do the multivariate regression results tell you about the preferences of reviewers? How could you use them to inform your business strategy?
-
-
+```
 
 
 
 [^insideairbnb]: Inside Airbnb is a mission driven activist project with the objective to: *Provide data that quantifies the impact of short-term rentals on housing and residential communities; and also provides a platform to support advocacy for policies to protect our cities from the impacts of short-term rentals.*
-
-[^endogeneity]: For now let's keep things simple and put aside the fact that your costs would vary by location and that value ratings will depend on price, which you are also going to be choosing...

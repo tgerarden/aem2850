@@ -1,4 +1,4 @@
-# AEM 2850 - Example 5
+# AEM 2850 - Example 7
 # Plan for today:
 # - Questions?
 # - On our own devices: work through this script
@@ -17,19 +17,67 @@ library(palmerpenguins)
 theme_set(theme_minimal()) # set the current theme to theme_minimal()
 # you can use theme_set(theme()) to return to defaults if you prefer
 
-# data prep for 2. Aesthetic mappings
-temperatures <- read_csv("https://wilkelab.org/SDS375/datasets/tempnormals.csv") %>%
-  mutate(
-    location = factor(
-      location, levels = c("Death Valley", "Houston", "San Diego", "Chicago")
-    )
-  ) %>%
-  select(location, day_of_year, month, temperature)
-temps_houston <- filter(temperatures, location == "Houston")
+
+# 1. Putting it all together -----
+# let's build a plot sequentially to see how each grammatical layer changes its appearance
+
+?mpg # background on data
+
+names(mpg) # what are the column names?
+
+# let's start with data and aesthetics:
+# map `displ` to x, `hwy` to y, and `drv` to color
+___ |>
+  ggplot(aes(x = _____,
+             y = __,
+             color = __))
+# what do you see? why?
+# no data! because we have not added any geometry layers
+
+# now copy and paste your code from above, and add a point geom
+_____ +
+  geom_point()
+
+# now copy and paste, and add a smooth geom
+_____ +
+  geom_smooth()
+
+# let's modify that to make the smooth geom linear
+_____ +
+  geom_smooth(method = "lm")
+
+# now add the viridis color scale scale_color_viridis_d()
+_____ +
+  scale_color_viridis_d()
+
+# facet by drive train type
+_____ +
+  facet_wrap(vars(drv), ncol = 1)
+
+_____ +
+  labs(x = "Displacement", y = "Highway MPG",
+       color = "Drive",
+       title = "Larger engines use more fuel",
+       subtitle = "Displacement measures engine size")
+
+# add a theme: + theme_bw()
+_____ +
+  theme_bw()
+
+# modify the theme
+_____ +
+  theme(legend.position = "bottom",
+        plot.title = element_text(face =))
+
+# finished! (note: slides contain for a slide version of this process)
 
 
 
-# 1. Warm up -----
+# THE REST OF THESE EXERCISES ARE HERE OPTIONAL, FOR REFERENCE ----
+
+
+
+# 2. Independent warm up -----
 # let's practice mapping from data to aesthetics using palmerpenguins::penguins
 
 ?penguins # background on data
@@ -38,28 +86,28 @@ names(penguins) # what are the column names?
 
 # first, let's visualize body mass and flipper length for penguins
 # map flipper_length_mm to the x-axis, body_mass_g to the y-axis, and add points
-penguins %>%
+penguins |>
   ggplot(aes(x = ______, y = ______)) +
   geom_point()
 # is this data pattern intuitive?
 
 # now map bill_length_mm to the x-axis, bill_depth_mm to the y-axis, and add points
-penguins %>%
+penguins |>
   ggplot(aes(______ = bill_length_mm, ______ = bill_depth_mm)) +
   geom_point()
 # now add a line of best fit
-penguins %>%
+penguins |>
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
   ______() +
   geom_smooth(method = "lm")
 # is this data pattern intuitive?
 
 # augment the mapping: color by species
-penguins %>%
+penguins |>
   ______(aes(x = bill_length_mm, y = bill_depth_mm, color = ______)) +
   geom_point()
 # now add a line of best fit
-penguins %>%
+penguins |>
   ______(______(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   ______() +
   ______(method = "lm")
@@ -71,7 +119,7 @@ penguins %>%
 
 
 # now facet by species
-______ %>%
+______ |>
   ggplot(______(______ = bill_length_mm, ______ = bill_depth_mm, ______ = species)) +
   ______() +
   ______(method = "lm") +
@@ -79,26 +127,35 @@ ______ %>%
 
 # PLEASE STOP HERE AND LET US KNOW THAT YOU ARE DONE
 # if you are waiting, try the following additions to our mapping:
-# 1.1: map sex to color, add points, and facet by species (but don't add lines)
+# 2.1: map sex to color, add points, and facet by species (but don't add lines)
 ______
 
-# 1.2: why is there a color for sex that is labeled NA? make a version of the plot without it
+# 2.2: why is there a color for sex that is labeled NA? make a version of the plot without it
 ______
 
-# 1.3: make a new plot: map flipper_length_mm to x, bill_length_mm to y,
+# 2.3: make a new plot: map flipper_length_mm to x, bill_length_mm to y,
 # species to color and shape, add points, and add a linear fit for each species
 ______
 
 
-# 2. Aesthetic mappings ----
+# 3. Aesthetic mappings ----
 # Acknowledgement: Claus O. Wilke (https://wilkelab.org/SDS375/schedule.html)
+# data prep for 3. Aesthetic mappings
+temperatures <- read_csv("https://wilkelab.org/SDS375/datasets/tempnormals.csv") |>
+  mutate(
+    location = factor(
+      location, levels = c("Death Valley", "Houston", "San Diego", "Chicago")
+    )
+  ) |>
+  select(location, day_of_year, month, temperature)
+temps_houston <- filter(temperatures, location == "Houston")
 
-# let's work with data on average temperature for each day of the year for Houston, TX, birthplace of queen bey:
+# let's work with data on average temperature for each day of the year for Houston, TX, birthplace of Queen Bey:
 temps_houston
 
 # recall our barebones ggplot template:
-# ggplot(data = DATA,
-#        mapping = aes(AESTHETIC MAPPINGS)) +
+# data |>
+# ggplot(aes(AESTHETIC MAPPINGS)) +
 #   GEOM_FUNCTION()
 
 # try this for yourself. map the column `day_of_year` onto the x axis,
@@ -129,14 +186,14 @@ ggplot(______) +
 
 # PLEASE STOP HERE AND LET US KNOW THAT YOU ARE DONE
 # if you are waiting, try the following changes to that last plot:
-# 2.1: replace `geom_boxplot` with `geom_violin`
+# 3.1: replace `geom_boxplot` with `geom_violin`
 ______
 
-# 2.2: replace `geom_boxplot` with `geom_jitter`
+# 3.2: replace `geom_boxplot` with `geom_jitter`
 ______
 
 
-# 3. Adding color ----
+# 4. Adding color ----
 # next let's work with the dataset `temperatures`, contains data for three more locations:
 temperatures
 

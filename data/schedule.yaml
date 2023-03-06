@@ -95,7 +95,7 @@ lessons:
     # assignment: "08-lab"
     bg: 1
 
-  - title: '<span class="content-title">Relationships</span>'
+  - title: '<span class="content-title">Time <br> Working with dates and times</span>'
     session: "Session 9"
     date: "Week 9"
     # date_start: "July 5"
@@ -105,7 +105,7 @@ lessons:
     # assignment: "09-lab"
     bg: 1
 
-  - title: '<span class="content-title">Time <br> Working with dates and times</span>'
+  - title: '<span class="content-title">Relationships</span>'
     session: "Session 10"
     date: "Week 10"
     # date_start: "July 5"
@@ -115,11 +115,11 @@ lessons:
     # assignment: "10-lab"
     bg: 2
 
-#  - title: '<i class="fas fa-star"></i> **Mini project 1 due**'
-#    date: "April 1"
-#    # assignment: "01-mini-project"
-#    bg: 3
-#    bottomborder: True
+  - title: '<i class="fas fa-star"></i> **Group project due**'
+    date: "TBD" # date: "Tentative due date: April 14 at 11:59pm"
+    # assignment: "group-project"
+    bg: 3
+    bottomborder: True
 
   - title: '*Spring break: no class on April 4, 6*'
     header: False
@@ -146,11 +146,6 @@ lessons:
     # example: "12-example"
     # assignment: "12-lab"
     bg: 2
-
-#  - title: '<i class="fas fa-star"></i> **Mini project 2 due**'
-#    date: "April 29"
-#    # # assignment: "02-mini-project"
-#    bg: 3
 
   - title: '<span class="content-title">Functions and iteration</span>'
     session: "Session 13"
