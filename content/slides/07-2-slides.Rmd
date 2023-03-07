@@ -1,41 +1,6 @@
-
-
-
 ---
 class: inverse, center, middle
-name: amounts-overview
-
-# Amounts
-
----
-
-# Announcements
-
-I hope you had a restorative February break
-
-Today we will cover slides and an example
-- Next lab is due Monday
-
-We will provide details on the first project in the next 0-1 weeks
-
-Questions before we get started?
-
-
----
-
-# Plan for Thursday
-
-[Prologue](#prologue)
-
-[Amounts](#amounts)
-
-[Plotting amounts using ggplot](#plotting-amounts)
-
-[example-07](#example-2)
-
----
-class: inverse, center, middle
-name: prologue
+name: prologue-2
 
 # Prologue
 
@@ -663,5 +628,5 @@ gapminder %>%
 class: inverse, center, middle
 name: example-2
 
-# example-07: `amounts-practice.R`
+# example-07:<br>amounts-practice.R
 
