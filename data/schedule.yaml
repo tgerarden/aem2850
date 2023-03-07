@@ -53,15 +53,7 @@ lessons:
     assignment: "05-lab"
     bg: 2
 
-  - title: '*February break: no class on Feb 28*'
-    header: False
-
-  - title: '<i class="fas fa-star"></i> **Prelim 1 in class**'
-    date: "Mar 2 at 9:40AM"
-    # assignment: "final-project"
-    bg: 3
-
-  - title: '<span class="content-title">No new content <br> (February break and Prelim 1)</span>'
+  - title: '<span class="content-title">No new content <br> *February break: no class on Feb 28*</span>'
     # and Proportions
     session: "Session 6"
     date: "Week 6"
@@ -71,6 +63,11 @@ lessons:
     # example: "06-example"
     # assignment: "06-lab"
     bg: 1
+
+  - title: '<i class="fas fa-star"></i> **Prelim 1 in class**'
+    date: "Mar 2 at 9:40AM"
+    # assignment: "final-project"
+    bg: 3
 
   - title: '**Data Visualization Foundations**'
     header: True
