@@ -34,10 +34,10 @@ Spring 2023
 
 Acknowledgements: 
 [Andrew Heiss](https://datavizm20.classes.andrewheiss.com), 
-[Claus Wilke](https://wilkelab.org/SDS375/),
+[Claus Wilke](https://wilkelab.org/SDS375/)
 &lt;!-- [Grant McDermott](https://github.com/uo-ec607/lectures), --&gt;
 &lt;!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), --&gt;
-[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+&lt;!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) --&gt;
 
 ]
 
@@ -47,7 +47,7 @@ Acknowledgements:
 
 Today marks the start of the data visualization component of this course
 
-We will provide details on the group project in the next 1-2 weeks
+See [aem2850.toddgerarden.com/schedule](https://aem2850.toddgerarden.com/schedule/) for minor schedule updates
 
 I will discuss prelim 1 at the end of class today
 
@@ -56,21 +56,22 @@ Questions before we get started?
 
 ---
 
-# Plan for Tuesday
+# Plan for this week
 
-[Course progress](#progress)
+.pull-left[
+### Tuesday
+  - [Course progress](#progress)
+  - [Prologue](#prologue)
+  - [Data, aesthetics, &amp; the grammar of graphics](#grammar-of-graphics)
+  - [Grammatical layers](#grammatical-layers)
+  - [Example (part 1)](#example-1)
+  - [Prelim 1](#example-1)
+  - [Reference: Additional layers](#additional-layers)
+]
 
-[Prologue](#prologue)
-
-[Data, aesthetics, &amp; the grammar of graphics](#grammar-of-graphics)
-
-[Grammatical layers](#grammatical-layers)
-
-[Tidy data revisited](#tidy-data)
-
-[Example (time permitting)](#example-1)
-
-&lt;!-- [Plan for Thursday](#amounts-overview) --&gt;
+&lt;!-- ### Thursday--&gt;
+&lt;!--   - [Prologue](#prologue-) --&gt;
+&lt;!--   - [...](#amounts-overview) --&gt;
 
 
 ---
@@ -625,57 +626,6 @@ gapminder |&gt;
   scale_x_log10() + theme_gray(base_size = 20) # ignore this line for now
 ```
 
-Let's fill in the blanks... what geometry should we use?
-
----
-
-# Mapping from `gapminder` to aesthetics
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:center;"&gt; country &lt;/th&gt;
-   &lt;th style="text-align:center;"&gt; continent &lt;/th&gt;
-   &lt;th style="text-align:center;"&gt; gdpPercap &lt;/th&gt;
-   &lt;th style="text-align:center;"&gt; lifeExp &lt;/th&gt;
-   &lt;th style="text-align:center;"&gt; pop &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:center;"&gt; Afghanistan &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; Asia &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 974.5803384 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 43.828 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 31889923 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:center;"&gt; Albania &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; Europe &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 5937.029526 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 76.423 &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; 3600523 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
-   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-
-```r
-gapminder |&gt; 
-  ggplot(aes(x = gdpPercap,
-             y = lifeExp,
-             color = continent,
-             size = pop)) +
-  geom_point() +
-  scale_x_log10() + theme_gray(base_size = 20) # ignore this line for now
-```
-
 All done! Let's see what we get...
 
 ---
@@ -699,7 +649,15 @@ So far we know about data, aesthetics, and geometries
 
 Think of these components as **layers**
 
-Add them to foundational `ggplot()` with `+`
+Add to foundational `ggplot()` with `+`
+
+
+Why `+` and not `|&gt;`?
+&gt; ggplot2 was written before the pipe was discovered
+
+
+Treat the `+` the same as `|&gt;`
+
 ]
 
 .pull-right[
@@ -712,6 +670,8 @@ Add them to foundational `ggplot()` with `+`
 ???
 
 Layer analogy borrowed from [Thomas Lin Pedersen](https://www.data-imaginist.com/) and his ["Drawing Anything with ggplot2" workshop](https://github.com/thomasp85/ggplot2_workshop).
+
+Source for quote: [R4DS (2e)](https://r4ds.hadley.nz/workflow-style.html#ggplot2)
 
 ---
 
@@ -806,318 +766,13 @@ There are many other grammatical layers we can use to describe graphs!
 
 We can sequentially add layers to the foundational `ggplot()` plot to create complex figures
 
-I will give you a quick preview, don't worry about all the details for now
+We will primarily learn by doing, though this slide deck contains [a preview of additional layers](#additional-layers) in case you need some bedtime reading
 ]
 
 .pull-right[
 ![](img/07/ggplot-layers@4x.png)
 ]
 
----
-
-# Scales
-
-Scales change the properties of the variable mapping
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
-    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_x_continuous()&lt;/code&gt;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Make the x-axis continuous&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_x_continuous(breaks = 1:5)&amp;ensp;&lt;/code&gt;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Manually specify axis ticks&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_x_log10()&lt;/code&gt;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Log the x-axis&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_color_gradient()&lt;/code&gt;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Use a gradient&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_fill_viridis_d()&lt;/code&gt;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Fill with discrete viridis colors&lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
----
-
-# Scales
-
-.pull-left[
-
-.center[`scale_x_log10()`]
-
-&lt;img src="07-slides_files/figure-html/scale-example-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
---
-
-.pull-right[
-
-.center[`scale_color_viridis_d()`]
-
-&lt;img src="07-slides_files/figure-html/scale-example-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
----
-
-# Facets
-
-Facets show subplots for different subsets of data
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
-    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;facet_wrap(vars(continent))&lt;/code&gt;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Plot for each continent&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;facet_wrap(vars(continent, year))&lt;/code&gt;&amp;emsp;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Plot for each continent/year&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;facet_wrap(..., ncol = 1)&lt;/code&gt;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Put all facets in one column&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;facet_wrap(..., nrow = 1)&lt;/code&gt;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Put all facets in one row&lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
----
-
-# Facets
-
-.pull-left[
-
-.center.small[`facet_wrap(vars(continent))`]
-
-&lt;img src="07-slides_files/figure-html/facet-example-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
---
-
-.pull-right[
-
-.center.small[`facet_wrap(vars(continent, year))`]
-
-&lt;img src="07-slides_files/figure-html/facet-example-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
----
-
-# Coordinates
-
-Change the coordinate system
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
-    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;coord_cartesian(ylim = c(1, 10))&lt;/code&gt;&amp;emsp;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Zoom in where y is 1–10&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;coord_flip()&lt;/code&gt;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Switch x and y&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;coord_polar()&lt;/code&gt;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Use polar coordinates&lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
----
-
-# Coordinates
-
-.pull-left[
-
-.center.small[`coord_cartesian(ylim = c(70, 80), xlim = c(10000, 30000))`]
-
-&lt;img src="07-slides_files/figure-html/coord-example-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
---
-
-.pull-right[
-
-.center.small[`coord_flip()`]
-
-&lt;img src="07-slides_files/figure-html/coord-example-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
----
-
-# Labels
-
-Add labels to the plot with a single `labs()` layer
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
-    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;labs(title = "Neat title")&lt;/code&gt;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Title&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;labs(caption = "Something")&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Caption&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;labs(y = "Something")&lt;/td&gt;
-    &lt;td class="cell-left"&gt;y-axis&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;labs(size = "Population")&lt;/code&gt;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Title of size legend&lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
----
-
-# Labels
-
-.left-code[
-
-```r
-ggplot(gapminder_2007, 
-       aes(x = gdpPercap, y = lifeExp, 
-           color = continent, size = pop)) +
-  geom_point() +
-  scale_x_log10() +
-  labs(title = "Health and wealth go together",
-       subtitle = "Data from 2007",
-       x = "Wealth (GDP per capita)",
-       y = "Health (life expectancy)",
-       color = "Continent",
-       size = "Population",
-       caption = "Source: The Gapminder Project")
-```
-]
-
-.right-plot[
-![](07-slides_files/figure-html/labels-example-1.png)
-]
-
----
-
-# Theme
-
-`theme()` can be used to change the appearance of anything in a plot
-
-Lots of themes built in and available from other packages
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
-    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;theme_grey()&lt;/code&gt;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Default grey background&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;theme_bw()&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Black and white&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;theme_dark()&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Dark&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;theme_minimal()&lt;/code&gt;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Minimal&lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
----
-
-# Theme
-
-.pull-left[
-
-.center.small[`theme_dark()`]
-
-&lt;img src="07-slides_files/figure-html/theme-example-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
---
-
-.pull-right[
-
-.center.small[`theme_minimal()`]
-
-&lt;img src="07-slides_files/figure-html/theme-example-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
----
-
-# Theme
-
-There are collections of pre-built themes online, like [the **ggthemes** package](https://jrnold.github.io/ggthemes/)
-
-.center[
-&lt;figure&gt;
-  &lt;img src="img/07/ggthemes.png" alt="ggthemes" title="ggthemes" width="55%"&gt;
-&lt;/figure&gt;
-]
-
----
-
-# Theme
-
-Organizations often make their own custom themes, like [the BBC](https://bbc.github.io/rcookbook/)
-
-.center[
-&lt;figure&gt;
-  &lt;img src="img/07/bbc-cookbook.png" alt="ggthemes" title="ggthemes" width="80%"&gt;
-&lt;/figure&gt;
-]
-
----
-
-# Theme
-
-Make individual theme adjustments with `theme()`
-
-
-```r
-theme_bw() + 
-theme(legend.position = "bottom",
-      plot.title = element_text(face = "bold"),
-      panel.grid = element_blank(),
-      axis.title.y = element_text(face = "italic"))
-```
-
----
-
-# So many possibilities!
-
-.pull-left[
-![](img/07/ggplot-layers@4x.png)
-]
-
-.pull-right[
-These were just a few examples
-
-See [the **ggplot2** documentation](https://ggplot2.tidyverse.org/reference/index.html) for examples of everything you can do
-]
 
 ---
 
@@ -1160,7 +815,7 @@ This grammar is portable to other software like Tableau, which is [built on the 
 # Describing graphs with the grammar
 
 .left-code[
-.box-2.small[Map wealth to the x-axis, health to the y-axis, add points, color by continent, size by population, scale the y-axis with a log, and facet by year]
+.box-2.small[Map wealth to the x-axis, health to the y-axis, add points, color by continent, size by population, scale the x-axis with a log, and facet by year]
 
 
 ```r
@@ -1247,12 +902,7 @@ ggplot(data = gapminder,
 ]
 
 ---
-class: inverse, center, middle
 name: tidy-data
-
-# Tidy data revisited
-
----
 
 # Tidy data revisited
 
@@ -1558,6 +1208,334 @@ ggplot(data = mpg,
 
 .right-plot[
 ![](07-slides_files/figure-html/mpg-layers-finished-1.png)
+]
+
+
+---
+class: inverse, center, middle
+name: additional-layers
+
+# Additional layers
+
+---
+
+# Additional layers
+
+.pull-left[
+The next several slides contains a preview of additional layers
+
+These are intended as a reference
+]
+
+.pull-right[
+![](img/07/ggplot-layers@4x.png)
+]
+
+
+---
+
+# Scales
+
+Scales change the properties of the variable mapping
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
+    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_x_continuous()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Make the x-axis continuous&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_x_continuous(breaks = 1:5)&amp;ensp;&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Manually specify axis ticks&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_x_log10()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Log the x-axis&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_color_gradient()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Use a gradient&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_fill_viridis_d()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Fill with discrete viridis colors&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+---
+
+# Scales
+
+.pull-left[
+
+.center[`scale_x_log10()`]
+
+&lt;img src="07-slides_files/figure-html/scale-example-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-right[
+
+.center[`scale_color_viridis_d()`]
+
+&lt;img src="07-slides_files/figure-html/scale-example-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Facets
+
+Facets show subplots for different subsets of data
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
+    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;facet_wrap(vars(continent))&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Plot for each continent&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;facet_wrap(vars(continent, year))&lt;/code&gt;&amp;emsp;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Plot for each continent/year&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;facet_wrap(..., ncol = 1)&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Put all facets in one column&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;facet_wrap(..., nrow = 1)&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Put all facets in one row&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+---
+
+# Facets
+
+.pull-left[
+
+.center.small[`facet_wrap(vars(continent))`]
+
+&lt;img src="07-slides_files/figure-html/facet-example-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-right[
+
+.center.small[`facet_wrap(vars(continent, year))`]
+
+&lt;img src="07-slides_files/figure-html/facet-example-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Coordinates
+
+Change the coordinate system
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
+    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;coord_cartesian(ylim = c(1, 10))&lt;/code&gt;&amp;emsp;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Zoom in where y is 1–10&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;coord_flip()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Switch x and y&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;coord_polar()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Use polar coordinates&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+---
+
+# Coordinates
+
+.pull-left[
+
+.center.small[`coord_cartesian(ylim = c(70, 80), xlim = c(10000, 30000))`]
+
+&lt;img src="07-slides_files/figure-html/coord-example-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-right[
+
+.center.small[`coord_flip()`]
+
+&lt;img src="07-slides_files/figure-html/coord-example-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Labels
+
+Add labels to the plot with a single `labs()` layer
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
+    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;labs(title = "Neat title")&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Title&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;labs(caption = "Something")&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Caption&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;labs(y = "Something")&lt;/td&gt;
+    &lt;td class="cell-left"&gt;y-axis&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;labs(size = "Population")&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Title of size legend&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+---
+
+# Labels
+
+.left-code[
+
+```r
+ggplot(gapminder_2007, 
+       aes(x = gdpPercap, y = lifeExp, 
+           color = continent, size = pop)) +
+  geom_point() +
+  scale_x_log10() +
+  labs(title = "Health and wealth go together",
+       subtitle = "Data from 2007",
+       x = "Wealth (GDP per capita)",
+       y = "Health (life expectancy)",
+       color = "Continent",
+       size = "Population",
+       caption = "Source: The Gapminder Project")
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/labels-example-1.png)
+]
+
+---
+
+# Theme
+
+`theme()` can be used to change the appearance of anything in a plot
+
+Lots of themes built in and available from other packages
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
+    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;theme_grey()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Default grey background&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;theme_bw()&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Black and white&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;theme_dark()&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Dark&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;theme_minimal()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Minimal&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+---
+
+# Theme
+
+.pull-left[
+
+.center.small[`theme_dark()`]
+
+&lt;img src="07-slides_files/figure-html/theme-example-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-right[
+
+.center.small[`theme_minimal()`]
+
+&lt;img src="07-slides_files/figure-html/theme-example-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Theme
+
+There are collections of pre-built themes online, like [the **ggthemes** package](https://jrnold.github.io/ggthemes/)
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/07/ggthemes.png" alt="ggthemes" title="ggthemes" width="55%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Theme
+
+Organizations often make their own custom themes, like [the BBC](https://bbc.github.io/rcookbook/)
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/07/bbc-cookbook.png" alt="ggthemes" title="ggthemes" width="80%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Theme
+
+Make individual theme adjustments with `theme()`
+
+
+```r
+theme_bw() + 
+theme(legend.position = "bottom",
+      plot.title = element_text(face = "bold"),
+      panel.grid = element_blank(),
+      axis.title.y = element_text(face = "italic"))
+```
+
+---
+
+# So many possibilities!
+
+.pull-left[
+![](img/07/ggplot-layers@4x.png)
+]
+
+.pull-right[
+These were just a few examples
+
+See [the **ggplot2** documentation](https://ggplot2.tidyverse.org/reference/index.html) for examples of everything you can do
 ]
 
     </textarea>
