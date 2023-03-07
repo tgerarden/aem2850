@@ -55,10 +55,10 @@ Spring 2023
 
 Acknowledgements: 
 [Andrew Heiss](https://datavizm20.classes.andrewheiss.com), 
-[Claus Wilke](https://wilkelab.org/SDS375/),
+[Claus Wilke](https://wilkelab.org/SDS375/)
 <!-- [Grant McDermott](https://github.com/uo-ec607/lectures), -->
 <!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), -->
-[Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+<!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) -->
 
 ]
 
@@ -68,7 +68,7 @@ Acknowledgements:
 
 Today marks the start of the data visualization component of this course
 
-We will provide details on the group project in the next 1-2 weeks
+See [aem2850.toddgerarden.com/schedule](https://aem2850.toddgerarden.com/schedule/) for minor schedule updates
 
 I will discuss prelim 1 at the end of class today
 
@@ -77,21 +77,22 @@ Questions before we get started?
 
 ---
 
-# Plan for Tuesday
+# Plan for this week
 
-[Course progress](#progress)
+.pull-left[
+### Tuesday
+  - [Course progress](#progress)
+  - [Prologue](#prologue)
+  - [Data, aesthetics, & the grammar of graphics](#grammar-of-graphics)
+  - [Grammatical layers](#grammatical-layers)
+  - [Example (part 1)](#example-1)
+  - [Prelim 1](#example-1)
+  - [Reference: Additional layers](#additional-layers)
+]
 
-[Prologue](#prologue)
-
-[Data, aesthetics, & the grammar of graphics](#grammar-of-graphics)
-
-[Grammatical layers](#grammatical-layers)
-
-[Tidy data revisited](#tidy-data)
-
-[Example (time permitting)](#example-1)
-
-<!-- [Plan for Thursday](#amounts-overview) -->
+<!-- ### Thursday-->
+<!--   - [Prologue](#prologue-) -->
+<!--   - [...](#amounts-overview) -->
 
 
 ---
@@ -493,29 +494,6 @@ Let's fill in the blanks... what geometry should we use?
 ---
 
 # Mapping from `gapminder` to aesthetics
-```{r head-gapminder-mask-5, echo=FALSE}
-gapminder_2007 |> 
-  slice(1:2) |> 
-  mutate_all(as.character) |> 
-  bind_rows(tibble(country = "…", continent = "…", gdpPercap = "…", lifeExp = "…", pop = "…")) |> 
-  knitr::kable(format = "html", align = "ccccc")
-```
-
-```{r gapminder-example-mask-5, eval=FALSE}
-gapminder |> 
-  ggplot(aes(x = gdpPercap,
-             y = lifeExp,
-             color = continent,
-             size = pop)) +
-  geom_point() +
-  scale_x_log10() + theme_gray(base_size = 20) # ignore this line for now
-```
-
-Let's fill in the blanks... what geometry should we use?
-
----
-
-# Mapping from `gapminder` to aesthetics
 ```{r head-gapminder, echo=FALSE}
 gapminder_2007 |> 
   slice(1:2) |> 
@@ -568,7 +546,15 @@ So far we know about data, aesthetics, and geometries
 
 Think of these components as **layers**
 
-Add them to foundational `ggplot()` with `+`
+Add to foundational `ggplot()` with `+`
+
+
+Why `+` and not `|>`?
+> ggplot2 was written before the pipe was discovered
+
+
+Treat the `+` the same as `|>`
+
 ]
 
 .pull-right[
@@ -581,6 +567,8 @@ Add them to foundational `ggplot()` with `+`
 ???
 
 Layer analogy borrowed from [Thomas Lin Pedersen](https://www.data-imaginist.com/) and his ["Drawing Anything with ggplot2" workshop](https://github.com/thomasp85/ggplot2_workshop).
+
+Source for quote: [R4DS (2e)](https://r4ds.hadley.nz/workflow-style.html#ggplot2)
 
 ---
 
@@ -726,12 +714,426 @@ There are many other grammatical layers we can use to describe graphs!
 
 We can sequentially add layers to the foundational `ggplot()` plot to create complex figures
 
-I will give you a quick preview, don't worry about all the details for now
+We will primarily learn by doing, though this slide deck contains [a preview of additional layers](#additional-layers) in case you need some bedtime reading
 ]
 
 .pull-right[
 ![](img/07/ggplot-layers@4x.png)
 ]
+
+
+---
+
+# A true grammar
+
+.pull-left[
+You have probably made graphics in Excel by searching through menus for a specific chart type, and then reshaping your data to work with it
+
+With the grammar of graphics, we don't talk about specific chart **types**
+]
+
+.pull-right[
+.center[
+<figure>
+  <img src="img/07/excel-chart-types.png" alt="Excel chart types" title="Excel chart types" width="85%">
+</figure>
+]
+]
+
+---
+
+# A true grammar
+
+.pull-left[
+With the grammar of graphics, we talk about specific chart **elements**
+
+- .small[Map a column to the x-axis, fill by a variable, `geom_col()` to get stacked bars]
+
+- .small[Geoms can be interchangable (e.g., `geom_violin()` and `geom_boxplot()`)]
+
+This grammar is portable to other software like Tableau, which is [built on the grammar of graphics](https://www.tableau.com/about/blog/2015/4/getting-know-lee-wilkinson-tableaus-new-vp-statistics-38654)
+]
+
+.pull-right[
+![](img/07/ggplot-layers@4x.png)
+]
+
+---
+
+# Describing graphs with the grammar
+
+.left-code[
+.box-2.small[Map wealth to the x-axis, health to the y-axis, add points, color by continent, size by population, scale the x-axis with a log, and facet by year]
+
+```{r describe-1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
+ggplot(data = filter(gapminder, year %in% c(2002, 2007)), 
+       mapping = aes(x = gdpPercap,
+                     y = lifeExp,
+                     color = continent,
+                     size = pop)) +
+  geom_point() +
+  scale_x_log10() + 
+  facet_wrap(vars(year), ncol = 1)
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("describe-1", "png")`)
+]
+
+---
+
+# Describing graphs with the grammar
+
+.left-code[
+.box-2.small[Map health to the x-axis, add a histogram with bins for every 5 years, fill and facet by continent]
+
+```{r describe-2, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
+ggplot(data = gapminder_2007, 
+       mapping = aes(x = lifeExp,
+                     fill = continent)) +
+  geom_histogram(binwidth = 5, 
+                 color = "white") +
+  guides(fill = "none") +  # Turn off legend
+  facet_wrap(vars(continent))
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("describe-2", "png")`)
+]
+
+---
+
+# Describing graphs with the grammar
+
+.left-code[
+.box-2.small[Map continent to the x-axis, health to the y-axis, add boxplots, fill by continent]
+
+```{r describe-3, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
+ggplot(data = gapminder, 
+       mapping = aes(x = continent,
+                     y = lifeExp,
+                     fill = continent)) +
+  geom_boxplot() +
+  guides(fill = "none")  # Turn off legend
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("describe-3", "png")`)
+]
+
+---
+
+# Describing graphs with the grammar
+
+.left-code[
+.box-2.small[Map continent to the x-axis, health to the y-axis, add violin plots, fill by continent]
+
+```{r describe-4, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
+ggplot(data = gapminder, 
+       mapping = aes(x = continent,
+                     y = lifeExp,
+                     fill = continent)) +
+  geom_violin() + # we only had to change this! #<<
+  guides(fill = "none")  # Turn off legend
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("describe-4", "png")`)
+]
+
+---
+name: tidy-data
+
+# Tidy data revisited
+
+`ggplot()` is incredibly flexible
+
+For `ggplot()` to work its magic, your data frame needs to be **tidy**
+
+This requires a bit of upfront work, but it pays off
+
+We never had to modify `gapminder` to make all those different plots!
+
+---
+
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/07/tidydata_7.jpg")
+```
+
+
+---
+class: inverse, center, middle
+name: example-1
+
+# example-07:<br>mapping-data-to-graphics-practice.R
+
+
+---
+
+# Putting it all together
+
+In the example, we'll build a plot sequentially to see how each grammatical layer changes its appearance
+
+The rest of this section presents that code and output in slide form
+
+For illustrative purposes, let's use data on cars from the data frame `ggplot2::mpg`
+
+```{r head-mpg, echo=FALSE}
+mpg |> 
+  filter(manufacturer=="volkswagen") |> 
+  slice(1:2) |> 
+  select(manufacturer, model, year, trans, displ, hwy, drv) |> 
+  mutate_all(as.character) |> 
+  bind_rows(tibble(manufacturer = "…", model = "…", year = "…", trans = "…", displ = "…", hwy = "…", drv = "…")) |> 
+  knitr::kable(format = "html")
+```
+
+---
+
+.left-code[
+### Start with data and aesthetics
+
+```{r mpg-layers-1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
+ggplot(data = mpg,                              #<<
+       aes(x = displ, # engine displacement     #<<
+           y = hwy, # highway mpg               #<<
+           color = drv))  # type of drive train #<<
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("mpg-layers-1", "png")`)
+]
+
+---
+
+.left-code[
+### Add a point geom
+
+```{r mpg-layers-2, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
+ggplot(data = mpg,
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() #<<
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("mpg-layers-2", "png")`)
+]
+
+---
+
+.left-code[
+### Add a smooth geom
+
+```{r mpg-layers-3, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
+ggplot(data = mpg,
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+  geom_smooth() #<<
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("mpg-layers-3", "png")`)
+]
+
+---
+
+.left-code[
+### Make it straight
+
+```{r mpg-layers-4, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
+ggplot(data = mpg,
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") #<<
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("mpg-layers-4", "png")`)
+]
+
+---
+
+.left-code[
+### Use a viridis color scale
+
+```{r mpg-layers-5, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
+ggplot(data = mpg,
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_viridis_d() #<<
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("mpg-layers-5", "png")`)
+]
+
+---
+
+.left-code[
+### Facet by drive train type
+
+```{r mpg-layers-6, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
+ggplot(data = mpg,
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_viridis_d() +
+  facet_wrap(vars(drv), ncol = 1) #<<
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("mpg-layers-6", "png")`)
+]
+
+---
+
+.left-code[
+### Add labels
+
+```{r mpg-layers-7, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
+ggplot(data = mpg,
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_viridis_d() +
+  facet_wrap(vars(drv), ncol = 1) +
+  labs(x = "Displacement", y = "Highway MPG",  #<<
+       color = "Drive",   #<<
+       title = "Larger engines use more fuel",  #<<
+       subtitle = "Displacement measures engine size")  #<<
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("mpg-layers-7", "png")`)
+]
+
+---
+
+.left-code[
+### Add a theme
+
+```{r mpg-layers-8, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
+ggplot(data = mpg,
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_viridis_d() +
+  facet_wrap(vars(drv), ncol = 1) +
+  labs(x = "Displacement", y = "Highway MPG",
+       color = "Drive",
+       title = "Larger engines use more fuel",
+       subtitle = "Displacement measures engine size") +
+  theme_bw() #<<
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("mpg-layers-8", "png")`)
+]
+
+---
+
+.left-code[
+### Modify the theme
+
+```{r mpg-layers-9, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
+ggplot(data = mpg, 
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_viridis_d() +
+  facet_wrap(vars(drv), ncol = 1) +
+  labs(x = "Displacement", y = "Highway MPG",
+       color = "Drive",
+       title = "Larger engines use more fuel",
+       subtitle = "Displacement measures engine size") +
+  theme_bw() +
+  theme(legend.position = "bottom", #<<
+        plot.title = element_text(face = "bold")) #<<
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("mpg-layers-9", "png")`)
+]
+
+---
+
+.left-code[
+### Finished!
+
+```{r mpg-layers-finished, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
+ggplot(data = mpg, 
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") + 
+  scale_color_viridis_d() +
+  facet_wrap(vars(drv), ncol = 1) +
+  labs(x = "Displacement", y = "Highway MPG",
+       color = "Drive",
+       title = "Larger engines use more fuel",
+       subtitle = "Displacement measures engine size") +
+  theme_bw() +
+  theme(legend.position = "bottom",
+        plot.title = element_text(face = "bold"))
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("mpg-layers-finished", "png")`)
+]
+
+
+---
+class: inverse, center, middle
+name: additional-layers
+
+# Additional layers
+
+---
+
+# Additional layers
+
+.pull-left[
+The next several slides contains a preview of additional layers
+
+These are intended as a reference
+]
+
+.pull-right[
+![](img/07/ggplot-layers@4x.png)
+]
+
 
 ---
 
@@ -1075,401 +1477,5 @@ theme(legend.position = "bottom",
 These were just a few examples
 
 See [the **ggplot2** documentation](https://ggplot2.tidyverse.org/reference/index.html) for examples of everything you can do
-]
-
----
-
-# A true grammar
-
-.pull-left[
-You have probably made graphics in Excel by searching through menus for a specific chart type, and then reshaping your data to work with it
-
-With the grammar of graphics, we don't talk about specific chart **types**
-]
-
-.pull-right[
-.center[
-<figure>
-  <img src="img/07/excel-chart-types.png" alt="Excel chart types" title="Excel chart types" width="85%">
-</figure>
-]
-]
-
----
-
-# A true grammar
-
-.pull-left[
-With the grammar of graphics, we talk about specific chart **elements**
-
-- .small[Map a column to the x-axis, fill by a variable, `geom_col()` to get stacked bars]
-
-- .small[Geoms can be interchangable (e.g., `geom_violin()` and `geom_boxplot()`)]
-
-This grammar is portable to other software like Tableau, which is [built on the grammar of graphics](https://www.tableau.com/about/blog/2015/4/getting-know-lee-wilkinson-tableaus-new-vp-statistics-38654)
-]
-
-.pull-right[
-![](img/07/ggplot-layers@4x.png)
-]
-
----
-
-# Describing graphs with the grammar
-
-.left-code[
-.box-2.small[Map wealth to the x-axis, health to the y-axis, add points, color by continent, size by population, scale the y-axis with a log, and facet by year]
-
-```{r describe-1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(data = filter(gapminder, year %in% c(2002, 2007)), 
-       mapping = aes(x = gdpPercap,
-                     y = lifeExp,
-                     color = continent,
-                     size = pop)) +
-  geom_point() +
-  scale_x_log10() + 
-  facet_wrap(vars(year), ncol = 1)
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("describe-1", "png")`)
-]
-
----
-
-# Describing graphs with the grammar
-
-.left-code[
-.box-2.small[Map health to the x-axis, add a histogram with bins for every 5 years, fill and facet by continent]
-
-```{r describe-2, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(data = gapminder_2007, 
-       mapping = aes(x = lifeExp,
-                     fill = continent)) +
-  geom_histogram(binwidth = 5, 
-                 color = "white") +
-  guides(fill = "none") +  # Turn off legend
-  facet_wrap(vars(continent))
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("describe-2", "png")`)
-]
-
----
-
-# Describing graphs with the grammar
-
-.left-code[
-.box-2.small[Map continent to the x-axis, health to the y-axis, add boxplots, fill by continent]
-
-```{r describe-3, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(data = gapminder, 
-       mapping = aes(x = continent,
-                     y = lifeExp,
-                     fill = continent)) +
-  geom_boxplot() +
-  guides(fill = "none")  # Turn off legend
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("describe-3", "png")`)
-]
-
----
-
-# Describing graphs with the grammar
-
-.left-code[
-.box-2.small[Map continent to the x-axis, health to the y-axis, add violin plots, fill by continent]
-
-```{r describe-4, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(data = gapminder, 
-       mapping = aes(x = continent,
-                     y = lifeExp,
-                     fill = continent)) +
-  geom_violin() + # we only had to change this! #<<
-  guides(fill = "none")  # Turn off legend
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("describe-4", "png")`)
-]
-
----
-class: inverse, center, middle
-name: tidy-data
-
-# Tidy data revisited
-
----
-
-# Tidy data revisited
-
-`ggplot()` is incredibly flexible
-
-For `ggplot()` to work its magic, your data frame needs to be **tidy**
-
-This requires a bit of upfront work, but it pays off
-
-We never had to modify `gapminder` to make all those different plots!
-
----
-
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/07/tidydata_7.jpg")
-```
-
-
----
-class: inverse, center, middle
-name: example-1
-
-# example-07:<br>mapping-data-to-graphics-practice.R
-
-
----
-
-# Putting it all together
-
-In the example, we'll build a plot sequentially to see how each grammatical layer changes its appearance
-
-The rest of this section presents that code and output in slide form
-
-For illustrative purposes, let's use data on cars from the data frame `ggplot2::mpg`
-
-```{r head-mpg, echo=FALSE}
-mpg |> 
-  filter(manufacturer=="volkswagen") |> 
-  slice(1:2) |> 
-  select(manufacturer, model, year, trans, displ, hwy, drv) |> 
-  mutate_all(as.character) |> 
-  bind_rows(tibble(manufacturer = "…", model = "…", year = "…", trans = "…", displ = "…", hwy = "…", drv = "…")) |> 
-  knitr::kable(format = "html")
-```
-
----
-
-.left-code[
-### Start with data and aesthetics
-
-```{r mpg-layers-1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,                              #<<
-       aes(x = displ, # engine displacement     #<<
-           y = hwy, # highway mpg               #<<
-           color = drv))  # type of drive train #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-1", "png")`)
-]
-
----
-
-.left-code[
-### Add a point geom
-
-```{r mpg-layers-2, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-2", "png")`)
-]
-
----
-
-.left-code[
-### Add a smooth geom
-
-```{r mpg-layers-3, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth() #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-3", "png")`)
-]
-
----
-
-.left-code[
-### Make it straight
-
-```{r mpg-layers-4, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-4", "png")`)
-]
-
----
-
-.left-code[
-### Use a viridis color scale
-
-```{r mpg-layers-5, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-5", "png")`)
-]
-
----
-
-.left-code[
-### Facet by drive train type
-
-```{r mpg-layers-6, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-6", "png")`)
-]
-
----
-
-.left-code[
-### Add labels
-
-```{r mpg-layers-7, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) +
-  labs(x = "Displacement", y = "Highway MPG",  #<<
-       color = "Drive",   #<<
-       title = "Larger engines use more fuel",  #<<
-       subtitle = "Displacement measures engine size")  #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-7", "png")`)
-]
-
----
-
-.left-code[
-### Add a theme
-
-```{r mpg-layers-8, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) +
-  labs(x = "Displacement", y = "Highway MPG",
-       color = "Drive",
-       title = "Larger engines use more fuel",
-       subtitle = "Displacement measures engine size") +
-  theme_bw() #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-8", "png")`)
-]
-
----
-
-.left-code[
-### Modify the theme
-
-```{r mpg-layers-9, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg, 
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) +
-  labs(x = "Displacement", y = "Highway MPG",
-       color = "Drive",
-       title = "Larger engines use more fuel",
-       subtitle = "Displacement measures engine size") +
-  theme_bw() +
-  theme(legend.position = "bottom", #<<
-        plot.title = element_text(face = "bold")) #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-9", "png")`)
-]
-
----
-
-.left-code[
-### Finished!
-
-```{r mpg-layers-finished, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg, 
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") + 
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) +
-  labs(x = "Displacement", y = "Highway MPG",
-       color = "Drive",
-       title = "Larger engines use more fuel",
-       subtitle = "Displacement measures engine size") +
-  theme_bw() +
-  theme(legend.position = "bottom",
-        plot.title = element_text(face = "bold"))
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-finished", "png")`)
 ]
 
