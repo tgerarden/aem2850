@@ -77,7 +77,6 @@
 
 /* Side-by-side code/plot stuff https://www.garrickadenbuie.com/blog/decouple-code-and-output-in-xaringan-slides/ */
 .left-code {
-  color: #777;
   width: 48%;
   height: 92%;
   float: left;
@@ -89,14 +88,9 @@
   padding-left: 1%;
 }
 
-.left-code .remark-code,
-.left-code .remark-inline-code {
-  font-size: 0.6em;
-}
-
 .small-code .remark-code,
 .small-code .remark-inline-code {
-  font-size: 0.6em;
+/*  font-size: 0.6em; */
 }
 
 

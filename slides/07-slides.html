@@ -1421,9 +1421,9 @@ Add labels to the plot with a single `labs()` layer
 .left-code[
 
 ```r
-ggplot(gapminder_2007, 
-       aes(x = gdpPercap, y = lifeExp, 
-           color = continent, size = pop)) +
+gapminder_2007 |&gt; 
+  ggplot(aes(x = gdpPercap, y = lifeExp, 
+             color = continent, size = pop)) +
   geom_point() +
   scale_x_log10() +
   labs(title = "Health and wealth go together",
@@ -1560,7 +1560,7 @@ name: prologue-2
 
 # Remember our concentrations?
 
-How might we visualize these data?
+How might we visualize these amounts?
 
 .less-left[
 
@@ -1575,9 +1575,9 @@ How might we visualize these data?
 ##  5 tech              5
 ##  6 dev               2
 ##  7 food              2
-##  8 strategy          1
+##  8 strat             1
 ##  9 entr              1
-## 10 mkting            1
+## 10 mkt               1
 ```
 ]
 
@@ -1666,7 +1666,7 @@ We are a lot better at visualizing line lengths than angles and areas
 1. truncated y axis
 2. area scales faster than height
 
-.small[This terrible figure was brought to us by one of you, thanks!]
+.small[This terrible figure brought to you by a former AEM 2850 student!]
 ]
 
 ---
@@ -1689,51 +1689,6 @@ We are a lot better at visualizing line lengths than angles and areas
 
 ---
 
-# Show more data with strip plots
-
-.left-code[
-
-```r
-ggplot(animals,
-aes(x = animal_type,
-y = weight,
-color = animal_type)) +
-*geom_point() +
-labs(x = NULL, y = "Weight") +
-guides(color = "none")
-```
-]
-
-.right-plot[
-![](07-slides_files/figure-html/strip-plot-basic-1.png)
-]
-
-
----
-
-# Jittering and transparency can also help
-
-.left-code[
-
-```r
-ggplot(animals,
-aes(x = animal_type,
-y = weight,
-color = animal_type)) +
-*geom_point(position = position_jitter(),
-*size = 1,
-*alpha = 0.5) +
-labs(x = NULL, y = "Weight") +
-guides(color = "none")
-```
-]
-
-.right-plot[
-![](07-slides_files/figure-html/strip-plot-1.png)
-]
-
----
-
 # General rules for bar charts
 
 Useful when the length of the bar is all that matters
@@ -1746,7 +1701,7 @@ Bar charts should always start at zero
 --
 
 Don't use bars for summary statistics. You throw away too much information.
-- We will come back to visualizing distributions / uncertainty
+- We will come back to visualizing distributions / uncertainty next week
 
 
 ---
@@ -1766,8 +1721,8 @@ We'll use a summarized version of the gapminder dataset for examples
 library(gapminder)
 gapminder_continents &lt;- gapminder |&gt;
   filter(year == 2007) |&gt;  # only look at 2007
-  count(continent) |&gt;  # get a count of continents
-  arrange(desc(n))  # sort by count, descending
+  count(continent) |&gt;      # count the number of countries per continent
+  arrange(desc(n))         # sort by count, descending
 gapminder_continents
 ```
 
@@ -1790,10 +1745,10 @@ gapminder_continents
 
 
 ```r
-ggplot(data = gapminder_continents,
-       aes(x = continent, # map continent to x
-           y = n)) + # map n (num countries) to y
-* geom_col() # add bars
+gapminder_continents |&gt; 
+  ggplot(aes(x = continent, # map continent to x
+             y = n)) +      # map n countries to y
+* geom_col()                # add bars
 ```
 How could we improve this?
 ]
@@ -1812,9 +1767,10 @@ How could we improve this?
 
 
 ```r
-ggplot(gapminder_continents,
-       aes(x = continent, y = n,
-*          fill = continent)) + # color bars
+gapminder_continents |&gt; 
+  ggplot(aes(x = continent, 
+             y = n,
+*            fill = continent)) + # color bars
   geom_col()
 ```
 
@@ -1835,9 +1791,9 @@ Do we need the fill legend?
 
 
 ```r
-ggplot(gapminder_continents,
-       aes(x = continent, y = n,
-           fill = continent)) +
+gapminder_continents |&gt; 
+  ggplot(aes(x = continent, y = n,
+             fill = continent)) +
   geom_col() +
 * guides(fill = "none") # omit fill legend
 ```
@@ -1861,9 +1817,9 @@ Do we need "continent" at all?
 
 
 ```r
-ggplot(gapminder_continents,
-       aes(x = continent, y = n,
-           fill = continent)) +
+gapminder_continents |&gt; 
+  ggplot(aes(x = continent, y = n,
+             fill = continent)) +
   geom_col() +
   guides(fill = "none") +
 * labs(x = NULL, y = "Number of countries")
@@ -1886,13 +1842,17 @@ Is alphabetical the best ordering?
 
 
 ```r
-ggplot(gapminder_continents,
-*      aes(x = fct_reorder(continent, n),
-           y = n, fill = continent)) +
+gapminder_continents |&gt; 
+* ggplot(aes(x = fct_reorder(continent, n),
+             y = n, fill = continent)) +
   geom_col() +
   guides(fill = "none") +
   labs(x = NULL, y = "Number of countries")
 ```
+
+`fct_reorder(continent, n)` means "reorder the factor variable continent by n, smallest to largest"
+
+Factor is R's term for variables that have a fixed and known set of possible values
 ]
 
 .right-plot[
@@ -1909,13 +1869,15 @@ ggplot(gapminder_continents,
 
 
 ```r
-ggplot(gapminder_continents,
-*      aes(x = fct_reorder(continent, -n),
-           y = n, fill = continent)) +
+gapminder_continents |&gt; 
+* ggplot(aes(x = fct_reorder(continent, -n),
+             y = n, fill = continent)) +
   geom_col() +
   guides(fill = "none") +
   labs(x = NULL, y = "Number of countries")
 ```
+
+`fct_reorder(continent, -n)` means "reorder the factor variable continent by n, largest to smallest"
 ]
 
 .right-plot[
@@ -1937,9 +1899,10 @@ ggplot(gapminder_continents,
 gapminder_ordered &lt;- gapminder_continents |&gt;
   arrange(desc(n)) |&gt; # sort by count, descending
 * mutate(continent = fct_inorder(continent))
-ggplot(gapminder_ordered,
-*      aes(x = continent,
-           y = n, fill = continent)) +
+gapminder_ordered |&gt; 
+* ggplot(aes(x = continent,
+             y = n, 
+             fill = continent)) +
   geom_col() +
   guides(fill = "none") +
   labs(x = NULL, y = "Number of countries")
@@ -1965,7 +1928,7 @@ Use `geom_bar` to count and plot in one step
 gapminder |&gt;
   filter(year == 2007) |&gt;
   ggplot(aes(x = continent, # note: no y aesthetic defined
-           fill = continent)) +
+             fill = continent)) +
 * geom_bar() +
   guides(fill = "none") +
   labs(x = NULL, y = "Number of countries")
@@ -1991,8 +1954,8 @@ Here we can reorder by frequency using `fct_infreq`
 gapminder |&gt;
   filter(year == 2007) |&gt;
 * ggplot(aes(x = fct_infreq(continent),
-           fill = continent)) +
-* geom_bar() +
+             fill = continent)) +
+  geom_bar() +
   guides(fill = "none") +
   labs(x = NULL, y = "Number of countries")
 ```
@@ -2008,14 +1971,16 @@ gapminder |&gt;
 
 # We can also flip geom_col/bar axes
 
+Simply use `y = ` instead of `x = ` for the aesthetic mapping
+
 .left-code[
 
 
 ```r
 gapminder |&gt;
   filter(year == 2007) |&gt;
-* ggplot(aes(y = fct_rev(fct_infreq(continent)),
-           fill = continent)) +
+* ggplot(aes(y = fct_infreq(continent),
+             fill = continent)) +
   geom_bar() +
   guides(fill = "none") +
 * labs(x = "Number of countries", y = NULL)
@@ -2030,13 +1995,92 @@ gapminder |&gt;
 
 ---
 
+# We can also flip geom_col/bar axes
+
+`fct_rev()` reverses the order of factors
+
+.left-code[
+
+
+```r
+gapminder |&gt;
+  filter(year == 2007) |&gt;
+* ggplot(aes(y = fct_rev(fct_infreq(continent)),
+           fill = continent)) +
+  geom_bar() +
+  guides(fill = "none") +
+  labs(x = "Number of countries", y = NULL)
+```
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/geom_bar-y-rev-1.png)
+
+]
+
+---
+
 # Grouped bar charts
 
-Use grouped bars for higher dimensional datasets
+Use grouped bars or facets for higher dimensional datasets
 
-Facets are another option we saw last week
+.left-code[
 
+```r
+gapminder |&gt;
+  filter(year==1957 | year==2007) |&gt; 
+  group_by(continent, year) |&gt; 
+  summarize(
+    lifeExp = sum(lifeExp * pop) / sum(pop)
+  ) |&gt; 
+  ggplot(aes(x = continent,
+             y = lifeExp,
+*            fill = as_factor(year))) +
+* geom_col(position = "dodge") +
+  labs(x = NULL, 
+       y = "Life expectancy", fill = "Year")
+```
+`as_factor()` specifies that we want to treat `year` as distinct categories, not a continuous measure
+]
 
+.right-plot[
+
+![](07-slides_files/figure-html/geom_bar-grouped-1.png)
+
+]
+
+---
+
+# Facets
+
+Use grouped bars or facets for higher dimensional datasets
+
+.left-code[
+
+```r
+gapminder |&gt;
+  filter(year==1957 | year==2007) |&gt; 
+  group_by(continent, year) |&gt; 
+  summarize(
+    lifeExp = sum(lifeExp * pop) / sum(pop)
+  ) |&gt; 
+  ggplot(aes(x = continent,
+             y = lifeExp,
+             fill = as_factor(year))) + 
+* geom_col() +
+* facet_wrap(vars(year)) +
+  guides(fill = "none") +
+  labs(x = NULL, 
+       y = "Life expectancy")
+```
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/geom_bar-faceted-1.png)
+
+]
 
 ---
 
@@ -2048,10 +2092,11 @@ Since the end of the bar is important, emphasize it the most
 
 
 ```r
-ggplot(gapminder_ordered,
-       aes(x = continent, y = n,
-           color = continent)) +
-  geom_pointrange(aes(ymin = 0, ymax = n)) +
+gapminder_ordered |&gt; 
+  ggplot(aes(x = continent, 
+             y = n,
+             color = continent)) +
+* geom_pointrange(aes(ymin = 0, ymax = n)) +
   guides(color = "none") +
   labs(x = NULL, y = "Number of countries")
 ```
@@ -2076,17 +2121,18 @@ Show individual observations as squares
 # This has to be installed in a special way
 # install.packages("devtools") # do this once
 # devtools::install_github("hrbrmstr/waffle") # do this once
-library(waffle) # for geom_waffle
+*library(waffle) # for geom_waffle
 
-ggplot(gapminder_ordered,
-       aes(x = continent, y = n,
-           fill = continent)) +
-  geom_waffle(aes(values = n),  # waffle aesthetic
-              n_rows = 9,  # waffle options
-              flip = TRUE) +
+gapminder_ordered |&gt; 
+  ggplot(aes(x = continent, 
+             y = n,
+             fill = continent)) +
+* geom_waffle(aes(values = n), # waffle aes()
+*             n_rows = 10,     # waffle options
+*             flip = TRUE) +   # make vertical
   labs(fill = NULL) +
-  coord_equal() +  # make all the squares square
-  theme_void()  # use a completely empty theme
+  coord_equal() + # make the boxes square
+  theme_void()    # use an empty theme
 ```
 
 ]
@@ -2112,7 +2158,7 @@ gapminder |&gt;
   filter(year == 2007, continent == "Americas") |&gt;
   ggplot(aes(x = lifeExp,
              y = fct_reorder(country, lifeExp))) +
-  geom_point() +
+* geom_point() +
   guides(color = "none") +
   labs(x = "Life expectancy (years)", y = NULL) +
   theme_minimal()
