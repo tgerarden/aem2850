@@ -21,7 +21,8 @@ layouts/partials/menu.html
 .Ruserdata
 
 # survey data
-survey-responses/
+*survey*.csv
+*enrollment*.csv
 survey-responses-midsemester/
 
 # teaching notes

@@ -1,7 +1,7 @@
 ---
 title: "Mapping data to graphics and amounts"
 linktitle: "Mapping data to graphics and amounts"
-date: "2023-03-06 14:02:52"
+date: "2023-03-09 09:06:23"
 menu:
   content:
     parent: Course content
@@ -19,7 +19,7 @@ output:
 
 ### Readings
 
-- <i class="fab fa-youtube"></i> Hans Rosling, ["200 Countries, 200 Years, 4 Minutes"](https://www.youtube.com/watch?v=jbkSRLYSojo)
+- <i class="fab fa-youtube"></i> Hans Rosling: [200 Countries, 200 Years, 4 Minutes](https://www.youtube.com/watch?v=jbkSRLYSojo)
 - <i class="fas fa-book"></i> [Chapter 2: Visualizing data](https://clauswilke.com/dataviz/aesthetic-mapping.html) of *Fundamentals of Data Visualization*
 - <i class="fas fa-book"></i> [Chapter 3: Make a plot](http://socviz.co/makeplot.html) of *Data Visualization*
 - <i class="fas fa-book"></i> [Chapter 6: Visualizing amounts](https://clauswilke.com/dataviz/visualizing-amounts.html) of *Fundamentals of Data Visualization*
@@ -27,6 +27,8 @@ output:
 
 #### Optional readings
 - <i class="fas fa-book"></i> [Chapter 2: Data visualization](https://r4ds.hadley.nz/data-visualize.html) of *R for Data Science (2e)*
+- <i class="fas fa-book"></i> [Chapter 17: Factors](https://r4ds.hadley.nz/factors.html) of *R for Data Science (2e)*
+- <i class="fab fa-youtube"></i> The Pudding: [The Greatest Unexpected NBA performances](https://www.youtube.com/watch?v=jV49bDzkQhY)
 
 <!-- #### Other resources -->
 

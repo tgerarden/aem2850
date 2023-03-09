@@ -1502,7 +1502,7 @@ name: prologue-2
 
 # Remember our concentrations?
 
-How might we visualize these data?
+How might we visualize these amounts?
 
 .less-left[
 ```{r, echo = FALSE}
@@ -1543,8 +1543,8 @@ as_tibble(sports) |>
   ggplot(aes(y = fct_rev(fct_infreq(value)))) +
   geom_bar() +
   scale_x_continuous(breaks = scales::breaks_pretty()) +
-  theme_xaringan(text_font_size = 34) +
-  theme(axis.title.x = element_text(size = 40)) +
+  theme_xaringan(text_font_size = 30) +
+  theme(axis.title.x = element_text(size = 36)) +
   labs(x = "Number of Fans",
        y = NULL)
 ```
@@ -1558,10 +1558,14 @@ as_tibble(sports) |>
 ```{r, echo = FALSE}
 companies |>
   filter(!is.na(name)) |>
+  mutate(name = str_to_title(name),
+         name = str_replace(name, "\\s?/.*", ""),
+         name = str_replace(name, ",?\\s?Inc.?", ""),
+         name = str_replace(name, " S\\.a\\.", "")) |> 
   ggplot(aes(y = fct_rev(fct_infreq(name)))) +
   geom_bar() +
-  theme_xaringan(text_font_size = 22) +
-  theme(axis.title.x = element_text(size = 40)) +
+  theme_xaringan(text_font_size = 20) +
+  theme(axis.title.x = element_text(size = 36)) +
   labs(x = "Number of Potential Investors?",
        y = NULL)
 ```
@@ -1742,8 +1746,8 @@ gapminder_continents
 
 ```{r gapminder-bars, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
 gapminder_continents |> 
-  ggplot(aes(x = continent, # map continent to x
-             y = n)) +      # map n countries to y
+  ggplot(aes(x = continent, # continent to x
+             y = n)) +      # n countries to y
   geom_col()                # add bars #<<
 ```
 How could we improve this?
@@ -1842,7 +1846,9 @@ gapminder_continents |>
   labs(x = NULL, y = "Number of countries")
 ```
 
-"Reorder the factor variable continent by n"
+`fct_reorder(continent, n)` means "reorder the factor variable continent by n, smallest to largest"
+
+Factor is R's term for variables that have a fixed and known set of possible values
 ]
 
 .right-plot[
@@ -1865,6 +1871,8 @@ gapminder_continents |>
   guides(fill = "none") +
   labs(x = NULL, y = "Number of countries")
 ```
+
+`fct_reorder(continent, -n)` means "reorder the factor variable continent by n, largest to smallest"
 ]
 
 .right-plot[
@@ -2010,21 +2018,55 @@ Use grouped bars or facets for higher dimensional datasets
 .left-code[
 ```{r geom_bar-grouped, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
 gapminder |>
-    filter(year==1957 | year==2007) |> 
-    group_by(continent, year) |> 
-    summarize(lifeExp = sum(lifeExp * pop) / sum(pop)) |> 
-    ggplot(aes(x = continent,
-               y = lifeExp,
-               fill = as_factor(year))) + #<<
-    geom_col(position = "dodge") + #<<
-    labs(x = "Number of countries", 
-         y = "Life expectancy", fill = "Year")
+  filter(year==1957 | year==2007) |> 
+  group_by(continent, year) |> 
+  summarize(
+    lifeExp = sum(lifeExp * pop) / sum(pop)
+  ) |> 
+  ggplot(aes(x = continent,
+             y = lifeExp,
+             fill = as_factor(year))) + #<<
+  geom_col(position = "dodge") + #<<
+  labs(x = NULL, 
+       y = "Life expectancy", fill = "Year")
 ```
+`as_factor()` specifies that we want to treat `year` as distinct categories, not a continuous measure
 ]
 
 .right-plot[
 
 ![](`r knitr::fig_chunk("geom_bar-grouped", "png")`)
+
+]
+
+---
+
+# Facets
+
+Use grouped bars or facets for higher dimensional datasets
+
+.left-code[
+```{r geom_bar-faceted, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder |>
+  filter(year==1957 | year==2007) |> 
+  group_by(continent, year) |> 
+  summarize(
+    lifeExp = sum(lifeExp * pop) / sum(pop)
+  ) |> 
+  ggplot(aes(x = continent,
+             y = lifeExp,
+             fill = as_factor(year))) + 
+  geom_col() + #<<
+  facet_wrap(vars(year)) + #<<
+  guides(fill = "none") +
+  labs(x = NULL, 
+       y = "Life expectancy")
+```
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("geom_bar-faceted", "png")`)
 
 ]
 
@@ -2071,12 +2113,12 @@ gapminder_ordered |>
   ggplot(aes(x = continent, 
              y = n,
              fill = continent)) +
-  geom_waffle(aes(values = n), # waffle aesthetic #<<
-              n_rows = 9,      # waffle options #<<
-              flip = TRUE) + #<<
+  geom_waffle(aes(values = n), # waffle aes() #<<
+              n_rows = 10,     # waffle options #<<
+              flip = TRUE) +   # make vertical #<<
   labs(fill = NULL) +
-  coord_equal() + # make all the squares square
-  theme_void()    # use a completely empty theme
+  coord_equal() + # make the boxes square
+  theme_void()    # use an empty theme
 ```
 
 ]
