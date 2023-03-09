@@ -15,7 +15,7 @@
 title: "Reflection - Week XX"
 author: "Your Name Here"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-output: pdf_document
+format: pdf
 ---
 
 Write your reflection here.

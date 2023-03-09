@@ -79,7 +79,7 @@ lessons:
     # date_end: "July 2"
     content: "07-content"
     example: "07-example"
-    # assignment: "07-lab"
+    assignment: "07-lab"
     bg: 2
 
   - title: '<span class="content-title">Distributions</span>'

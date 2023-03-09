@@ -3,7 +3,7 @@
 # Steps to complete this lab:
 #   1. Add your name to the author field of the yaml header
 #   2. Fill in the code chunks and use inline code to answer the questions 
-#   3. Click on "Knit" directly above to render output (or Ctrl/Cmd-Shift-K)
+#   3. Click on "Render" directly above to render output (or Ctrl/Cmd-Shift-K)
 #   4. Repeat steps 2-3 until you are satisfied with the final product
 #   5. Download the resulting file lab-xx.pdf
 #   6. Upload lab-xx.pdf to canvas
@@ -13,7 +13,7 @@
 title: "Lab-10"
 author: "your name here"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-output: pdf_document
+format: pdf
 urlcolor: blue
 ---
 

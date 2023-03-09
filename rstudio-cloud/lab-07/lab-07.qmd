@@ -3,18 +3,18 @@
 # Steps to complete this lab:
 #   1. Add your name to the author field of the yaml header
 #   2. Fill in the code chunks and use inline code to answer the questions 
-#   3. Click on "Knit" directly above to render output (or Ctrl/Cmd-Shift-K)
+#   3. Click on "Render" directly above to render output (or Ctrl/Cmd-Shift-K)
 #   4. Repeat steps 2-3 until you are satisfied with the final product
 #   5. Download the resulting file lab-xx.pdf
 #   6. Upload lab-xx.pdf to canvas
-# Note: this file will not Knit properly until it is (partially) completed
+# Note: this file may not Render properly until it is (partially) completed
 # Reminder: to get around this and work interactively, you can run code chunks on their own
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
 title: "Lab-07"
-author: "Answer Key"
+author: "Write your name here"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
-output: pdf_document
+format: pdf
 urlcolor: blue
 ---
 
@@ -31,116 +31,109 @@ The goal of this assignment is to help you gain more familiarity with using **gg
 
 We will work with `diamonds` and a couple of datasets (`flights`, `airlines`, `weather`) provided by the package **nycflights13** that we have seen in previous labs.
 
+## For questions 1-3, we are going to work with the `diamonds` data. Here is what the data frame looks like:
 
-<!--- Please leave the code above unchanged. Questions start from here. --->
-
-# For questions 1-3, we are going to work with the `diamonds` data. As a reminder, here is what the data frame looks like:
-
-``` {r echo = TRUE}
+``` {r echo = FALSE}
 diamonds
 ```
 
-## 1. In `diamonds`, one variable `color` has levels of `r unique(diamonds$color)`. Count the number of diamonds by color. Use `goem_col` to plot a bar chart, with x-axis being the level of `color` of a diamond, and y-axis the number of diamonds per `color`. Fill the bars by `color`. Lable x-axis "Color", and y-axis "Number of diamonds". 
+
+<!--- Please leave the code above unchanged. Questions start from here. --->
+
+## 1. In `diamonds`, one variable `color` takes on the values `r unique(diamonds$color)`. Count the number of diamonds of each color. Use `goem_col` to plot a bar chart, with x-axis being the level of `color` of a diamond, and y-axis the number of diamonds per `color`. Fill the bars by `color`. Label the x-axis "Color", and the y-axis "Number of diamonds".
 
 ``` {r echo = TRUE}
-diamonds_color <- diamonds %>% 
-  count()  # count the number of diamonds by color
-
-diamonds_color %>% 
-  ggplot(aes(x = , y = , fill = )) +   
+diamonds |> 
+  count(_____) |> # count the number of diamonds by color
+  ggplot(aes(x = _____, y = _____, fill = _____)) +   
   geom_col() +
   guides(fill = "none") +
-  labs(x = "", y = "")
+  labs(x = "_____", y = "_____")
+```
 
-```  
 
-
-## 2. Use `geom_bar` to replot the plot in question #1. Show the diamonds color at the y-axis, in a desending order by the number of diamonds from top to bottom.
+{{< pagebreak >}}
+## 2. Use `geom_bar` to reproduce the plot in question #1. Show the diamonds color at the y-axis, in a desending order by the number of diamonds from top to bottom.
 
 ``` {r echo = TRUE}
-diamonds %>% 
-  ggplot(aes(y = ), fill = )) +
+diamonds |> # no need to manually count the number of diamonds by color this time
+  ggplot(aes(y = fct_rev(fct_infreq(_____)), fill = _____)) +
   geom_bar() +
   guides(fill = "none") +
-  labs(x = "", y = "")
+  labs(x = "_____", y = "_____")
+```
 
-```  
 
-
-## 3. Calculate the average price by diamonds color. Use `geom_pointrange` to plot a lollipop chart, with x-axis being diamonds color, and y-axis the average price. Add labels to x-axis and y-axis.
+{{< pagebreak >}}
+## 3. Calculate the average price of by diamonds color. Use `geom_pointrange` to plot a lollipop chart, with the x-axis being the color of the diamonds, and the y-axis being the average price. Add labels to both axes.
 <!-- No tips this time! -->
 
 ``` {r echo = TRUE}
-
-```  
-
-# For questions 4-8, we are going to work with the `flights` data. As a reminder, here is what the data frame looks like:
-
-``` {r echo = TRUE}
-flights
+_____
 ```
+
+
+{{< pagebreak >}}
+## For questions 4-8, we are going to work with the `flights` data.
 
 ## 4. In `flights`, the variable `hour` shows the scheduled departing hour of each flight. Calculate average arrival delays by hour, and plot a bar chart with x-axis the hour, and y-axis the average arrival delays. Add labels to both axes.
 
 ``` {r echo = TRUE}
-flights %>%
-  group_by() %>%
-  summarise() %>% # Calculate the average arrival delay by hour
-  filter() %>%  # Drop observations with NA delays
-  ggplot() +
+flights |>
+  group_by(_____) |> # group by hour
+  summarize(_____ = _____(_____)) |> # calculate the average arrival delay (by hour), removing NAs
+  filter(_____) |>  # drop observations with NA delays
+  ggplot(_____(x = _____, y = _____)) +
   geom_col() +
-  guides(fill = "none") +
-  labs()
+  labs(_____ = "_____", _____ = "_____")
+```
 
-```  
 
+{{< pagebreak >}}
 ## 5. From question 4 we see that flights in early morning have negative average arrival delays. Use two different colors to fill the bars with negative delays and positve delays.
 <!-- Tip: You can generate a new variable indicating whether the average arrival delay is positive or negative. Then use this variable in the fill argument in aesthetics.  -->
 
 ``` {r echo = TRUE}
-flights %>%
-  group_by() %>%
-  summarise() %>%  # Calculate the average arrival delay by hour, removing NAs
-  filter() %>%  # Drop observations with NA delays
-  mutate() %>%  # Generate a variable indicating whether the average arrival delay is positive or negative
-  ggplot() +
+flights |>
+  group_by(_____) |> # group by hour
+  summarize(_____ = _____(_____)) |> # calculate the average arrival delay (by hour), removing NAs
+  filter(_____) |>  # drop observations with NA delays
+  ggplot(aes(x = _____,
+             y = _____,
+             fill = _____) + # create a variable for whether the delay is negative or not
   geom_col() +
   guides(fill = "none") +
-  labs()
-
+  labs(_____)
 ```
 
 
+{{< pagebreak >}}
 ## 6. Calculate the number of flights by carrier. Find the top 10 carriers by number of flights. The **nycflights13** provides a data set `airlines` that contains the name of each carrier. Use `inner_join` to merge the `flights` data set with the `airlines` data set. Use `geom_point` to make a plot with x-axis showing the number of flights, y-axis the carrier's name. In the y-axis, the carriers should be arranged in a descending order by the number of flights from top to bottom. Add a label to the x-axis and omit the (superfluous) label from the y-axis.
-```{r echo = TRUE}
-airlines
-```
-
 <!-- No tips this time! -->
+
 ```{r echo = TRUE}
 
 ```
 
 
-# Questions 7-8 are not specific to amounts, but they provide more practice wrangling data and mapping data to graphics. For these questions, we will explore the relationship between flight delays and weather conditions. The **nycflights13** provides a data set `weather` that includes a bunch of weather condition variables (temperature, humidity, wind direction, wind speed, precipitation, pressure, visibility, etc.) by origin-year-month-day-hour.
-```{r echo=TRUE}
-weather
-```
+{{< pagebreak >}}
+## Questions 7-8 are not specific to amounts, but they provide more practice with data wrangling and dataviz. The **nycflights13** provides a data set `weather` that includes weather condition variables (temperature, humidity, wind direction, wind speed, precipitation, pressure, visibility, etc.) by origin-year-month-day-hour.
 
 ## 7. Use `inner_join` to merge the `flights` data with `weather` data. Assign it to a new object `flight_weather`. Use `summarize` to calculate the average departure delays by precipitation (`precip`). Use `geom_point` to make a plot with x-axis being precipitation, and y-axis the average departure delay. Add labels to the x- and y- axes. Is there any pattern between precipitation and departure delays?
 <!-- No tips this time! -->
 
-``` {r echo = TRUE}
+``` {r echo = TRUE, fig.dim = c(3.3,2.1)}
 
-```  
+```
+...
 
 
-
+{{< pagebreak >}}
 ## 8. Next we want to look at visibility. Use `summarize` to calculate the average departure delays by visibility. Make a similar plot as of #7, with x-axis being visibility, and y-axis the average departure delay. Add labels to the x- and y- axes. Does visibility seem to be correlated with departure delays? 
 <!-- No tips this time! -->
  
 ``` {r echo = TRUE}
 
-``` 
-
+```
+...
 

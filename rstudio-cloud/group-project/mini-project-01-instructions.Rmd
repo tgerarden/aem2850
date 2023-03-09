@@ -1,6 +1,6 @@
 ---
 title: "AEM 2850 mini-project-01"
-output: pdf_document
+format: pdf
 urlcolor: blue
 ---
 
