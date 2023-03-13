@@ -17,6 +17,7 @@ layouts/partials/menu.html
 .DS_Store
 .Rproj.user
 .Rhistory
+.Rapp.history
 .RData
 .Ruserdata
 
