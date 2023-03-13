@@ -112,14 +112,14 @@ lessons:
     # assignment: "10-lab"
     bg: 2
 
+  - title: '*Spring break: no class on April 4, 6*'
+    header: False
+
   - title: '<i class="fas fa-star"></i> **Group project due**'
-    date: "TBD" # date: "Tentative due date: April 14 at 11:59pm"
+    date: "April 14 at 11:59PM"
     # assignment: "group-project"
     bg: 3
     bottomborder: True
-
-  - title: '*Spring break: no class on April 4, 6*'
-    header: False
 
   - title: '**Special Topics**'
     header: True

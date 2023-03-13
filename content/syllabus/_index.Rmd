@@ -47,12 +47,12 @@ Tuesdays and Thursdays 9:40 - 10:55 in Warren 150
 
 ### TA office hours
 
-- Mondays 12:30pm - 3:30pm in Warren 372
-  - 12:30-2:30: Undergrad TA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu))
-  - 12:45-2:45: Undergrad TA Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu))
-  - 2:00-3:30: Grad TA Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
-- Fridays 10:30am - 11:30am in Warren 372
-  - Grad TA Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
+All TA office hours take place in Warren 372.
+
+- Mondays 12:30-2:30: Undergrad TA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu))
+- Mondays 12:45-2:45: Undergrad TA Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu))
+- Mondays 3:30-5:00: Grad TA Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
+- Fridays 4:00-5:00: Grad TA Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
 
 <!-- #### Graduate TA: Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu)) -->
 
