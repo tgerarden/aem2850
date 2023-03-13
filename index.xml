@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 09 Mar 2023 14:40:11 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 7</title><link>https://aem2850.toddgerarden.com/assignment/07-lab/</link><pubDate>Thu, 09 Mar 2023 14:40:11 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/07-lab/</guid><description>&lt;h2 id="lab">Lab&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 13 Mar 2023 12:25:00 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 7</title><link>https://aem2850.toddgerarden.com/assignment/07-lab/</link><pubDate>Thu, 09 Mar 2023 14:40:11 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/07-lab/</guid><description>&lt;h2 id="lab">Lab&lt;/h2>
 &lt;p>&lt;a href="https://posit.cloud/spaces/328615/content/5570014" target="_blank" rel="noopener">Click here to access the Posit Cloud project for this week&amp;rsquo;s lab and follow the instructions in the file &lt;code>lab-07.qmd&lt;/code>.&lt;/a>&lt;/p></description></item><item><title>Mapping data to graphics and amounts</title><link>https://aem2850.toddgerarden.com/example/07-example/</link><pubDate>Mon, 06 Mar 2023 21:02:18 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/07-example/</guid><description>&lt;h2 id="posit-cloud-links">Posit Cloud links&lt;/h2>
 &lt;p>&lt;a href="https://posit.cloud/spaces/328615/content/5548455" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s example Posit Cloud project&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://posit.cloud/spaces/328615/content/5548472" target="_blank" rel="noopener">&lt;strong>Solutions:&lt;/strong> click here to access a project with a completed version&lt;/a>&lt;/p>
@@ -550,6 +550,22 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;li>
 &lt;p>&lt;a href="https://toolbox.google.com/datasetsearch" target="_blank" rel="noopener">&lt;strong>Google Dataset Search&lt;/strong>&lt;/a>: Google indexes thousands of public datasets; search for them here.&lt;/p>
 &lt;/li>
+&lt;/ul></description></item><item><title>Distributions</title><link>https://aem2850.toddgerarden.com/content/08-content/</link><pubDate>Mon, 13 Mar 2023 12:25:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/08-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/histograms-density-plots.html" target="_blank" rel="noopener">Chapter 7: Visualizing distributions&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://socviz.co/groupfacettx.html#histograms" target="_blank" rel="noopener">Section 4.6: Histograms and density plots&lt;/a> of &lt;em>Data Visualization&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;h4 id="optional-readings">Optional readings&lt;/h4>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/boxplots-violins.html" target="_blank" rel="noopener">Chapter 9: Visualizing many distributions&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;!-- - &lt;i class="fas fa-external-link-square-alt">&lt;/i> Cédric Scherer, ["Visualizing distributions with raincloud plots with ggplot2"](https://www.cedricscherer.com/2021/06/06/visualizing-distributions-with-raincloud-plots-with-ggplot2/) -->
+&lt;!-- - &lt;i class="fas fa-external-link-square-alt">&lt;/i> [The Election Needle Is Back. Meet One of Its Creators.](https://www.nytimes.com/video/us/politics/100000006186649/needle-elections.html) -->
+&lt;!-- https://www.nytimes.com/2018/03/13/upshot/needle-forecast-pennsylvania-special-election.html -->
+&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
+&lt;ul>
+&lt;li>Why is it important to visualize all the variation in a variable?&lt;/li>
+&lt;li>What are some geometries that can be used to visualize distributions?&lt;/li>
 &lt;/ul></description></item><item><title>Mapping data to graphics and amounts</title><link>https://aem2850.toddgerarden.com/content/07-content/</link><pubDate>Thu, 09 Mar 2023 09:06:23 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/07-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fab fa-youtube">&lt;/i> Hans Rosling: &lt;a href="https://www.youtube.com/watch?v=jbkSRLYSojo" target="_blank" rel="noopener">200 Countries, 200 Years, 4 Minutes&lt;/a>&lt;/li>
