@@ -163,6 +163,7 @@ name: prologue
 
 ```{r echo=FALSE, out.width='75%'}
 knitr::include_graphics("img/07/gapminder-screenshot.png")
+# could switch to use youtube html embed code next year to just do this right in the slides
 ```
 
 ???

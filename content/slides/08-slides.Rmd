@@ -22,6 +22,7 @@ editor_options:
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
 library(xaringanthemer)
+require(showtext) # optional, but suggested by xaringanthemer functions
 style_mono_accent(base_color = "#B31B1B",
                   text_font_size = "1.4rem")
 xaringanExtra::use_xaringan_extra(c("tile_view"))
@@ -62,18 +63,35 @@ Acknowledgements:
 
 ---
 
+# Class Participation
+
+I got some questions about the class participation component of the course grade
+
+Reminder from [the syllabus](https://aem2850.toddgerarden.com/syllabus/#assignments-and-grading):
+> "Class participation and regular attendance are expected. Excessive absences and failure to complete weekly in-class examples will impact your final grade..."
+
+We will use name cards to help me learn names and track attendance
+
+I expect everyone to attempt all examples (even if absent)
+
+As long as you attend class regularly and try all the examples, you should receive full credit for class participation (5% of final grade)
+
+---
+
 # Announcements
 
-This week we are back to our old routine:
-- Today: slides
-- Wednesday: reflection is due
-- Thursday: work through an example
-- Monday: next lab is due
+Prelim 1 grades posted on canvas
+  - See canvas announcement for details
+  - Grading questions? Contact [Hui Zhou](mailto:hz423@cornell.edu) first, then [me](mailto:gerarden@cornell.edu)
+  - Other questions? Schedule an appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
-First: discuss survey resonses and mini project 1
+<br>
+
+I will give you preliminary details on the group project today
+
+<br>
 
 Questions before we get started?
-
 
 ---
 
@@ -81,11 +99,11 @@ Questions before we get started?
 
 [Prologue](#prologue)
 
-[Mini Project 1](#mini-project-1)
-
-[Proportions: a brief interlude](#proportions)
+[Group project](#group-project)
 
 [Distributions](#distributions)
+
+[Proportions: cut for time](#proportions)
 
 ---
 class: inverse, center, middle
@@ -93,138 +111,43 @@ name: prologue
 
 # Prologue
 
-```{r read-survey-responses, include=FALSE}
-# load data
-survey <- read_csv("data/survey-responses-midsemester/survey_responses.csv")
-summary_questions <- survey %>% 
-  select(id, contains(":"))
-names(summary_questions) <- str_replace( names(summary_questions), ".*: ", "")
-
-# make a function for plotting responses
-```
-
 ---
 
-# Thank you!
+# [Health and wealth revisited](https://www.youtube.com/watch?v=ZoLk6GUKzU0)
 
-I read all the Reflection - Week 6 survey responses
+<center><iframe width="832.5" height="468" src="https://www.youtube.com/embed/ZoLk6GUKzU0" title="How South Koreans got so much taller" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></center>
 
-I will briefly summarize some of the responses and share some reactions
+???
 
-Please don't hesitate to provide feedback on how the course progresses!
+[Video](https://www.youtube.com/watch?v=ZoLk6GUKzU0)
 
----
-
-# Please rate the pace overall:
-
-```{r, echo=FALSE}
-summary_questions %>% 
-  ggplot(aes(x = fct_relevel(`Please rate the pace overall:`,
-                                "too slow", "about right", "too fast")
-                                )) +
-  geom_bar() +
-  labs(x = NULL,
-       y = "number of students") +
-  theme_xaringan()
-```
-
-
----
-
-# Please rate the difficulty overall:
-
-```{r, echo=FALSE}
-summary_questions %>% 
-  ggplot(aes(x = fct_relevel(`Please rate the difficulty overall:`,
-                                "too easy", "about right", "too difficult")
-                                )) +
-  geom_bar() +
-  labs(x = NULL,
-       y = "number of students") +
-  theme_xaringan()
-```
-
-
----
-
-# Please rate the workload overall:
-
-```{r, echo=FALSE}
-summary_questions %>% 
-  group_by(`Please rate the workload overall:`) %>% count() %>% ungroup() %>% 
-  add_row(`Please rate the workload overall:` = "too little", n = 0) %>% 
-  ggplot(aes(x = fct_relevel(`Please rate the workload overall:`,
-                                "too little", "about right", "too much"),
-             y = n)) +
-  geom_col() +
-  labs(x = NULL,
-       y = "number of students") +
-  theme_xaringan()
-```
-
-
----
-
-# RStudio Cloud versus a local install?
-
-```{r, echo=FALSE}
-summary_questions %>% 
-  rename(preference = contains("preference")) %>% 
-  ggplot(aes(x = preference)) +
-  geom_bar() +
-  labs(x = NULL,
-       y = "number of students") +
-  theme_xaringan()
-```
-
-
----
-
-# Some themes:
-
-**Desire for more business applications**
-- We will work on this, especially on projects
-
---
-
-**Several people requested guidance on installing/working locally**
-- I will post some basic guidance on the course site
-- Come to office hours if you want help installing R+RStudio!
-
---
-
-**Examples: make them more open-ended/challenging + work more as a group**
-- I will experiment with this!
-
---
-
-**Interest in modeling, statistical methods, linear regression, etc.**
 
 ---
 class: inverse, center, middle
-name: mini-project-1
+name: group-project
 
-# Mini Project 1
+# Group project
 
 ---
 
-# Mini Project 1
+# Group project
 
 Use R and the tidyverse to wrangle and visualize equities data
 
-#### Three parts:
+#### Multiple parts:
 1. AAPL
 2. The S&P 500
 3. Our Class Portfolio
+4. Something extra for 5850 students (TBD)
 
 ```{r load-project-data, include=FALSE}
-load("../../rstudio-cloud/mini-project-01/sp500.RData")
-our_companies <- read_csv("../../rstudio-cloud/mini-project-01/our-companies.csv")
+load("../../rstudio-cloud/group-project/sp500.RData")
+our_companies <- read_csv("../../rstudio-cloud/group-project/our-companies.csv")
 ```
 
 ---
 
-# Mini Project 1: data
+# Group project: data
 
 ```{r}
 sp500_companies
@@ -232,7 +155,7 @@ sp500_companies
 
 ---
 
-# Mini Project 1: data
+# Group project: data
 
 ```{r}
 sp500_prices
@@ -240,7 +163,7 @@ sp500_prices
 
 ---
 
-# Mini Project 1: data
+# Group project: data
 
 ```{r}
 our_companies
@@ -248,161 +171,18 @@ our_companies
 
 ---
 
-# Mini Project 1: logistics
+# Group project: overview
 
-Work in groups of 3 (posted on canvas)
+First: you choose groups of 3
+  - All group members must be in the same section (i.e., 2850 or 5850)
 
-Write report in R Markdown that summarizes your work, presents visualizations, and discusses takeaways
+Write quarto report that summarizes your work, presents visualizations, and discusses takeaways
 
 Do not use any packages outside base R and the tidyverse
 
-No TA help for Part 3!
-- If you try but still need help, come to my office hours
+Limited TA help for Part 3!
 
----
-class: inverse, center, middle
-name: proportions
-
-# Proportions: a brief interlude
-
----
-
-# Can we improve this survey visualization?
-
-```{r, echo=FALSE}
-summary_questions %>% 
-  rename(preference = contains("preference")) %>% 
-  ggplot(aes(x = preference)) +
-  geom_bar() +
-  labs(x = NULL,
-       y = "number of students") +
-  theme_xaringan()
-```
-
-
----
-
-# Proportions
-
-.pull-left[
-```{r, echo=FALSE}
-summary_questions %>% 
-  rename(preference = contains("preference")) %>% 
-  group_by(preference) %>% count() %>% 
-  ggplot(aes(x = n, y = "", fill = fct_rev(preference))) +
-  geom_col() +
-  coord_polar() +
-  scale_x_continuous(
-    name = NULL, breaks = NULL
-  ) +
-  scale_xaringan_fill_discrete(direction = -1) +
-  labs(x = NULL,
-       y = NULL,
-       fill = NULL) +
-  theme_xaringan(text_font_size = 50)
-```
-]
-
-.pull-right[
-```{r, echo=FALSE}
-summary_questions %>% 
-  rename(preference = contains("preference")) %>% 
-  ggplot(aes(x = "", fill = preference)) +
-  geom_bar(position = "fill") +
-  coord_flip() +
-  scale_xaringan_fill_discrete() +
-  guides(fill = guide_legend(reverse = TRUE)) +
-  labs(x = NULL,
-       y = "share of students",
-       fill = NULL) +
-  theme_xaringan(text_font_size = 50) +
-  theme(axis.title.x = element_text(size = 44)) +
-  theme(legend.position = "bottom")
-```
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             | ✔ | ✔ | ✖
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             | ✔ | ✔ | ✖
-Emphasizes simple fractions (1/2, 1/3, ...) | ✔ | ✖ | ✖
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             | ✔ | ✔ | ✖
-Emphasizes simple fractions (1/2, 1/3, ...) | ✔ | ✖ | ✖
-Visually appealing for small datasets | ✔ | ✖ | ✔
-]
-
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             | ✔ | ✔ | ✖
-Emphasizes simple fractions (1/2, 1/3, ...) | ✔ | ✖ | ✖
-Visually appealing for small datasets | ✔ | ✖ | ✔
-Works well for a large number of subsets | ✖ | ✖ | ✔ 
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             | ✔ | ✔ | ✖
-Emphasizes simple fractions (1/2, 1/3, ...) | ✔ | ✖ | ✖
-Visually appealing for small datasets | ✔ | ✖ | ✔
-Works well for a large number of subsets | ✖ | ✖ | ✔ 
-Works well for time series and similar | ✖ | ✔ | ✖
-]
-
---
-
-No one visualization fits all scenarios!
-
-[//]: # "segment ends here"
-
+Due: Friday, April 14 at 11:59pm (after spring break)
 
 ---
 
@@ -424,16 +204,16 @@ theme_set(theme_gray(base_size = 18)) # increase base text size
 
 ```{r animal-weight-bar, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
 set.seed(1234)
-animals <- tibble(animal = c(rep(c("Small cat", "Big cat"), each = 250), rep("Dog", 500))) %>% 
+animals <- tibble(animal = c(rep(c("Small cat", "Big cat"), each = 250), rep("Dog", 500))) |> 
   mutate(weight = case_when(
     animal == "Small cat" ~ rnorm(n(), 20, 5),
     animal == "Big cat" ~ rnorm(n(), 60, 5),
     animal == "Dog" ~ rnorm(n(), 40, 10)
-  )) %>% 
+  )) |> 
   mutate(animal_type = ifelse(str_detect(animal, "cat"), "Cats", "Dogs"))
 
-animals_mean <- animals %>% 
-  group_by(animal_type) %>% 
+animals_mean <- animals |> 
+  group_by(animal_type) |> 
   summarize(avg_weight = mean(weight))
 
 ggplot(animals_mean, aes(x = animal_type, y = avg_weight, fill = animal_type)) + 
@@ -445,8 +225,6 @@ ggplot(animals_mean, aes(x = animal_type, y = avg_weight, fill = animal_type)) +
   
 ]
 
---
-  
 .pull-right[
   
 ```{r animal-weight-points, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
@@ -476,6 +254,14 @@ Uncertainty across multiple variables
   
 Uncertainty in models and simulations
 
+--
+
+**What are some common methods for visualizing distributions?**
+
+--
+
+Histograms, densities, box plots, etc.
+
 ---
 
 # Histograms
@@ -492,11 +278,23 @@ Put data into equally spaced buckets (or "bins"), plot how many rows are in each
 
 How would we use the grammar of graphics to make a histogram of `lifeExp`?
 
-```{r basic-histogram-data}
+```{r basic-histogram-data, eval=FALSE}
 library(gapminder)
 
-gapminder_2002 <- gapminder %>% 
+gapminder_2002 <- gapminder |> 
   filter(year == 2002)
+
+head(gapminder_2002)
+```
+
+```{r basic-histogram-data-mask, echo=FALSE}
+library(gapminder)
+
+gapminder_2002 <- gapminder |> 
+  filter(year == 2002) |> 
+  mutate(continent = case_match(continent,
+                                "Oceania" ~ as_factor("Asia"),
+                                .default = continent))
 
 head(gapminder_2002)
 ```
@@ -506,13 +304,13 @@ head(gapminder_2002)
 # Histograms
 
 .left-code[
-```{r basic-histogram, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
-ggplot(gapminder_2002,
-       aes(x = lifeExp)) + #<<
+```{r basic-histogram, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) + #<<
   geom_histogram() #<<
 ```
 
-What if we mapped lifeExp to y?
+What if we mapped `lifeExp` to `y`?
 ]
 
 .right-plot[
@@ -525,9 +323,9 @@ What if we mapped lifeExp to y?
 # Histograms
 
 .left-code[
-```{r basic-histogram-y, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
-ggplot(gapminder_2002,
-       aes(y = lifeExp)) + #<<
+```{r basic-histogram-y, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder_2002 |> 
+  ggplot(aes(y = lifeExp)) + #<<
   geom_histogram()
 ```
 ]
@@ -549,7 +347,8 @@ No official rule for what makes a good bin width
 .center.tiny[`geom_histogram(binwidth = .2)`]
 
 ```{r hist-too-narrow, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-ggplot(gapminder_2002, aes(x = lifeExp)) +
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) +
   geom_histogram(binwidth = 0.2)
 ```
   
@@ -563,7 +362,8 @@ ggplot(gapminder_2002, aes(x = lifeExp)) +
 .center.tiny[`geom_histogram(binwidth = 50)`]
 
 ```{r hist-too-wide, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-ggplot(gapminder_2002, aes(x = lifeExp)) +
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) +
   geom_histogram(binwidth = 50)
 ```
 ]
@@ -576,7 +376,8 @@ ggplot(gapminder_2002, aes(x = lifeExp)) +
 .center.tiny[`geom_histogram(binwidth = 5)`]
   
 ```{r hist-just-right, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-ggplot(gapminder_2002, aes(x = lifeExp)) +
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) +
   geom_histogram(binwidth = 5)
 ```
 ]
@@ -591,7 +392,8 @@ ggplot(gapminder_2002, aes(x = lifeExp)) +
 .center.tiny[`geom_histogram(..., color = "white")`]
     
 ```{r hist-border, echo=FALSE, fig.dim=c(4.5, 3), out.width="100%"}
-ggplot(gapminder_2002, aes(x = lifeExp)) +
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) +
   geom_histogram(binwidth = 5, color = "white")
 ```
 ]
@@ -604,7 +406,8 @@ ggplot(gapminder_2002, aes(x = lifeExp)) +
 .center.tiny[`geom_histogram(..., boundary = 50)`]
 
 ```{r hist-boundary, echo=FALSE, fig.dim=c(4.5, 3), out.width="100%"}
-ggplot(gapminder_2002, aes(x = lifeExp)) +
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) +
   geom_histogram(binwidth = 5, color = "white", boundary = 50)
 ```
 
@@ -633,9 +436,9 @@ How would we use the grammar of graphics to make a density plot of `lifeExp`?
 # Density plots
   
 .left-code[
-```{r basic-density, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
-ggplot(gapminder_2002,
-       aes(x = lifeExp)) + #<<
+```{r basic-density, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) + 
   geom_density() #<<
 ```
 ]
@@ -649,13 +452,13 @@ ggplot(gapminder_2002,
 # Density plots: add some color
   
 .left-code[
-```{r basic-density-color, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
-ggplot(gapminder_2002,
-       aes(x = lifeExp)) +
+```{r basic-density-color, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) +
   geom_density(fill = "skyblue") #<<
 ```
 
-Reminder: we can use aesthetics as parameters inside a geom rather than inside an **aes()** statement
+We can use aesthetics as parameters inside a geom rather than inside an **aes()** statement
 
 Here we used **fill = "skyblue"**
 ]
@@ -674,7 +477,8 @@ Different options for calculus change the plot shape
 .center.small[`bw = 1`]
 
 ```{r gaussian-bw-1, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-ggplot(gapminder_2002, aes(x = lifeExp)) +
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) +
   geom_density(fill = "skyblue",
                kernel = "gaussian", bw = 1)
 ```
@@ -687,7 +491,8 @@ ggplot(gapminder_2002, aes(x = lifeExp)) +
 .center.small[`bw = 10`]
 
 ```{r gaussian-bw-10, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-ggplot(gapminder_2002, aes(x = lifeExp)) +
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) +
   geom_density(fill = "skyblue",
                kernel = "gaussian", bw = 10)
 ```
@@ -699,7 +504,8 @@ ggplot(gapminder_2002, aes(x = lifeExp)) +
 .center.small[`bw = "nrd0"` <small>(default)</small>]
     
 ```{r gaussian-bw-auto, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-ggplot(gapminder_2002, aes(x = lifeExp)) +
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) +
   geom_density(fill = "skyblue",
                kernel = "gaussian")
 ```
@@ -715,32 +521,31 @@ Different options for calculus change the plot shape
 .center.small[`kernel = "gaussian"`]
 
 ```{r gaussian-kernel-gaussian, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-ggplot(gapminder_2002, aes(x = lifeExp)) +
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) +
   geom_density(fill = "skyblue",
                kernel = "gaussian")
 ```
   
 ]
 
---
-  
 .pull-middle-3[
 .center.small[`"epanechnikov"`]
 
 ```{r gaussian-kernel-epanechnikov, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-ggplot(gapminder_2002, aes(x = lifeExp)) +
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) +
   geom_density(fill = "skyblue",
                kernel = "epanechnikov")
 ```
 ]
 
---
-  
 .pull-right-3[
 .center.small[`"rectangular"`]
 
 ```{r gaussian-kernel-rectangular, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-ggplot(gapminder_2002, aes(x = lifeExp)) +
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) +
   geom_density(fill = "skyblue",
                kernel = "rectangular")
 ```
@@ -774,7 +579,8 @@ hwy_max <- boxplot.stats(mpg$hwy)$stats[5]
 
 hwy_out <- boxplot.stats(mpg$hwy)$out
 
-ggplot(mpg, aes(x = hwy)) +
+mpg |> 
+  ggplot(aes(x = hwy)) +
   geom_boxplot(fill = "#F7F7F7", color = "#B31B1B") +
   annotate(geom = "text", x = hwy_50, y = 0.48, label = "Median", fontface = "bold") +
   annotate(geom = "segment", x = hwy_50, xend = hwy_50, y = 0.44, yend = 0.4,
@@ -819,7 +625,7 @@ ggplot(mpg, aes(x = hwy)) +
 
 What are they?
 
-Show specific points in a distribution
+Graphical representations of specific points in a distribution
 
 How would we use the grammar of graphics to make a boxplot of `lifeExp`?
 
@@ -829,9 +635,9 @@ How would we use the grammar of graphics to make a boxplot of `lifeExp`?
 
 .left-code[
 ```{r basic-boxplot, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 2.75), out.width="100%"}
-  ggplot(gapminder_2002,
-         aes(x = lifeExp)) + #<<
-    geom_boxplot() #<<
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) + 
+  geom_boxplot() #<<
 ```
 
 What do the y axis numbers mean?
@@ -849,9 +655,9 @@ Use `theme()` to customize the plot for this geom
 
 .left-code[
 ```{r basic-boxplot-no-y, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 2.75), out.width="100%"}
-  ggplot(gapminder_2002,
-         aes(x = lifeExp)) +
-    geom_boxplot() +
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp)) +
+  geom_boxplot() +
   theme(axis.text.y = element_blank(), #<<
         axis.ticks.y = element_blank(), #<<
         panel.grid.major.y = element_blank(), #<<
@@ -868,15 +674,16 @@ Use `theme()` to customize the plot for this geom
 ---
   
 # Violin plots
-  
+
 Mirror density plot and flip
 
 .left-code[
-```{r basic-violin, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 2.75), out.width="100%"}
-ggplot(gapminder_2002,
-       aes(x = "", 
-           y = lifeExp)) + #<<
-  geom_violin() #<<
+```{r basic-violin, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder_2002 |> 
+  ggplot(aes(x = "", 
+             y = lifeExp)) + #<<
+  geom_violin() + #<<
+  labs(x = NULL)
 ```
 ]
 
@@ -891,12 +698,13 @@ ggplot(gapminder_2002,
 We can overlay multiple geometries to provide more information
 
 .left-code[
-```{r basic-violin-overlay, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 2.75), out.width="100%"}
-ggplot(gapminder_2002,
-       aes(x = "", 
-           y = lifeExp)) +
+```{r basic-violin-overlay, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder_2002 |> 
+  ggplot(aes(x = "", 
+             y = lifeExp)) +
   geom_violin() +
-  geom_boxplot(width = 0.1) #<<
+  geom_boxplot(width = 0.1) + #<<
+  labs(x = NULL)
 ```
 ]
 
@@ -916,7 +724,7 @@ How could we visualize the distribution of a single variable across groups?
 
 --
 
-Add a `fill` aesthetic or use faceting!
+Add a `fill` aesthetic or use facets!
 
 ---
   
@@ -924,17 +732,19 @@ Add a `fill` aesthetic or use faceting!
   
 Fill with a different variable
 
-This is bad and really hard to read though
-
 .left-code[
-```{r histogram-fill, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 2.75), out.width="100%"}
-ggplot(gapminder_2002,
-       aes(x = lifeExp,
-           fill = continent)) + #<<
+```{r histogram-fill, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp,
+             fill = continent)) + #<<
   geom_histogram(binwidth = 5, 
                  color = "white", 
-                 boundary = 50)
+                 boundary = 50) +
+  theme(legend.position = "bottom") +
+  labs(fill = NULL)
 ```
+
+This is bad and hard to read though
 ]
 
 .right-plot[
@@ -948,10 +758,10 @@ ggplot(gapminder_2002,
 Facet with a different variable
 
 .left-code[
-```{r histogram-facet, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.25), out.width="100%"}
-ggplot(gapminder_2002,
-       aes(x = lifeExp,
-           fill = continent)) +
+```{r histogram-facet, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp,
+             fill = continent)) +
   geom_histogram(binwidth = 5, 
                  color = "white", 
                  boundary = 50) +
@@ -966,49 +776,16 @@ ggplot(gapminder_2002,
 
 ---
 
-# Pyramid histograms
-
-.left-code[
-```{r gapminder-pyramid, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
-gapminder %>% 
-  filter(year == 2002) %>% 
-  mutate(africa = 
-           ifelse(continent == "Africa", 
-                  "Africa", 
-                  "Not Africa")) %>% 
-      mutate(age_buckets = 
-               cut(lifeExp, 
-                   breaks = seq(30, 90, by = 5))) %>% 
-      group_by(africa, age_buckets) %>% 
-      summarize(total = n()) %>% 
-ggplot(aes(y = age_buckets,
-           x = ifelse(africa == "Africa", 
-                      total, -total),
-           fill = africa)) +
-  geom_col(width = 1, color = "white") + 
-  theme(legend.position = "bottom")
-```
-]
-
-.right-plot[
-  ![](`r knitr::fig_chunk("gapminder-pyramid", "png")`)
-]
-
-???
-
-There's no way to use `geom_histogram()` to do this, but we can fake it with `geom_col()`
-
----
-
 # Multiple densities: Transparency
 
 .left-code[
 ```{r density-fill, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
-gapminder_2002 %>% 
-  filter(continent != "Oceania") %>% 
+gapminder_2002 |> 
   ggplot(aes(x = lifeExp,
              fill = continent)) +
-  geom_density(alpha = 0.5) #<<
+  geom_density(alpha = 0.5) + #<<
+  theme(legend.position = "bottom") +
+  labs(fill = NULL)
 ```
 
 But be careful, these can get confusing quickly
@@ -1028,11 +805,10 @@ With many groups, better to space them out using ridgeline plots
 ```{r density-ridges, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
 library(ggridges) #<<
 
-ggplot(filter(gapminder_2002, 
-              continent != "Oceania"),
-       aes(x = lifeExp,
-           fill = continent,
-           y = continent)) +
+gapminder_2002 |> 
+  ggplot(aes(x = lifeExp,
+             fill = continent,
+             y = continent)) +
   guides(fill = "none") +
   labs(y = NULL) +
   geom_density_ridges() #<<
@@ -1048,6 +824,11 @@ With many densities, use a single fill color to prevent distraction
 ]
 
 ---
+class: inverse, center, middle
+
+# example-08<br>remaining slides cut for time
+
+---
 
 # Multiple geoms: gghalves
 
@@ -1055,11 +836,10 @@ With many densities, use a single fill color to prevent distraction
 ```{r gghalves, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
 library(gghalves) #<<
 
-ggplot(filter(gapminder_2002, 
-              continent != "Oceania"),
-       aes(y = lifeExp,
-           x = continent,
-           color = continent)) +
+gapminder_2002 |> 
+  ggplot(aes(y = lifeExp,
+             x = continent,
+             color = continent)) +
   geom_half_boxplot(side = "l") + #<<
   geom_half_point(side = "r") + #<<
   guides(color = "none")
@@ -1078,11 +858,10 @@ ggplot(filter(gapminder_2002,
 ```{r raincloud, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
 library(gghalves) #<<
 
-ggplot(filter(gapminder_2002, 
-              continent != "Oceania"),
-       aes(y = lifeExp,
-           x = continent,
-           color = continent)) +
+gapminder_2002 |> 
+  ggplot(aes(y = lifeExp,
+             x = continent,
+             color = continent)) +
   geom_half_point(side = "l", size = 0.3) +  #<<
   geom_half_boxplot(side = "l", width = 0.5,  #<<
                     alpha = 0.3, nudge = 0.1) + #<<
@@ -1104,7 +883,7 @@ ggplot(filter(gapminder_2002,
 
 We have already seen at least one example: `geom_smooth()`
 
-We will discuss these more next week
+We will discuss these more in **Relationships**
 
 Until then, here are a few real-world examples
 
@@ -1114,7 +893,7 @@ Until then, here are a few real-world examples
 
 .center[
 <figure>
-  <img src="img/07/needle.gif" alt="2016 election needle" title="2016 election needle" width="65%">
+  <img src="img/08/needle.gif" alt="2016 election needle" title="2016 election needle" width="75%">
 </figure>
 ]
 
@@ -1128,7 +907,227 @@ Via https://www.vis4.net/blog/2016/11/jittery-gauges-election-forecast/
 
 .center[
 <figure>
-  <img src="img/07/fivethirtyeight-outcomes.png" alt="FiveThirtyEight model outcomes plot" title="FiveThirtyEight model outcomes plot" width="55%">
+  <img src="img/08/fivethirtyeight-outcomes.png" alt="FiveThirtyEight model outcomes plot" title="FiveThirtyEight model outcomes plot" width="60%">
   <figcaption>FiveThirtyEight's 2018 midterms model outcomes plot</figcaption
 </figure>
   ]
+
+
+---
+class: inverse, center, middle
+name: proportions
+
+# Proportions: cut for time
+
+---
+
+# Can we improve this survey visualization?
+
+```{r, echo=FALSE}
+load("data/survey-responses/survey-data.RData")
+
+prior_programming |> 
+  ggplot(aes(x = fct_rev(prior_programming))) +
+  geom_bar() +
+  labs(x = NULL,
+       y = "number of students",
+       title = "Have you done any programming before?") +
+  theme_xaringan() +
+  theme(axis.title.y = element_text(size = 32))
+```
+
+---
+
+# Have you done any programming before?
+
+.pull-left[
+```{r, echo=FALSE}
+prior_programming |> 
+  count(prior_programming) |> 
+  ggplot(aes(x = n, y = "", fill = fct_rev(prior_programming))) +
+  geom_col() +
+  coord_polar() +
+  scale_x_continuous(
+    name = NULL, breaks = NULL
+  ) +
+  scale_xaringan_fill_discrete(direction = -1) +
+  labs(x = NULL,
+       y = NULL,
+       fill = NULL) +
+  theme_xaringan(text_font_size = 48)
+```
+]
+
+.pull-right[
+```{r, echo=FALSE}
+prior_programming |>
+  ggplot(aes(x = "", fill = prior_programming)) +
+  geom_bar(position = "fill") +
+  coord_flip() +
+  scale_xaringan_fill_discrete() +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  labs(x = NULL,
+       y = "share of students",
+       fill = NULL) +
+  theme_xaringan(text_font_size = 48) +
+  theme(axis.title.x = element_text(size = 44)) +
+  theme(legend.position = "bottom")
+```
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   |   |   |   
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             |   |   |  
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      |   |   |  
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            |   |   |  
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+Works well for a large number of subsets         |   |   |   
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+Works well for a large number of subsets         | ✖ | ✖ | ✔ 
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+Works well for a large number of subsets         | ✖ | ✖ | ✔ 
+Works well for time series and similar           |   |   |  
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+Works well for a large number of subsets         | ✖ | ✖ | ✔ 
+Works well for time series and similar           | ✖ | ✔ | ✖
+]
+
+--
+
+No one visualization fits all scenarios!
+
+[//]: # "segment ends here"
+
