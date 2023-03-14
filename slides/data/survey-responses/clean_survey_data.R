@@ -25,16 +25,8 @@ responses <- inner_join(all_responses, enrolled_students, by = "netid")
 
 
 # PRIOR CODING EXPERIENCE ----
-# programming <- vector(mode = "character", length = length(survey_raw))
-# for (i in 1:length(survey_lines)){
-#   programming[i] <- survey_lines[i][[1]] %>%
-#     paste(., collapse = '') %>%
-#     stringr::str_replace(., ".*language\\(s\\):", "") %>%
-#     stringr::str_replace(., "6\\..*", "") %>%
-#     stringr::str_replace(., "•.*", "") %>%
-#     stringr::str_replace(., "\\)   If applicable.*", "") %>%
-#     str_trim(.)
-# }
+prior_programming <- responses |>
+  select(prior_programming = "Have you done any programming before?")
 
 
 # SPECTATOR SPORTS ----
@@ -113,11 +105,33 @@ companies <- left_join(companies, tickers, join_by(ticker)) |>
 
 
 # SAVE DATA ----
-save(concentrations_raw, concentrations,
+save(prior_programming,
      sports,
+     concentrations_raw, concentrations,
      companies,
      file = paste0("content/slides/data/survey-responses/survey-data.RData"))
 
 # export names, concentrations, and prior programming ----
 # tibble(name = name, concentration = concentrations_raw, prior_programming = programming) %>%
 #   write_csv(paste0(dir,"/student_info.csv"))
+
+
+# MAKE LIST OF COMPANIES FOR GROUP PROJECT ----
+load("rstudio-cloud/group-project/sp500.RData")
+
+companies |>
+  rename(symbol = ticker,
+         sec_name = name) |>
+  group_by(symbol, sec_name) |>
+  count() |>
+  ungroup() |>
+  left_join(sp500_companies |> select(symbol, company),
+            join_by(symbol)) |>
+  mutate(name = case_when(
+    is.na(company) ~ str_to_title(sec_name),
+    TRUE ~ company
+  )) |>
+  select(name, n) |>
+  filter(!is.na(name)) |>
+  arrange(name) |>
+  write_csv("rstudio-cloud/group-project/our-companies.csv")
