@@ -24,55 +24,96 @@ theme_set(theme_minimal()) # set the current theme to theme_minimal()
 
 
 # 1. Import airbnb listings ----
-# import data
-listings <- read_csv("listings.csv")
+# import data and assign them to all_listings
+all_listings <- read_csv("listings.csv")
 
 
 # 2. Histograms ----
-# use a histogram to visualize the distribution of price for all listings
-listings %>%
+# use a histogram to visualize the distribution of price for all_listings
+all_listings |>
   ggplot(aes(x = price)) +
   geom_histogram()
 
-# let's focus on listings below $1000/night
-dat <- listings %>%
+# make a data frame named listings with the listings priced below $1000/night
+listings <- all_listings |>
   filter(price<1000)
 
-# use a histogram to visualize the distribution for properties below $1000/night
-dat %>%
+# use a histogram to visualize the distribution of price for listings
+listings |>
   ggplot(aes(x = price)) +
   geom_histogram()
 
-# increase the number of bins to 10 (default is 30)
-dat %>%
-  ggplot(aes(x = price)) +
-  geom_histogram(bins = 10)
-
-# decrease the number of bins to 50 (default is 30)
-dat %>%
+# increase the number of bins to 50 (default is 30)
+listings |>
   ggplot(aes(x = price)) +
   geom_histogram(bins = 50)
 
-# instead of specifying the number of bins, specify a binwidth of $25
-dat %>%
+# instead of specifying the number of bins, specify a binwidth of 25 ($/night)
+listings |>
   ggplot(aes(x = price)) +
   geom_histogram(binwidth = 25)
 
-# specify a binwidth of $25, but now make the bins start at 0 instead of being centered around 0
-dat %>%
+# specify a binwidth of 25, but now make the bins start at 0 instead of being centered around 0
+listings |>
   ggplot(aes(x = price)) +
-  geom_histogram(binwidth = 25, boundary = 0)
+  geom_histogram(binwidth = 25, 
+                 boundary = 0)
 
 # modify the previous plot by making the border of the bars white
-dat %>%
+listings |>
   ggplot(aes(x = price)) +
-  geom_histogram(binwidth = 25, boundary = 0,
+  geom_histogram(binwidth = 25, 
+                 boundary = 0,
                  color = "white")
 
 
-# 3. Colors in ggplot2 ----
-# tuesday we saw some examples of using color, fill, etc. as parameters rather than aesthetics
-# a question came up: how do we know what colors R will understand? (e.g., "skyblue")
+# 3. Density plots ----
+# use the listings below $1000 to make a density plot of all listing prices
+listings |>
+  ggplot(aes(x = price)) +
+  geom_density()
+
+# fill by room_type to make a separate density plot for each room_type
+# to make them more readable, experiment with transparency (alpha) as a parameter of geom_density()
+listings |>
+  ggplot(aes(x = price, fill = room_type)) +
+  geom_density(alpha = 0.2)
+
+# use facets to put them on separate plots for readability
+listings |>
+  ggplot(aes(x = price, fill = room_type)) +
+  geom_density(alpha = 0.2) +
+  guides(fill = "none") +
+  facet_wrap(vars(room_type))
+
+# put all the facets in a single column to facilitate comparisons
+listings |>
+  ggplot(aes(x = price, fill = room_type)) +
+  geom_density(alpha = 0.2) +
+  guides(fill = "none") +
+  facet_wrap(vars(room_type), ncol = 1)
+
+# ridgeline plots offer an intermediate option between overlays and facets
+# these can be useful for comparisons of distributions across many categories (e.g., over time)
+# use geom_density_ridges() from the package ggridges to implement this
+listings |>
+  ggplot(aes(x = price, y = room_type, fill = room_type)) +
+  geom_density_ridges() +
+  guides(fill = "none")
+
+# the default densities produced by geom_density_ridges() extend below $0
+# does that make sense?
+# you can use scale_x_continuous(limits = c(0, NA)) to prevent it
+listings |>
+  ggplot(aes(x = price, y = room_type, fill = room_type)) +
+  geom_density_ridges() +
+  guides(fill = "none") +
+  scale_x_continuous(limits = c(0, NA))
+
+
+# 4. Colors in ggplot2 ----
+# in the slides we saw some examples of using color, fill, etc. as parameters rather than aesthetics
+# how do we know what colors R will understand? (e.g., "skyblue")
 # here is a quick primer on the options that are available to you by default
 # you can use RBG codes (either on your own or through other packages) to customize colors with virtually limitless possibilities
 
@@ -83,29 +124,28 @@ dat %>%
 grDevices::colors()
 
 # reproduce your histogram from before, filling with the 42nd element in the list of colors
-# see if you can do this WITHOUT manually looking through the list and typing out its name
-dat %>%
+listings |>
   ggplot(aes(x = price)) +
   geom_histogram(binwidth = 25, boundary = 0,
                  color = "white",
                  fill = grDevices::colors()[42])
 
 # now look through the list and find a color that sounds nice to you, and reproduce the histogram using this fill
-dat %>%
+listings |>
   ggplot(aes(x = price)) +
   geom_histogram(binwidth = 25, boundary = 0,
                  color = "white",
                  fill = "orchid")
 
 # google the official rgb hex code for cornell ("carnelian"), and use that code to fill your histogram
-dat %>%
+listings |>
   ggplot(aes(x = price)) +
   geom_histogram(binwidth = 25, boundary = 0,
                  color = "white",
                  fill = "#B31B1B")
 
 # now modify the theme so that the axis labels (numbers and/or words) are printed in carnelian
-dat %>%
+listings |>
   ggplot(aes(x = price)) +
   geom_histogram(binwidth = 25, boundary = 0,
                  color = "white",
@@ -116,7 +156,7 @@ dat %>%
         axis.text.y = element_text(color = "#B31B1B"))
 
 # there are multiple ways to implement these depending on what you want and how much you want to type...
-dat %>%
+listings |>
   ggplot(aes(x = price)) +
   geom_histogram(binwidth = 25, boundary = 0,
                  color = "white",
@@ -124,7 +164,7 @@ dat %>%
   theme(axis.title = element_text(color = "#B31B1B"),
         axis.text = element_text(color = "#B31B1B"))
 
-dat %>%
+listings |>
   ggplot(aes(x = price)) +
   geom_histogram(binwidth = 25, boundary = 0,
                  color = "white",
@@ -134,7 +174,7 @@ dat %>%
 # one really nice thing about ggplot's layered grammar of graphics is that we can just keep adding things
 # in fact, we can even assign plots to names and then continue adding to them without duplicating code
 # to see this in action, give your current histogram a name so that you can reference it below
-histogram <- dat %>%
+histogram <- listings |>
   ggplot(aes(x = price)) +
   geom_histogram(binwidth = 25, boundary = 0,
                  color = "white",
@@ -145,8 +185,8 @@ histogram <- dat %>%
 histogram
 
 
-# 4. Customizing axis labels ----
-# another thing that came up tuesday was whether we can customize the numeric labeling of axes
+# 5. Customizing axis labels ----
+# how can we customize the numeric labeling of axes?
 # to modify the x axis, we can use scale_x_continuous(), scale_x_discrete(), etc. depending on the data type
 # we can do the same thing for the y axis: scale_y_continuous(), etc.
 
@@ -169,7 +209,7 @@ histogram +
   scale_x_continuous(breaks = c(0, 100, 760.2, 1000),
                      labels = c("free", "cheap", "oh you fancy, huh?", ""))
 
-# use scale_y_continuous to remove the horizontal lines and axis
+# use scale_y_continuous(breaks = NULL) to remove the horizontal lines and axis
 histogram +
   scale_x_continuous(breaks = c(0, 100, 760.2, 1000),
                      labels = c("free", "cheap", "oh you fancy, huh?", "")) +
@@ -186,50 +226,6 @@ histogram +
   scale_y_continuous(limits = c(-2500, NA))
 
 
-# 5. Density plots ----
-# use the listings below $1000 to make a density plot of all listing prices
-dat %>%
-  ggplot(aes(x = price)) +
-  geom_density()
-
-# make a separate density plot for each room_type and overlay them
-# to make them more readable, experiment with transparency (alpha) as a parameter of geom_density()
-dat %>%
-  ggplot(aes(x = price, fill = room_type)) +
-  geom_density(alpha = 0.2)
-
-# use facets to put them on separate plots for readability
-dat %>%
-  ggplot(aes(x = price, fill = room_type)) +
-  geom_density(alpha = 0.2) +
-  guides(fill = "none") +
-  facet_wrap(~room_type)
-
-# put all the facets in a single column to facilitate comparisons
-dat %>%
-  ggplot(aes(x = price, fill = room_type)) +
-  geom_density(alpha = 0.2) +
-  guides(fill = "none") +
-  facet_wrap(~room_type, ncol = 1)
-
-# ridgeline plots offer an intermediate option between overlays and facets
-# these can be useful for comparisons of distributions across many categories (e.g., over time)
-# use geom_density_ridges() from the package ggridges to implement this
-dat %>%
-  ggplot(aes(x = price, y = room_type, fill = room_type)) +
-  geom_density_ridges() +
-  guides(fill = "none")
-
-# the default densities produced by geom_density_ridges() extend below $0
-# does that make sense?
-# find a way to prevent that from happening
-dat %>%
-  ggplot(aes(x = price, y = room_type, fill = room_type)) +
-  geom_density_ridges() +
-  guides(fill = "none") +
-  scale_x_continuous(limits = c(0, NA))
-
-
 # 6. Open-ended exploratory analysis of private rooms ----
 # make a new data frame that contains only private rooms
 # explore other variables in the dataset using data wrangling and visualization tools we have learned so far
@@ -239,23 +235,22 @@ dat %>%
 # visualize the proportion of listings in each neighbourhood_group
 # visualize the distribution of prices in each neighbourhood_group
 # visualize the distribution of reviews (you might want to use a log scale for this)
-# visualize the distribution of last_review (over time)
 
-rooms <- dat %>%
+rooms <- listings |>
   filter(room_type == "Private room")
 
 # visualize the number of listings in each neighbourhood_group. which has the most? which has the least?
-dat %>%
-  group_by(neighbourhood_group) %>%
-  count() %>%
+listings |>
+  group_by(neighbourhood_group) |>
+  count() |>
   ggplot(aes(x = n, y = fct_reorder(neighbourhood_group, n))) +
   geom_col()
 
 # visualize the proportion of listings in each neighbourhood_group
 # pie
-dat %>%
-  group_by(neighbourhood_group) %>%
-  count() %>%
+listings |>
+  group_by(neighbourhood_group) |>
+  count() |>
   ggplot(aes(x = n, y = "", fill = fct_reorder(neighbourhood_group, -n))) +
   geom_col() + coord_polar() +
   scale_x_continuous(breaks = NULL) +
@@ -264,7 +259,7 @@ dat %>%
        fill = NULL)
 
 # stacked bars
-dat %>%
+listings |>
   ggplot(aes(x = "", fill = fct_rev(fct_infreq(neighbourhood_group)))) +
   geom_bar(position = "fill") +
   coord_flip() +
@@ -277,25 +272,21 @@ dat %>%
        fill = NULL)
 
 # visualize the distribution of prices in each neighbourhood_group
-dat %>%
+listings |>
   ggplot(aes(x = price, y = neighbourhood_group, fill = neighbourhood_group)) +
   geom_density_ridges() +
   guides(fill = "none")
 
 # visualize the distribution of reviews (you might want to use a log scale for this)
-dat %>%
+listings |>
   ggplot(aes(x = number_of_reviews)) +
   geom_histogram()
-dat %>%
+listings |>
   ggplot(aes(x = number_of_reviews)) +
   geom_histogram(boundary = 0) + # note boundary is before we transform the scale, so 0 is equivalent to 1 on a log scale bc log10(1) = 0
   scale_x_log10()
 
-# visualize the distribution of last_review (over time)
-rooms %>%
-  ggplot(aes(x = last_review)) +
-  geom_density()
-
 
 # 7. Feedback ----
-# how did this format go vs the format we used in previous examples? please shoot me an email (gerarden@cornell.edu) if you have a strong opinion!
+# how did this format go vs the format we used in examples earlier in the course?
+# please shoot me an email (gerarden@cornell.edu) if you have any strong opinions!
