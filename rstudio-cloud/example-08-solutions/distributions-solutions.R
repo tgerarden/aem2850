@@ -1,4 +1,4 @@
-# AEM 2850 - Example 7
+# AEM 2850 - Example 8
 # Plan for today:
 # - Questions?
 # - On our own devices: work through this script
