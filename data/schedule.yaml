@@ -116,7 +116,7 @@ lessons:
     header: False
 
   - title: '<i class="fas fa-star"></i> **Group project due**'
-    date: "April 14 at 11:59PM"
+    date: "Apr 14 at 11:59PM"
     # assignment: "group-project"
     bg: 3
     bottomborder: True
