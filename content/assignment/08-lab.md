@@ -1,7 +1,7 @@
 ---
 title: "Week 8"
 linktitle: "Week 8"
-date: "2023-03-16 21:55:21"
+date: "2023-03-16 22:08:28"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -19,4 +19,4 @@ editor_options:
 
 ## Lab
 
-[Click here to access the Posit Cloud project for this week's lab and follow the instructions in the file `lab-08.Rmd`.](https://posit.cloud/spaces/328615/content/5615188)
+[Click here to access the Posit Cloud project for this week's lab and follow the instructions in the file `lab-08.qmd`.](https://posit.cloud/spaces/328615/content/5615188)
