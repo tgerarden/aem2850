@@ -807,6 +807,14 @@
         "tibble"
       ]
     },
+    "gifski": {
+      "Package": "gifski",
+      "Version": "1.6.6-1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "32cfcc7a7a72484e5857645df33ac077",
+      "Requirements": []
+    },
     "glue": {
       "Package": "glue",
       "Version": "1.6.2",

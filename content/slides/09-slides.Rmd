@@ -35,13 +35,13 @@ opts_chunk$set(warning = FALSE, message = FALSE,
                       fig.width=14, fig.height=7)
 ```
 
-```{r, download-gme-prices, eval=FALSE}
+```{r, download-gme-prices, include=FALSE, eval=FALSE}
 # do this once, manually
-tidyquant::tq_get("GME", get = "stock.prices", from = "1990-01-01") %>% 
+tidyquant::tq_get("GME", get = "stock.prices", from = "1990-01-01") |>
   write_csv(., "content/slides/data/gme-prices.csv")
 ```
 
-```{r download-fred-data, eval=FALSE}
+```{r download-fred-data, include=FALSE, eval=FALSE}
 # do this once, manually
 fred_raw <- tidyquant::tq_get(c("RSXFSN",  # Advance retail sales
                                 "GDPC1",  # GDP
@@ -57,30 +57,34 @@ write_csv(fred_raw, "content/slides/data/fred_raw.csv")
 ```{r packages-data, include=FALSE}
 library(tidyverse)
 library(scales)
-library(viridis)
 library(gapminder)
 library(ggridges)
 library(scales)
 library(gganimate)
-library(lubridate)
+library(gifski) # renderer for gganimate gif
 library(ggrepel)
 library(patchwork)
 library(tsibble)
 library(fable)
 library(ggtext)
 
+# slide-deck specific fonts
+library(showtext)
+font_add_google("Fira Sans Condensed")
+showtext_auto()
+
 set.seed(1234)
 
 gme_prices <- read_csv("data/gme-prices.csv")
-solar_data <- read_csv("data/solar-data.csv") %>% 
-  mutate(date = yq(paste0(year,"-",quarter))) %>% 
-  select(date, p, q) %>% 
-  mutate(q = q/1e3) %>%
+solar_data <- read_csv("data/solar-data.csv") |> 
+  mutate(date = yq(paste0(year,"-",quarter))) |> 
+  select(date, p, q) |> 
+  mutate(q = q/1e3) |>
   rename("Price ($/Watt)" = p, "Quantity (GW)" = q)
 fred_raw <- read_csv("data/fred_raw.csv")
-measles <- read_csv("data/cdc-measles.csv") %>% 
-  group_by(Year) %>% 
-  slice(1) %>% 
+measles <- read_csv("data/cdc-measles.csv") |> 
+  group_by(Year) |> 
+  slice(1) |> 
   ungroup()
 ```
 
@@ -111,7 +115,11 @@ Acknowledgements:
 # Announcements
 
 Reminders:
-- Mini Project 1 due April 1 ([link](https://aem2850.toddgerarden.com/assignment/01-mini-project/))
+- **Group project groups due this Friday (March 24)** ([canvas link](https://canvas.cornell.edu/courses/50706/assignments/501438))
+  - Form groups of 3
+  - All students in each group must be in the same section (2850 or 5850)
+  - If unable to form a group of 3, please state that in your submission
+- **Group project due April 14** (full details to come in the next week)
 
 Questions before we get started?
 
@@ -120,9 +128,14 @@ Questions before we get started?
 
 # Plan for today
 
-[Prologue: Axis issues](#axis-issues)
+[Prologue](#prologue)
 
 [Visualizing time](#visualizing-time)
+  - [Visualizing amounts over time](#visualizing-amounts)
+  - [Visualizing distributions over time](#visualizing-distributions)
+  - [Animating plots over time](#animations)
+  - [Faceting plots over time](#faceting)
+  - [Connecting scatter plots over time](#connected-scatter-plots)
 
 [Starting, ending, and decomposing time](#decomposing)
 
@@ -130,24 +143,44 @@ Questions before we get started?
 
 
 ---
+name: prologue
+class: inverse, center, middle
+name: in-the-news
+
+# Prologue: In the news
+
+---
+
+# [Car thefts are rising. Is TikTok to blame?](https://usafacts.org/data-projects/car-thefts)
+
+<figure>
+  <img src="img/09/car-thefts-tiktok.png" alt="Car thefts over time, form USA Facts" title="Car thefts are rising. Is a 
+TikTok challenge to blame?" width="100%">
+</figure>
+
+???
+
+Source: https://usafacts.org/data-projects/car-thefts
+
+---
 class: inverse, center, middle
 name: axis-issues
 
-# Prologue: Axis issues
+# Prologue: Axis issues (revisited)
 
 ---
 
 # Is truncating the y-axis misleading?
 
 ```{r truncation-yes-no, echo=FALSE, fig.width=12, fig.height=7}
-tibble(y = seq(0, 0.995, 0.005)) %>% 
-  mutate(fill = y <= 0.989) %>% 
+tibble(y = seq(0, 0.995, 0.005)) |> 
+  mutate(fill = y <= 0.989) |> 
   ggplot(aes(ymin = y, ymax = y + 0.005, xmin = 0, xmax = 1, fill = fill)) +
   geom_rect() +
   annotate(geom = "text", x = 0.5, y = 0.995, label = "No", color = "#FFDC00",
-           family = "Fira Sans Condensed Black", fontface = "plain", size = 25) +
+           family = "Fira Sans Condensed", fontface = "plain", size = 25) +
   annotate(geom = "text", x = 0.5, y = 0.985, label = "Yes", color = "#FFDC00",
-           family = "Fira Sans Condensed Black", fontface = "plain", size = 25) +
+           family = "Fira Sans Condensed", fontface = "plain", size = 25) +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(labels = percent_format(accuracy = 0.1)) +
   scale_fill_manual(values = c("#FF4136", "#0074D9"), guide = "none") +
@@ -162,7 +195,9 @@ tibble(y = seq(0, 0.995, 0.005)) %>%
 
 # Don't be too extreme!
 
-It is actually more legal to truncate the y-axis than you might think
+When discussing amounts, we said to never truncate the y-axis
+
+But it is actually more legal to truncate the y-axis than you might think
 
 When do you think it is okay to truncate?
 
@@ -267,7 +302,7 @@ https://qz.com/418083/its-ok-not-to-start-your-y-axis-at-zero/
 
 .center[
 <figure>
-  <img src="img/06/obamacareenrollment-fncchart.jpg" alt="Fox News Obamacare enrollment" title="Fox News Obamacare enrollment" width="85%">
+  <img src="img/07/obamacareenrollment-fncchart.jpg" alt="Fox News Obamacare enrollment" title="Fox News Obamacare enrollment" width="85%">
 </figure>
 ]
 
@@ -291,7 +326,7 @@ https://statmodeling.stat.columbia.edu/2021/12/17/graphing-advice-if-zero-is-in-
 
 ---
 
-# Keep scales consistent and flag missing data
+# Also: keep scales consistent, flag missing data
 
 &nbsp;
 
@@ -307,7 +342,7 @@ Alberto Cairo, *The Truthful Art*, chapter 8, figure 8.21
 
 ---
 
-# Don’t impute across categories
+# Also: don’t impute across categories
 
 .pull-left[
 ```{r likert-imputation-bad, echo=FALSE, fig.width=4.8, fig.height=4.2, out.width="100%"}
@@ -318,13 +353,13 @@ fake_survey <- tribble(
   "Neutral", 11,
   "Disagree", 8,
   "Strongly disagree", 2
-) %>% 
+) |> 
   mutate(response = fct_rev(fct_inorder(response)))
 
 ggplot(fake_survey, aes(x = response, y = count, group = 1)) +
   geom_line(size = 1, color = "grey50") +
   geom_point(aes(color = response), size = 9) +
-  scale_color_viridis(discrete = TRUE) +
+  scale_color_viridis_d() +
   expand_limits(y = 0) +
   labs(title = "This is BAD", x = NULL, y = "Count") +
   guides(color = "none")
@@ -337,7 +372,7 @@ ggplot(fake_survey, aes(x = response, y = count, group = 1)) +
 ```{r likert-good, echo=FALSE, fig.width=4.8, fig.height=4.2, out.width="100%"}
 ggplot(fake_survey, aes(x = response, y = count)) +
   geom_pointrange(aes(ymin = 0, ymax = count, color = response), size = 2) +
-  scale_color_viridis(discrete = TRUE) +
+  scale_color_viridis_d() +
   labs(title = "This is BETTER", x = NULL, y = "Count") +
   guides(color = "none")
 ```
@@ -351,8 +386,9 @@ name: visualizing-time
 # Visualizing time
 
 ---
+name: visualizing-amounts
 
-# Showing changes over time
+# Visualizing amounts over time
 
 Time is just a variable that can be mapped to an aesthetic
 
@@ -372,11 +408,22 @@ In general, follow reading conventions to show time progression:
 
 ---
 
+# Visualizing amounts over time using ggplot
+
+Let's use GameStop share prices to make some plots:
+
+```{r}
+gme_prices
+```
+
+
+---
+
 # Time on x-axis + `geom_point()`
 
 .left-code[
 ```{r gme-point, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gme_prices %>% 
+gme_prices |> 
   ggplot(aes(x = date, y = adjusted)) +
   geom_point(size = 0.5) + #<<
   labs(x = NULL, y = "Share price ($)",
@@ -396,7 +443,7 @@ How would you add a line to this?
 
 .left-code[
 ```{r gme-point-line, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gme_prices %>% 
+gme_prices |> 
   ggplot(aes(x = date, y = adjusted)) +
   geom_point(size = 0.5) +
   geom_line() + #<<
@@ -426,9 +473,11 @@ But lines are effectively made-up data, so be careful how you use them!
 
 # Time on x-axis + `geom_line/col()`
 
+The GameStop share price plot is clearer without points:
+
 .left-code[
 ```{r gme, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gme_prices %>% 
+gme_prices |> 
   ggplot(aes(x = date, y = adjusted)) +
   geom_line() +
   labs(x = NULL, y = "Share price ($)",
@@ -449,7 +498,7 @@ Can also use a fill for the area under a line, **as long as the y-axis starts at
 
 .left-code[
 ```{r gme-fill, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gme_prices %>% 
+gme_prices |> 
   ggplot(aes(x = date, y = adjusted)) +
   geom_area(fill = "skyblue", color = "black") + #<<
   labs(x = NULL, y = "Share price ($)",
@@ -469,20 +518,20 @@ gme_prices %>%
 .more-left.center[
 ```{r covid-unemp-claims, echo=FALSE, fig.width=6, fig.height=4, out.width="100%"}
 # Wrangle the recession dates so that we just have start and end dates
-recessions_raw <- fred_raw %>% 
-  filter(symbol == "USREC") %>% 
-  mutate(recession_delta = price - lag(price)) %>% 
+recessions_raw <- fred_raw |> 
+  filter(symbol == "USREC") |> 
+  mutate(recession_delta = price - lag(price)) |> 
   filter(recession_delta != 0)
 
-recessions_fake_end <- recessions_raw %>% 
+recessions_fake_end <- recessions_raw |> 
   bind_rows(tibble(date = ymd("2021-06-01"),
                    recession_delta = -1))
 
 recessions <- tibble(start = filter(recessions_fake_end, recession_delta == 1)$date,
                      end = filter(recessions_fake_end, recession_delta == -1)$date)
 
-claims <- fred_raw %>% 
-  filter(symbol == "ICSA") %>% 
+claims <- fred_raw |> 
+  filter(symbol == "ICSA") |> 
   rename(claims = price)
 
 ggplot() +
@@ -494,7 +543,8 @@ ggplot() +
   labs(x = NULL, y = "Initial unemployment claims",
        title = "HOLY CRAP",
        caption = "Source: Initial weekly unemployment claims (ICSA); FRED\nRecessions highlighted in orange") +
-  theme_bw(base_family = "Fira Sans Condensed") +
+  theme_bw(base_size = 14,
+           base_family = "Fira Sans Condensed") +
   theme(plot.title = element_text(face = "bold"),
         panel.grid.minor.x = element_blank())
 
@@ -518,15 +568,20 @@ https://www.nytimes.com/issue/todayspaper/2020/05/09/todays-new-york-times
 https://static01.nyt.com/images/2020/05/09/nytfrontpage/scan.pdf
 
 ---
+name: visualizing-distributions
 
-# Time on y-axis + `geom_density()`
+# Visualizing distributions over time
+
+--
+
+We can also visualize how distributions evolve. How could you make this plot?
 
 ```{r density-ridges, echo=FALSE, fig.width=7, fig.height=3.25, out.width="90%"}
-gapminder %>% 
-    mutate(year_factor = factor(year)) %>% 
+gapminder |> 
+    mutate(year = as_factor(year)) |> 
     ggplot(
       aes(x = lifeExp, 
-          y = fct_rev(year_factor), 
+          y = fct_rev(year), 
           fill = after_stat(x))
       ) +
     geom_density_ridges_gradient(
@@ -535,13 +590,11 @@ gapminder %>%
       quantiles = 2
       ) +
     guides(fill = "none") +
-    scale_fill_viridis() + 
+    scale_fill_viridis_c() +
     labs(x = "Life expectancy", 
          y = NULL, fill = NULL) + 
     theme_minimal()
 ```
-
-.center[How would you make this plot?]
 
 ---
 
@@ -549,13 +602,13 @@ gapminder %>%
 
 .left-code[
 ```{r density-ridges-howto, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-library(ggridges) # geom_density_ridges() package #<<
+library(ggridges) # for geom_density_ridges() #<<
 
-gapminder %>% 
-    mutate(year_factor = factor(year)) %>% #<<
+gapminder |> 
+    mutate(year = as_factor(year)) |> #<<
     ggplot(
       aes(x = lifeExp, 
-          y = year_factor) # map time to y #<<
+          y = year) # map time to y #<<
       ) +
     geom_density_ridges() # add geom #<<
 ```
@@ -573,16 +626,15 @@ How could we modify this to follow ↓ convention for time?
 
 .left-code[
 ```{r density-ridges-howto-rev, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gapminder %>% 
-    mutate(year_factor = factor(year)) %>% 
+gapminder |> 
+    mutate(year = as_factor(year)) |> 
     ggplot(
       aes(x = lifeExp, 
-          y = fct_rev(year_factor)) # reverse year #<<
+          y = fct_rev(year)) # reverse year #<<
       ) +
     geom_density_ridges()
 ```
-
-How could we change the black lines to white?
+How could we make the lines white?
 ]
 
 .right-plot[
@@ -595,11 +647,11 @@ How could we change the black lines to white?
 
 .left-code[
 ```{r density-ridges-howto-white, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gapminder %>% 
-    mutate(year_factor = factor(year)) %>% 
+gapminder |> 
+    mutate(year = as_factor(year)) |> 
     ggplot(
       aes(x = lifeExp, 
-          y = fct_rev(year_factor))
+          y = fct_rev(year))
       ) +
     geom_density_ridges(
       color = "white"  # separate densities #<<
@@ -619,15 +671,15 @@ How could we add a line at the median of each density?
 
 .left-code[
 ```{r density-ridges-howto-median, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gapminder %>% 
-    mutate(year_factor = factor(year)) %>% 
+gapminder |> 
+    mutate(year = as_factor(year)) |> 
     ggplot(
       aes(x = lifeExp, 
-          y = fct_rev(year_factor))
+          y = fct_rev(year))
       ) +
     geom_density_ridges(
       color = "white", 
-      quantile_lines = TRUE, # add quantile lines #<<
+      quantile_lines = TRUE, # add lines #<<
       quantiles = 2          # median #<<
       )
 ```
@@ -645,12 +697,12 @@ How could we add a color gradient to the densities?
 
 .left-code[
 ```{r density-ridges-howto-fill, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gapminder %>% 
-    mutate(year_factor = factor(year)) %>% 
+gapminder |> 
+    mutate(year = as_factor(year)) |> 
     ggplot(
       aes(x = lifeExp, 
-          y = fct_rev(year_factor),
-          fill = after_stat(x)) # fill by x value #<<
+          y = fct_rev(year),
+          fill = after_stat(x)) # fill by x #<<
       ) +
     geom_density_ridges_gradient( #<<
       # this is a special geom to fill along x #<<
@@ -660,7 +712,7 @@ gapminder %>%
       )
 ```
 
-Use **after_stat** to shade the *densities*, not the data itself
+Use `after_stat(x)` to shade the *densities*, not the data itself
 ]
 
 .right-plot[
@@ -673,11 +725,11 @@ Use **after_stat** to shade the *densities*, not the data itself
 
 .left-code[
 ```{r density-ridges-howto-fancy, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gapminder %>% 
-    mutate(year_factor = factor(year)) %>% 
+gapminder |> 
+    mutate(year = as_factor(year)) |> 
     ggplot(
       aes(x = lifeExp, 
-          y = fct_rev(year_factor),
+          y = fct_rev(year),
           fill = after_stat(x))
       ) +
     geom_density_ridges_gradient(
@@ -685,11 +737,14 @@ gapminder %>%
       quantile_lines = TRUE, 
       quantiles = 2
       ) +
-    guides(fill = "none") +       # omit legend #<<
-    scale_fill_viridis() +        # nicer shading #<<
-    labs(x = "Life expectancy",   # modify label #<<
-         y = NULL, fill = NULL) + # omit labels #<<
-    theme_minimal()               # cleaner theme #<<
+    guides(fill = "none") +    # omit legend #<<
+    scale_fill_viridis_c() +   # nicer shading #<<
+    labs(x = "Life expectancy",# modify label #<<
+         y = NULL,             # omit labels #<<
+         fill = NULL) +        # omit labels #<<
+    theme_minimal(             # cleaner theme #<<
+      base_size = 14           # larger font #<<
+      )                        #<<
 ```
 ]
 
@@ -698,12 +753,13 @@ gapminder %>%
 ]
 
 ---
+name: animations
 
-# Time in animation + `geom_point()`
+# Animating plots over time
 
 .center[
 <figure>
-  <img src="img/05/gapminder.gif" alt="Hans Rosling animation" title="Hans Rosling animation" width="65%">
+  <img src="img/09/my-gapminder-animation.gif" alt="My Hans Rosling animation" title="My Hans Rosling animation" width="70%">
 </figure>
 ]
 
@@ -717,17 +773,18 @@ First, how would we make a static plot of the data?
 
 .left-code[
 ```{r gapminder-static, tidy=FALSE, fig.show="hide", fig.dim=c(8, 6), out.width="100%"}
-gapminder %>% 
+library(gapminder) # gapminder data
+
+gapminder |> 
   ggplot(aes(gdpPercap, lifeExp,  #<<
-             size = pop, color = country)) + #<<
+             size = pop, color = continent)) + #<<
   geom_point(alpha = 0.5, show.legend = FALSE) + #<<
-  facet_wrap(~continent) + #<<
   scale_color_manual(
-    values = gapminder::country_colors
+    values = gapminder::continent_colors
     ) +
   scale_size_continuous(range = c(1, 15)) +
-  scale_x_log10(labels = scales::dollar) +
-  theme_minimal(base_size = 14) +
+  scale_x_log10(labels = label_dollar()) +
+  theme_classic(base_size = 20) +
   labs(x = "GDP per capita", 
        y = "Life expectancy",
        title = "Year: 1952-2007")
@@ -750,20 +807,19 @@ https://towardsdatascience.com/how-to-create-animated-plots-in-r-adf53a775961
 Second, let's use `gganimate` to visualize changes over time
 
 .left-code[
-```{r gapminder-dynamic, eval=FALSE, tidy=FALSE, message=FALSE}
+```{r gapminder-dynamic, tidy=FALSE, fig.show="hide", fig.dim=c(8, 6), out.width="100%", cache=TRUE}
 library(gganimate) # plot animation package #<<
 
-gapminder %>% 
+gapminder |> 
   ggplot(aes(gdpPercap, lifeExp, 
-             size = pop, color = country)) +
+             size = pop, color = continent)) +
   geom_point(alpha = 0.5, show.legend = FALSE) +
-  facet_wrap(~continent) +
   scale_color_manual(
-    values = gapminder::country_colors
+    values = gapminder::continent_colors
     ) +
   scale_size_continuous(range = c(1, 15)) +
-  scale_x_log10(labels = scales::dollar) +
-  theme_minimal(base_size = 14) +
+  scale_x_log10(labels = label_dollar()) +
+  theme_classic(base_size = 20) +
   labs(x = "GDP per capita", 
        y = "Life expectancy",
        title = "Year: {frame_time}") + #<<
@@ -775,9 +831,7 @@ gapminder %>%
 --
 
 .right-plot[
-<figure>
-  <img src="img/09/my-gapminder-animation.gif" alt="My Hans Rosling animation" title="My Hans Rosling animation" width="90%">
-</figure>
+![](`r knitr::fig_chunk("gapminder-dynamic", "gif")`)
 ]
 
 ???
@@ -791,24 +845,34 @@ https://towardsdatascience.com/how-to-create-animated-plots-in-r-adf53a775961
 Third, use `anim_save()` to write a `.gif` that you can text to your mom
 
 ```{r gapminder-animation, eval=FALSE, tidy=FALSE, fig.dim=c(8, 6), out.width="100%"}
-library(gganimate) # plot animation package
+library(gganimate)
+library(gifski)
 
-my_gapminder_animation <- gapminder %>% 
-  ggplot(aes(gdpPercap, lifeExp, size = pop, color = country)) +
+my_gapminder_animation <- gapminder |> 
+  ggplot(aes(gdpPercap, lifeExp, size = pop, color = continent)) +
   geom_point(alpha = 0.5, show.legend = FALSE) +
-  scale_color_manual(values = gapminder::country_colors) +
+  scale_color_manual(values = gapminder::continent_colors) +
   scale_size_continuous(range = c(1, 15)) +
-  scale_x_log10(labels = scales::dollar) +
-  facet_wrap(~continent) +
-  theme_minimal(base_size = 14) +
+  scale_x_log10(labels = label_dollar()) +
+  theme_classic(base_size = 20) +
   labs(x = "GDP per capita", 
        y = "Life expectancy",
        title = "Year: {frame_time}") +
   transition_time(year) +
   ease_aes('linear')
 
-anim_save("content/slides/img/09/my-gapminder-animation.gif",  #<<
-          my_gapminder_animation) #<<
+animate(my_gapminder_animation, renderer = gifski_renderer()) #<<
+anim_save("content/slides/img/09/my-gapminder-animation.gif") #<<
+```
+
+```{r, include=FALSE, eval=FALSE}
+# to change my-gapminder-animation.gif, edit code block above and run manually
+# but use this anim_save to get aspect ratio that matches R code above
+animate(my_gapminder_animation, 
+        #fps = 8, start_pause = 8, end_pause = 8,
+        width = 8, height = 6, units = "in", res = 150,
+        renderer = gifski_renderer())
+anim_save("content/slides/img/09/my-gapminder-animation.gif")
 ```
 
 ???
@@ -816,8 +880,9 @@ anim_save("content/slides/img/09/my-gapminder-animation.gif",  #<<
 https://towardsdatascience.com/how-to-create-animated-plots-in-r-adf53a775961
 
 ---
+name: faceting
 
-# Time in maps
+# Faceting plots over time
 
 .center[
 <figure>
@@ -831,8 +896,9 @@ https://towardsdatascience.com/how-to-create-animated-plots-in-r-adf53a775961
 Alberto Cairo, *The Truthful Art*, chapter 8, figure 8.30
 
 ---
+name: connected-scatter-plots
 
-# Connected scatter plots
+# Connecting scatter plots over time
 
 .pull-left[
 Sometimes connected scatter plots of time series data make sense
@@ -844,18 +910,18 @@ How would you make one using these data?
 
 .pull-right[
 ```{r solar-data-facet, echo=FALSE, fig.dim=c(4, 3), out.width="100%"}
-solar_data %>% 
+solar_data |> 
   pivot_longer(-date, 
                names_to = "key", 
-               values_to = "value") %>% 
+               values_to = "value") |> 
   ggplot(aes(x = date, 
              y = value, 
              color = key)) + 
   geom_line() + 
-  facet_wrap(~key, ncol = 1, 
+  facet_wrap(vars(key), ncol = 1, 
              scales = "free_y") + 
   guides(color = "none") +
-  theme_minimal() + 
+  theme_minimal(base_size = 14) + 
   labs(x = NULL, y = NULL) +
   scale_y_continuous(limits = c(0,NA))
 ```
@@ -867,7 +933,7 @@ solar_data %>%
 
 .left-code[
 ```{r solar-data-connected, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-solar_data %>% 
+solar_data |> 
   ggplot(aes(x = `Quantity (GW)`,  # not time #<<
              y = `Price ($/Watt)`, # not time #<<
              color = date)) +      # time! #<<
@@ -875,9 +941,9 @@ solar_data %>%
   geom_path() + # connect by time, not x #<<
   scale_x_log10() + 
   scale_y_log10() + 
-  scale_color_viridis() +
+  scale_color_viridis_c() +
   guides(color = "none") +
-  theme_minimal()
+  theme_minimal(base_size = 14)
 ```
 
 Note the log axes
@@ -894,7 +960,7 @@ Note the log axes
 
 .pull-left[
 ```{r solar-data-connected-2, echo=FALSE, fig.dim=c(4, 3), out.width="100%"}
-solar_data %>% 
+solar_data |> 
   ggplot(aes(x = `Quantity (GW)`,  # not time #<<
              y = `Price ($/Watt)`, # not time #<<
              color = date)) +      # time! #<<
@@ -903,9 +969,9 @@ solar_data %>%
   geom_smooth(method = "lm", alpha = 0.5) +
   scale_x_log10() +
   scale_y_log10() +
-  scale_color_viridis() +
+  scale_color_viridis_c() +
   guides(color = "none") +
-  theme_minimal()
+  theme_minimal(base_size = 14)
 ```
 ]
 
@@ -916,11 +982,15 @@ Looks a lot like a demand curve!
 
 $log(Q) = \alpha + \beta log(P) + \varepsilon$
 
-We could use OLS to estimate $\beta$
+We could use regression to estimate $\beta$
 
 How might we interpret $\beta$?
+
 ]
 
+--
+
+**But even here, a regular (not connected) scatter plot would be better!**
 
 ---
 
@@ -928,17 +998,17 @@ How might we interpret $\beta$?
 
 .pull-left[
 ```{r unemp-inflation-path, echo=FALSE, fig.width=4.8, fig.height=4.2, out.width="100%"}
-unemp_inflation <- fred_raw %>% 
-  filter(symbol %in% c("UNRATE", "FPCPITOTLZGUSA")) %>% 
-  pivot_wider(id_cols = date, names_from = symbol, values_from = price) %>% 
-  rename(inflation = FPCPITOTLZGUSA, unemployment = UNRATE) %>% 
-  mutate(year = year(date)) %>% 
-  mutate_at(vars(inflation, unemployment), ~ . / 100) %>% 
-  filter(year >= 1990, year < 2020) %>% 
+unemp_inflation <- fred_raw |> 
+  filter(symbol %in% c("UNRATE", "FPCPITOTLZGUSA")) |> 
+  pivot_wider(id_cols = date, names_from = symbol, values_from = price) |> 
+  rename(inflation = FPCPITOTLZGUSA, unemployment = UNRATE) |> 
+  mutate(year = year(date)) |> 
+  mutate_at(vars(inflation, unemployment), ~ . / 100) |> 
+  filter(year >= 1990, year < 2020) |> 
   arrange(date)
 
-unemp_inflation_small <- unemp_inflation %>% 
-  group_by(year) %>% 
+unemp_inflation_small <- unemp_inflation |> 
+  group_by(year) |> 
   summarize(inflation = mean(inflation, na.rm = TRUE),
             unemployment = mean(unemployment))
 
@@ -949,7 +1019,8 @@ ggplot(unemp_inflation_small, aes(x = unemployment, y = inflation)) +
   scale_x_continuous(labels = percent_format(accuracy = 1)) +
   scale_y_continuous(labels = percent_format(accuracy = 1)) +
   labs(x = "Unemployment", y = "Inflation") +
-  theme_minimal(base_family = "Fira Sans Condensed")
+  theme_minimal(base_size = 16,
+                base_family = "Fira Sans Condensed")
 ```
 ]
 
@@ -962,42 +1033,20 @@ plot_inflation <- ggplot(drop_na(unemp_inflation, inflation),
   geom_line(size = 1, color = "#F012BE") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) +
   labs(x = NULL, y = "Inflation") +
-  theme_minimal(base_family = "Fira Sans Condensed")
+  theme_minimal(base_size = 16,
+                base_family = "Fira Sans Condensed")
 
 plot_unempl <- ggplot(unemp_inflation, aes(x = date, y = unemployment)) +
   geom_line(size = 1, color = "#FF851B") +
   scale_y_continuous(labels = percent_format(accuracy = 1)) +
   labs(x = NULL, y = "Unemployment") +
-  theme_minimal(base_family = "Fira Sans Condensed")
+  theme_minimal(base_size = 16,
+                base_family = "Fira Sans Condensed")
 
 plot_inflation / plot_unempl
 ```
 
 ]
-
----
-
-# Don't go wild with time mapping!
-
-.pull-left.center[
-<figure>
-  <img src="img/09/covid-death-spiral.png" alt="COVID death rates" title="COVID death rates" width="100%">
-</figure>
-]
-
---
-
-.pull-right.center[
-<figure>
-  <img src="img/09/covid-death-line.png" alt="COVID death rates" title="COVID death rates" width="100%">
-</figure>
-]
-
-???
-
-Image source: https://www.nytimes.com/2022/01/06/opinion/omicron-covid-us.html
-
-Discussion: https://junkcharts.typepad.com/junk_charts/2022/01/think-twice-before-you-spiral.html
 
 ---
 class: inverse, center, middle
@@ -1036,7 +1085,8 @@ ggplot(measles, aes(x = Year, y = Cases)) +
   coord_cartesian(xlim = c(1960, 1965), ylim = c(0, 500000)) +
   labs(x = NULL, y = "Cases per year", 
        caption = "Source: CDC, Epidemiology and Prevention of\nVaccine-Preventable Diseases, 13th Edition") +
-  theme_minimal(base_family = "Fira Sans Condensed")
+  theme_minimal(base_size = 16,
+                base_family = "Fira Sans Condensed")
 ```
 
 
@@ -1068,7 +1118,8 @@ ggplot(measles, aes(x = Year, y = Cases)) +
            color = "#F012BE", size = 2) +
   labs(x = NULL, y = "Cases per year", 
        caption = "Source: CDC, Epidemiology and Prevention of\nVaccine-Preventable Diseases, 13th Edition") +
-  theme_minimal(base_family = "Fira Sans Condensed")
+  theme_minimal(base_size = 16,
+                base_family = "Fira Sans Condensed")
 ```
 
 ---
@@ -1079,31 +1130,31 @@ Don't mistake seasonality for actual trends
 
 ```{r process-fred-seasonality, echo=FALSE}
 # Clean up retail sales data
-retail_sales <- fred_raw %>%
-  filter(symbol == "RSXFSN") %>%
-  filter(date > "1999-12-31") %>%
-  rename(sales = price) %>%
-  mutate(year_month = yearmonth(date)) %>%
+retail_sales <- fred_raw |>
+  filter(symbol == "RSXFSN") |>
+  filter(date > "1999-12-31") |>
+  rename(sales = price) |>
+  mutate(year_month = yearmonth(date)) |>
   as_tsibble(index = year_month, key = symbol)
 
 # Decompose sales
-sales_model <- retail_sales %>%
+sales_model <- retail_sales |>
   # Probably best to use multiplicative errors, but then the values are less
   # easily interpretable
   model(ets = ETS(sales ~ error("A") + trend("Ad") + season("A")))
 
 # Tidy decomposed data
-sales_model_components <- sales_model %>%
-  components() %>%
-  select(-slope) %>%
+sales_model_components <- sales_model |>
+  components() |>
+  select(-slope) |>
   pivot_longer(cols = c(sales, level, season, remainder),
-               names_to = "component", values_to = "value") %>%
-  filter(year_month > yearmonth(ymd("1999-12-31"))) %>%
-  mutate(is_component = component != "sales") %>%
+               names_to = "component", values_to = "value") |>
+  filter(year_month > yearmonth(ymd("1999-12-31"))) |>
+  mutate(is_component = component != "sales") |>
   mutate(component = recode(component, sales = "Total retail sales in the United States, 2000–2019",
                             level = "Trend",
                             season = "Seasonality",
-                            remainder = "Remainder")) %>%
+                            remainder = "Remainder")) |>
   mutate(component = fct_inorder(component))
 ```
 
@@ -1119,7 +1170,7 @@ ggplot(filter(retail_sales,
                guide = guide_axis(n.dodge = 2)) +
   scale_y_continuous(labels = comma) +
   labs(x = NULL, y = "Millions of dollars",
-       title = "Total 2019 retail sales in the United States",
+       title = "Total retail sales in the United States, 2019",
        caption = "Source: RSXFSN from FRED") +
   theme_minimal(base_family = "Fira Sans Condensed") +
   theme(panel.grid.minor.x = element_blank(),
@@ -1179,14 +1230,13 @@ ggplot(sales_model_components, aes(x = year_month, y = value)) +
 
 .center[
 <figure>
-  <img src="img/09/bda_cover.png" alt="Bayesian Data Analysis cover" title="Bayesian Data Analysis cover" width="48%">
-  <figcaption>Cover of Andrew Gelman, et al., <i>Bayesian Data Analysis</i></figcaption>
+  <img src="img/09/bda_cover.png" alt="Bayesian Data Analysis cover" title="Bayesian Data Analysis cover" width="54%">
 </figure>
 ]
 
 ???
 
-http://www.stat.columbia.edu/~gelman/book/
+Source: http://www.stat.columbia.edu/~gelman/book/
 
 ---
 class: inverse, center, middle
@@ -1246,7 +1296,8 @@ R has "native" classes for storing calendar dates and times
 
 The `lubridate` package offers convenient tools for working with dates and times
 
-- See [`vignette("lubridate")`](https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html) and [Chapter 16 of R4DS](https://r4ds.had.co.nz/dates-and-times.html)
+- Loaded automatically as part of the core tidyverse since tidyverse 2.0.0
+- See [`vignette("lubridate")`](https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html) and [Chapter 18 of R4DS (2e)](https://r4ds.hadley.nz/datetimes.html)
 
 ---
 
@@ -1255,39 +1306,66 @@ The `lubridate` package offers convenient tools for working with dates and times
 Use `lubridate::ymd` to parse dates with **y**ear, **m**onth, and **d**ay components
 
 ```{r}
-independence_declared <- ymd("1776-07-04")
-independence_declared
-class(independence_declared)
+svb_failure <- ymd("2023-03-10")
+svb_failure
 ```
 
 --
 
-`lubridate` offers many other functions for parsing dates. For example:
+.pull-left[
+```{r}
+class(svb_failure)
+```
+]
+
+.pull-right[
+```{r}
+class("2023-03-10")
+```
+]
+
+---
+
+# Converting from strings to dates
+
+`lubridate` offers many other functions for parsing dates
+
+For example, instead of `ymd` we could use `mdy`:
 
 ```{r}
-emancipation_proclaimed <- mdy("January 1, 1863")
-emancipation_proclaimed
-class(emancipation_proclaimed)
+signature_failure <- mdy("March 12, 2023")
 ```
+
+.pull-left[
+```{r}
+signature_failure
+```
+]
+
+.pull-right[
+```{r}
+class(signature_failure)
+```
+]
 
 ---
 
 # Getting components of date-time data
 
-What year was the Emancipation Proclamation?
+What year did Silicon Valley Bank fail?
 
 --
 
 ```{r}
-year(emancipation_proclaimed)
+year(svb_failure)
 ```
 
 --
 .pull-left[
 What day of the week was that?
 ```{r}
-wday(emancipation_proclaimed)
-wday(emancipation_proclaimed, label = TRUE)
+wday(svb_failure)
+wday(svb_failure, label = TRUE)
 ```
 ]
 
@@ -1297,8 +1375,8 @@ wday(emancipation_proclaimed, label = TRUE)
 What month was that?
 
 ```{r}
-month(emancipation_proclaimed)
-month(emancipation_proclaimed, label = TRUE)
+month(svb_failure)
+month(svb_failure, label = TRUE)
 ```
 ]
 
@@ -1308,18 +1386,18 @@ month(emancipation_proclaimed, label = TRUE)
 
 How many days passed between independence and emancipation?
 ```{r}
-emancipation_proclaimed - independence_declared
+signature_failure - svb_failure
 ```
 
 --
 
 How many days are left until classes end?
 ```{r}
-ymd(20220510) - today()
+ymd(20230509) - today()
 ```
 
 --
 
 These are **durations**
 
-See [Chapter 16 of R4DS](https://r4ds.had.co.nz/dates-and-times.html) for functions to compute **periods** and **intervals**
+See [Chapter 18 of R4DS (2e)](https://r4ds.hadley.nz/datetimes.html) for functions to compute **periods** and **intervals**
