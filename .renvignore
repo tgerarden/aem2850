@@ -23,14 +23,6 @@ layouts/partials/menu.html
 *enrollment*.csv
 survey-responses-midsemester/
 
-# teaching notes
-notes-for-next-year/
-
-# solutions
-*project*solution*
-*lab*solution*
-*prelim*solution*
-
 # temp files
 draft-*
 *-draft
