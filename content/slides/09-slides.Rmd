@@ -147,7 +147,7 @@ name: prologue
 class: inverse, center, middle
 name: in-the-news
 
-# Prologue: In the news
+# Prologue
 
 ---
 
@@ -158,17 +158,50 @@ name: in-the-news
 TikTok challenge to blame?" width="100%">
 </figure>
 
+What's good about this graph? What could be better?
+
 ???
 
 Source: https://usafacts.org/data-projects/car-thefts
 
 ---
-class: inverse, center, middle
-name: axis-issues
 
-# Prologue: Axis issues (revisited)
+# What's good? What could be better?
+
+.center[
+<figure>
+  <img src="img/09/baby-names.gif" alt="Graph of the number of baby names that end in i in the U.S. from 1900 to 2016" title="Baby names that end in i" width="65%">
+</figure>
+]
+
+???
+
+Source: https://statmodeling.stat.columbia.edu/2023/01/26/labeling-the-x-and-y-axes-heres-a-quick-example-where-a-bit-of-care-can-make-a-big-difference/
 
 ---
+
+# What's good? What could be better?
+
+.pull-left[
+- Stacked curves makes it hard to see trends for females
+- Legend could be bigger and use "Male" and "Female"
+- x-axis labeling: use labels every 10 or 20 years (not 4!)
+- y-axis labeling:
+  - multiples of 4 are not intuitive
+  - %s would be easier to interpret
+]
+
+.pull-right[
+<figure>
+  <img src="img/09/baby-names.gif" alt="Graph of the number of baby names that end in i in the U.S. from 1900 to 2016" title="Baby names that end in i" width="100%">
+</figure>
+]
+???
+
+Source: https://statmodeling.stat.columbia.edu/2023/01/26/labeling-the-x-and-y-axes-heres-a-quick-example-where-a-bit-of-care-can-make-a-big-difference/
+
+---
+name: axis-issues
 
 # Is truncating the y-axis misleading?
 
