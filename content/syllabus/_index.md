@@ -58,7 +58,7 @@ All TA office hours take place in Warren 372.
 <!-- - Mondays 12:20pm - 1:20pm in Warren 372 -->
 <!-- - Fridays 10:00am - 11:00am in Warren 372 -->
 
-[See below for tips on how to make the most of office hours and email.](#office-hours-and-email).
+[See below for tips on how to make the most of office hours and email.](#office-hours-and-email)
 
 ## Course overview
 

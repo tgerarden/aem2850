@@ -22,7 +22,7 @@ theme_set(theme_minimal()) # set the current theme to theme_minimal()
 # for convenience, i created csv files store in data/ but also include the code used to get the data
 
 
-# 0. it's your birthday ----
+# 1. it's your birthday ----
 # before we get to visualization of time data, let's start with a special date: your birth date
 # write your birthday as a string in "YYYY-MM-DD" format and assign it to my_bday
 my_bday <- "1991-02-03" # (not really my birthday)
@@ -75,7 +75,7 @@ my_duration <- as.duration(my_days)
 my_duration
 
 
-# 1. Import and visualize oil price data ----
+# 2. Import and visualize oil price data ----
 # oil prices are an important economic indicator
 # use quandl to import WTI (US) and Brent (EU) prices from FRED
 # oil_prices <- Quandl(c("FRED/DCOILWTICO", "FRED/DCOILBRENTEU"))
@@ -111,7 +111,7 @@ tidy_oil_prices |>
   geom_hline(yintercept = 0)
 
 
-# 2. Import and visualize GDP data ----
+# 3. Import and visualize GDP data ----
 # use quandl to import FRED's seasonally adjusted GDP data
 # use GDPC1, which is in real terms, rather than GDP (which is nominal)
 # gdp <- Quandl("FRED/GDPC1")
@@ -157,11 +157,66 @@ gdp |>
   geom_line()
 
 
-# 3. Make a more polished GDP plot ----
+# 4. Gapminder animation revisited ----
+# load the gapminder, gganimate, and gifski packages
+library(gapminder)
+library(gganimate)
+library(gifski)
+
+# use the gapminder data to recreate the animation from class
+gapminder_points <- gapminder |> 
+  ggplot(aes(gdpPercap, lifeExp, 
+             size = pop, color = continent)) +
+  geom_point(alpha = 0.5, show.legend = FALSE) +
+  scale_color_manual(
+    values = continent_colors # continent_colors comes from gapminder
+  ) +
+  scale_size_continuous(range = c(1, 15)) +
+  scale_x_log10(labels = scales::label_dollar()) + # scales is a tidyverse package
+  theme_classic(base_size = 20) +
+  labs(x = "GDP per capita", 
+       y = "Life expectancy",
+       title = "Year: {frame_time}") + # transition_time makes {frame_time} available
+  transition_time(year) + # tell gganimate to use year for animation transitions
+  ease_aes('linear') # default progression
+animate(gapminder_points, renderer = gifski_renderer())
+
+# find the outlier country with GDP per capita over $100,000 in the 1950s
+# one way is using filters
+gapminder |> 
+  filter(gdpPercap>100000 & year<1960)
+
+# or plot text using geom_text (or geom_label) instead of geom_point
+# note: for plotting text, the aesthetic mapping to include a `label`
+# you might also want to omit the size mapping to make the chart more readable
+gapminder_text <- gapminder |> 
+  ggplot(aes(gdpPercap, lifeExp, 
+             color = continent)) + # omit size here
+  geom_text(aes(label = country), show.legend = FALSE) + # add a label mapping
+  scale_color_manual(
+    values = continent_colors # continent_colors comes from gapminder
+  ) +
+  scale_size_continuous(range = c(1, 15)) +
+  scale_x_log10(labels = scales::label_dollar()) + # scales is a tidyverse package
+  theme_classic(base_size = 20) +
+  labs(x = "GDP per capita", 
+       y = "Life expectancy",
+       title = "Year: {frame_time}") + # transition_time makes {frame_time} available
+  transition_time(year) + # tell gganimate to use year for animation transitions
+  ease_aes('linear') # default progression
+animate(gapminder_text, renderer = gifski_renderer())
+
+# can you think of any reasons that country was an outlier in terms of gdp/capita?
+# hint: it might related to some of the data we plotted earlier in this example
+# note: don't read too far into this without doing more due diligence
+# alternative economic measures could lead to very different conclusions
+
+
+# 5. Make a more polished GDP plot ----
 # try to make this: https://fred.stlouisfed.org/graph/fredgraph.png?g=MOiP
 
-# 3.1. first you will need to process recessions data:
-# 3.1.1. get data on the start and end dates of recessions (FRED/USREC)
+# 5.1. first you will need to process recessions data:
+# 5.1.1. get data on the start and end dates of recessions (FRED/USREC)
 # go ahead and filter to post-2000 data for convenience
 # rec <- Quandl("FRED/USREC") |>
 #   filter(Date >= "2000-01-01") |>
@@ -169,24 +224,24 @@ gdp |>
 # write_csv(rec, "data/rec.csv")
 rec <- read_csv("data/rec.csv")
 
-# 3.1.2. use dplyr tools to isolate periods when recessions start/end
+# 5.1.2. use dplyr tools to isolate periods when recessions start/end
 # (hint: think window functions for offsets)
 rec_start_end <- rec |>
   mutate(change = Value - lag(Value)) |>
   filter(change != 0)
 
-# 3.1.3. make a data frame where each row is a recession, and columns are start/end dates
+# 5.1.3. make a data frame where each row is a recession, and columns are start/end dates
 recessions <- tibble(start = filter(rec_start_end, change == 1) |> pull(Date),
                      end = filter(rec_start_end, change == -1) |> pull(Date))
 recessions
 
-# 3.2. filter gpd to post-2000 data and convert GDP from billions to trillions
+# 5.2. filter gpd to post-2000 data and convert GDP from billions to trillions
 # assign resulting data frame to a variable
 gdp_recent <- gdp |>
   filter(Date >= "2000-01-01") |>
   mutate(Value = Value/1e3)
 
-# 3.3. now make a plot using the two data frames
+# 5.3. now make a plot using the two data frames
 # we need to give data and mappings to each geometry without confusing them
 # we can do this by calling ggplot without arguments, and then
 # passing the data and aesthetic mappings directly to each geom function
@@ -197,7 +252,7 @@ gdp_recent <- gdp |>
 ggplot() +
   geom_line(data = gdp_recent,
             aes(x = Date, y = Value),
-            color = "#B31B1B", size = 1) +
+            color = "#B31B1B", linewidth = 1) +
   geom_rect(data = recessions,
             aes(xmin = start, xmax = end, ymin = -Inf, ymax = Inf),
             fill = "#222222", alpha = 0.2) +
@@ -211,12 +266,12 @@ ggplot() +
   theme_bw() +
   theme(plot.title = element_text(face = "bold"))
 
-# 3.4. save the plot as a .png file using ggsave
+# 5.4. save the plot as a .png file using ggsave
 # you will probably want to specify the dimensions (e.g., width = 8, height = 4.5)
 ggsave("my_gdp_plot.png", width = 8, height = 4.5)
 
 
-# 4. Recessionary oil prices ----
+# 6. Recessionary oil prices ----
 # use your code from 3 to make a plot of WTI prices with recession shading
 wti_prices <- tidy_oil_prices |>
   filter(type == "wti")
@@ -224,7 +279,7 @@ wti_prices <- tidy_oil_prices |>
 ggplot() +
   geom_line(data = wti_prices,
             aes(x = date, y = price),
-            color = "#B31B1B", size = 1) +
+            color = "#B31B1B", linewidth = 1) +
   geom_hline(yintercept = 0) +
   geom_rect(data = recessions,
             aes(xmin = start, xmax = end, ymin = -Inf, ymax = Inf),
@@ -246,7 +301,7 @@ ggsave("my_wti_plot.png", width = 8, height = 4.5)
 # do you think the Great Recession and COVID affected oil prices? how? why?
 
 
-# 5. OJ prices and sales over time ----
+# 7. OJ prices and sales over time ----
 # data/oj.csv contains data from a real retailer on oj prices and sales
 # if time allows, we can explore the data to:
 # make a column plot of tropicana sales over time (time = "week")
