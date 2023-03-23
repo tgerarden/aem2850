@@ -19,39 +19,38 @@ urlcolor: blue
 
 ```{r setup, include = FALSE}
 library(tidyverse)
-library(lubridate)
 library(ggridges)
-library(viridis)
+library(scales) # functions for making nicer scales
 
 # omit warnings and center plots by default
 library(knitr)
-opts_chunk$set(warning = FALSE, message = FALSE,
+opts_chunk$set(warning = FALSE, 
+               message = FALSE,
                fig.align = "center",
                out.width = "85%")
 ```
 
 # Preface
 
-The goal of this assignment is to help you gain more familiarity with using **ggplot** to visualize relationships. As always, please come to office hours and reach out to your teaching staff if you have any questions.
-
-FYI: in this assignment we added `\newpage` before some questions to keep question statements, code blocks, and output together.
+The goal of this assignment is to help you gain more familiarity with using **ggplot** to visualize time. As always, please come to office hours and reach out to your teaching staff if you have any questions.
 
 ## Data
 
-We will work with monthly data on Zillow median sale price from [Zillow Research](https://www.zillow.com/research/data/).[^price] For this lab, we will work with raw data from `Metro_median_sale_price_uc_sfrcondo_month.csv` and smoothed and seasonally adjusted data from `Metro_median_sale_price_uc_sfrcondo_sm_sa_month.csv`. Each data set contains monthly median sales price for 94 US metropolitan statistical area. The two data series start at different times, but both end in January 2022. Start by importing the raw data and the adjusted data and assigning them to `raw` and `adj`, respectively.
+We will work with monthly data on home prices from [Zillow Research](https://www.zillow.com/research/data/). For this lab, we will work with raw data from `Metro_median_sale_price_uc_sfrcondo_month.csv` and smoothed and seasonally adjusted data from `Metro_median_sale_price_uc_sfrcondo_sm_sa_month.csv`. Each data set contains monthly a measure of home sales prices for 94 US metropolitan statistical areas. The two data series start at different times, but both end in January 2022. Start by importing the raw data and the adjusted data and assigning them to `raw` and `adj`, respectively.
 ```{r}
 
 ```
 
 
 ## 1. We'll start by tidying the data `raw`. Drop the row that contains information for the entire United States, and then tidy the data set so that each observation is an MSA-date. Filter out observations with missing prices. Convert `date` into the date format. Generate new variables of `year` and `month` indicating the year and month of the date. Convert price to thousands. Assign the new data set to `raw_tidy`.
+<!-- Hint: You may find the function ymd() very handy to convert strings to dates. -->
 
 ```{r}
 
 ```
 
 
-\newpage
+{{< pagebreak >}}
 ## 2. Visualize the price distribution across years, using the type of plot that you think is most appropriate. Show the median price per year in the plot. Add tweaks that you think can improve the plot. How does the distribution and the median price change over years?
 
 ```{r}
@@ -59,29 +58,34 @@ We will work with monthly data on Zillow median sale price from [Zillow Research
 ```
 
 
-\newpage
-## 3. Use `geom_line()` to visualize the median price over time in New York City. Put the aesthetic mappings within `geom_line()` rather than `ggplot()`. Assign it to `nyc_plot` and then print it.
+{{< pagebreak >}}
+## 3. Use `geom_line()` to visualize the sale price over time in New York City. Put the aesthetic mappings within `geom_line()` rather than `ggplot()`. Assign it to `nyc_plot` and then print it.
 
 ```{r}
 
 ```
 
-\newpage
+
+{{< pagebreak >}}
 ## 4. Add a colored rectangle to the plot in question 3, showing the period of pandemic, from March 2020 to the last period of the data. Use a caption below the figure to explain what the shading indicates. Use your plot object `nyc_plot` as the starting point rather than duplicating your code from above.
 
 ```{r}
 
 ```
 
-\newpage
+
+{{< pagebreak >}}
 ## 5. Do you see any seasonality in the plot of question 3? Now use the same procedure to wrangle the data `adj`. Overlay the two time series from the raw data and the seasonally adjusted data for New York City in one plot. Compare the two lines. What difference(s) do you see?
+<!-- Hint: There are multiple ways that you could overlay two time series in one plot. One way is to start with the two tidy data frames and add a variable with the same name to each, for example, `type`, which contains a string that indicates whether the rows contain raw or adjusted prices. Then use  `bind_rows()` or `rbind` to stack the raw and the seasonally adjusted data sets. Finally, when making the plot, you may include `color = type` in the aesthetics to distinguish the two time series by color. A second way is to join the two data sets by date and then `pivot_longer` the data. Finally, another "non-tidy" way would be to use multiple calls to `geom_line()` with multiple datasets or a joined dataset that is not tidy. -->
 
 ```{r}
 
+
 ```
+...
 
 
-\newpage
+{{< pagebreak >}}
 ## 6. Now let's work with the seasonally adjusted price data. Choose the four MSAs with `SizeRank` from 1 to 4. Visualize prices over time, faceting by MSA. Optional: Do these patterns make sense to you? If not, you could investigate the data source further to see if you can explain any discrepancies between the results and what you expected.
 
 ```{r}
@@ -89,22 +93,19 @@ We will work with monthly data on Zillow median sale price from [Zillow Research
 ```
 
 
-\newpage
-## 7. Use the adjusted price to caclulate the average of the median prices per year per MSA. Then caclulate the annual price change rate per region: $(p_t - p_{t-1})/p_{t-1}$. Express them as percentage points (i.e., ranging from -100 to 100, not -1 to 1). Find the cities with the largest and smallest change rate in 2021. Use the resulting data frame to plot the change rate using a bar chart for these two cities, with each city as a separate facet. Use logical color-coding for whether the growth rate was positive or negative each year.
-
-```{r}
-
-```
-
-\newpage
-## 8. Now import sales counts from `Metro_sales_count_now_uc_sfrcondo_month.csv`. Join the sales data with the raw price data. Keep the observations for New York City. Make a scatter plot mapping raw prices to the x-axis and sales to the y-axis. What pattern do you see? Is it consistent with your expectation? Can you explain why?
+{{< pagebreak >}}
+## 7. Use the adjusted price to caclulate the average of the sale price per year per MSA. Then caclulate the annual price growth rate per region: $(p_t - p_{t-1})/p_{t-1}$. Express them as percentage points (i.e., ranging from -100 to 100, not -1 to 1). Find the cities with the largest and smallest growth rate in 2021. Use the resulting data frame to plot the growth rate using a bar chart for these two cities, with each city as a separate facet. Use logical color-coding for whether the growth rate was positive or negative each year.
+<!-- Hint: This question is a combination of data wrangling and data visualization. You may approach it in several steps: First, calculate the annual price growth rate and store it as a new object. Second, find the two cities with the largest and smallest growth rate in 2021, and store them into two objects. Lastly, filter the annual price growth rate data to keep only the two cities, and then plot the growth rate as instructed. -->
 
 ```{r}
 
 ```
 
 
+{{< pagebreak >}}
+## 8. Now import `Metro_sales_count_now_uc_sfrcondo_month.csv`, which contains sales counts. Tidy and join the sales data with the adjusted price data. Keep the observations for New York City. Make a scatter plot mapping sales to the x-axis and adjusted prices to the y-axis. What pattern do you see? Is it consistent with your expectation? Can you explain why?
 
-[^price]: Median Sale Price: The median price at which homes across various geographies were sold.
+```{r, echo = FALSE}
 
-
+```
+...
