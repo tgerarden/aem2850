@@ -9,17 +9,17 @@
 # 0. Loading packages and prepping data -----
 # we need to install packages once before we can use them
 # install.packages("tidyverse") # in this case, it has already been done for you in this project
-library(tidyverse) # load the core tidyverse packages
-library(lubridate) # load lubridate (part of tidyverse but not automatically loaded)
-library(Quandl) # load Quandl package (https://data.nasdaq.com/tools/r)
+library(tidyverse) # load the core tidyverse packages, which include lubridate
+# library(Quandl) # load Quandl package (https://data.nasdaq.com/tools/r)
 
 # use theme_set to get clean plots without having to specify the theme each time
 theme_set(theme_minimal()) # set the current theme to theme_minimal()
 # you can use theme_set(theme()) to return to defaults if you prefer
 
 # today we'll explore some economic data to learn about working with dates and visualizing time data
-# the data come from FRED (https://fred.stlouisfed.org), though we'll access it via the quandl api
-# FYI i included csv files of the three key datasets in backup-data in case of issues with the quandl api
+# the data come from FRED (https://fred.stlouisfed.org), though accessed via the quandl api
+# in order to use the API, you either need to work locally or register and then use your own API key
+# for convenience, i created csv files store in data/ but also include the code used to get the data
 
 
 # 0. it's your birthday ----
@@ -61,12 +61,13 @@ ______(______)
 
 
 # how many days old are you? assign this to my_days
+______ - ______
 my_days <- ______ - ______
 
 # what type of object is my_days?
 
 
-# lubridate offers a **duration** type that is stored in second
+# lubridate offers a **duration** type that is stored in seconds
 # use as.duration() to convert my_days from difftime to duration, assign it to my_duration
 
 
@@ -77,14 +78,16 @@ my_days <- ______ - ______
 # 1. Import and visualize oil price data ----
 # oil prices are an important economic indicator
 # use quandl to import WTI (US) and Brent (EU) prices from FRED
-oil_prices <- Quandl(c("FRED/DCOILWTICO", "FRED/DCOILBRENTEU"))
+# oil_prices <- Quandl(c("FRED/DCOILWTICO", "FRED/DCOILBRENTEU"))
+oil_prices <- read_csv("data/oil_prices.csv")
+
 
 # tidy the data, filtering to post 2000
 # renaming the variables by position for convenience
 # i used the names "date" "wti" and "brent"
 
 
-# use the tidy data to plot brent prices over time as points
+# use the tidy data to plot wti prices over time as points
 
 
 # add a line
@@ -98,7 +101,8 @@ oil_prices <- Quandl(c("FRED/DCOILWTICO", "FRED/DCOILBRENTEU"))
 # 2. Import and visualize GDP data ----
 # use quandl to import FRED's seasonally adjusted GDP data
 # use FRED/GDPC1, which is in real terms, rather than GDP (which is nominal)
-
+# gdp <- Quandl("FRED/GDPC1")
+gdp <- read_csv("data/gdp.csv")
 
 # inspect the data frame's structure
 
@@ -129,7 +133,10 @@ oil_prices <- Quandl(c("FRED/DCOILWTICO", "FRED/DCOILBRENTEU"))
 # 3.1. first you will need to process recessions data:
 # 3.1.1. get data on the start and end dates of recessions (FRED/USREC)
 # go ahead and filter to post-2000 data for convenience
-
+# rec <- Quandl("FRED/USREC") |>
+#   filter(Date >= "2000-01-01") |>
+#   arrange(Date)
+rec <- read_csv("data/rec.csv")
 
 # 3.1.2. use dplyr tools to isolate periods when recessions start/end
 # (hint: think window functions for offsets)
@@ -146,19 +153,44 @@ oil_prices <- Quandl(c("FRED/DCOILWTICO", "FRED/DCOILBRENTEU"))
 # we need to give data and mappings to each geometry without confusing them
 # we can do this by calling ggplot without arguments, and then
 # passing the data and aesthetic mappings directly to each geom function
-# map start and end dates to xmin and xmax, -Inf and Inf to ymin and ymax
+# geom_rect: map start and end dates to xmin and xmax, -Inf and Inf to ymin and ymax
 # fill your rectangles and color your line
 # add informative labels
 # state your data source
 
 
 # 3.4. use ggsave to save the plot as a .png file
+# you will probably want to specify the dimensions (e.g., width = 8, height = 4.5)
 
 
 
-# 4. Bonus: use your code from 3 to make a plot of WTI prices with recession shading ----
-# do you think the Great Recession and COVID affected oil prices? how? why?
+# 4. Recessionary oil prices ----
+# use your code from 3 to make a plot of WTI prices with recession shading
 
 
 # use ggsave to save the plot as a .png file
+# you will probably want to specify the dimensions (e.g., width = 8, height = 4.5)
 
+
+# do you think the Great Recession and COVID affected oil prices? how? why?
+
+
+# 5. OJ prices and sales over time ----
+# data/oj.csv contains data from a real retailer on oj prices and sales
+# if time allows, we can explore the data to:
+# make a column plot of tropicana sales over time (time = "week")
+
+
+# make a line plot of both sales and prices, in facets, over time for tropicana
+# you will want to use the scales argument to facet_wrap here
+
+
+# make a plot that would be good for tropicana data, without using time at all
+
+
+# make a version of your last plot that includes all brands
+
+
+# if you were the retailer, how could you use the data to inform your strategy?
+# what are the pros and cons of your two different visualizations for this purpose?
+# what more would you want to know, or to do with the data?

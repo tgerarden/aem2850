@@ -98,7 +98,7 @@ lessons:
     # date_start: "July 5"
     # date_end: "July 9"
     content: "09-content"
-    # example: "09-example"
+    example: "09-example"
     # assignment: "09-lab"
     bg: 1
 

@@ -16,16 +16,16 @@ library(knitr)
 You will do all of your work in this class with the open source (and free!) programming language [R](https://cran.r-project.org/). You will use [RStudio](https://www.rstudio.com/) as the main program to access R. Think of R as an engine and RStudio as a car dashboard—R handles all the calculations and the actual statistics, while RStudio provides a nice interface for running R code.
 
 
-## RStudio.cloud
+## Posit Cloud
 
-R is free, but it can sometimes be a pain to install and configure. To make life easier, this course uses [RStudio.cloud](http://rstudio.cloud/), which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R! We have a shared class workspace in RStudio.cloud that will let you quickly copy templates for labs and problem sets.
+R is free, but it can sometimes be a pain to install and configure. To make life easier, this course uses [posit.cloud](http://posit.cloud/), which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R! We have a shared class workspace on Posit Cloud that will let you quickly copy templates for labs and problem sets.
 
-Go to <https://rstudio.cloud/> and create an account. You'll receive a link to join the shared class workspace separately. If you don't get this link, let me know and I will invite you.
+Go to <http://posit.cloud/> and create an account. You'll receive a link to join the shared class workspace separately. If you don't get this link, let me know and I will invite you.
 
 
 ## RStudio on your computer
 
-RStudio.cloud is convenient, but it can be slow and it is not designed to be able to handle larger datasets, more complicated analysis, or fancier graphics. Over the course of the semester, you might want to wean yourself off of RStudio.cloud and install all these things locally. This will also be handy in the future if you want to use R for other classes, jobs, etc.
+Posit Cloud is convenient, but it can be slow and it is not designed to be able to handle larger datasets, more complicated analysis, or fancier graphics. Over the course of the semester, you might want to wean yourself off of Posit Cloud and install all these things locally. This will also be handy in the future if you want to use R for other classes, jobs, etc.
 
 Here are some links to get set up for this class:
 
@@ -129,9 +129,9 @@ Here's how to install **tinytex** so you can knit to pretty PDFs:
 
 ### Reminder: come to office hours if you need help with this!
 
-## Downloading RStudio Cloud projects
+## Downloading Posit Cloud projects
 
-If you want to use your local installation of R to complete assignments, all you need to do is navigate to the class workspace on RStudio Cloud and click the download arrow ⬇️ to the right of the project you would like to download.
+If you want to use your local installation of R to complete assignments, all you need to do is navigate to the class workspace on Posit Cloud and click the download arrow ⬇️ to the right of the project you would like to download.
 
 ```{r, echo=FALSE, out.width="80%"}
 include_graphics("img/download-cloud-project.png", error = FALSE)
@@ -143,7 +143,7 @@ Once the project is prepared for export, click the Download button:
 include_graphics("img/download-cloud-download.png", error = FALSE)
 ```
 
-This will download the entire project directory to your computer. The downloaded folder will have a name like `3511792` (check your `Downloads` folder). You can move and rename the folder as you wish. If you double-click the `.Rproj` file within that directory, it will open an instance of RStudio on your machine with the working directory set to the project directory (either in your `Downloads` or wherever you moved it). You can then work with the files included in the project directory just as if you were working on RStudio Cloud.[^cloud-packages]
+This will download the entire project directory to your computer. The downloaded folder will have a name like `3511792` (check your `Downloads` folder). You can move and rename the folder as you wish. If you double-click the `.Rproj` file within that directory, it will open an instance of RStudio on your machine with the working directory set to the project directory (either in your `Downloads` or wherever you moved it). You can then work with the files included in the project directory just as if you were working on Posit Cloud.[^cloud-packages]
 
 
-[^cloud-packages]: The main exception to this is that I set up RStudio Cloud projects so they come with packages pre-installed in the cloud, and those packages are not included in the project files you downloaded, so you may need to install new packages the first time you use them.
+[^cloud-packages]: The main exception to this is that I set up Posit Cloud projects so they come with packages pre-installed in the cloud, and those packages are not included in the project files you downloaded, so you may need to install new packages the first time you use them.
