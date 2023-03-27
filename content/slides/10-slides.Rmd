@@ -68,11 +68,10 @@ Acknowledgements:
 # Announcements
 
 Reminders:
-- Mini Project 1 due April 1 ([link](https://aem2850.toddgerarden.com/assignment/01-mini-project/))
+- Group project due April 14 ([link](https://aem2850.toddgerarden.com/assignment/group-project/))
 - Local R install instructions posted ([link](https://aem2850.toddgerarden.com/resource/install/))
 
 Questions before we get started?
-
 
 ---
 
@@ -80,32 +79,18 @@ Questions before we get started?
 
 <!-- [Prologue](#prologue) -->
 
-[The dangers of dual y-axes](#dual-y-axes)
+[Prologue: The dangers of dual y-axes](#dual-y-axes)
 
 [Visualizing correlations](#correlations)
 
 [Visualizing regressions](#regressions)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 class: inverse, center, middle
 name: dual-y-axes
 
-# The dangers of dual y-axes
+# Prologue: The dangers of dual y-axes
 
 ---
 
@@ -113,14 +98,14 @@ name: dual-y-axes
 
 .small.center[
 <figure>
-  <img src="img/08/chart.png" alt="Spurious correlation between divorce rate and margarine consumption" title="Spurious correlation between divorce rate and margarine consumption" width="100%">
+  <img src="img/10/chart.png" alt="Spurious correlation between deaths by drowning and the number of films Nicolas Cage appeared in" title="Spurious correlation between deaths by drowning and the number of films Nicolas Cage appeared in" width="100%">
   <figcaption>Source: <a href="https://www.tylervigen.com/spurious-correlations" target="_blank">Tyler Vigen's spurious correlations</a></figcaption>
 </figure>
 ]
 
 ---
 
-# Why not use double y-axes?
+# Why not use two y-axes?
 
 --
 
@@ -137,7 +122,7 @@ You have to choose where the y-axes start and stop, which means...
 
 .center[
 <figure>
-  <img src="img/08/economist-dogs.png" alt="Dog neck size and weight in The Economist" title="Dog neck size and weight in The Economist" width="90%">
+  <img src="img/10/economist-dogs.png" alt="Dog neck size and weight in The Economist" title="Dog neck size and weight in The Economist" width="90%">
 </figure>
 ]
 
@@ -151,7 +136,7 @@ You have to choose where the y-axes start and stop, which means...
 
 .small.center[
 <figure>
-  <img src="img/08/triple-y-axis.png" alt="Acemoglu and Restrepo triple y-axis" title="Acemoglu and Restrepo triple y-axis" width="60%">
+  <img src="img/10/triple-y-axis.png" alt="Acemoglu and Restrepo triple y-axis" title="Acemoglu and Restrepo triple y-axis" width="60%">
   <figcaption>Source: Daron Acemoglu and Pascual Restrepo, "The Race Between Man and Machine: Implications of Technology for Growth, Factor Shares and Employment"</figcaption>
 </figure>
 ]
@@ -162,7 +147,84 @@ Daron Acemoglu and Pascual Restrepo, ["The Race Between Man and Machine: Implica
 
 ---
 
-# When is it defensible?
+# What could we do instead?
+
+--
+
+Use multiple plots!
+
+.center[
+<figure>
+  <figcaption>Solar panels in Japan</figcaption>
+  <img src="img/10/solar-innovation-Japan.png" alt="Japanese solar market timeline" title="Japanese solar market timeline" width="65%">
+</figure>
+]
+
+???
+
+Source: Gerarden (2021) "Demanding Innovation: The Impact of Consumer Subsidies on Solar Panel Production Costs"
+
+---
+
+# How could we make multiple plots in R?
+
+--
+
+**1. Facets** are great when using a common geometry (we've already seen that)
+
+**2. Combining multiple plot objects** can be more flexible
+
+--
+
+Let's use Ithaca weather data to see an example of combining plots:
+
+```{r}
+ithaca_weather <- read_csv("data/ithaca-weather-2021.csv")
+
+ithaca_weather |> 
+  select(STATION, NAME, DATE, TMAX, SNOW) |> 
+  head(3)
+```
+
+
+---
+
+# Alternative: Use multiple plots
+
+.left-code[
+```{r ithaca-weather-patchwork, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
+library(patchwork) #<<
+
+# make a plot of temperatures
+temp_plot <- ggplot(ithaca_weather, 
+                    aes(x = DATE, y = TMAX)) +
+  geom_line() + geom_smooth() +
+  labs(x = NULL, y = "Fahrenheit")
+
+# make a plot of snowfall
+snow_plot <- ggplot(ithaca_weather,   
+                    aes(x = DATE, y = SNOW)) + 
+  geom_col() + 
+  labs(x = NULL, y = "Snowfall (inches)")
+
+# use patchwork to combine the two plots       #<<
+temp_plot +    # simply use + to combine plots #<<
+  snow_plot +  # then add on custom options    #<<
+  plot_layout(ncol = 1,                        #<<
+              heights = c(0.7, 0.3))           #<<
+```
+]
+
+--
+
+.right-plot[
+![](`r knitr::fig_chunk("ithaca-weather-patchwork", "png")`)
+]
+
+
+---
+
+# When are dual y-axes defensible?
 
 --
 
@@ -186,19 +248,6 @@ ggplot(ithaca_weather, aes(x = DATE, y = TMAX)) +
   theme_minimal() +
   theme(plot.title = element_text(face = "bold"))
 ```
-
----
-
-# How could we make this plot in R?
-
-```{r}
-ithaca_weather <- 
-  read_csv("data/ithaca-weather-2021.csv")
-
-ithaca_weather %>% 
-  select(STATION, NAME, DATE, TMAX, SNOW)
-```
-
 
 ---
 
@@ -242,7 +291,7 @@ ggplot(ithaca_weather,
 
 We provided this formula for the **trans**formation argument:
 
-.center[`Celsius = (Fahrenheit - 32) * 5/9`]
+.small.center[`Celsius = (Fahrenheit - 32) * 5/9`]
 ]
 
 .right-plot[
@@ -255,8 +304,8 @@ We provided this formula for the **trans**formation argument:
 
 .left-code[
 ```{r cars-dual, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
-car_counts <- mpg %>% 
-  group_by(drv) %>% summarize(total = n())
+car_counts <- mpg |> 
+  group_by(drv) |> summarize(total = n())
 
 total_cars <- sum(car_counts$total)
 
@@ -280,62 +329,6 @@ Note: **total_cars** is not in **car_counts**
 
 ---
 
-# Alternative 1: Use multiple plots
-
-.center[
-<figure>
-  <figcaption>Solar panels in Japan</figcaption>
-  <img src="img/08/solar-innovation-Japan.png" alt="Japanese solar market timeline" title="Japanese solar market timeline" width="75%">
-</figure>
-]
-
-???
-
-Source: Gerarden (2021) "Demanding Innovation: The Impact of Consumer Subsidies on Solar Panel Production Costs"
-
----
-
-# Alternative 1: Use multiple plots
-
-.left-code[
-```{r ithaca-weather-patchwork, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
-library(patchwork) #<<
-
-temp_plot <- ggplot(ithaca_weather, 
-                    aes(x = DATE, 
-                        y = TMAX)) +
-  geom_line() + geom_smooth() +
-  labs(x = NULL, y = "Fahrenheit")
-
-snow_plot <- ggplot(ithaca_weather,   #<<
-                     aes(x = DATE,    #<<
-                         y = SNOW)) + #<<
-  geom_col() + 
-  labs(x = NULL, y = "Snowfall (inches)")
-
-temp_plot + snow_plot +              #<<
-  plot_layout(ncol = 1,              #<<
-              heights = c(0.7, 0.3)) #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("ithaca-weather-patchwork", "png")`)
-]
-
-
----
-
-# Alternative 2: Use another aesthetic
-
-.center[
-<figure>
-  <img src="img/05/gapminder-screenshot.png" alt="Animated gapminder data" title="Animated gapminder data" width="70%">
-</figure>
-]
-
----
-
 class: inverse, center, middle
 name: correlations
 
@@ -347,10 +340,11 @@ name: correlations
 
 --
 
+As the value of X goes up, Y tends to go up (down) a lot / a little / not at all
+
 $$
 \rho_{X, Y} = \frac{\operatorname{cov}(X, Y)}{\sigma_X \sigma_Y}
 $$
-As the value of X goes up, Y tends to go up (or down) a lot/a little/not at all
 
 Says nothing about *how much* Y changes when X changes
 
@@ -392,13 +386,13 @@ make_correlated_data <- function(r, n = 200) {
   MASS::mvrnorm(n = n, 
                 mu = c(0, 0), 
                 Sigma = matrix(c(1, r, r, 1), nrow = 2), 
-                empirical = TRUE) %>% 
-    magrittr::set_colnames(c("x", "y")) %>% 
+                empirical = TRUE) |> 
+    magrittr::set_colnames(c("x", "y")) |> 
     as_tibble()
 }
 
-cor_grid <- tibble(r = c(0.2, 0.4, 0.75, 0.9)) %>% 
-  mutate(data = map(r, make_correlated_data)) %>% 
+cor_grid <- tibble(r = c(0.2, 0.4, 0.75, 0.9)) |> 
+  mutate(data = map(r, make_correlated_data)) |> 
   unnest(data)
 
 ggplot(cor_grid, aes(x = x, y = y)) +
@@ -430,13 +424,13 @@ The humble scatter plot is often the best place to start when studying the assoc
 
 .left-code[
 ```{r ithaca-weather-scatterplot-1, tidy=FALSE, message=FALSE, warning=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ithaca_weather %>% 
+ithaca_weather |> 
   ggplot(aes(x = TMIN, y = TMAX)) +
   geom_point()
 
 cor(ithaca_weather$TMIN, 
-    ithaca_weather$TMAX) %>% 
-  round(., 3)
+    ithaca_weather$TMAX) |> 
+  round(3)
 ```
 
 What about min temp and snowfall?
@@ -452,13 +446,13 @@ What about min temp and snowfall?
 
 .left-code[
 ```{r ithaca-weather-scatterplot-2, tidy=FALSE, message=FALSE, warning=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ithaca_weather %>% 
+ithaca_weather |> 
   ggplot(aes(x = TMIN, y = SNOW)) +
   geom_point()
 
 cor(ithaca_weather$TMIN, 
-    ithaca_weather$SNOW) %>% 
-  round(., 3)
+    ithaca_weather$SNOW) |> 
+  round(3)
 ```
 ]
 
@@ -474,7 +468,7 @@ cor(ithaca_weather$TMIN,
 ```{r scatterplot-matrix, tidy=FALSE, message=FALSE, warning=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
   library(GGally)
   
-cars_smaller <- mtcars %>% 
+cars_smaller <- mtcars |> 
   select(mpg, cyl, gear, hp, qsec)
   
 ggpairs(cars_smaller)
@@ -494,22 +488,22 @@ For many variables, correlograms or correlation coefficients often better
 # Correlograms: Heatmaps
 
 ```{r cor-heatmap, echo=FALSE, message=FALSE, fig.dim=c(8, 3.5), out.width="100%"}
-cars_cor <- mtcars %>% 
-  select(mpg, cyl, gear, hp, qsec) %>% 
+cars_cor <- mtcars |> 
+  select(mpg, cyl, gear, hp, qsec) |> 
   cor()
 
 cars_cor[lower.tri(cars_cor)] <- NA
 
-cars_cor_long <- cars_cor %>% 
-  as.data.frame() %>% 
-  rownames_to_column("measure2") %>% 
+cars_cor_long <- cars_cor |> 
+  as.data.frame() |> 
+  rownames_to_column("measure2") |> 
   pivot_longer(cols = -measure2,
                names_to = "measure1",
-               values_to = "cor") %>% 
-  mutate(nice_cor = round(cor, 2)) %>% 
+               values_to = "cor") |> 
+  mutate(nice_cor = round(cor, 2)) |> 
   mutate(measure1 = fct_inorder(measure1),
-         measure2 = fct_inorder(measure2)) %>% 
-  filter(!is.na(cor)) %>% 
+         measure2 = fct_inorder(measure2)) |> 
+  filter(!is.na(cor)) |> 
   filter(measure2 != measure1)
 
 ggplot(cars_cor_long, aes(x = measure2, y = measure1, fill = cor)) +
@@ -790,7 +784,7 @@ On average, a one unit increase in displacement is associated with 3.53 lower hi
 
 .pull-left[
 ```{r tidy-car-model-small}
-tidy(car_model) %>% 
+tidy(car_model) |> 
   select(term, estimate)
 ```
 
@@ -815,7 +809,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 .pull-left[
 ```{r tidy-car-model-small-again-again}
-tidy(car_model) %>% 
+tidy(car_model) |> 
   select(term, estimate)
 ```
 
@@ -885,7 +879,7 @@ $$
 
 .center[
 <figure>
-  <img src="img/08/slider-switch-plain-80.jpg" alt="Switch and slider" title="Switch and slider" width="100%">
+  <img src="img/10/slider-switch-plain-80.jpg" alt="Switch and slider" title="Switch and slider" width="100%">
 </figure>
 ]
 
@@ -895,7 +889,7 @@ $$
 
 .center[
 <figure>
-  <img src="img/08/slider-switch-annotated-80.jpg" alt="Switch and slider" title="Switch and slider" width="100%">
+  <img src="img/10/slider-switch-annotated-80.jpg" alt="Switch and slider" title="Switch and slider" width="100%">
 </figure>
 ]
 
@@ -991,7 +985,7 @@ Convert the model results to a data frame with `tidy()`
 ```{r tidy-coef-plot-cars}
 car_model_big <- lm(hwy ~ displ + cyl + drv, data = mpg)
 
-car_coefs <- tidy(car_model_big, conf.int = TRUE) %>% 
+car_coefs <- tidy(car_model_big, conf.int = TRUE) |> 
   filter(term != "(Intercept)")  # we can typically skip plotting the intercept, so remove it
 car_coefs
 ```

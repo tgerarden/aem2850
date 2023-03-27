@@ -1,26 +1,26 @@
-name,n
-Alphabet Inc. Class A,2
-Amazon.com Inc.,1
-Apple Inc.,8
-Blackstone Inc.,1
-Boyd Gaming Corp,1
-"Catalyst Pharmaceuticals, Inc.",1
-China International Capital Corp,1
-Chipotle Mexican Grill Inc.,1
-Costco Wholesale Corporation,1
-Deere & Company,1
-Estee Lauder Companies Inc. Class A,1
-"First Solar, Inc.",1
-Ikegps,1
-Microsoft Corporation,2
-Netflix Inc.,1
-Ping An Insurance,1
-Porsche Automobil Holding Se / Adr,1
-Spotify Technology S.a.,1
-Tesla Inc,3
-Toyota Motor Corp/,1
-Ulta Beauty Inc,1
-Unilever Plc,1
-Walmart Inc.,1
-Walt Disney Company,1
-salesforce.com inc.,1
+ticker,n
+601318,1
+AAPL,8
+AMZN,1
+BX,1
+BYD,1
+CICC,1
+CMG,1
+COST,1
+CPRX,1
+CRM,1
+DE,1
+DIS,1
+EL,1
+FSLR,1
+GOOGL,2
+IKE,1
+MSFT,2
+NFLX,1
+POAHY,1
+SPOT,1
+TM,1
+TSLA,3
+UL,1
+ULTA,1
+WMT,1
