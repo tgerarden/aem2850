@@ -1238,6 +1238,78 @@ predicted_mpg_fancy |&gt;
 
 ---
 
+# Estimating regressions with interactions
+
+We can use **interactions** to estimate different slopes for each drive type
+
+.pull-left[
+.small[Syntax: `drv:displ` adds an interaction between `drv` and `displ`]
+
+```r
+car_model_interactions &lt;- lm(
+* hwy ~ drv + drv:displ + cyl,
+  data = mpg
+)
+```
+.small[Alternatively: `drv*displ` adds `drv`, `displ`, and their interaction]
+]
+
+.pull-right[
+
+```r
+tidy(car_model_interactions) |&gt; 
+  select(term, estimate)
+```
+
+```
+## # A tibble: 7 × 2
+##   term        estimate
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 (Intercept)  32.5   
+## 2 drvf          7.03  
+## 3 drvr         -1.12  
+## 4 cyl          -1.30  
+*## 5 drv4:displ   -1.21  
+*## 6 drvf:displ   -1.94  
+*## 7 drvr:displ   -0.0645
+```
+]
+
+---
+
+# Even more effects at once!
+
+.left-code[
+
+```r
+predicted_mpg_interactions &lt;- augment(
+* car_model_interactions, # interacted model
+  newdata = cars_new_data_fancy,
+  se_fit = TRUE
+)
+
+predicted_mpg_interactions |&gt; 
+  ggplot(aes(x = displ, y = .fitted)) +
+  geom_ribbon(aes(ymin = .fitted + 
+                    (-1.96 * .se.fit),
+                  ymax = .fitted + 
+                    (1.96 * .se.fit),
+                  fill = drv),
+              alpha = 0.5) +
+  geom_line(aes(color = drv), linewidth = 1) + 
+  guides(fill = "none", color = "none") +
+  facet_wrap(vars(drv))
+```
+]
+
+.right-plot[
+![](10-slides_files/figure-html/mfx-plot-cars-interactions-1.png)
+
+.small.center[**Note the different slopes!**]
+]
+
+---
+
 # Not just OLS!
 
 .box-inv-6[These plots are for an OLS model built with `lm()`]
