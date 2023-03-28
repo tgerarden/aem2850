@@ -1188,6 +1188,62 @@ predicted_mpg_fancy |>
 
 ---
 
+# Estimating regressions with interactions
+
+We can use **interactions** to estimate different slopes for each drive type
+
+.pull-left[
+.small[Syntax: `drv:displ` adds an interaction between `drv` and `displ`]
+```{r}
+car_model_interactions <- lm(
+  hwy ~ drv + drv:displ + cyl, #<<
+  data = mpg
+)
+```
+.small[Alternatively: `drv*displ` adds `drv`, `displ`, and their interaction]
+]
+
+.pull-right[
+```{r, highlight.output=c(8,9,10)}
+tidy(car_model_interactions) |> 
+  select(term, estimate)
+```
+]
+
+---
+
+# Even more effects at once!
+
+.left-code[
+```{r mfx-plot-cars-interactions, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
+predicted_mpg_interactions <- augment(
+  car_model_interactions, # interacted model #<<
+  newdata = cars_new_data_fancy,
+  se_fit = TRUE
+)
+
+predicted_mpg_interactions |> 
+  ggplot(aes(x = displ, y = .fitted)) +
+  geom_ribbon(aes(ymin = .fitted + 
+                    (-1.96 * .se.fit),
+                  ymax = .fitted + 
+                    (1.96 * .se.fit),
+                  fill = drv),
+              alpha = 0.5) +
+  geom_line(aes(color = drv), linewidth = 1) + 
+  guides(fill = "none", color = "none") +
+  facet_wrap(vars(drv))
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("mfx-plot-cars-interactions", "png")`)
+
+.small.center[**Note the different slopes!**]
+]
+
+---
+
 # Not just OLS!
 
 .box-inv-6[These plots are for an OLS model built with `lm()`]

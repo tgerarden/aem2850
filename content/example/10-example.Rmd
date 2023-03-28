@@ -27,6 +27,7 @@ editor_options:
 ## Plan for today
 - Questions? :raising_hand_woman:
 - Finish up slides from Tuesday
+  - I added two slides on how to estimate interactions that might be helpful for the group project :winking_face:
 - Work through `relationships-practice.R`
 
 
