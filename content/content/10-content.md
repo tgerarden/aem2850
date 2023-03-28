@@ -1,7 +1,7 @@
 ---
 title: "Relationships"
 linktitle: "Relationships"
-date: "2023-03-23 15:37:30"
+date: "2023-03-28 09:37:26"
 menu:
   content:
     parent: Course content
@@ -34,3 +34,10 @@ output:
 - When is it appropriate to use two y-axes?
 
 
+### Slides
+
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
+
+{{< blogdown/slide-buttons >}}
+
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.

@@ -126,8 +126,10 @@ You have to choose where the y-axes start and stop, which means...
 
 .center[
 <figure>
-  <img src="img/10/economist-dogs.png" alt="Dog neck size and weight in The Economist" title="Dog neck size and weight in The Economist" width="90%">
+  <img src="img/10/economist-dogs.png" alt="Dog neck size and weight in The Economist" title="Dog neck size and weight in The Economist" width="80%">
 </figure>
+
+The revised axes ranges reflect a comparable proportional change
 ]
 
 ???
@@ -193,7 +195,7 @@ ithaca_weather |>
 
 ---
 
-# Alternative: Use multiple plots
+# Combining multiple plots in R
 
 .left-code[
 ```{r ithaca-weather-patchwork, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
@@ -553,76 +555,7 @@ name: regressions
 
 ---
 
-# Drawing lines with math
-
-$$
-y = ax + b
-$$
-
-<table>
-  <tr>
-    <td class="cell-center">\(y\)</td>
-    <td class="cell-left">&ensp;A number</td>
-  </tr>
-  <tr>
-    <td class="cell-center">\(x\)</td>
-    <td class="cell-left">&ensp;A number</td>
-  </tr>
-  <tr>
-    <td class="cell-center">\(a\)</td>
-    <td class="cell-left">&ensp;Slope (\(\frac{\text{rise}}{\text{run}}\))</td>
-  </tr>
-  <tr>
-    <td class="cell-center">\(b\)</td>
-    <td class="cell-left">&ensp;y-intercept</td>
-  </tr>
-</table>
-
----
-
-# Slopes and intercepts
-
-.pull-left[
-
-$$
-y = 2x - 1
-$$
-
-```{r simple-line-1, echo=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-ggplot(data = tibble(x = 0:5), aes(x = x)) +
-  stat_function(fun = function(x) 2 * x - 1, 
-                color = "#B31B1B", linewidth = 1.5) +
-  geom_vline(xintercept = 0) +
-  geom_hline(yintercept = 0) +
-  scale_x_continuous(breaks = 0:5) +
-  scale_y_continuous(breaks = -1:9) +
-  theme(panel.grid.minor = element_blank())
-```
-
-]
-
-.pull-right[
-
-$$
-y = -0.5x + 6
-$$
-
-```{r simple-line-2, echo=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-ggplot(data = tibble(x = 0:14), aes(x = x)) +
-  stat_function(fun = function(x) -0.5 * x + 6, 
-                color = "#B31B1B", linewidth = 1.5) +
-  geom_vline(xintercept = 0) +
-  geom_hline(yintercept = 0) +
-  scale_x_continuous(breaks = 0:14) +
-  scale_y_continuous(breaks = -1:9) +
-  theme(panel.grid.minor = element_blank())
-```
-
-]
-
----
-
-# Drawing lines with stats
+# Linear regression reminder
 
 $$
 y = \beta_0 + \beta_1 x_1 + \varepsilon
@@ -658,14 +591,14 @@ $$
 
 ---
 
-# Drawing lines with stats
+# Linear regression is just drawing lines
 
 .pull-left[
 
 ```{r cars-line, echo=FALSE, fig.dim=c(4.8, 4.2), out.width="100%"}
 ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point() +
-  geom_smooth(method = "lm", formula = "y ~ x")
+  geom_point() #+
+  #geom_smooth(method = "lm", formula = "y ~ x")
 ```
 
 ]
@@ -694,7 +627,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 Base R has some basic modeling tools:
 ```{r model-template, eval=FALSE}
-name_of_model <- lm(<Y> ~ <X>, data = <DATA>) # estimate model
+name_of_model <- lm(<Y> ~ <X>, data = <DATA>) # use lm to fit simple linear models
 
 summary(name_of_model) # see model details
 ```
@@ -708,8 +641,8 @@ library(broom)
 # convert model estimates to a data frame for plotting
 tidy(name_of_model)
 
-# convert model diagnostics to a data frame
-glance(name_of_model)
+# return a data frame that includes predictions, residuals, etc.
+augment(name_of_model)
 ```
 
 ---
@@ -728,12 +661,14 @@ car_model <- lm(hwy ~ displ,
 
 Note how we didn't write anything for the $\beta_0$ or $\varepsilon$ terms
 
+What do you think the sign on $\beta_1$ is?
+
 ]
 
 --
 
 .pull-right[
-```{r print-cars-model}
+```{r print-cars-model, highlight.output=c(2,3,5,6,7)}
 car_model
 ```
 ]
@@ -769,7 +704,7 @@ $$
 
 --
 
-A one unit increase in $x_1$ is *associated* with a $\beta_1$ change in $y$, on average
+On average, a one unit increase in $x_1$ is *associated* with a $\beta_1$ change in $y$
 
 --
 
@@ -780,7 +715,7 @@ $$
 $$
 \widehat{\text{hwy}} = 35.7 + (-3.53) \times \text{displ}
 $$
-On average, a one unit increase in displacement is associated with 3.53 lower highway MPG
+On average, a one unit increase in displacement is associated with 3.53 lower highway fuel economy
 
 --
 
@@ -824,7 +759,6 @@ tidy(car_model) |>
 $$
 \widehat{\text{hwy}} = 35.7 + (-3.53) \times \text{displ}
 $$
-.small[Reminder: `geom_smooth(method = "lm")` allows us to skip the estimation step!]
 ]
 
 .pull-right[
@@ -836,6 +770,44 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   scale_y_continuous(limits = c(10, NA))
 ```
 
+]
+
+---
+
+# Visualization of a continuous variable
+
+.pull-left[
+.small[Reminder: `geom_smooth(method = "lm")` allows us to skip the estimation step!]
+
+```{r tidy-car-model-geom_smooth-code, eval=FALSE, fig.dim=c(4.8, 4.2), out.width="100%"}
+mpg |> 
+  ggplot(aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth(
+    method = "lm",     # smoothing function #<<
+    formula = "y ~ x", # optional in this case (default) #<<
+    fullrange = TRUE,  # start line at 0 #<<
+    se = FALSE         # omit confidence bands #<<
+  ) +      
+  scale_x_continuous(limits = c(0, 7)) +
+  scale_y_continuous(limits = c(10, NA))
+```
+]
+
+.pull-right[
+```{r tidy-car-model-geom_smooth-plot, echo=FALSE, fig.dim=c(4.8, 4.2), out.width="100%"}
+mpg |> 
+  ggplot(aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth(
+    method = "lm",     # smoothing function #<<
+    formula = "y ~ x", # optional (default) #<<
+    fullrange = TRUE,  # start line at 0 #<<
+    se = FALSE         # no confidence bands #<<
+  ) +      
+  scale_x_continuous(limits = c(0, 7)) +
+  scale_y_continuous(limits = c(10, NA))
+```
 ]
 
 ---
@@ -923,14 +895,14 @@ $$
 \end{aligned}
 $$
 
-On average, a one unit increase in displacement is associated with 1.12 lower highway MPG, holding everything else constant
+On average, a one unit increase in displacement is associated with 1.12 lower highway fuel economy, holding everything else constant
 
 --
 
 .tiny[
 Aside: for the earlier model we had said
 
-> On average, a one unit increase in displacement is associated with 3.53 lower highway MPG
+> On average, a one unit increase in displacement is associated with 3.53 lower highway fuel economy
 ]
 
 ---
@@ -954,7 +926,7 @@ $$
 
 --
 
-On average, front-wheel drive cars have 5.04 higher highway MPG than 4-wheel-drive cars, holding everything else constant
+On average, front-wheel drive cars have 5.04 higher highway fuel economy than 4-wheel-drive cars, holding everything else constant
 
 ---
 
@@ -962,11 +934,11 @@ On average, front-wheel drive cars have 5.04 higher highway MPG than 4-wheel-dri
 
 &nbsp;
 
-.large[You can't just draw a line! There are too many moving parts!]
+.large[You can't just draw a single line! There are too many moving parts!]
 
 ---
 
-# Main problems
+# Main challenges
 
 --
 
@@ -995,7 +967,7 @@ Convert the model results to a data frame with `tidy()`
 car_model_big <- lm(hwy ~ displ + cyl + drv, data = mpg)
 
 car_coefs <- tidy(car_model_big, conf.int = TRUE) |> 
-  filter(term != "(Intercept)")  # we can typically skip plotting the intercept, so remove it
+  filter(term != "(Intercept)")  # we typically skip plotting the intercept, so remove it
 car_coefs
 ```
 ]
@@ -1008,9 +980,9 @@ Plot the point estimate and confidence intervals with `geom_pointrange()`
 
 .left-code[
 ```{r coef-plot-cars, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
-ggplot(car_coefs,
-       aes(x = estimate, 
-           y = fct_rev(term))) +
+car_coefs |> 
+  ggplot(aes(x = estimate, 
+             y = fct_rev(term))) +
   geom_pointrange(aes(xmin = conf.low, 
                       xmax = conf.high)) +
   geom_vline(xintercept = 0, color = "red")
@@ -1074,7 +1046,7 @@ Plug each of those rows of data into the model with `augment()`
 ```{r agument-simple-cars-data}
 predicted_mpg <- augment(car_model_big,           # our estimated model
                          newdata = cars_new_data, # our new data for plotting
-                         se_fit = TRUE)
+                         se_fit = TRUE)           # add standard errors for fitted values
 
 head(predicted_mpg)
 ```
@@ -1089,15 +1061,16 @@ We made predictions for front-wheel drive cars with cylinders held at their mean
 
 .left-code[
 ```{r mfx-plot-cars, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
-ggplot(predicted_mpg,
-       aes(x = displ, y = .fitted)) +
+predicted_mpg |> 
+  ggplot(aes(x = displ, y = .fitted)) +
+  geom_line(color = "#B31B1B",
+            linewidth = 1) +
   geom_ribbon(aes(ymin = .fitted + 
                     (-1.96 * .se.fit),
                   ymax = .fitted + 
                     (1.96 * .se.fit)),
-              fill = "#5601A4", 
-              alpha = 0.5) +
-  geom_line(linewidth = 1, color = "#5601A4")
+              fill = "#B31B1B", 
+              alpha = 0.5)
 ```
 ]
 
@@ -1169,8 +1142,8 @@ Cylinders held at their mean; colored/filled by drive
 
 .left-code[
 ```{r mfx-plot-cars-fancy, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
-ggplot(predicted_mpg_fancy,
-       aes(x = displ, y = .fitted)) +
+predicted_mpg_fancy |> 
+  ggplot(aes(x = displ, y = .fitted)) +
   geom_ribbon(aes(ymin = .fitted + 
                     (-1.96 * .se.fit),
                   ymax = .fitted + 
@@ -1189,14 +1162,14 @@ ggplot(predicted_mpg_fancy,
 
 # Multiple effects at once
 
-.box-inv-6[Plot the fitted values for each row]
+Plot the fitted values for each row
 
-.box-6.small[Cylinders held at their mean; colored/filled/facetted by drive]
+Cylinders held at their mean; colored/filled/facetted by drive
 
 .left-code[
 ```{r mfx-plot-cars-fancy-facet, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
-ggplot(predicted_mpg_fancy,
-       aes(x = displ, y = .fitted)) +
+predicted_mpg_fancy |> 
+  ggplot(aes(x = displ, y = .fitted)) +
   geom_ribbon(aes(ymin = .fitted + 
                     (-1.96 * .se.fit),
                   ymax = .fitted + 
