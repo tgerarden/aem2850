@@ -69,7 +69,11 @@ Acknowledgements:
 
 Reminders:
 - Group project due April 14 ([link](https://aem2850.toddgerarden.com/assignment/group-project/))
+  - We set up group-specific workspaces on Posit Cloud for the project to allow simultaneous collaborative editing
+  - Instructions are posted there and on canvas
+  - Make a plan and start early!
 - Local R install instructions posted ([link](https://aem2850.toddgerarden.com/resource/install/))
+  - You are welcome to work locally if that's what your group prefers
 
 Questions before we get started?
 
@@ -362,7 +366,7 @@ Says nothing about *how much* Y changes when X changes
   </tr>
   <tr>
     <td class="cell-left">±0.1–0.3&emsp;</td>
-    <td class="cell-left">Modest</td>
+    <td class="cell-left">Weak</td>
   </tr>
   <tr>
     <td class="cell-left">±0.3–0.5</td>
@@ -433,7 +437,7 @@ cor(ithaca_weather$TMIN,
   round(3)
 ```
 
-What about min temp and snowfall?
+**Strong positive correlation**
 ]
 
 .right-plot[
@@ -442,7 +446,9 @@ What about min temp and snowfall?
 
 ---
 
-# Scatter plots
+# What about min temp and snowfall?
+
+--
 
 .left-code[
 ```{r ithaca-weather-scatterplot-2, tidy=FALSE, message=FALSE, warning=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
@@ -454,6 +460,8 @@ cor(ithaca_weather$TMIN,
     ithaca_weather$SNOW) |> 
   round(3)
 ```
+
+**Weak negative correlation**
 ]
 
 .right-plot[
@@ -464,13 +472,15 @@ cor(ithaca_weather$TMIN,
   
 # Scatter plot matrices
 
+--
+
 .left-code[
 ```{r scatterplot-matrix, tidy=FALSE, message=FALSE, warning=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-  library(GGally)
-  
+library(GGally)
+
 cars_smaller <- mtcars |> 
-  select(mpg, cyl, gear, hp, qsec)
-  
+  select(disp, hp, mpg)
+
 ggpairs(cars_smaller)
 ```
 Scatter plots can be scaled up to matrices for several variables
@@ -489,7 +499,7 @@ For many variables, correlograms or correlation coefficients often better
 
 ```{r cor-heatmap, echo=FALSE, message=FALSE, fig.dim=c(8, 3.5), out.width="100%"}
 cars_cor <- mtcars |> 
-  select(mpg, cyl, gear, hp, qsec) |> 
+  select(disp, hp, cyl, mpg) |> 
   cor()
 
 cars_cor[lower.tri(cars_cor)] <- NA
@@ -546,7 +556,7 @@ name: regressions
 # Drawing lines with math
 
 $$
-y = mx + b
+y = ax + b
 $$
 
 <table>
@@ -559,7 +569,7 @@ $$
     <td class="cell-left">&ensp;A number</td>
   </tr>
   <tr>
-    <td class="cell-center">\(m\)</td>
+    <td class="cell-center">\(a\)</td>
     <td class="cell-left">&ensp;Slope (\(\frac{\text{rise}}{\text{run}}\))</td>
   </tr>
   <tr>
@@ -581,7 +591,7 @@ $$
 ```{r simple-line-1, echo=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
 ggplot(data = tibble(x = 0:5), aes(x = x)) +
   stat_function(fun = function(x) 2 * x - 1, 
-                color = "#BF3984", size = 1.5) +
+                color = "#B31B1B", linewidth = 1.5) +
   geom_vline(xintercept = 0) +
   geom_hline(yintercept = 0) +
   scale_x_continuous(breaks = 0:5) +
@@ -590,8 +600,6 @@ ggplot(data = tibble(x = 0:5), aes(x = x)) +
 ```
 
 ]
-
---
 
 .pull-right[
 
@@ -602,7 +610,7 @@ $$
 ```{r simple-line-2, echo=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
 ggplot(data = tibble(x = 0:14), aes(x = x)) +
   stat_function(fun = function(x) -0.5 * x + 6, 
-                color = "#BF3984", size = 1.5) +
+                color = "#B31B1B", linewidth = 1.5) +
   geom_vline(xintercept = 0) +
   geom_hline(yintercept = 0) +
   scale_x_continuous(breaks = 0:14) +
@@ -622,27 +630,27 @@ $$
 
 <table>
   <tr>
-    <td class="cell-center">\(y\)</td>
+    <!-- <td class="cell-center">\(y\)</td> -->
     <td class="cell-center">\(y\)</td>
     <td class="cell-left">&ensp;Outcome variable (DV)</td>
   </tr>
   <tr>
-    <td class="cell-center">\(x\)</td>
+    <!-- <td class="cell-center">\(x\)</td> -->
     <td class="cell-center">\(x_1\)</td>
     <td class="cell-left">&ensp;Explanatory variable (IV)</td>
   </tr>
   <tr>
-    <td class="cell-center">\(m\)</td>
+    <!-- <td class="cell-center">\(a\)</td> -->
     <td class="cell-center">\(\beta_1\)</td>
     <td class="cell-left">&ensp;Slope</td>
   </tr>
   <tr>
-    <td class="cell-center">\(b\)</td>
+    <!-- <td class="cell-center">\(b\)</td> -->
     <td class="cell-center">\(\beta_0\)</td>
     <td class="cell-left">&ensp;y-intercept</td>
   </tr>
   <tr>
-    <td class="cell-center">&emsp;&emsp;</td>
+    <!-- <td class="cell-center">&emsp;&emsp;</td> -->
     <td class="cell-center">&emsp;\(\varepsilon\)&emsp;</td>
     <td class="cell-left">&ensp;Error (residuals)</td>
   </tr>
@@ -733,7 +741,7 @@ car_model
 ---
 
 # Modeling displacement and highway MPG
-```{r summarize-car-model}
+```{r summarize-car-model, highlight.output=c(2,3,9,10,11,12)}
 summary(car_model)
 ```
 
@@ -745,9 +753,9 @@ summary(car_model)
 tidy(car_model, conf.int = TRUE)
 ```
 
---
+<!-- -- -->
 
-```{r glance-car-model}
+```{r glance-car-model, include=FALSE}
 glance(car_model)
 ```
 
@@ -816,6 +824,7 @@ tidy(car_model) |>
 $$
 \widehat{\text{hwy}} = 35.7 + (-3.53) \times \text{displ}
 $$
+.small[Reminder: `geom_smooth(method = "lm")` allows us to skip the estimation step!]
 ]
 
 .pull-right[
@@ -1088,7 +1097,7 @@ ggplot(predicted_mpg,
                     (1.96 * .se.fit)),
               fill = "#5601A4", 
               alpha = 0.5) +
-  geom_line(size = 1, color = "#5601A4")
+  geom_line(linewidth = 1, color = "#5601A4")
 ```
 ]
 
@@ -1168,7 +1177,7 @@ ggplot(predicted_mpg_fancy,
                     (1.96 * .se.fit),
                   fill = drv),
               alpha = 0.5) +
-  geom_line(aes(color = drv), size = 1)
+  geom_line(aes(color = drv), linewidth = 1)
 ```
 ]
 
@@ -1194,7 +1203,7 @@ ggplot(predicted_mpg_fancy,
                     (1.96 * .se.fit),
                   fill = drv),
               alpha = 0.5) +
-  geom_line(aes(color = drv), size = 1) + 
+  geom_line(aes(color = drv), linewidth = 1) + 
   guides(fill = "none", color = "none") + #<<
   facet_wrap(vars(drv)) #<<
 ```

@@ -117,7 +117,7 @@ lessons:
 
   - title: '<i class="fas fa-star"></i> **Group project due**'
     date: "Apr 14 at 11:59PM"
-    # assignment: "group-project"
+    assignment: "group-project"
     bg: 3
     bottomborder: True
 

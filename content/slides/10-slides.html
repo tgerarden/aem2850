@@ -47,7 +47,11 @@ Acknowledgements:
 
 Reminders:
 - Group project due April 14 ([link](https://aem2850.toddgerarden.com/assignment/group-project/))
+  - We set up group-specific workspaces on Posit Cloud for the project to allow simultaneous collaborative editing
+  - Instructions are posted there and on canvas
+  - Make a plan and start early!
 - Local R install instructions posted ([link](https://aem2850.toddgerarden.com/resource/install/))
+  - You are welcome to work locally if that's what your group prefers
 
 Questions before we get started?
 
@@ -339,7 +343,7 @@ Says nothing about *how much* Y changes when X changes
   &lt;/tr&gt;
   &lt;tr&gt;
     &lt;td class="cell-left"&gt;±0.1–0.3&amp;emsp;&lt;/td&gt;
-    &lt;td class="cell-left"&gt;Modest&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Weak&lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
     &lt;td class="cell-left"&gt;±0.3–0.5&lt;/td&gt;
@@ -398,7 +402,7 @@ cor(ithaca_weather$TMIN,
 ## [1] 0.919
 ```
 
-What about min temp and snowfall?
+**Strong positive correlation**
 ]
 
 .right-plot[
@@ -407,7 +411,9 @@ What about min temp and snowfall?
 
 ---
 
-# Scatter plots
+# What about min temp and snowfall?
+
+--
 
 .left-code[
 
@@ -426,6 +432,8 @@ cor(ithaca_weather$TMIN,
 ```
 ## [1] -0.239
 ```
+
+**Weak negative correlation**
 ]
 
 .right-plot[
@@ -436,14 +444,16 @@ cor(ithaca_weather$TMIN,
   
 # Scatter plot matrices
 
+--
+
 .left-code[
 
 ```r
-  library(GGally)
-  
+library(GGally)
+
 cars_smaller &lt;- mtcars |&gt; 
-  select(mpg, cyl, gear, hp, qsec)
-  
+  select(disp, hp, mpg)
+
 ggpairs(cars_smaller)
 ```
 Scatter plots can be scaled up to matrices for several variables
@@ -481,7 +491,7 @@ name: regressions
 # Drawing lines with math
 
 $$
-y = mx + b
+y = ax + b
 $$
 
 &lt;table&gt;
@@ -494,7 +504,7 @@ $$
     &lt;td class="cell-left"&gt;&amp;ensp;A number&lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-    &lt;td class="cell-center"&gt;\(m\)&lt;/td&gt;
+    &lt;td class="cell-center"&gt;\(a\)&lt;/td&gt;
     &lt;td class="cell-left"&gt;&amp;ensp;Slope (\(\frac{\text{rise}}{\text{run}}\))&lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
@@ -517,8 +527,6 @@ $$
 
 ]
 
---
-
 .pull-right[
 
 $$
@@ -539,27 +547,27 @@ $$
 
 &lt;table&gt;
   &lt;tr&gt;
-    &lt;td class="cell-center"&gt;\(y\)&lt;/td&gt;
+    &lt;!-- &lt;td class="cell-center"&gt;\(y\)&lt;/td&gt; --&gt;
     &lt;td class="cell-center"&gt;\(y\)&lt;/td&gt;
     &lt;td class="cell-left"&gt;&amp;ensp;Outcome variable (DV)&lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-    &lt;td class="cell-center"&gt;\(x\)&lt;/td&gt;
+    &lt;!-- &lt;td class="cell-center"&gt;\(x\)&lt;/td&gt; --&gt;
     &lt;td class="cell-center"&gt;\(x_1\)&lt;/td&gt;
     &lt;td class="cell-left"&gt;&amp;ensp;Explanatory variable (IV)&lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-    &lt;td class="cell-center"&gt;\(m\)&lt;/td&gt;
+    &lt;!-- &lt;td class="cell-center"&gt;\(a\)&lt;/td&gt; --&gt;
     &lt;td class="cell-center"&gt;\(\beta_1\)&lt;/td&gt;
     &lt;td class="cell-left"&gt;&amp;ensp;Slope&lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-    &lt;td class="cell-center"&gt;\(b\)&lt;/td&gt;
+    &lt;!-- &lt;td class="cell-center"&gt;\(b\)&lt;/td&gt; --&gt;
     &lt;td class="cell-center"&gt;\(\beta_0\)&lt;/td&gt;
     &lt;td class="cell-left"&gt;&amp;ensp;y-intercept&lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-    &lt;td class="cell-center"&gt;&amp;emsp;&amp;emsp;&lt;/td&gt;
+    &lt;!-- &lt;td class="cell-center"&gt;&amp;emsp;&amp;emsp;&lt;/td&gt; --&gt;
     &lt;td class="cell-center"&gt;&amp;emsp;\(\varepsilon\)&amp;emsp;&lt;/td&gt;
     &lt;td class="cell-left"&gt;&amp;ensp;Error (residuals)&lt;/td&gt;
   &lt;/tr&gt;
@@ -657,17 +665,17 @@ summary(car_model)
 
 ```
 ## 
-## Call:
-## lm(formula = hwy ~ displ, data = mpg)
+*## Call:
+*## lm(formula = hwy ~ displ, data = mpg)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
 ## -7.1039 -2.1646 -0.2242  2.0589 15.0105 
 ## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  35.6977     0.7204   49.55   &lt;2e-16 ***
-## displ        -3.5306     0.1945  -18.15   &lt;2e-16 ***
+*## Coefficients:
+*##             Estimate Std. Error t value Pr(&gt;|t|)    
+*## (Intercept)  35.6977     0.7204   49.55   &lt;2e-16 ***
+*## displ        -3.5306     0.1945  -18.15   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -693,21 +701,9 @@ tidy(car_model, conf.int = TRUE)
 ## 2 displ          -3.53     0.195     -18.2 2.04e- 46    -3.91     -3.15
 ```
 
---
+&lt;!-- -- --&gt;
 
 
-```r
-glance(car_model)
-```
-
-```
-## # A tibble: 1 × 12
-##   r.squared adj.r.squa…¹ sigma stati…²  p.value    df logLik   AIC   BIC devia…³
-##       &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-## 1     0.587        0.585  3.84    329. 2.04e-46     1  -646. 1297. 1308.   3414.
-## # … with 2 more variables: df.residual &lt;int&gt;, nobs &lt;int&gt;, and abbreviated
-## #   variable names ¹​adj.r.squared, ²​statistic, ³​deviance
-```
 
 ---
 
@@ -787,6 +783,7 @@ tidy(car_model) |&gt;
 $$
 \widehat{\text{hwy}} = 35.7 + (-3.53) \times \text{displ}
 $$
+.small[Reminder: `geom_smooth(method = "lm")` allows us to skip the estimation step!]
 ]
 
 .pull-right[
@@ -1110,7 +1107,7 @@ ggplot(predicted_mpg,
                     (1.96 * .se.fit)),
               fill = "#5601A4", 
               alpha = 0.5) +
-  geom_line(size = 1, color = "#5601A4")
+  geom_line(linewidth = 1, color = "#5601A4")
 ```
 ]
 
@@ -1222,7 +1219,7 @@ ggplot(predicted_mpg_fancy,
                     (1.96 * .se.fit),
                   fill = drv),
               alpha = 0.5) +
-  geom_line(aes(color = drv), size = 1)
+  geom_line(aes(color = drv), linewidth = 1)
 ```
 ]
 
@@ -1249,7 +1246,7 @@ ggplot(predicted_mpg_fancy,
                     (1.96 * .se.fit),
                   fill = drv),
               alpha = 0.5) +
-  geom_line(aes(color = drv), size = 1) + 
+  geom_line(aes(color = drv), linewidth = 1) + 
 * guides(fill = "none", color = "none") +
 * facet_wrap(vars(drv))
 ```
