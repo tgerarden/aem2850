@@ -25,7 +25,8 @@ library(broom)
 
 # omit warnings and center plots by default
 library(knitr)
-opts_chunk$set(warning = FALSE, message = FALSE,
+opts_chunk$set(warning = FALSE, 
+               message = FALSE,
                fig.align = "center",
                out.width = "85%")
 ```
