@@ -336,7 +336,7 @@ https://www.census.gov/dataviz/visualizations/051/
 .center[
 <figure>
   <img src="img/11/nyt-ukraine-refugees.png" alt="Refugees from Ukraine" title="Refugees from Ukraine" width="70%">
-  <figcaption><a href="https://www.nytimes.com/interactive/2022/03/15/opinion/ukraine-refugee-crisis.html" target="_blank">The New York Times, "Refugees from Ukraine, since Feb. 24"</a></figcaption>
+  <figcaption><a href="https://www.nytimes.com/interactive/2022/03/15/opinion/ukraine-refugee-crisis.html" target="_blank">The New York Times, "Refugees from Ukraine, Feb. 24 - Mar. 13, 2022"</a></figcaption>
 </figure>
 ]
 
@@ -350,7 +350,7 @@ https://www.nytimes.com/interactive/2022/03/15/opinion/ukraine-refugee-crisis.ht
 
 .center[
 <figure>
-  <img src="img/11/dc-photo-locations-small.jpg" alt="DC photo locations by locals and tourists" title="DC photo locations by locals and tourists" width="52%">
+  <img src="img/11/dc-photo-locations-small.jpg" alt="DC photo locations by locals and tourists" title="DC photo locations by locals and tourists" width="65%">
   <figcaption><a href="https://www.flickr.com/photos/walkingsf/4672195208/in/album-72157624209158632/" target="_blank">Photos taken in DC: blue = locals; red = tourists; yellow = unknown</a></figcaption>
 </figure>
 ]
@@ -451,30 +451,29 @@ To make it easy to combine *attributes* with *spatial geometries*, `sf` stores f
 
 ---
 
-# Structure of an `sf` data frame
+# Importing `sf` data frames
 
-.small-code[
 ```{r demo-read-shapefile, eval=FALSE}
-library(sf)
+library(sf) # load sf package
 world_shapes <- read_sf("data/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp")
-world_shapes |> select(TYPE, GEOUNIT, ISO_A3, geometry)
 ```
 
-```{r show-shapefile, echo=FALSE}
-world_shapes |> 
-  select(TYPE, GEOUNIT, ISO_A3, geometry)
-```
-]
+--
 
----
-
-# `sf` data frames are data frames
+**`sf` data frames are data frames:**
 
 ```{r}
 class(world_shapes)
+```
+
+---
+
+# Inspecting `sf` data frames
+
+```{r show-shapefile}
 world_shapes |> 
-  filter(NAME == "United States of America") |> 
-  select(NAME, TYPE, ISO_A3, geometry)
+  select(TYPE, GEOUNIT, ISO_A3, geometry) |> 
+  head(5)
 ```
 
 ---
@@ -565,7 +564,10 @@ counties |>
   geom_sf()
 ```
 
+What will this code produce?
 ]
+
+--
 
 .right-plot[
 ![](`r knitr::fig_chunk("filter-map-data", "png")`)
@@ -573,22 +575,72 @@ counties |>
 
 ---
 
+# We can mutate like normal
+
+All regular data frame operations work on `sf` data frames
+
+What will this code produce?
+
+```{r, eval=FALSE}
+counties |>
+  mutate(is_albany = (county=="albany")) |> #<<
+  head(5)
+```
+
+--
+
+```{r, echo=FALSE}
+counties |>
+  mutate(is_albany = (county=="albany")) |> #<<
+  head(5)
+```
+
+
+---
+
 # We can use aesthetics like normal
 
-All regular ggplot layers and aesthetics work
+All regular ggplot aesthetics work
 
 .left-code[
 ```{r add-aes, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 counties |>
-  ggplot(aes(fill = (county=="tompkins"))) + #<<
-  geom_sf() +
-  guides(fill = "none") + # omit legend
-  scale_fill_viridis_d()  # nicer colors
+  mutate(is_tompkins = (county=="tompkins")) |> 
+  ggplot(aes(fill = is_tompkins)) + #<<
+  geom_sf()
 ```
+What will this code produce?
 ]
+
+--
 
 .right-plot[
 ![](`r knitr::fig_chunk("add-aes", "png")`)
+]
+
+---
+
+# We can add layers like normal
+
+All regular ggplot layers work
+
+.left-code[
+```{r add-layers, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+counties |>
+  mutate(is_tompkins = (county=="tompkins")) |> 
+  ggplot(aes(fill = is_tompkins)) +
+  geom_sf() +
+  guides(fill = "none") +  # omit legend #<<
+  scale_fill_viridis_d() + # nicer colors #<<
+  theme_minimal()          # cleaner theme #<<
+```
+What will this code produce?
+]
+
+--
+
+.right-plot[
+![](`r knitr::fig_chunk("add-layers", "png")`)
 ]
 
 ---
@@ -660,7 +712,7 @@ other_data <- tribble(
   "Cancun", -86.84656, 21.17429
 )
 ```
-
+ 
 ```{r show-other}
 other_data
 ```
@@ -676,19 +728,51 @@ other_data |>
 ```
 ]
 
-<!-- --- -->
+---
 
-<!-- # No `geometry` column? -->
-.pull-left[
-```{r echo=FALSE, eval=FALSE}
-other_data |> 
+# Compute the distance from Cornell to Cancun
+
+Compute distances using `st_distance()`
+
+```{r compute-distance}
+other_sf <- other_data |> 
   st_as_sf(coords = c("long", "lat"), 
-           crs = st_crs("EPSG:4326")) |> 
+           crs = st_crs("EPSG:4326"))
+
+other_sf |> 
   st_distance() #<<
 ```
+
+The distance from Cornell to Cancun is `r round(st_distance(other_sf)[2, 1]/1e3)` kilometers, or `r round(units::set_units(st_distance(other_sf)[2, 1], "mi"))` miles.
+
+
+
+---
+
+# Map the trip form Cornell to Cancun
+
+.left-code[
+```{r cornell-cancun-map, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+world_shapes |> 
+  ggplot() +
+  geom_sf() +
+  geom_sf(data = other_sf, 
+          color = "#B31B1B") +
+  coord_sf(crs = "+proj=robin")
+```
+What will this code produce?
+]
+
+--
+
+.right-plot[
+![](`r knitr::fig_chunk("cornell-cancun-map", "png")`)
 ]
 
 
+???
+
+Or make great circle plots: https://www.findingyourway.io/blog/2018/02/28/2018-02-28_great-circles-with-sf-and-leaflet/
 
 ---
 

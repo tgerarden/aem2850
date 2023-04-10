@@ -294,7 +294,7 @@ https://www.census.gov/dataviz/visualizations/051/
 .center[
 &lt;figure&gt;
   &lt;img src="img/11/nyt-ukraine-refugees.png" alt="Refugees from Ukraine" title="Refugees from Ukraine" width="70%"&gt;
-  &lt;figcaption&gt;&lt;a href="https://www.nytimes.com/interactive/2022/03/15/opinion/ukraine-refugee-crisis.html" target="_blank"&gt;The New York Times, "Refugees from Ukraine, since Feb. 24"&lt;/a&gt;&lt;/figcaption&gt;
+  &lt;figcaption&gt;&lt;a href="https://www.nytimes.com/interactive/2022/03/15/opinion/ukraine-refugee-crisis.html" target="_blank"&gt;The New York Times, "Refugees from Ukraine, Feb. 24 - Mar. 13, 2022"&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 ]
 
@@ -308,7 +308,7 @@ https://www.nytimes.com/interactive/2022/03/15/opinion/ukraine-refugee-crisis.ht
 
 .center[
 &lt;figure&gt;
-  &lt;img src="img/11/dc-photo-locations-small.jpg" alt="DC photo locations by locals and tourists" title="DC photo locations by locals and tourists" width="52%"&gt;
+  &lt;img src="img/11/dc-photo-locations-small.jpg" alt="DC photo locations by locals and tourists" title="DC photo locations by locals and tourists" width="65%"&gt;
   &lt;figcaption&gt;&lt;a href="https://www.flickr.com/photos/walkingsf/4672195208/in/album-72157624209158632/" target="_blank"&gt;Photos taken in DC: blue = locals; red = tourists; yellow = unknown&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 ]
@@ -379,43 +379,17 @@ To make it easy to combine *attributes* with *spatial geometries*, `sf` stores f
 
 ---
 
-# Structure of an `sf` data frame
+# Importing `sf` data frames
 
-.small-code[
 
 ```r
-library(sf)
+library(sf) # load sf package
 world_shapes &lt;- read_sf("data/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp")
-world_shapes |&gt; select(TYPE, GEOUNIT, ISO_A3, geometry)
 ```
 
+--
 
-```
-## Simple feature collection with 176 features and 3 fields
-## Geometry type: MULTIPOLYGON
-## Dimension:     XY
-## Bounding box:  xmin: -180 ymin: -56 xmax: 180 ymax: 84
-## Geodetic CRS:  WGS 84
-## # A tibble: 176 × 4
-##    TYPE              GEOUNIT                  ISO_A3                              geometry
-##    &lt;chr&gt;             &lt;chr&gt;                    &lt;chr&gt;                     &lt;MULTIPOLYGON [°]&gt;
-##  1 Sovereign country Fiji                     FJI    (((180 -16, 180 -17, 179 -17, 179 -1…
-##  2 Sovereign country Tanzania                 TZA    (((34 -0.95, 34 -1.1, 38 -3.1, 38 -3…
-##  3 Indeterminate     Western Sahara           ESH    (((-8.7 28, -8.7 28, -8.7 27, -8.7 2…
-##  4 Sovereign country Canada                   CAN    (((-123 49, -123 49, -125 50, -126 5…
-##  5 Country           United States of America USA    (((-123 49, -120 49, -117 49, -116 4…
-##  6 Sovereign country Kazakhstan               KAZ    (((87 49, 87 49, 86 48, 86 47, 85 47…
-##  7 Sovereign country Uzbekistan               UZB    (((56 41, 56 45, 59 46, 59 46, 60 45…
-##  8 Sovereign country Papua New Guinea         PNG    (((141 -2.6, 143 -3.3, 145 -3.9, 145…
-##  9 Sovereign country Indonesia                IDN    (((141 -2.6, 141 -5.9, 141 -9.1, 140…
-## 10 Sovereign country Argentina                ARG    (((-69 -53, -68 -53, -68 -54, -66 -5…
-## # … with 166 more rows
-```
-]
-
----
-
-# `sf` data frames are data frames
+**`sf` data frames are data frames:**
 
 
 ```r
@@ -426,22 +400,31 @@ class(world_shapes)
 ## [1] "sf"         "tbl_df"     "tbl"        "data.frame"
 ```
 
+---
+
+# Inspecting `sf` data frames
+
+
 ```r
 world_shapes |&gt; 
-  filter(NAME == "United States of America") |&gt; 
-  select(NAME, TYPE, ISO_A3, geometry)
+  select(TYPE, GEOUNIT, ISO_A3, geometry) |&gt; 
+  head(5)
 ```
 
 ```
-## Simple feature collection with 1 feature and 3 fields
+## Simple feature collection with 5 features and 3 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
-## Bounding box:  xmin: -170 ymin: 19 xmax: -67 ymax: 71
+## Bounding box:  xmin: -180 ymin: -18 xmax: 180 ymax: 83
 ## Geodetic CRS:  WGS 84
-## # A tibble: 1 × 4
-##   NAME                     TYPE    ISO_A3                                         geometry
-##   &lt;chr&gt;                    &lt;chr&gt;   &lt;chr&gt;                                &lt;MULTIPOLYGON [°]&gt;
-## 1 United States of America Country USA    (((-123 49, -120 49, -117 49, -116 49, -113 49,…
+## # A tibble: 5 × 4
+##   TYPE              GEOUNIT                  ISO_A3                               geometry
+##   &lt;chr&gt;             &lt;chr&gt;                    &lt;chr&gt;                      &lt;MULTIPOLYGON [°]&gt;
+## 1 Sovereign country Fiji                     FJI    (((180 -16, 180 -17, 179 -17, 179 -17…
+## 2 Sovereign country Tanzania                 TZA    (((34 -0.95, 34 -1.1, 38 -3.1, 38 -3.…
+## 3 Indeterminate     Western Sahara           ESH    (((-8.7 28, -8.7 28, -8.7 27, -8.7 26…
+## 4 Sovereign country Canada                   CAN    (((-123 49, -123 49, -125 50, -126 50…
+## 5 Country           United States of America USA    (((-123 49, -120 49, -117 49, -116 49…
 ```
 
 ---
@@ -554,7 +537,10 @@ counties |&gt;
   geom_sf()
 ```
 
+What will this code produce?
 ]
+
+--
 
 .right-plot[
 ![](11-slides_files/figure-html/filter-map-data-1.png)
@@ -562,23 +548,84 @@ counties |&gt;
 
 ---
 
+# We can mutate like normal
+
+All regular data frame operations work on `sf` data frames
+
+What will this code produce?
+
+
+```r
+counties |&gt;
+* mutate(is_albany = (county=="albany")) |&gt;
+  head(5)
+```
+
+--
+
+
+```
+## Simple feature collection with 5 features and 2 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -79 ymin: 41 xmax: -74 ymax: 43
+## Geodetic CRS:  WGS 84
+##           county                           geom is_albany
+## 1793      albany MULTIPOLYGON (((-74 42, -74...      TRUE
+## 1794    allegany MULTIPOLYGON (((-78 42, -78...     FALSE
+## 1795       bronx MULTIPOLYGON (((-74 41, -74...     FALSE
+## 1796      broome MULTIPOLYGON (((-75 42, -76...     FALSE
+## 1797 cattaraugus MULTIPOLYGON (((-79 42, -79...     FALSE
+```
+
+
+---
+
 # We can use aesthetics like normal
 
-All regular ggplot layers and aesthetics work
+All regular ggplot aesthetics work
 
 .left-code[
 
 ```r
 counties |&gt;
-* ggplot(aes(fill = (county=="tompkins"))) +
-  geom_sf() +
-  guides(fill = "none") + # omit legend
-  scale_fill_viridis_d()  # nicer colors
+  mutate(is_tompkins = (county=="tompkins")) |&gt; 
+* ggplot(aes(fill = is_tompkins)) +
+  geom_sf()
 ```
+What will this code produce?
 ]
+
+--
 
 .right-plot[
 ![](11-slides_files/figure-html/add-aes-1.png)
+]
+
+---
+
+# We can add layers like normal
+
+All regular ggplot layers work
+
+.left-code[
+
+```r
+counties |&gt;
+  mutate(is_tompkins = (county=="tompkins")) |&gt; 
+  ggplot(aes(fill = is_tompkins)) +
+  geom_sf() +
+* guides(fill = "none") +  # omit legend
+* scale_fill_viridis_d() + # nicer colors
+* theme_minimal()          # cleaner theme
+```
+What will this code produce?
+]
+
+--
+
+.right-plot[
+![](11-slides_files/figure-html/add-layers-1.png)
 ]
 
 ---
@@ -666,7 +713,7 @@ Make your own with `st_as_sf()`
 
 .less-left.small-code[
 
-
+ 
 
 ```r
 other_data
@@ -705,14 +752,60 @@ other_data |&gt;
 ```
 ]
 
-&lt;!-- --- --&gt;
+---
 
-&lt;!-- # No `geometry` column? --&gt;
-.pull-left[
+# Compute the distance from Cornell to Cancun
 
+Compute distances using `st_distance()`
+
+
+```r
+other_sf &lt;- other_data |&gt; 
+  st_as_sf(coords = c("long", "lat"), 
+           crs = st_crs("EPSG:4326"))
+
+other_sf |&gt; 
+* st_distance()
+```
+
+```
+## Units: [m]
+##         [,1]    [,2]
+## [1,]       0 2556310
+## [2,] 2556310       0
+```
+
+The distance from Cornell to Cancun is 2556 kilometers, or 1588 miles.
+
+
+
+---
+
+# Map the trip form Cornell to Cancun
+
+.left-code[
+
+```r
+world_shapes |&gt; 
+  ggplot() +
+  geom_sf() +
+  geom_sf(data = other_sf, 
+          color = "#B31B1B") +
+  coord_sf(crs = "+proj=robin")
+```
+What will this code produce?
+]
+
+--
+
+.right-plot[
+![](11-slides_files/figure-html/cornell-cancun-map-1.png)
 ]
 
 
+???
+
+Or make great circle plots: https://www.findingyourway.io/blog/2018/02/28/2018-02-28_great-circles-with-sf-and-leaflet/
 
 ---
 
