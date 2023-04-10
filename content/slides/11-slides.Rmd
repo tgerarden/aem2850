@@ -48,15 +48,15 @@ options("digits" = 2, "width" = 90)
 ```
 
 ```{r world-data, include=FALSE}
-world_shapes <- read_sf("data/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp") %>% 
+world_shapes <- read_sf("data/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp") |> 
   filter(ISO_A3 != "ATA")
 ```
 
 ```{r county-data, include=FALSE}
 counties <- st_as_sf(map("county", plot = FALSE, fill = TRUE))
 counties <- subset(counties, grepl("new york,", counties$ID))
-counties <- counties %>% 
-  separate(ID, c("state", "county"), ",") %>% 
+counties <- counties |> 
+  separate(ID, c("state", "county"), ",") |> 
   select(-state)
 ```
 
@@ -86,12 +86,14 @@ Acknowledgements:
 
 # Announcements
 
-Mini Project 1 due April 1 ([link](https://aem2850.toddgerarden.com/assignment/01-mini-project/))
+Group project due this Friday, April 14 ([link](https://aem2850.toddgerarden.com/assignment/group-project/))
 
-Extra office hours slots at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
+No office hours today after class
+
+Office hours by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
 **Thursday's in-class example = this week's lab**
-- Idea is that you can complete it without working over break
+- Goal is to get practice without overloading you given the group project deadline this week
 
 Questions before we get started?
 
@@ -118,60 +120,6 @@ name: prologue
 
 ---
 
-# John Snow and 1854 cholera epidemic
-
-.pull-left.center[
-<figure>
-  <img src="img/10/john-snow-pic.jpg" alt="John Snow" title="John Snow" width="60%">
-</figure>
-]
-
---
-
-.pull-right[
-10% of the population of Soho died in a week (!!)
-
-Miasma theory said it was because the air was bad
-]
-
-???
-
-https://en.wikipedia.org/wiki/John_Snow
-
----
-
-background-image: url("img/10/john-snow-cholera-map.jpg")
-background-position: center
-background-size: contain
-
-???
-
-https://commons.wikimedia.org/wiki/File:Snow-cholera-map-1.jpg
-
----
-
-# The Broad Street pump
-
-.pull-left.center[
-<figure>
-  <img src="img/10/john-snow-cholera-detail.jpg" alt="John Snow's 1854 cholera map" title="John Snow's 1854 cholera map" width="100%">
-</figure>
-]
-
-.pull-right.center[
-<figure>
-  <img src="img/10/John_Snow_memorial_and_pub.jpg" alt="The Broad Street Pump" title="The Broad Street Pump" width="75%">
-</figure>
-]
-
-???
-
-https://nl.wikibooks.org/wiki/Bestand:Snow-cholera-map.jpg
-
-https://upload.wikimedia.org/wikipedia/commons/c/cb/John_Snow_memorial_and_pub.jpg
-
----
-
 # Geospatial data can help us...
 
 Visualize business data for internal purposes
@@ -184,9 +132,9 @@ Study business activities
 
 .center[
 <figure>
-  <img src="img/10/pic-jawad-addoum.jpg" alt="Jawad Addoum" title="Jawad Addoum" width="25%">
-  <img src="img/10/pic-david-ng.jpg" alt="David Ng" title="David Ng" width="25%">
-  <img src="img/10/pic-ariel-ortiz-bobea.jpg" alt="Ariel Ortiz-Bobea" title="Ariel Ortiz-Bobea" width="25%">
+  <img src="img/11/pic-jawad-addoum.jpg" alt="Jawad Addoum" title="Jawad Addoum" width="25%">
+  <img src="img/11/pic-david-ng.jpg" alt="David Ng" title="David Ng" width="25%">
+  <img src="img/11/pic-ariel-ortiz-bobea.jpg" alt="Ariel Ortiz-Bobea" title="Ariel Ortiz-Bobea" width="25%">
 </figure>
 ]
 
@@ -198,7 +146,7 @@ Study business activities
 
 .center[
 <figure>
-  <img src="img/10/business-map-temps.png" alt="July 1999 temperatures" title="July 1999 temperatures" width="100%">
+  <img src="img/11/business-map-temps.png" alt="July 1999 temperatures" title="July 1999 temperatures" width="100%">
 </figure>
 ]
 
@@ -212,7 +160,7 @@ Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishm
 
 .center[
 <figure>
-  <img src="img/10/business-map-temps-anomalies.png" alt="July 1999 temperature anomalies" title="July 1999 temperature anomalies" width="100%">
+  <img src="img/11/business-map-temps-anomalies.png" alt="July 1999 temperature anomalies" title="July 1999 temperature anomalies" width="100%">
 </figure>
 ]
 
@@ -226,7 +174,7 @@ Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishm
 
 .center[
 <figure>
-  <img src="img/10/business-map-locations.png" alt="U.S. business locations" title="U.S. business locations" width="95%">
+  <img src="img/11/business-map-locations.png" alt="U.S. business locations" title="U.S. business locations" width="95%">
 </figure>
 ]
 
@@ -240,8 +188,8 @@ Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishm
 
 .center[
 <figure>
-  <img src="img/10/business-map-temps-anomalies.png" alt="July 1999 temperature anomalies" title="July 1999 temperature anomalies" width="50%">
-  <img src="img/10/business-map-locations.png" alt="U.S. business locations" title="U.S. business locations" width="50%">
+  <img src="img/11/business-map-temps-anomalies.png" alt="July 1999 temperature anomalies" title="July 1999 temperature anomalies" width="50%">
+  <img src="img/11/business-map-locations.png" alt="U.S. business locations" title="U.S. business locations" width="50%">
 </figure>
 ]
 
@@ -251,26 +199,16 @@ Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishm
 
 ---
 
-# Choropleth maps can be great
+# Geospatial data can mislead us...
 
-.center[
+.more-left.center[
 <figure>
-  <img src="img/10/business-map-temps-anomalies.png" alt="July 1999 temperature anomalies" title="July 1999 temperature anomalies" width="100%">
+  <img src="img/11/white-house-framed-map.png" alt="White House framed map of election results" title="White House framed map of election results" width="95%">
 </figure>
 ]
 
-???
-
-Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishment Sales, The Review of Financial Studies, Volume 33, Issue 3, March 2020, Pages 1331–1366, [https://doi.org/10.1093/rfs/hhz126](https://doi.org/10.1093/rfs/hhz126)
-
----
-
-# Choropleth maps can be misleading. Why?
-
-.center[
-<figure>
-  <img src="img/10/white-house-framed-map.png" alt="White House framed map of election results" title="White House framed map of election results" width="42%">
-</figure>
+.less-right[
+How is this **choropleth map** misleading?
 ]
 
 ???
@@ -283,7 +221,7 @@ https://thehill.com/blogs/blog-briefing-room/332927-trump-will-hang-map-of-2016-
 
 .center[
 <video controls>
-  <source src="img/10/election-map.mp4" type="video/mp4">
+  <source src="img/11/election-map.mp4" type="video/mp4">
 </video>
 ]
 
@@ -303,7 +241,7 @@ ffmpeg -r 30 -i input.gif -movflags faststart -pix_fmt yuv420p -vf "scale=trunc(
 
 .center[
 <figure>
-  <img src="img/10/538-hexagon-cartogram.png" alt="FiveThirtyEight hex cartogram" title="FiveThirtyEight hex cartogram" width="55%">
+  <img src="img/11/538-hexagon-cartogram.png" alt="FiveThirtyEight hex cartogram" title="FiveThirtyEight hex cartogram" width="55%">
 </figure>
 ]
 
@@ -319,7 +257,7 @@ http://metrocosm.com/election-2016-map-3d/
 
 .center[
 <figure>
-  <img src="img/10/2016_election_map_large.png" alt="xkcd 2016 election map" title="xkcd 2016 election map" width="55%">
+  <img src="img/11/2016_election_map_large.png" alt="xkcd 2016 election map" title="xkcd 2016 election map" width="70%">
 </figure>
 ]
 
@@ -382,7 +320,7 @@ Figure from [Claus O. Wilke. Fundamentals of Data Visualization. O'Reilly, 2019.
 
 .center[
 <figure>
-  <img src="img/10/CA_Migration_v2_101-01.png" alt="Net migration between California and other states" title="Net migration between California and other states" width="65%">
+  <img src="img/11/CA_Migration_v2_101-01.png" alt="Net migration between California and other states" title="Net migration between California and other states" width="65%">
   <figcaption><a href="https://www.census.gov/dataviz/visualizations/051/" target="_blank">US Census Bureau: Net migration between California and other states</a></figcaption>
 </figure>
 ]
@@ -397,7 +335,7 @@ https://www.census.gov/dataviz/visualizations/051/
 
 .center[
 <figure>
-  <img src="img/10/nyt-ukraine-refugees.png" alt="Refugees from Ukraine" title="Refugees from Ukraine" width="70%">
+  <img src="img/11/nyt-ukraine-refugees.png" alt="Refugees from Ukraine" title="Refugees from Ukraine" width="70%">
   <figcaption><a href="https://www.nytimes.com/interactive/2022/03/15/opinion/ukraine-refugee-crisis.html" target="_blank">The New York Times, "Refugees from Ukraine, since Feb. 24"</a></figcaption>
 </figure>
 ]
@@ -412,7 +350,7 @@ https://www.nytimes.com/interactive/2022/03/15/opinion/ukraine-refugee-crisis.ht
 
 .center[
 <figure>
-  <img src="img/10/dc-photo-locations-small.jpg" alt="DC photo locations by locals and tourists" title="DC photo locations by locals and tourists" width="52%">
+  <img src="img/11/dc-photo-locations-small.jpg" alt="DC photo locations by locals and tourists" title="DC photo locations by locals and tourists" width="52%">
   <figcaption><a href="https://www.flickr.com/photos/walkingsf/4672195208/in/album-72157624209158632/" target="_blank">Photos taken in DC: blue = locals; red = tourists; yellow = unknown</a></figcaption>
 </figure>
 ]
@@ -432,7 +370,7 @@ name: gis-in-r
 # Aesthetic mappings meet mapping
 
 ```{r lat-long-example, echo=FALSE, fig.width=7, fig.height=7}
-point_example <- tibble(x = 2, y = 1) %>%
+point_example <- tibble(x = 2, y = 1) |>
   mutate(label = glue("{x} x, {y} y\n{y} lat, {x} lon"))
 lat_labs <- tibble(x = -3, y = seq(-2, 3, 1), label = "Latitude")
 lon_labs <- tibble(x = seq(-2, 3, 1), y = -2, label = "Longitude")
@@ -463,10 +401,10 @@ ggplot() +
 
 ---
 
-# The **sf** package: simple features in R
+# The `sf` package: simple features in R
 
 ```{r echo=FALSE, out.width='75%'}
-knitr::include_graphics("img/10/sf.png")
+knitr::include_graphics("img/11/sf.png")
 ```
 
 ???
@@ -489,7 +427,7 @@ Shapefiles come as zipped files with a bunch of different files inside
 
 .center[
 <figure>
-  <img src="img/10/shapefile-raw.png" alt="Shapefile folder structure" title="Shapefile folder structure" width="65%">
+  <img src="img/11/shapefile-raw.png" alt="Shapefile folder structure" title="Shapefile folder structure" width="65%">
 </figure>
 ]
 
@@ -501,11 +439,11 @@ Shapefiles come as zipped files with a bunch of different files inside
 
 --
 
-`sf` represents simple features as native R objects
+The `sf` package represents simple features as native R objects
 
 --
 
-Goal is to present information about *spatial geometries* according to some *attribute* (e.g., population, business data, etc.)
+Goal is to present information about *spatial geometries* according to some *attribute* (e.g., population, sales, etc.)
 
 --
 
@@ -519,11 +457,11 @@ To make it easy to combine *attributes* with *spatial geometries*, `sf` stores f
 ```{r demo-read-shapefile, eval=FALSE}
 library(sf)
 world_shapes <- read_sf("data/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp")
-world_shapes %>% select(TYPE, GEOUNIT, ISO_A3, geometry)
+world_shapes |> select(TYPE, GEOUNIT, ISO_A3, geometry)
 ```
 
 ```{r show-shapefile, echo=FALSE}
-world_shapes %>% 
+world_shapes |> 
   select(TYPE, GEOUNIT, ISO_A3, geometry)
 ```
 ]
@@ -534,8 +472,8 @@ world_shapes %>%
 
 ```{r}
 class(world_shapes)
-world_shapes %>% 
-  filter(NAME == "United States of America") %>% 
+world_shapes |> 
+  filter(NAME == "United States of America") |> 
   select(NAME, TYPE, ISO_A3, geometry)
 ```
 
@@ -547,8 +485,8 @@ To make a map using `ggplot`, all you need to do is &nbsp; `+ geom_sf()`
 
 .left-code[
 ```{r simple-map, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-world_shapes %>% 
-  ggplot() +
+world_shapes |> 
+  ggplot() + #<<
   geom_sf() #<<
 ```
 ]
@@ -565,7 +503,7 @@ Use `coord_sf()` to change projections (see end for background on projections)
 
 .left-code[
 ```{r change-projection, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-world_shapes %>% 
+world_shapes |> 
   ggplot() +
   geom_sf() +
   coord_sf(crs = "+proj=merc") #<<
@@ -584,7 +522,7 @@ Use `coord_sf()` to change projections (see end for background on projections)
 
 .left-code[
 ```{r change-projection1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-world_shapes %>% 
+world_shapes |> 
   ggplot() +
   geom_sf() +
   coord_sf(crs = "+proj=robin") #<<
@@ -601,9 +539,9 @@ world_shapes %>%
 
 .left-code[
 ```{r nys-map, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-# counties object created in the background
+# counties was created in the background
 head(counties, 5)
-counties %>% #<<
+counties |> #<<
   ggplot() + #<<
   geom_sf()  #<<
 ```
@@ -617,15 +555,16 @@ counties %>% #<<
 
 # We can filter like normal
 
-All regular data frame operations work
+All regular data frame operations work on `sf` data frames
 
 .left-code[
 ```{r filter-map-data, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-counties %>% 
-  filter(county == "tompkins") %>%  #<<
+counties |> 
+  filter(county == "tompkins") |>  #<<
   ggplot() +
   geom_sf()
 ```
+
 ]
 
 .right-plot[
@@ -640,7 +579,7 @@ All regular ggplot layers and aesthetics work
 
 .left-code[
 ```{r add-aes, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-counties %>%
+counties |>
   ggplot(aes(fill = (county=="tompkins"))) + #<<
   geom_sf() +
   guides(fill = "none") + # omit legend
@@ -684,7 +623,7 @@ See [here](https://bookdown.org/robinlovelace/geocompr/intro.html) or [here](htt
 # Example: compute the area of NY counties
 
 ```{r}
-counties %>% 
+counties |> 
   mutate(area = st_area(counties)) # sf::st_area() computes areas #<<
 ```
 
@@ -694,8 +633,8 @@ counties %>%
 
 .left-code[
 ```{r nys-add-aes, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-counties %>% 
-  mutate(area = as.numeric(st_area(counties))) %>% #<<
+counties |> 
+  mutate(area = as.numeric(st_area(counties))) |> #<<
   ggplot(aes(fill = area)) + #<<
   geom_sf() +
   scale_fill_viridis_c(alpha = 0.5) +
@@ -731,11 +670,25 @@ other_data
 
 .more-right.small-code[
 ```{r show-converted}
-other_data %>% 
+other_data |> 
   st_as_sf(coords = c("long", "lat"), #<< 
            crs = st_crs("EPSG:4326")) #<<
 ```
 ]
+
+<!-- --- -->
+
+<!-- # No `geometry` column? -->
+.pull-left[
+```{r echo=FALSE, eval=FALSE}
+other_data |> 
+  st_as_sf(coords = c("long", "lat"), 
+           crs = st_crs("EPSG:4326")) |> 
+  st_distance() #<<
+```
+]
+
+
 
 ---
 
@@ -771,7 +724,7 @@ For anything else…
 
 .center[
 <figure>
-  <img src="img/10/shapefile-search.png" alt="Search for shapefiles" title="Search for shapefiles" width="50%">
+  <img src="img/11/shapefile-search.png" alt="Search for shapefiles" title="Search for shapefiles" width="50%">
 </figure>
 ]
 
@@ -781,7 +734,7 @@ For anything else…
 
 .pull-left-3[
 <figure>
-  <img src="img/10/download_thumbs_10m.jpg" alt="10m scale" title="10m scale" width="100%">
+  <img src="img/11/download_thumbs_10m.jpg" alt="10m scale" title="10m scale" width="100%">
 </figure>
 
 .small.center[1:10m = 1:10,000,000]
@@ -791,7 +744,7 @@ For anything else…
 
 .pull-middle-3[
 <figure>
-  <img src="img/10/download_thumbs_50m.jpg" alt="50m scale" title="50m scale" width="100%">
+  <img src="img/11/download_thumbs_50m.jpg" alt="50m scale" title="50m scale" width="100%">
 </figure>
 
 .small.center[1:50m = 1:50,000,000]
@@ -801,7 +754,7 @@ For anything else…
 
 .pull-right-3[
 <figure>
-  <img src="img/10/download_thumbs_110m.jpg" alt="110m scale" title="110m scale" width="100%">
+  <img src="img/11/download_thumbs_110m.jpg" alt="110m scale" title="110m scale" width="100%">
 </figure>
 
 .small.center[1:110m = 1:110,000,000]
@@ -894,7 +847,7 @@ map_gall_peters <- base_map +
 ```{r us-projections, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
 us_states <- read_sf("data/cb_2018_us_state_20m/cb_2018_us_state_20m.shp")
 
-states_48 <- us_states %>% 
+states_48 <- us_states |> 
   filter(!(STUSPS %in% c("HI", "AK", "PR")))
 
 map_nad83 <- ggplot() +
@@ -947,9 +900,4 @@ There are good and bad projections for a particular use case
 .small[[This](https://www.earthdatascience.org/courses/earth-analytics/spatial-data-r/understand-epsg-wkt-and-other-crs-definition-file-types/) is an excellent overview of how this all works]
 
 .small[And [this](https://web.archive.org/web/20200225021219/https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/OverviewCoordinateReferenceSystems.pdf) is a really really helpful overview of all these moving parts]
-
----
-class: inverse, center, middle
-
-# Have a nice spring break!
 
