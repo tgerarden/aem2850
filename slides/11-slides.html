@@ -789,8 +789,8 @@ The distance from Cornell to Cancun is 2556 kilometers, or 1588 miles.
 world_shapes |&gt; 
   ggplot() +
   geom_sf() +
-  geom_sf(data = other_sf, 
-          color = "#B31B1B") +
+* geom_sf(data = other_sf,
+*         color = "#B31B1B") +
   coord_sf(crs = "+proj=robin")
 ```
 What will this code produce?
@@ -805,7 +805,7 @@ What will this code produce?
 
 ???
 
-Or make great circle plots: https://www.findingyourway.io/blog/2018/02/28/2018-02-28_great-circles-with-sf-and-leaflet/
+Or to make great circle plots: https://www.findingyourway.io/blog/2018/02/28/2018-02-28_great-circles-with-sf-and-leaflet/
 
 ---
 
