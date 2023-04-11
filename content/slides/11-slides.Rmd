@@ -756,8 +756,8 @@ The distance from Cornell to Cancun is `r round(st_distance(other_sf)[2, 1]/1e3)
 world_shapes |> 
   ggplot() +
   geom_sf() +
-  geom_sf(data = other_sf, 
-          color = "#B31B1B") +
+  geom_sf(data = other_sf, #<<
+          color = "#B31B1B") + #<<
   coord_sf(crs = "+proj=robin")
 ```
 What will this code produce?
@@ -772,7 +772,7 @@ What will this code produce?
 
 ???
 
-Or make great circle plots: https://www.findingyourway.io/blog/2018/02/28/2018-02-28_great-circles-with-sf-and-leaflet/
+Or to make great circle plots: https://www.findingyourway.io/blog/2018/02/28/2018-02-28_great-circles-with-sf-and-leaflet/
 
 ---
 

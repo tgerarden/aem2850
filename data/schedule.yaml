@@ -130,8 +130,8 @@ lessons:
     # date_start: "July 12"
     # date_end: "July 16"
     content: "11-content"
-    # example: "11-example"
-    # assignment: "11-lab"
+    example: "11-example"
+    assignment: "11-lab"
     bg: 1
 
   - title: '<span class="content-title">Text</span>'
