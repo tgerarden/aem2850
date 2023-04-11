@@ -118,7 +118,7 @@ listings <- read_csv("listings.csv")
 
 
 {{< pagebreak >}}
-## 8. Do something else interesting with these data, or with other spatial data. You could analyze other airbnb rating measures, or use other variables like price. You could compute the distance to wherever you will spend spring break, or make a map of that location. Or just stop here and go enjoy your break. Your choice!
+## 8. Do something else interesting with these data, or with other spatial data. You could analyze other airbnb rating measures, or use other variables like price. You could compute the distance to wherever you spent spring break, or make a map of that location. Or just stop here. Your choice!
 
 
 
