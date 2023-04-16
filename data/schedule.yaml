@@ -139,7 +139,7 @@ lessons:
     date: "Week 12"
     # date_start: "July 12"
     # date_end: "July 16"
-    # content: "12-content"
+    content: "12-content"
     # example: "12-example"
     # assignment: "12-lab"
     bg: 2
