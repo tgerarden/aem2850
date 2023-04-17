@@ -1098,14 +1098,16 @@
     },
     "harrypotter": {
       "Package": "harrypotter",
-      "Version": "2.1.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "5672ac02f15a6d6462b8d60d0cc63fc8",
-      "Requirements": [
-        "ggplot2",
-        "gridExtra"
-      ]
+      "Version": "0.1.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "harrypotter",
+      "RemoteUsername": "bradleyboehmke",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "51f714619350e6685534c8a9c892ff1870e56558",
+      "Hash": "632ea449685e83ac104a5a72eba983c6",
+      "Requirements": []
     },
     "haven": {
       "Package": "haven",
@@ -2198,6 +2200,19 @@
       "Hash": "90b28393209827327de889f49935140a",
       "Requirements": [
         "cpp11"
+      ]
+    },
+    "textdata": {
+      "Package": "textdata",
+      "Version": "0.4.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c94c6cafedd394e259193d548a6f5945",
+      "Requirements": [
+        "fs",
+        "rappdirs",
+        "readr",
+        "tibble"
       ]
     },
     "textshaping": {

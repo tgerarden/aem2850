@@ -39,6 +39,7 @@ opts_chunk$set(warning = FALSE, message = FALSE,
 library(tidyverse)
 library(tidytext)
 # install.packages("textdata") # needed for AFINN and NRC sentiment lexicons
+library(textdata)
 
 # devtools::install_github("bradleyboehmke/harrypotter")
 library(harrypotter)
@@ -53,13 +54,13 @@ hp <- tibble(book = c("Philosopher's Stone", "Chamber of Secrets",
              raw_text = list(philosophers_stone, chamber_of_secrets, 
                              prisoner_of_azkaban, goblet_of_fire, 
                              order_of_the_phoenix, half_blood_prince,
-                             deathly_hallows)) %>% 
+                             deathly_hallows)) |> 
   mutate(text_data = map(raw_text, ~{
-    tibble(text = .x) %>% 
+    tibble(text = .x) |> 
       mutate(chapter = 1:n())
-  })) %>% 
-  select(book, text_data) %>% 
-  unnest(text_data) %>% 
+  })) |> 
+  select(book, text_data) |> 
+  unnest(text_data) |> 
   mutate(book = fct_inorder(book))
 ```
 
@@ -88,15 +89,6 @@ Acknowledgements:
 ---
 
 # Announcements
-
-I hope you had a nice spring break!
-
-Reminder: [Cornell still requires masks in classrooms as of now](https://covid.cornell.edu/prevention/face-coverings/)
-
-Mini project 1 grades will be posted soon
-- Peer-review survey forthcoming
-
-Mini project 2 details will be released in the next 0-1 weeks
 
 Questions before we get started?
 
@@ -158,11 +150,10 @@ name: progress
 5. Utilize course concepts and tools for business applications
 
 All of the above, plus special topics! Tentative plan:
-- Week 11: Text
-- Week 12: Functions and iteration
-- Week 13: Prediction
-- Week 14: Causal inference
-- Week 15: Wrap up
+- Week 11: Space [last week]
+- Week 12: Text
+- Week 13: Functions and iteration
+- Week 14: Web scraping
 
 ---
 
@@ -202,7 +193,7 @@ theoffice # this is an object from the schrute package
 
 .center[
 <figure>
-  <img src="img/11/word-cloud.png" alt="Bad word cloud" title="Bad word cloud" width="85%">
+  <img src="img/12/word-cloud.png" alt="Bad word cloud" title="Bad word cloud" width="85%">
 </figure>
 ]
 
@@ -236,7 +227,7 @@ theoffice # this is an object from the schrute package
 .pull-left[
 .center[
 <figure>
-  <img src="img/11/email-word-cloud.jpg" alt="What Happened? word cloud" title="What Happened? word cloud" width="100%">
+  <img src="img/12/email-word-cloud.jpg" alt="What Happened? word cloud" title="What Happened? word cloud" width="100%">
 </figure>
 ]
 ]
@@ -245,7 +236,7 @@ theoffice # this is an object from the schrute package
 Trump word cloud is uninformative
 
 Clinton word cloud is okay
-- Highlights email as the **single** dominant narrative about Hillary Clinton prior to the 2016 election
+- Highlights **email** as the single dominant narrative about Hillary Clinton prior to the 2016 election
 ]
 
 ???
@@ -258,13 +249,11 @@ https://twitter.com/s_soroka/status/907941270735278085
 
 .center[
 <figure>
-  <img src="img/11/breakups.png" alt="Twitter word cloud before and after breakups" title="Twitter word cloud before and after breakups" width="100%">
+  <img src="img/12/breakups.png" alt="Twitter word cloud before and after breakups" title="Twitter word cloud before and after breakups" width="100%">
 </figure>
 ]
 
---
-
-Better yet: use other methods to analyze and visualize text
+What do you think of this word cloud?
 
 ???
 
@@ -276,7 +265,39 @@ https://www.vice.com/en/article/ezvaba/what-our-breakups-look-like-on-twitter
 
 ---
 
-background-image: url("img/11/he-she-julia.png")
+# Text of tech CEOs' memos announcing layoffs
+
+.center[
+<figure>
+  <img src="img/12/layoffs_wordcloud.png" alt="Washington Post word cloud of tech CEO layoff memos" title="Washington Post word cloud of tech CEO layoff memos" width="58%">
+</figure>
+]
+
+What makes this better or worse than a traditional word cloud?
+
+???
+
+https://www.washingtonpost.com/business/interactive/2023/tech-layoffs-company-memos/
+
+---
+
+# Even better: other methods to visualize text
+
+.center[
+<figure>
+  <img src="img/12/layoffs_economy.png" alt="Washington Post analysis of tech CEO layoff memos" title="Washington Post analysis of tech CEO layoff memos" width="75%">
+  <img src="img/12/layoffs_economic_factors.png" alt="Washington Post analysis of tech CEO layoff memos" title="Washington Post analysis of tech CEO layoff memos" width="75%">
+  <img src="img/12/layoffs_apologies.png" alt="Washington Post analysis of tech CEO layoff memos" title="Washington Post analysis of tech CEO layoff memos" width="75%">
+</figure>
+]
+
+???
+
+https://www.washingtonpost.com/business/interactive/2023/tech-layoffs-company-memos/
+
+---
+
+background-image: url("img/12/he-she-julia.png")
 background-position: center
 background-size: cover
 
@@ -286,7 +307,7 @@ https://pudding.cool/2017/08/screen-direction/
 
 ---
 
-background-image: url("img/11/minimap-1.png")
+background-image: url("img/12/minimap-1.png")
 background-position: center
 background-size: contain
 
@@ -353,7 +374,7 @@ We will use the `tidytext` package
 
 .pull-right.center[
 <figure>
-  <img src="img/11/cover.png" alt="Tidy text mining with R" title="Tidy text mining with R" width="80%">
+  <img src="img/12/cover.png" alt="Tidy text mining with R" title="Tidy text mining with R" width="80%">
 </figure>
 ]
 
@@ -367,9 +388,9 @@ https://www.tidytextmining.com/
 # Regular text
 
 ```{r show-hp1, echo=FALSE, comment=NA}
-harrypotter::philosophers_stone[1] %>% 
-  str_trunc(100 * 14) %>% 
-  str_wrap(100) %>% 
+harrypotter::philosophers_stone[1] |> 
+  str_trunc(100 * 14) |> 
+  str_wrap(100) |> 
   cat("\n")
 ```
 
@@ -382,10 +403,10 @@ Text can be stored in data frames as character strings
 Here, each row corresponds to a chapter
 
 ```{r tidy-hp1, echo=FALSE}
-hp1_data <- tibble(text = harrypotter::philosophers_stone) %>%
+hp1_data <- tibble(text = harrypotter::philosophers_stone) |>
   mutate(
     chapter = 1:n() # here, each row is a chapter #<<
-    ) %>% 
+    ) |> 
   relocate(chapter)
 ```
 
@@ -434,11 +455,11 @@ So the definition of tidy text depends on what you are doing!
 
 .pull-left[
 ```{r hp1-word, eval=FALSE}
-hp1_data %>% 
+hp1_data |> 
   unnest_tokens(  # convert data to tokens
     input = text, # split text column #<<
     output = word,# make new word column #<<
-    ) %>%
+    ) |>
   relocate(word)  # move new column to front
 ```
 .small[Note: `unnest_tokens()` expects **output** before **input** if you don't name arguments]
@@ -447,12 +468,12 @@ hp1_data %>%
 --
 
 .pull-right[
-```{r hp1-wordr, echo=FALSE}
-hp1_data %>% 
+```{r hp1-wordr, echo=FALSE, cache=TRUE}
+hp1_data |> 
   unnest_tokens(   # convert data to tokens
     input = text,   # split text column #<<
     output = word, # make new word column #<<
-    ) %>%
+    ) |>
   relocate(word) # move new column to front #<<
 ```
 ]
@@ -465,39 +486,40 @@ hp1_data %>%
 For example, we can count them:
 
 ```{r hp1-word-count, eval=FALSE}
-hp1_data %>% 
+hp1_data |> 
   unnest_tokens(
     input = text, 
     output = word, 
-    ) %>%        
+    ) |>        
   count(word, sort = TRUE) #<<
 ```
+What do you think are the most common words?
 ]
+
+--
 
 .pull-right[
-```{r hp1-word-countr, echo=FALSE}
-hp1_data %>% 
+```{r hp1-word-countr, echo=FALSE, cache=TRUE}
+hp1_data |> 
   unnest_tokens(
     input = text, 
     output = word, 
-    ) %>%        
+    ) |>        
   count(word, sort = TRUE) #<<
 ```
 ]
-
-What do you notice about the most common words?
 
 ---
 
 # Raw word frequency is not always informative
 
 .left-code[
-```{r word-count-plot, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-hp1_data %>% 
-  unnest_tokens(word, text) %>% 
-  count(word, sort = TRUE) %>% 
-  slice_max(order_by = n, # order rows by count #<<
-            n = 10) %>%   # slice top 10 rows #<<
+```{r word-count-plot, cache=TRUE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+hp1_data |> 
+  unnest_tokens(word, text) |> 
+  count(word, sort = TRUE) |> 
+  slice_max(order_by = n,# order rows by count #<<
+            n = 10) |>   # slice top 10 rows #<<
   ggplot(aes(x = n, 
              y = fct_reorder(word, n))) +
   geom_col() +
@@ -522,32 +544,34 @@ We can filter out common **stop words** that we want to ignore
 stop_words # this is an object from the tidytext package
 ```
 
+--
+
+How could we remove these stop words from our Harry Potter tokens?
+
 ---
 
 # Token frequency: words
 
 .left-code[
-```{r hp-words, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-hp1_data %>% 
-  unnest_tokens(word, text) %>% 
-  anti_join(stop_words, by = "word") %>% #<<
-  count(word, sort = TRUE) %>% 
+```{r hp-words, cache=TRUE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+hp1_data |> 
+  unnest_tokens(word, text) |> 
+  anti_join(stop_words, by = "word") |> #<<
+  count(word, sort = TRUE) |> 
   slice_max(order_by = n,
-            n = 10) %>%
+            n = 10) |>
   ggplot(aes(x = n, 
              y = fct_reorder(word, n))) +
   geom_col() +
   labs(x = NULL, y = NULL) +
   theme_bw()
 ```
-
 That's better!
 ]
 
 .right-plot[
 ![](`r knitr::fig_chunk("hp-words", "png")`)
 ]
-
 
 ---
 
@@ -561,24 +585,24 @@ Example: two consecutive words are a bigram
 
 .pull-left[
 ```{r hp1-bigram, eval=FALSE}
-hp1_data %>% 
+hp1_data |> 
   unnest_tokens(
     input = text, 
     output = bigram,  # new column bigram #<<
     token = "ngrams", # we want ngrams #<<
-    n = 2) %>%        # we want bigrams #<<
+    n = 2) |>        # we want bigrams #<<
   relocate(bigram)
 ```
 ]
 
 .pull-right[
-```{r hp1-bigramr, echo=FALSE}
-hp1_data %>% 
+```{r hp1-bigramr, cache=TRUE, echo=FALSE}
+hp1_data |> 
   unnest_tokens(
     input = text, 
     output = bigram,  # call new column bigram #<<
     token = "ngrams", # we want ngrams #<<
-    n = 2) %>%        # we want bigrams #<<
+    n = 2) |>        # we want bigrams #<<
   relocate(bigram)
 ```
 ]
@@ -587,17 +611,17 @@ hp1_data %>%
 
 # Token frequency: n-grams
 
-```{r hp-bigrams, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
-hp_bigrams <- hp %>% 
-  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>% 
-  separate(bigram, c("word1", "word2"), sep = " ") %>% 
-  filter(!word1 %in% stop_words$word) %>%
-  filter(!word2 %in% stop_words$word) %>% 
-  unite(bigram, word1, word2, sep = " ") %>% 
-  group_by(book) %>% 
-  count(bigram, sort = TRUE) %>% 
-  top_n(3, n) %>% 
-  ungroup() %>% 
+```{r hp-bigrams, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
+hp_bigrams <- hp |> 
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) |> 
+  separate(bigram, c("word1", "word2"), sep = " ") |> 
+  filter(!word1 %in% stop_words$word) |>
+  filter(!word2 %in% stop_words$word) |> 
+  unite(bigram, word1, word2, sep = " ") |> 
+  group_by(book) |> 
+  count(bigram, sort = TRUE) |> 
+  top_n(3, n) |> 
+  ungroup() |> 
   mutate(bigram = fct_inorder(bigram))
 
 ggplot(hp_bigrams, aes(x = n, y = fct_rev(bigram), fill = book)) +
@@ -613,46 +637,46 @@ ggplot(hp_bigrams, aes(x = n, y = fct_rev(bigram), fill = book)) +
 
 # Token frequency: n-gram ratios
 
-```{r hp-he-she, cache = TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="75%"}
+```{r hp-he-she, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="75%"}
 hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
 
-bigram_he_she_counts <- hp %>%
-  unnest_tokens(bigram, text, token = "ngrams", n = 2)  %>%
-  count(bigram, sort = TRUE) %>%
+bigram_he_she_counts <- hp |>
+  unnest_tokens(bigram, text, token = "ngrams", n = 2)  |>
+  count(bigram, sort = TRUE) |>
   # split the bigram column into two columns
-  separate(bigram, c("word1", "word2"), sep = " ") %>%
+  separate(bigram, c("word1", "word2"), sep = " ") |>
   # only choose rows where the first word is he or she #<<
-  filter(word1 %in% hp_pronouns) %>% #<<
+  filter(word1 %in% hp_pronouns) |> #<<
   # count unique pairs of words
-  count(word1, word2, wt = n, sort = TRUE) %>%
+  count(word1, word2, wt = n, sort = TRUE) |>
   rename(total = n)
 
-word_ratios <- bigram_he_she_counts %>%
+word_ratios <- bigram_he_she_counts |>
   # look at each of the second words
-  group_by(word2) %>%
+  group_by(word2) |>
   # keep rows where the second word appears 10+ times
-  filter(sum(total) > 10) %>%
-  ungroup() %>%
+  filter(sum(total) > 10) |>
+  ungroup() |>
   # pivot out the word1 column so that there's a column named "he" and one named "she"
-  pivot_wider(names_from = word1, values_from = total) %>% 
+  pivot_wider(names_from = word1, values_from = total) |> 
   # filter out missing he/she cases (subjective choice!)
-  filter(!is.na(he) & !is.na(she)) %>% 
+  filter(!is.na(he) & !is.na(she)) |> 
   # convert word2 counts to frequencies by he/she (normalization)
-  mutate_if(is.numeric, ~ (.) / sum(.)) %>%
+  mutate_if(is.numeric, ~ (.) / sum(.)) |>
   # compute logged ratio of the she counts to he counts
-  mutate(logratio = log2(she / he)) %>%
+  mutate(logratio = log2(she / he)) |>
   # sort by that ratio
   arrange(desc(logratio))
 
-plot_word_ratios <- word_ratios %>%
+plot_word_ratios <- word_ratios |>
   # this gets the words in the right order---we take the absolute value, select
   # only rows where the log ratio is bigger than 0, and then take the top 15 words
-  mutate(abslogratio = abs(logratio)) %>%
-  group_by(logratio < 0) %>%
-  slice_max(abslogratio, n = 5) %>%
+  mutate(abslogratio = abs(logratio)) |>
+  group_by(logratio < 0) |>
+  slice_max(abslogratio, n = 5) |>
   ungroup()
 
-plot_word_ratios %>% 
+plot_word_ratios |> 
   ggplot(aes(logratio, 
              fct_reorder(word2, logratio), 
              fill = logratio < 0)) +
@@ -682,15 +706,15 @@ How would you make this?
 ```{r hp-he-she-counts, eval=FALSE}
 hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
 
-bigram_he_she_counts <- hp %>%
-  unnest_tokens(bigram, text, token = "ngrams", n = 2)  %>%
-  count(bigram, sort = TRUE) %>%
+bigram_he_she_counts <- hp |>
+  unnest_tokens(bigram, text, token = "ngrams", n = 2)  |>
+  count(bigram, sort = TRUE) |>
   # split the bigram column into two columns
-  separate(bigram, c("word1", "word2"), sep = " ") %>%
+  separate(bigram, c("word1", "word2"), sep = " ") |>
   # only choose rows where the first word is he or she #<<
-  filter(word1 %in% hp_pronouns) %>% #<<
+  filter(word1 %in% hp_pronouns) |> #<<
   # count unique pairs of words
-  count(word1, word2, wt = n, sort = TRUE) %>%
+  count(word1, word2, wt = n, sort = TRUE) |>
   rename(total = n)
 ```
 ]
@@ -698,18 +722,18 @@ bigram_he_she_counts <- hp %>%
 --
 
 .pull-right[
-```{r hp-he-she-countsr, echo=FALSE}
+```{r hp-he-she-countsr, cache=TRUE, echo=FALSE}
 hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
 
-hp %>%
-  unnest_tokens(bigram, text, token = "ngrams", n = 2)  %>%
-  count(bigram, sort = TRUE) %>%
+hp |>
+  unnest_tokens(bigram, text, token = "ngrams", n = 2)  |>
+  count(bigram, sort = TRUE) |>
   # split the bigram column into two columns
-  separate(bigram, c("word1", "word2"), sep = " ") %>%
+  separate(bigram, c("word1", "word2"), sep = " ") |>
   # only choose rows where the first word is he or she #<<
-  filter(word1 %in% hp_pronouns) %>% #<<
+  filter(word1 %in% hp_pronouns) |> #<<
   # count unique pairs of words
-  count(word1, word2, wt = n, sort = TRUE) %>%
+  count(word1, word2, wt = n, sort = TRUE) |>
   rename(total = n)
 ```
 ]
@@ -723,20 +747,20 @@ hp %>%
 
 .pull-left[
 ```{r hp-he-she-ratios, eval=FALSE}
-word_ratios <- bigram_he_she_counts %>%
+word_ratios <- bigram_he_she_counts |>
   # look at each of the second words
-  group_by(word2) %>%
+  group_by(word2) |>
   # keep rows where the second word appears 10+ times
-  filter(sum(total) > 10) %>%
-  ungroup() %>%
+  filter(sum(total) > 10) |>
+  ungroup() |>
   # pivot out the word1 column so that there's a column named "he" and one named "she"
-  pivot_wider(names_from = word1, values_from = total) %>% 
+  pivot_wider(names_from = word1, values_from = total) |> 
   # filter out missing he/she cases (subjective choice!)
-  filter(!is.na(he) & !is.na(she)) %>% 
+  filter(!is.na(he) & !is.na(she)) |> 
   # convert word2 counts to frequencies by he/she (normalization)
-  mutate_if(is.numeric, ~ (.) / sum(.)) %>%
+  mutate_if(is.numeric, ~ (.) / sum(.)) |>
   # compute logged ratio of the she counts to he counts
-  mutate(logratio = log2(she / he)) %>%
+  mutate(logratio = log2(she / he)) |>
   # sort by that ratio
   arrange(desc(logratio))
 
@@ -747,21 +771,21 @@ word_ratios
 --
 
 .pull-right[
-```{r hp-he-she-ratiosr, echo=FALSE}
-bigram_he_she_counts %>%
+```{r hp-he-she-ratiosr, cache=TRUE, echo=FALSE}
+bigram_he_she_counts |>
   # look at each of the second words
-  group_by(word2) %>%
+  group_by(word2) |>
   # keep rows where the second word appears 10+ times
-  filter(sum(total) > 10) %>%
-  ungroup() %>%
+  filter(sum(total) > 10) |>
+  ungroup() |>
   # pivot out the word1 column so that there's a column named "he" and one named "she"
-  pivot_wider(names_from = word1, values_from = total) %>% 
+  pivot_wider(names_from = word1, values_from = total) |> 
   # filter out missing he/she cases (subjective choice!)
-  filter(!is.na(he) & !is.na(she)) %>% 
+  filter(!is.na(he) & !is.na(she)) |> 
   # convert word2 counts to frequencies by he/she (normalization)
-  mutate_if(is.numeric, ~ (.) / sum(.)) %>%
+  mutate_if(is.numeric, ~ (.) / sum(.)) |>
   # compute logged ratio of the she counts to he counts
-  mutate(logratio = log2(she / he)) %>%
+  mutate(logratio = log2(she / he)) |>
   # sort by that ratio
   arrange(desc(logratio))
 ```
@@ -775,10 +799,10 @@ bigram_he_she_counts %>%
 
 .pull-left[
 ```{r hp-he-she-rearrange, eval=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
-plot_word_ratios <- word_ratios %>%
-  mutate(abslogratio = abs(logratio)) %>%
-  group_by(logratio < 0) %>%
-  slice_max(abslogratio, n = 5) %>%
+plot_word_ratios <- word_ratios |>
+  mutate(abslogratio = abs(logratio)) |>
+  group_by(logratio < 0) |>
+  slice_max(abslogratio, n = 5) |>
   ungroup()
 
 plot_word_ratios
@@ -789,12 +813,12 @@ plot_word_ratios
 
 .pull-right[
 ```{r hp-he-she-rearranger, echo=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
-word_ratios %>%
+word_ratios |>
   # this gets the words in the right order---we take the absolute value, select
   # only rows where the log ratio is bigger than 0, and then take the top 15 words
-  mutate(abslogratio = abs(logratio)) %>%
-  group_by(logratio < 0) %>%
-  slice_max(abslogratio, n = 5) %>%
+  mutate(abslogratio = abs(logratio)) |>
+  group_by(logratio < 0) |>
+  slice_max(abslogratio, n = 5) |>
   ungroup()
 ```
 ]
@@ -807,7 +831,7 @@ word_ratios %>%
 
 .pull-left.small-code[
 ```{r hp-he-she-plot, eval=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
-plot_word_ratios %>% 
+plot_word_ratios |> 
   ggplot(aes(logratio, 
              fct_reorder(word2, logratio), 
              fill = logratio < 0)) +
@@ -827,8 +851,8 @@ plot_word_ratios %>%
 --
 
 .pull-right[
-```{r hp-he-she-plotr, echo=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
-plot_word_ratios %>% 
+```{r hp-he-she-plotr, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
+plot_word_ratios |> 
   ggplot(aes(logratio, 
              fct_reorder(word2, logratio), 
              fill = logratio < 0)) +
@@ -881,14 +905,14 @@ get_sentiments("nrc")
 
 ```{r hp-net-sentiment, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
 # https://rstudio-pubs-static.s3.amazonaws.com/300624_8260952d1f0346969e65f41a97006bf5.html
-hp_sentiment <- hp %>%
-  unnest_tokens(word, text) %>%
-  group_by(book) %>%
+hp_sentiment <- hp |>
+  unnest_tokens(word, text) |>
+  group_by(book) |>
   mutate(word_count = 1:n(),
-         index = word_count %/% 500 + 1) %>%
-  inner_join(get_sentiments("bing")) %>%
-  count(book, index = index, sentiment) %>%
-  pivot_wider(names_from = sentiment, values_from = n) %>%
+         index = word_count %/% 500 + 1) |>
+  inner_join(get_sentiments("bing")) |>
+  count(book, index = index, sentiment) |>
+  pivot_wider(names_from = sentiment, values_from = n) |>
   mutate(net_sentiment = positive - negative)
 
 ggplot(hp_sentiment,
@@ -920,21 +944,21 @@ $$
 
 # Harry Potter tf-idf
 
-```{r hp-tf-idf, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
+```{r hp-tf-idf, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
 # Get a list of words in all the books
-hp_words <- hp %>% 
-  unnest_tokens(word, text) %>% 
+hp_words <- hp |> 
+  unnest_tokens(word, text) |> 
   count(book, word, sort = TRUE)
 
 # Add the tf-idf for these words
-hp_tf_idf <- hp_words %>% 
-  bind_tf_idf(word, book, n) %>% 
+hp_tf_idf <- hp_words |> 
+  bind_tf_idf(word, book, n) |> 
   arrange(desc(tf_idf))
 
 # Get the top 3 words in each book
-hp_tf_idf_plot <- hp_tf_idf %>% 
-  group_by(book) %>% 
-  slice_max(tf_idf, n = 3) %>% 
+hp_tf_idf_plot <- hp_tf_idf |> 
+  group_by(book) |> 
+  slice_max(tf_idf, n = 3) |> 
   ungroup()
 
 ggplot(hp_tf_idf_plot, aes(y = fct_reorder(word, tf_idf), x = tf_idf, fill = book)) +
