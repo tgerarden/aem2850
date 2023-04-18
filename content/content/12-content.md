@@ -1,7 +1,7 @@
 ---
 title: "Text"
 linktitle: "Text"
-date: "2023-04-16 08:01:38"
+date: "2023-04-18 09:38:30"
 menu:
   content:
     parent: Course content
@@ -31,3 +31,10 @@ output:
 - Why are word clouds so problematic? When is it (not) okay to use them? 
 
 
+### Slides
+
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
+
+{{< blogdown/slide-buttons >}}
+
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.

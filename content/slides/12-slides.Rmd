@@ -722,34 +722,39 @@ ggplot(hp_bigrams, aes(x = n, y = fct_rev(bigram), fill = book)) +
 
 # Token frequency: n-gram ratios
 
-Move beyond simple frequency plots to analyze relative frequencies by groups:
+We can move beyond frequency plots to analyze relative frequencies by groups:
 
 ```{r hp-he-she, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="60%"}
-hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
+hp_pronouns <- c("he", "she")
 
-bigram_he_she_counts <- hp |>
+bigram_split <- hp |>
+  # tokenize into bigrams
   unnest_tokens(bigram, text, token = "ngrams", n = 2)  |>
-  count(bigram, sort = TRUE) |>
   # split the bigram column into two columns
-  separate(bigram, c("word1", "word2"), sep = " ") |>
+  separate(bigram, c("word1", "word2"), sep = " ") |> 
+  select(word1, word2)
+
+bigram_he_she_counts <- bigram_split |>
   # only choose rows where the first word is he or she #<<
   filter(word1 %in% hp_pronouns) |> #<<
   # count unique pairs of words
-  count(word1, word2, wt = n, sort = TRUE) |>
-  rename(total = n)
+  count(word1, word2, sort = TRUE)
 
-word_ratios <- bigram_he_she_counts |>
+word_counts <- bigram_he_she_counts |>
   # look at each of the second words
   group_by(word2) |>
   # keep rows where the second word appears 10+ times
-  filter(sum(total) > 10) |>
+  filter(sum(n) > 10) |>
   ungroup() |>
   # pivot out the word1 column to columns "he" and "she"
-  pivot_wider(names_from = word1, values_from = total) |> 
-  # filter out missing he/she cases (subjective choice!)
-  filter(!is.na(he) & !is.na(she)) |> 
+  pivot_wider(names_from = word1, values_from = n) |> #<<
+  # remove cases where either he or she is missing
+  filter(!is.na(he) & !is.na(she))
+
+word_ratios <- word_counts |> 
   # normalize word2 counts to frequencies by he/she
-  mutate_if(is.numeric, ~ (.) / sum(.))
+  mutate(he = he / sum(he), #<<
+         she = she / sum(she)) #<<
 
 log_ratios <- word_ratios |>
   # compute logged ratio of the she counts to he counts
@@ -759,11 +764,10 @@ log_ratios <- word_ratios |>
   select(word2, logratio)
 
 plot_word_ratios <- log_ratios |>
-  # this gets the words in the right order---we take the absolute value, select
-  # only rows where the log ratio is bigger than 0, and then take the top 15 words
-  mutate(abslogratio = abs(logratio)) |>
-  group_by(logratio < 0) |>
-  slice_max(abslogratio, n = 5) |>
+  # take the top 5 logratios by pronoun
+  # (logratios are +/- for she/he)
+  group_by(logratio < 0) |> #<<
+  slice_max(abs(logratio), n = 5) |> #<<
   ungroup()
 
 plot_word_ratios |> 
@@ -788,45 +792,31 @@ How would you make this?
 
 .small[This is not an endorsement of J. K. Rowling's views on sex and gender]
 
+
 ---
 
 # Token frequency: n-gram ratios
 
-1: Identify and count words associated with "he", "she"
+1: Identify and split bigrams
 
 .more-left[
-```{r hp-he-she-counts, eval=FALSE}
-hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
-
-bigram_he_she_counts <- hp |>
-  unnest_tokens(bigram, text, token = "ngrams", n = 2)  |>
-  count(bigram, sort = TRUE) |>
+```{r hp-word1-word2, eval=FALSE}
+bigram_split <- hp |>
+  # tokenize into bigrams
+  unnest_tokens(bigram, text, token = "ngrams", n = 2)  |> #<<
   # split the bigram column into two columns
-  separate(bigram, c("word1", "word2"), sep = " ") |>
-  # only choose rows where the first word is he or she #<<
-  filter(word1 %in% hp_pronouns) |> #<<
-  # count unique pairs of words
-  count(word1, word2, wt = n, sort = TRUE) |>
-  rename(total = n)
+  separate(bigram, c("word1", "word2"), sep = " ") |>  #<<
+  select(word1, word2)
+
+bigram_split
 ```
 ]
 
 --
 
 .less-right[
-```{r hp-he-she-countsr, cache=TRUE, echo=FALSE}
-hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
-
-hp |>
-  unnest_tokens(bigram, text, token = "ngrams", n = 2)  |>
-  count(bigram, sort = TRUE) |>
-  # split the bigram column into two columns
-  separate(bigram, c("word1", "word2"), sep = " ") |>
-  # only choose rows where the first word is he or she #<<
-  filter(word1 %in% hp_pronouns) |> #<<
-  # count unique pairs of words
-  count(word1, word2, wt = n, sort = TRUE) |>
-  rename(total = n)
+```{r hp-word1-word2r, cache=TRUE, echo=FALSE}
+bigram_split # created at beginning of Token frequency: n-gram ratios
 ```
 ]
 
@@ -835,22 +825,74 @@ hp |>
 
 # Token frequency: n-gram ratios
 
-2: Compute group-specific frequencies for the most common bigrams
+2: Filter and count bigrams that begin with "he", "she"
+
+.more-left[
+```{r hp-bigram-counts, eval=FALSE}
+hp_pronouns <- c("he", "she")
+
+bigram_he_she_counts <- bigram_split |>
+  # only choose rows where the first word is he or she
+  filter(word1 %in% hp_pronouns) |> #<<
+  # count unique pairs of words
+  count(word1, word2, sort = TRUE) #<<
+
+bigram_he_she_counts
+```
+]
+
+--
+
+.less-right[
+```{r hp-bigram-countsr, cache=TRUE, echo=FALSE}
+bigram_he_she_counts # created at beginning of Token frequency: n-gram ratios
+```
+]
+
+
+---
+
+# Token frequency: n-gram ratios
+
+3: Pivot the data to the `word2` level (and clean up)
+
+.more-left[
+```{r hp-word2-counts, eval=FALSE}
+word_counts <- bigram_he_she_counts |>
+  # keep rows where the second word appears 10+ times
+  group_by(word2) |>
+  filter(sum(n) > 10) |>
+  ungroup() |>
+  # pivot out the word1 column to columns "he" and "she"
+  pivot_wider(names_from = word1, values_from = n) |> #<<
+  # remove cases where either he or she is missing
+  # (can't divide by 0. note this discards info though!)
+  filter(!is.na(he) & !is.na(she))
+
+word_counts
+```
+]
+
+--
+
+.less-right[
+```{r hp-word2-countsr, cache=TRUE, echo=FALSE}
+word_counts # created at beginning of Token frequency: n-gram ratios
+```
+]
+
+---
+
+# Token frequency: n-gram ratios
+
+4: Compute pronoun-specific frequencies for the most common bigrams
 
 .more-left[
 ```{r hp-he-she-ratios, eval=FALSE}
-word_ratios <- bigram_he_she_counts |>
-  # look at each of the second words
-  group_by(word2) |>
-  # keep rows where the second word appears 10+ times
-  filter(sum(total) > 10) |>
-  ungroup() |>
-  # pivot out the word1 column to columns "he" and "she"
-  pivot_wider(names_from = word1, values_from = total) |> 
-  # filter out missing he/she cases (subjective choice!)
-  filter(!is.na(he) & !is.na(she)) |> 
-  # normalize word2 counts to frequencies by he/she #<<
-  mutate_if(is.numeric, ~ (.) / sum(.)) #<<
+word_ratios <- word_counts |> 
+  # normalize word2 counts to frequencies by he/she
+  mutate(he = he / sum(he), #<<
+         she = she / sum(she)) #<<
 
 word_ratios
 ```
@@ -860,18 +902,7 @@ word_ratios
 
 .less-right[
 ```{r hp-he-she-ratiosr, cache=TRUE, echo=FALSE}
-bigram_he_she_counts |>
-  # look at each of the second words
-  group_by(word2) |>
-  # keep rows where the second word appears 10+ times
-  filter(sum(total) > 10) |>
-  ungroup() |>
-  # pivot out the word1 column so that there's a column named "he" and one named "she"
-  pivot_wider(names_from = word1, values_from = total) |> 
-  # filter out missing he/she cases (subjective choice!)
-  filter(!is.na(he) & !is.na(she)) |> 
-  # convert word2 counts to frequencies by he/she (normalization)
-  mutate_if(is.numeric, ~ (.) / sum(.))
+word_ratios # created at beginning of Token frequency: n-gram ratios
 ```
 ]
 
@@ -879,13 +910,14 @@ bigram_he_she_counts |>
 
 # Token frequency: n-gram ratios
 
-3: Compute log ratios for the most common bigrams
+5: Compute log ratios for the most common bigrams
 
 .more-left[
 ```{r hp-he-she-logratios, eval=FALSE}
 log_ratios <- word_ratios |>
   # compute logged ratio of the she counts to he counts
-  mutate(logratio = log2(she / he)) |>
+  # taking logs just helps to compress outliers
+  mutate(logratio = log2(she / he)) |> #<<
   # sort by that ratio
   arrange(desc(logratio)) |> 
   select(word2, logratio)
@@ -898,12 +930,7 @@ log_ratios
 
 .less-right[
 ```{r hp-he-she-logratiosr, cache=TRUE, echo=FALSE}
-word_ratios |>
-  # compute logged ratio of the she counts to he counts
-  mutate(logratio = log2(she / he)) |>
-  # sort by that ratio
-  arrange(desc(logratio)) |> 
-  select(word2, logratio)
+log_ratios # created at beginning of Token frequency: n-gram ratios
 ```
 ]
 
@@ -911,14 +938,15 @@ word_ratios |>
 
 # Token frequency: n-gram ratios
 
-4: Rearrange the data for plotting
+6: Filter the data for plotting
 
 .pull-left[
 ```{r hp-he-she-rearrange, eval=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
 plot_word_ratios <- log_ratios |>
-  mutate(abslogratio = abs(logratio)) |>
-  group_by(logratio < 0) |>
-  slice_max(abslogratio, n = 5) |>
+  # take the top 5 logratios by pronoun
+  # (logratios are +/- for she/he)
+  group_by(logratio < 0) |> #<<
+  slice_max(abs(logratio), n = 5) |> #<<
   ungroup()
 
 plot_word_ratios
@@ -929,13 +957,7 @@ plot_word_ratios
 
 .pull-right[
 ```{r hp-he-she-rearranger, echo=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
-log_ratios |>
-  # this gets the words in the right order---we take the absolute value, select
-  # only rows where the log ratio is bigger than 0, and then take the top 15 words
-  mutate(abslogratio = abs(logratio)) |>
-  group_by(logratio < 0) |>
-  slice_max(abslogratio, n = 5) |>
-  ungroup()
+plot_word_ratios # created at beginning of Token frequency: n-gram ratios
 ```
 ]
 
@@ -943,13 +965,13 @@ log_ratios |>
 
 # Token frequency: n-gram ratios
 
-5: Plot the data
+7: Plot the data
 
-.pull-left.small-code[
+.pull-left[
 ```{r hp-he-she-plot, eval=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
 plot_word_ratios |> 
-  ggplot(aes(logratio, 
-             fct_reorder(word2, logratio), 
+  ggplot(aes(x = logratio, 
+             y = fct_reorder(word2, logratio), 
              fill = logratio < 0)) +
   geom_col() +
   labs(y = "How much more/less likely", x = NULL) +
@@ -967,14 +989,15 @@ plot_word_ratios |>
 --
 
 .pull-right[
-```{r hp-he-she-plotr, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
+```{r hp-he-she-plotr, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
 plot_word_ratios |> 
   ggplot(aes(logratio, 
              fct_reorder(word2, logratio), 
              fill = logratio < 0)) +
   geom_col() +
   labs(y = "How much more/less likely", x = NULL) +
-  scale_fill_manual(name = "", labels = c("More 'she'", "More 'he'"),
+  scale_fill_manual(name = "", 
+                    labels = c("More 'she'", "More 'he'"),
                     values = c("#3D9970", "#FF851B"),
                     guide = guide_legend(reverse = TRUE)) +
   scale_x_continuous(breaks = seq(-3, 3),

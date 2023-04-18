@@ -755,7 +755,7 @@ As always, tools and tricks from the layered grammar of graphics apply:
 
 # Token frequency: n-gram ratios
 
-Move beyond simple frequency plots to analyze relative frequencies by groups:
+We can move beyond frequency plots to analyze relative frequencies by groups:
 
 &lt;img src="12-slides_files/figure-html/hp-he-she-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
@@ -765,27 +765,68 @@ How would you make this?
 
 .small[This is not an endorsement of J. K. Rowling's views on sex and gender]
 
+
 ---
 
 # Token frequency: n-gram ratios
 
-1: Identify and count words associated with "he", "she"
+1: Identify and split bigrams
 
 .more-left[
 
 ```r
-hp_pronouns &lt;- c("he", "she") # not apologizing for j k rowling here
-
-bigram_he_she_counts &lt;- hp |&gt;
-  unnest_tokens(bigram, text, token = "ngrams", n = 2)  |&gt;
-  count(bigram, sort = TRUE) |&gt;
+bigram_split &lt;- hp |&gt;
+  # tokenize into bigrams
+* unnest_tokens(bigram, text, token = "ngrams", n = 2)  |&gt;
   # split the bigram column into two columns
-  separate(bigram, c("word1", "word2"), sep = " ") |&gt;
-* # only choose rows where the first word is he or she
+* separate(bigram, c("word1", "word2"), sep = " ") |&gt;
+  select(word1, word2)
+
+bigram_split
+```
+]
+
+--
+
+.less-right[
+
+```
+## # A tibble: 1,089,186 × 2
+##    word1   word2  
+##    &lt;chr&gt;   &lt;chr&gt;  
+##  1 the     boy    
+##  2 boy     who    
+##  3 who     lived  
+##  4 lived   mr     
+##  5 mr      and    
+##  6 and     mrs    
+##  7 mrs     dursley
+##  8 dursley of     
+##  9 of      number 
+## 10 number  four   
+## # … with 1,089,176 more rows
+```
+]
+
+
+---
+
+# Token frequency: n-gram ratios
+
+2: Filter and count bigrams that begin with "he", "she"
+
+.more-left[
+
+```r
+hp_pronouns &lt;- c("he", "she")
+
+bigram_he_she_counts &lt;- bigram_split |&gt;
+  # only choose rows where the first word is he or she
 * filter(word1 %in% hp_pronouns) |&gt;
   # count unique pairs of words
-  count(word1, word2, wt = n, sort = TRUE) |&gt;
-  rename(total = n)
+* count(word1, word2, sort = TRUE)
+
+bigram_he_she_counts
 ```
 ]
 
@@ -795,7 +836,7 @@ bigram_he_she_counts &lt;- hp |&gt;
 
 ```
 ## # A tibble: 2,096 × 3
-##    word1 word2  total
+##    word1 word2      n
 ##    &lt;chr&gt; &lt;chr&gt;  &lt;int&gt;
 ##  1 he    was     2490
 ##  2 he    had     2138
@@ -816,23 +857,61 @@ bigram_he_she_counts &lt;- hp |&gt;
 
 # Token frequency: n-gram ratios
 
-2: Compute group-specific frequencies for the most common bigrams
+3: Pivot the data to the `word2` level (and clean up)
 
 .more-left[
 
 ```r
-word_ratios &lt;- bigram_he_she_counts |&gt;
-  # look at each of the second words
-  group_by(word2) |&gt;
+word_counts &lt;- bigram_he_she_counts |&gt;
   # keep rows where the second word appears 10+ times
-  filter(sum(total) &gt; 10) |&gt;
+  group_by(word2) |&gt;
+  filter(sum(n) &gt; 10) |&gt;
   ungroup() |&gt;
   # pivot out the word1 column to columns "he" and "she"
-  pivot_wider(names_from = word1, values_from = total) |&gt; 
-  # filter out missing he/she cases (subjective choice!)
-  filter(!is.na(he) &amp; !is.na(she)) |&gt; 
-* # normalize word2 counts to frequencies by he/she
-* mutate_if(is.numeric, ~ (.) / sum(.))
+* pivot_wider(names_from = word1, values_from = n) |&gt;
+  # remove cases where either he or she is missing
+  # (can't divide by 0. note this discards info though!)
+  filter(!is.na(he) &amp; !is.na(she))
+
+word_counts
+```
+]
+
+--
+
+.less-right[
+
+```
+## # A tibble: 262 × 3
+##    word2     he   she
+##    &lt;chr&gt;  &lt;int&gt; &lt;int&gt;
+##  1 was     2490   603
+##  2 had     2138   385
+##  3 said    1270   615
+##  4 could    925    64
+##  5 looked   428   144
+##  6 did      386    58
+##  7 would    349    49
+##  8 knew     297    20
+##  9 felt     285     4
+## 10 saw      285    21
+## # … with 252 more rows
+```
+]
+
+---
+
+# Token frequency: n-gram ratios
+
+4: Compute pronoun-specific frequencies for the most common bigrams
+
+.more-left[
+
+```r
+word_ratios &lt;- word_counts |&gt; 
+  # normalize word2 counts to frequencies by he/she
+* mutate(he = he / sum(he),
+*        she = she / sum(she))
 
 word_ratios
 ```
@@ -864,14 +943,15 @@ word_ratios
 
 # Token frequency: n-gram ratios
 
-3: Compute log ratios for the most common bigrams
+5: Compute log ratios for the most common bigrams
 
 .more-left[
 
 ```r
 log_ratios &lt;- word_ratios |&gt;
   # compute logged ratio of the she counts to he counts
-  mutate(logratio = log2(she / he)) |&gt;
+  # taking logs just helps to compress outliers
+* mutate(logratio = log2(she / he)) |&gt;
   # sort by that ratio
   arrange(desc(logratio)) |&gt; 
   select(word2, logratio)
@@ -906,15 +986,16 @@ log_ratios
 
 # Token frequency: n-gram ratios
 
-4: Rearrange the data for plotting
+6: Filter the data for plotting
 
 .pull-left[
 
 ```r
 plot_word_ratios &lt;- log_ratios |&gt;
-  mutate(abslogratio = abs(logratio)) |&gt;
-  group_by(logratio &lt; 0) |&gt;
-  slice_max(abslogratio, n = 5) |&gt;
+  # take the top 5 logratios by pronoun
+  # (logratios are +/- for she/he)
+* group_by(logratio &lt; 0) |&gt;
+* slice_max(abs(logratio), n = 5) |&gt;
   ungroup()
 
 plot_word_ratios
@@ -926,19 +1007,19 @@ plot_word_ratios
 .pull-right[
 
 ```
-## # A tibble: 10 × 4
-##    word2      logratio abslogratio `logratio &lt; 0`
-##    &lt;chr&gt;         &lt;dbl&gt;       &lt;dbl&gt; &lt;lgl&gt;         
-##  1 screamed       4.30        4.30 FALSE         
-##  2 shrieked       3.89        3.89 FALSE         
-##  3 snapped        3.27        3.27 FALSE         
-##  4 replied        3.25        3.25 FALSE         
-##  5 barked         2.89        2.89 FALSE         
-##  6 felt          -4.07        4.07 TRUE          
-##  7 remembered    -3.67        3.67 TRUE          
-##  8 yelled        -2.92        2.92 TRUE          
-##  9 heard         -2.53        2.53 TRUE          
-## 10 forced        -2.44        2.44 TRUE
+## # A tibble: 10 × 3
+##    word2      logratio `logratio &lt; 0`
+##    &lt;chr&gt;         &lt;dbl&gt; &lt;lgl&gt;         
+##  1 screamed       4.30 FALSE         
+##  2 shrieked       3.89 FALSE         
+##  3 snapped        3.27 FALSE         
+##  4 replied        3.25 FALSE         
+##  5 barked         2.89 FALSE         
+##  6 felt          -4.07 TRUE          
+##  7 remembered    -3.67 TRUE          
+##  8 yelled        -2.92 TRUE          
+##  9 heard         -2.53 TRUE          
+## 10 forced        -2.44 TRUE
 ```
 ]
 
@@ -946,14 +1027,14 @@ plot_word_ratios
 
 # Token frequency: n-gram ratios
 
-5: Plot the data
+7: Plot the data
 
-.pull-left.small-code[
+.pull-left[
 
 ```r
 plot_word_ratios |&gt; 
-  ggplot(aes(logratio, 
-             fct_reorder(word2, logratio), 
+  ggplot(aes(x = logratio, 
+             y = fct_reorder(word2, logratio), 
              fill = logratio &lt; 0)) +
   geom_col() +
   labs(y = "How much more/less likely", x = NULL) +
@@ -971,7 +1052,7 @@ plot_word_ratios |&gt;
 --
 
 .pull-right[
-&lt;img src="12-slides_files/figure-html/hp-he-she-plotr-1.png" width="85%" style="display: block; margin: auto;" /&gt;
+&lt;img src="12-slides_files/figure-html/hp-he-she-plotr-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -1041,7 +1122,7 @@ get_sentiments("nrc")
 ```
 
 ```
-# A tibble: 13,872 × 2
+# A tibble: 13,875 × 2
    word        sentiment
    &lt;chr&gt;       &lt;chr&gt;    
  1 abacus      trust    
@@ -1054,7 +1135,7 @@ get_sentiments("nrc")
  8 abandoned   sadness  
  9 abandonment anger    
 10 abandonment fear     
-# … with 13,862 more rows
+# … with 13,865 more rows
 ```
 ]
 
