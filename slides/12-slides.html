@@ -299,6 +299,22 @@ name: tidytext
 
 ---
 
+# Text mining with R
+
+We already worked with strings and character vectors in week 5
+
+Many of our data frames include string variables that are useful for filtering and other operations (e.g., stock tickers used in the group project)
+
+--
+
+This week we will learn more about methods to glean insights from unstructured text
+
+--
+
+**Text mining** refers to this process of converting unstructured text to higher-quality information
+
+---
+
 # Core concepts and techniques
 
 --
@@ -360,7 +376,7 @@ https://www.tidytextmining.com/
 
 ---
 
-# Regular text
+# Unstructured text
 
 
 ```
@@ -590,7 +606,7 @@ How could we remove these stop words from our Harry Potter tokens?
 ```r
 hp1_data |&gt; 
   unnest_tokens(word, text) |&gt; 
-* anti_join(stop_words, by = "word") |&gt;
+* anti_join(stop_words, join_by(word)) |&gt;
   count(word, sort = TRUE) |&gt; 
   slice_max(order_by = n,
             n = 10) |&gt;
@@ -617,20 +633,20 @@ Example: two consecutive words are a bigram
 
 --
 
-.pull-left[
+.more-left[
 
 ```r
 hp1_data |&gt; 
   unnest_tokens(
     input = text, 
-*   output = bigram,  # new column bigram
-*   token = "ngrams", # we want ngrams
-*   n = 2) |&gt;        # we want bigrams
+*   output = bigram,  # call the new column bigram
+*   token = "ngrams", # we want to create ngrams
+*   n = 2) |&gt;         # more specifically, bigrams
   relocate(bigram)
 ```
 ]
 
-.pull-right[
+.less-right[
 
 ```
 ## # A tibble: 77,858 × 2
@@ -652,27 +668,110 @@ hp1_data |&gt;
 
 ---
 
+# Tokenization: n-grams
+
+What do you think are the most common bigrams in Harry Potter and the Philosopher's Stone, after removing bigrams that include stop words?
+
+.more-left[
+
+```r
+hp1_data |&gt; 
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) |&gt; 
+* separate(bigram,              # split bigrams
+*          c("word1", "word2"), #   assign arbitrary names
+*          sep = " ") |&gt;        #   split at space
+* anti_join(stop_words,         # remove cases w/ stop
+*   join_by(word1 == word)) |&gt;  #   words in first term
+* anti_join(stop_words,         # remove cases w/ stop
+*   join_by(word2 == word)) |&gt;  #   words in second term
+* unite(bigram,                 # reunite bigrams
+*       word1, word2,
+*       sep = " ") |&gt;
+  count(bigram, sort = TRUE)    # count
+```
+]
+
+--
+
+.less-right[
+
+```
+## # A tibble: 7,695 × 2
+##    bigram                   n
+##    &lt;chr&gt;                &lt;int&gt;
+##  1 uncle vernon            97
+##  2 professor mcgonagall    90
+##  3 aunt petunia            52
+##  4 harry potter            26
+##  5 harry looked            22
+##  6 professor dumbledore    20
+##  7 professor quirrell      18
+##  8 hermione granger        16
+##  9 privet drive            16
+## 10 professor flitwick      15
+## # … with 7,685 more rows
+```
+]
+
+---
+
 # Token frequency: n-grams
 
-&lt;img src="12-slides_files/figure-html/hp-bigrams-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+We can visualize the top bigrams in Harry Potter and the Philosopher's Stone:
+
+.more-left[
+
+```r
+hp1_data |&gt; 
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) |&gt; 
+  separate(bigram, c("word1", "word2"), sep = " ") |&gt; 
+  anti_join(stop_words, join_by(word1 == word)) |&gt; 
+  anti_join(stop_words, join_by(word2 == word)) |&gt; 
+  unite(bigram, word1, word2, sep = " ") |&gt; 
+  count(bigram, sort = TRUE) |&gt; 
+* slice_max(order_by = n,
+*           n = 10) |&gt;
+* ggplot(aes(x = n,
+*            y = fct_reorder(bigram, n))) +
+* geom_col() +
+* labs(x = NULL, y = NULL) +
+  theme_bw()
+```
+]
+
+.less-right[
+![](12-slides_files/figure-html/hp1-bigram-plot-1.png)
+]
+
+---
+
+# Token frequency: n-grams
+
+As always, tools and tricks from the layered grammar of graphics apply:
+
+&lt;img src="12-slides_files/figure-html/hp-bigrams-1.png" width="95%" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # Token frequency: n-gram ratios
 
-&lt;img src="12-slides_files/figure-html/hp-he-she-1.png" width="75%" style="display: block; margin: auto;" /&gt;
+Move beyond simple frequency plots to analyze relative frequencies by groups:
+
+&lt;img src="12-slides_files/figure-html/hp-he-she-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+--
 
 How would you make this?
 
-.small[This is not an endorsement of J. K. Rowling's [views on sex and gender](https://en.wikipedia.org/wiki/Political_views_of_J._K._Rowling#Transgender_people)!]
+.small[This is not an endorsement of J. K. Rowling's views on sex and gender]
 
 ---
 
 # Token frequency: n-gram ratios
 
-1. Identify and count words associated with "he", "she"
+1: Identify and count words associated with "he", "she"
 
-.pull-left[
+.more-left[
 
 ```r
 hp_pronouns &lt;- c("he", "she") # not apologizing for j k rowling here
@@ -692,7 +791,7 @@ bigram_he_she_counts &lt;- hp |&gt;
 
 --
 
-.pull-right[
+.less-right[
 
 ```
 ## # A tibble: 2,096 × 3
@@ -717,9 +816,9 @@ bigram_he_she_counts &lt;- hp |&gt;
 
 # Token frequency: n-gram ratios
 
-2. Compute ratios for the most common bigrams
+2: Compute group-specific frequencies for the most common bigrams
 
-.pull-left[
+.more-left[
 
 ```r
 word_ratios &lt;- bigram_he_she_counts |&gt;
@@ -728,16 +827,12 @@ word_ratios &lt;- bigram_he_she_counts |&gt;
   # keep rows where the second word appears 10+ times
   filter(sum(total) &gt; 10) |&gt;
   ungroup() |&gt;
-  # pivot out the word1 column so that there's a column named "he" and one named "she"
+  # pivot out the word1 column to columns "he" and "she"
   pivot_wider(names_from = word1, values_from = total) |&gt; 
   # filter out missing he/she cases (subjective choice!)
   filter(!is.na(he) &amp; !is.na(she)) |&gt; 
-  # convert word2 counts to frequencies by he/she (normalization)
-  mutate_if(is.numeric, ~ (.) / sum(.)) |&gt;
-  # compute logged ratio of the she counts to he counts
-  mutate(logratio = log2(she / he)) |&gt;
-  # sort by that ratio
-  arrange(desc(logratio))
+* # normalize word2 counts to frequencies by he/she
+* mutate_if(is.numeric, ~ (.) / sum(.))
 
 word_ratios
 ```
@@ -745,22 +840,22 @@ word_ratios
 
 --
 
-.pull-right[
+.less-right[
 
 ```
-## # A tibble: 262 × 4
-##    word2          he     she logratio
-##    &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
-##  1 screamed 0.000171 0.00338     4.30
-##  2 shrieked 0.000228 0.00338     3.89
-##  3 snapped  0.000399 0.00386     3.27
-##  4 replied  0.000228 0.00217     3.25
-##  5 barked   0.000228 0.00169     2.89
-##  6 cried    0.000628 0.00338     2.43
-##  7 sounded  0.000685 0.00290     2.08
-##  8 say      0.000456 0.00169     1.89
-##  9 checked  0.000342 0.00121     1.82
-## 10 jerked   0.000342 0.00121     1.82
+## # A tibble: 262 × 3
+##    word2      he      she
+##    &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1 was    0.142  0.146   
+##  2 had    0.122  0.0930  
+##  3 said   0.0725 0.149   
+##  4 could  0.0528 0.0155  
+##  5 looked 0.0244 0.0348  
+##  6 did    0.0220 0.0140  
+##  7 would  0.0199 0.0118  
+##  8 knew   0.0169 0.00483 
+##  9 felt   0.0163 0.000966
+## 10 saw    0.0163 0.00507 
 ## # … with 252 more rows
 ```
 ]
@@ -769,12 +864,54 @@ word_ratios
 
 # Token frequency: n-gram ratios
 
-3. Rearrange the data for plotting
+3: Compute log ratios for the most common bigrams
+
+.more-left[
+
+```r
+log_ratios &lt;- word_ratios |&gt;
+  # compute logged ratio of the she counts to he counts
+  mutate(logratio = log2(she / he)) |&gt;
+  # sort by that ratio
+  arrange(desc(logratio)) |&gt; 
+  select(word2, logratio)
+
+log_ratios
+```
+]
+
+--
+
+.less-right[
+
+```
+## # A tibble: 262 × 2
+##    word2    logratio
+##    &lt;chr&gt;       &lt;dbl&gt;
+##  1 screamed     4.30
+##  2 shrieked     3.89
+##  3 snapped      3.27
+##  4 replied      3.25
+##  5 barked       2.89
+##  6 cried        2.43
+##  7 sounded      2.08
+##  8 say          1.89
+##  9 checked      1.82
+## 10 jerked       1.82
+## # … with 252 more rows
+```
+]
+
+---
+
+# Token frequency: n-gram ratios
+
+4: Rearrange the data for plotting
 
 .pull-left[
 
 ```r
-plot_word_ratios &lt;- word_ratios |&gt;
+plot_word_ratios &lt;- log_ratios |&gt;
   mutate(abslogratio = abs(logratio)) |&gt;
   group_by(logratio &lt; 0) |&gt;
   slice_max(abslogratio, n = 5) |&gt;
@@ -789,19 +926,19 @@ plot_word_ratios
 .pull-right[
 
 ```
-## # A tibble: 10 × 6
-##    word2            he      she logratio abslogratio `logratio &lt; 0`
-##    &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt; &lt;lgl&gt;         
-##  1 screamed   0.000171 0.00338      4.30        4.30 FALSE         
-##  2 shrieked   0.000228 0.00338      3.89        3.89 FALSE         
-##  3 snapped    0.000399 0.00386      3.27        3.27 FALSE         
-##  4 replied    0.000228 0.00217      3.25        3.25 FALSE         
-##  5 barked     0.000228 0.00169      2.89        2.89 FALSE         
-##  6 felt       0.0163   0.000966    -4.07        4.07 TRUE          
-##  7 remembered 0.00308  0.000242    -3.67        3.67 TRUE          
-##  8 yelled     0.00183  0.000242    -2.92        2.92 TRUE          
-##  9 heard      0.00976  0.00169     -2.53        2.53 TRUE          
-## 10 forced     0.00131  0.000242    -2.44        2.44 TRUE
+## # A tibble: 10 × 4
+##    word2      logratio abslogratio `logratio &lt; 0`
+##    &lt;chr&gt;         &lt;dbl&gt;       &lt;dbl&gt; &lt;lgl&gt;         
+##  1 screamed       4.30        4.30 FALSE         
+##  2 shrieked       3.89        3.89 FALSE         
+##  3 snapped        3.27        3.27 FALSE         
+##  4 replied        3.25        3.25 FALSE         
+##  5 barked         2.89        2.89 FALSE         
+##  6 felt          -4.07        4.07 TRUE          
+##  7 remembered    -3.67        3.67 TRUE          
+##  8 yelled        -2.92        2.92 TRUE          
+##  9 heard         -2.53        2.53 TRUE          
+## 10 forced        -2.44        2.44 TRUE
 ```
 ]
 
@@ -809,7 +946,7 @@ plot_word_ratios
 
 # Token frequency: n-gram ratios
 
-4. Plot the data
+5: Plot the data
 
 .pull-left.small-code[
 
@@ -826,7 +963,7 @@ plot_word_ratios |&gt;
   scale_x_continuous(breaks = seq(-3, 3),
                      labels = c("8x", "4x", "2x",
                                 "Same", "2x", "4x", "8x")) +
-  theme_bw() +
+  theme_bw(base_size = 16) +
   theme(legend.position = "bottom")
 ```
 ]
@@ -904,7 +1041,7 @@ get_sentiments("nrc")
 ```
 
 ```
-# A tibble: 13,875 × 2
+# A tibble: 13,872 × 2
    word        sentiment
    &lt;chr&gt;       &lt;chr&gt;    
  1 abacus      trust    
@@ -917,7 +1054,7 @@ get_sentiments("nrc")
  8 abandoned   sadness  
  9 abandonment anger    
 10 abandonment fear     
-# … with 13,865 more rows
+# … with 13,862 more rows
 ```
 ]
 
