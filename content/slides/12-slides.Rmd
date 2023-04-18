@@ -324,6 +324,22 @@ name: tidytext
 
 ---
 
+# Text mining with R
+
+We already worked with strings and character vectors in week 5
+
+Many of our data frames include string variables that are useful for filtering and other operations (e.g., stock tickers used in the group project)
+
+--
+
+This week we will learn more about methods to glean insights from unstructured text
+
+--
+
+**Text mining** refers to this process of converting unstructured text to higher-quality information
+
+---
+
 # Core concepts and techniques
 
 --
@@ -385,7 +401,7 @@ https://www.tidytextmining.com/
 
 ---
 
-# Regular text
+# Unstructured text
 
 ```{r show-hp1, echo=FALSE, comment=NA}
 harrypotter::philosophers_stone[1] |> 
@@ -556,7 +572,7 @@ How could we remove these stop words from our Harry Potter tokens?
 ```{r hp-words, cache=TRUE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 hp1_data |> 
   unnest_tokens(word, text) |> 
-  anti_join(stop_words, by = "word") |> #<<
+  anti_join(stop_words, join_by(word)) |> #<<
   count(word, sort = TRUE) |> 
   slice_max(order_by = n,
             n = 10) |>
@@ -583,27 +599,65 @@ Example: two consecutive words are a bigram
 
 --
 
-.pull-left[
+.more-left[
 ```{r hp1-bigram, eval=FALSE}
 hp1_data |> 
   unnest_tokens(
     input = text, 
-    output = bigram,  # new column bigram #<<
-    token = "ngrams", # we want ngrams #<<
-    n = 2) |>        # we want bigrams #<<
+    output = bigram,  # call the new column bigram #<<
+    token = "ngrams", # we want to create ngrams #<<
+    n = 2) |>         # more specifically, bigrams #<<
   relocate(bigram)
 ```
 ]
 
-.pull-right[
+.less-right[
 ```{r hp1-bigramr, cache=TRUE, echo=FALSE}
 hp1_data |> 
   unnest_tokens(
     input = text, 
-    output = bigram,  # call new column bigram #<<
-    token = "ngrams", # we want ngrams #<<
-    n = 2) |>        # we want bigrams #<<
+    output = bigram,  # call the new column bigram #<<
+    token = "ngrams", # we want to create ngrams #<<
+    n = 2) |>         # more specifically, bigrams #<<
   relocate(bigram)
+```
+]
+
+---
+
+# Tokenization: n-grams
+
+What do you think are the most common bigrams in Harry Potter and the Philosopher's Stone, after removing bigrams that include stop words?
+
+.more-left[
+```{r hp1-bigram-clean, eval=FALSE}
+hp1_data |> 
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) |> 
+  separate(bigram,              # split bigrams #<< 
+           c("word1", "word2"), #   assign arbitrary names #<< 
+           sep = " ") |>        #   split at space #<< 
+  anti_join(stop_words,         # remove cases w/ stop #<< 
+    join_by(word1 == word)) |>  #   words in first term #<< 
+  anti_join(stop_words,         # remove cases w/ stop #<< 
+    join_by(word2 == word)) |>  #   words in second term #<< 
+  unite(bigram,                 # reunite bigrams #<< 
+        word1, word2,           #<<
+        sep = " ") |>           #<<
+  count(bigram, sort = TRUE)    # count
+```
+]
+
+--
+
+.less-right[
+```{r hp1-bigram-cleanr, cache=TRUE, echo=FALSE}
+hp1_data |> 
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) |> 
+  separate(bigram, c("word1", "word2"), sep = " ") |> #<<
+  anti_join(stop_words, join_by(word1 == word)) |> # filter out #<< 
+  anti_join(stop_words, join_by(word2 == word)) |> # stop words #<< 
+  unite(bigram, word1, word2, sep = " ") |> # recombine #<<
+  count(bigram, sort = TRUE) # count
 ```
 ]
 
@@ -611,12 +665,43 @@ hp1_data |>
 
 # Token frequency: n-grams
 
-```{r hp-bigrams, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
+We can visualize the top bigrams in Harry Potter and the Philosopher's Stone:
+
+.more-left[
+```{r hp1-bigram-plot, cache=TRUE, fig.show="hide", fig.dim=c(4, 4), out.width="100%"}
+hp1_data |> 
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) |> 
+  separate(bigram, c("word1", "word2"), sep = " ") |> 
+  anti_join(stop_words, join_by(word1 == word)) |> 
+  anti_join(stop_words, join_by(word2 == word)) |> 
+  unite(bigram, word1, word2, sep = " ") |> 
+  count(bigram, sort = TRUE) |> 
+  slice_max(order_by = n, #<<
+            n = 10) |> #<<
+  ggplot(aes(x = n,  #<<
+             y = fct_reorder(bigram, n))) + #<<
+  geom_col() + #<<
+  labs(x = NULL, y = NULL) + #<<
+  theme_bw()
+```
+]
+
+.less-right[
+![](`r knitr::fig_chunk("hp1-bigram-plot", "png")`)
+]
+
+---
+
+# Token frequency: n-grams
+
+As always, tools and tricks from the layered grammar of graphics apply:
+
+```{r hp-bigrams, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.5, out.width="95%"}
 hp_bigrams <- hp |> 
   unnest_tokens(bigram, text, token = "ngrams", n = 2) |> 
   separate(bigram, c("word1", "word2"), sep = " ") |> 
-  filter(!word1 %in% stop_words$word) |>
-  filter(!word2 %in% stop_words$word) |> 
+  anti_join(stop_words, join_by(word1 == word)) |> 
+  anti_join(stop_words, join_by(word2 == word)) |> 
   unite(bigram, word1, word2, sep = " ") |> 
   group_by(book) |> 
   count(bigram, sort = TRUE) |> 
@@ -637,7 +722,9 @@ ggplot(hp_bigrams, aes(x = n, y = fct_rev(bigram), fill = book)) +
 
 # Token frequency: n-gram ratios
 
-```{r hp-he-she, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="75%"}
+Move beyond simple frequency plots to analyze relative frequencies by groups:
+
+```{r hp-he-she, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="60%"}
 hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
 
 bigram_he_she_counts <- hp |>
@@ -657,18 +744,21 @@ word_ratios <- bigram_he_she_counts |>
   # keep rows where the second word appears 10+ times
   filter(sum(total) > 10) |>
   ungroup() |>
-  # pivot out the word1 column so that there's a column named "he" and one named "she"
+  # pivot out the word1 column to columns "he" and "she"
   pivot_wider(names_from = word1, values_from = total) |> 
   # filter out missing he/she cases (subjective choice!)
   filter(!is.na(he) & !is.na(she)) |> 
-  # convert word2 counts to frequencies by he/she (normalization)
-  mutate_if(is.numeric, ~ (.) / sum(.)) |>
+  # normalize word2 counts to frequencies by he/she
+  mutate_if(is.numeric, ~ (.) / sum(.))
+
+log_ratios <- word_ratios |>
   # compute logged ratio of the she counts to he counts
   mutate(logratio = log2(she / he)) |>
   # sort by that ratio
-  arrange(desc(logratio))
+  arrange(desc(logratio)) |> 
+  select(word2, logratio)
 
-plot_word_ratios <- word_ratios |>
+plot_word_ratios <- log_ratios |>
   # this gets the words in the right order---we take the absolute value, select
   # only rows where the log ratio is bigger than 0, and then take the top 15 words
   mutate(abslogratio = abs(logratio)) |>
@@ -688,21 +778,23 @@ plot_word_ratios |>
   scale_x_continuous(breaks = seq(-3, 3),
                      labels = c("8x", "4x", "2x",
                                 "Same", "2x", "4x", "8x")) +
-  theme_bw() +
+  theme_bw(base_size = 16) +
   theme(legend.position = "bottom")
 ```
 
+--
+
 How would you make this?
 
-.small[This is not an endorsement of J. K. Rowling's [views on sex and gender](https://en.wikipedia.org/wiki/Political_views_of_J._K._Rowling#Transgender_people)!]
+.small[This is not an endorsement of J. K. Rowling's views on sex and gender]
 
 ---
 
 # Token frequency: n-gram ratios
 
-1. Identify and count words associated with "he", "she"
+1: Identify and count words associated with "he", "she"
 
-.pull-left[
+.more-left[
 ```{r hp-he-she-counts, eval=FALSE}
 hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
 
@@ -721,7 +813,7 @@ bigram_he_she_counts <- hp |>
 
 --
 
-.pull-right[
+.less-right[
 ```{r hp-he-she-countsr, cache=TRUE, echo=FALSE}
 hp_pronouns <- c("he", "she") # not apologizing for j k rowling here
 
@@ -743,9 +835,9 @@ hp |>
 
 # Token frequency: n-gram ratios
 
-2. Compute ratios for the most common bigrams
+2: Compute group-specific frequencies for the most common bigrams
 
-.pull-left[
+.more-left[
 ```{r hp-he-she-ratios, eval=FALSE}
 word_ratios <- bigram_he_she_counts |>
   # look at each of the second words
@@ -753,16 +845,12 @@ word_ratios <- bigram_he_she_counts |>
   # keep rows where the second word appears 10+ times
   filter(sum(total) > 10) |>
   ungroup() |>
-  # pivot out the word1 column so that there's a column named "he" and one named "she"
+  # pivot out the word1 column to columns "he" and "she"
   pivot_wider(names_from = word1, values_from = total) |> 
   # filter out missing he/she cases (subjective choice!)
   filter(!is.na(he) & !is.na(she)) |> 
-  # convert word2 counts to frequencies by he/she (normalization)
-  mutate_if(is.numeric, ~ (.) / sum(.)) |>
-  # compute logged ratio of the she counts to he counts
-  mutate(logratio = log2(she / he)) |>
-  # sort by that ratio
-  arrange(desc(logratio))
+  # normalize word2 counts to frequencies by he/she #<<
+  mutate_if(is.numeric, ~ (.) / sum(.)) #<<
 
 word_ratios
 ```
@@ -770,7 +858,7 @@ word_ratios
 
 --
 
-.pull-right[
+.less-right[
 ```{r hp-he-she-ratiosr, cache=TRUE, echo=FALSE}
 bigram_he_she_counts |>
   # look at each of the second words
@@ -783,11 +871,7 @@ bigram_he_she_counts |>
   # filter out missing he/she cases (subjective choice!)
   filter(!is.na(he) & !is.na(she)) |> 
   # convert word2 counts to frequencies by he/she (normalization)
-  mutate_if(is.numeric, ~ (.) / sum(.)) |>
-  # compute logged ratio of the she counts to he counts
-  mutate(logratio = log2(she / he)) |>
-  # sort by that ratio
-  arrange(desc(logratio))
+  mutate_if(is.numeric, ~ (.) / sum(.))
 ```
 ]
 
@@ -795,11 +879,43 @@ bigram_he_she_counts |>
 
 # Token frequency: n-gram ratios
 
-3. Rearrange the data for plotting
+3: Compute log ratios for the most common bigrams
+
+.more-left[
+```{r hp-he-she-logratios, eval=FALSE}
+log_ratios <- word_ratios |>
+  # compute logged ratio of the she counts to he counts
+  mutate(logratio = log2(she / he)) |>
+  # sort by that ratio
+  arrange(desc(logratio)) |> 
+  select(word2, logratio)
+
+log_ratios
+```
+]
+
+--
+
+.less-right[
+```{r hp-he-she-logratiosr, cache=TRUE, echo=FALSE}
+word_ratios |>
+  # compute logged ratio of the she counts to he counts
+  mutate(logratio = log2(she / he)) |>
+  # sort by that ratio
+  arrange(desc(logratio)) |> 
+  select(word2, logratio)
+```
+]
+
+---
+
+# Token frequency: n-gram ratios
+
+4: Rearrange the data for plotting
 
 .pull-left[
 ```{r hp-he-she-rearrange, eval=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
-plot_word_ratios <- word_ratios |>
+plot_word_ratios <- log_ratios |>
   mutate(abslogratio = abs(logratio)) |>
   group_by(logratio < 0) |>
   slice_max(abslogratio, n = 5) |>
@@ -813,7 +929,7 @@ plot_word_ratios
 
 .pull-right[
 ```{r hp-he-she-rearranger, echo=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
-word_ratios |>
+log_ratios |>
   # this gets the words in the right order---we take the absolute value, select
   # only rows where the log ratio is bigger than 0, and then take the top 15 words
   mutate(abslogratio = abs(logratio)) |>
@@ -827,7 +943,7 @@ word_ratios |>
 
 # Token frequency: n-gram ratios
 
-4. Plot the data
+5: Plot the data
 
 .pull-left.small-code[
 ```{r hp-he-she-plot, eval=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
@@ -843,7 +959,7 @@ plot_word_ratios |>
   scale_x_continuous(breaks = seq(-3, 3),
                      labels = c("8x", "4x", "2x",
                                 "Same", "2x", "4x", "8x")) +
-  theme_bw() +
+  theme_bw(base_size = 16) +
   theme(legend.position = "bottom")
 ```
 ]
@@ -864,7 +980,7 @@ plot_word_ratios |>
   scale_x_continuous(breaks = seq(-3, 3),
                      labels = c("8x", "4x", "2x",
                                 "Same", "2x", "4x", "8x")) +
-  theme_bw() +
+  theme_bw(base_size = 16) +
   theme(legend.position = "bottom")
 ```
 ]
