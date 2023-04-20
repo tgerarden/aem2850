@@ -751,12 +751,12 @@ word_counts <- bigram_he_she_counts |>
   # remove cases where either he or she is missing
   filter(!is.na(he) & !is.na(she))
 
-word_ratios <- word_counts |> 
+word_frequencies <- word_counts |> 
   # normalize word2 counts to frequencies by he/she
   mutate(he = he / sum(he), #<<
          she = she / sum(she)) #<<
 
-log_ratios <- word_ratios |>
+log_ratios <- word_frequencies |>
   # compute logged ratio of the she counts to he counts
   mutate(logratio = log2(she / he)) |>
   # sort by that ratio
@@ -889,12 +889,12 @@ word_counts # created at beginning of Token frequency: n-gram ratios
 
 .more-left[
 ```{r hp-he-she-ratios, eval=FALSE}
-word_ratios <- word_counts |> 
+word_frequencies <- word_counts |> 
   # normalize word2 counts to frequencies by he/she
   mutate(he = he / sum(he), #<<
          she = she / sum(she)) #<<
 
-word_ratios
+word_frequencies
 ```
 ]
 
@@ -902,7 +902,7 @@ word_ratios
 
 .less-right[
 ```{r hp-he-she-ratiosr, cache=TRUE, echo=FALSE}
-word_ratios # created at beginning of Token frequency: n-gram ratios
+word_frequencies # created at beginning of Token frequency: n-gram ratios
 ```
 ]
 
@@ -914,7 +914,7 @@ word_ratios # created at beginning of Token frequency: n-gram ratios
 
 .more-left[
 ```{r hp-he-she-logratios, eval=FALSE}
-log_ratios <- word_ratios |>
+log_ratios <- word_frequencies |>
   # compute logged ratio of the she counts to he counts
   # taking logs just helps to compress outliers
   mutate(logratio = log2(she / he)) |> #<<
