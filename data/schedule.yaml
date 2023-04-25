@@ -144,7 +144,7 @@ lessons:
     assignment: "12-lab"
     bg: 2
 
-  - title: '<span class="content-title">Functions and iteration</span>'
+  - title: '<span class="content-title">Web scraping</span>'
     session: "Session 13"
     date: "Week 13"
     # date_start: "July 19"
@@ -154,12 +154,12 @@ lessons:
     # assignment: "13-lab"
     bg: 1
 
-  - title: '<span class="content-title">Web scraping</span>'
+  - title: '<span class="content-title">Functions and iteration</span>'
     session: "Session 14"
     date: "Week 14"
     # date_start: "July 19"
     # date_end: "July 23"
-    # content: "14-content"
+    content: "14-content"
     # example: "14-example"
     # assignment: "14-lab"
     bg: 2
