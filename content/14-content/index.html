@@ -7,8 +7,8 @@
 <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
 <link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
 <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media=print onload="this.media='all'">
-<meta name=description content="Readings   Web scraping 101 from vignette(&#34;rvest&#34;)  Guiding questions  When is web scraping useful? What is html? What is the difference between client-side and server-side web scraping?  Slides The slides for today&rsquo;s lesson are available online as an HTML file.">
-<link rel=alternate hreflang=en-us href=https://aem2850.toddgerarden.com/content/13-content/>
+<meta name=description content="Readings   Chapter 26: Functions of R for Data Science (2e)  Chapter 27: Iteration of R for Data Science (2e)  Guiding questions  When should you write a function?">
+<link rel=alternate hreflang=en-us href=https://aem2850.toddgerarden.com/content/14-content/>
 <meta name=theme-color content="#B31B1B">
 <link rel=stylesheet href=/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css media=print onload="this.media='all'">
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin=anonymous media=print onload="this.media='all'">
@@ -18,18 +18,18 @@
 <link rel=manifest href=/manifest.webmanifest>
 <link rel=icon type=image/png href=/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_32x32_fill_lanczos_center_3.png>
 <link rel=apple-touch-icon type=image/png href=/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_180x180_fill_lanczos_center_3.png>
-<link rel=canonical href=https://aem2850.toddgerarden.com/content/13-content/>
+<link rel=canonical href=https://aem2850.toddgerarden.com/content/14-content/>
 <meta property="twitter:card" content="summary">
 <meta property="og:site_name" content="R for Business Analytics">
-<meta property="og:url" content="https://aem2850.toddgerarden.com/content/13-content/">
-<meta property="og:title" content="Web scraping | R for Business Analytics">
-<meta property="og:description" content="Readings   Web scraping 101 from vignette(&#34;rvest&#34;)  Guiding questions  When is web scraping useful? What is html? What is the difference between client-side and server-side web scraping?  Slides The slides for today&rsquo;s lesson are available online as an HTML file."><meta property="og:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png">
+<meta property="og:url" content="https://aem2850.toddgerarden.com/content/14-content/">
+<meta property="og:title" content="Functions and iteration | R for Business Analytics">
+<meta property="og:description" content="Readings   Chapter 26: Functions of R for Data Science (2e)  Chapter 27: Iteration of R for Data Science (2e)  Guiding questions  When should you write a function?"><meta property="og:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png">
 <meta property="twitter:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
-<meta property="article:published_time" content="2023-04-24T21:29:38+00:00">
-<meta property="article:modified_time" content="2023-04-24T21:29:38+00:00">
-<title>Web scraping | R for Business Analytics</title>
+<meta property="article:published_time" content="2023-04-24T21:29:53+00:00">
+<meta property="article:modified_time" content="2023-04-24T21:29:53+00:00">
+<title>Functions and iteration | R for Business Analytics</title>
 </head>
-<body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=8f4efa2c204562d293d32de75a20ec7a>
+<body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=d888dc1e1db7e37272db215c4ed12c42>
 <script src=/js/wowchemy-init.min.133800c88f3b5bb934932231fd94fed7.js></script>
 <div class=page-header>
 <header class=header--fixed>
@@ -78,7 +78,7 @@
 <div class=page-body>
 <article class=article>
 <div class="article-container pt-3">
-<h1>Web scraping</h1>
+<h1>Functions and iteration</h1>
 <div class=article-metadata>
 <span class=article-date>
 Apr 24, 2023
@@ -91,18 +91,15 @@ Apr 24, 2023
 <div class=article-style>
 <h3 id=readings>Readings</h3>
 <ul>
-<li><i class="fas fa-external-link-square-alt"></i> <a href=https://rvest.tidyverse.org/articles/rvest.html target=_blank rel=noopener>Web scraping 101</a> from <code>vignette("rvest")</code></li>
+<li><i class="fas fa-book"></i> <a href=https://r4ds.hadley.nz/functions.html target=_blank rel=noopener>Chapter 26: Functions</a> of <em>R for Data Science (2e)</em></li>
+<li><i class="fas fa-book"></i> <a href=https://r4ds.hadley.nz/iteration.html target=_blank rel=noopener>Chapter 27: Iteration</a> of <em>R for Data Science (2e)</em></li>
 </ul>
 <h3 id=guiding-questions>Guiding questions</h3>
 <ul>
-<li>When is web scraping useful?</li>
-<li>What is html?</li>
-<li>What is the difference between client-side and server-side web scraping?</li>
+<li>When should you write a function?</li>
+<li>What are some advantages of writing functions relative to copy-and-paste?</li>
+<li>What is conditional execution?</li>
 </ul>
-<h3 id=slides>Slides</h3>
-<p>The slides for today&rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).</p>
-<p><a class="btn btn-primary btn-lg" target=_blank href=/slides/13-slides.html><i class="fas fa-external-link-alt"></i> View all slides in new window</a> <a class="btn btn-primary btn-lg" target=_blank href=/slides/13-slides.pdf role=button><i class="far fa-file-pdf"></i> Download PDF of all slides</a></p>
-<p><strong>Fun fact</strong>: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.</p>
 </div>
 <div class="media author-card content-widget-hr">
 <div class=media-body>
