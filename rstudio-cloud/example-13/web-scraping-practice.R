@@ -1,4 +1,4 @@
-# AEM 2850 - Example 14
+# AEM 2850 - Example 13
 # Plan for today:
 # - Questions?
 # - On our own devices: work through this script
@@ -11,17 +11,26 @@
 # install.packages("tidyverse") # in this case, it has already been done for you in this project
 library(tidyverse) # load the core tidyverse packages
 library(rvest) # load rvest (from tidyverse) for web scraping
-library(lubridate) # load lubridate (from tidyverse) for working with dates
 
 # use theme_set to get clean plots without having to specify the theme each time
 theme_set(theme_minimal()) # set the current theme to theme_minimal()
 # you can use theme_set(theme()) to return to defaults if you prefer
 
 
-# 1. Set up SelectorGadget ----
+# 1. SelectorGadget ----
 # we will use the extension/bookmarklet SelectorGadget to help find css selectors
+
+# 1.1 set up SelectorGadget
 # there is an extension available for chrome and a bookmarklet for other browsers
 # go to https://selectorgadget.com and set it up on your laptop if you haven't already
+
+# 1.2 test out SelectorGadget on https://en.wikipedia.org/wiki/Cornell_Big_Red
+# first, enable SelectorGadget and click on "Baseball" under "Championship teams
+# what CSS selector appears in the SelectorGadget bar?
+
+# next, press Clear
+# align your cursor so the entire table of sports is highlighted, and click
+# what CSS selector appears in the SelectorGadget bar?
 
 
 # 2. Stock prices from Yahoo! Finance ----
@@ -50,17 +59,25 @@ theme_set(theme_minimal()) # set the current theme to theme_minimal()
 
 # 2.5: plot stock open prices over time
 # this will require some modest data cleaning
+# tip: type_convert() is handy for automatically detecting column types
 
 
 
-# 3. Use your code above to define a function to produce a plot for any ticker ----
-# test that the script works for your ticker above
-# use map to call this function for three tickers and look at the plots
+# 3. Use your code above to write a pipeline that produces a plot for any ticker ----
+# note: next week we will see how code like this can be called via functions
 
+# first, assign "AAPL" to the name symbol
+
+
+# now start the pipeline by using str_glue() to construct a url based on symbol
+# see if you can customize the title to include the ticker
+
+
+# go back and assign a new ticker to symbol, then run your code. did it work?
 
 
 # nice work!
-# though we might have some issues:
+# though our results are not perfect:
 # - what if we want a longer time period?
 # - a different time period?
 # - what if we don't like dealing with cleaning/type conversion?
@@ -81,9 +98,12 @@ theme_set(theme_minimal()) # set the current theme to theme_minimal()
 # plot open prices for your stock over the past year
 
 
-# now let's modify our function above to make a plot for any ticker
-# test that the script works for your ticker above
-# use map to call this function for three tickers and look at the plots
+# now let's modify our code above to make a plot for any ticker
+# you can strip the end of the url starting at "interval" for convenience
+# as before, assign "AAPL" to symbol and test that it works
+
+
+# go back and assign a new ticker to symbol, then run the code. did it work?
 
 
 # how could you modify this function to make plots for different date ranges?
@@ -97,7 +117,8 @@ theme_set(theme_minimal()) # set the current theme to theme_minimal()
 # let's focus on road bikes: filter Category: "Road bikes" on the left side
 # how many pages of results are there?
 # find a way to display as many results as possible on one page
-# now copy the url and assign it to bike_url
+# now copy the url and assign it to bike_url. here it is for convenience:
+bike_url <- "https://www.trekbikes.com/us/en_US/bikes/road-bikes/c/B200/?pageSize=72&q=%3Arelevance&sort=relevance#"
 
 
 # use read_html() to read the site's html, and assign it to bike_html
@@ -114,18 +135,20 @@ theme_set(theme_minimal()) # set the current theme to theme_minimal()
 
 
 # how can we convert this to a data frame for analysis?
-# coercion!
-# one approach is to start by making a matrix using matrix()
+# one option is to convert the vector to a data frame using as_tibble()
+# then tidy it up so that rows correspond to bikes using tidyverse tools
+# parse_number() is a handy function for converting character prices to numbers
 
 
-# now convert the matrix to a tibble using as_tibble(), and clean it up
+# (another option is coercion: filling a matrix or data frame element by element)
+# (then convert the matrix to a tibble using as_tibble(), and clean it up)
 
 
 # now let's visualize the data!
 # make a histogram of prices
 
 
-# now split the data by eTap, and plot the distribution of bikes w/ and w/o eTap
+# now split the data by AXS, and plot the distribution of bikes w/ and w/o AXS
 # use alpha = 0.5 to adjust transparency to facilitate comparisons
 
 
@@ -137,16 +160,14 @@ theme_set(theme_minimal()) # set the current theme to theme_minimal()
 # nice work!
 # will this always work?
 # it turns out we get very different results for the company Specialized:
-read_html("https://www.specialized.com/us/en/shop/bikes/c/bikes") %>%
+read_html("https://www.specialized.com/us/en/shop/bikes/c/bikes") |>
   html_elements(".product-list__content-text") # from SelectorGadget
 
-# but there's nothing there!
+# there's nothing there!
 # for this page, the html code does not include all the data we see in a browser
 # we need more tools for this site, which we don't have time to cover
 
 
 # 5. Scrape prices for your own favorite product ----
 # if time allows, extend your work above to another product on another site
-
-
 

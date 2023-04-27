@@ -150,7 +150,7 @@ lessons:
     # date_start: "July 19"
     # date_end: "July 23"
     content: "13-content"
-    # example: "13-example"
+    example: "13-example"
     # assignment: "13-lab"
     bg: 1
 
