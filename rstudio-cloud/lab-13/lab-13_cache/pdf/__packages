@@ -7,6 +7,6 @@ purrr
 dplyr
 stringr
 forcats
-rvest
 lubridate
+rvest
 knitr
