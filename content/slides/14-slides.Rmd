@@ -67,10 +67,21 @@ Acknowledgements:
 
 # Announcements
 
+Plan for this week:
+  - Today: slides and a short example
+  - Thursday: course evaluations, prelim 2 Q&A, **Lab-14**
+    - If you come to class and work through the lab you should get full credit
+    - Due Thursday at 11:59pm so you can focus on studying for prelim 2
 
+--
+
+Plan for next week:
+  - **Prelim 2** in class on Tuesday, May 9 at 9:40am
+  - **Lab 15 - Course Survey** due Monday, May 15 at 11:59pm
+
+--
 
 Questions before we get started?
-
 
 ---
 
@@ -82,7 +93,7 @@ Questions before we get started?
 
 [Functions and iteration](#functions)
 
-[Example 12](#example)
+[example-14](#example)
 
 ---
 class: inverse, center, middle
@@ -92,11 +103,23 @@ name: course-evals
 
 ---
 
-# Course evaluations
+# Course objectives reminder
+
+1. Develop basic proficiency in `R` programming
+2. Understand data structures and manipulation
+3. Describe effective techniques for data visualization and communication
+4. Construct effective data visualizations
+5. Utilize course concepts and tools for business applications
+
+With these objectives in mind...
+
+---
+
+# Please complete course evaluations
 
 I take feedback seriously and will use it to improve this course!
 
-Extra useful since this is the first offering of AEM 2850
+Extra useful since this is only the second offering of AEM 2850 / 5850
 
 --
 
@@ -106,12 +129,24 @@ Concrete suggestions are most helpful
 
 **I would appreciate your feedback through two channels:**
 
-1. Reflection - Week 15 - Course Feedback Survey
+1. Lab 15 - Course Feedback Survey (on canvas)
 2. University course evaluations
 
 --
 
 Both will be anonymous
+
+**I will give you time to complete these in class on Thursday**
+
+---
+
+# Lab 15 - course feedback survey
+
+Anonymous: canvas reports whether you submit but does not link responses to individuals
+
+Survey is very short, should only take 5 minutes!
+
+I will give you time in class Thursday to complete it
 
 ---
 
@@ -120,6 +155,8 @@ Both will be anonymous
 Anonymous: we just get summary reports, after grades are submitted
 
 **I will award a bonus point on Lab 15 for completing evaluations**
+
+I will give you time in class Thursday to complete it
 
 Thank you in advance for your feedback!
 
@@ -147,9 +184,8 @@ sp500_prices |>
   scale_y_continuous(limits = c(0, NA)) +
   theme_bw()
 ```
+What needs to change if we want to look at AMZN share prices instead?
 ]
-
---
 
 .right-plot[
 ![](`r knitr::fig_chunk("stock-plot-aapl", "png")`)
@@ -160,14 +196,14 @@ sp500_prices |>
 # We often run similar code multiple times
 
 .left-code[
-```{r stock-plot-nvda, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+```{r stock-plot-amzn, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 sp500_prices |> 
-  filter(symbol == "NVDA") |> #<<
+  filter(symbol == "AMZN") |> #<<
   ggplot(aes(x = date, y = adjusted)) +
   geom_line() +
   labs(x = NULL,
        y = "Share price ($)",
-       title = "Symbol: NVDA") + #<<
+       title = "Symbol: AMZN") + #<<
   scale_x_date(date_breaks = "1 year",
                date_labels = "%Y") +
   scale_y_continuous(limits = c(0, NA)) +
@@ -176,7 +212,7 @@ sp500_prices |>
 ]
 
 .right-plot[
-![](`r knitr::fig_chunk("stock-plot-nvda", "png")`)
+![](`r knitr::fig_chunk("stock-plot-amzn", "png")`)
 ]
 
 ---
@@ -209,17 +245,15 @@ sp500_prices |>
 
 --
 
-1. Avoid hard-coding specific values
+1. **Avoid hard-coding specific values**
 
-2. Define a function
+2. **Define a function**
 
-3. Automate calling the function
+3. **Automate calling the function**
 
 4. Write a more general function
 
 5. Use these concepts in a tidy pipeline
-
---
 
 We will focus on steps 1-3 due to time constraints
 
@@ -273,22 +307,21 @@ sp500_prices |>
 
 .left-code[
 ```{r stock-plot-aapl2, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-library(glue) # evaluate R code inside strings
-symbol_choice <- "AAPL" #<<
+ticker <- "AAPL" #<<
 
 sp500_prices |> 
-  filter(symbol == symbol_choice) |> #<<
+  filter(symbol == ticker) |> #<<
   ggplot(aes(x = date, y = adjusted)) +
   geom_line() +
   labs(x = NULL,
        y = "Share price ($)",
-       title = glue("Symbol: {symbol_choice}")) + #<<
+       title = str_glue("Symbol: {ticker}")) + #<<
   scale_x_date(date_breaks = "1 year",
                date_labels = "%Y") +
   scale_y_continuous(limits = c(0, NA)) +
   theme_bw()
 ```
-**glue()** allows us to put the contents of **symbol_choice** in the plot's title
+**str_glue()** allows us to put the contents of **ticker** in the plot's title
 ]
 
 --
@@ -302,27 +335,26 @@ sp500_prices |>
 # Step 1: Avoid hard-coding specific values
 
 .left-code[
-```{r stock-plot-nvda2, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-library(glue) # evaluate R code inside strings
-symbol_choice <- "NVDA" #<<
+```{r stock-plot-amzn2, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+ticker <- "AMZN" #<<
 
 sp500_prices |> 
-  filter(symbol == symbol_choice) |>
+  filter(symbol == ticker) |>
   ggplot(aes(x = date, y = adjusted)) +
   geom_line() +
   labs(x = NULL,
        y = "Share price ($)",
-       title = glue("Symbol: {symbol_choice}")) +
+       title = str_glue("Symbol: {ticker}")) +
   scale_x_date(date_breaks = "1 year",
                date_labels = "%Y") +
   scale_y_continuous(limits = c(0, NA)) +
   theme_bw()
 ```
-Now **symbol_choice** is the only thing that changes
+Now **ticker** is the only thing that changes
 ]
 
 .right-plot[
-![](`r knitr::fig_chunk("stock-plot-nvda2", "png")`)
+![](`r knitr::fig_chunk("stock-plot-amzn2", "png")`)
 ]
 
 ---
@@ -331,22 +363,21 @@ Now **symbol_choice** is the only thing that changes
 
 .left-code[
 ```{r stock-plot-tsla2, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-library(glue) # evaluate R code inside strings
-symbol_choice <- "TSLA" #<<
+ticker <- "TSLA" #<<
 
 sp500_prices |> 
-  filter(symbol == symbol_choice) |>
+  filter(symbol == ticker) |>
   ggplot(aes(x = date, y = adjusted)) +
   geom_line() +
   labs(x = NULL,
        y = "Share price ($)",
-       title = glue("Symbol: {symbol_choice}")) +
+       title = str_glue("Symbol: {ticker}")) +
   scale_x_date(date_breaks = "1 year",
                date_labels = "%Y") +
   scale_y_continuous(limits = c(0, NA)) +
   theme_bw()
 ```
-Now **symbol_choice** is the only thing that changes
+Now **ticker** is the only thing that changes
 ]
 
 .right-plot[
@@ -362,14 +393,14 @@ Now **symbol_choice** is the only thing that changes
 
 .left-code[
 ```{r eval = FALSE}
-make_plot <- function(symbol_choice) { #<<
+make_plot <- function(ticker) { #<<
   sp500_prices |> 
-    filter(symbol == symbol_choice) |>
+    filter(symbol == ticker) |>
     ggplot(aes(x = date, y = adjusted)) +
     geom_line() +
     labs(x = NULL,
          y = "Share price ($)",
-         title = glue("Symbol: {symbol_choice}")) +
+         title = str_glue("Symbol: {ticker}")) +
     scale_x_date(date_breaks = "1 year",
                  date_labels = "%Y") +
     scale_y_continuous(limits = c(0, NA)) +
@@ -393,14 +424,14 @@ Easiest to write the body on a test case, *then* convert it into a function
 
 .left-code[
 ```{r stock-plot-aapl3, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-make_plot <- function(symbol_choice) {
+make_plot <- function(ticker) {
   sp500_prices |> 
-    filter(symbol == symbol_choice) |>
+    filter(symbol == ticker) |>
     ggplot(aes(x = date, y = adjusted)) +
     geom_line() +
     labs(x = NULL,
          y = "Share price ($)",
-         title = glue("Symbol: {symbol_choice}")) +
+         title = str_glue("Symbol: {ticker}")) +
     scale_x_date(date_breaks = "1 year",
                  date_labels = "%Y") +
     scale_y_continuous(limits = c(0, NA)) +
@@ -421,7 +452,7 @@ make_plot("AAPL") #<<
 
 .pull-left[
 ```{r fig.dim=c(4, 3), out.width="100%"}
-make_plot("NVDA") #<<
+make_plot("AMZN") #<<
 ```
 ]
 
@@ -461,7 +492,7 @@ Individual function calls are hard to scale
 
 ```{r, eval=FALSE}
 make_plot("AAPL")
-make_plot("NVDA")
+make_plot("AMZN")
 make_plot("TSLA")
 ```
 
@@ -489,12 +520,12 @@ map(some_vector, some_function)
 
 --
 
-**How can we use map to make plots for AAPL, NVDA, and TSLA?**
+**How can we use map to make plots for AAPL, AMZN, and TSLA?**
 
 --
 
 ```{r}
-symbols <- c("AAPL", "NVDA", "TSLA")
+symbols <- c("AAPL", "AMZN", "TSLA")
 plots <- map(symbols, make_plot)
 ```
 
@@ -545,7 +576,7 @@ plots[[3]]
 This scales really easily!
 
 .small-code[
-```{r}
+```{r all-symbols}
 all_symbols <- sp500_prices |> distinct(symbol) |> pull() # get all the symbols in the S&P 500 #<<
 all_plots <- map(all_symbols, make_plot) # make a plot for each of the symbols
 ```
@@ -554,7 +585,7 @@ all_plots <- map(all_symbols, make_plot) # make a plot for each of the symbols
 --
 
 .pull-left-3[
-```{r, warnings = FALSE}
+```{r length-all-symbols}
 length(all_symbols)
 length(all_plots)
 ```
@@ -564,7 +595,7 @@ length(all_plots)
 
 .pull-middle-3[
 ```{r fig.dim=c(4, 3), out.width="100%"}
-all_plots[[279]]
+all_plots[[33]]
 ```
 ]
 
@@ -572,9 +603,36 @@ all_plots[[279]]
 
 .pull-right-3[
 ```{r fig.dim=c(4, 3), out.width="100%"}
-all_plots[[504]]
+all_plots[[498]]
 ```
 ]
+
+---
+
+# Step 3: Automate calling the function
+
+We can also extract results using logical expressions:
+
+.pull-left-3[
+```{r failed-bank-1, fig.dim=c(4, 3), out.width="100%"}
+all_plots[all_symbols=="SIVB"]
+```
+]
+
+.pull-middle-3[
+```{r failed-bank-2, fig.dim=c(4, 3), out.width="100%"}
+all_plots[all_symbols=="SBNY"]
+```
+]
+
+.pull-right-3[
+```{r failed-bank-3, fig.dim=c(4, 3), out.width="100%"}
+all_plots[all_symbols=="FRC"]
+```
+
+]
+
+.small[Note: these prices don't reflect the banks' failures since they end in 2022]
 
 ---
 
@@ -595,7 +653,7 @@ The `purrr` package provides a family of `map` functions that return different t
 For loops work too!
 
 ```{r, eval=FALSE}
-symbols <- c("AAPL", "NVDA", "TSLA")
+symbols <- c("AAPL", "AMZN", "TSLA")
 plots <- vector("list", length(symbols)) # 1. allocate space for output
 for (i in seq_along(symbols)) {          # 2. specify the sequence to loop over
   plots[[i]] <- make_plot(symbols[i])    # 3. specify what to do in each iteration
@@ -606,7 +664,7 @@ for (i in seq_along(symbols)) {          # 2. specify the sequence to loop over
 
 But functional programming is more concise:
 ```{r, eval=FALSE}
-symbols <- c("AAPL", "NVDA", "TSLA")
+symbols <- c("AAPL", "AMZN", "TSLA")
 plots <- map(symbols, make_plot)
 ```
 
@@ -628,16 +686,15 @@ plots <- map(symbols, make_plot)
 
 --
 
-- Harder to parallelize or otherwise optimize
+- Can be harder to parallelize or otherwise optimize
 
 --
 
 **But there is nothing wrong with using them!**
 
-
 ---
 class: inverse, center, middle
 name: example
 
-# Example 12
+# example-14
 
