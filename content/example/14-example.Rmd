@@ -19,9 +19,9 @@ editor_options:
 
 ## Posit Cloud links
 
-[Click here to access this week's example Posit Cloud project](https://rstudio.cloud/spaces/210747/project/3935045)
+[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5900959)
 
-[**Solutions:** click here to access a project with a completed version](https://rstudio.cloud/spaces/210747/project/3935046)
+[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5900961)
 
 
 ## Plan for today
@@ -32,4 +32,3 @@ editor_options:
 ## Cheatsheets
 
 [Click here to download the `purrr` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/purrr.pdf)
-
