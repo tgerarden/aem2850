@@ -64,7 +64,6 @@ The earliest date for which prices are available is...
 ```{r}
 
 ```
-There are...
 
 
 {{< pagebreak >}}
