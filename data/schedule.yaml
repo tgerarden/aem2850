@@ -161,7 +161,7 @@ lessons:
     # date_end: "July 23"
     content: "14-content"
     example: "14-example"
-    # assignment: "14-lab"
+    assignment: "14-lab"
     bg: 2
 
 #  - title: '**Conclusion**'
