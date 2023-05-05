@@ -744,7 +744,7 @@ Same format as prelim 1 (write answers and code in `.qmd`, submit `.qmd`+`.pdf`)
       - Tip: study the prologue sections of slides
   - ~1 is a mix of how to improve a dataviz, and then actually doing it
   - ~5 are coding questions where we specify the goal, and you get there
-    - ~3 also have a sub-part where you describe an approach w/o writing code
+      - ~3 have a sub-part where you describe an approach w/o writing code
 - I will list the number of points per question to help you allocate effort
 
 I pre-tested the prelim and believe it will be challenging but manageable
