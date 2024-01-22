@@ -5,67 +5,55 @@ lessons:
   - title: '<span class="content-title">Welcome to AEM 2850! <br> Intro to R, RStudio, and Quarto</span>'
     session: "Session 1"
     date: "Week 1"
-    # date_start: "June 7"
-    # date_end: "June 11"
     content: "01-content"
-    example: "01-example"
-    assignment: "01-lab"
+    # example: "01-example"
+    # assignment: "01-lab"
     bg: 1
 
   - title: '<span class="content-title">Welcome to the tidyverse <br> Data transformation with dplyr</span>'
     session: "Session 2"
     date: "Week 2"
-    # date_start: "June 7"
-    # date_end: "June 11"
-    content: "02-content"
-    example: "02-example"
-    assignment: "02-lab"
+    # content: "02-content"
+    # example: "02-example"
+    # assignment: "02-lab"
     bg: 2
 
   - title: '<span class="content-title">Data import and tidying</span>'
     session: "Session 3"
     date: "Week 3"
-    # date_start: "June 14"
-    # date_end: "June 18"
-    content: "03-content"
-    example: "03-example"
-    assignment: "03-lab"
+    # content: "03-content"
+    # example: "03-example"
+    # assignment: "03-lab"
     bg: 1
     bottomborder: True
 
   - title: '<span class="content-title">Joins <br> Logic</span>'
     session: "Session 4"
     date: "Week 4"
-    # date_start: "June 14"
-    # date_end: "June 18"
-    content: "04-content"
-    example: "04-example"
-    assignment: "04-lab"
+    # content: "04-content"
+    # example: "04-example"
+    # assignment: "04-lab"
     bg: 1
 
   - title: '<span class="content-title">Strings and regular expressions</span>'
     session: "Session 5"
     date: "Week 5"
-    # date_start: "June 21"
-    # date_end: "June 25"
-    content: "05-content"
-    example: "05-example"
-    assignment: "05-lab"
+    # content: "05-content"
+    # example: "05-example"
+    # assignment: "05-lab"
     bg: 2
 
   - title: '<span class="content-title">No new content <br> *February break: no class on Feb 28*</span>'
     # and Proportions
     session: "Session 6"
     date: "Week 6"
-    # date_start: "June 21"
-    # date_end: "June 25"
     # content: "06-content"
     # example: "06-example"
     # assignment: "06-lab"
     bg: 1
 
   - title: '<i class="fas fa-star"></i> **Prelim 1 in class**'
-    date: "Mar 2 at 9:40AM"
+    date: "Feb 29 in class"
     # assignment: "final-project"
     bg: 3
 
@@ -75,48 +63,40 @@ lessons:
   - title: '<span class="content-title">Mapping data to graphics <br> Amounts</span>'
     session: "Session 7"
     date: "Week 7"
-    # date_start: "June 28"
-    # date_end: "July 2"
-    content: "07-content"
-    example: "07-example"
-    assignment: "07-lab"
+    # content: "07-content"
+    # example: "07-example"
+    # assignment: "07-lab"
     bg: 2
 
   - title: '<span class="content-title">Distributions</span>'
     session: "Session 8"
     date: "Week 8"
-    # date_start: "June 28"
-    # date_end: "July 2"
-    content: "08-content"
-    example: "08-example"
-    assignment: "08-lab"
+    # content: "08-content"
+    # example: "08-example"
+    # assignment: "08-lab"
     bg: 1
 
   - title: '<span class="content-title">Time <br> Working with dates and times</span>'
     session: "Session 9"
     date: "Week 9"
-    # date_start: "July 5"
-    # date_end: "July 9"
-    content: "09-content"
-    example: "09-example"
-    assignment: "09-lab"
+    # content: "09-content"
+    # example: "09-example"
+    # assignment: "09-lab"
     bg: 1
 
   - title: '<span class="content-title">Relationships</span>'
     session: "Session 10"
     date: "Week 10"
-    # date_start: "July 5"
-    # date_end: "July 9"
-    content: "10-content"
-    example: "10-example"
-    assignment: "10-lab"
+    # content: "10-content"
+    # example: "10-example"
+    # assignment: "10-lab"
     bg: 2
 
-  - title: '*Spring break: no class on April 4, 6*'
+  - title: '*Spring break: no class on April 2, 4*'
     header: False
 
   - title: '<i class="fas fa-star"></i> **Group project due**'
-    date: "Apr 14 at 11:59PM"
+    date: "Apr 12 at 11:59PM"
     assignment: "group-project"
     bg: 3
     bottomborder: True
@@ -127,41 +107,33 @@ lessons:
   - title: '<span class="content-title">Space</span>'
     session: "Session 11"
     date: "Week 11"
-    # date_start: "July 12"
-    # date_end: "July 16"
-    content: "11-content"
-    example: "11-example"
-    assignment: "11-lab"
+    # content: "11-content"
+    # example: "11-example"
+    # assignment: "11-lab"
     bg: 1
 
   - title: '<span class="content-title">Text</span>'
     session: "Session 12"
     date: "Week 12"
-    # date_start: "July 12"
-    # date_end: "July 16"
-    content: "12-content"
-    example: "12-example"
-    assignment: "12-lab"
+    # content: "12-content"
+    # example: "12-example"
+    # assignment: "12-lab"
     bg: 2
 
   - title: '<span class="content-title">Web scraping</span>'
     session: "Session 13"
     date: "Week 13"
-    # date_start: "July 19"
-    # date_end: "July 23"
-    content: "13-content"
-    example: "13-example"
-    assignment: "13-lab"
+    # content: "13-content"
+    # example: "13-example"
+    # assignment: "13-lab"
     bg: 1
 
   - title: '<span class="content-title">Functions and iteration</span>'
     session: "Session 14"
     date: "Week 14"
-    # date_start: "July 19"
-    # date_end: "July 23"
-    content: "14-content"
-    example: "14-example"
-    assignment: "14-lab"
+    # content: "14-content"
+    # example: "14-example"
+    # assignment: "14-lab"
     bg: 2
 
 #  - title: '**Conclusion**'
@@ -171,14 +143,12 @@ lessons:
 #Telling stories with data
 #    session: "Session 15"
 #    date: "Week 15"
-#    # date_start: "July 26"
-#    # date_end: "July 26"
 #    # content: "15-content"
 #    # # example: "15-example"
 #    # assignment: "15-lab"
 #    bg: 1
 
   - title: '<i class="fas fa-star"></i> **Prelim 2 in class**'
-    date: "May 9 at 9:40AM"
+    date: "May 7 in class"
     # assignment: "final-project"
     bg: 3

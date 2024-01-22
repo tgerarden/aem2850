@@ -17,7 +17,7 @@ Welcome to AEM 2850 / AEM 5850! I'd like to preface the syllabus with three poin
 
 1. **Your success in this class is important to me.** I am committed to making appropriate accommodations that meet your needs and that also allow you to complete the requirements of this course. My goal is for you to learn everything you want to learn in this class.
 
-2. **This course is a work in progress.** This is its second offering. This means you have a unique opportunity to help improve the class for yourself as well as for future students. Please take advantage of it! The best way to provide constructive feedback throughout the semester is by emailing me and/or the TAs.
+2. **This course is a work in progress.** This is its third offering. This means you have a unique opportunity to help improve the class for yourself as well as for future students. Please take advantage of it! The best way to provide constructive feedback throughout the semester is by emailing me and/or the TAs.
 
 3. **Get the semester off to a good start:** **[read the syllabus](https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy)**!
 
@@ -32,31 +32,23 @@ Welcome to AEM 2850 / AEM 5850! I'd like to preface the syllabus with three poin
 
 ### Class
 
-Tuesdays and Thursdays 9:40 - 10:55 in Warren 150
+Tuesdays and Thursdays 8:40 - 9:55 or 10:10 - 11:25 in Warren 150
 
 ### Professor office hours
 
-- Tuesdays 11:00am - 12:00pm  in Warren 466
+- Tuesdays 11:30am - 12:30pm  in Warren 464
   - these are "drop-in" office hours---come at any time, in any number
 - Other times by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
 ### TA office hours
 
-All TA office hours take place in Warren 372.
+TBD
 
-- Mondays 12:30-2:30: Undergrad TA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu))
-- Mondays 12:45-2:45: Undergrad TA Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu))
-- Mondays 3:30-5:00: Grad TA Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
-- Fridays 4:00-5:00: Grad TA Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu))
+<!-- All TA office hours take place in Warren 372. -->
 
-<!-- #### Graduate TA: Hui Zhou ([hz423@cornell.edu](mailto:hz423@cornell.edu)) -->
-
-<!-- Office hours TBD -->
-
-<!-- #### Undergraduate TAs: Sophie McComb ([sm2397@cornell.edu](mailto:sm2397@cornell.edu)) -->
-
-<!-- - Mondays 12:20pm - 1:20pm in Warren 372 -->
-<!-- - Fridays 10:00am - 11:00am in Warren 372 -->
+<!-- - Mondays 12:30-2:30: Undergrad TA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu)) -->
+<!-- - Mondays 3:30-5:00: Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) -->
+<!-- - Fridays 4:00-5:00: Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) -->
 
 [See below for tips on how to make the most of office hours and email.](#office-hours-and-email)
 
@@ -207,45 +199,11 @@ Email is a blessing and a curse. Here are some tips to help us get the most out 
 - Be concise.
 
 
-
-
-## Learning during a pandemic
-
-<!-- Life sucks right now. You probably aren't having the college experience of your dreams, to say the least. -->
-
-<!-- You most likely know people who have lost their jobs, have tested positive for COVID-19, have been hospitalized, or perhaps have even died. You all have increased (or possibly decreased) work responsibilities and increased family care responsibilities—you might be caring for extra people (young and/or old) right now, and you are likely facing uncertain job prospects. -->
-
-**I am fully committed to making sure that you learn everything you are hoping to learn from this class.** I will make whatever accommodations I can to help you finish your assignments, do well on your projects, and learn and understand the class material.
-
-If you need extra help, or if you need more time with something, or if you feel like you're behind or not understanding everything, **do not suffer in silence!** Talk to me! I will work with you. If you tell me you're having trouble, I will not judge you or think less of you. I hope you'll extend me the same grace.
-
-You *never* owe me personal information about your health (mental or physical). But you are *always* welcome to talk to me about things you're going through. Even if I can't help you, I may know someone who can.
-
-*Please* come to meet with me during set office hours, or sign up for another time to meet with me [here](https://aem2850.youcanbook.me).
-
-I want you to learn a lot in this class (R! the tidyverse! grammer of graphics!), but I primarily want you to stay healthy, balanced, and grounded.
-
-<!-- ## Late work -->
-
-<!-- With the exception of the mini projects and the final project, there's no such late work. I would **highly recommend** staying caught up as much as possible, but if you need to turn something in late, that's fine—there's **no penalty**. -->
-
-
-
-
-
-
-
-
-
-
-
 ## Assignments and grading
 
 ### Assignments
 
-Your grade in this course will be based on weekly reflections, labs, projects:
-
-<!-- - **Reflections** are short weekly writing assignments. They are intended as an easy way to get some points and a nudge to engage with readings. -->
+Your grade in this course will be based on completing the following assignments:
 
 - **Labs** are short weekly homework assignments that require you to practice programming.
 
@@ -253,7 +211,10 @@ Your grade in this course will be based on weekly reflections, labs, projects:
 
 - The **group project** is intended to synthesize and reinforce the individual skills you develop in class, and to provide examples of their application to business and life more generally.
 
-- **Class participation** and regular attendance are expected. Excessive absences and failure to complete weekly in-class examples will impact your final grade. There is no penalty for the first three absences (except for the in-class prelims, which are mandatory). If you miss class, you are still expected to complete the in-class examples for any classes that you miss. You do not need to notify the instructor that you will miss class unless you anticipate missing more than three classes.
+- **Class participation** and regular attendance are expected due to the interactive nature of this course.
+  - Completing in-class **examples** are an important part of class participation and learning. If you miss class, you are still expected to complete the in-class examples for any classes that you miss.
+  - Excessive absences and failure to complete weekly in-class examples will impact your final grade. There is no penalty for the first three absences (except for the in-class prelims, which are mandatory).
+  - Please do not notify the instructor that you will miss class unless you anticipate missing more than three classes.
 
 **Note: Students in AEM 5850** will have to complete a few extra assignments and meet slightly different requirements for the project.
 
@@ -293,18 +254,17 @@ Please read [the assignments page](/assignment/) for more details on the assignm
 
 
 
+## Course resources
 
+**I am fully committed to making sure that you learn everything you are hoping to learn from this class.** I will make whatever accommodations I can to help you finish your assignments, do well on your project, and learn and understand the class material.
 
+<!-- If you need extra help, or if you need more time with something, or if you feel like you're behind or not understanding everything, **do not suffer in silence!** Talk to me! I will work with you. If you tell me you're having trouble, I will not judge you or think less of you. I hope you'll extend me the same grace. -->
 
-## University policies
+You *never* owe me personal information about your health (mental or physical). But you are *always* welcome to talk to me about things you're going through. Even if I can't help you, I may know someone who can.
 
-### Academic integrity
-Each student in this course is expected to abide by the Cornell University Code of Academic Integrity: https://cuinfo.cornell.edu/aic.cfm. Any work submitted by a student in this course for academic credit will be the student's own work. You are encouraged to study together and to discuss information and concepts covered in this course and the sections with other students. However, this permissible cooperation should never involve one student having possession of a copy of all or part of work done by someone else, in the form of an electronic or hard copy. This policy extends beyond peers in the course: buying, selling, or otherwise sharing course materials is prohibited. Should copying occur, both the student who copied work from another student and the student who gave material to be copied will both automatically receive a zero for the assignment/exam. Penalty for violation of this Code can also be extended to include failure of the course and University disciplinary action.
+*Please* come to meet with me during set office hours, or sign up for another time to meet with me [here](https://aem2850.youcanbook.me).
 
-### Sharing of course materials is prohibited
-
-Sharing of course materials is prohibited. These materials include, but are not limited to: zoom recordings, lecture hand-outs, in-class materials, exercises, and assignments. Accessing course materials through friends or indirectly online is a violation of the Code of Academic Integrity.
-<!-- https://theuniversityfaculty.cornell.edu/the-new-faculty-handbook/6-policies-and-assistance/6-1-instruction/33797-2/ -->
+I want you to learn a lot in this class (R! the tidyverse! grammar of graphics!), but I primarily want you to stay healthy, balanced, and grounded.
 
 
 ## University resources
@@ -332,6 +292,18 @@ We understand that our members represent a rich variety of backgrounds and persp
 ## Acknowledgements
 
 This site and many of the course materials build on the course [Data Visualization with R](https://datavizs21.classes.andrewheiss.com) by [Andrew Heiss](https://andrewheiss.com). Other materials and inspiration came from [Claus Wilke](https://clauswilke.com), [Grant McDermott](https://grantmcdermott.com), [Ivan Rudik](https://ivanrudik.com), [Justin Kirkpatrick](https://www.justinkirkpatrick.com), [Ed Rubin](https://edrub.in), [Jenny Bryan](https://jennybryan.org), [Allison Horst](https://www.allisonhorst.com), [Magdalena Bennett](https://www.magdalenabennett.com), [Ariel Ortiz-Bobea](https://ortiz-bobea.dyson.cornell.edu), and [Reza Moghimi](https://dyson.cornell.edu/faculty-research/faculty/am2393/).
+
+
+
+## University policies
+
+### Academic integrity
+Each student in this course is expected to abide by the Cornell University Code of Academic Integrity: https://cuinfo.cornell.edu/aic.cfm. Any work submitted by a student in this course for academic credit will be the student's own work. You are encouraged to study together and to discuss information and concepts covered in this course and the sections with other students. However, this permissible cooperation should never involve one student having possession of a copy of all or part of work done by someone else, in the form of an electronic or hard copy. This policy extends beyond peers in the course: buying, selling, or otherwise sharing course materials is prohibited. Should copying occur, both the student who copied work from another student and the student who gave material to be copied will both automatically receive a zero for the assignment/exam. Penalty for violation of this Code can also be extended to include failure of the course and University disciplinary action.
+
+### Sharing of course materials is prohibited
+
+Sharing of course materials is prohibited. These materials include, but are not limited to: zoom recordings, lecture hand-outs, in-class materials, exercises, and assignments. Accessing course materials through friends or indirectly online is a violation of the Code of Academic Integrity.
+<!-- https://theuniversityfaculty.cornell.edu/the-new-faculty-handbook/6-policies-and-assistance/6-1-instruction/33797-2/ -->
 
 
 

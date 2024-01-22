@@ -52,7 +52,7 @@ instructor:
   name: Prof. Todd Gerarden
   email: gerarden@cornell.edu
   url: "https://www.toddgerarden.com"
-  office: "Warren 466"
+  office: "Warren 464"
   twitter: 'toddgerarden'
   contact_policy: >-
     Email is best for short and concrete questions. Please use office hours for complex or open-ended questions.
@@ -63,14 +63,15 @@ teaching_assistant:
 
 course:
   number: "AEM 2850 / 5850"
-  semester: "Spring 2023"
+  semester: "Spring 2024"
   days: "Tuesdays and Thursdays"
-  time: "9:40am - 10:55am"
+  time: "08:40am - 09:55am"
+  time: "10:10am - 11:25am"
   location: "Warren 150"
-  dates: "January – May, 2023"
-  copyrightYear: "2023"
+  dates: "January – May, 2024"
+  copyrightYear: "2024"
 #  slack: "https://join.slack.com/t/msu-qs62738/shared_invite/zt-10u63bf0n-b0cePmz9NDhhw3MSUPBP5A"
-  office_hours: "Tuesday 11:00am - 12:00pm + by appointment"
+  office_hours: "Tuesday 11:30am - 12:30pm + by appointment"
   appointment_url: 'https://aem2850.youcanbook.me'
   github: "tgerarden/aem2850"
 
