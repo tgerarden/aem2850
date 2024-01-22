@@ -139,7 +139,7 @@ Fortunately there are tons of online resources to help you with this. Two of the
 2. [RStudio Community](https://community.rstudio.com/): a forum specifically for RStudio and the `tidyverse` (that's you!)
 <!-- 3. [ChatGPT](https://chat.openai.com): an AI-powered chatbot that can help debug code (among other things) -->
 
-All three of these tools, and others, are valuable resources that can help you learn and work. That said, they can also provide misleading or incorrect answers. I encourage you to use them as tools for debugging your code, not as replacements for you and your developing expertise.[^1]
+These tools, and others, are valuable resources that can help you learn and work. That said, they can also provide misleading or incorrect answers. I encourage you to use them as tools for debugging your code, not as replacements for you and your developing expertise.[^1]
 
 <!-- If you use Twitter, post R-related questions and content with [#rstats](https://twitter.com/search?q=%23rstats). The community there is exceptionally generous and helpful. -->
 

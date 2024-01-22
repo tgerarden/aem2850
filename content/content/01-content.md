@@ -1,7 +1,7 @@
 ---
 title: "Welcome to AEM 2850 / 5850!"
 linktitle: "Welcome to AEM 2850 / 5850!"
-date: "2023-01-25 15:00:50"
+date: "2024-01-22 13:25:25"
 menu:
   content:
     parent: Course content
@@ -43,20 +43,26 @@ output:
 - Why do we visualize data?
 - What makes a great visualization?
 
+<!-- - What are objects? -->
+<!-- - What is assignment? -->
+<!-- - What are some advantages of writing scripts vs working in the console? -->
+<!-- - What are some differences between `.R` scripts and `.Rmd` files? -->
+<!-- - What are the three types of content in an R Markdown file? -->
 
-### Teaser data
 
-Click the links to download the following files and then follow the instructions from the slides:
-- [Weather stations in NY](/slides/data/01-slides/ny-stations.csv)
-- [Weather in NY in 2022](/slides/data/01-slides/ny-weather-2022.csv)
-- [Weather in NY in 2023](/slides/data/01-slides/ny-weather-2023.csv)
+<!-- ### Teaser data -->
 
-Depending on your browser you may need `File > Save As...` to download the files in their source format (`.csv`).
+<!-- Click the links to download the following files and then follow the instructions from the slides: -->
+<!-- - [Weather stations in NY](/slides/data/01-slides/ny-stations.csv) -->
+<!-- - [Weather in NY in 2022](/slides/data/01-slides/ny-weather-2022.csv) -->
+<!-- - [Weather in NY in 2023](/slides/data/01-slides/ny-weather-2023.csv) -->
 
-### Slides
+<!-- Depending on your browser you may need `File > Save As...` to download the files in their source format (`.csv`). -->
 
-The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
+<!-- ### Slides -->
 
-{{< blogdown/slide-buttons >}}
+<!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
 
-**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.
+<!-- {{< blogdown/slide-buttons >}} -->
+
+<!-- **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands. -->
