@@ -53,7 +53,7 @@ instructor:
   email: gerarden@cornell.edu
   url: "https://www.toddgerarden.com"
   office: "Warren 464"
-  twitter: 'toddgerarden'
+  # twitter: 'toddgerarden'
   contact_policy: >-
     Email is best for short and concrete questions. Please use office hours for complex or open-ended questions.
 
@@ -65,8 +65,7 @@ course:
   number: "AEM 2850 / 5850"
   semester: "Spring 2024"
   days: "Tuesdays and Thursdays"
-  time: "08:40am - 09:55am"
-  time: "10:10am - 11:25am"
+  time: "08:40am - 09:55am (sec. 2)\n10:10am - 11:25am (sec. 1)"
   location: "Warren 150"
   dates: "January – May, 2024"
   copyrightYear: "2024"
