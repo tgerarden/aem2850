@@ -1,225 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 01 May 2023 15:28:42 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Functions and iteration</title><link>https://aem2850.toddgerarden.com/content/14-content/</link><pubDate>Mon, 01 May 2023 15:28:42 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/14-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/functions.html" target="_blank" rel="noopener">Chapter 26: Functions&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/iteration.html" target="_blank" rel="noopener">Chapter 27: Iteration&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
-&lt;/ul>
-&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
-&lt;ul>
-&lt;li>When should you write a function?&lt;/li>
-&lt;li>What are some advantages of writing functions relative to copy-and-paste?&lt;/li>
-&lt;li>What is conditional execution?&lt;/li>
-&lt;/ul>
-&lt;h3 id="slides">Slides&lt;/h3>
-&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
-&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/14-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/14-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
-&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Web scraping</title><link>https://aem2850.toddgerarden.com/content/13-content/</link><pubDate>Mon, 24 Apr 2023 21:29:38 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/13-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://rvest.tidyverse.org/articles/rvest.html" target="_blank" rel="noopener">Web scraping 101&lt;/a> from &lt;code>vignette(&amp;quot;rvest&amp;quot;)&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
-&lt;ul>
-&lt;li>When is web scraping useful?&lt;/li>
-&lt;li>What is html?&lt;/li>
-&lt;li>What is the difference between client-side and server-side web scraping?&lt;/li>
-&lt;/ul>
-&lt;h3 id="slides">Slides&lt;/h3>
-&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
-&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/13-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/13-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
-&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Text</title><link>https://aem2850.toddgerarden.com/content/12-content/</link><pubDate>Tue, 18 Apr 2023 09:38:30 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/12-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://www.tidytextmining.com/preface.html" target="_blank" rel="noopener">Preface&lt;/a> of &lt;em>Text Mining with R: A Tidy Approach&lt;/em>&lt;/li>
-&lt;/ul>
-&lt;h4 id="optional-readings">Optional readings&lt;/h4>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="http://annkemery.com/qual-dataviz/" target="_blank" rel="noopener">How to Visualize Qualitative Data&lt;/a>&lt;/li>
-&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://www.washingtonpost.com/news/the-intersect/wp/2016/05/28/these-are-the-words-most-associated-with-men-and-women-according-to-facebook-status-updates/" target="_blank" rel="noopener">These are the words most associated with men and women, according to Facebook status updates&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
-&lt;ul>
-&lt;li>Why is qualitative data difficult to visualize?&lt;/li>
-&lt;li>Why are word clouds so problematic? When is it (not) okay to use them?&lt;/li>
-&lt;/ul>
-&lt;h3 id="slides">Slides&lt;/h3>
-&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
-&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/12-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/12-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
-&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Space</title><link>https://aem2850.toddgerarden.com/content/11-content/</link><pubDate>Tue, 11 Apr 2023 08:40:36 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/11-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/geospatial-data.html" target="_blank" rel="noopener">Chapter 15: Visualizing geospatial data&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fab fa-youtube">&lt;/i> Vox: &lt;a href="https://www.youtube.com/watch?v=kIID5FDi2JQ" target="_blank" rel="noopener">Why all world maps are wrong&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="optional-readings">Optional readings&lt;/h4>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="http://socviz.co/maps.html" target="_blank" rel="noopener">Chapter 7: Draw maps&lt;/a> of &lt;em>Data Visualization&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://r-spatial.org//r/2018/10/25/ggplot2-sf.html" target="_blank" rel="noopener">Drawing beautiful maps programmatically with R, sf and ggplot2&lt;/a>&lt;/li>
-&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://www.citylab.com/design/2015/06/when-maps-lie/396761/" target="_blank" rel="noopener">Bloomberg: When maps lie&lt;/a>&lt;/li>
-&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://xkcd.com/977/" target="_blank" rel="noopener">xkcd: Map projections&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
-&lt;ul>
-&lt;li>How can you know if a map projection is truthful or misleading?&lt;/li>
-&lt;li>What&amp;rsquo;s wrong (or not wrong) with using points on maps? Choropleths? Lines?&lt;/li>
-&lt;/ul>
-&lt;h3 id="slides">Slides&lt;/h3>
-&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
-&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/11-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/11-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
-&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Relationships</title><link>https://aem2850.toddgerarden.com/content/10-content/</link><pubDate>Tue, 28 Mar 2023 09:37:26 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/10-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-associations.html" target="_blank" rel="noopener">Chapter 12: Visualizing associations&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://kieranhealy.org/blog/archives/2016/01/16/two-y-axes/" target="_blank" rel="noopener">Two Y-Axes&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="optional-readings">Optional readings&lt;/h4>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://socviz.co/modeling.html#modeling" target="_blank" rel="noopener">Chapter 6: Working with models&lt;/a> of &lt;em>Data Visualization&lt;/em>&lt;/li>
-&lt;/ul>
-&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
-&lt;ul>
-&lt;li>How can you correctly and honestly communicate relationships between variables? How can you communicate the uncertainty in those relationships?&lt;/li>
-&lt;li>What are the dangers of visualizing two variables?&lt;/li>
-&lt;li>When is it appropriate to use two y-axes?&lt;/li>
-&lt;/ul>
-&lt;h3 id="slides">Slides&lt;/h3>
-&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
-&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/10-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/10-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
-&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Time</title><link>https://aem2850.toddgerarden.com/content/09-content/</link><pubDate>Sun, 19 Mar 2023 23:07:27 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/09-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/time-series.html" target="_blank" rel="noopener">Chapter 13: Visualizing time series&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-trends.html" target="_blank" rel="noopener">Chapter 14: Visualizing trends&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
-&lt;/ul>
-&lt;h4 id="optional-readings">Optional readings&lt;/h4>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/datetimes.html" target="_blank" rel="noopener">Chapter 18: Dates and times&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://flowingdata.com/2010/01/07/11-ways-to-visualize-changes-over-time-a-guide/" target="_blank" rel="noopener">11 Ways to Visualize Changes Over Time – A Guide&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
-&lt;ul>
-&lt;li>When is it okay (or not) to truncate the y-axis?&lt;/li>
-&lt;li>Many types of charts can communicate changes over time, but some are more appropriate in different situations. When is it best to use some of the different types (e.g., line graphs vs. area graphs vs. horizon charts vs. heatmaps, etc.)?&lt;/li>
-&lt;/ul>
-&lt;h3 id="slides">Slides&lt;/h3>
-&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
-&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/09-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/09-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
-&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Distributions</title><link>https://aem2850.toddgerarden.com/content/08-content/</link><pubDate>Tue, 14 Mar 2023 11:51:55 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/08-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/histograms-density-plots.html" target="_blank" rel="noopener">Chapter 7: Visualizing distributions&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://socviz.co/groupfacettx.html#histograms" target="_blank" rel="noopener">Section 4.6: Histograms and density plots&lt;/a> of &lt;em>Data Visualization&lt;/em>&lt;/li>
-&lt;/ul>
-&lt;h4 id="optional-readings">Optional readings&lt;/h4>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/boxplots-violins.html" target="_blank" rel="noopener">Chapter 9: Visualizing many distributions&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
-&lt;/ul>
-&lt;!-- - &lt;i class="fas fa-external-link-square-alt">&lt;/i> Cédric Scherer, ["Visualizing distributions with raincloud plots with ggplot2"](https://www.cedricscherer.com/2021/06/06/visualizing-distributions-with-raincloud-plots-with-ggplot2/) -->
-&lt;!-- - &lt;i class="fas fa-external-link-square-alt">&lt;/i> [The Election Needle Is Back. Meet One of Its Creators.](https://www.nytimes.com/video/us/politics/100000006186649/needle-elections.html) -->
-&lt;!-- https://www.nytimes.com/2018/03/13/upshot/needle-forecast-pennsylvania-special-election.html -->
-&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
-&lt;ul>
-&lt;li>Why is it important to visualize all the variation in a variable?&lt;/li>
-&lt;li>What are some geometries that can be used to visualize distributions?&lt;/li>
-&lt;/ul>
-&lt;h3 id="slides">Slides&lt;/h3>
-&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
-&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/08-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/08-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
-&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Mapping data to graphics and amounts</title><link>https://aem2850.toddgerarden.com/content/07-content/</link><pubDate>Thu, 09 Mar 2023 09:06:23 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/07-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
-&lt;ul>
-&lt;li>&lt;i class="fab fa-youtube">&lt;/i> Hans Rosling: &lt;a href="https://www.youtube.com/watch?v=jbkSRLYSojo" target="_blank" rel="noopener">200 Countries, 200 Years, 4 Minutes&lt;/a>&lt;/li>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/aesthetic-mapping.html" target="_blank" rel="noopener">Chapter 2: Visualizing data&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="http://socviz.co/makeplot.html" target="_blank" rel="noopener">Chapter 3: Make a plot&lt;/a> of &lt;em>Data Visualization&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-amounts.html" target="_blank" rel="noopener">Chapter 6: Visualizing amounts&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
-&lt;/ul>
-&lt;h4 id="optional-readings">Optional readings&lt;/h4>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/data-visualize.html" target="_blank" rel="noopener">Chapter 2: Data visualization&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/factors.html" target="_blank" rel="noopener">Chapter 17: Factors&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fab fa-youtube">&lt;/i> The Pudding: &lt;a href="https://www.youtube.com/watch?v=jV49bDzkQhY" target="_blank" rel="noopener">The Greatest Unexpected NBA performances&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;!-- #### Other resources -->
-&lt;!-- [This tutorial by Cédric Scherer](https://www.cedricscherer.com/2019/05/17/the-evolution-of-a-ggplot-ep.-1/) is an excellent demonstration of the grammar of graphics and the sequential nature of building up a plot layer-by-layer. -->
-&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
-&lt;ul>
-&lt;li>Why is it important to visualize variables and data?&lt;/li>
-&lt;li>What does it mean to map data to graph aesthetics?&lt;/li>
-&lt;li>What data was mapped to which aesthetics in Rosling&amp;rsquo;s video?&lt;/li>
-&lt;li>How can bar charts help or hinder our ability to understand amounts?&lt;/li>
-&lt;li>What are the pros and cons of grouped bars?&lt;/li>
-&lt;li>When are stacked bars useful?&lt;/li>
-&lt;/ul>
-&lt;h3 id="slides">Slides&lt;/h3>
-&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
-&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/07-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/07-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
-&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Strings and regular expressions</title><link>https://aem2850.toddgerarden.com/content/05-content/</link><pubDate>Tue, 21 Feb 2023 09:38:07 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/05-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/strings.html" target="_blank" rel="noopener">Read chapter 16: Strings&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/regexps.html" target="_blank" rel="noopener">Read chapter 17: Regular expressions&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
-&lt;/ul>
-&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
-&lt;ul>
-&lt;li>What are strings?&lt;/li>
-&lt;li>How can you extract and subset information from strings?&lt;/li>
-&lt;li>What are regular expressions?&lt;/li>
-&lt;li>What is a pattern?&lt;/li>
-&lt;/ul>
-&lt;h3 id="slides">Slides&lt;/h3>
-&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
-&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/05-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/05-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
-&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Joins and logic</title><link>https://aem2850.toddgerarden.com/content/04-content/</link><pubDate>Mon, 13 Feb 2023 17:24:42 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/04-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/joins.html" target="_blank" rel="noopener">Read chapter 21: Joins&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/logicals.html" target="_blank" rel="noopener">Read chapter 14: Logical vectors&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
-&lt;/ul>
-&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
-&lt;ul>
-&lt;li>What is the difference between a mutating join and a filtering join?&lt;/li>
-&lt;li>What are keys?&lt;/li>
-&lt;li>How do joins work?&lt;/li>
-&lt;li>How can you create, combine, and summarize logical vectors?&lt;/li>
-&lt;/ul>
-&lt;h3 id="slides">Slides&lt;/h3>
-&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
-&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/04-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/04-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
-&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Data import and tidying</title><link>https://aem2850.toddgerarden.com/content/03-content/</link><pubDate>Mon, 06 Feb 2023 16:34:48 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/03-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/data-import.html" target="_blank" rel="noopener">Skim chapter 8: Data import&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>
-&lt;ul>
-&lt;li>Focus on sections 8.1, 8.2, and 8.5&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/data-tidy.html" target="_blank" rel="noopener">Read chapter 6: Data tidying&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
-&lt;/ul>
-&lt;h4 id="optional-readings">Optional readings&lt;/h4>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://projects.fivethirtyeight.com/super-bowl-ads/" target="_blank" rel="noopener">FiveThirtyEight: According To Super Bowl Ads, Americans Love America, Animals And Sex&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
-&lt;ul>
-&lt;li>What types of files do &lt;code>readr&lt;/code> functions read?&lt;/li>
-&lt;li>What is tidy data?&lt;/li>
-&lt;li>What three rules make a dataset tidy?&lt;/li>
-&lt;li>What basic steps/functions can be used to tidy a dataset?&lt;/li>
-&lt;/ul>
-&lt;h3 id="slides">Slides&lt;/h3>
-&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
-&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/03-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/03-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
-&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Welcome to the tidyverse</title><link>https://aem2850.toddgerarden.com/content/02-content/</link><pubDate>Tue, 31 Jan 2023 09:37:08 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/02-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/workflow-basics.html" target="_blank" rel="noopener">Read chapter 3: Workflow: basics&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/data-transform.html" target="_blank" rel="noopener">Read chapter 4: Data transformation&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/quarto.html" target="_blank" rel="noopener">Revisit chapter 30: Quarto&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em> as needed&lt;/li>
-&lt;/ul>
-&lt;h4 id="optional-readings">Optional readings&lt;/h4>
-&lt;ul>
-&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/workflow-pipes.html" target="_blank" rel="noopener">Chapter 5: Workflow: Pipes&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
-&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/" target="_blank" rel="noopener">FiveThirtyEight: The Economic Guide To Picking A College Major&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
-&lt;ul>
-&lt;li>What do the key verbs of &lt;code>dplyr&lt;/code> do?&lt;/li>
-&lt;li>What class of objects do &lt;code>dplyr&lt;/code> verbs operate on?&lt;/li>
-&lt;li>How can you use &lt;code>dplyr&lt;/code> to summarize data by group?&lt;/li>
-&lt;li>What are pipes and what are they used for?&lt;/li>
-&lt;/ul>
-&lt;h3 id="slides">Slides&lt;/h3>
-&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
-&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/02-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/02-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
-&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Welcome to AEM 2850 / 5850!</title><link>https://aem2850.toddgerarden.com/content/01-content/</link><pubDate>Wed, 25 Jan 2023 15:00:50 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/01-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 22 Jan 2024 13:25:25 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Welcome to AEM 2850 / 5850!</title><link>https://aem2850.toddgerarden.com/content/01-content/</link><pubDate>Mon, 22 Jan 2024 13:25:25 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/01-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://aem2850.toddgerarden.com/syllabus/">Read the syllabus&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://aem2850.toddgerarden.com/schedule/">Review the schedule&lt;/a>&lt;/li>
@@ -243,15 +22,20 @@
 &lt;li>Why do we visualize data?&lt;/li>
 &lt;li>What makes a great visualization?&lt;/li>
 &lt;/ul>
-&lt;h3 id="teaser-data">Teaser data&lt;/h3>
-&lt;p>Click the links to download the following files and then follow the instructions from the slides:&lt;/p>
-&lt;ul>
-&lt;li>&lt;a href="https://aem2850.toddgerarden.com/slides/data/01-slides/ny-stations.csv">Weather stations in NY&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://aem2850.toddgerarden.com/slides/data/01-slides/ny-weather-2022.csv">Weather in NY in 2022&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://aem2850.toddgerarden.com/slides/data/01-slides/ny-weather-2023.csv">Weather in NY in 2023&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>Depending on your browser you may need &lt;code>File &amp;gt; Save As...&lt;/code> to download the files in their source format (&lt;code>.csv&lt;/code>).&lt;/p>
-&lt;h3 id="slides">Slides&lt;/h3>
-&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
+&lt;!-- - What are objects? -->
+&lt;!-- - What is assignment? -->
+&lt;!-- - What are some advantages of writing scripts vs working in the console? -->
+&lt;!-- - What are some differences between `.R` scripts and `.Rmd` files? -->
+&lt;!-- - What are the three types of content in an R Markdown file? -->
+&lt;!-- ### Teaser data -->
+&lt;!-- Click the links to download the following files and then follow the instructions from the slides: -->
+&lt;!-- - [Weather stations in NY](/slides/data/01-slides/ny-stations.csv) -->
+&lt;!-- - [Weather in NY in 2022](/slides/data/01-slides/ny-weather-2022.csv) -->
+&lt;!-- - [Weather in NY in 2023](/slides/data/01-slides/ny-weather-2023.csv) -->
+&lt;!-- Depending on your browser you may need `File > Save As...` to download the files in their source format (`.csv`). -->
+&lt;!-- ### Slides -->
+&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+&lt;!--
 &lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/01-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/01-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
-&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item></channel></rss>
+-->
+&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item></channel></rss>
