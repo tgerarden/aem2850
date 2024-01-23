@@ -50,19 +50,19 @@ output:
 <!-- - What are the three types of content in an R Markdown file? -->
 
 
-<!-- ### Teaser data -->
+### Teaser data
 
-<!-- Click the links to download the following files and then follow the instructions from the slides: -->
-<!-- - [Weather stations in NY](/slides/data/01-slides/ny-stations.csv) -->
-<!-- - [Weather in NY in 2022](/slides/data/01-slides/ny-weather-2022.csv) -->
-<!-- - [Weather in NY in 2023](/slides/data/01-slides/ny-weather-2023.csv) -->
+Click the links to download the following files and then follow the instructions from the slides:
+- [Weather stations in NY](/slides/data/01-slides/ny-stations.csv)
+- [Weather in NY in 2022](/slides/data/01-slides/ny-weather-2023.csv)
+- [Weather in NY in 2023](/slides/data/01-slides/ny-weather-2024.csv)
 
-<!-- Depending on your browser you may need `File > Save As...` to download the files in their source format (`.csv`). -->
+Depending on your browser you may need `File > Save As...` to download the files in their source format (`.csv`).
 
-<!-- ### Slides -->
+### Slides
 
-<!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
 
-<!-- {{< blogdown/slide-buttons >}} -->
+{{< blogdown/slide-buttons >}}
 
-<!-- **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands. -->
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.
