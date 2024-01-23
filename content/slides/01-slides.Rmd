@@ -976,6 +976,31 @@ Honesty + good judgment?
 
 .pull-left[
 <figure>
+  <img src="img/01/bbc-gp-pie.png" alt="BCC GP pie chart" title="BCC GP pie chart" width="100%">
+</figure>
+]
+
+.pull-right[
+Good aesthetics?
+
+No substantive issues?
+
+No perceptual issues?
+
+Honesty + good judgment?
+
+]
+
+???
+
+Source: https://statmodeling.stat.columbia.edu/2023/12/30/how-not-to-be-fooled-by-viral-charts/
+
+---
+
+# What's wrong?
+
+.pull-left[
+<figure>
   <img src="img/01/end-wokeness-tweet.jpeg" alt="Violent crime bar chart" title="Violent crime bar chart" width="80%">
 </figure>
 ]
