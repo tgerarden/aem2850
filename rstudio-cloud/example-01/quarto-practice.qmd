@@ -9,7 +9,7 @@ date: "`r format(Sys.time(), '%B %d, %Y')`"
 format: pdf
 ---
 
-Much of the work in this class will be done via Quarto documents. Quarto documents are documents that combine text, R code, and R output, including figures. They are a great way to produce self-contained and documented statistical analyses.
+Much of the work in this class will be done via Quarto documents. Quarto documents are documents that combine text, R code, and R output, including figures. They are a great way to produce self-contained and documented analyses.
 
 In this first worksheet, you will learn how to do some basic markdown editing. After you have made a change to the document, press "Render" in R Studio and see what kind of a result you get.
 
@@ -26,8 +26,8 @@ Try out basic Markdown features, as described [here](https://quarto.org/docs/aut
 R code embedded in R chunks will be executed and the output will be shown.
 ```{r}
 # R code goes here
-x <- rnorm(10)    # random sample from normal distribution
-hist(x)           # plot density
+x <- rnorm(10)    # random draws from normal distribution
+hist(x)           # plot draws in a histogram
 ```
 
 Try increasing the number of draws from the normal distribution and see what happens.

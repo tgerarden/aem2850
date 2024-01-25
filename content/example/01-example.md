@@ -1,7 +1,7 @@
 ---
 title: "Intro to R, RStudio, and Quarto"
 linktitle: "Intro to R, RStudio, and Quarto"
-date: "`r format(Sys.time())`"
+date: "2024-01-24 12:56:20"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -109,7 +109,8 @@ When you ask for the document to be saved for the first time, RStudio will promp
 
 Now we are ready to start editing our first script. For example, you could write:
 
-```{r, eval = FALSE}
+
+```r
 print("welcome to RStudio")
 ```
 
@@ -117,8 +118,9 @@ If you do this and hit ↩ in the editor, nothing will happen in the console.
 
 To _execute_ your new script, you can click on the _Run_ button on the upper right side of the editing pane or use the keyboard shortcut: Ctrl+⇧+↩ on Windows or ⌘+⇧+↩ on Mac. When you do this, the console will show the command as well as its output:
 
-```{r, echo = FALSE}
-print("welcome to RStudio")
+
+```
+## [1] "welcome to RStudio"
 ```
 
 To run one line at a time instead of the entire script, you can use Ctrl+↩ on Windows and ⌘+↩ on Mac.

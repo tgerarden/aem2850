@@ -6,8 +6,8 @@ lessons:
     session: "Session 1"
     date: "Week 1"
     content: "01-content"
-    # example: "01-example"
-    # assignment: "01-lab"
+    example: "01-example"
+    assignment: "01-lab"
     bg: 1
 
   - title: '<span class="content-title">Welcome to the tidyverse <br> Data transformation with dplyr</span>'

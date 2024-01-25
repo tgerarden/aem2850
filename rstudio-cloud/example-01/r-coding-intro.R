@@ -2,12 +2,12 @@
 
 # Running code ----
 # First, try running the following line of code using the Run button above
-print("welcome to aem 2850 / 5850")
+"welcome to aem 2850 / 5850"
 
 # Note how the cursor automatically advances
 
 # Now, try running the following line of code using ⌘+↩ (mac) or Ctrl+↩ (pc)
-print("welcome to aem 2850 / 5850")
+"welcome to aem 2850 / 5850"
 
 
 # Arithmetic operations ----
@@ -61,7 +61,7 @@ class(numbers)
 # We will cover lots of functions in the coming weeks
 # For now, you can probably find and use some intuitive ones
 sqrt(4)
-log(1)
+log(1) # default is the natural logarithm
 
 new_numbers <- 1:10
 new_numbers
@@ -105,4 +105,4 @@ plot(cars)
 
 # Viewer ----
 # Another handy place to view things
-# You will see an example shortly when we discuss R Markdown
+# You will see an example shortly when we discuss Quarto (/ R Markdown)
