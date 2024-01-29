@@ -13,7 +13,7 @@ lessons:
   - title: '<span class="content-title">Welcome to the tidyverse <br> Data transformation with dplyr</span>'
     session: "Session 2"
     date: "Week 2"
-    # content: "02-content"
+    content: "02-content"
     # example: "02-example"
     # assignment: "02-lab"
     bg: 2
