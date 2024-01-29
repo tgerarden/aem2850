@@ -1,7 +1,7 @@
 ---
 title: "Welcome to AEM 2850 / 5850!"
 linktitle: "Welcome to AEM 2850 / 5850!"
-date: "2024-01-23 08:24:47"
+date: "2024-01-29 09:16:18"
 menu:
   content:
     parent: Course content
@@ -23,7 +23,7 @@ output:
 - [Review the schedule](/schedule/)
 - [Read the assignments overview](/assignment/)
 - <i class="fas fa-book"></i> [Skim the introduction](https://r4ds.hadley.nz/intro.html) of *R for Data Science (2e)*
-- <i class="fas fa-book"></i> [Read chapter 30: Quarto](https://r4ds.hadley.nz/quarto.html) of *R for Data Science (2e)*
+- <i class="fas fa-book"></i> [Read chapter 28: Quarto](https://r4ds.hadley.nz/quarto.html) of *R for Data Science (2e)*
 - <i class="fas fa-book"></i> [Skim chapter 1, through section 1.2](http://socviz.co/lookatdata.html) of *Data Visualization*
 
 #### Optional readings
@@ -46,8 +46,7 @@ output:
 <!-- - What are objects? -->
 <!-- - What is assignment? -->
 <!-- - What are some advantages of writing scripts vs working in the console? -->
-<!-- - What are some differences between `.R` scripts and `.Rmd` files? -->
-<!-- - What are the three types of content in an R Markdown file? -->
+<!-- - What are some differences between `.R` scripts and `.qmd` files? -->
 
 
 ### Teaser data
