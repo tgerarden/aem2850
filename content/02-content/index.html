@@ -7,8 +7,8 @@
 <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
 <link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
 <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media=print onload="this.media='all'">
-<meta name=description content="Readings  Read the syllabus Review the schedule Read the assignments overview  Skim the introduction of R for Data Science (2e)  Read chapter 28: Quarto of R for Data Science (2e)  Skim chapter 1, through section 1.">
-<link rel=alternate hreflang=en-us href=https://aem2850.toddgerarden.com/content/01-content/>
+<meta name=description content="Readings   Skim chapter 2: Workflow: basics of R for Data Science (2e)  Skim chapter 3: Data transformation of R for Data Science (2e)  Revisit chapter 28: Quarto of R for Data Science (2e) as needed  Optional readings   Chapter 4: Workflow: code style of R for Data Science (2e)  Chapter 6: Workflow: scripts and projects of R for Data Science (2e)  Hands-On Programming with R, by Garrett Grolemund, is a more detailed introduction to the nuts and bolts of programming in R  FiveThirtyEight: The Economic Guide To Picking A College Major  Guiding questions  What do the key verbs of dplyr do?">
+<link rel=alternate hreflang=en-us href=https://aem2850.toddgerarden.com/content/02-content/>
 <meta name=theme-color content="#B31B1B">
 <link rel=stylesheet href=/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css media=print onload="this.media='all'">
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css integrity="sha512-W0xM4mr6dEP9nREo7Z9z+9X70wytKvMGeDsj7ps2+xg5QPrEBXC8tAW1IFnzjR6eoJ90JmCnFzerQJTLzIEHjA==" crossorigin=anonymous media=print onload="this.media='all'">
@@ -18,18 +18,18 @@
 <link rel=manifest href=/manifest.webmanifest>
 <link rel=icon type=image/png href=/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_32x32_fill_lanczos_center_3.png>
 <link rel=apple-touch-icon type=image/png href=/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_180x180_fill_lanczos_center_3.png>
-<link rel=canonical href=https://aem2850.toddgerarden.com/content/01-content/>
+<link rel=canonical href=https://aem2850.toddgerarden.com/content/02-content/>
 <meta property="twitter:card" content="summary">
 <meta property="og:site_name" content="R for Business Analytics">
-<meta property="og:url" content="https://aem2850.toddgerarden.com/content/01-content/">
-<meta property="og:title" content="Welcome to AEM 2850 / 5850! | R for Business Analytics">
-<meta property="og:description" content="Readings  Read the syllabus Review the schedule Read the assignments overview  Skim the introduction of R for Data Science (2e)  Read chapter 28: Quarto of R for Data Science (2e)  Skim chapter 1, through section 1."><meta property="og:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png">
+<meta property="og:url" content="https://aem2850.toddgerarden.com/content/02-content/">
+<meta property="og:title" content="Welcome to the tidyverse | R for Business Analytics">
+<meta property="og:description" content="Readings   Skim chapter 2: Workflow: basics of R for Data Science (2e)  Skim chapter 3: Data transformation of R for Data Science (2e)  Revisit chapter 28: Quarto of R for Data Science (2e) as needed  Optional readings   Chapter 4: Workflow: code style of R for Data Science (2e)  Chapter 6: Workflow: scripts and projects of R for Data Science (2e)  Hands-On Programming with R, by Garrett Grolemund, is a more detailed introduction to the nuts and bolts of programming in R  FiveThirtyEight: The Economic Guide To Picking A College Major  Guiding questions  What do the key verbs of dplyr do?"><meta property="og:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png">
 <meta property="twitter:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
-<meta property="article:published_time" content="2024-01-29T09:16:18+00:00">
-<meta property="article:modified_time" content="2024-01-29T09:16:18+00:00">
-<title>Welcome to AEM 2850 / 5850! | R for Business Analytics</title>
+<meta property="article:published_time" content="2024-01-29T09:21:17+00:00">
+<meta property="article:modified_time" content="2024-01-29T09:21:17+00:00">
+<title>Welcome to the tidyverse | R for Business Analytics</title>
 </head>
-<body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=9f210e786ac3c6ae3a61cb9aaebcdc5c>
+<body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=6e8e57565e1b5660f464ba2de5f5bfc6>
 <script src=/js/wowchemy-init.min.133800c88f3b5bb934932231fd94fed7.js></script>
 <div class=page-header>
 <header class=header--fixed>
@@ -78,7 +78,7 @@
 <div class=page-body>
 <article class=article>
 <div class="article-container pt-3">
-<h1>Welcome to AEM 2850 / 5850!</h1>
+<h1>Welcome to the tidyverse</h1>
 <div class=article-metadata>
 <span class=article-date>
 Jan 29, 2024
@@ -91,39 +91,24 @@ Jan 29, 2024
 <div class=article-style>
 <h3 id=readings>Readings</h3>
 <ul>
-<li><a href=/syllabus/>Read the syllabus</a></li>
-<li><a href=/schedule/>Review the schedule</a></li>
-<li><a href=/assignment/>Read the assignments overview</a></li>
-<li><i class="fas fa-book"></i> <a href=https://r4ds.hadley.nz/intro.html target=_blank rel=noopener>Skim the introduction</a> of <em>R for Data Science (2e)</em></li>
-<li><i class="fas fa-book"></i> <a href=https://r4ds.hadley.nz/quarto.html target=_blank rel=noopener>Read chapter 28: Quarto</a> of <em>R for Data Science (2e)</em></li>
-<li><i class="fas fa-book"></i> <a href=http://socviz.co/lookatdata.html target=_blank rel=noopener>Skim chapter 1, through section 1.2</a> of <em>Data Visualization</em></li>
+<li><i class="fas fa-book"></i> <a href=https://r4ds.hadley.nz/workflow-basics.html target=_blank rel=noopener>Skim chapter 2: Workflow: basics</a> of <em>R for Data Science (2e)</em></li>
+<li><i class="fas fa-book"></i> <a href=https://r4ds.hadley.nz/data-transform.html target=_blank rel=noopener>Skim chapter 3: Data transformation</a> of <em>R for Data Science (2e)</em></li>
+<li><i class="fas fa-book"></i> <a href=https://r4ds.hadley.nz/quarto.html target=_blank rel=noopener>Revisit chapter 28: Quarto</a> of <em>R for Data Science (2e)</em> as needed</li>
 </ul>
 <h4 id=optional-readings>Optional readings</h4>
 <ul>
-<li><i class="fas fa-external-link-square-alt"></i> <a href="https://www.washingtonpost.com/news/wonk/wp/2018/06/15/study-charts-change-hearts-and-minds-better-than-words-do/?utm_term=.4474599c0d5e" target=_blank rel=noopener>Study: Charts change hearts and minds better than words do</a></li>
-<li><i class="fas fa-podcast"></i> Tim Harford, <a href=https://99percentinvisible.org/episode/florence-nightingale-data-viz-pioneer/ target=_blank rel=noopener>&ldquo;Florence Nightingale: Data Viz Pioneer,"</a> <em>99% Invisible</em></li>
+<li><i class="fas fa-book"></i> <a href=https://r4ds.hadley.nz/workflow-style target=_blank rel=noopener>Chapter 4: Workflow: code style</a> of <em>R for Data Science (2e)</em></li>
+<li><i class="fas fa-book"></i> <a href=https://r4ds.hadley.nz/workflow-scripts target=_blank rel=noopener>Chapter 6: Workflow: scripts and projects</a> of <em>R for Data Science (2e)</em></li>
+<li><i class="fas fa-book"></i> <a href=https://rstudio-education.github.io/hopr/index.html target=_blank rel=noopener><em>Hands-On Programming with R</em></a>, by Garrett Grolemund, is a more detailed introduction to the nuts and bolts of programming in R</li>
+<li><i class="fas fa-external-link-square-alt"></i> <a href=https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/ target=_blank rel=noopener>FiveThirtyEight: The Economic Guide To Picking A College Major</a></li>
 </ul>
 <h3 id=guiding-questions>Guiding questions</h3>
 <ul>
-<li>What is this course all about? <a href=/syllabus/#course-overview>I wonder if that&rsquo;s on the syllabus&mldr;</a></li>
-<li>What is <code>R</code>? <a href=/syllabus/#course-materials>I bet that&rsquo;s on the syllabus&mldr;</a></li>
-<li>Can I succeed in this course? (<a href=/syllabus/#success-in-this-course>yes! according to the syllabus&mldr;</a>)</li>
-<li>Wait, should I read the syllabus? (<a href="https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy" target=_blank rel=noopener>here&rsquo;s a hint</a>)</li>
-<li>Why do we visualize data?</li>
-<li>What makes a great visualization?</li>
+<li>What do the key verbs of <code>dplyr</code> do?</li>
+<li>What class of objects do <code>dplyr</code> verbs operate on?</li>
+<li>How can you use <code>dplyr</code> to summarize data by group?</li>
+<li>What are pipes and what are they used for?</li>
 </ul>
-<h3 id=teaser-data>Teaser data</h3>
-<p>Click the links to download the following files and then follow the instructions from the slides:</p>
-<ul>
-<li><a href=/slides/data/01-slides/ny-stations.csv>Weather stations in NY</a></li>
-<li><a href=/slides/data/01-slides/ny-weather-2023.csv>Weather in NY in 2023</a></li>
-<li><a href=/slides/data/01-slides/ny-weather-2024.csv>Weather in NY in 2024</a></li>
-</ul>
-<p>Depending on your browser you may need <code>File > Save As...</code> to download the files in their source format (<code>.csv</code>).</p>
-<h3 id=slides>Slides</h3>
-<p>The slides for today&rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).</p>
-<p><a class="btn btn-primary btn-lg" target=_blank href=/slides/01-slides.html><i class="fas fa-external-link-alt"></i> View all slides in new window</a> <a class="btn btn-primary btn-lg" target=_blank href=/slides/01-slides.pdf role=button><i class="far fa-file-pdf"></i> Download PDF of all slides</a></p>
-<p><strong>Fun fact</strong>: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.</p>
 </div>
 <div class="media author-card content-widget-hr">
 <div class=media-body>
