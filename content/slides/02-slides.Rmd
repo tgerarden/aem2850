@@ -70,12 +70,14 @@ Acknowledgements:
 
 If you are new to the class, please review canvas and [course site](https://aem2850.toddgerarden.com)
 
-**Prelim dates:** March 2 and May 9 in class
-- SDS: we will use the Alternative Testing Program, submit form by Feb. 8
+**Prelim dates:** Feb 29 and May 7 in class
+<!-- - SDS: we will use the Alternative Testing Program, submit form by Feb. 8 -->
 
-**TA office hours:** Mondays 12:30pm - 3:30pm in Warren 372
+**TA office hours:** Mondays, exact time still TBD, starting next week
+<!-- Mondays 12:30pm - 3:30pm in Warren 372 -->
 
-**My office hours:** Tuesdays 11am - 12pm in Warren 466; [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
+**My office hours:** Tuesdays 11:30 - 12:30 in Warren 464; [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
+- Caveat: I cannot hold office hours today
 
 **Other reminders:**
 - Bookmark [the schedule](https://aem2850.toddgerarden.com/schedule) and visit often
@@ -83,19 +85,7 @@ If you are new to the class, please review canvas and [course site](https://aem2
 
 ---
 
-# Friday office hours poll
-
-Hui Zhou will host additional TA office hours on Fridays
-
-Informal poll: what times **do not** work for you on Fridays?
-- 10:30 - 11:30
-- 11:30 - 12:30
-- 12:30 - 1:30
-- 3:00 - 4:00
-
---
-
-Questions before we get started?
+# Questions before we get started?
 
 ---
 
@@ -132,21 +122,16 @@ name: prologue
 
 <br>
 
-> its lit
+> feeling great
 
 <br>
 
 --
 
-> hope this class is not too hard haha
+> nervous but looking forward to it
 
 <br>
 
---
-
-> maybe the speaking speed is too fast
-
-  
 ---
 
 # Where we're from
@@ -155,6 +140,7 @@ name: prologue
 # LOAD PACKAGES (WILL UNLOAD BEFORE SHOWING HOW TIDYVERSE LOADS) ----
 library(ggplot2)
 library(dplyr)
+library(lubridate)
 
 # GET MAP DATA ----
 us_states <- map_data("state")
@@ -162,7 +148,9 @@ countries <- map_data("world") |> mutate(region = tolower(region))
 
 # IMPORT DATA ----
 responses <- readr::read_csv("data/survey-responses/lab-1-survey.csv")
-responses_timestamp <- file.mtime("data/survey-responses/lab-1-survey.csv")
+responses_timestamp <- file.mtime("data/survey-responses/lab-1-survey.csv") |> 
+  ymd_hms(tz = "America/Los_Angeles") |> 
+  with_tz("America/New_York") # convert from pacific to eastern time
 
 where_were_from <- responses |> 
   select(contains("from?")) |> 
@@ -182,6 +170,10 @@ plot_countries <- where_were_from |>
   mutate(
     region = case_when(
       country == "United States of America" ~ "usa",
+      # use the following command to identify labels that need updating
+      # anti_join(plot_countries, countries, by = "region")
+      country == "rok (south korea)" ~ "south korea",
+      country == "us & china" ~ "usa", # arbitrarily taking first response
       TRUE ~ stringr::str_to_lower(country)
     )
   ) |> 
@@ -275,6 +267,12 @@ our_countries |>
 
 
 ---
+class: inverse, center, middle
+name: basics
+
+# Tidyverse basics
+
+---
 
 # R "dialects"
 
@@ -302,6 +300,8 @@ This dialect is similar to human language
 
 Intuitive if you're new to programming
 
+Not representative of all R programming
+
 Base R and `data.table` are alternative "dialects"
 ]
 
@@ -310,12 +310,6 @@ Base R and `data.table` are alternative "dialects"
 knitr::include_graphics("img/02/r_first_then.png")
 ```
 ]
-
----
-class: inverse, center, middle
-name: basics
-
-# Tidyverse basics
 
 ---
 
@@ -364,6 +358,7 @@ Tidyverse alternatives typically offer extra features
 # UNLOAD PACKAGES TO ILLUSTRATE HOW TIDYVERSE LOADS ----
 detach(package:ggplot2)
 detach(package:dplyr)
+detach(package:lubridate)
 ```
 
 ```{r tverse, cache = FALSE, eval = FALSE}
@@ -421,7 +416,7 @@ Here are some objects that we'll be working with regularly:
 
 ---
 
-# Review: Data frames
+# Data frames
 
 The most important object we'll work with is the **data frame**
 
@@ -476,6 +471,14 @@ as.data.frame(starwars)
 # Printing a data.frame with head()
 
 ```{r data.frame.head}
+head(as.data.frame(starwars))
+```
+
+---
+
+# This still doesn't look very nice...
+
+```{r data.frame.head.nicer}
 head(as.data.frame(starwars))
 ```
 
@@ -726,21 +729,9 @@ starwars |>
 
 ---
 
-# 1) dplyr::select
-
-`select(..., everything())` is another useful shortcut to move important variables to the "front" of a data frame
-
-```{r select4}
-starwars |> 
-  select(species, homeworld, everything()) |>
-  head(5)
-```
-
----
-
 # 1) dplyr::~~select~~ relocate
 
-You can also use `relocate` to reorder columns without subsetting:
+You can also use `relocate` to move important variables to the "front" of a data frame without subsetting:
 ```{r relocate4}
 starwars |> 
   relocate(species, homeworld) |>
@@ -759,7 +750,7 @@ knitr::include_graphics("img/02/dplyr_relocate.png")
 class: inverse, center, middle
 name: example
 
-# Let's all work through an example on Posit Cloud
+# Let's work through an example on Posit Cloud
 
 
 ---
@@ -767,7 +758,7 @@ name: filter
 
 # 2) dplyr::filter
 
-```{r echo=FALSE, out.width='85%'}
+```{r echo=FALSE, out.width='75%'}
 knitr::include_graphics("img/02/dplyr_filter.jpg")
 ```
 
@@ -820,22 +811,14 @@ starwars |>
 Regular expressions work here too, with the help of the `stringr` package:
 ```{r filter2}
 starwars |> 
-  filter(stringr::str_detect(name, "Skywalker"))
-```
-
---
-
-Or you can use `grepl` to achieve the same goal:
-```{r filter2b, eval = FALSE}
-starwars |> 
-  filter(grepl("Skywalker", name))
+  filter(str_detect(name, "Skywalker"))
 ```
 
 ---
 
 # 2) dplyr::filter
 
-A very common `filter` use case is identifying/removing missing data:
+A common `filter` use case is identifying/removing missing data using `is.na`:
 ```{r filter3}
 starwars |> 
   filter(is.na(height))
@@ -845,7 +828,7 @@ starwars |>
 
 # 2) dplyr::filter
 
-How could you build on this to remove missing observations?
+How could you build on this to remove rows with missing data?
 
 --
 
@@ -890,11 +873,22 @@ knitr::include_graphics("img/02/dplyr_mutate.png")
 # 4) dplyr::mutate
 
 You can create new columns from scratch or by transforming existing columns:
+```{r mutate0}
+starwars |> 
+  select(name, birth_year) |>
+  mutate(dog_years = birth_year * 7)
+```
+
+---
+
+# 4) dplyr::mutate
+
+You can create new columns from scratch or by transforming existing columns:
 ```{r mutate1}
 starwars |> 
   select(name, birth_year) |>
   mutate(dog_years = birth_year * 7) |>
-  mutate(comment = paste0(name, " is ", dog_years, " in dog years."))
+  mutate(comment = str_glue("{name} is {dog_years} in dog years.")) # or could use paste()
 ```
 
 ---
@@ -907,7 +901,7 @@ starwars |>
 starwars |> 
   select(name, birth_year) |>
   mutate(dog_years = birth_year * 7, # separate with a comma
-         comment = paste0(name, " is ", dog_years, " in dog years."))
+         comment = str_glue("{name} is {dog_years} in dog years."))
 ```
 
 ---
@@ -962,7 +956,7 @@ Including `na.rm = TRUE` keeps NAs from propagating to the end result:
 
 .pull-left[
 ```{r summ2l}
-# Probably not what we want
+# probably not what we want
 starwars |> 
   summarize(mh = mean(height))
 ```
@@ -970,7 +964,7 @@ starwars |>
 
 .pull-right[
 ```{r summ2r}
-# Much better
+# better
 starwars |> 
   summarize(mh = mean(height, na.rm = TRUE))
 ```
@@ -992,7 +986,8 @@ It depends on the context!
 ```{r summ1}
 starwars |> 
   group_by(species, gender) |> # for each species-gender combo
-  summarize(mean_height = mean(height, na.rm = TRUE)) # calculate the mean height
+  summarize(mean_height = mean(height, na.rm = TRUE)) |> # calculate the mean height
+  head() # then just print the first 6 rows for clarity
 ```
 
 ---
@@ -1011,39 +1006,6 @@ name: goodies
 
 # Other dplyr goodies for your reference
 
----
-
-# Other dplyr goodies: across
-
-```{r echo=FALSE, out.width='70%'}
-knitr::include_graphics("img/02/dplyr_across.png")
-```
-
----
-
-# Other dplyr goodies: across
-
-Combining `mutate` with `across` allows you to work on a subset of variables:
-
-```{r, mutate4}
-starwars |> 
-  select(name:eye_color) |> 
-  mutate(across(where(is.character), toupper)) |> # capitalize all character variables #<< 
-  head(5)
-```
-
----
-
-# Other dplyr goodies: across
-
-We can also use `across` within `summarize`:
-
-```{r, summ4}
-starwars |> 
-  group_by(species) |> 
-  summarize(across(where(is.numeric), mean, na.rm=T)) |> # take the mean of all numeric variables #<< 
-  head(5)
-```
 ---
 
 # Other dplyr goodies: count

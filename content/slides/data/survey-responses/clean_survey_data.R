@@ -6,10 +6,12 @@ all_responses <- read_csv("content/slides/data/survey-responses/lab-1-survey.csv
   separate(netid, into = c("netid"), sep = "@") |>
   mutate(netid = tolower(netid))
 
-enrolled_students <- read_csv("content/slides/data/survey-responses/enrollment-feb6.csv") |>
-  select(netid = `NET ID`)
+responses <- all_responses
 
-responses <- inner_join(all_responses, enrolled_students, by = "netid")
+# enrolled_students <- read_csv("content/slides/data/survey-responses/enrollment-feb6.csv") |>
+#   select(netid = `NET ID`)
+#
+# responses <- inner_join(all_responses, enrolled_students, by = "netid")
 
 
 # EXTRACT DATA OF DIFFERENT TYPES----

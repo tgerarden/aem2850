@@ -48,15 +48,11 @@ college_majors |>
 # now print college_majors
 college_majors
 # why doesn't R "remember" the results of the command we just used?
-# we never used the assignment operator!
+# we never used the assignment operator! # replace "______" with your answer
 
 # use dplyr::select to extract three variables: rank, major, and median salary
 college_majors |> 
   select(rank, major, median)
-
-# use dplyr::select to move rank, major, and median salary to the "front" of the data frame
-college_majors |> 
-  select(rank, major, median, everything())
 
 # or: use dplyr::relocate to move rank, major, and median to the "front" of the data frame
 college_majors |> 
@@ -131,8 +127,8 @@ college_majors  |>
 college_salaries |> 
   filter(major_category == "Business") |>   # get Business majors only
   mutate(median_salary = median/1000) |> # then create a variable median_salary in thousands of dollars
-  mutate(bitcoins = median/22890.90) |> # convert to bitcoins (based on 1/30/23 prices)
-  filter(bitcoins > 2) # what majors pay more than 2 bitcoins per year?
+  mutate(bitcoins = median/43075.60) |> # convert to bitcoins (based on 1/29/24 prices)
+  filter(bitcoins > 1) # what majors pay more than 1 bitcoin per year?
 
 # let's clean up a bit
 ls() # what objects have you defined so far?

@@ -54,10 +54,6 @@ college_majors
 college_majors |> 
   select(______, ______, ______)
 
-# use dplyr::select to move rank, major, and median salary to the "front" of the data frame
-college_majors |> 
-  select(______, ______, ______, everything())
-
 # or: use dplyr::relocate to move rank, major, and median to the "front" of the data frame
 college_majors |> 
   ______(rank, major, median)
@@ -131,8 +127,8 @@ ______ ______
 college_salaries |> 
   ______(______ ______ ______) |>   # get Business majors only
   mutate(______ = median/______) |> # then create a variable median_salary in thousands of dollars
-  ______(bitcoins = median/22890.90) |> # convert to bitcoins (based on 1/30/23 prices)
-  ______(______ ______ ______) # what majors pay more than 2 bitcoins per year?
+  ______(bitcoins = median/43075.60) |> # convert to bitcoins (based on 1/29/24 prices)
+  ______(______ ______ ______) # what majors pay more than 1 bitcoin per year?
 
 # let's clean up a bit
 ls() # what objects have you defined so far?
