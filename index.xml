@@ -1,4 +1,38 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 29 Jan 2024 09:21:17 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Intro to R, RStudio, and Quarto</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Wed, 24 Jan 2024 12:56:20 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 29 Jan 2024 16:27:26 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Welcome to the tidyverse</title><link>https://aem2850.toddgerarden.com/example/02-example/</link><pubDate>Mon, 29 Jan 2024 16:27:26 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/02-example/</guid><description>&lt;h2 id="posit-cloud-links">Posit Cloud links&lt;/h2>
+&lt;p>&lt;a href="https://posit.cloud/spaces/471091/content/7468889" target="_blank" rel="noopener">Click here to access this week&amp;rsquo;s example Posit Cloud project&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://posit.cloud/spaces/471091/content/7468929" target="_blank" rel="noopener">&lt;strong>Solutions:&lt;/strong> click here to access a project with a completed version&lt;/a>&lt;/p>
+&lt;h2 id="plan-for-this-weeks-example">Plan for this week&amp;rsquo;s example&lt;/h2>
+&lt;ul>
+&lt;li>Questions? 🙋‍♀️&lt;/li>
+&lt;li>Work through &lt;code>intro-tidyverse-practice.R&lt;/code>&lt;/li>
+&lt;li>We will explore data from &lt;a href="https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/" target="_blank" rel="noopener">this FiveThirtyEight article&lt;/a>
+&lt;!-- - On our own devices: 1. Getting Comfortable with Data Frames -->
+&lt;!-- - As a group: discuss results, answer questions -->
+&lt;!-- - On our own devices: 2. Using Functions in Packages -->
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="cheatsheets">Cheatsheets&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.github.io/cheatsheets/data-transformation.pdf" target="_blank" rel="noopener">Click here to download the &lt;code>dplyr&lt;/code> cheatsheet&lt;/a>&lt;/p>
+&lt;h2 id="tidyverse-version">tidyverse version&lt;/h2>
+&lt;p>&lt;strong>Note:&lt;/strong> If you are working locally, make sure you are running at least &lt;strong>tidyverse&lt;/strong> 2.0.0:&lt;/p>
+&lt;pre>&lt;code class="language-r"># packageVersion(&amp;quot;tidyverse&amp;quot;)
+# install.packages(&amp;quot;tidyverse&amp;quot;) # install updated version if &amp;lt; 2.0.0
+&lt;/code>&lt;/pre>
+&lt;h2 id="installing-r-packages">Installing R packages&lt;/h2>
+&lt;p>The functionality provided by a fresh install of R is only a small fraction of what is possible. In fact, we refer to what you get after your first install as &lt;em>base R&lt;/em>. To access additional functionality, we can use add-ons made by developers. There are currently hundreds of these available from CRAN and many others shared via other repositories such as GitHub. However, because not everybody needs all available functionality, R instead makes different components available via &lt;em>packages&lt;/em>. R makes it very easy to install packages from within R. For example, to install the &lt;strong>tidyverse&lt;/strong> package, which we will use throughout the semester, you would just enter the following command in the R Console:&lt;/p>
+&lt;pre>&lt;code class="language-r">install.packages(&amp;quot;tidyverse&amp;quot;)
+&lt;/code>&lt;/pre>
+&lt;p>In RStudio, you can also do this by navigating to the &lt;em>Packages&lt;/em> pane or via the &lt;em>Tools&lt;/em> menu &amp;gt; Install Packages.&lt;/p>
+&lt;p>After installation is complete, we can then load the package into our current R session using the &lt;code>library&lt;/code> function:&lt;/p>
+&lt;pre>&lt;code class="language-r">library(tidyverse)
+&lt;/code>&lt;/pre>
+&lt;p>You only need to install a package once if you are working with a local installation of R. On RStudio Cloud, you may sometimes need to install packages within multiple projects, but I will usually do this for you in advance. After that, you can load it using &lt;code>library&lt;/code> whenever you need it. The package remains loaded until we quit the R session (or &lt;code>detach&lt;/code> the package).&lt;/p>
+&lt;p>Note that installing &lt;strong>tidyverse&lt;/strong> actually installs a large number of packages. This commonly occurs when a package has &lt;em>dependencies&lt;/em>, or uses functions from other packages. When you load a package using &lt;code>library&lt;/code>, you also load its dependencies.&lt;/p>
+&lt;p>You can see all the packages you have installed using the &lt;em>Packages&lt;/em> tab in RStudio or via the following function:&lt;/p>
+&lt;pre>&lt;code class="language-r">installed.packages()
+&lt;/code>&lt;/pre>
+&lt;p>As we move through this course, we will learn more about packages and keep adding them to our toolbox.&lt;/p>
+&lt;!-- **Note that in this course (at least, on most browsers), grey boxes are used to show R code typed into the R console. The symbol `##` is used to denote what the R console outputs.** --></description></item><item><title>Intro to R, RStudio, and Quarto</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Wed, 24 Jan 2024 12:56:20 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
 &lt;p>Examples contain material we will discuss and use to learn R in class. These notes are &lt;em>not&lt;/em> comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.&lt;/p>
 &lt;h2 id="posit-cloud-link">Posit Cloud link&lt;/h2>
 &lt;p>&lt;em>Note: Posit Cloud was formerly known as RStudio Cloud. Posit Cloud hosts Jupyter projects as well as the RStudio projects we will use in this course.&lt;/em>&lt;/p>
@@ -433,7 +467,7 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;li>
 &lt;p>&lt;a href="https://toolbox.google.com/datasetsearch" target="_blank" rel="noopener">&lt;strong>Google Dataset Search&lt;/strong>&lt;/a>: Google indexes thousands of public datasets; search for them here.&lt;/p>
 &lt;/li>
-&lt;/ul></description></item><item><title>Welcome to the tidyverse</title><link>https://aem2850.toddgerarden.com/content/02-content/</link><pubDate>Mon, 29 Jan 2024 09:21:17 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/02-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;/ul></description></item><item><title>Welcome to the tidyverse</title><link>https://aem2850.toddgerarden.com/content/02-content/</link><pubDate>Mon, 29 Jan 2024 15:40:01 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/02-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/workflow-basics.html" target="_blank" rel="noopener">Skim chapter 2: Workflow: basics&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/data-transform.html" target="_blank" rel="noopener">Skim chapter 3: Data transformation&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
@@ -453,12 +487,10 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;li>How can you use &lt;code>dplyr&lt;/code> to summarize data by group?&lt;/li>
 &lt;li>What are pipes and what are they used for?&lt;/li>
 &lt;/ul>
-&lt;!-- ### Slides -->
-&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
-&lt;!--
+&lt;h3 id="slides">Slides&lt;/h3>
+&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
 &lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/02-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/02-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
--->
-&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item><item><title>Welcome to AEM 2850 / 5850!</title><link>https://aem2850.toddgerarden.com/content/01-content/</link><pubDate>Mon, 29 Jan 2024 09:16:18 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/01-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Welcome to AEM 2850 / 5850!</title><link>https://aem2850.toddgerarden.com/content/01-content/</link><pubDate>Mon, 29 Jan 2024 09:16:18 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/01-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://aem2850.toddgerarden.com/syllabus/">Read the syllabus&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://aem2850.toddgerarden.com/schedule/">Review the schedule&lt;/a>&lt;/li>
