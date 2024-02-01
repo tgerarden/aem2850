@@ -15,7 +15,7 @@ lessons:
     date: "Week 2"
     content: "02-content"
     example: "02-example"
-    # assignment: "02-lab"
+    assignment: "02-lab"
     bg: 2
 
   - title: '<span class="content-title">Data import and tidying</span>'

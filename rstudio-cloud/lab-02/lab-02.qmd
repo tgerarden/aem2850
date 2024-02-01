@@ -24,10 +24,12 @@ library(tidyverse)
 
 The goal of this assignment is to help you gain familiarity with data frames -- think "spreadsheets" -- and how to use **dplyr** functions to transform data. In this lab we are providing some code snippets to serve as "scaffolding" to help guide you through each step. As always, please come to office hours and reach out to your teaching staff if you have any questions.
 
+In some places the scaffolded code provides the argument `FALSE` to functons (e.g., `filter(FALSE)` in question 1). We did this to allow the file to render even before you do any coding. Please replace `FALSE` with your code, just as you have been replacing `_____` with your code in the examples.
+
 We will work with the data table `flights` provided in the package **nycflights13**. The data table includes all domestic flights that departed NYC (i.e. JFK, LGA or EWR) in 2013. It has `r ncol(flights)` variables. Details of the package **nycflights13** are available [here](https://github.com/tidyverse/nycflights13).
 
 ``` {r}
-flights
+head(flights)
 ```
 
 <!--- Please leave the code above unchanged. Questions start from here. --->
@@ -81,8 +83,8 @@ You can also use dplyr::relocate to reorder columns.
 
 
 ## 4. Use dplyr::arrange to sort flights by arrival delays in descending order. How long was the worst arrival delay?
-<!-- Tip: Use dplyr::arrange to sort flights by arrival delays in descending order. Since the worst delay is the first row, you can combine dplyr::filter with dplyr::row_number to get this row. You may use pull() to get the value of this delay time.
-Note: another approach you could take would be to use a conditional statement to filter for the maximum delay without needing to use arrange at all.
+<!-- Tip: Use dplyr::arrange to sort flights by arrival delays in descending order. Since the worst delay is the first row, you can combine dplyr::filter with dplyr::row_number to get this row. You may use pull() to get the value of this delay time in a vector rather than data frame, which simplifies presenting the number in text using inline code (though other methods work, too).
+Note: Another option would be to use the convenience function slice_max(). Alternatively, you could use a conditional statement to filter for the maximum delay without needing to use arrange at all.
 -->
 ``` {r echo = TRUE}
 worst_delay <- flights |>
@@ -104,7 +106,7 @@ flights |>
 ```
 
 
-## 6. Select `dep_time`. Currently `dep_time` is convenient to look at, but hard to compute with because it is not really a continuous number. Convert it to a more convenient representation of number of minutes since midnight. Add a new column `dep_time_min` to store the converted values.
+## 6. Select `dep_time`. Currently `dep_time` is convenient to look at, but hard to compute with because it is not really a continuous number. Convert it to a represent the number of minutes since midnight. Add a new column `dep_time_min` to store the converted values.
 <!-- Tip: To get the departure times in the number of minutes, divide dep_time by 100 to get the hours since midnight and multiply by 60 and add the remainder of dep_time divided by 100. For example, 1504 represents 15:04 (or 3:04 PM), which is 904 minutes after midnight. To generalize this approach, you can use %/% and %% to split out the hour-digits from the minute-digits.
 The integer division operator %/% can give us the hour-digits: 1504 %/% 100 = 15
 The modulo operator %% can give us the minute-digits: 1504 %% 100 = 4
@@ -116,24 +118,23 @@ flights |>
   select() |>
   mutate(dep_hour = FALSE) |> # split out the hour-digits
   mutate(dep_min = FALSE) |> # split out the minute-digits
-  mutate(dep_time_min = dep_hour * 60 + dep_min) # generate dep_time in the number of minutes since midnight
+  mutate(dep_time_min = dep_hour * 60 + dep_min) # dep_time in min since midnight
 ```
 
 
 ## 7. Calculate the average arrival delay by carrier. Which carrier has the worst delays? 
-<!-- Tip: Combine dplyr::group_by and dplyr::summarise to find the average arrival delay by carrier. Be careful! There are missing values in arr_delay. You want to ignore these missing values when calculating the mean. You can use mean(, na.rm = TRUE). 
-Note: dplyr::summarise and dplyr::summarize are synonyms, so you can use whichever you are most comfortable with.-->
+<!-- Tip: Combine dplyr::group_by and dplyr::summarize to find the average arrival delay by carrier. Be careful! There are missing values in arr_delay. You want to ignore these missing values when calculating the mean. You can use mean(_____, na.rm = TRUE). 
+Note: dplyr::summarize and dplyr::summarise are synonyms, so you can use whichever you are most comfortable with.-->
 ``` {r echo = TRUE}
 worst_delay_carrier <- flights |>
   group_by() |>
-  summarise() |>
-  arrange() |>
-  filter() 
+  summarize() |>
+  slice_max(FALSE) # Replace FALSE with your code
 ```
 Carrier `inline code` has the worst delays.
 
 
-## 8. What time of day should you fly if you want to avoid delays as much as possible?
+## 8. What hour(s) of the day should you fly if you want to avoid delays as much as possible?
 ``` {r echo = TRUE}
 # Your code goes here
 ```
