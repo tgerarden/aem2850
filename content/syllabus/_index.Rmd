@@ -46,13 +46,15 @@ Tuesdays and Thursdays 08:40 - 09:55 or 10:10 - 11:25 in Warren 150
 
 ### TA office hours
 
-TBD
-
 <!-- All TA office hours take place in Warren 372. -->
 
-<!-- - Mondays 12:30-2:30: Undergrad TA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu)) -->
-<!-- - Mondays 3:30-5:00: Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) -->
-<!-- - Fridays 4:00-5:00: Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) -->
+- Mondays 1:30-3:30 in Warren 370:
+  - Undergrad TA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu))
+  - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
+- Mondays 3:30-5:00 in Warren 167:
+  - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
+- Fridays 2:30-3:30 in Warren B50:
+  - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
 
 [See below for tips on how to make the most of office hours and email.](#office-hours-and-email)
 

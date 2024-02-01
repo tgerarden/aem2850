@@ -73,15 +73,22 @@ If you are new to the class, please review canvas and [course site](https://aem2
 **Prelim dates:** Feb 29 and May 7 in class
 <!-- - SDS: we will use the Alternative Testing Program, submit form by Feb. 8 -->
 
-**TA office hours:** Mondays, exact time still TBD, starting next week
-<!-- Mondays 12:30pm - 3:30pm in Warren 372 -->
-
-**My office hours:** Tuesdays 11:30 - 12:30 in Warren 464; [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
-- Caveat: I cannot hold office hours today
-
 **Other reminders:**
 - Bookmark [the schedule](https://aem2850.toddgerarden.com/schedule) and visit often
 - Submit assignments via canvas by Monday at 11:59pm going forward
+
+---
+
+# Office hours update
+
+**TA office hours:**
+- Mondays 1:30pm - 3:30pm in Warren 370
+- Mondays 3:30pm - 5:00pm in Warren 167
+- Fridays 2:30pm - 3:30pm in Warren B50
+
+
+**My office hours:** Tuesdays 11:30 - 12:30 in Warren 464; [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
+- Caveat: I cannot hold office hours today
 
 ---
 
@@ -172,8 +179,9 @@ plot_countries <- where_were_from |>
       country == "United States of America" ~ "usa",
       # use the following command to identify labels that need updating
       # anti_join(plot_countries, countries, by = "region")
-      country == "rok (south korea)" ~ "south korea",
-      country == "us & china" ~ "usa", # arbitrarily taking first response
+      country == "ROK (South Korea)" ~ "south korea",
+      country == "I am a dual citizen of Korea and the US (+ I was raised in China)" ~ "south korea",
+      country == "US & China" ~ "usa", # arbitrarily taking first response
       TRUE ~ stringr::str_to_lower(country)
     )
   ) |> 
