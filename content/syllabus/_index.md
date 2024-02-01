@@ -188,7 +188,7 @@ I highly encourage you to utilize Professor and TA office hours, especially if y
 
 #### Email
 
-You can also reach us by email. The best approach for generic, time-sensitive questions is to email all of us at the same time (and reply-all in follow-up emails). You can do that with one click [here](mailto:gerarden@cornell.edu,hz423@cornell.edu,sm2397@cornell.edu).
+You can also reach us by email. The best approach for generic, time-sensitive questions is to email all of us at the same time (and reply-all in follow-up emails). You can do that with one click [here](mailto:gerarden@cornell.edu,vs424@cornell.edu,jeg338@cornell.edu).
 
 
 Email is a blessing and a curse. Here are some tips to help us get the most out of our email exchanges:
