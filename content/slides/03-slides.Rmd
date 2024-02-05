@@ -69,7 +69,7 @@ Acknowledgements:
 We will not assign any late penalties for the survey and lab-02
 
 Late assignments will be penalized going forward
-- If something comes up, please email me and Hui **in advance**
+- If something comes up, please email me and Victor **in advance**
 
 Reminders:
 - Submit assignments via canvas
@@ -84,12 +84,13 @@ Questions before we get started?
 [Prologue](#prologue)
 
 [Data import](#readr)
+  - [read_csv](#read_csv)
+  - [write_csv](#write_csv)
+  - [read_excel](#read_excel)
 
 [Tidy data](#tidyr)
   - [pivot_longer](#pivot_longer)
   - [pivot_wider](#pivot_wider)
-  - [separate](#separate)
-  - [unite](#unite)
 
 [Summary](#summary)
 
@@ -141,16 +142,15 @@ How would you use counts to compute shares in this data frame?
 
 # What are our "tidy" concentrations?
 
-Let's `pivot_longer` and `arrange` to get the top 3:
+Let's `pivot_longer` and `slice_max` to get the top 3:
 
 ```{r, echo = FALSE}
 # now show off what we can do with pivot_longer()
 concentrations |> select(-degree, -concentration, -program) |> 
   summarize_all(sum, na.rm = TRUE) |> 
   pivot_longer(everything(), names_to = "concentration", values_to = "count") |> 
-  arrange(desc(count)) |> 
-  filter(concentration!="other") |> 
-  head(3)
+  filter(concentration!="other") |>
+  slice_max(count, n = 3)
 ```
 
 --
@@ -167,10 +167,9 @@ tidy_concentrations |> mutate(share = count / sum(count)) # easy!
 concentrations |> select(-degree, -concentration, -program) |> 
   summarize_all(sum, na.rm = TRUE) |> 
   pivot_longer(everything(), names_to = "concentration", values_to = "count") |> 
-  arrange(desc(count)) |> 
   mutate(share = count / sum(count)) |> 
   filter(concentration!="other") |> 
-  head(3)
+  slice_max(count, n = 3)
 ```
 
 ---
@@ -240,6 +239,7 @@ How are they different?
 - csv files do not store column types!
 
 ---
+name: read_csv
 
 # 1) readr::read_csv
 
@@ -299,9 +299,9 @@ In our RStudio Cloud projects, these will both be `/cloud/project`, which is the
 
 # An aside on paths
 
-More generally, can check your working directory using `getwd()`
+More generally, you can check your working directory using `getwd()`
 
-For example, here's the working directory for the slides' source code:
+Example: here's the working directory for the slides' source code on my laptop:
 ```{r get-wd}
 getwd()
 ```
@@ -328,7 +328,6 @@ fs::dir_tree("data", glob = "*superbowl.csv") # could instead list the *.csv fil
 ```
 
 `data/superbowl.csv` is the relative path from our working directory to our csv
-
 
 ???
 
@@ -358,8 +357,7 @@ Note: readr intentionally never guesses that columns are integers as a safeguard
 .less-left[
 ```{r}
 ads |> 
-  count(funny) |> 
-  arrange(desc(n))
+  count(funny)
 ```
 ]
 
@@ -375,6 +373,7 @@ ads |>
 ]
 
 ---
+name: write_csv
 
 # 2) readr::write_csv
 
@@ -397,6 +396,7 @@ To preserve column specifications and save time when working in R, use `write_rd
 For multiple objects, `save()` and `load()` are handy functions from base R that work with the .RData format
 
 ---
+name: read_excel
 
 # Importing excel data
 
@@ -473,7 +473,7 @@ knitr::include_graphics("img/03/tidydata_3.jpg")
 
 # Which of these do you think is most tidy?
 
-.pull-left[
+.pull-left.small[
 ```{r, eval=FALSE}
 table1
 #> # A tibble: 4 × 4
@@ -497,7 +497,7 @@ table2
 ```
 ]
 
-.pull-right[
+.pull-right.small[
 ```{r, eval=FALSE}
 table3
 #> # A tibble: 8 × 4
@@ -534,7 +534,7 @@ table1 <- tibble(
 
 .pull-left[
 ```{r}
-# compute rate per 10,000
+# compute rate per 10,000 people
 table1 |>
   mutate(rate = cases / population * 10000)
 ```
@@ -563,8 +563,8 @@ The `ggplot2` functions we will learn are designed to work with tidy data:
 # visualize changes over time
 table1 |> 
   ggplot(aes(x = year, y = cases)) +
-  geom_line(aes(group = country)) +
-  geom_point(aes(color = country, 
+  geom_line(aes(color = country)) +
+  geom_point(aes(color = country,
                  shape = country)) +
   scale_x_continuous(breaks = c(1999, 2000)) +
   theme_bw() +
@@ -583,14 +583,9 @@ table1 |>
 
 **Key tidyr verbs**
 
-1. `pivot_longer`: Pivot wide data into long format (updated version of `gather`) 
+1. `pivot_longer`: Pivot wide data into long format
 
-2. `pivot_wider`: Pivot long data into wide format (updated version of `spread`) 
-
-3. `separate`: Split one column into multiple columns
-
-4. `unite`: Combine multiple columns into one
-
+2. `pivot_wider`: Pivot long data into wide format
 
 ---
 name: pivot_longer
@@ -600,10 +595,10 @@ name: pivot_longer
 ```{r, echo=FALSE}
 set.seed(12345)
 stocks <- tibble( # could use "tibble" instead of "data.frame" if you prefer
-  date = as.Date('2021-01-01') + 0:1,
-  X = rnorm(2, 0, 1),
-  Y = rnorm(2, 0, 2),
-  Z = rnorm(2, 0, 4)
+  date = Sys.Date() - 0:1,
+  AAPL = rnorm(2, 200, 15),
+  GOOG = rnorm(2, 150, 10),
+  MSFT = rnorm(2, 400, 20)
   )
 ```
 
@@ -613,27 +608,28 @@ stocks
 
 We have 4 columns, the date and the stocks
 
-Is this tidy?
+Why do I think this is untidy?
 
 --
 
-No!
-1. stock names `X`, `Y`, `Z` are values, not variables
+1. stock names `AAPL`, `GOOG`, `MSFT` are values, not variables
 2. cells contain prices, but there is no variable `price`
-
-Let's use `pivot_longer()` to get this in tidy form
 
 ---
 
 # 1) tidyr::pivot_longer
 
-We need to pivot the stock name columns `X`, `Y`, `Z` "longer"
+Let's use `pivot_longer()` to get this in tidy form
+
+We want to pivot the stock name columns `AAPL`, `GOOG`, `MSFT` "longer"
+
+--
 
 We need to give three key pieces of information to `pivot_longer()`:
 
-1. Choose columns using `X:Z` or `-date`
-2. Decide what variable holds the names: `names_to = "stock"`
-3. Decide what variable holds the values: `values_to = "price"`
+1. **Which columns to pivot** using `AAPL:MSFT` or `-date`
+2. **What variable will hold the names:** `names_to = "stock"`
+3. **What variable will hold the values:** `values_to = "price"`
 
 --
 
@@ -641,7 +637,7 @@ Here is what that syntax looks like:
 
 ```{r pivot_longer1a, eval=FALSE}
 stocks |> 
-  pivot_longer(X:Z, names_to = "stock", values_to = "price")
+  pivot_longer(cols = AAPL:MSFT, names_to = "stock", values_to = "price")
 ```
 
 ---
@@ -651,7 +647,7 @@ stocks |>
 Here is what that syntax does:
 
 ```{r pivot_longer1b}
-stocks |> pivot_longer(X:Z, names_to = "stock", values_to = "price")
+stocks |> pivot_longer(cols = AAPL:MSFT, names_to = "stock", values_to = "price")
 ```
 
 --
@@ -660,7 +656,7 @@ Let's save the "tidy" (i.e., long) stocks data frame for later use
 
 ```{r pivot_longer2}
 tidy_stocks <- stocks |> 
-  pivot_longer(-date, names_to = "stock", values_to = "price")
+  pivot_longer(cols = -date, names_to = "stock", values_to = "price")
 ```
 
 ---
@@ -701,7 +697,7 @@ df |>
 
 .less-left[
 Column names become values in a new variable, whose name is given by `names_to`
-  - repeated once for each row in the original dataset
+  - repeated once for each row in the original
 ]
 
 .more-right[
@@ -767,116 +763,18 @@ Reversing the arguments effectively transposed the original data
 stocks
 ```
 
-
----
-name: separate
-
-# 3) tidyr::separate
-
-```{r echo = FALSE, eval = FALSE}
-# economists <- data.frame(name = c("Adam.Smith", "Paul.Samuelson", "Milton.Friedman"))
-```
-
-```{r sep1}
-halftime_openers <- data.frame(name = c("Dr.Dre", "Snoop.Dogg")) # (from the 2022 super bowl)
-halftime_openers
-```
-
---
-
-```{r sep1a}
-halftime_openers |> separate(name, c("first_name", "last_name")) 
-```
-
---
-
-This command is clever: it splits at non-alphanumeric values. To avoid ambiguity, you can specify the separation character with `separate(..., sep=".")`
-
----
-
-# 3) tidyr::separate
-
-```{r sep1b}
-halftime_performers <- data.frame(name = c("Dr..Dre", "Snoop.Dogg", "Eminem", "Mary.J.Blige",
-                                           "Kendrick.Lamar", "50.Cent", "Anderson..Paak"))
-```
---
-```{r sep1c}
-halftime_performers |> separate(name, c("first_name", "last_name"))
-```
-
-What happened? Did we lose any information?
-
-???
-No "Blige", no . in "Dr." or ".Paak"
-
----
-name: unite
-
-# 4) tidyr::unite
-
-Sometimes a single variable is stored in multiple columns:
-
-```{r unite1, echo=FALSE}
-gas_prices <- data.frame(
-  yr = rep(2023, times = 4),
-  mnth = rep(2, times = 4),
-  dy = 3:6,
-  price = c(3.567, 3.565, 3.563, 3.559)
-  )
-```
-
-```{r unite1a}
-gas_prices
-```
-
----
-
-# 4) tidyr::unite
-
-```{r unite1b}
-# combine "yr", "mnth", and "dy" into one "date" column
-gp_u <- gas_prices |> unite(date, c("yr", "mnth", "dy"), sep = "-")
-gp_u
-```
-
----
-
-# 4) tidyr::unite
-
-Note that `unite` will automatically create a character variable:
-```{r unite2, highlight.output=3}
-gp_u |> as_tibble() # print it as a tibble to see data types
-```
-
---
-
-To convert it to something else (e.g., date or numeric), modify it using `mutate`
-
----
-
-# 4) tidyr::unite
-
-```{r unite3, message=F, highlight.output=3}
-library(lubridate) # the tidyverse package lubridate is helpful for dates and times
-gp_u |> 
-  mutate(date = ymd(date)) |> # ymd() converts from strings to dates, more on that later
-  as_tibble()
-```
-
-???
-https://lubridate.tidyverse.org/
-
 ---
 
 # tidyr resources
 
-[Data tidying with tidyr : : CHEAT SHEET](https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf) (link downloads a pdf)
+[Data tidying with tidyr : : CHEATSHEET](https://rstudio.github.io/cheatsheets/tidyr.pdf)
 
 [Vignette](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) (from the **tidyr** package)
 ```{r, eval = FALSE}
 vignette("tidy-data")
 ```
+
+[Ch. 5 of R for Data Science (2e)](https://r4ds.hadley.nz/data-tidy)
 
 [Original paper](https://vita.had.co.nz/papers/tidy-data.pdf) (Hadley Wickham, 2014 JSS)
 
@@ -906,8 +804,6 @@ name: summary
 #### tidyr
 1. `pivot_longer`
 2. `pivot_wider`
-3. `separate`
-4. `unite`
 ]
 
 .pull-right-3[

@@ -8,10 +8,14 @@ all_responses <- read_csv("content/slides/data/survey-responses/lab-1-survey.csv
 
 responses <- all_responses
 
-# enrolled_students <- read_csv("content/slides/data/survey-responses/enrollment-feb6.csv") |>
-#   select(netid = `NET ID`)
-#
-# responses <- inner_join(all_responses, enrolled_students, by = "netid")
+enrolled_students <-
+  rbind(
+    read_csv("content/slides/data/survey-responses/enrollment-feb6-sec1.csv"),
+    read_csv("content/slides/data/survey-responses/enrollment-feb6-sec2.csv")
+    ) |>
+  select(netid = `NET ID`)
+
+responses <- inner_join(all_responses, enrolled_students, by = "netid")
 
 
 # EXTRACT DATA OF DIFFERENT TYPES----
@@ -43,9 +47,14 @@ concentrations_raw <- responses |>
   mutate(
     program = case_when(
       str_detect(degree, "BA") ~ "BA",
-      str_detect(degree, "BS") ~ "BS",
+      str_detect(degree, "BS|AEM|Dyson") ~ "BS",
+      str_detect(degree, "Applied Economics and Management") ~ "BS",
       str_detect(degree, "MPS") ~ "MPS",
+      str_detect(degree, "MPA") ~ "MPA",
+      str_detect(degree, "Master of Public Administration") ~ "MPA",
       str_detect(degree, "MS") ~ "MS",
+      str_detect(degree, "PhD") ~ "PhD",
+      str_detect(degree, "CAS") ~ "BA",
       TRUE ~ "BS"
     )
   )
@@ -53,16 +62,18 @@ concentrations_raw <- responses |>
 concentrations <- concentrations_raw |>
   mutate(concentration = tolower(concentration)) |>
   mutate(ba = str_detect(concentration, "business analytics"),
-         finance = str_detect(concentration, "finance") | str_detect(concentration, "finace"), # BS finance and MPS behavioral finance
-         strategy = str_detect(concentration, "strategy"),
-         # accounting = str_detect(concentration, "accounting"),
+         acct = str_detect(concentration, "accounting"),
          dev = str_detect(concentration, "development"),
-         entr = str_detect(concentration, "entrepreneurship"),
-         enviro = str_detect(concentration, "sustainable") | str_detect(concentration, "environmental") | str_detect(concentration, "eere"),
+         econ = str_detect(concentration, "economics") | str_detect(degree, "Econ"),
+         # entr = str_detect(concentration, "entrepreneurship"),
+         enviro = str_detect(concentration, "sustainable|sustainability|environmental|eere|sbep"),
+         finance = str_detect(concentration, "finance") | str_detect(concentration, "finace"), # BS finance and MPS behavioral finance
          food = str_detect(concentration, "food"),
-         mkting = str_detect(concentration, "marketing"),
-         tech = str_detect(concentration, "tech") & str_detect(concentration, "manage")) |>
-  mutate(other = (ba + finance + strategy + dev + entr + enviro + food + mkting + tech)==0)
+         mktg = str_detect(concentration, "marketing"),
+         mgmt = str_detect(concentration, "management") | concentration=="tm", # management + tech management + agribusiness management
+         strategy = str_detect(concentration, "strategy")
+         ) |>
+  mutate(other = (ba + acct + dev + econ + enviro + finance + food + mktg + mgmt + strategy)==0)
 
 
 # COMPANIES ----
@@ -72,16 +83,28 @@ companies <- responses |>
     ticker = case_match(
       ticker,
       "Not sure" ~ NA,
-      "Haven't invested in stocks." ~ NA,
-      "I do not really follow the stock market" ~ NA,
-      "I don't have one unfortunately" ~ NA,
-      "Don't have one" ~ NA,
-      "Don't have a preference" ~ NA,
-      "GOOG (Google)" ~ "GOOGL",
-      "NASDAQ: ULTA" ~ "ULTA",
-      "Blackstone" ~ "BX",
+      "I don't have just one" ~ NA,
+      "none" ~ NA,
+      "don't have any" ~ NA,
+      "apple" ~ "AAPL",
+      "$AMD" ~ "AMD",
+      "APPL" ~ "AAPL",
+      "SPINN" ~ "SPINN.HE",
+      "PFE (Pfizer Inc.)" ~ "PFE",
+      "Tesla" ~ "TSLA",
+      "Tesla, Apple, BYD" ~ "TSLA",
+      "I don't really have a favorite, but I'd probably go with MSFT" ~ "MSFT",
+      "Tough one... I'd say $NEE" ~ "NEE",
+      "ISIN: US88160R1014" ~ "TSLA",
+      "None" ~ NA,
+      "not sure" ~ NA,
+      "NASDAQ" ~ "NDAQ",
+      "HBD, AAPL, TCS" ~ "AAPL",
+      "PayPal" ~ "PYPL",
+      "$AAPL" ~ "AAPL",
       "Apple" ~ "AAPL",
-      "Ike" ~ "IKE",
+      "no" ~ NA,
+      "BOM:500800" ~ "TATACONSUM",
       .default = ticker
     )
   )
