@@ -838,6 +838,82 @@ name: pivot_wider
 
 # 2) tidyr::pivot_wider
 
+We can use `pivot_wider()` to make data "wide"
+
+Let's say we want to convert `tidy_stocks` back to `stocks`
+
+.pull-left[
+
+```r
+tidy_stocks
+```
+
+```
+## # A tibble: 6 × 3
+##   date       stock price
+##   &lt;date&gt;     &lt;chr&gt; &lt;dbl&gt;
+## 1 2024-02-06 AAPL   209.
+## 2 2024-02-06 GOOG   149.
+## 3 2024-02-06 MSFT   412.
+## 4 2024-02-05 AAPL   211.
+## 5 2024-02-05 GOOG   145.
+## 6 2024-02-05 MSFT   364.
+```
+
+]
+
+.pull-right[
+
+```r
+stocks
+```
+
+```
+## # A tibble: 2 × 4
+##   date        AAPL  GOOG  MSFT
+##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 2024-02-06  209.  149.  412.
+## 2 2024-02-05  211.  145.  364.
+```
+
+]
+
+---
+
+# 2) tidyr::pivot_wider
+
+.less-left[
+
+```r
+tidy_stocks
+```
+
+```
+## # A tibble: 6 × 3
+##   date       stock price
+##   &lt;date&gt;     &lt;chr&gt; &lt;dbl&gt;
+## 1 2024-02-06 AAPL   209.
+## 2 2024-02-06 GOOG   149.
+## 3 2024-02-06 MSFT   412.
+## 4 2024-02-05 AAPL   211.
+## 5 2024-02-05 GOOG   145.
+## 6 2024-02-05 MSFT   364.
+```
+]
+
+.more-right[
+We need to give two key pieces of information to `pivot_wider()`:
+
+1. **What variable to get names from:** `names_from = "stock"`
+2. **What variable to get values from:** `values_from = "price"`
+
+`pivot_wider()` figures out the rest
+]
+
+---
+
+# 2) tidyr::pivot_wider
+
 
 ```r
 tidy_stocks |&gt; pivot_wider(names_from = stock, values_from = price)
