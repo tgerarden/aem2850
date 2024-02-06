@@ -367,7 +367,7 @@ ads |>
 ```{r}
 ads |> 
   group_by(brand) |> 
-  summarize(likes = sum(like_count, na.rm = T)) |> 
+  summarize(likes = sum(like_count, na.rm = TRUE)) |> 
   arrange(desc(likes))
 ```
 ]
