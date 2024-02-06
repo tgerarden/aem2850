@@ -735,6 +735,47 @@ name: pivot_wider
 
 # 2) tidyr::pivot_wider
 
+We can use `pivot_wider()` to make data "wide"
+
+Let's say we want to convert `tidy_stocks` back to `stocks`
+
+.pull-left[
+```{r}
+tidy_stocks
+```
+
+]
+
+.pull-right[
+```{r}
+stocks
+```
+
+]
+
+---
+
+# 2) tidyr::pivot_wider
+
+.less-left[
+```{r}
+tidy_stocks
+```
+]
+
+.more-right[
+We need to give two key pieces of information to `pivot_wider()`:
+
+1. **What variable to get names from:** `names_from = "stock"`
+2. **What variable to get values from:** `values_from = "price"`
+
+`pivot_wider()` figures out the rest
+]
+
+---
+
+# 2) tidyr::pivot_wider
+
 ```{r pivot_wider1a}
 tidy_stocks |> pivot_wider(names_from = stock, values_from = price)
 ```
