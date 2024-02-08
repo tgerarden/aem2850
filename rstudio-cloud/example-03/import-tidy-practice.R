@@ -24,48 +24,58 @@ table2 # let's take a look
 # level of observation: country-year
 # variables: country, year, cases, population
 # in other words, we want to pivot cases and population data wider
-table1 <- table2 %>% # assign the tidy data to table1
+table1 <- table2 |> # assign the tidy data to table1
   pivot_wider(names_from = "______", values_from = "______")
 table1 # let's take a look
 
 # 1.3 work with tidy data
 # compute the case rate per 10,000 people
-table1 %>% 
+table1 |>
   mutate(case_rate = ______ / ______ * 10000)
 
 # compute the total number of cases in each country
-table1 %>% 
-  group_by(______) %>% 
+table1 |>
+  group_by(______) |>
   summarize(total_cases = ______(cases))
 
 # compute the total number of cases in each year
-table1 %>% 
-  ______(______) %>% 
+table1 |>
+  ______(______) |>
   ______(total_cases = ______(cases))
 
 # it is possible to do each of these with table2
 # but it's really easy if we use the tidy version (table1)
 
 # 1.4 write tidy data in case you want to use it later
-______("______") # write table1 to table1.csv
+table1 |>
+  ______("______") # use write_csv() to write table1 to table1.csv
 
 
 # PLEASE STOP HERE AND LET US KNOW THAT YOU ARE DONE
 
 
 # 2. Import and tidy data -----
-______ # use read_csv to read in table3.csv and assign it to table3
+______ <- ______("______") # use read_csv to read in table3.csv and assign it to table3
 table3 # let's take a look
 
-# use separate to split "rate" into "cases" and "population"
-table3 %>% 
-  separate(______, ______, ______)
+# use separate_wider_delim to split "rate" into "cases" and "population"
+table3 |>
+  separate_wider_delim( # this is a new function so we've coded it up for you
+    cols = rate,        # the existing column with data we want to separate
+    delim = " / ",      # the characters that separate (delimit) the data
+    names = c("cases", "population") # names for the new columns
+  )
 
 # compute the case rate per 10,000 people
-table3 %>% 
-  separate(______, ______, ______) %>% # you can just copy this from the previous exercise above
+table3 |>
+  separate_wider_delim( # this is a new function so we've coded it up for you
+    cols = rate,        # the existing column with data we want to separate
+    delim = " / ",      # the characters that separate (delimit) the data
+    names = c("cases", "population") # names for the new columns
+  ) |>
   mutate(case_rate = ______ / ______ * 10000)
-# did someting go wrong? if so, can you modify the code fix it?
+# did something go wrong? if so, can you modify the code fix it?
+# hint: try using mutate with as.integer() to convert cases and population
 
 
 # PLEASE STOP HERE AND LET US KNOW THAT YOU ARE DONE
@@ -74,46 +84,59 @@ table3 %>%
 # 3. Import, tidy, and transform zillow data -----
 # zillow-data.xlsx contains Zillow Home Value Index data
 # use read_excel to read in data from the sheet "ny" and assign it to zhvi
-zhvi <- read_excel("______.xlsx", 
+zhvi <- read_excel("______.xlsx",
                    sheet = "______")
 zhvi # let's take a look
 # did something go wrong? try using the `skip` argument to fix it
+# hint: visually inspect zillow-data.xlsx by clicking on it in the Files pane
 ?read_excel # if you get stuck, use the console to get help!
-zhvi <- read_excel("______.xlsx", 
+zhvi <- read_excel("______.xlsx",
                    ______ = "______",
-                   ______ = ______)
+                   skip = ______)
 zhvi # let's take a look
 
 # it looks like the column names are dates
 # tidy the data so the variable date is stored in a single column "date"
 # store the prices in a single column "price"
-# rename RegionName, and remove RegionType and StateName from the data
+# rename RegionName to city, and remove RegionType and StateName from the data
 # assign the resulting data frame to zhvi_tidy
-zhvi_tidy <- zhvi |> 
-  rename(______ = ______) |> 
-  ______(-RegionType, -______) |> 
-  pivot_longer(-______,
+zhvi_tidy <- zhvi |>
+  rename(______ = RegionName) |>
+  ______(-RegionType, -______) |>
+  pivot_longer(-______, # pivot everything but the column city
                names_to = "______",
                ______ = "______")
 
+# print zhvi_tidy to make sure you got what you wanted
+zhvi_tidy
+
 # use dplyr functions to find the mean home price for "Ithaca, NY" in thousands
-zhvi_tidy |> 
-  ______(city == "Ithaca, NY") |> 
+zhvi_tidy |>
+  ______(city == "Ithaca, NY") |>
   summarize(mean_price = ______(______) / ______)
 
 # use dplyr functions to find the city with the highest mean price
-zhvi_tidy |> 
-  group_by(______) |> 
-  ______(mean_price = ______(______) / ______) |> 
-  arrange(______(______)) |> 
-  slice_head(n = 1)
+zhvi_tidy |>
+  group_by(______) |>
+  ______(mean_price = ______(______) / 1000) |>
+  slice_max(______, n = ______)
+
+# do that again, using a slightly different approach
+zhvi_tidy |>
+  group_by(______) |>
+  ______(mean_price = ______(______) / 1000) |>
+  arrange(desc(______)) |>
+  slice_head(n = 1) # could do this yet a third way: filter(row_number() == 1)
 
 # use dplyr functions to find the city with the lowest mean price
 ______
 
 
-# challenge: compute the ratio of the price in 2/28/22 over the price in 1/31/00
+# challenge: use the original "untidy" dataset zhvi to compute 
+# the ratio of the price in 2/28/22 over the price in 1/31/00.
 # which city has a higher ratio: ithaca or NYC?
+names(zhvi)
+# this is a case where untidy data can be convenient:
 ______
 
 
@@ -127,22 +150,32 @@ ______
 # use read_csv to read in data from the url https://www.census.gov/retail/mrts/www/statedata/state_retail_yy.csv and assign it to retail
 retail <- ______
 
-# use pivot_longer() to construct a data frame where the level of observation is 
-# the fips-stateabbr-naics-yearmonth, and the variable of interst is yoy_pct_change
-retail_tidy <- ______
+# use pivot_longer() to construct a data frame where the level of observation is
+# the fips-stateabbr-naics-yearmonth, and the variable of interest is yoy_pct_change
+# you'll need to convert yoy_pct_change from a character to a numberic
+retail_tidy <- ______ |> 
+  pivot_longer(
+    cols = starts_with("______"), # this is one of many ways to specify the columns to pivot
+    names_to = "______",
+    values_to = "______"
+  ) |> 
+  mutate(______ = as.numeric(______))
+
+# print retail_tidy to make sure you got what you wanted
+retail_tidy
 
 # what yearmonth had the highest yoy_pct_change for naics == "TOTAL" for the entire USA?
 ______
 
 # what state had the highest yoy_pct_change for naics == "TOTAL" in february 2022?
-# hint: you could use filter to circumvent the non-numeric data in yoy_pct_change
 ______
 
 # make a plot of yoy_pct_change over time for naics == "TOTAL" for the entire USA
-retail_tidy |> 
-  filter(______ == "USA" & naics == "______") |> 
-  mutate(yearmonth = str_replace(______, "______", "______"), # remove leading yy from yearmonth
-         date = lubridate::______(yearmonth)) |> # find a lubridate function similar to ymd() to convert yearmonth to a date
+# note: you just need to fill in the missing pieces of the filter() command
+retail_tidy |>
+  filter(______ == "USA" & naics == "______") |>
+  mutate(yearmonth = str_replace(yearmonth, "yy", ""), # remove leading yy from yearmonth
+         date = ym(yearmonth)) |> # convert yearmonth to a date for plotting
   ggplot(aes(x = date, y = as.numeric(yoy_pct_change))) +
   geom_col() +
   theme_bw() +
@@ -152,4 +185,7 @@ retail_tidy |>
        caption = "Data Source: U.S. Census Bureau's Monthly State Retail Sales")
 
 # challenge: replicate the plot above for Gasoline Stations in NY
+# you can start by copying and pasting the code you wrote above, then editing it
+# you can look up NAICS codes, but for convenience the relevant code is 447
 # how does it compare to the first plot?
+______

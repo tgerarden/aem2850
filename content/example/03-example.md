@@ -1,7 +1,7 @@
 ---
 title: "Data import and tidying"
 linktitle: "Data import and tidying"
-date: "`r format(Sys.time())`"
+date: "2024-02-07 21:58:28"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
