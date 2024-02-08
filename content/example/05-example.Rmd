@@ -17,18 +17,10 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Posit Cloud links
-
-[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5470040)
-
-[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5470044)
-
-
-
 ## Announcements
 - Office hours
   - No office hours during February break
-  - We will hold office hours Wednesday, March 1 (see canvas)
+  <!-- - We will hold office hours Wednesday, March 1 (see canvas) -->
 - Prelim 1
   - Will be similar in structure to labs, though slightly more open-ended questions and less direct guidance
   - Prelim will be distributed on Posit Cloud at 9:40am
@@ -38,10 +30,11 @@ editor_options:
 
 ## Plan for today
 - Questions? :raising_hand_woman:
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-05` in our course workspace
 - Work through `strings-practice.R`
+- **Solutions** will be posted after class
 
 
 ## Cheatsheets
 
 [Click here to download the `stringr` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf)
-

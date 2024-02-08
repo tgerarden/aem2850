@@ -17,18 +17,12 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Posit Cloud links
-
-[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5700001)
-
-[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5700005)
-
-
 ## Plan for today
 - Questions? :raising_hand_woman:
 - Finish up slides from Tuesday
-  - I added two slides on how to estimate interactions that might be helpful for the group project :winking_face:
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-10` in our course workspace
 - Work through `relationships-practice.R`
+- **Solutions** will be posted after class
 
 
 ## Cheatsheets

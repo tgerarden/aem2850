@@ -1,7 +1,7 @@
 ---
 title: "Welcome to the tidyverse"
 linktitle: "Welcome to the tidyverse"
-date: "2024-01-29 16:27:26"
+date: "2024-02-08 14:15:41"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -17,20 +17,15 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Posit Cloud links
-
-[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/471091/content/7468889)
-
-[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/471091/content/7468929)
-
-
 ## Plan for this week's example
 - Questions? :raising_hand_woman:
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-02` in our course workspace
 - Work through `intro-tidyverse-practice.R`
 - We will explore data from [this FiveThirtyEight article](https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/)
   <!-- - On our own devices: 1. Getting Comfortable with Data Frames -->
   <!-- - As a group: discuss results, answer questions -->
   <!-- - On our own devices: 2. Using Functions in Packages -->
+- **Solutions** will be posted after class
 
 
 ## Cheatsheets

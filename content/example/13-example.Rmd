@@ -17,13 +17,8 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Posit Cloud links
-
-[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5875791)
-
-[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5875799)
-
-
 ## Plan for today
 - Questions? :raising_hand_woman:
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-13` in our course workspace
 - Work through `web-scraping-practice.R` as a group
+- **Solutions** will be posted after class

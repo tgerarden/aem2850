@@ -1,7 +1,7 @@
 ---
 title: "Intro to R, RStudio, and Quarto"
 linktitle: "Intro to R, RStudio, and Quarto"
-date: "2024-01-24 12:56:20"
+date: "2024-02-08 14:15:39"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -22,18 +22,12 @@ editor_options:
 Examples contain material we will discuss and use to learn R in class. These notes are *not* comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.
 
 
-## Posit Cloud link
-
-*Note: Posit Cloud was formerly known as RStudio Cloud. Posit Cloud hosts Jupyter projects as well as the RStudio projects we will use in this course.*
-
-[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/471091/content/7432154)
-
-
 ## Plan for today
 - Questions? Concerns?
 - Did anyone have trouble making an RStudio Cloud account?
   - [Here is the link to join the course workspace if you haven't already](https://posit.cloud/spaces/471091/join?access_code=eC5iPqQ24gGxvOPDVxfwh02QT8RAzg6sLvC8u51e)
   - **IMPORTANT NOTE:** I and our TAs will be able to view your work. This is a feature but could also be a bug -- please don't write or store anything in your course projects that you don't want us to see. :wink:
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-01` in our course workspace
 - R, RStudio, Posit Cloud basics
   - overview on this site, then move to posit.cloud
   - together: `r-coding-intro.R`
@@ -45,12 +39,12 @@ Examples contain material we will discuss and use to learn R in class. These not
   - p. 51 of slides: [html](/slides/01-slides.html#67) [PDF](/slides/01-slides.pdf)
 - Feedback on class format welcome!
 
+
 ## Cheatsheets
 
 [Click here to download the RStudio IDE cheatsheet](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf)
 
 [Click here to download the Quarto cheatsheet](https://rstudio.github.io/cheatsheets/quarto.pdf)
-
 
 
 ## Getting started with R and RStudio {#getting-started}

@@ -17,25 +17,12 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Posit Cloud links
-
-### Joins (Tuesday)
-
-[Click here to access example-04-1 on Posit Cloud](https://posit.cloud/spaces/328615/content/5413852)
-
-[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5416231)
-
-### Logic (Thursday) 
-
-[Click here to access example-04-2 on Posit Cloud](https://posit.cloud/spaces/328615/content/5413858)
-
-[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5416235)
-
-
 ## Plan for today
 - Questions? :raising_hand_woman:
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-04-X` in our course workspace
 - Tuesday: work through `join-practice.R` in `example-04-1`
-- Thursday: work through `logic-practice.R` in `example-04-1`
+- Thursday: work through `logic-practice.R` in `example-04-2`
+- **Solutions** will be posted after class
 
 
 ## Cheatsheets

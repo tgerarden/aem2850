@@ -17,16 +17,11 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Posit Cloud links
-
-[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5900959)
-
-[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5900961)
-
-
 ## Plan for today
 - Short lecture
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-14` in our course workspace
 - Work through `functions-practice.R`
+- **Solutions** will be posted after class
 
 
 ## Cheatsheets

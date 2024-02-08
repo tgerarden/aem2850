@@ -13,7 +13,7 @@
 #########################################################
 title: "Lab-03"
 author: "Write your name here"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
+date: today
 format: pdf
 urlcolor: blue
 ---
@@ -21,127 +21,170 @@ urlcolor: blue
 ```{r setup, include = FALSE}
 library(tidyverse)
 library(readxl)
-library(stringr)
+# the next line causes the output to omit output from functions like read_csv()
+knitr::opts_chunk$set(message = FALSE)
 ```
 
-# Preface
+## Preface
 
-The goal of this assignment is to help you gain more familiarity with data import, tidy data, and relational data. In this lab we will continue providing some code snippets to serve as "scaffolding" to help guide you through each step. Over the course of the semester we will provide less scaffolding and more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
+Starlink is a satellite network designed to provide internet to remote and underserved areas. Operated by the company SpaceX, it is comprised of a "constellation" of satellites orbiting the Earth at lower altitude than conventional internet satellites, removing the need for large infrastructure on the ground to receive the signal [(CNET, 2022)](https://www.cnet.com/home/internet/starlink-satellite-internet-explained/). In Jul. 2023, there were over 4,500 Starlink satellites orbiting the planet --- each about the size of a sofa ---, with plans of bringing this number up to 42,000 in the coming years [(The New York Times, 2023)](https://www.nytimes.com/interactive/2023/07/28/business/starlink.html).
 
-We will work with two data sets. One is **txhouse.csv** that has been derived from the `txhousing` dataset provided by **ggplot2**. `sales` is the number of sales. `price` is the median sale price. See here for details of the [original dataset](https://ggplot2.tidyverse.org/reference/txhousing.html). The other one is **TX_population.xlsx** that has been downloaded from the [United States Census Bureau](https://www.census.gov/data/tables/time-series/demo/popest/2010s-total-cities-and-towns.html). 
+In 2021, the Brazilian government started a dialogue with SpaceX to increase internet provision in remote areas of Brazil, particularly in the Amazon region [(Business Insider, 2021)](https://www.businessinsider.com/elon-musk-met-brazil-government-spacex-starlink-internet-amazon-rainforest-2021-11). SpaceX was eventually authorized to provide Starlink internet in 2022 [(Valor International, 2022)](https://valorinternational.globo.com/business/news/2022/01/30/elon-musks-starlink-gets-greenlight-from-brazils-telecoms-regulator.ghtml).
+
+In this assignment, we will use R to investigate whether the plan of increasing access in remote areas of Brazil is coming along or not. The goal is to help you gain more familiarity with data import, tidy data, and relational data. In this lab we will continue providing some code snippets to serve as "scaffolding" to help guide you through each step. Over the course of the semester we will provide less scaffolding and more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
+
+We will work with two data sets:
+
+1. **Internet access in Brazil (2022-2023).xlsx**, constructed with data found from the Brazilian regulatory agency for telecommunications [(source)](https://dados.gov.br/dados/conjuntos-dados/acessos---banda-larga-fixa). It measures Internet access by counting the number of fixed connections to the Internet for each month from Jan. 2022 to Nov. 2023. Counts are broken down by state, provider, type of area within the state, and whether the area is considered remote or not.
+
+2. **brazil_regions.csv**, which identifies the region where each of the 27 Brazilian states is located. There are five regions in total. Though not necessary, you can read more about Brazilian regions on [Wikipedia](https://en.wikipedia.org/wiki/Regions_of_Brazil).
 
 
 <!--- Please leave the code above unchanged. Questions start from here. --->
 
-## 1. Import `txhouse.csv` and assign it to `txhouse`. Is this data tidy? Why or why not? 
+{{< pagebreak >}}
+## 1. Import `Internet access in Brazil (2022-2023).xlsx` and assign it to a new object named `access`. You may need to specify the range of cells in the spreadsheet that should be imported. We'll consider the level of observation to be a state-year-month.
+
+## Based on what we saw in class, is this data frame "tidy"? Why or why not? Also, look at the column types (character, double, etc.); do they seem appropriate given the type of information contained in each one?
+<!-- Tip: Open this file with a spreadsheet editor (such as Excel or Google Sheets) and inspect which cells contain information that matches the "rectangular" data.frame structure. Those are the ones you should import, ignoring everything else the spreadsheet may contain. -->
+
 ``` {r echo = TRUE}
-txhouse <- FALSE # Replace FALSE with your code
-txhouse
-```  
+access <- FALSE # Replace FALSE with your code
+
+access
+```
+
 This data set is ... because ...
 
+Yes/no, the column types do/don't seem appropriate for the data they contain.
 
-## 2. Use tidyr::pivot_wider to tidy `txhouse`. Aggregate `sales` and take the average of `price` by city-year. Assign the tidy data to `tidy_txhouse` and print it.
-<!-- Tip: To aggregate `sales` and take the average of `price`, you can group the data by city and year. Then use dplyr::summarize to get the sum of sales and mean of price. -->
+
+{{< pagebreak >}}
+## 2. To start tidying the data, focus first on the columns whose names appear to be year-month combinations (in YYYYMM format -- e.g., "202202" is Feb. 2022). Use `pivot_longer` to transform the data frame, and then create two new columns: `year`, containing the year of the observation, and `month`, containing the month.  Assign the result to a new object named `access2`. Print the data frame `access2`.
+<!-- Tip: Pay attention to column types after using pivot_longer. Take that into account when you create `year` and `month`.-->
+
+```{r echo = TRUE}
+access2 <- access |>
+  pivot_longer(
+    cols = _____,
+    names_to = "_____",
+    values_to = "_____"
+  ) |>
+  mutate(
+    year = _____(_____) %/% 100,
+    month = _____(_____) %% 100
+  )
+
+access2
+```
+
+
+{{< pagebreak >}}
+## 3. We'll ignore the distinction between area types (rural, suburban and urban), so aggregate the data up to the `state`-`provider`-`remote_area`-`year`-`month` level by grouping and summarizing appropriately (watch out for missing data!). Ungroup the data frame after summarizing. You do not need to retain `year_month`. Assign the resulting data frame to `access3` and print it.
 
 ``` {r echo = TRUE}
-tidy_txhouse <- txhouse |> 
-  pivot_wider() |> 
-  group_by() |> 
+access3 <- access2 |>
+  group_by() |>
   summarize() |> 
   ungroup()
-tidy_txhouse
-```  
 
-
-## 3. Import `TX_population.xlsx`. Keep the columns of geographic area and population estimate from 2010-2019 (drop columns B and C in the sheet). Change the first column name to `region`. Assign it to `tx_pop` and print it.
-<!-- Tip: This excel spreadsheet has a relatively complex header. You can view the spreadsheet by clicking on it in the Files pane and then clicking "View File." You can also download it if you want. To make things easier, you can set the range of cells that you want to import, rather than importing the whole sheet. You can also use dplyr::select to select the variables within that range that you want to keep. Then use rename() to change the name of the first column.
--->
-
-```{r echo = TRUE}
-tx_pop <- read_excel() |>  
-  select() |>  # you can use "-" syntax to get all but the specified columns
-  rename(region = 1) # this renames by position; you could also use rename(region = "...1") 
-tx_pop
+access3
 ```
 
 
-## 4. Use tidyr::pivot_longer to tidy `tx_pop` and assign it to `tx_pop2`. What is the data type of variable `year`? Convert it to numeric and assign the data set to `tx_pop3`.
-<!-- Tip: You can use class() to find the data type. Use as.numeric() to convert to numeric type. -->
+{{< pagebreak >}}
+## 4. Finish tidying this data set by using `pivot_wider` so that `access3` shows for any given state, year, and month: (i) the number of Starlink connections in remote areas; (ii) Starlink connections in non-remote areas; (iii) connections to other providers in remote areas; and (iv) connections to other providers in non-remote areas. Assign the resulting data frame to `access3` and print it.
 
-```{r echo = TRUE}
-tx_pop2 <- tx_pop |> 
-  pivot_longer()
+## Note the new columns created have non-intuitive names. Use `rename` to give them names you think are intuitive for you and anyone who might look at your code.
 
-tx_pop3 <- tx_pop2 |> 
-  mutate(year = FALSE) # use as.numeric() to convert to the numeric type
-```
-Variable `year` in `tx_pop2` is of type `r class(tx_pop2$year)`.
+``` {r echo = TRUE}
+access3 <- access3 |>
+  pivot_wider(
+    names_from = c(_____, _____),
+    values_from = _____
+  ) |>
+  rename(
+    _____ = _____,
+    _____ = _____,
+    _____ = _____,
+    _____ = _____
+  )
 
-
-## 5. In `tx_pop3` use tidyr::separate to separate `region` into `city` and `state`. Remove the strings "city" and "town" in the `city` variable, and drop the `state` variable. Assign the new data to `tidy_txpop` and print it.
-<!-- Tip: We have not learned about how to remove strings, so we are providing code for you in the code chunk. -->
-
-```{r echo = TRUE}
-tidy_txpop <- tx_pop3 |> 
-  separate() |> 
-  mutate(city = str_remove(city, " city"),
-         city = str_remove(city, " town")) |> 
-  select()
-tidy_txpop
+access3
 ```
 
 
-## 6. Find the top three cities that have the largest average population over 2010-2019. What are these cities?
-<!-- Tip: This question is similar to questions #7 and #8 of lab-02. Please refer to lab-02-solutions if you have no clue for this one.-->
+{{< pagebreak >}}
+## 5. We now have the number of connections of each type by provider in each state at any given year and month. However, we still need to find out which states are located in the Amazon area.
 
-```{r echo = TRUE}
-top3 <- tidy_txpop |> 
-  group_by() |> 
-  summarize() |> 
-  arrange() |> 
+## Import `brazil_regions.csv` and assign it to a new object named `regions`. The Brazilian Amazon is mostly contained in the North region, so we want to single out states that are located there. With that in mind, is this data frame tidy? If not, why is that a problem, given what we want to do with this data?
+<!-- Tip: The level of observation here is states.-->
+
+``` {r echo = TRUE}
+regions <- FALSE # Replace FALSE with your code
+
+regions
+```
+
+Yes/no, the data frame is/is not tidy, because...
+
+
+{{< pagebreak >}}
+## 6. Use `pivot_longer` to tidy up `regions` and assign it to `states`. Print the resulting data frame. Then filter for rows in `states` corresponding to the North region, `pull` the states' names stored in `state`, and assign it to a new object named `north_states`. What are these states?
+<!-- Less code scaffolding this time! -->
+
+``` {r echo = TRUE}
+states <- regions |>
+  pivot_longer(
+    
+    
+    
+  )
+
+states
+
+north_states <- states |>
+  filter() |>
+  pull()
+```
+
+The states located in the North region are: `r paste(north_states, collapse = ", ")`.
+
+
+{{< pagebreak >}}
+## 7. Let's go back to the internet data. Filter `access3` so that only North states remain in the data frame. When was Starlink first introduced in each state? You can present the answer to this question in a small data frame with 7 rows.
+<!-- Tip: As we saw in a previous example, you can use the syntax `%in%` in conjunction with `filter` to identify the rows where `state` takes on a value contained in `north_states`. -->
+
+``` {r echo = TRUE}
+access4 <-
+  access3 |>
   filter()
+
+access4 |>
+  filter() |>
+  arrange() |>
+  group_by() |>
+  filter() |>
+  select()
 ```
-The top three cities with the largest average population over 2010-2019 are `r top3$city`.
 
 
-## 7. What are the total sales over 2010-2015 for each of the top three most populous cities?
-<!-- Tip: From question #6, we have found the three most populous cities in Taxes. You can filter the `tidy_txhouse` data based on your answer to #6. combine group_by() and summarize() to get the total sales of each city over 2010-2015. -->
-<!-- Note: Next week we'll learn how to use join operations, which provide another way to do this. -->
+{{< pagebreak >}}
+## 8. For each state and *just in 2023*, calculate Starlink's share of remote and non-remote connections. Would you say Starlink's entry in the Brazilian internet market is having a larger impact in remote or in non-remote areas of the Amazon? Recalling what you read in the introduction, is this result consistent with SpaceX's expectations for Starlink?
+<!-- Tip: You'll have to calculate the shares before repeating the analysis from the previous question. -->
 
-```{r echo = TRUE}
-top3_sales <- tidy_txhouse |> 
-  filter(_____ %in% top3$city) |> 
-  filter(_____) |> 
-  group_by(_____) |> 
-  summarize(sales = as.integer(_____(_____))) |> # as.integer is optional, for formatting
-  arrange(desc(_____))
+``` {r echo = TRUE}
+access4 |>
+  filter(_____==_____) |>
+  mutate(
+    
+    
+  ) |>
+  group_by(_____) |>
+  summarize(
+    
+    
+  )
 ```
-The total sales are `r top3_sales$sales[1]` in `r top3_sales$city[1]`, `r insert-your-inline-code-here` in `r insert-your-inline-code-here`, and `r insert-your-inline-code-here` in `r insert-your-inline-code-here`.
-<!-- Note: don't worry about the formatting of these numbers, though you can try to put them in a prettier format if you would like. -->
 
-
-## 8. Use information from `tidy_txhouse` and `tidy_txpop` to compute sales in 2010 per ten thousand residents for Houston.
-<!-- Tip: For this week, we'll do this by creating two separate objects that contain the numbers we want to divide. Note: Next week we'll learn how to use join operations, which provide an easy way to do this at scale. -->
-
-```{r echo = TRUE}
-houston_sales <- tidy_txhouse |> 
-  filter() |> 
-  pull() # use pull to get the value(s) in sales without the data frame
-
-houston_pop <- tidy_txpop |> 
-  filter() |> 
-  pull() # use pull to get the value(s) in population without the data frame
-
-houston_spc <- round(_____ / _____ * _____) # round for pretty printing
-```
-Houston had `r houston_spc` sales per ten thousand residents in 2010.
-
-
-## 9. Replicate #8 for "South Padre Island" (also in the year 2010). Are sales per capita higher or lower than for Houston? Can you think of a reason that place might have the most sales per capita? (you can google the location to inform your answer)
-<!-- No tips this time! -->
-
-```{r echo = TRUE}
-
-```
-South Padre Island had `r insert-your-inline-code-here` sales per ten thousand residents in 2010. That is higher (much higher!) than for Houston. One possible reason is that South Padre Island is a resort town, where a lot of properties may be bought by non-residents. These non-resident buyers would contribute to the number of property sales but not be included in the population counts.
+We see that...

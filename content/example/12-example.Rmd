@@ -17,15 +17,9 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Posit Cloud links
-
-[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5832370)
-
-[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5832363)
-
-
 ## Plan for today
 - Questions? :raising_hand_woman:
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-12` in our course workspace
 - Work through `text-practice.R`
 - Happy to discuss slides, but want to make sure you have a chance to practice new skills
-
+- **Solutions** will be posted after class

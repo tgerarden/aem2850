@@ -17,13 +17,10 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Posit Cloud links
-
-This week's example will be lab 11. [Click here to access the Posit Cloud project for this week's lab and follow the instructions in the file `lab-11.qmd`.](https://posit.cloud/spaces/328615/content/5771714)
-
-
 ## Plan for today
 - Questions? :raising_hand_woman:
+- This week's example will be the lab (homework) for week 11
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `lab-11` in our course workspace
 - Work through `lab-11.qmd`
 
 

@@ -1,7 +1,7 @@
 ---
 title: "Data import and tidying"
 linktitle: "Data import and tidying"
-date: "2024-02-07 21:58:28"
+date: "2024-02-08 14:15:54"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -17,17 +17,12 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Posit Cloud links
-
-[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/471091/content/7548478)
-
-[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/471091/content/7548481)
-
-
 ## Plan for today
 - Questions? :raising_hand_woman:
 - Wrap up slides from Tuesday (as needed)
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-03` in our course workspace
 - Work through `import-tidy-practice.R`
+- **Solutions** will be posted after class
 
 
 ## Cheatsheets

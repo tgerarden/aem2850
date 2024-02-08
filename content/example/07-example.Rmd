@@ -17,21 +17,16 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Posit Cloud links
-
-[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5548455)
-
-[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5548472)
-
-
 ## Plan for today
 - Questions? :raising_hand_woman:
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-07` in our course workspace
 - Tuesday:
   - Go through [slides](/content/07-content/)
   - Work through `mapping-data-to-graphics-practice.R`
 - Thursday:
   - Go through [slides](/content/07-content/)
   - Work through `amounts-practice.R`
+- **Solutions** will be posted after class
 
 ## Cheatsheets
 

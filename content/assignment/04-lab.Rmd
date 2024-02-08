@@ -19,4 +19,4 @@ editor_options:
 
 ## Lab
 
-[Click here to access the Posit Cloud project for this week's lab and follow the instructions in the file `lab-04.qmd`.](https://posit.cloud/spaces/328615/content/5440406)
+Navigate to [posit.cloud](http://posit.cloud), open the project `lab-03` in our course workspace, and follow the instructions in the file `lab-04.qmd`.

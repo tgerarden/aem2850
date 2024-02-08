@@ -17,19 +17,14 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Posit Cloud links
-
-[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/328615/content/5596049)
-
-[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/328615/content/5596055)
-
-
 ## Plan for today
 <!-- - Announcements: -->
 <!--   - [R installation instructions](/resource/install/) -->
 <!--   - [Group project](/assignment/group-project/) due April 14 (but start early!) -->
 - Questions? :raising_hand_woman:
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-08` in our course workspace
 - Work through `distributions-practice.R`
+- **Solutions** will be posted after class
 
 
 ## Cheatsheets

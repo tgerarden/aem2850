@@ -1,7 +1,7 @@
 ---
 title: "Joins and logic"
 linktitle: "Joins and logic"
-date: "`r format(Sys.time())`"
+date: "2024-02-08 15:26:07"
 menu:
   content:
     parent: Course content

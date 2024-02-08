@@ -17,17 +17,12 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Posit Cloud links
-
-[Click here to access this week's example Posit Cloud project](https://posit.cloud/spaces/471091/content/7548478)
-
-[**Solutions:** click here to access a project with a completed version](https://posit.cloud/spaces/471091/content/7548481)
-
-
 ## Plan for today
 - Questions? :raising_hand_woman:
 - Wrap up slides from Tuesday (as needed)
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-03` in our course workspace
 - Work through `import-tidy-practice.R`
+- **Solutions** will be posted after class
 
 
 ## Cheatsheets

@@ -1,26 +1,34 @@
-ticker,n
-601318,1
-AAPL,8
-AMZN,1
-BX,1
-BYD,1
-CICC,1
-CMG,1
-COST,1
-CPRX,1
-CRM,1
-DE,1
-DIS,1
-EL,1
-FSLR,1
-GOOGL,2
-IKE,1
-MSFT,2
-NFLX,1
-POAHY,1
-SPOT,1
-TM,1
-TSLA,3
-UL,1
-ULTA,1
-WMT,1
+name,n
+3M Company,2
+Advanced Micro Devices Inc.,2
+Airbus Se/Adr,1
+Alphabet Inc. Class A,2
+Alphabet Inc. Class C,1
+Apple Inc.,13
+"Celsius Holdings, Inc.",1
+Cisco Systems Inc.,1
+Coca-Cola Company,1
+Costco Wholesale Corporation,3
+Destiny Media Technologies Inc,1
+JPMorgan Chase & Co.,1
+Lululemon Athletica Inc.,2
+"Macy's, Inc.",1
+Meta Platforms Inc. Class A,1
+Microsoft Corporation,3
+Moody's Corporation,1
+NIKE Inc. Class B,1
+NVIDIA Corporation,3
+Nasdaq Inc.,1
+Netflix Inc.,1
+NextEra Energy Inc.,1
+PayPal Holdings Inc.,1
+Pfizer Inc.,1
+Royal Caribbean Group,1
+Sitime Corp,1
+Snowflake Inc.,1
+"Southwest Gas Holdings, Inc.",1
+Sunrun Inc.,1
+Tesla Inc.,3
+"Transmedics Group, Inc.",1
+Viasat Inc,1
+Walt Disney Company,2
