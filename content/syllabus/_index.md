@@ -46,8 +46,10 @@ Tuesdays and Thursdays 08:40 - 09:55 or 10:10 - 11:25 in Warren 150
 
 - Mondays 1:30-3:30 in Warren 370:
   - Undergrad TA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu))
+  - Grad CA Riley Leonard ([ral346@cornell.edu](mailto:ral346@cornell.edu))
   - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
 - Mondays 3:30-5:00 in Warren 167:
+  - Grad CA Riley Leonard ([ral346@cornell.edu](mailto:ral346@cornell.edu))
   - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
 - Fridays 2:30-3:30 in Warren B50:
   - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
@@ -188,7 +190,7 @@ I highly encourage you to utilize Professor and TA office hours, especially if y
 
 #### Email
 
-You can also reach us by email. The best approach for generic, time-sensitive questions is to email all of us at the same time (and reply-all in follow-up emails). You can do that with one click [here](mailto:gerarden@cornell.edu,vs424@cornell.edu,jeg338@cornell.edu).
+You can also reach us by email. The best approach for generic, time-sensitive questions is to email all of us at the same time (and reply-all in follow-up emails). You can do that with one click [here](mailto:gerarden@cornell.edu,vs424@cornell.edu,jeg338@cornell.edu,ral346@cornell.edu).
 
 
 Email is a blessing and a curse. Here are some tips to help us get the most out of our email exchanges:
@@ -278,7 +280,10 @@ Life at Cornell can be complicated and challenging, especially during a pandemic
 ### Accommodations for students with disabilities
 Your access in this course is important. In order to have adequate time to arrange your approved accommodation, please request your accommodation letter as soon as possible. If you need an immediate accommodation for equal access, please speak with me in person, [email me](mailto:gerarden@cornell.edu), and/or email SDS at [sds_cu@cornell.edu](mailto:sds_cu@cornell.edu). If the need arises for additional accommodations during the semester, please contact SDS.
 
-**For students with testing accommodations,** we are participating in the Alternative Testing Program for the Spring 2023 semester. If you are approved for exam accommodations, please request your exam accommodation(s) for this course and fill out an exam request form for each exam in this course via the [SDS student portal](https://cascade.accessiblelearning.com/Cornell/).
+**For students with testing accommodations,** we will manage alternative testing locations through Dyson for the Spring 2024 semester. If you are approved for exam accommodation(s), please be sure to have a letter sent from SDS to me as early in the semester as possible.
+
+<!-- **For students with testing accommodations,** we are participating in the Alternative Testing Program for the Spring 2023 semester. If you are approved for exam accommodations, please request your exam accommodation(s) for this course and fill out an exam request form for each exam in this course via the [SDS student portal](https://cascade.accessiblelearning.com/Cornell/). -->
+
 
 ### Inclusivity
 We understand that our members represent a rich variety of backgrounds and perspectives. The Dyson School of Applied Economics and Management is committed to providing an atmosphere for learning that respects diversity. While working together to build this community we ask everyone to:
