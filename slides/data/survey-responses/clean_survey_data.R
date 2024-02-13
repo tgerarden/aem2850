@@ -10,8 +10,8 @@ responses <- all_responses
 
 enrolled_students <-
   rbind(
-    read_csv("content/slides/data/survey-responses/enrollment-feb6-sec1.csv"),
-    read_csv("content/slides/data/survey-responses/enrollment-feb6-sec2.csv")
+    read_csv("content/slides/data/survey-responses/enrollment-feb12-sec1.csv"),
+    read_csv("content/slides/data/survey-responses/enrollment-feb12-sec2.csv")
     ) |>
   select(netid = `NET ID`)
 
@@ -38,7 +38,8 @@ prior_programming <- responses |>
 # SPECTATOR SPORTS ----
 sports <- responses |>
   select(sport = "Favorite spectator sport") |>
-  pull(sport)
+  pull(sport) |>
+  tolower()
 
 
 # CONCENTRATIONS ----

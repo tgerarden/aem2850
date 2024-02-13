@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 08 Feb 2024 17:31:58 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 3</title><link>https://aem2850.toddgerarden.com/assignment/03-lab/</link><pubDate>Thu, 08 Feb 2024 17:31:58 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/03-lab/</guid><description>&lt;h2 id="lab">Lab&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 12 Feb 2024 21:41:11 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Joins and logic</title><link>https://aem2850.toddgerarden.com/example/04-example/</link><pubDate>Mon, 12 Feb 2024 21:40:30 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/04-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
+&lt;li>Questions? 🙋‍♀️&lt;/li>
+&lt;li>Navigate to &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a> and open the project &lt;code>example-04-X&lt;/code> in our course workspace&lt;/li>
+&lt;li>Tuesday: work through &lt;code>joins-practice.R&lt;/code> in &lt;code>example-04-1&lt;/code>&lt;/li>
+&lt;li>Thursday: work through &lt;code>logic-practice.R&lt;/code> in &lt;code>example-04-2&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Solutions&lt;/strong> will be posted after class&lt;/li>
+&lt;/ul>
+&lt;h2 id="cheatsheets">Cheatsheets&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.github.io/cheatsheets/data-transformation.pdf" target="_blank" rel="noopener">Click here to download the &lt;code>dplyr&lt;/code> cheatsheet&lt;/a>&lt;/p></description></item><item><title>Week 3</title><link>https://aem2850.toddgerarden.com/assignment/03-lab/</link><pubDate>Thu, 08 Feb 2024 17:31:58 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/03-lab/</guid><description>&lt;h2 id="lab">Lab&lt;/h2>
 &lt;p>Navigate to &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a>, open the project &lt;code>lab-03&lt;/code> in our course workspace, and follow the instructions in the file &lt;code>lab-03.qmd&lt;/code>.&lt;/p></description></item><item><title>Data import and tidying</title><link>https://aem2850.toddgerarden.com/example/03-example/</link><pubDate>Thu, 08 Feb 2024 14:15:54 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/03-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
 &lt;li>Questions? 🙋‍♀️&lt;/li>
@@ -476,7 +485,7 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;li>
 &lt;p>&lt;a href="https://toolbox.google.com/datasetsearch" target="_blank" rel="noopener">&lt;strong>Google Dataset Search&lt;/strong>&lt;/a>: Google indexes thousands of public datasets; search for them here.&lt;/p>
 &lt;/li>
-&lt;/ul></description></item><item><title>Joins and logic</title><link>https://aem2850.toddgerarden.com/content/04-content/</link><pubDate>Thu, 08 Feb 2024 15:26:07 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/04-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;/ul></description></item><item><title>Joins and logic</title><link>https://aem2850.toddgerarden.com/content/04-content/</link><pubDate>Mon, 12 Feb 2024 21:41:11 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/04-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/joins.html" target="_blank" rel="noopener">Read chapter 19: Joins&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/logicals.html" target="_blank" rel="noopener">Read chapter 12: Logical vectors&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
@@ -488,12 +497,10 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;li>How do joins work?&lt;/li>
 &lt;li>How can you create, combine, and summarize logical vectors?&lt;/li>
 &lt;/ul>
-&lt;!-- ### Slides -->
-&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
-&lt;!--
+&lt;h3 id="slides">Slides&lt;/h3>
+&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
 &lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/04-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/04-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
--->
-&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item><item><title>Data import and tidying</title><link>https://aem2850.toddgerarden.com/content/03-content/</link><pubDate>Mon, 05 Feb 2024 16:17:56 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/03-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Data import and tidying</title><link>https://aem2850.toddgerarden.com/content/03-content/</link><pubDate>Mon, 05 Feb 2024 16:17:56 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/03-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/data-import.html" target="_blank" rel="noopener">Skim chapter 7: Data import&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>
 &lt;ul>
