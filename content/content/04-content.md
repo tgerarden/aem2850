@@ -1,7 +1,7 @@
 ---
 title: "Joins and logic"
 linktitle: "Joins and logic"
-date: "2024-02-08 15:26:07"
+date: "2024-02-12 21:41:11"
 menu:
   content:
     parent: Course content
@@ -30,10 +30,10 @@ output:
 - How do joins work?
 - How can you create, combine, and summarize logical vectors?
 
-<!-- ### Slides -->
+### Slides
 
-<!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
 
-<!-- {{< blogdown/slide-buttons >}} -->
+{{< blogdown/slide-buttons >}}
 
-<!-- **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands. -->
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.

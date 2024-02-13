@@ -83,6 +83,7 @@ Questions before we get started?
 [Joins (Tuesday)](#joins)
   - [Join animations](#join-animations)
   - [example-04-1](#example-04-1)
+  - [Additional slides on joins for your reference](#joins-extra)
 
 [Logic (Thursday)](#logic)
   - [Boolean algebra](#boolean-algebra)
@@ -105,14 +106,15 @@ Take a guess: what's the most popular spectator sport among classmates?
 
 ```{r, echo = FALSE}
 load("data/survey-responses/survey-data.RData")
-n_sports <- 30
+n_sports <- 20
 ```
 
 --
 
 Here are the first `r n_sports` responses:
 ```{r, echo = FALSE}
-sports[!(sports %in% c("don't really watch sports"))] |> # just for pretty printing
+sports[!(sports %in% c("honestly i could watch anything and i would get invested"))] |> # just for pretty printing
+  str_replace("esports \\(counter strike \\& fighting games\\)", "esports") |> 
   head(n_sports)
 ```
 
@@ -156,25 +158,18 @@ name: joins
 
 ---
 
-# What are relational data?
+# Joins
 
---
+Most data analyses require information contained in multiple data frames
 
-Multiple tables of data with pairwise relations
+We **join** them together to answer questions
 
-Relations across >2 data tables are determined by the relations between each pair
+**Keys** are the variables that connect a pair of data frames in a join
 
----
-
-# Relational data example: `nycflights13`
-
-```{r echo=FALSE, out.width='75%'}
-knitr::include_graphics("img/04/nycflights13-relational.png")
-```
 
 ---
 
-# Relational data verbs from dplyr
+# Join verbs from dplyr
 
 1. **Mutating joins**: add new variables
   - `left_join()`
@@ -187,24 +182,133 @@ knitr::include_graphics("img/04/nycflights13-relational.png")
   - `anti_join()`
 
 
-<!-- --- -->
+???
 
-<!-- # How do join verbs work? -->
+You can visualize the operations [here](https://r4ds.hadley.nz/joins)
 
+---
+class: center, middle
+name: join-animations
 
-<!-- From Ivan Rudik's slides: -->
+# Join animations
 
-<!-- We need two datasets (e.g., housing prices and pollution) -->
+---
 
-<!-- Each dataset has the same set of **key** variables (e.g. county) -->
+# Let's start by visualizing joins
 
-<!-- When we join, we match up the two datasets on the key, and combine them into one -->
+Here are two data frames we want to **join**
 
-<!-- In our housing example, each row of the joined dataset would now tell us the house price, the county it's in, and the county's pollution -->
+```{r echo=FALSE, out.width='45%'}
+knitr::include_graphics("img/04/original-dfs.png")
+```
+
+Their **keys** are in color in the first column, and other data are in grey
+
+---
+
+# Left join and right join
+
+Left and right joins add variables to the left and right data frames
+
+.pull-left[
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/04/left-join.gif")
+```
+]
+
+--
+
+.pull-right[
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/04/right-join.gif")
+```
+]
 
 ???
 
-You can visualize the operations [here](https://r4ds.hadley.nz/joins.html)
+Source: <https://github.com/gadenbuie/tidyexplain>
+
+---
+
+# Multiple matches
+
+With multiple matches between `x` and `y`, all combinations of matches are returned
+
+```{r echo=FALSE, out.width='45%'}
+knitr::include_graphics("img/04/left-join-extra.gif")
+```
+
+`x2` is duplicated to join one row in `x` to multiple rows in `y`
+
+???
+
+Source: <https://github.com/gadenbuie/tidyexplain>
+
+---
+
+# Inner join and full join
+
+.pull-left[
+Inner joins return all rows in `x` **AND** `y`
+
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/04/inner-join.gif")
+```
+]
+
+--
+
+.pull-right[
+Full joins return all rows in `x` **OR** `y`
+
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/04/full-join.gif")
+```
+]
+
+
+???
+
+Source: <https://github.com/gadenbuie/tidyexplain>
+
+---
+
+# Semi join and anti join
+
+.pull-left[
+Semi joins filter rows in `x` that match `y`
+
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/04/semi-join.gif")
+```
+]
+
+--
+
+.pull-right[
+Anti joins filter rows in `x` **not** in `y`
+
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/04/anti-join.gif")
+```
+]
+
+
+???
+
+Source: <https://github.com/gadenbuie/tidyexplain>
+
+---
+class: center, middle
+name: example-04-1
+
+# example-04-1
+
+---
+class: center, middle
+name: joins-extra
+
+# Additional slides on joins for your reference
 
 ---
 
@@ -463,91 +567,6 @@ What is `year.x`? What is `year.y`?
 
 ---
 class: inverse, center, middle
-name: join-animations
-
-# Join animations
-
----
-
-# Left and right join
-
-.pull-left[
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/04/left-join.gif")
-```
-]
-
-.pull-right[
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/04/right-join.gif")
-```
-]
-
-???
-
-Source: <https://github.com/gadenbuie/tidyexplain>
-
----
-
-# Multiple matches
-
-With multiple matches between `x` and `y`, all combinations of matches are returned
-
-```{r echo=FALSE, out.width='45%'}
-knitr::include_graphics("img/04/left-join-extra.gif")
-```
-
-`x2` is duplicated to join one row in `x` to multiple rows in `y`
-
-???
-
-Source: <https://github.com/gadenbuie/tidyexplain>
-
----
-
-# Inner join and full join
-
-.pull-left[
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/04/inner-join.gif")
-```
-]
-
-.pull-right[
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/04/full-join.gif")
-```
-]
-
-???
-
-Source: <https://github.com/gadenbuie/tidyexplain>
-
----
-
-# Semi join and anti join
-
-.pull-left[
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/04/semi-join.gif")
-```
-]
-
---
-
-.pull-right[
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/04/anti-join.gif")
-```
-]
-
-
-???
-
-Source: <https://github.com/gadenbuie/tidyexplain>
-
----
-class: inverse, center, middle
 name: summary
 
 # Summary of key verbs so far
@@ -596,12 +615,6 @@ name: summary
 5. `summarize`
 ]
 
-
----
-class: center, middle
-name: example-04-1
-
-# [link to example-04-1](https://posit.cloud/spaces/328615/content/5413852)
 
 ---
 class: inverse, center, middle
@@ -833,5 +846,5 @@ flights |>
 class: center, middle
 name: example-04-2
 
-# [link to example-04-2](https://posit.cloud/spaces/328615/content/5413858)
+# example-04-2
 

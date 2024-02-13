@@ -210,8 +210,10 @@ Email is a blessing and a curse. Here are some tips to help us get the most out 
 Your grade in this course will be based on completing the following assignments:
 
 - **Labs** are short weekly homework assignments that require you to practice programming.
+  - Late lab submissions will be accepted, with a penalty of 1 point per day late.
 
 - **Prelims** are intended to assess programming and data visualization proficiency. Prelims will be completed in class.
+  - In-class prelims are mandatory. No make up exams will be offered due to time conflicts (including but not limited to personal travel).
 
 - The **group project** is intended to synthesize and reinforce the individual skills you develop in class, and to provide examples of their application to business and life more generally.
 
@@ -230,7 +232,7 @@ Please read [the assignments page](/assignment/) for more details on the assignm
 
 
 
-
+<div align="center">
 
 |Assignment          | Percent|
 |:-------------------|-------:|
@@ -240,11 +242,12 @@ Please read [the assignments page](/assignment/) for more details on the assignm
 |Group project       |     20%|
 |Class participation |      5%|
 |Total               |    100%|
-
+</div>
 
 
 ### Grading scale
 
+<div align="center">
 | Grade | Range     | Grade | Range  | Grade | Range |
 |:-----:|:---------:|:-----:|:------:|:-----:|:-----:|
 | A+    | :unicorn: | A     | 93-100 | A-    | 90-92 |
@@ -252,6 +255,7 @@ Please read [the assignments page](/assignment/) for more details on the assignm
 | C+    | 77-79     | C     | 73-76  | C-    | 70-72 |
 | D+    | 67-69     | D     | 63-66  | D-    | 60-62 |
 | F     | <60       |       |        |       |       |
+</div>
 
 
 **Dyson grading policy:** Dyson faculty policy mandates that grades reflect a range of outcomes distinguishing between failing, poor, good, and excellent performance. The latter category is awarded an A grade and is considered the top mark in this course. The grade of A+ is awarded only for extraordinary achievement far above the mean and will in no case make up more than 5% of total final grades.
