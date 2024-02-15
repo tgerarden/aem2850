@@ -20,30 +20,30 @@ library(nycflights13) # load data frames we'll use later
 # 1.1 boolean algebra
 # use filter() to find all the flights scheduled between 6am and 8pm
 # that arrived less than 20 minutes after their scheduled arrival time
-flights |> 
+flights |>
   filter(sched_dep_time > 600 & sched_dep_time < 2000 & arr_delay < 20)
 
 # use mutate() to create a logical vector "on_time" based on that condition
-flight_timeliness <- flights |> 
+flight_timeliness <- flights |>
   mutate(on_time = sched_dep_time > 600 & sched_dep_time < 2000 & arr_delay < 20)
 
 # now summarize() my_logical using mean()
 # what share of the flights are on-time daytime flights?
-flight_timeliness |> 
+flight_timeliness |>
   summarize(share = mean(on_time))
 # uh-oh! some of our values are NA. let's ignore them for now
-flight_timeliness |> 
+flight_timeliness |>
   summarize(share = mean(on_time, na.rm = TRUE))
 
 
 # 1.2 is.na()
 # use filter() to find rows where dep_time and arr_time are not available
-flights |> 
+flights |>
   filter(is.na(dep_time) & is.na(arr_time))
 # what do you think happened to these flights?
 
 # now find rows where dep_time is available but arr_time is not
-flights |> 
+flights |>
   filter(!is.na(dep_time) & is.na(arr_time))
 # what do you think happened to these flights?
 
@@ -51,33 +51,33 @@ flights |>
 # 1.3 if_else()
 # customize the cutoff for "too early!" below for you
 # then use count() to find out how many flights are too early
-flights |> 
-  filter(dest == "MIA") |> 
-  select(carrier, flight, dest, sched_dep_time) |> 
-  mutate(too_early = if_else(sched_dep_time < 800, "too early!", "okay")) |> 
+flights |>
+  filter(dest == "MIA") |>
+  select(carrier, flight, dest, sched_dep_time) |>
+  mutate(too_early = if_else(sched_dep_time < 800, "too early!", "okay")) |>
   count(too_early)
 
 # use mutate() and if_else() to classify flights as "late" if their
 # arr_delay was more than 15 minutes (and "not late" otherwise")
 # how many flights were late? (hint: you could use count() again)
-flights |> 
-  mutate(late = ifelse(arr_delay > 15, "late", "not late")) |> 
+flights |>
+  mutate(late = ifelse(arr_delay > 15, "late", "not late")) |>
   count(late)
 
 
 # 1.4 case_when()
 # customize the conditions below for you
 # then use count() to find out how many flights are in each category
-flights |> 
-  filter(dest == "MIA") |> 
-  select(carrier, flight, sched_dep_time) |> 
+flights |>
+  filter(dest == "MIA") |>
+  select(carrier, flight, sched_dep_time) |>
   mutate(too_early = case_when(
     sched_dep_time < 600   ~ "too early!",
     sched_dep_time < 800   ~ "still early",
     sched_dep_time <= 2000 ~ "okay",
     sched_dep_time > 2000  ~ "late"
     )
-  ) |> 
+  ) |>
   count(too_early)
 
 
@@ -100,17 +100,23 @@ flights |>
     arr_delay >= 180 ~ "absurdly late",
     is.na(arr_delay) ~ "canceled (we think)"
   )
-  ) |> 
+  ) |>
   count(delay)
 
 
 # bonus: let's revisit 1.1 and 1.2 using case_when()
 # recompute the share of flights that are on-time daytime flights, treating
 # arr_delay==NA as NOT being on time (as if it corresponds to a cancellation)
-flights |> 
+flights |>
   mutate(on_time = case_when(
     is.na(arr_delay) ~ FALSE, # treat missing values as not on time
     sched_dep_time > 600 & sched_dep_time < 2000 & arr_delay < 20 ~ TRUE,
-    TRUE ~ FALSE) # this fills all remaining cells of my_logical with "FALSE"
-  ) |> 
+    .default = FALSE) # this fills all remaining cells of my_logical with "FALSE"
+  ) |>
   summarize(share = mean(on_time))
+
+
+# if you complete this example during class, go back to finish up example-04-1
+# solutions for both examples will be posted by the end of this week
+# if you ran into trouble with either example, please review the solutions
+# and then come to office hours with questions!

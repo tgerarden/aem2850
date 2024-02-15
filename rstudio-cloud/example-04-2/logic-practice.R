@@ -20,19 +20,19 @@ library(nycflights13) # load data frames we'll use later
 # 1.1 boolean algebra
 # use filter() to find all the flights scheduled between 6am and 8pm
 # that arrived less than 20 minutes after their scheduled arrival time
-flights |> 
+flights |>
   filter(_____)
 
 # use mutate() to create a logical vector "on_time" based on that condition
-flight_timeliness <- flights |> 
+flight_timeliness <- flights |>
   mutate(on_time = _____)
 
 # now summarize() my_logical using mean()
 # what share of the flights are on-time daytime flights?
-flight_timeliness |> 
+flight_timeliness |>
   summarize(share = _____(_____))
 # uh-oh! some of our values are NA. let's ignore them for now
-flight_timeliness |> 
+flight_timeliness |>
   _____(_____ = _____(_____, _____ = _____))
 
 
@@ -49,10 +49,10 @@ _____
 # 1.3 if_else()
 # customize the cutoff for "too early!" below for you
 # then use count() to find out how many flights are too early
-flights |> 
-  filter(dest == "MIA") |> 
-  select(carrier, flight, dest, sched_dep_time) |> 
-  mutate(too_early = if_else(sched_dep_time < 800, "too early!", "okay")) |> 
+flights |>
+  filter(dest == "MIA") |>
+  select(carrier, flight, dest, sched_dep_time) |>
+  mutate(too_early = if_else(sched_dep_time < 800, "too early!", "okay")) |>
   _____(_____)
 
 # use mutate() and if_else() to classify flights as "late" if their
@@ -62,18 +62,18 @@ _____
 
 
 # 1.4 case_when()
-# customize the conditions below for you
+# customize the case_when() conditions below for you
 # then use count() to find out how many flights are in each category
-flights |> 
-  filter(dest == "MIA") |> 
-  select(carrier, flight, sched_dep_time) |> 
-  mutate(too_early = case_when(
+flights |>
+  filter(dest == "MIA") |>
+  select(carrier, flight, sched_dep_time) |>
+  mutate(too_early = _____(
     sched_dep_time < 600   ~ "too early!",
     sched_dep_time < 800   ~ "still early",
     sched_dep_time <= 2000 ~ "okay",
     sched_dep_time > 2000  ~ "late"
     )
-  ) |> 
+  ) |>
   _____(_____)
 
 
@@ -94,3 +94,9 @@ _____
 # recompute the share of flights that are on-time daytime flights, treating
 # arr_delay==NA as NOT being on time (as if it corresponds to a cancellation)
 _____
+
+
+# if you complete this example during class, go back to finish up example-04-1
+# solutions for both examples will be posted by the end of this week
+# if you ran into trouble with either example, please review the solutions
+# and then come to office hours with questions!
