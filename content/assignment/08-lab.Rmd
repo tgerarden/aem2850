@@ -19,4 +19,4 @@ editor_options:
 
 ## Lab
 
-Navigate to [posit.cloud](http://posit.cloud), open the project `lab-03` in our course workspace, and follow the instructions in the file `lab-08.qmd`.
+Navigate to [posit.cloud](http://posit.cloud), open the project `lab-08` in our course workspace, and follow the instructions in the file `lab-08.qmd`.

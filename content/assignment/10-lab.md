@@ -1,7 +1,7 @@
 ---
-title: "Week 7"
-linktitle: "Week 7"
-date: "`r format(Sys.time())`"
+title: "Week 10"
+linktitle: "Week 10"
+date: "2024-02-16 09:48:59"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -17,6 +17,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Lab
+## No lab this week
 
-Navigate to [posit.cloud](http://posit.cloud), open the project `lab-07` in our course workspace, and follow the instructions in the file `lab-07.qmd`.
+There is no lab for this week. Have a great Spring break!
