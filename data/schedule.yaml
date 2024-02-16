@@ -32,7 +32,7 @@ lessons:
     date: "Week 4"
     content: "04-content"
     example: "04-example"
-    # assignment: "04-lab"
+    assignment: "04-lab"
     bg: 1
 
   - title: '<span class="content-title">Strings and regular expressions</span>'
