@@ -45,12 +45,13 @@ Tuesdays and Thursdays 08:40 - 09:55 or 10:10 - 11:25 in Warren 150
 <!-- All TA office hours take place in Warren 372. -->
 
 - Mondays 1:30-3:30 in Warren 370:
-  - Undergrad TA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu))
+  - Undergrad CA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu))
   - Grad CA Riley Leonard ([ral346@cornell.edu](mailto:ral346@cornell.edu))
   - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
-- Mondays 3:30-5:00 in Warren 167:
+- Mondays 3:30-6:00 in Warren 167:
   - Grad CA Riley Leonard ([ral346@cornell.edu](mailto:ral346@cornell.edu))
   - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
+  - Undergrad CA Aarya Tavshikar ([amt272@cornell.edu](mailto:amt272@cornell.edu))
 - Fridays 2:30-3:30 in Warren B50:
   - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
 
