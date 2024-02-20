@@ -20,21 +20,21 @@ editor_options:
 ## Announcements
 - Office hours
   - No office hours during February break
-  <!-- - We will hold office hours Wednesday, March 1 (see canvas) -->
+  <!-- - We will hold office hours Wednesday, Feb 28 (see canvas) -->
 - Prelim 1
   - Will be similar in structure to labs, though slightly more open-ended questions and less direct guidance
-  - Prelim will be distributed on Posit Cloud at 9:40am
-  - Complete and submit via canvas by 10:55am (penalties may apply)
+  - Prelim will be distributed on Posit Cloud at class start time
+  - Complete and submit via canvas by class end time (penalties may apply)
   - Submit **both** the .pdf output **and** all your code within your .qmd file (self-contained)
 
 
 ## Plan for today
 - Questions? :raising_hand_woman:
 - Navigate to [posit.cloud](http://posit.cloud) and open the project `example-05` in our course workspace
-- Work through `strings-practice.R`
+- Work through `strings-practice.R` in `example-05`
 - **Solutions** will be posted after class
 
 
 ## Cheatsheets
 
-[Click here to download the `stringr` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf)
+[Click here to download the `stringr` cheatsheet](https://rstudio.github.io/cheatsheets/strings.pdf)

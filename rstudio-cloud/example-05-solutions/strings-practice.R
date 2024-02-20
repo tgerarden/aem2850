@@ -24,7 +24,8 @@ ______
 # what variables do we have?
 names(______)
 
-# create a data frame called amenities that contains just the variables id, amenities, and review_scores_rating
+# create a data frame called amenities that contains just the variables:
+# id, amenities, and review_scores_rating
 ______
 
 
@@ -79,9 +80,9 @@ ______ |>
   count(______)
 
 
-# now let's use str_detect() to create two new variables:
-# 1. a logical variable has_parking that indicates whether each listing's amenities include the word "parking"
-# 2. a logical variable has_wifi that indicates whether each listing's amenities include the word "Wifi" or "wifi"
+# now let's use str_detect() to create two new logical variables:
+# 1. has_parking that indicates whether amenities include the word "parking"
+# 2. has_wifi that indicates whether amenities include the word "Wifi" or "wifi"
 ______
 
 # select has_wifi and has_parking, and pass them through the pipe to summarize_all(mean)
@@ -96,9 +97,10 @@ ______
 
 # 2a. Sometimes strings are not as they appear ----
 
-# extract amenities for the first row as a string (not a data frame), and assign it to a name
+# extract amenities for the first row as a string (not a data frame)
 # you can get the first row using bracket slice_head(n = 1)
 # you can get the column amenities as a vector using pull()
+# assign the result to the name first_amenities
 first_amenities <- ______ |>
   ______(n = 1) |>
   pull(amenities)
@@ -106,7 +108,7 @@ first_amenities <- ______ |>
 # write the name of the object you just created to print it
 ______
 
-# now use writeLines(.) to print the "real" data
+# now use str_view(.) to print the "real" data
 ______(first_amenities)
 
 # what difference do you notice?
@@ -120,14 +122,14 @@ ______(first_amenities)
 
 
 # so things like this won't work:
-writeLines(""The worst thing about prison was the dementors," said Michael Scott.")
+str_view(""The worst thing about prison was the dementors," said Michael Scott.")
 # if you want a literal double quote within a string, you can "escape" it using \:
-writeLines("\"The worst thing about prison was the dementors,\" said Michael Scott.")
+str_view("\"The worst thing about prison was the dementors,\" said Michael Scott.")
 # or you can mix ' and " as follows:
-writeLines('"The worst thing about prison was the dementors," said Michael Scott.')
+str_view('"The worst thing about prison was the dementors," said Michael Scott.')
 
-# all the the instances of \" in `first_amenities` are representations of literal double quotes
-# writeLines() shows us what it "should" look like
+# the \" in `first_amenities` are representations of literal double quotes
+# str_view() shows us what it "should" look like
 
 
 # 2b. Anchors ----
@@ -135,7 +137,7 @@ writeLines('"The worst thing about prison was the dementors," said Michael Scott
 
 # say you want to analyze whether local airbnb landlords have better reviews that absentee landlords
 # use filter() and str_detect() to find listings where host_location includes "New York"
-# pass that through the pipe to nrow() to count how many there are
+# pass that through the pipe to count() to count how many there are
 ______
 
 # did that work?
@@ -154,8 +156,8 @@ ______
 
 # 2c. Repetition ----
 
-# another handy thing is to search for two components of a string that are separated by one or more characters
-# let's illustrate this by looking at all the descriptions that include "bedroom"
+# what if we want to search for strings with patterns that are not contiguous?
+# let's investigate this by looking at all the descriptions that include "bedroom"
 descriptions <- listings |> select(description)
 descriptions |>
   filter(______(description, "______"))
@@ -164,28 +166,31 @@ descriptions |>
 ______
 
 # the metacharacter . can be used to match any single character
-# copy and modify the code above to find descriptions that use "bed" and "room" separated by any 1 character (including a space)
+# copy and modify the code above to find descriptions that use "bed" and "room"
+# separated by any 1 character (including a space)
 ______
 
 # the metacharacter ? can be used to match a character 0 or 1 times
 # this can be combined with other characters, or with metacharacters like .
-# copy and modify the code above to find descriptions that include "bed" and "room" separated by any 0 or 1 characters
+# copy and modify the code above to find descriptions that include "bed" and "room" 
+# separated by any 0 or 1 characters
 # how is the result different from when you only used . above?
 ______
 
 # the metacharacter * can be used to match a character 0 or more times
 # this can be combined with other characters, or with metacharacters like .
-# copy and modify the code above to find descriptions that include "bed" and "room" separated by any 0 or more characters
+# copy and modify the code above to find descriptions that include "bed" and "room" 
+# separated by any 0 or more characters
 # how is the result different from your results above?
 ______
 
 
 # 3. Analyzing more strings ----
-# identify listings that have shared bathrooms vs not shared bathrooms
+# identify listings that have shared bbathrooms vs not shared bathrooms
 # compute the average price and review_scores_rating for each group
 # note: you may need to str_replace() non-numeric characters in price,
-#   and use as.numeric() to convert the string data to numeric data
-# tip: it's also a good idea to remove missing reviews and prices to compare apples to apples, 
+#   and use as.numeric() or parse_number() to convert strings to numbers
+# tip: remove missing reviews and prices to compare apples to apples, 
 #   and to ensure the listings we are using for comparison are active
 ______
 
