@@ -13,45 +13,50 @@ library(tidyverse) # load the core tidyverse packages
 
 # today we'll explore textual data on Airbnb listings from New York City
 # the data come from Inside Airbnb, a mission driven activist project with the objective to:
-#   Provide data that quantifies the impact of short-term rentals on housing and residential communities; 
+#   Provide data that quantifies the impact of short-term rentals on housing and residential communities;
 #   and also provides a platform to support advocacy for policies to protect our cities from the impacts of short-term rentals.
 # http://insideairbnb.com
 
 
 # 0. Import airbnb listings ----
 # import listings data and assign it to the name listings
-______
+listings <- read_csv("listings_text.csv")
 # what variables do we have?
-names(______)
+names(listings)
 
 # create a data frame called amenities that contains just the variables:
 # id, amenities, and review_scores_rating
-______
+amenities <- listings |>
+  select(id, amenities, review_scores_rating)
+# what does amenities look like? what are the column types?
+amenities
 
 
 # 1. Analyzing amenities ----
-# note: for simplicity you can just reassign each modified data frame to the name amenities
+# for simplicity, let's reassign each modified data frame to the name amenities
 
-# let's come up with a crude measure of the number of amenities each property has
-# compute the length of the string amenities for each listing, and assign it to a new variable length
+# let's make a crude measure of the number of amenities each property has
+# compute the length of the string amenities for each listing
+# assign it to a new variable length
 ______
 
-# count the number of individual amenities using str_count() and assign it to a new variable count
-# hint: what character occurs once between each amenity?
-# hint: how many of these characters are present if there is just one amenity?
+# count the number of individual amenities using str_count()
+# assign it to a new variable count
+# one way to approximate this is by counting the commas (between each amenity)
+# hint: how many commas are present if there is just one amenity?
 ______
 
-# how similar are these measures? run the code below to make a scatter plot of count vs length
-# note: this is just for illustrative purposes, ggplot2 functions will not be on prelim 1!
+# how similar are these measures? run the code below to plot count vs length
+# note: ggplot2 functions will not be on prelim 1!
 amenities |>
   ggplot(aes(x = length, y = count)) +
   geom_point() +
   theme_bw()
 
 # another way to assess this is by looking at their correlation:
-# note: this is just for illustrative purposes, cor() will not be on prelim 1!
-amenities |> 
-  select(length, count) |> 
+# note: cor() will not be on prelim 1!
+amenities |>
+  select(length, count) |>
   cor()
 
 # now let's focus on a few specific amenities
@@ -72,12 +77,20 @@ ______
 
 
 # regular expressions can help us parse long strings like amenities
-# try to fill in the blanks to count the different types of wifi in amenities
-______ |> 
-  ______(wifi = str_extract(______, 
-                            regex("(\\w+\\s+)?wifi", # this will extract wifi and the word that precedes it, if applicable
-                                  ignore_case = TRUE))) |> 
-  count(______)
+# run the code below to count the different types of wifi in amenities
+amenities |>
+  mutate(wifi = str_extract(
+    string = amenities,
+    pattern = regex("(\\w+\\s)?wifi", ignore_case = TRUE)
+  )) |>
+  count(wifi)
+
+# what is the regular expression "(\\w+\\s)?wifi" doing?
+# \\w+ matches one or more "word" characters (letters or numbers)
+# \\s matches whitespace
+# ? makes the word and space in () optional
+# so this will extract wifi and the word that precedes it, if applicable
+# `ignore_case = TRUE` this avoids case sensitivity of "wifi"
 
 
 # now let's use str_detect() to create two new logical variables:
@@ -93,26 +106,22 @@ ______
 ______
 
 
-# 2. Intro to regular expressions ----
+# 2. Regular expressions ----
 
-# 2a. Sometimes strings are not as they appear ----
+# 2.1 Sometimes strings are not as they appear ----
 
 # extract amenities for the first row as a string (not a data frame)
-# you can get the first row using bracket slice_head(n = 1)
-# you can get the column amenities as a vector using pull()
-# assign the result to the name first_amenities
-first_amenities <- ______ |>
-  ______(n = 1) |>
+first_amenities <- amenities |>
+  slice_head(n = 1) |>
   pull(amenities)
 
 # write the name of the object you just created to print it
 ______
 
-# now use str_view(.) to print the "real" data
+# now use str_view() to print the "real" data
 ______(first_amenities)
 
 # what difference do you notice?
-
 
 # as it turns out, certain characters need special representations in strings
 # a good example is including single or double quotes in a string
@@ -132,7 +141,7 @@ str_view('"The worst thing about prison was the dementors," said Michael Scott.'
 # str_view() shows us what it "should" look like
 
 
-# 2b. Anchors ----
+# 2.2 Anchors ----
 # anchors can be used to search for patterns in specific locations within a string
 
 # say you want to analyze whether local airbnb landlords have better reviews that absentee landlords
@@ -146,15 +155,15 @@ listings |>
   select(contains("host"))
 
 # no. we want to find hosts in NYC, not just NYS!
-# one way to solve this problem would be to anchor your search for "New York" at the beginning of host_location
+# we could anchor the search for "New York" at the beginning of host_location
 # ^ can be used to match the start of the string (e.g., "^New York")
-# try doing that to see how many listings have host_locations that start with "New York"
+# do that to see how many listings have host_locations that start with "New York"
 ______
 
 # similarly, you can search for things at the end of a string using $ (e.g., "United States$")
 
 
-# 2c. Repetition ----
+# 2.3 Repetition ----
 
 # what if we want to search for strings with patterns that are not contiguous?
 # let's investigate this by looking at all the descriptions that include "bedroom"
@@ -172,27 +181,27 @@ ______
 
 # the metacharacter ? can be used to match a character 0 or 1 times
 # this can be combined with other characters, or with metacharacters like .
-# copy and modify the code above to find descriptions that include "bed" and "room" 
+# copy and modify the code above to find descriptions that include "bed" and "room"
 # separated by any 0 or 1 characters
 # how is the result different from when you only used . above?
 ______
 
 # the metacharacter * can be used to match a character 0 or more times
 # this can be combined with other characters, or with metacharacters like .
-# copy and modify the code above to find descriptions that include "bed" and "room" 
+# copy and modify the code above to find descriptions that include "bed" and "room"
 # separated by any 0 or more characters
 # how is the result different from your results above?
 ______
 
 
 # 3. Analyzing more strings ----
-# identify listings that have shared bbathrooms vs not shared bathrooms
+# identify listings that have shared bathrooms vs not shared bathrooms
 # compute the average price and review_scores_rating for each group
-# note: you may need to str_replace() non-numeric characters in price,
-#   and use as.numeric() or parse_number() to convert strings to numbers
-# tip: remove missing reviews and prices to compare apples to apples, 
+# note: you could use parse_number() to convert the string price to a number
+#   or: use str_replace() and as.numeric() to clean then convert strings to numbers
+# tip: remove missing reviews and prices to compare apples to apples,
 #   and to ensure the listings we are using for comparison are active
 ______
 
 
-# how does having a shared bath influence reviews? prices?
+# how does having a shared bath correlate with reviews? prices?

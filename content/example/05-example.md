@@ -1,7 +1,7 @@
 ---
 title: "Strings and regular expressions"
 linktitle: "Strings and regular expressions"
-date: "`r format(Sys.time())`"
+date: "2024-02-20 22:08:29"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file

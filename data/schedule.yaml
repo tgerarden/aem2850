@@ -39,8 +39,8 @@ lessons:
     session: "Session 5"
     date: "Week 5"
     content: "05-content"
-    # example: "05-example"
-    # assignment: "05-lab"
+    example: "05-example"
+    assignment: "05-lab"
     bg: 2
 
   - title: '<span class="content-title">No new content <br> *February break: no class on Feb 27*</span>'
