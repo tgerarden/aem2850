@@ -63,7 +63,7 @@ lessons:
   - title: '<span class="content-title">Mapping data to graphics <br> Amounts</span>'
     session: "Session 7"
     date: "Week 7"
-    # content: "07-content"
+    content: "07-content"
     # example: "07-example"
     # assignment: "07-lab"
     bg: 2
