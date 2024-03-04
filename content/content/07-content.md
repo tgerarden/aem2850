@@ -1,7 +1,7 @@
 ---
 title: "Mapping data to graphics and amounts"
 linktitle: "Mapping data to graphics and amounts"
-date: "2024-03-02 10:34:17"
+date: "2024-03-04 16:42:45"
 menu:
   content:
     parent: Course content
@@ -30,10 +30,6 @@ output:
 - <i class="fas fa-book"></i> [Chapter 16: Factors](https://r4ds.hadley.nz/factors.html) of *R for Data Science (2e)*
 - <i class="fab fa-youtube"></i> The Pudding: [The Greatest Unexpected NBA performances](https://www.youtube.com/watch?v=jV49bDzkQhY)
 
-<!-- #### Other resources -->
-
-<!-- [This tutorial by Cédric Scherer](https://www.cedricscherer.com/2019/05/17/the-evolution-of-a-ggplot-ep.-1/) is an excellent demonstration of the grammar of graphics and the sequential nature of building up a plot layer-by-layer. -->
-
 
 ### Guiding questions
 
@@ -45,10 +41,10 @@ output:
 - When are stacked bars useful?
 
 
-<!-- ### Slides -->
+### Slides
 
-<!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
 
-<!-- {{< blogdown/slide-buttons >}} -->
+{{< blogdown/slide-buttons >}}
 
-<!-- **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands. -->
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.

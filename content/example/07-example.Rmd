@@ -19,15 +19,16 @@ editor_options:
 
 ## Plan for today
 - Questions? :raising_hand_woman:
-- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-07` in our course workspace
 - Tuesday:
   - Go through [slides](/content/07-content/)
+  - Open the [posit.cloud](http://posit.cloud) project `example-07-1`
   - Work through `mapping-data-to-graphics-practice.R`
 - Thursday:
   - Go through [slides](/content/07-content/)
+  - Open the [posit.cloud](http://posit.cloud) project `example-07-2`
   - Work through `amounts-practice.R`
 - **Solutions** will be posted after class
 
 ## Cheatsheets
 
-[Click here to download the `ggplot` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)
+[Click here to download the `ggplot` cheatsheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf)

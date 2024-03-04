@@ -68,8 +68,6 @@ Acknowledgements:
 
 This week marks the start of the data visualization component of this course
 
-See [aem2850.toddgerarden.com/schedule](https://aem2850.toddgerarden.com/schedule/) for minor schedule updates
-
 Next lab is due Monday
 
 We will provide details on the group project in the next 1-2 weeks
@@ -85,9 +83,9 @@ Questions before we get started?
 ### Tuesday
   - [Course progress](#progress)
   - [Prologue](#prologue)
-  - [Data, aesthetics, & the grammar of graphics](#grammar-of-graphics)
+  - [Data, aesthetics, <br> & the grammar of graphics](#grammar-of-graphics)
   - [Grammatical layers](#grammatical-layers)
-  - [Example (part 1)](#example-1)
+  - [example-07-1](#example-1)
   - [Prelim 1](#example-1)
   - [Reference: Additional layers](#additional-layers)
 ]
@@ -97,8 +95,7 @@ Questions before we get started?
   - [Prologue](#prologue-2)
   - [Amounts](#amounts)
   - [Plotting amounts using ggplot](#plotting-amounts)
-  - [example-07](#example-2)
-  - [Prologue](#prologue-)
+  - [example-07-2](#example-2)
 ]
 
 ---
@@ -163,7 +160,8 @@ name: prologue
 
 ```{r echo=FALSE, out.width='75%'}
 knitr::include_graphics("img/07/gapminder-screenshot.png")
-# could switch to use youtube html embed code next year to just do this right in the slides
+# click the link above to access the youtube
+# could switch to use youtube html embed code to make the entire plot a link
 ```
 
 ???
@@ -424,7 +422,7 @@ _________ |> #<<
              color = _________,
              size = ___)) +
   geom______() +
-  scale_x_log10() + theme_gray(base_size = 20) # ignore this line for now
+  scale_x_log10() + theme_classic(base_size = 20) # ignore this line for now
 ```
 
 Let's fill in the blanks... how do we start?
@@ -447,7 +445,7 @@ gapminder |>
              color = _________,
              size = ___)) +
   geom______() +
-  scale_x_log10() + theme_gray(base_size = 20) # ignore this line for now
+  scale_x_log10() + theme_classic(base_size = 20) # ignore this line for now
 ```
 
 Let's fill in the blanks... what should we map to x? y?
@@ -470,7 +468,7 @@ gapminder |>
              color = _________, #<<
              size = ___)) + #<<
   geom______() +
-  scale_x_log10() + theme_gray(base_size = 20) # ignore this line for now
+  scale_x_log10() + theme_classic(base_size = 20) # ignore this line for now
 ```
 
 Let's fill in the blanks... what should we map to color? size?
@@ -493,7 +491,7 @@ gapminder |>
              color = continent,
              size = pop)) +
   geom______() + #<<
-  scale_x_log10() + theme_gray(base_size = 20) # ignore this line for now
+  scale_x_log10() + theme_classic(base_size = 20) # ignore this line for now
 ```
 
 Let's fill in the blanks... what geometry should we use?
@@ -516,7 +514,7 @@ gapminder |>
              color = continent,
              size = pop)) +
   geom_point() +
-  scale_x_log10() + theme_gray(base_size = 20) # ignore this line for now
+  scale_x_log10() + theme_classic(base_size = 20) # ignore this line for now
 ```
 
 All done! Let's see what we get...
@@ -532,7 +530,7 @@ gapminder_2007 |>
              color = continent,
              size = pop)) +
   geom_point() +
-  scale_x_log10() + theme_gray(base_size = 20)
+  scale_x_log10() + theme_classic(base_size = 20)
 # +
 #   scale_size_continuous(range = c(1, 15),
 #                         labels = scales::comma)
@@ -667,12 +665,12 @@ ggplot(eg, aes(x = x, y = y, alpha = x)) +
 
 ---
 
-# Possible geoms
+# Possible geometries
 
 <table>
   <tr>
     <th class="cell-left"></th>
-    <th class="cell-left">Example geom</th>
+    <th class="cell-left">Example geometry</th>
     <th class="cell-left">What it makes</th>
   </tr>
   <tr>
@@ -704,13 +702,13 @@ ggplot(eg, aes(x = x, y = y, alpha = x)) +
 
 ---
 
-# Possible geoms
+# Possible geometries
 
-There are dozens of possible geoms
+There are dozens of possible geometries
 
 Over the next several weeks we will cover a number of them
 
-See [the **ggplot2** documentation](https://ggplot2.tidyverse.org/reference/index.html#section-layer-geoms) for examples of all the different geom layers
+See [the **ggplot2** documentation](https://ggplot2.tidyverse.org/reference/index.html#section-layer-geoms) for examples of all the different geometry layers
 
 ---
 
@@ -756,7 +754,7 @@ With the grammar of graphics, we talk about specific chart **elements**
 
 - .small[Map a column to the x-axis, fill by a variable, `geom_col()` to get stacked bars]
 
-- .small[Geoms can be interchangable (e.g., `geom_violin()` and `geom_boxplot()`)]
+- .small[Geometries can be interchangable (e.g., `geom_violin()` and `geom_boxplot()`)]
 
 This grammar is portable to other software like Tableau, which is [built on the grammar of graphics](https://www.tableau.com/about/blog/2015/4/getting-know-lee-wilkinson-tableaus-new-vp-statistics-38654)
 ]
@@ -773,11 +771,12 @@ This grammar is portable to other software like Tableau, which is [built on the 
 .box-2.small[Map wealth to the x-axis, health to the y-axis, add points, color by continent, size by population, scale the x-axis with a log, and facet by year]
 
 ```{r describe-1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(data = filter(gapminder, year %in% c(2002, 2007)), 
-       mapping = aes(x = gdpPercap,
-                     y = lifeExp,
-                     color = continent,
-                     size = pop)) +
+gapminder |> 
+  filter(year %in% c(2002, 2007)) |> 
+  ggplot(aes(x = gdpPercap,
+             y = lifeExp,
+             color = continent,
+             size = pop)) +
   geom_point() +
   scale_x_log10() + 
   facet_wrap(vars(year), ncol = 1)
@@ -876,7 +875,7 @@ knitr::include_graphics("img/07/tidydata_7.jpg")
 class: inverse, center, middle
 name: example-1
 
-# example-07:<br>mapping-data-to-graphics-practice.R
+# example-07-1:<br>mapping-data-to-graphics-practice.R
 
 
 ---
@@ -1509,8 +1508,12 @@ How might we visualize these amounts?
 ```{r, echo = FALSE}
 load("data/survey-responses/survey-data.RData")
 concentrations_tidy <- concentrations |> 
-  rename(mkt = mkting,
-         strat = strategy) |> 
+  rename(
+    sus = enviro,
+    fin = finance,
+    oth = other,
+    strat = strategy
+    ) |>
   select(-degree, -concentration, -program) |>
   summarize_all(sum, na.rm = TRUE) |>
   pivot_longer(everything(), names_to = "concentration", values_to = "count") |>
@@ -1541,6 +1544,7 @@ concentrations_tidy |>
 ```{r, echo = FALSE}
 as_tibble(sports) |>
   filter(!is.na(value)) |>
+  mutate(value = str_remove(value, " ?\\(.*")) |> 
   ggplot(aes(y = fct_rev(fct_infreq(value)))) +
   geom_bar() +
   scale_x_continuous(breaks = scales::breaks_pretty()) +
@@ -1651,7 +1655,7 @@ concentrations_tidy |>
 1. truncated y axis
 2. area scales faster than height
 
-.small[This terrible figure brought to you by a former AEM 2850 student!]
+.small[This terrible figure brought to you by a former AEM 2850 / 5850 student!]
 ]
 
 ---
@@ -1997,7 +2001,7 @@ gapminder |>
 gapminder |>
   filter(year == 2007) |>
   ggplot(aes(y = fct_rev(fct_infreq(continent)), #<<
-           fill = continent)) +
+             fill = continent)) +
   geom_bar() +
   guides(fill = "none") +
   labs(x = "Number of countries", y = NULL)
@@ -2073,67 +2077,7 @@ gapminder |>
 
 ---
 
-# Alternatives: Lollipop charts
-
-Since the end of the bar is important, emphasize it the most
-
-.left-code[
-
-```{r lollipop, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder_ordered |> 
-  ggplot(aes(x = continent, 
-             y = n,
-             color = continent)) +
-  geom_pointrange(aes(ymin = 0, ymax = n)) + #<<
-  guides(color = "none") +
-  labs(x = NULL, y = "Number of countries")
-```
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("lollipop", "png")`)
-
-]
-
----
-
-# Alternatives: Waffle charts
-
-Show individual observations as squares
-
-.left-code[
-
-```{r waffle, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-# This has to be installed in a special way
-# install.packages("devtools") # do this once
-# devtools::install_github("hrbrmstr/waffle") # do this once
-library(waffle) # for geom_waffle #<<
-
-gapminder_ordered |> 
-  ggplot(aes(x = continent, 
-             y = n,
-             fill = continent)) +
-  geom_waffle(aes(values = n), # waffle aes() #<<
-              n_rows = 10,     # waffle options #<<
-              flip = TRUE) +   # make vertical #<<
-  labs(fill = NULL) +
-  coord_equal() + # make the boxes square
-  theme_void()    # use an empty theme
-```
-
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("waffle", "png")`)
-
-]
-
-
----
-
-# Alternatives: Dots instead of bars
+# Alternative: Dots instead of bars
 
 Dots are preferable if we want to truncate the axes
 
@@ -2161,5 +2105,5 @@ gapminder |>
 class: inverse, center, middle
 name: example-2
 
-# example-07:<br>amounts-practice.R
+# example-07-2:<br>amounts-practice.R
 
