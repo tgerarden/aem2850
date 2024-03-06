@@ -25,6 +25,7 @@ output:
 
 #### Optional readings
 
+- <i class="fas fa-book"></i> [Section 1.4: Visualizing distributions](https://r4ds.hadley.nz/data-visualize#visualizing-distributions) of *R for Data Science (2e)*
 - <i class="fas fa-book"></i> [Chapter 9: Visualizing many distributions](https://clauswilke.com/dataviz/boxplots-violins.html) of *Fundamentals of Data Visualization*
 
 <!-- - <i class="fas fa-external-link-square-alt"></i> Cédric Scherer, ["Visualizing distributions with raincloud plots with ggplot2"](https://www.cedricscherer.com/2021/06/06/visualizing-distributions-with-raincloud-plots-with-ggplot2/) -->

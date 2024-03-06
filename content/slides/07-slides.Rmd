@@ -1923,7 +1923,7 @@ Use `geom_bar` to count and plot in one step
 .left-code[
 
 ```{r geom_bar, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder |>
+gapminder |> # old data: rows are countries #<<
   filter(year == 2007) |>
   ggplot(aes(x = continent, # note: no y aesthetic defined
              fill = continent)) +

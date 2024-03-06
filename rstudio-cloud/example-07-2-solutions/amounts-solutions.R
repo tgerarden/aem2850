@@ -1,4 +1,4 @@
-# AEM 2850 - Example 7 part 2
+# AEM 2850 - Example 7-2
 # Plan for today:
 # - Questions?
 # - On our own devices: work through this script
@@ -103,4 +103,3 @@ brewer_size |>
   labs(x = "Size of Brewers",
        y = "Total Barrels Produced",
        fill = NULL)
-

@@ -13,7 +13,7 @@
 #########################################################
 title: "Lab-07"
 author: "Write your name here"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
+date: today
 format: pdf
 urlcolor: blue
 ---
@@ -40,7 +40,7 @@ diamonds
 
 <!--- Please leave the code above unchanged. Questions start from here. --->
 
-## 1. In `diamonds`, one variable `color` takes on the values `r unique(diamonds$color)`. Count the number of diamonds of each color. Use `goem_col` to plot a bar chart, with x-axis being the level of `color` of a diamond, and y-axis the number of diamonds per `color`. Fill the bars by `color`. Label the x-axis "Color", and the y-axis "Number of diamonds".
+## 1. In `diamonds`, one variable `color` takes on the values `r fct_unique(diamonds$color)`. Count the number of diamonds of each color. Use `goem_col` to plot a bar chart, with x-axis being the level of `color` of a diamond, and y-axis the number of diamonds per `color`. Fill the bars by `color`. Label the x-axis "Color", and the y-axis "Number of diamonds". Exclude the fill legend using `guides(fill = "none")`.
 
 ``` {r echo = TRUE}
 diamonds |> 
@@ -65,24 +65,25 @@ diamonds |> # no need to manually count the number of diamonds by color this tim
 
 
 {{< pagebreak >}}
-## 3. Calculate the average price of by diamonds color. Use `geom_pointrange` to plot a lollipop chart, with the x-axis being the color of the diamonds, and the y-axis being the average price. Add labels to both axes.
+## 3. Calculate the average price of diamonds by color. Use `geom_col` to compare the average prices, with the x-axis being the color of the diamonds, the y-axis being the average price, and coloring the bars by color. Add labels to both axes. How is the color of the bars different from the first two questions? Why?
 <!-- No tips this time! -->
 
 ``` {r echo = TRUE}
-_____
+
 ```
+...
 
 
 {{< pagebreak >}}
 ## For questions 4-8, we are going to work with the `flights` data.
 
-## 4. In `flights`, the variable `hour` shows the scheduled departing hour of each flight. Calculate average arrival delays by hour, and plot a bar chart with x-axis the hour, and y-axis the average arrival delays. Add labels to both axes.
+## 4. In `flights`, the variable `hour` shows the scheduled departing hour of each flight. Calculate average arrival delays by hour, and plot a bar chart with hour on the x-axis and average arrival delay on the y-axis. Add labels to both axes.
 
 ``` {r echo = TRUE}
 flights |>
   group_by(_____) |> # group by hour
   summarize(_____ = _____(_____)) |> # calculate the average arrival delay (by hour), removing NAs
-  filter(_____) |>  # drop observations with NA delays
+  filter(_____) |>  # drop observations with NA average delays
   ggplot(_____(x = _____, y = _____)) +
   geom_col() +
   labs(_____ = "_____", _____ = "_____")
@@ -117,19 +118,19 @@ flights |>
 
 
 {{< pagebreak >}}
-## Questions 7-8 are not specific to amounts, but they provide more practice with data wrangling and dataviz. The **nycflights13** provides a data set `weather` that includes weather condition variables (temperature, humidity, wind direction, wind speed, precipitation, pressure, visibility, etc.) by origin-year-month-day-hour.
+## For questions 7-8 are not specific to amounts, we'll use the **nycflights13** data set `weather` that includes weather condition variables (temperature, wind speed, precipitation, visibility, etc.) by origin-year-month-day-hour.
 
-## 7. Use `inner_join` to merge the `flights` data with `weather` data. Assign it to a new object `flight_weather`. Use `summarize` to calculate the average departure delays by precipitation (`precip`). Use `geom_point` to make a plot with x-axis being precipitation, and y-axis the average departure delay. Add labels to the x- and y- axes. Is there any pattern between precipitation and departure delays?
+## 7. Use `inner_join` to merge the `flights` data with `weather` data. Assign it to a new object `flight_weather`. Calculate the average departure delays by precipitation (`precip`). Make a scatter plot of average departure delay vs precipitation (y vs x). Add axis labels. Does the correlation between precipitation and departure delay appear to be positive, negative, or zero?
 <!-- No tips this time! -->
 
-``` {r echo = TRUE, fig.dim = c(3.3,2.1)}
+``` {r echo = TRUE, fig.dim = c(3.6,2.3)}
 
 ```
 ...
 
 
 {{< pagebreak >}}
-## 8. Next we want to look at visibility. Use `summarize` to calculate the average departure delays by visibility. Make a similar plot as of #7, with x-axis being visibility, and y-axis the average departure delay. Add labels to the x- and y- axes. Does visibility seem to be correlated with departure delays? 
+## 8. Finally, let's look at visibility. Calculate the average departure delays by visibility. Make a similar plot to #7, with x-axis being visibility, and y-axis the average departure delay. Add labels to both axes. Does the correlation between visibility and departure delay appear to be positive, negative, or zero?
 <!-- No tips this time! -->
  
 ``` {r echo = TRUE}

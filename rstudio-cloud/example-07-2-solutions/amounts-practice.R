@@ -1,4 +1,4 @@
-# AEM 2850 - Example 7 part 2
+# AEM 2850 - Example 7-2
 # Plan for today:
 # - Questions?
 # - On our own devices: work through this script
@@ -66,7 +66,6 @@ brewer_size |>
   ______() +
   labs(x = "______",
        y = "______")
-
 
 # make a grouped bar chart, mapping: size to x, total_barrels to y, and year to fill
 # use the years 2009, 2015, and 2019 for the rest of this example

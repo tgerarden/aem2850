@@ -1,7 +1,7 @@
 ---
 title: "Mapping data to graphics and amounts"
 linktitle: "Mapping data to graphics and amounts"
-date: "2024-03-04 16:42:45"
+date: "2024-03-06 11:51:24"
 menu:
   content:
     parent: Course content
@@ -20,14 +20,15 @@ output:
 ### Readings
 
 - <i class="fab fa-youtube"></i> Hans Rosling: [200 Countries, 200 Years, 4 Minutes](https://www.youtube.com/watch?v=jbkSRLYSojo)
-- <i class="fas fa-book"></i> [Chapter 2: Visualizing data](https://clauswilke.com/dataviz/aesthetic-mapping.html) of *Fundamentals of Data Visualization*
+- <i class="fas fa-book"></i> [Chapter 2: Visualizing data](https://clauswilke.com/dataviz/aesthetic-mapping) of *Fundamentals of Data Visualization*
 - <i class="fas fa-book"></i> [Chapter 3: Make a plot](http://socviz.co/makeplot.html) of *Data Visualization*
-- <i class="fas fa-book"></i> [Chapter 6: Visualizing amounts](https://clauswilke.com/dataviz/visualizing-amounts.html) of *Fundamentals of Data Visualization*
+- <i class="fas fa-book"></i> [Chapter 6: Visualizing amounts](https://clauswilke.com/dataviz/visualizing-amounts) of *Fundamentals of Data Visualization*
 
 
 #### Optional readings
-- <i class="fas fa-book"></i> [Chapter 1: Data visualization](https://r4ds.hadley.nz/data-visualize.html) of *R for Data Science (2e)*
-- <i class="fas fa-book"></i> [Chapter 16: Factors](https://r4ds.hadley.nz/factors.html) of *R for Data Science (2e)*
+- <i class="fas fa-book"></i> [Chapter 1: Data visualization](https://r4ds.hadley.nz/data-visualize) of *R for Data Science (2e)*
+- <i class="fas fa-book"></i> [Chapter 9: Layers](https://r4ds.hadley.nz/layers) of *R for Data Science (2e)*
+- <i class="fas fa-book"></i> [Chapter 16: Factors](https://r4ds.hadley.nz/factors) of *R for Data Science (2e)*
 - <i class="fab fa-youtube"></i> The Pudding: [The Greatest Unexpected NBA performances](https://www.youtube.com/watch?v=jV49bDzkQhY)
 
 
