@@ -1924,7 +1924,7 @@ Use `geom_bar` to count and plot in one step
 
 
 ```r
-gapminder |&gt;
+*gapminder |&gt; # old data: rows are countries
   filter(year == 2007) |&gt;
   ggplot(aes(x = continent, # note: no y aesthetic defined
              fill = continent)) +
