@@ -249,6 +249,7 @@ Please read [the assignments page](/assignment/) for more details on the assignm
 ### Grading scale
 
 <div align="center">
+
 | Grade | Range     | Grade | Range  | Grade | Range |
 |:-----:|:---------:|:-----:|:------:|:-----:|:-----:|
 | A+    | :unicorn: | A     | 93-100 | A-    | 90-92 |
@@ -256,6 +257,7 @@ Please read [the assignments page](/assignment/) for more details on the assignm
 | C+    | 77-79     | C     | 73-76  | C-    | 70-72 |
 | D+    | 67-69     | D     | 63-66  | D-    | 60-62 |
 | F     | <60       |       |        |       |       |
+
 </div>
 
 
