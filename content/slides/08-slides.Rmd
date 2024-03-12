@@ -1,5 +1,5 @@
 ---
-title: "Distributions"
+title: "Proportions and distributions"
 author: "Todd Gerarden"
 output:
   xaringan::moon_reader:
@@ -42,7 +42,7 @@ library(tidyverse)
 
 class: center middle main-title section-title-4
 
-# Distributions
+# Proportions and distributions
 
 .class-info[
 
@@ -63,126 +63,272 @@ Acknowledgements:
 
 ---
 
-# Class Participation
-
-I got some questions about the class participation component of the course grade
-
-Reminder from [the syllabus](https://aem2850.toddgerarden.com/syllabus/#assignments-and-grading):
-> "Class participation and regular attendance are expected. Excessive absences and failure to complete weekly in-class examples will impact your final grade..."
-
-We will use name cards to help me learn names and track attendance
-
-I expect everyone to attempt all examples (even if absent)
-
-As long as you attend class regularly and try all the examples, you should receive full credit for class participation (5% of final grade)
-
----
-
 # Announcements
 
-Prelim 1 grades posted on canvas
-  - See canvas announcement for details
-  - Grading questions? Contact [Hui Zhou](mailto:hz423@cornell.edu) first, then [me](mailto:gerarden@cornell.edu)
-  - Other questions? Schedule an appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
-
-<br>
-
-I will give you preliminary details on the group project today
-
-<br>
+We will provide details on the group project in the next 1-2 weeks
 
 Questions before we get started?
 
 ---
 
-# Plan for today
+# Plan for this week
 
-[Prologue](#prologue)
-
-[Group project](#group-project)
+[Proportions](#proportions)
 
 [Distributions](#distributions)
 
-[Proportions: cut for time](#proportions)
+[example-08](#example)
 
 ---
 class: inverse, center, middle
-name: prologue
+name: proportions
 
-# Prologue
-
----
-
-# [Health and wealth revisited](https://www.youtube.com/watch?v=ZoLk6GUKzU0)
-
-<center><iframe width="832.5" height="468" src="https://www.youtube.com/embed/ZoLk6GUKzU0" title="How South Koreans got so much taller" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></center>
-
-???
-
-[Video](https://www.youtube.com/watch?v=ZoLk6GUKzU0)
-
-
----
-class: inverse, center, middle
-name: group-project
-
-# Group project
+# Proportions
 
 ---
 
-# Group project
+# Last week we plotted amounts
 
-Use R and the tidyverse to wrangle and visualize equities data
+```{r, echo=FALSE}
+load("data/survey-responses/survey-data.RData")
 
-#### Multiple parts:
-1. AAPL
-2. The S&P 500
-3. Our Class Portfolio
-4. Something extra for 5850 students (TBD)
-
-```{r load-project-data, include=FALSE}
-load("../../rstudio-cloud/group-project/sp500.RData")
-our_companies <- read_csv("../../rstudio-cloud/group-project/our-companies.csv")
+prior_programming |> 
+  ggplot(aes(x = fct_rev(prior_programming))) +
+  geom_bar() +
+  labs(x = NULL,
+       y = "number of students",
+       title = "Have you done any programming before?") +
+  theme_xaringan() +
+  theme(axis.title.y = element_text(size = 32))
 ```
 
 ---
 
-# Group project: data
+# Can we improve this survey visualization?
 
-```{r}
-sp500_companies
+```{r, echo=FALSE}
+prior_programming |> 
+  ggplot(aes(x = fct_rev(prior_programming))) +
+  geom_bar() +
+  labs(x = NULL,
+       y = "number of students",
+       title = "Have you done any programming before?") +
+  theme_xaringan() +
+  theme(axis.title.y = element_text(size = 32))
 ```
 
 ---
 
-# Group project: data
+# Have you done any programming before?
 
-```{r}
-sp500_prices
+.pull-left-3[
+```{r, echo=FALSE, fig.height = 6, fig.width = 9}
+prior_programming |> 
+  ggplot(aes(x = fct_rev(prior_programming))) +
+  geom_bar() +
+  labs(x = NULL,
+       y = "number of students") +
+  theme_xaringan() +
+  theme(axis.title.y = element_text(size = 44))
 ```
+]
+
+.pull-middle-3[
+```{r, echo=FALSE, fig.height = 6, fig.width = 9}
+prior_programming |> 
+  count(prior_programming) |> 
+  ggplot(aes(x = n, y = "", fill = fct_rev(prior_programming))) +
+  geom_col() +
+  coord_polar() +
+  scale_x_continuous(
+    name = NULL, breaks = NULL
+  ) +
+  scale_xaringan_fill_discrete(direction = -1) +
+  labs(x = NULL,
+       y = NULL,
+       fill = NULL) +
+  theme_xaringan(text_font_size = 48)
+```
+]
+
+.pull-right-3[
+```{r, echo=FALSE, fig.height = 6, fig.width = 9}
+prior_programming |>
+  ggplot(aes(x = "", fill = prior_programming)) +
+  geom_bar(position = "fill") +
+  coord_flip() +
+  scale_xaringan_fill_discrete() +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  labs(x = NULL,
+       y = "share of students",
+       fill = NULL) +
+  theme_xaringan(text_font_size = 48) +
+  theme(axis.title.x = element_text(size = 44)) +
+  theme(legend.position = "bottom")
+```
+]
+
+--
+
+Which do you think is best?
+
+--
+
+Does it depend on what you want to communicate?
 
 ---
 
-# Group project: data
+# Pros and cons of different approaches
 
-```{r}
-our_companies
-```
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   |   |   |   
+]
 
 ---
 
-# Group project: overview
+# Pros and cons of different approaches
 
-First: you choose groups of 3
-  - All group members must be in the same section (i.e., 2850 or 5850)
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+]
 
-Write quarto report that summarizes your work, presents visualizations, and discusses takeaways
+---
 
-Do not use any packages outside base R and the tidyverse
+# Pros and cons of different approaches
 
-Limited TA help for Part 3!
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             |   |   |  
+]
 
-Due: Friday, April 14 at 11:59pm (after spring break)
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      |   |   |  
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            |   |   |  
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+Works well for a large number of subsets         |   |   |   
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+Works well for a large number of subsets         | ✖ | ✖ | ✔ 
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+Works well for a large number of subsets         | ✖ | ✖ | ✔ 
+Works well for time series and similar           |   |   |  
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+Works well for a large number of subsets         | ✖ | ✖ | ✔ 
+Works well for time series and similar           | ✖ | ✔ | ✖
+]
+
+--
+
+No one visualization fits all scenarios!
 
 ---
 
@@ -246,12 +392,8 @@ ggplot(animals, aes(x = animal_type, y = weight, color = animal_type)) +
   
 Uncertainty in single variables
 
---
-  
 Uncertainty across multiple variables
 
---
-  
 Uncertainty in models and simulations
 
 --
@@ -270,7 +412,7 @@ What are they?
 
 --
 
-Put data into equally spaced buckets (or "bins"), plot how many rows are in each bucket
+Put data into equally spaced buckets (or "bins") based on values of a variable, plot how many rows of the data frame are in each bucket
 
 ---
   
@@ -337,7 +479,7 @@ gapminder_2002 |>
 
 ---
   
-# Histograms: bin width
+# Histograms: binwidth argument
   
 No official rule for what makes a good bin width
 
@@ -384,7 +526,7 @@ gapminder_2002 |>
 
 ---
   
-# Histogram tips
+# Histograms: tips using other arguments
 
 .pull-left[
 .center[Add a border to the bars<br>for readability]
@@ -673,47 +815,6 @@ gapminder_2002 |>
 
 ---
   
-# Violin plots
-
-Mirror density plot and flip
-
-.left-code[
-```{r basic-violin, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder_2002 |> 
-  ggplot(aes(x = "", 
-             y = lifeExp)) + #<<
-  geom_violin() + #<<
-  labs(x = NULL)
-```
-]
-
-.right-plot[
-  ![](`r knitr::fig_chunk("basic-violin", "png")`)
-]
-
----
-  
-# Overalying geometries
-
-We can overlay multiple geometries to provide more information
-
-.left-code[
-```{r basic-violin-overlay, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder_2002 |> 
-  ggplot(aes(x = "", 
-             y = lifeExp)) +
-  geom_violin() +
-  geom_boxplot(width = 0.1) + #<<
-  labs(x = NULL)
-```
-]
-
-.right-plot[
-  ![](`r knitr::fig_chunk("basic-violin-overlay", "png")`)
-]
-
----
-  
 # Uncertainty across multiple variables
   
 ```{r, include=FALSE}
@@ -765,8 +866,8 @@ gapminder_2002 |>
   geom_histogram(binwidth = 5, 
                  color = "white", 
                  boundary = 50) +
-  guides(fill = "none") + #<<
-  facet_wrap(vars(continent)) #<<
+  facet_wrap(vars(continent)) + #<<
+  guides(fill = "none") #<<
 ```
 ]
 
@@ -823,311 +924,9 @@ With many densities, use a single fill color to prevent distraction
 ![](`r knitr::fig_chunk("density-ridges", "png")`)
 ]
 
----
-class: inverse, center, middle
-
-# example-08<br>remaining slides cut for time
-
----
-
-# Multiple geoms: gghalves
-
-.left-code[
-```{r gghalves, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
-library(gghalves) #<<
-
-gapminder_2002 |> 
-  ggplot(aes(y = lifeExp,
-             x = continent,
-             color = continent)) +
-  geom_half_boxplot(side = "l") + #<<
-  geom_half_point(side = "r") + #<<
-  guides(color = "none")
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("gghalves", "png")`)
-]
-
----
-
-# Multiple geoms: Raincloud plots
-
-.left-code[
-```{r raincloud, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
-library(gghalves) #<<
-
-gapminder_2002 |> 
-  ggplot(aes(y = lifeExp,
-             x = continent,
-             color = continent)) +
-  geom_half_point(side = "l", size = 0.3) +  #<<
-  geom_half_boxplot(side = "l", width = 0.5,  #<<
-                    alpha = 0.3, nudge = 0.1) + #<<
-  geom_half_violin(aes(fill = continent),  #<<
-                   side = "r") + #<<
-  guides(fill = "none", color = "none") +
-  labs(y = NULL) +
-  coord_flip()  #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("raincloud", "png")`)
-]
-
----
-
-# Uncertainty in models and simulations
-
-We have already seen at least one example: `geom_smooth()`
-
-We will discuss these more in **Relationships**
-
-Until then, here are a few real-world examples
-
----
-
-# The needle
-
-.center[
-<figure>
-  <img src="img/08/needle.gif" alt="2016 election needle" title="2016 election needle" width="75%">
-</figure>
-]
-
-???
-
-Via https://www.vis4.net/blog/2016/11/jittery-gauges-election-forecast/
-
----
-
-# Uncertainty in model outcomes
-
-.center[
-<figure>
-  <img src="img/08/fivethirtyeight-outcomes.png" alt="FiveThirtyEight model outcomes plot" title="FiveThirtyEight model outcomes plot" width="60%">
-  <figcaption>FiveThirtyEight's 2018 midterms model outcomes plot</figcaption
-</figure>
-  ]
-
 
 ---
 class: inverse, center, middle
-name: proportions
+name: example
 
-# Proportions: cut for time
-
----
-
-# Can we improve this survey visualization?
-
-```{r, echo=FALSE}
-load("data/survey-responses/survey-data.RData")
-
-prior_programming |> 
-  ggplot(aes(x = fct_rev(prior_programming))) +
-  geom_bar() +
-  labs(x = NULL,
-       y = "number of students",
-       title = "Have you done any programming before?") +
-  theme_xaringan() +
-  theme(axis.title.y = element_text(size = 32))
-```
-
----
-
-# Have you done any programming before?
-
-.pull-left[
-```{r, echo=FALSE}
-prior_programming |> 
-  count(prior_programming) |> 
-  ggplot(aes(x = n, y = "", fill = fct_rev(prior_programming))) +
-  geom_col() +
-  coord_polar() +
-  scale_x_continuous(
-    name = NULL, breaks = NULL
-  ) +
-  scale_xaringan_fill_discrete(direction = -1) +
-  labs(x = NULL,
-       y = NULL,
-       fill = NULL) +
-  theme_xaringan(text_font_size = 48)
-```
-]
-
-.pull-right[
-```{r, echo=FALSE}
-prior_programming |>
-  ggplot(aes(x = "", fill = prior_programming)) +
-  geom_bar(position = "fill") +
-  coord_flip() +
-  scale_xaringan_fill_discrete() +
-  guides(fill = guide_legend(reverse = TRUE)) +
-  labs(x = NULL,
-       y = "share of students",
-       fill = NULL) +
-  theme_xaringan(text_font_size = 48) +
-  theme(axis.title.x = element_text(size = 44)) +
-  theme(legend.position = "bottom")
-```
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   |   |   |   
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             |   |   |  
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             | ✔ | ✔ | ✖
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             | ✔ | ✔ | ✖
-Emphasizes simple fractions (1/2, 1/3, ...)      |   |   |  
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             | ✔ | ✔ | ✖
-Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             | ✔ | ✔ | ✖
-Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
-Visually appealing for small datasets            |   |   |  
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             | ✔ | ✔ | ✖
-Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
-Visually appealing for small datasets            | ✔ | ✖ | ✔
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             | ✔ | ✔ | ✖
-Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
-Visually appealing for small datasets            | ✔ | ✖ | ✔
-Works well for a large number of subsets         |   |   |   
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             | ✔ | ✔ | ✖
-Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
-Visually appealing for small datasets            | ✔ | ✖ | ✔
-Works well for a large number of subsets         | ✖ | ✖ | ✔ 
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             | ✔ | ✔ | ✖
-Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
-Visually appealing for small datasets            | ✔ | ✖ | ✔
-Works well for a large number of subsets         | ✖ | ✖ | ✔ 
-Works well for time series and similar           |   |   |  
-]
-
----
-
-# Pros and cons of different approaches
-
-.small.center[
-               | Pie chart | Stacked bars | Side-by-side bars
-:----------    | :-------: | :----------: | :---------------:
-Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
-Shows data as proportions of a whole             | ✔ | ✔ | ✖
-Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
-Visually appealing for small datasets            | ✔ | ✖ | ✔
-Works well for a large number of subsets         | ✖ | ✖ | ✔ 
-Works well for time series and similar           | ✖ | ✔ | ✖
-]
-
---
-
-No one visualization fits all scenarios!
-
-[//]: # "segment ends here"
-
+# example-08:<br>distributions-practice.R

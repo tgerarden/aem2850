@@ -1,7 +1,7 @@
 ---
 title: "Proportions and distributions"
 linktitle: "Proportions and distributions"
-date: "`r format(Sys.time())`"
+date: "2024-03-11 20:53:30"
 menu:
   content:
     parent: Course content

@@ -68,11 +68,11 @@ lessons:
     assignment: "07-lab"
     bg: 2
 
-  - title: '<span class="content-title">Distributions</span>'
+  - title: '<span class="content-title">Proportions <br> Distributions</span>'
     session: "Session 8"
     date: "Week 8"
-    # content: "08-content"
-    # example: "08-example"
+    content: "08-content"
+    example: "08-example"
     # assignment: "08-lab"
     bg: 1
 

@@ -11,7 +11,7 @@
 # install.packages("tidyverse") # in this case, it has already been done for you in this project
 library(tidyverse) # load the core tidyverse packages
 # install.packages("ggridges") # in this case, it has already been done for you in this project
-library(ggridges) # load the core tidyverse packages
+library(ggridges) # load the ggridges package so we can use geom_density_ridges()
 
 # use theme_set to get clean plots without having to specify the theme each time
 theme_set(theme_minimal()) # set the current theme to theme_minimal()
@@ -28,15 +28,88 @@ theme_set(theme_minimal()) # set the current theme to theme_minimal()
 all_listings <- read_csv("listings.csv")
 
 
-# 2. Histograms ----
-# use a histogram to visualize the distribution of price for all_listings
+# 2. Proportions ----
+# how are the listings distributed across boroughs? (neighbourhood_group)
+# which borough has the most? which borough has the least?
+
+# visualize the number of all_listings in each neighbourhood_group
+# using bars (via geom_col)
+______ |>
+  count(______) |>
+  ggplot(______(______ = neighbourhood_group, ______ = n)) +
+  geom_col()
+
+# alternatively, this can be done using geom_bar()
+# reminder: geom_bar() counts and plots frequencies automatically
 all_listings |>
-  ggplot(aes(x = price)) +
-  geom_histogram()
+  ______(aes(x = ______)) +
+  geom_bar()
+
+# visualize the proportion of all_listings in each neighbourhood_group
+# using stacked bars (via geom_col)
+all_listings |>
+  ______(neighbourhood_group) |>
+  mutate(share = n / ______(n)) |>
+  ggplot(______(x = "", y = share, fill = ______)) +
+  geom_col()
+
+# alternatively, this can be done using geom_bar()
+all_listings |>
+  ______(aes(y = "", fill = ______)) +
+  ______(position = "fill")
+
+# here is a more polished version for your reference
+# you can play around with commenting out lines to see how layers change
+all_listings |>
+  ggplot(aes(y = "", fill = fct_rev(fct_infreq(neighbourhood_group)))) +
+  geom_bar(position = "fill") +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  scale_y_discrete(breaks = NULL) +
+  scale_x_continuous(breaks = seq(0, 1, .1)) +
+  scale_fill_viridis_d(direction = -1) +
+  theme(legend.position = "bottom") +
+  labs(
+    title = "Airbnb listings across the boroughs of NYC: parts of the whole",
+    x = NULL,
+    y = "share",
+    fill = NULL
+  )
+
+# visualize the proportion of all_listings in each neighbourhood_group
+# using a pie chart (via geom_bar)
+# you can do this by adding the layer `coord_polar()` to the earlier stacked bars
+all_listings |>
+  ggplot(aes(y = "", fill = neighbourhood_group)) +
+  geom_bar(position = "fill") +
+  ______()
+
+# here is a more polished version for your reference
+# you can play around with commenting out lines to see how layers change
+all_listings |>
+  group_by(neighbourhood_group) |>
+  count() |>
+  ggplot(aes(
+    x = n,
+    y = "",
+    fill = fct_reorder(neighbourhood_group, -n)
+  )) +
+  geom_col() + coord_polar() +
+  scale_x_continuous(breaks = NULL) +
+  scale_fill_viridis_d() +
+  labs(
+    title = "Airbnb listings across the boroughs of NYC: slices of the pie",
+    x = NULL,
+    y = NULL,
+    fill = NULL
+  )
+
+
+# 3. Histograms ----
+# use a histogram to visualize the distribution of price for all_listings
+
 
 # make a data frame named listings with the listings priced below $1000/night
-listings <- all_listings |>
-  _____(price<1000)
+
 
 # use a histogram to visualize the distribution of price for listings
 
@@ -54,11 +127,8 @@ listings <- all_listings |>
 
 
 
-# 3. Density plots ----
+# 4. Density plots ----
 # use the listings below $1000 to make a density plot of all listing prices
-listings |>
-  ggplot(aes(x = price)) +
-  _____()
 
 
 # fill by room_type to make a separate density plot for each room_type
@@ -82,7 +152,7 @@ listings |>
 
 
 
-# 4. Colors in ggplot2 ----
+# 5. Colors in ggplot2 ----
 # in the slides we saw some examples of using color, fill, etc. as parameters rather than aesthetics
 # how do we know what colors R will understand? (e.g., "skyblue")
 # here is a quick primer on the options that are available to you by default
@@ -94,28 +164,29 @@ listings |>
 # read the help to find a command that will list all the pre-defined colors available in R, and enter it
 
 
-# reproduce your histogram from before, filling with the 42nd element in the list of colors
+# reproduce your histogram from before, filling with the color "tomato"
 
 
 # now look through the list and find a color that sounds nice to you, and reproduce the histogram using this fill
 
 
-# google the official rgb hex code for cornell ("carnelian"), and use that code to fill your histogram
+# use #B31B1B, the official rgb hex code for cornell ("carnelian"), to fill your histogram
 
 
-# now modify the theme so that the axis labels (numbers and/or words) are printed in carnelian
-
+# you can even modify the theme so that the axis labels (numbers and/or words) are printed in carnelian, just add the layer below to your code from above
+____ +
+  theme(text = element_text(color = "#B31B1B"))
 
 # one really nice thing about ggplot's layered grammar of graphics is that we can just keep adding things
 # in fact, we can even assign plots to names and then continue adding to them without duplicating code
-# to see this in action, give your current histogram a name so that you can reference it below
+# to see this in action, assign your current histogram to "histogram" so that you can reference it below
 
 
 # use the name to reproduce the plot
 
 
 
-# 5. Customizing axis labels ----
+# 6. Customizing axis labels ----
 # how can we customize the numeric labeling of axes?
 # to modify the x axis, we can use scale_x_continuous(), scale_x_discrete(), etc. depending on the data type
 # we can do the same thing for the y axis: scale_y_continuous(), etc.
@@ -135,7 +206,7 @@ listings |>
 # use scale_y_continuous(breaks = NULL) to remove the horizontal lines and axis
 
 
-# we can use scale_... to do other things, like limit  to also limit
+# we can use scale_... to do other things, like impose limits
 # use scale_y_continuous to limit to between 0 and 2500
 # what happens to the bars that previously exceeded 2500?
 
@@ -144,18 +215,30 @@ listings |>
 
 
 
-# 6. Open-ended exploratory analysis of private rooms ----
+# 7. Open-ended exploratory analysis of private rooms ----
 # make a new data frame that contains only private rooms
 # explore other variables in the dataset using data wrangling and visualization tools we have learned so far
 
 # suggestions:
 # visualize the number of listings in each neighbourhood_group. which has the most? which has the least?
-# visualize the proportion of listings in each neighbourhood_group
+
+
+# visualize the proportion of listings in each neighbourhood_group using a pie chart
+
+
+# visualize the proportion of listings in each neighbourhood_group using a pie chart
+
+
 # visualize the distribution of prices in each neighbourhood_group
-# visualize the distribution of reviews (you might want to use a log scale for this)
+
+
+# visualize the distribution of reviews using the default scale
+
+
+# visualize the distribution of reviews using a log scale
 
 
 
-# 7. Feedback ----
+# 8. Feedback ----
 # how did this format go vs the format we used in examples earlier in the course?
 # please shoot me an email (gerarden@cornell.edu) if you have any strong opinions!
