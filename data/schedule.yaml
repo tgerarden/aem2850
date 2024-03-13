@@ -73,7 +73,7 @@ lessons:
     date: "Week 8"
     content: "08-content"
     example: "08-example"
-    # assignment: "08-lab"
+    assignment: "08-lab"
     bg: 1
 
   - title: '<span class="content-title">Time <br> Working with dates and times</span>'

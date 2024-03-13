@@ -13,7 +13,7 @@
 #########################################################
 title: "Lab-08"
 author: "Write your name here"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
+date: today
 format: pdf
 urlcolor: blue
 ---
@@ -24,19 +24,32 @@ library(ggridges)
 
 # omit warnings and center plots by default
 library(knitr)
-opts_chunk$set(warning = FALSE, message = FALSE,
-               fig.align = "center")
+opts_chunk$set(
+  warning = FALSE, 
+  message = FALSE,
+  fig.align = "center"
+)
 ```
 
 # Preface
 
-The goal of this assignment is to help you gain more familiarity with using **ggplot** to visualize distributions. In this lab we provide less scaffolding and more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
+The goal of this assignment is to help you gain more familiarity with using **ggplot** to visualize proportions and distributions. In this lab we provide less scaffolding and more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
 
 ## Data
 
-We will work with data on NYC Yellow cab trip data in January 2021 from [TCL](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page). We have seen these data in our Prelim 1. Start by importing these data and assigning them to a name.
+We will work with data on NYC Yellow cab trip data in January 2021 from [TCL](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page). We'll start by importing these data and assigning them to the name `trips`, and creating another data frame assigned to the name `speeds`.
 ```{r}
-trips <- read_csv("taxi-trips.csv") 
+trips <- read_csv("taxi-trips.csv")
+
+speeds <- trips |> 
+  mutate(
+    duration = dropoff_datetime - pickup_datetime,
+    hour = hour(pickup_datetime)
+  ) |> 
+  filter(duration > 0 & trip_distance > 0) |> 
+  select(pickup_datetime, dropoff_datetime, hour, trip_distance, duration) |> 
+  mutate(speed = trip_distance / (as.numeric(duration)/60/60)) |> 
+  filter(speed < 55) # filter out 55+ miles per hour
 ```
 
 
@@ -58,17 +71,9 @@ trips <- read_csv("taxi-trips.csv")
 
 {{< pagebreak >}}
 ## 3. Use the data frame `speeds` to plot the density of trip speeds, faceting by the hour during which the trip began. Use `geom_density`'s `fill` argument to fill the densities with a named color or hex code of your choice. Arrange the facets so they are in 6 rows and 4 columns. What, if any, conclusions can you draw from the resulting plot?
-<!-- Note: We provided some code that calculates the speed and hour of day during which each trip originated, because we haven't had time to cover working with dates and times yet. On future assignments you may be expected to do similar operations and calculations without being provided answers. -->
+<!-- Note: We provided some code at the top of this quarto document to calculate the speed and hour of day during which each trip originated, because we haven't had time to cover working with dates and times yet. On future assignments you may be expected to do similar operations and calculations without being provided answers. -->
 
 ```{r}
-speeds <- trips |> 
-  mutate(duration = dropoff_datetime - pickup_datetime,
-         hour = hour(pickup_datetime)) |> 
-  filter(duration > 0 & trip_distance > 0) |> 
-  select(pickup_datetime, dropoff_datetime, hour, trip_distance, duration) |> 
-  mutate(speed = trip_distance/(as.numeric(duration)/60/60)) |> 
-  filter(speed < 55) # filter out 55+ miles per hour
-
 
 ```
 
@@ -88,7 +93,23 @@ speeds <- trips |>
 ```
 
 
-
 {{< pagebreak >}}
 ## 6. Comparing your plots from questions 3, 4, and 5, which one do you think is the most effective visualization? Why?
+
+
+{{< pagebreak >}}
+## 7. How much do riders tip? Compute the tip percentage using `tip_amount` as a share of `fare_amount`, converted to percentage points. Remove outliers where tips are less than 0% or more than 100% so we can focus on the main part of the distribution. Create a histogram of tip percentage. Is the distribution [unimodal](https://en.wikipedia.org/wiki/Unimodality) or bimodal? Explain your answer.
+```{r}
+
+```
+
+
+
+{{< pagebreak >}}
+## 8. What fraction of NYC cab rides include a tip? Use the `trips` data to classify trips according to whether they included a tip amount of zero, or greater than zero. Remove any observations with negative tip amounts. Finally, make a plot of the proportion of rides that included a tip and did not include a tip. Of the three approaches we discussed in class (side-by-side bars, stacked bars, and pie charts), choose one that is effective at showing data as proportions of a whole, and explain your choice.
+<!-- Note: At least one of the three approaches is *not* a good choice and could result in point deductions depending on how you justify your approach. -->
+
+```{r}
+
+```
 
