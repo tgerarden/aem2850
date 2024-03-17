@@ -909,7 +909,7 @@ library(ggridges) #<<
 gapminder_2002 |> 
   ggplot(aes(x = lifeExp,
              fill = continent,
-             y = continent)) +
+             y = continent)) + #<<
   guides(fill = "none") +
   labs(y = NULL) +
   geom_density_ridges() #<<
