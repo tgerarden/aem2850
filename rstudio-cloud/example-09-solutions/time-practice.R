@@ -23,8 +23,8 @@ theme_set(theme_minimal()) # set the current theme to theme_minimal()
 
 
 # 1. it's your birthday ----
-# before we get to visualization of time data, let's start with a special date: your birth date
-# write your birthday as a string in "YYYY-MM-DD" format and assign it to my_bday
+# before visualizing time, let's start with a special date: your birth date
+# write your birth date below in "YYYY-MM-DD" format and assign it to my_bday
 my_bday <- "____-__-__"
 
 # what type of object is my_bday?
@@ -77,8 +77,9 @@ my_days <- ______ - ______
 
 # 2. Import and visualize oil price data ----
 # oil prices are an important economic indicator
-# use quandl to import WTI (US) and Brent (EU) prices from FRED
+# could use quandl to import WTI (US) and Brent (EU) prices from FRED
 # oil_prices <- Quandl(c("FRED/DCOILWTICO", "FRED/DCOILBRENTEU"))
+# but we did this in advance, so we can just `data/oil_prices.csv`
 oil_prices <- read_csv("data/oil_prices.csv")
 
 
@@ -110,7 +111,7 @@ gdp <- read_csv("data/gdp.csv")
 # make a line plot of GDP over time
 
 
-# put the y axis scale in logs
+# put the y axis scale in logs using scale_y_log10()
 # many economic and business indicators exhibit constant growth rates, which lead to exponential trends
 # plotting data in logs is often a convenient way to visualize these data
 
@@ -127,6 +128,11 @@ gdp <- read_csv("data/gdp.csv")
 
 
 
+# PLEASE STOP HERE AND LET US KNOW THAT YOU ARE DONE
+# IF YOU FINISH WITH TIME TO SPARE, YOU CAN JUMP AHEAD TO SECTION 6
+# WE WILL COVER SECTIONS 4-5 ON THURSDAY
+
+
 # 4. Gapminder animation revisited ----
 # load the gapminder, gganimate, and gifski packages
 library(gapminder)
@@ -134,9 +140,13 @@ library(gganimate)
 library(gifski)
 
 # use the gapminder data to recreate the animation from class
-gapminder_points <- gapminder |> 
-  ggplot(aes(gdpPercap, lifeExp, 
-             size = pop, color = continent)) +
+gapminder_points <- gapminder |>
+  ggplot(aes(
+    x = gdpPercap,
+    y = lifeExp,
+    size = pop,
+    color = continent
+  )) +
   geom_point(alpha = 0.5, show.legend = FALSE) +
   scale_color_manual(
     values = continent_colors # continent_colors comes from gapminder
@@ -144,9 +154,11 @@ gapminder_points <- gapminder |>
   scale_size_continuous(range = c(1, 15)) +
   scale_x_log10(labels = scales::label_dollar()) + # scales is a tidyverse package
   theme_classic(base_size = 20) +
-  labs(x = "GDP per capita", 
-       y = "Life expectancy",
-       title = "Year: {frame_time}") + # transition_time makes {frame_time} available
+  labs(
+    x = "GDP per capita",
+    y = "Life expectancy",
+    title = "Year: {frame_time}"
+  ) + # transition_time makes {frame_time} available
   transition_time(year) + # tell gganimate to use year for animation transitions
   ease_aes('linear') # default progression
 animate(gapminder_points, renderer = gifski_renderer())
@@ -156,7 +168,7 @@ animate(gapminder_points, renderer = gifski_renderer())
 
 
 # or plot text using geom_text (or geom_label) instead of geom_point
-# note: for plotting text, the aesthetic mapping to include a `label`
+# note: for plotting text, the aesthetic mapping needs to include a `label`
 # you might also want to omit the size mapping to make the chart more readable
 
 
@@ -166,29 +178,65 @@ animate(gapminder_points, renderer = gifski_renderer())
 # alternative economic measures could lead to very different conclusions
 
 
-# 5. Make a more polished GDP plot ----
+# 5. OJ prices and sales over time ----
+# import data/oj.csv, which contains data from a retailer on oj prices and sales
+
+
+# the data are organized by brand
+# time in these data is represented by week
+# what data type is the column/variable week? is it a date or something else?
+
+
+# use the variable week to make a column plot of tropicana sales over time
+
+
+# make a connected scatter plot using the tropicana data
+# is this an effective data visualization? why or why not?
+
+
+# make a scatter plot using the tropicana data, without using time at all
+
+
+# modify your previous plot to use log scales (scale_x_log10, scale_y_log10)
+
+
+# make a version of your last plot that includes all brands
+# add a linear fit line using geom_smooth()
+
+
+# as time allows:
+# make a line plot of both sales and prices, in facets, over time for tropicana
+# you will want to use the scales argument to facet_wrap here
+
+
+# if you were the retailer, how could you use the data to inform your strategy?
+# what are the pros and cons of your two different visualizations for this purpose?
+# what more would you want to know, or to do with the data?
+
+
+# 6. Make a more polished GDP plot ----
 # try to make this: https://fred.stlouisfed.org/graph/fredgraph.png?g=MOiP
 
-# 5.1. first you will need to process recessions data:
-# 5.1.1. get data on the start and end dates of recessions (FRED/USREC)
+# 6.1. first you will need to process recessions data:
+# 6.1.1. get data on the start and end dates of recessions (FRED/USREC)
 # go ahead and filter to post-2000 data for convenience
 # rec <- Quandl("FRED/USREC") |>
 #   filter(Date >= "2000-01-01") |>
 #   arrange(Date)
 rec <- read_csv("data/rec.csv")
 
-# 5.1.2. use dplyr tools to isolate periods when recessions start/end
+# 6.1.2. use dplyr tools to isolate periods when recessions start/end
 # (hint: think window functions for offsets)
 
 
-# 5.1.3. make a data frame where each row is a recession, and columns are start/end dates
+# 6.1.3. make a data frame where each row is a recession, and columns are start/end dates
 
 
-# 5.2. filter gpd to post-2000 data and convert GDP from billions to trillions
+# 6.2. filter gpd to post-2000 data and convert GDP from billions to trillions
 # assign resulting data frame to a variable
 
 
-# 5.3. now make a plot using the two data frames
+# 6.3. now make a plot using the two data frames
 # we need to give data and mappings to each geometry without confusing them
 # we can do this by calling ggplot without arguments, and then
 # passing the data and aesthetic mappings directly to each geom function
@@ -198,12 +246,12 @@ rec <- read_csv("data/rec.csv")
 # state your data source
 
 
-# 5.4. use ggsave to save the plot as a .png file
+# 6.4. use ggsave to save the plot as a .png file
 # you will probably want to specify the dimensions (e.g., width = 8, height = 4.5)
 
 
 
-# 6. Recessionary oil prices ----
+# 7. Recessionary oil prices ----
 # use your code from 3 to make a plot of WTI prices with recession shading
 
 
@@ -213,23 +261,3 @@ rec <- read_csv("data/rec.csv")
 
 # do you think the Great Recession and COVID affected oil prices? how? why?
 
-
-# 7. OJ prices and sales over time ----
-# data/oj.csv contains data from a real retailer on oj prices and sales
-# if time allows, we can explore the data to:
-# make a column plot of tropicana sales over time (time = "week")
-
-
-# make a line plot of both sales and prices, in facets, over time for tropicana
-# you will want to use the scales argument to facet_wrap here
-
-
-# make a plot that would be good for tropicana data, without using time at all
-
-
-# make a version of your last plot that includes all brands
-
-
-# if you were the retailer, how could you use the data to inform your strategy?
-# what are the pros and cons of your two different visualizations for this purpose?
-# what more would you want to know, or to do with the data?

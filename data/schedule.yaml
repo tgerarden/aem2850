@@ -80,7 +80,7 @@ lessons:
     session: "Session 9"
     date: "Week 9"
     content: "09-content"
-    # example: "09-example"
+    example: "09-example"
     # assignment: "09-lab"
     bg: 1
 
