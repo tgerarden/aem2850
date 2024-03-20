@@ -12,7 +12,7 @@
 #########################################################
 title: "Lab-13"
 author: "your name here"
-date: "`r format(Sys.time(), '%B %d, %Y')`"
+date: today
 format: pdf
 urlcolor: blue
 ---
