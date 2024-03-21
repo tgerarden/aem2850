@@ -95,12 +95,6 @@ lessons:
   - title: '*Spring break: no class on April 2, 4*'
     header: False
 
-  - title: '<i class="fas fa-star"></i> **Group project due**'
-    date: "Apr 12 at 11:59PM"
-    # assignment: "group-project"
-    bg: 3
-    bottomborder: True
-
   - title: '**Special Topics**'
     header: True
 
@@ -119,6 +113,12 @@ lessons:
     # example: "12-example"
     # assignment: "12-lab"
     bg: 2
+
+  - title: '<i class="fas fa-star"></i> **Group project due**'
+    date: "Apr 19 at 11:59PM"
+    # assignment: "group-project"
+    bg: 3
+    bottomborder: True
 
   - title: '<span class="content-title">Web scraping</span>'
     session: "Session 13"
