@@ -30,16 +30,22 @@ listings <- read_csv("listings.csv")
 names(listings)
 
 # first, let's look at the distribution of price
-
+listings |>
+  ggplot(aes(x = price)) +
+  geom_histogram(color = "white", binwidth = 200, boundary = 0)
 
 # what is the minimum price?
-
+listings |>
+  summarize(min(price))
 
 # now, let's look at the distribution of accommodates
-
+listings |>
+  ggplot(aes(x = accommodates)) +
+  geom_histogram(color = "white", binwidth = 1, boundary = 0)
 
 # what is the minimum accommodates?
-
+listings |>
+  summarize(min(accommodates))
 
 # make a new data frame "dat" for analysis that:
 # removes listings with zero prices and accommodates,
@@ -47,10 +53,14 @@ names(listings)
 # removes listings with prices above $1,000/night, and accommodates above 10
 # for simplicity, only include listings of two room types: "Entire room/apt" and "Private room"
 # finally, generate a variable log_price = log(price)
+dat <- listings |>
+  filter(price>0 & price<=1000) |>
+  filter(accommodates>0 & accommodates<=10) |>
+  filter(room_type == "Entire home/apt" | room_type == "Private room") |>
+  mutate(log_price = log(price))
 
-
-# for the following analysis, we want to explore the association of prices and some room characteristics
-# it seems intuitive that prices would be higher if a property can hold more people (higher accommodation)
+# next let's explore the association of prices and some room characteristics
+# it's intuitive that prices would be higher if a property can hold more people
 # how can we visualize this relationship?
 
 
@@ -62,8 +72,8 @@ names(listings)
 
 
 # a lot of points lay on top of each other at the lower end of prices
-# we can use the geom_point argument position = "jitter" to help visualize them
-# we can also adjust the size and transparency of the points by setting size = , and alpha =
+# use the geom_point argument position = "jitter" to help visualize them
+# adjust the size and transparency of the points by setting size = 0.1, alpha = 0.5
 
 
 # do price and accommodates show any correlation?
@@ -76,6 +86,7 @@ names(listings)
 # now check the correlation coefficient between log(price) and accommodation
 
 
+# let's go back to price (not log_price)
 # add a layer with a flexible fit to the data using geom_smooth()
 
 
@@ -96,10 +107,6 @@ tidy(price_linear, conf.int = TRUE)
 # can you visualize this linear relationship using geom_smooth?
 
 
-# bonus: can you visualize this relationship using your regression estimates?
-# i recommend that you skip this during class and come back to it as time allows
-
-
 
 # 3.2: now let's estimate a model where the dependent variable is log(price)
 # continue to use the independent variable accommodates
@@ -111,10 +118,6 @@ price_loglinear <- lm()
 # how do we interpret the coefficient of `accommodates`?
 
 # can you visualize this linear relationship using geom_smooth?
-
-
-# bonus: can you visualize this relationship using your regression estimates?
-# i recommend that you skip this during class and come back to it as time allows
 
 
 
@@ -149,7 +152,8 @@ price_model_big <- lm()
 # let's plot the marginal effect of accommodations holding other attributes fixed
 # hold bedrooms at its mean, fix room_type at private room, and neighbourhood_group at Manhattan
 
-# create a dataset with accommodates change from 1 to 10, and other variables hold constant at the chosen level
+# create a dataset with accommodates change from 1 to 10
+# hold the other variables constant at the chosen level
 
 
 # use augment() to make predictions for these new data
@@ -160,7 +164,7 @@ price_model_big <- lm()
 
 
 # bonus: visualize marginal effects for different room types
-# still hold bedrooms at its mean level, and fix neighbourhood group at Manhattan
+# hold bedrooms at its mean level, and fix neighbourhood group at Manhattan
 
 
 # use augment() to make predictions for these new data

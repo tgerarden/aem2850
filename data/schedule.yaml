@@ -87,9 +87,9 @@ lessons:
   - title: '<span class="content-title">Relationships</span>'
     session: "Session 10"
     date: "Week 10"
-    # content: "10-content"
-    # example: "10-example"
-    # assignment: "10-lab"
+    content: "10-content"
+    example: "10-example"
+    assignment: "10-lab"
     bg: 2
 
   - title: '*Spring break: no class on April 2, 4*'
@@ -108,7 +108,7 @@ lessons:
 
   - title: '<i class="fas fa-star"></i> **Group project due**'
     date: "Apr 19 at 11:59PM"
-    # assignment: "group-project"
+    assignment: "group-project"
     bg: 3
     bottomborder: True
 
