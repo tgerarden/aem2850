@@ -227,8 +227,10 @@ snow_plot &lt;- ggplot(ithaca_weather,
 *# use patchwork to combine the two plots
 *temp_plot +    # simply use + to combine plots
 * snow_plot +  # then add on custom options
-* plot_layout(ncol = 1,
-*             heights = c(0.7, 0.3))
+* plot_layout( #   using plot_layout
+*   ncol = 1,  # layout, like with facet_wrap
+*   heights = c(7, 3) # relative heights
+* )
 ```
 ]
 
@@ -309,19 +311,20 @@ We provided this formula for the **trans**formation argument:
 .left-code[
 
 ```r
-car_counts &lt;- mpg |&gt; 
-  group_by(drv) |&gt; summarize(total = n())
+car_counts &lt;- mpg |&gt; count(drv)
 
-total_cars &lt;- sum(car_counts$total)
+total_cars &lt;- car_counts |&gt; pull(n) |&gt; sum()
 
 car_counts |&gt; 
-  ggplot(aes(x = drv, y = total)) +
+  ggplot(aes(x = drv, y = n)) +
   geom_col() +
 * scale_y_continuous(
 *   sec.axis = sec_axis(
-*     trans = ~ . / total_cars,
-*     labels = scales::percent)) +
-  guides(fill = "none")
+*     transform = ~ . / total_cars,
+*     labels = scales::percent,
+*     name = "Share"),
+*   ) +
+  labs(y = "Number")
 ```
 This makes it a lot easier to see proportions with side-by-side bars!
 
@@ -446,9 +449,10 @@ ithaca_weather |&gt;
 ```
 
 ```r
-cor(ithaca_weather$TMIN, 
-    ithaca_weather$TMAX) |&gt; 
-  round(2)
+ithaca_weather |&gt; 
+* summarize(cor(TMIN, TMAX)) |&gt;
+  pull() |&gt; # extract cor from data frame
+  round(2)  # round to 2 decimal places
 ```
 
 ```
@@ -464,7 +468,7 @@ cor(ithaca_weather$TMIN,
 
 ---
 
-# What about max temp and snowfall?
+# What about min temp and snowfall?
 
 --
 
@@ -472,14 +476,15 @@ cor(ithaca_weather$TMIN,
 
 ```r
 ithaca_weather |&gt; 
-  ggplot(aes(x = TMAX, y = SNOW)) +
+  ggplot(aes(x = TMIN, y = SNOW)) +
   geom_point()
 ```
 
 ```r
-cor(ithaca_weather$TMIN, 
-    ithaca_weather$SNOW) |&gt; 
-  round(2)
+ithaca_weather |&gt; 
+* summarize(cor(TMIN, SNOW)) |&gt;
+  pull() |&gt; # extract cor from data frame
+  round(2)  # round to 2 decimal places
 ```
 
 ```

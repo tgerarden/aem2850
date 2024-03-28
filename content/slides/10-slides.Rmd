@@ -269,8 +269,10 @@ snow_plot <- ggplot(ithaca_weather,
 # use patchwork to combine the two plots       #<<
 temp_plot +    # simply use + to combine plots #<<
   snow_plot +  # then add on custom options    #<<
-  plot_layout(ncol = 1,                        #<<
-              heights = c(0.7, 0.3))           #<<
+  plot_layout( #   using plot_layout           #<<
+    ncol = 1,  # layout, like with facet_wrap  #<<
+    heights = c(7, 3) # relative heights       #<<
+  )                                            #<<
 ```
 ]
 
@@ -361,19 +363,20 @@ We provided this formula for the **trans**formation argument:
 
 .left-code[
 ```{r review-dual, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
-car_counts <- mpg |> 
-  group_by(drv) |> summarize(total = n())
+car_counts <- mpg |> count(drv)
 
-total_cars <- sum(car_counts$total)
+total_cars <- car_counts |> pull(n) |> sum()
 
 car_counts |> 
-  ggplot(aes(x = drv, y = total)) +
+  ggplot(aes(x = drv, y = n)) +
   geom_col() +
   scale_y_continuous(               #<<
     sec.axis = sec_axis(            #<<
-      trans = ~ . / total_cars,     #<<
-      labels = scales::percent)) +  #<<
-  guides(fill = "none")
+      transform = ~ . / total_cars, #<<
+      labels = scales::percent,     #<<
+      name = "Share"),              #<<
+    ) +                             #<<
+  labs(y = "Number")
 ```
 This makes it a lot easier to see proportions with side-by-side bars!
 
@@ -542,9 +545,10 @@ ithaca_weather |>
   ggplot(aes(x = TMIN, y = TMAX)) +
   geom_point()
 
-cor(ithaca_weather$TMIN, 
-    ithaca_weather$TMAX) |> 
-  round(2)
+ithaca_weather |> 
+  summarize(cor(TMIN, TMAX)) |> #<<
+  pull() |> # extract cor from data frame
+  round(2)  # round to 2 decimal places
 ```
 
 **Strong positive correlation**
@@ -556,19 +560,20 @@ cor(ithaca_weather$TMIN,
 
 ---
 
-# What about max temp and snowfall?
+# What about min temp and snowfall?
 
 --
 
 .left-code[
 ```{r ithaca-weather-scatterplot-2, tidy=FALSE, message=FALSE, warning=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
 ithaca_weather |> 
-  ggplot(aes(x = TMAX, y = SNOW)) +
+  ggplot(aes(x = TMIN, y = SNOW)) +
   geom_point()
 
-cor(ithaca_weather$TMIN, 
-    ithaca_weather$SNOW) |> 
-  round(2)
+ithaca_weather |> 
+  summarize(cor(TMIN, SNOW)) |> #<<
+  pull() |> # extract cor from data frame
+  round(2)  # round to 2 decimal places
 ```
 
 **Weak negative correlation**
