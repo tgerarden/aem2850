@@ -1,0 +1,30 @@
+---
+title: "Space"
+linktitle: "Space"
+date: "2024-04-07 13:19:53"
+output:
+  blogdown::html_page:
+    keep_md: true # do this to save results in .md file
+    toc: false
+    fig_caption: false
+menu:
+  examples:
+    parent: Examples
+    weight: 1
+type: docs
+weight: 1
+editor_options:
+  chunk_output_type: console
+---
+
+## Plan for today
+- Questions? :raising_hand_woman:
+- This week's example will be the lab (homework) for week 11
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `lab-11` in our course workspace
+- Work through `lab-11.qmd`
+
+
+## Cheatsheets
+
+[Click here to download the `sf` cheatsheet](https://rstudio.github.io/cheatsheets/sf.pdf)
+

@@ -26,5 +26,5 @@ editor_options:
 
 ## Cheatsheets
 
-[Click here to download the `sf` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/sf.pdf)
+[Click here to download the `sf` cheatsheet](https://rstudio.github.io/cheatsheets/sf.pdf)
 

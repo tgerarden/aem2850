@@ -97,76 +97,9 @@ Questions before we get started?
 
 # Plan for today
 
-[Course progress](#progress)
-
 [Prologue](#prologue)
 
 [Text mining with R](#tidytext)
-
----
-class: inverse, center, middle
-name: progress
-
-# Course progress
-
----
-
-# Course objectives reminder
-
-1. Develop basic proficiency in `R` programming
-2. Understand data structures and manipulation
-3. Describe effective techniques for data visualization and communication
-4. Construct effective data visualizations
-5. Utilize course concepts and tools for business applications
-
----
-
-# Where we've been (weeks 1-4)
-
-1. **Develop basic proficiency in `R` programming**
-2. **Understand data structures and manipulation**
-3. Describe effective techniques for data visualization and communication
-4. Construct effective data visualizations
-5. Utilize course concepts and tools for business applications
-
----
-
-# Where we've been (weeks 5-10)
-
-1. Develop basic proficiency in `R` programming
-2. Understand data structures and manipulation
-3. **Describe effective techniques for data visualization and communication**
-4. **Construct effective data visualizations**
-5. **Utilize course concepts and tools for business applications**
-
----
-
-# Where we're going next (weeks 11+)
-
-1. Develop basic proficiency in `R` programming
-2. Understand data structures and manipulation
-3. Describe effective techniques for data visualization and communication
-4. Construct effective data visualizations
-5. Utilize course concepts and tools for business applications
-
-All of the above, plus special topics! Tentative plan:
-- Week 11: Space [last week]
-- Week 12: Text
-- Week 13: Functions and iteration
-- Week 14: Web scraping
-
----
-
-# Schedule overview
-
-#### Weeks 1-4: Programming Foundations
-
-#### Weeks 5-10: Data Visualization Foundations
-
-#### Weeks 11+: Special Topics (mix of programming and dataviz)
-
-See [aem2850.toddgerarden.com/schedule](https://aem2850.toddgerarden.com/schedule/) for details
-
 
 ---
 class: inverse, center, middle
