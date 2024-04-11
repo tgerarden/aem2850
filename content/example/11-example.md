@@ -1,7 +1,7 @@
 ---
 title: "Space"
 linktitle: "Space"
-date: "2024-04-07 13:19:53"
+date: "2024-04-11 08:38:04"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -16,6 +16,19 @@ weight: 1
 editor_options:
   chunk_output_type: console
 ---
+
+## Announcements
+- Group project: please read the instructions carefully
+  - Treat this as a memo/report for a manager, not a problem set
+  - You will be graded on presentation, not just content
+  - You will lose points if you include unnecessary instruction text and code!
+- [Taste and vote on free ice cream this week:](https://news.cornell.edu/stories/2024/04/freedom-expression-ice-cream-voting-april-10-12)
+  - Thursday 4/11, 12-2pm @ Ho Plaza/Willard Straight Hall
+  - Thursday 4/11, 6-7:30pm @ Rose House on West Campus
+  - Friday 4/12, 12-2pm @ Ag Quad/Mann Library
+- Office hours this week:
+  - Prof: Thursday afternoon [by appointment](http://aem2850.youcanbook.me)
+  - TA Victor: Friday 2:30-3:30 in Warren B50
 
 ## Plan for today
 - Questions? :raising_hand_woman:
