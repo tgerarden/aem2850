@@ -45,7 +45,7 @@ listings <- read_csv("listings.csv")
 
 
 {{< pagebreak >}}
-## 1. We'll start by plotting locations without formally treating them as spatial data. Use `geom_point()` to make a scatter plot of listing locations. Adjust the transparency to make it easier to see which locations have higher and lower densities of listings. Color by borough (e.g., Bronx, Brooklyn, etc.).
+## 1. We'll start by plotting locations without formally treating them as spatial data. Use `geom_point()` to make a scatter plot of listing locations. Adjust the transparency by setting `alpha = 0.1` to make it easier to see which locations have higher and lower densities of listings. Color by borough (e.g., Bronx, Brooklyn, etc.).
 
 ```{r}
 
@@ -61,7 +61,7 @@ listings <- read_csv("listings.csv")
 
 
 {{< pagebreak >}}
-## 3. Now we'll combine the listings data with these spatial data. Use `count()` or `summarize()` to count the number of listings in each borough. Join the resulting data frame with `boroughs`. Use `geom_sf()` to plot the boroughs as in 2, but now `fill` by the number of Airbnb listings in each borough to make a choropleth map. Add `scale_fill_viridis_c()` to alter the default fill colors.[^viridis-tidyverse]
+## 3. Now we'll combine the listings data with these new spatial data. Use `count()` or `summarize()` to count the number of listings in each borough. Join the resulting data frame with `boroughs`. Use `geom_sf()` to plot the boroughs as in 2, but now `fill` by the number of Airbnb listings in each borough to make a choropleth map. Add `scale_fill_viridis_c()` to alter the default fill colors.[^viridis-tidyverse]
 ```{r}
 
 ```
@@ -81,28 +81,29 @@ listings <- read_csv("listings.csv")
 
 ```
 
+\vfill
 ## Next, create a sf data frame with one row that contains the location of Times Square. Use the same coordinate reference system ("WGS84").
-<!-- Hint: see slide 39 from Tuesday's lecture if you aren't sure where to start. -->
+<!-- Hint: start by using a search tool like google to find the coordinates for Times Square. Be sure you pay close attention to which number is latitude and which is longitude. Then see slide 39 from Tuesday's lecture if you aren't sure how to convert that to an sf data frame. -->
 ```{r}
 
 ```
 
-## Use `mutate()` and `st_distance()` to create a new variable in `listing_locations` that contains the distance between each listing and Times Square. 
-<!-- Tip: it will simplify plotting if you convert the distance measure to a numeric in order to strip the units (meters). You may also want to convert from meters to kilometers. -->
+\vfill
+## Use `mutate()` and `st_distance()` to create a new variable in `listing_locations` that contains the distance between each listing and Times Square in kilometers.
+<!-- Tip: it will simplify plotting if you convert the distance measure to a numeric in order to strip the units (meters). You will also need to convert from meters to kilometers. -->
 ```{r}
 
 ```
 
-## Finally, plot the listings in Manhattan and `color` by the distance to Times Square. Add `scale_color_viridis_c()` to customize the color scheme.
-*Optional: start with the `boroughs` map of Manhattan and add points for an aesthetically pleasing result.*
+{{< pagebreak >}}
+## Finally, start making a visualization using the `boroughs` map of Manhattan as a base map. Then plot the listings in Manhattan and `color` by the distance to Times Square. Adjust the transparency by setting `alpha = 0.1`, and add `scale_color_viridis_c()` to customize the color scheme.
 ```{r}
 
 ```
 
 
 {{< pagebreak >}}
-## 6. Read in `review_summary.csv`.[^review-data] Isolate the properties with at least 10 reviews and `review_scores_location` of at least 4. Join the `review_scores_location` variable to `listing_locations`. Make a scatter plot of the listings using `geom_sf()`, and `color` by `review_scores_location`. Make sure there are no listings with missing values for `review_scores_location` on the plot. Adjust transparency as needed. Does proximity to Times Square seem to matter for location ratings?
-*Optional: start with the `boroughs` map of Manhattan and add points for an aesthetically pleasing result.*
+## 6. Read in `review_summary.csv`.[^review-data] Isolate the properties with at least 10 reviews and `review_scores_location` of at least 4. Join the `review_scores_location` variable to `listing_locations`. Make a plot similar to the one from 5 using the review data: Start making a visualization using the `boroughs` map of Manhattan as a base map. Then add the listings using `geom_sf()` and `color` by `review_scores_location`. Adjust the transparency by setting `alpha = 0.1`, and add `scale_color_viridis_c()` to customize the color scheme. Based on your knowledge of the location of Times Square from before, does proximity to Times Square seem to matter for location ratings?
 <!-- Tip: when joining sf data frames and regular data frames, start with the sf data frame if you want to keep the spatial attributes. Otherwise the spatial nature of the data frame can be discarded. -->
 
 ```{r}
@@ -111,14 +112,10 @@ listings <- read_csv("listings.csv")
 
 
 {{< pagebreak >}}
-## 7. Use a linear regression model to confirm your visual analysis of whether proximity to Times Square matters for location ratings. Use `review_scores_location` as the dependent variable and distance to Times Square as the independent variable. Print a `summary()` of the results and comment on your findings. Do you think this is a good model of location ratings?
+## 7. Use `lm()` to estimate a linear regression model to confirm your visual analysis of whether proximity to Times Square matters for location ratings. Use `review_scores_location` as the dependent variable and distance to Times Square as the independent variable. Print a `summary()` of the results and comment on your findings. Do you think this is a good model of location ratings?
 ```{r}
 
 ```
-
-
-{{< pagebreak >}}
-## 8. Do something else interesting with these data, or with other spatial data. You could analyze other airbnb rating measures, or use other variables like price. You could compute the distance to wherever you spent spring break, or make a map of that location. Or just stop here. Your choice!
 
 
 

@@ -103,7 +103,7 @@ lessons:
     date: "Week 11"
     content: "11-content"
     example: "11-example"
-    # assignment: "11-lab"
+    assignment: "11-lab"
     bg: 1
 
   - title: '<i class="fas fa-star"></i> **Group project due**'
