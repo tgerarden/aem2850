@@ -90,6 +90,17 @@ Acknowledgements:
 
 # Announcements
 
+**Group project due this Friday, April 19!** ([link](https://aem2850.toddgerarden.com/assignment/group-project/))
+
+Office hours for the rest of this week:
+  - Tuesday: no office hours from 11:30-12:30
+  - Wednesday: TA office hours (see canvas)
+  - Thursday: Prof. Gerarden by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
+  - Friday: Prof. Gerarden by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
+
+We will have a regular lab this week (due Monday 4/22)
+  - We will have regular TA office hours on Monday 4/22
+
 Questions before we get started?
 
 
@@ -101,6 +112,8 @@ Questions before we get started?
 
 [Text mining with R](#tidytext)
 
+[Time permitting: n-gram ratios](#n-gram-ratios)
+
 ---
 class: inverse, center, middle
 name: prologue
@@ -111,7 +124,7 @@ name: prologue
 
 # Text comes in many forms
 
-The `schrute` package contains transcripts of all episodes of [The Office](https://www.imdb.com/title/tt0386676/) (US)
+For example: The `schrute` package contains transcripts of [The Office](https://www.imdb.com/title/tt0386676/) (US)
 
 ```{r}
 library(schrute)
@@ -198,7 +211,7 @@ https://www.vice.com/en/article/ezvaba/what-our-breakups-look-like-on-twitter
 
 ---
 
-# Text of tech CEOs' memos announcing layoffs
+# Tech CEOs' memos re: layoffs in 2023
 
 .center[
 <figure>
@@ -259,13 +272,13 @@ name: tidytext
 
 # Text mining with R
 
-We already worked with strings and character vectors in week 5
+We already learned about strings and regular expressions in week 5
 
-Many of our data frames include string variables that are useful for filtering and other operations (e.g., stock tickers used in the group project)
+Many of our data frames include `chr` variables that are useful for filtering and other operations (e.g., stock tickers used in the group project)
 
 --
 
-This week we will learn more about methods to glean insights from unstructured text
+This week we will learn more about methods to glean insights from unstructured text (as well as revisit and reinforce what we learned in week 5)
 
 --
 
@@ -291,10 +304,6 @@ tf-idf
 
 Topics and LDA
 
---
-
-Fingerprinting
-
 ---
 
 # Core concepts and techniques
@@ -306,8 +315,6 @@ Fingerprinting
 **tf-idf**
 
 Topics and LDA
-
-Fingerprinting
 
 **We will cover tokens, sentiment analysis, and tf-idf** (time permitting)
 
@@ -334,7 +341,7 @@ https://www.tidytextmining.com/
 
 ---
 
-# Unstructured text
+# Let's start with some unstructured text
 
 ```{r show-hp1, echo=FALSE, comment=NA}
 harrypotter::philosophers_stone[1] |> 
@@ -345,9 +352,9 @@ harrypotter::philosophers_stone[1] |>
 
 ---
 
-# Text as data
+# Data frames can hold unstructured text
 
-Text can be stored in data frames as character strings
+As you know, text can be stored in data frames as character strings
 
 Here, each row corresponds to a chapter
 
@@ -365,7 +372,7 @@ head(hp1_data)
 
 ---
 
-# Tidy text and tokens
+# Tidy text (data)
 
 Tidy text format: a table with one **token** per row
 
@@ -405,11 +412,11 @@ So the definition of tidy text depends on what you are doing!
 .pull-left[
 ```{r hp1-word, eval=FALSE}
 hp1_data |> 
-  unnest_tokens(  # convert data to tokens
-    input = text, # split text column #<<
-    output = word,# make new word column #<<
-    ) |>
-  relocate(word)  # move new column to front
+  unnest_tokens(    # convert data to tokens #<<
+    input = text,   # split text column #<<
+    output = "word",# make new word column #<<
+    ) |> #<<
+  relocate(word)    # move new column to front
 ```
 .small[Note: `unnest_tokens()` expects **output** before **input** if you don't name arguments]
 ]
@@ -421,7 +428,7 @@ hp1_data |>
 hp1_data |> 
   unnest_tokens(   # convert data to tokens
     input = text,   # split text column #<<
-    output = word, # make new word column #<<
+    output = "word", # make new word column #<<
     ) |>
   relocate(word) # move new column to front #<<
 ```
@@ -438,7 +445,7 @@ For example, we can count them:
 hp1_data |> 
   unnest_tokens(
     input = text, 
-    output = word, 
+    output = "word", 
     ) |>        
   count(word, sort = TRUE) #<<
 ```
@@ -452,10 +459,12 @@ What do you think are the most common words?
 hp1_data |> 
   unnest_tokens(
     input = text, 
-    output = word, 
+    output = "word", 
     ) |>        
   count(word, sort = TRUE) #<<
 ```
+
+Let's visualize this...
 ]
 
 ---
@@ -465,14 +474,21 @@ hp1_data |>
 .left-code[
 ```{r word-count-plot, cache=TRUE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 hp1_data |> 
-  unnest_tokens(word, text) |> 
+  unnest_tokens("word", text) |> 
   count(word, sort = TRUE) |> 
-  slice_max(order_by = n,# order rows by count #<<
-            n = 10) |>   # slice top 10 rows #<<
-  ggplot(aes(x = n, 
-             y = fct_reorder(word, n))) +
+  slice_max( #<<
+    order_by = n, # order rows by count #<<
+    n = 10        # slice the top 10 rows #<<
+  ) |> #<<
+  ggplot(aes(
+    x = n, 
+    y = fct_reorder(word, n)
+  )) +
   geom_col() +
-  labs(x = NULL, y = NULL) +
+  labs(
+    x = "Word Frequency in Harry Potter 1", 
+    y = NULL
+    ) +
   theme_bw()
 ```
 
@@ -504,15 +520,19 @@ How could we remove these stop words from our Harry Potter tokens?
 .left-code[
 ```{r hp-words, cache=TRUE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 hp1_data |> 
-  unnest_tokens(word, text) |> 
+  unnest_tokens("word", text) |> 
   anti_join(stop_words, join_by(word)) |> #<<
   count(word, sort = TRUE) |> 
-  slice_max(order_by = n,
-            n = 10) |>
-  ggplot(aes(x = n, 
-             y = fct_reorder(word, n))) +
+  slice_max(order_by = n, n = 10) |>
+  ggplot(aes(
+    x = n, 
+    y = fct_reorder(word, n)
+  )) +
   geom_col() +
-  labs(x = NULL, y = NULL) +
+  labs(
+    x = "Word Frequency in Harry Potter 1", 
+    y = NULL
+    ) +
   theme_bw()
 ```
 That's better!
@@ -537,9 +557,9 @@ Example: two consecutive words are a bigram
 hp1_data |> 
   unnest_tokens(
     input = text, 
-    output = bigram,  # call the new column bigram #<<
-    token = "ngrams", # we want to create ngrams #<<
-    n = 2) |>         # more specifically, bigrams #<<
+    output = "bigram", # call the new column bigram #<<
+    token = "ngrams",  # we want to fill it with ngrams #<<
+    n = 2) |>          # more specifically, bigrams #<<
   relocate(bigram)
 ```
 ]
@@ -549,11 +569,57 @@ hp1_data |>
 hp1_data |> 
   unnest_tokens(
     input = text, 
-    output = bigram,  # call the new column bigram #<<
-    token = "ngrams", # we want to create ngrams #<<
-    n = 2) |>         # more specifically, bigrams #<<
+    output = "bigram", # call the new column bigram #<<
+    token = "ngrams",  # we want to fill it with ngrams #<<
+    n = 2) |>          # more specifically, bigrams #<<
   relocate(bigram)
 ```
+]
+
+---
+
+# Tokenization: n-grams
+
+How can we remove bigrams that include one or more stop words given what we have learned so far?
+
+```{r hp1-bigramr-again, cache=TRUE, echo=FALSE}
+hp1_data |> 
+  unnest_tokens(
+    input = text, 
+    output = "bigram", # call the new column bigram #<<
+    token = "ngrams",  # we want to fill it with ngrams #<<
+    n = 2) |>          # more specifically, bigrams #<<
+  relocate(bigram)
+```
+
+---
+
+# Tokenization: n-grams
+
+How can we remove bigrams that include one or more stop words given what we have learned so far?
+
+.more-left[
+```{r hp1-bigram-clean-how-to, eval=FALSE}
+hp1_data |> 
+  unnest_tokens("bigram", text, token = "ngrams", n = 2) |> 
+  separate_wider_delim(          # remember this? #<< 
+    bigram,                      # split bigrams #<< 
+    delim = " ",                 # split at space #<< 
+    names = c("word1", "word2"), # assign names #<< 
+    cols_remove = FALSE          # keep "bigram" col #<< 
+  ) |>                           #<< 
+  anti_join(stop_words,          # remove cases w/ stop #<< 
+    join_by(word1 == word)) |>   #   words in first term #<< 
+  anti_join(stop_words,          # remove cases w/ stop #<< 
+    join_by(word2 == word)) |>   #   words in second term #<< 
+  count(bigram, sort = TRUE)     # count
+```
+]
+
+.less-right[
+One word at a time:
+1. get each word
+2. filter out stop words
 ]
 
 ---
@@ -565,18 +631,18 @@ What do you think are the most common bigrams in Harry Potter and the Philosophe
 .more-left[
 ```{r hp1-bigram-clean, eval=FALSE}
 hp1_data |> 
-  unnest_tokens(bigram, text, token = "ngrams", n = 2) |> 
-  separate(bigram,              # split bigrams #<< 
-           c("word1", "word2"), #   assign arbitrary names #<< 
-           sep = " ") |>        #   split at space #<< 
-  anti_join(stop_words,         # remove cases w/ stop #<< 
-    join_by(word1 == word)) |>  #   words in first term #<< 
-  anti_join(stop_words,         # remove cases w/ stop #<< 
-    join_by(word2 == word)) |>  #   words in second term #<< 
-  unite(bigram,                 # reunite bigrams #<< 
-        word1, word2,           #<<
-        sep = " ") |>           #<<
-  count(bigram, sort = TRUE)    # count
+  unnest_tokens("bigram", text, token = "ngrams", n = 2) |> 
+  separate_wider_delim(          # remember this? #<< 
+    bigram,                      # split bigrams #<< 
+    delim = " ",                 # split at space #<< 
+    names = c("word1", "word2"), # assign names #<< 
+    cols_remove = FALSE          # keep "bigram" col #<< 
+  ) |>                           #<< 
+  anti_join(stop_words,          # remove cases w/ stop #<< 
+    join_by(word1 == word)) |>   #   words in first term #<< 
+  anti_join(stop_words,          # remove cases w/ stop #<< 
+    join_by(word2 == word)) |>   #   words in second term #<< 
+  count(bigram, sort = TRUE)     # count
 ```
 ]
 
@@ -585,12 +651,18 @@ hp1_data |>
 .less-right[
 ```{r hp1-bigram-cleanr, cache=TRUE, echo=FALSE}
 hp1_data |> 
-  unnest_tokens(bigram, text, token = "ngrams", n = 2) |> 
-  separate(bigram, c("word1", "word2"), sep = " ") |> #<<
-  anti_join(stop_words, join_by(word1 == word)) |> # filter out #<< 
-  anti_join(stop_words, join_by(word2 == word)) |> # stop words #<< 
-  unite(bigram, word1, word2, sep = " ") |> # recombine #<<
-  count(bigram, sort = TRUE) # count
+  unnest_tokens("bigram", text, token = "ngrams", n = 2) |> 
+  separate_wider_delim(          # remember this? #<< 
+    bigram,                      # split bigrams #<< 
+    delim = " ",                 # split at space #<< 
+    names = c("word1", "word2"), # assign names #<< 
+    cols_remove = FALSE          # keep "bigram" col #<< 
+  ) |>                           #<< 
+  anti_join(stop_words,          # remove cases w/ stop #<< 
+    join_by(word1 == word)) |>   #   words in first term #<< 
+  anti_join(stop_words,          # remove cases w/ stop #<< 
+    join_by(word2 == word)) |>   #   words in second term #<< 
+  count(bigram, sort = TRUE)     # count
 ```
 ]
 
@@ -603,12 +675,12 @@ We can visualize the top bigrams in Harry Potter and the Philosopher's Stone:
 .more-left[
 ```{r hp1-bigram-plot, cache=TRUE, fig.show="hide", fig.dim=c(4, 4), out.width="100%"}
 hp1_data |> 
-  unnest_tokens(bigram, text, token = "ngrams", n = 2) |> 
-  separate(bigram, c("word1", "word2"), sep = " ") |> 
+  unnest_tokens("bigram", text, token = "ngrams", n = 2) |> 
+  separate_wider_delim(bigram, delim = " ",
+    names = c("word1", "word2"), cols_remove = FALSE) |>
   anti_join(stop_words, join_by(word1 == word)) |> 
   anti_join(stop_words, join_by(word2 == word)) |> 
-  unite(bigram, word1, word2, sep = " ") |> 
-  count(bigram, sort = TRUE) |> 
+  count(bigram) |> 
   slice_max(order_by = n, #<<
             n = 10) |> #<<
   ggplot(aes(x = n,  #<<
@@ -631,7 +703,7 @@ As always, tools and tricks from the layered grammar of graphics apply:
 
 ```{r hp-bigrams, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.5, out.width="95%"}
 hp_bigrams <- hp |> 
-  unnest_tokens(bigram, text, token = "ngrams", n = 2) |> 
+  unnest_tokens("bigram", text, token = "ngrams", n = 2) |> 
   separate(bigram, c("word1", "word2"), sep = " ") |> 
   anti_join(stop_words, join_by(word1 == word)) |> 
   anti_join(stop_words, join_by(word2 == word)) |> 
@@ -653,6 +725,115 @@ ggplot(hp_bigrams, aes(x = n, y = fct_rev(bigram), fill = book)) +
 
 ---
 
+# Sentiment analysis
+
+Simple approach: quantify sentiment of each word in a corpus, then sum them up
+
+--
+
+.pull-left-3.small-code[
+```{r comment=NA}
+get_sentiments("bing")
+```
+]
+
+--
+
+.pull-middle-3.small-code[
+```{r comment=NA}
+get_sentiments("afinn")
+```
+]
+
+--
+
+.pull-right-3.small-code[
+```{r comment=NA}
+get_sentiments("nrc")
+```
+]
+
+---
+
+# Harry Potter sentiment analysis
+
+```{r hp-net-sentiment, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
+# https://rstudio-pubs-static.s3.amazonaws.com/300624_8260952d1f0346969e65f41a97006bf5.html
+hp_sentiment <- hp |>
+  unnest_tokens("word", text) |>
+  group_by(book) |>
+  mutate(word_count = 1:n(),
+         index = word_count %/% 500 + 1) |>
+  inner_join(get_sentiments("bing")) |>
+  count(book, index = index, sentiment) |>
+  pivot_wider(names_from = sentiment, values_from = n) |>
+  mutate(net_sentiment = positive - negative)
+
+ggplot(hp_sentiment,
+       aes(x = index, y = net_sentiment, fill = net_sentiment > 0)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Net sentiment") +
+  facet_wrap(vars(book), scales = "free_x") +
+  theme_bw()
+```
+
+---
+
+# tf-idf
+
+Term frequency-inverse document frequency
+
+tf-idf is a measure of how important a term is to a document within a broader collection or corpus
+
+$$
+\begin{aligned}
+tf(\text{term}) &= \frac{n_{\text{term}}}{n_{\text{terms in document}}} \\
+idf(\text{term}) &= \ln{\left(\frac{n_{\text{documents}}}{n_{\text{documents containing term}}}\right)} \\
+tf\text{-}idf(\text{term}) &= tf(\text{term}) \times idf(\text{term})
+\end{aligned}
+$$
+
+---
+
+# Harry Potter tf-idf
+
+```{r hp-tf-idf, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
+# Get a list of words in all the books
+hp_words <- hp |> 
+  unnest_tokens("word", text) |> 
+  count(book, word, sort = TRUE)
+
+# Add the tf-idf for these words
+hp_tf_idf <- hp_words |> 
+  bind_tf_idf(word, book, n) |> 
+  arrange(desc(tf_idf))
+
+# Get the top 3 words in each book
+hp_tf_idf_plot <- hp_tf_idf |> 
+  group_by(book) |> 
+  slice_max(tf_idf, n = 3) |> 
+  ungroup()
+
+ggplot(hp_tf_idf_plot, aes(y = fct_reorder(word, tf_idf), x = tf_idf, fill = book)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(y = "tf-idf", x = NULL) +
+  facet_wrap(~ book, scales = "free") +
+  labs(y = NULL) +
+  theme_bw()
+```
+
+
+---
+class: inverse, center, middle
+name: n-gram-ratios
+
+# n-gram ratios (time permitting)
+
+
+---
+
 # Token frequency: n-gram ratios
 
 We can move beyond frequency plots to analyze relative frequencies by groups:
@@ -662,7 +843,7 @@ hp_pronouns <- c("he", "she")
 
 bigram_split <- hp |>
   # tokenize into bigrams
-  unnest_tokens(bigram, text, token = "ngrams", n = 2)  |>
+  unnest_tokens("bigram", text, token = "ngrams", n = 2)  |>
   # split the bigram column into two columns
   separate(bigram, c("word1", "word2"), sep = " ") |> 
   select(word1, word2)
@@ -730,15 +911,24 @@ How would you make this?
 
 # Token frequency: n-gram ratios
 
-1: Identify and split bigrams
+1: Identify and separate bigrams
 
 .more-left[
 ```{r hp-word1-word2, eval=FALSE}
 bigram_split <- hp |>
-  # tokenize into bigrams
-  unnest_tokens(bigram, text, token = "ngrams", n = 2)  |> #<<
-  # split the bigram column into two columns
-  separate(bigram, c("word1", "word2"), sep = " ") |>  #<<
+  # tokenize into bigrams #<<
+  unnest_tokens(
+    "bigram", 
+    text, 
+    token = "ngrams", 
+    n = 2
+  )  |>
+  # separate the bigram column into two columns         #<<
+  separate_wider_delim(
+    bigram,
+    delim = " ",
+    names = c("word1", "word2"),
+  ) |>
   select(word1, word2)
 
 bigram_split
@@ -762,11 +952,9 @@ bigram_split # created at beginning of Token frequency: n-gram ratios
 
 .more-left[
 ```{r hp-bigram-counts, eval=FALSE}
-hp_pronouns <- c("he", "she")
-
 bigram_he_she_counts <- bigram_split |>
   # only choose rows where the first word is he or she
-  filter(word1 %in% hp_pronouns) |> #<<
+  filter(word1=="he" | word1=="she") |> #<<
   # count unique pairs of words
   count(word1, word2, sort = TRUE) #<<
 
@@ -824,7 +1012,7 @@ word_counts # created at beginning of Token frequency: n-gram ratios
 ```{r hp-he-she-ratios, eval=FALSE}
 word_frequencies <- word_counts |> 
   # normalize word2 counts to frequencies by he/she
-  mutate(he = he / sum(he), #<<
+  mutate(he  = he  / sum(he), #<<
          she = she / sum(she)) #<<
 
 word_frequencies
@@ -900,35 +1088,38 @@ plot_word_ratios # created at beginning of Token frequency: n-gram ratios
 
 7: Plot the data
 
-.pull-left[
+.more-left[
 ```{r hp-he-she-plot, eval=FALSE, fig.width=8, fig.height=3.75, out.width="85%"}
 plot_word_ratios |> 
   ggplot(aes(x = logratio, 
              y = fct_reorder(word2, logratio), 
              fill = logratio < 0)) +
   geom_col() +
-  labs(y = "How much more/less likely", x = NULL) +
-  scale_fill_manual(name = "", labels = c("More 'she'", "More 'he'"),
+  labs(title = "How much more/less likely", 
+       x = NULL, y = NULL) +
+  scale_fill_manual(name = "", 
+                    labels = c("More 'she'", "More 'he'"),
                     values = c("#3D9970", "#FF851B"),
                     guide = guide_legend(reverse = TRUE)) +
   scale_x_continuous(breaks = seq(-3, 3),
                      labels = c("8x", "4x", "2x",
-                                "Same", "2x", "4x", "8x")) +
-  theme_bw(base_size = 16) +
+                              "Same", "2x", "4x", "8x")) +
+  theme_bw(base_size = 20) +
   theme(legend.position = "bottom")
 ```
 ]
 
 --
 
-.pull-right[
-```{r hp-he-she-plotr, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
+.less-right[
+```{r hp-he-she-plotr, cache=TRUE, echo=FALSE, fig.width=8, fig.height=8, out.width="100%"}
 plot_word_ratios |> 
   ggplot(aes(logratio, 
              fct_reorder(word2, logratio), 
              fill = logratio < 0)) +
   geom_col() +
-  labs(y = "How much more/less likely", x = NULL) +
+  labs(title = "How much more/less likely", 
+       x = NULL, y = NULL) +
   scale_fill_manual(name = "", 
                     labels = c("More 'she'", "More 'he'"),
                     values = c("#3D9970", "#FF851B"),
@@ -936,109 +1127,8 @@ plot_word_ratios |>
   scale_x_continuous(breaks = seq(-3, 3),
                      labels = c("8x", "4x", "2x",
                                 "Same", "2x", "4x", "8x")) +
-  theme_bw(base_size = 16) +
+  theme_bw(base_size = 20) +
   theme(legend.position = "bottom")
 ```
 ]
-
----
-
-# Sentiment analysis
-
-Simple approach: quantify sentiment of each word in a corpus, then sum them up
-
---
-
-.pull-left-3.small-code[
-```{r comment=NA}
-get_sentiments("bing")
-```
-]
-
---
-
-.pull-middle-3.small-code[
-```{r comment=NA}
-get_sentiments("afinn")
-```
-]
-
---
-
-.pull-right-3.small-code[
-```{r comment=NA}
-get_sentiments("nrc")
-```
-]
-
----
-
-# Harry Potter sentiment analysis
-
-```{r hp-net-sentiment, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
-# https://rstudio-pubs-static.s3.amazonaws.com/300624_8260952d1f0346969e65f41a97006bf5.html
-hp_sentiment <- hp |>
-  unnest_tokens(word, text) |>
-  group_by(book) |>
-  mutate(word_count = 1:n(),
-         index = word_count %/% 500 + 1) |>
-  inner_join(get_sentiments("bing")) |>
-  count(book, index = index, sentiment) |>
-  pivot_wider(names_from = sentiment, values_from = n) |>
-  mutate(net_sentiment = positive - negative)
-
-ggplot(hp_sentiment,
-       aes(x = index, y = net_sentiment, fill = net_sentiment > 0)) +
-  geom_col() +
-  guides(fill = "none") +
-  labs(x = NULL, y = "Net sentiment") +
-  facet_wrap(vars(book), scales = "free_x") +
-  theme_bw()
-```
-
----
-
-# tf-idf
-
-Term frequency-inverse document frequency
-
-tf-idf is a measure of how important a term is to a document within a broader collection or corpus
-
-$$
-\begin{aligned}
-tf(\text{term}) &= \frac{n_{\text{term}}}{n_{\text{terms in document}}} \\
-idf(\text{term}) &= \ln{\left(\frac{n_{\text{documents}}}{n_{\text{documents containing term}}}\right)} \\
-tf\text{-}idf(\text{term}) &= tf(\text{term}) \times idf(\text{term})
-\end{aligned}
-$$
-
----
-
-# Harry Potter tf-idf
-
-```{r hp-tf-idf, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.75, out.width="100%"}
-# Get a list of words in all the books
-hp_words <- hp |> 
-  unnest_tokens(word, text) |> 
-  count(book, word, sort = TRUE)
-
-# Add the tf-idf for these words
-hp_tf_idf <- hp_words |> 
-  bind_tf_idf(word, book, n) |> 
-  arrange(desc(tf_idf))
-
-# Get the top 3 words in each book
-hp_tf_idf_plot <- hp_tf_idf |> 
-  group_by(book) |> 
-  slice_max(tf_idf, n = 3) |> 
-  ungroup()
-
-ggplot(hp_tf_idf_plot, aes(y = fct_reorder(word, tf_idf), x = tf_idf, fill = book)) +
-  geom_col() +
-  guides(fill = "none") +
-  labs(y = "tf-idf", x = NULL) +
-  facet_wrap(~ book, scales = "free") +
-  labs(y = NULL) +
-  theme_bw()
-```
 

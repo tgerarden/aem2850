@@ -115,7 +115,7 @@ lessons:
   - title: '<span class="content-title">Text</span>'
     session: "Session 12"
     date: "Week 12"
-    # content: "12-content"
+    content: "12-content"
     # example: "12-example"
     # assignment: "12-lab"
     bg: 2
