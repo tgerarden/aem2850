@@ -116,7 +116,7 @@ lessons:
     session: "Session 12"
     date: "Week 12"
     content: "12-content"
-    # example: "12-example"
+    example: "12-example"
     # assignment: "12-lab"
     bg: 2
 
