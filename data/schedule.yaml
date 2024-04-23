@@ -123,9 +123,9 @@ lessons:
   - title: '<span class="content-title">Web scraping</span>'
     session: "Session 13"
     date: "Week 13"
-    # content: "13-content"
-    # example: "13-example"
-    # assignment: "13-lab"
+    content: "13-content"
+    example: "13-example"
+    assignment: "13-lab"
     bg: 1
 
   - title: '<span class="content-title">Functions and iteration</span>'
