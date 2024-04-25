@@ -12,6 +12,10 @@
 library(tidyverse) # load the core tidyverse packages
 library(rvest) # load rvest (from tidyverse) for web scraping
 
+# set a user agent for simulating a web browser session later
+library(httr) # load httr, which is installed as a dependency of the tidyverse
+agent <- user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
+
 # use theme_set to get clean plots without having to specify the theme each time
 theme_set(theme_minimal()) # set the current theme to theme_minimal()
 # you can use theme_set(theme()) to return to defaults if you prefer
@@ -48,20 +52,37 @@ stock_url <- "https://finance.yahoo.com/quote/AAPL/history"
 
 # 2.2: use read_html() to get the html code, assign to stock_html
 stock_html <- read_html(stock_url)
-# what does stock_html look like?
+# what does stock_html look like? what went wrong?
 stock_html
 
-# 2.3: use html_element() to try to extract html code for the table
-# it's hard to use SelectorGadget to isolate the tabular data on yahoo finance
+# one way to get around this is to using `session()` to simulate a web browser
+#   here we use the arguments `stock_url` and `agent` specified above
+#   then pass the session to `read_html()`
+stock_html <- session(stock_url, agent) |>
+  read_html()
+# what does stock_html look like? what went wrong?
+stock_html
+
+# NOTE: if you run into problems reading the site via the posit cloud server,
+#   comment out the code below to load `stock_html` from disk
+## xml2::write_xml(stock_html, file = "aapl.html")
+# stock_html <- xml2::read_html("aapl.html")
+
+# 2.3: use html_element() to extract the table's html code, assign to stock_element
+# it may be hard to use SelectorGadget to isolate the tabular data on yahoo finance
 # instead, you can use the selector "table" (both in SelectorGadget and here)
 stock_element <- stock_html |> html_element("table")
 
-# 2.4: use html_table() to convert html code to a table
+# 2.4: use html_table() to convert html code to a table, assign to stock_table
 stock_table <- html_table(stock_element)
+# what does stock_table look like?
+stock_table
 
 # 2.5: plot stock open prices over time
-# this will require some modest data cleaning
-# tip: type_convert() is handy for automatically detecting column types
+# this will require some modest data cleaning. you can either:
+#   (1) coerce Open to numeric and filter out NA values, or
+#   (2) filter out rows with characters in Open and then
+#     use type_convert() to detect/convert column types
 stock_table |>
   filter(!str_detect(Open, "Close price|Dividend")) |>
   type_convert() |>
@@ -73,24 +94,41 @@ stock_table |>
 # 3. Use your code above to write a pipeline that produces a plot for any ticker ----
 # note: next week we will see how code like this can be called via functions
 
-# first, assign "AAPL" to the name symbol
+# first, combine the steps above into a single pipeline for the original ticker
+# customize the plot title to include the ticker
+session(stock_url, agent) |>
+  read_html() |>
+  html_element("table") |>
+  html_table() |>
+  filter(!str_detect(Open, "Close price|Dividend")) |>
+  type_convert() |>
+  mutate(Date = mdy(Date)) |>
+  ggplot(aes(x = Date, y = Open)) +
+  geom_line() +
+  labs(x = NULL,
+       y = "Share price (open, $)",
+       title = str_glue("Symbol: AAPL")) +
+  theme_bw()
+
+# second, assign "AAPL" to the name symbol
 symbol <- "AAPL" # "NVDA" # "TSLA"
 
 # now start the pipeline by using str_glue() to construct a url based on symbol
 # see if you can customize the title to include the ticker
 str_glue("https://finance.yahoo.com/quote/{symbol}/history") |>
-    read_html() |>
-    html_element("table") |>
-    html_table() |>
-    filter(!str_detect(Open, "Close price|Dividend")) |>
-    type_convert() |>
-    mutate(Date = mdy(Date)) |>
-    ggplot(aes(x = Date, y = Open)) +
-    geom_line() +
-    labs(x = NULL,
-         y = "Share price (open, $)",
-         title = str_glue("Symbol: {symbol}")) +
-    theme_bw()
+  session(agent) |>
+  read_html() |>
+  html_element("table") |>
+  html_table() |>
+  filter(!str_detect(Open, "Close price|Dividend")) |>
+  type_convert() |>
+  mutate(Date = mdy(Date)) |>
+  ggplot(aes(x = Date, y = Open)) +
+  geom_line() +
+  labs(x = NULL,
+       y = "Share price (open, $)",
+       title = str_glue("Symbol: {symbol}")) +
+  theme_bw()
 
 # go back and assign a new ticker to symbol, then run the code. did it work?
 
@@ -109,7 +147,7 @@ str_glue("https://finance.yahoo.com/quote/{symbol}/history") |>
 # if you download the file you will see it is a csv file
 # let's write a function to get data by reading these csv files
 # right-click and Copy Link, then paste here and assign it to csv_url
-csv_url <- "https://query1.finance.yahoo.com/v7/finance/download/AAPL?period1=1651022448&period2=1682558448&interval=1d&events=history&includeAdjustedClose=true"
+csv_url <- "https://query1.finance.yahoo.com/v7/finance/download/AAPL?period1=1682384546&period2=1714006946&interval=1d&events=history&includeAdjustedClose=true"
 
 # use read_csv() to read this csv and assign it to csv_prices
 csv_prices <- read_csv(csv_url)
@@ -140,97 +178,7 @@ str_glue("https://query1.finance.yahoo.com/v7/finance/download/{symbol}?period1=
 
 
 
-# 5. Scraping bike prices ----
-# let's look at bikes sold by the company Trek
-# start by navigating to https://www.trekbikes.com
-# click "Road" at top and then "All Bikes" at left
-# let's focus on road bikes: filter Category: "Road bikes" on the left side
-# how many pages of results are there?
-# find a way to display as many results as possible on one page
-# now copy the url and assign it to bike_url. here it is for convenience:
-bike_url <- "https://www.trekbikes.com/us/en_US/bikes/road-bikes/c/B200/?pageSize=72&q=%3Arelevance&sort=relevance#"
-
-# use read_html() to read the site's html, and assign it to bike_html
-bike_html <- read_html(bike_url)
-
-# next use SelectorGadget to get the name and price of each bike
-# use html_elements() to filter out this information, assign it to bike_elements
-bike_elements <- bike_html |>
-  html_elements(".product-tile__title , .product-tile__price")
-# or:
-bike_html |>
-  html_elements(".product-tile__info :nth-child(1)")
-
-# what happens if we use html_table() to clean bike_elements?
-html_table(bike_elements)
-
-# what if we use html_text2() instead? assign the result to bike_text
-bike_text <- html_text2(bike_elements)
-
-# how can we convert this to a data frame for analysis?
-# one option is to convert the vector to a data frame using as_tibble()
-# then tidy it up so that rows correspond to bikes using tidyverse tools
-# parse_number() is a handy function for converting character prices to numbers
-bike_tibble <- bike_text |> 
-  as_tibble() |> 
-  mutate(type = ifelse(
-    !str_detect(value, "^\\$"),
-    "model",
-    "price"
-  ),
-  model_index = (type=="model"),
-  model_index = cumsum(model_index)
-  ) |> 
-  pivot_wider(names_from = type, values_from = value) |> 
-  mutate(price = parse_number(price)) # convert prices from chr to dbl
-
-# (another option is coercion: filling a matrix or data frame element by element)
-# (then convert the matrix to a tibble using as_tibble(), and clean it up)
-bike_matrix <- matrix(bike_text, ncol = 2, byrow = TRUE) # fill matrix by row
-matrix(bike_text, nrow = 2) |> t() # alternative: make a wide matrix, transpose
-bike_tibble <- as_tibble(bike_matrix) |> # convert it to a tibble
-  setNames(c("model", "price")) |> # add column names
-  mutate(price = parse_number(price)) # convert prices from chr to dbl
-
-# now let's visualize the data!
-# make a histogram of prices
-bike_tibble |>
-  ggplot(aes(x = price)) +
-  geom_histogram(color = "white") +
-  scale_x_continuous(limits = c(0, NA), # start at zero
-                     labels = scales::label_dollar()) +
-  labs(x = "Price",
-       y = "Number of bikes",
-       title = "Histogram of Trek road bike prices")
-
-# now split the data by AXS, and plot the distribution of bikes w/ and w/o AXS
-# use alpha = 0.5 to adjust transparency to facilitate comparisons
-bike_tibble |>
-  mutate(AXS = str_detect(model, "AXS")) |>
-  ggplot(aes(x = price, fill = AXS)) +
-  geom_density(alpha = 0.5) +
-  scale_x_continuous(limits = c(0, NA), # start at zero
-                     labels = scales::label_dollar()) +
-  labs(x = "Price",
-       y = "Density",
-       title = "Distribution of Trek road bike prices")
-
-
-# did we miss any bikes on pages 2+?
-# could we build on our code above to scrape prices for all bikes?
-
-
-# nice work!
-# will this always work?
-# it turns out we get very different results for the company Specialized:
-read_html("https://www.specialized.com/us/en/shop/bikes/c/bikes") |>
-  html_elements(".product-list__content-text") # from SelectorGadget
-
-# there's nothing there!
-# for this page, the html code does not include all the data we see in a browser
-# we need more tools for this site, which we don't have time to cover
-
-
-# 5. Scrape prices for your own favorite product ----
-# if time allows, extend your work above to another product on another site
+# 5. Scrape something else you are interested in ----
+# if we have spare time, experiment with applying these tools to some other site(s)
+# for example: prices for your own favorite product
 
