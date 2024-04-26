@@ -21,6 +21,10 @@ urlcolor: blue
 library(tidyverse) # load the core tidyverse packages
 library(rvest) # load rvest (from tidyverse) for web scraping
 
+# set a user agent for simulating a web browser session later
+library(httr) # load httr, which is installed as a dependency of the tidyverse
+agent <- user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
+
 # set global options for all code chunks
 library(knitr)
 knitr::opts_chunk$set(fig.align = "center",
@@ -41,6 +45,7 @@ We will get data for this assignment from the web.
 
 {{< pagebreak >}}
 ## 1. Let's warm up by building on our work to scrape stock prices from this week's example. Write code that scrapes Goldman Sach's historical daily share price from [https://finance.yahoo.com/quote/GS/history](https://finance.yahoo.com/quote/GS/history). Clean the data, converting Date to a date and all other variables to doubles. Print the first 10 rows of the resulting data frame. What is the earliest date for which prices are available?
+
 *Note: If you don't know where to start, review example-13-solutions on Posit Cloud!*
 
 ```{r}
@@ -51,6 +56,7 @@ The earliest date for which prices are available is...
 
 {{< pagebreak >}}
 ## 2. Now generalize your code from question 1 so that it returns historical daily prices for any ticker assigned to the name `symbol`. First assign a new ticker -- "JPM" -- to `symbol`. As before, clean the data and convert Date to a date and all other variables to doubles. Print the first 10 rows of the data frame.
+
 *Note: example-13-solutions could be helpful here, too!*
 
 ```{r}
@@ -59,7 +65,7 @@ The earliest date for which prices are available is...
 
 
 {{< pagebreak >}}
-## 3. Adapt your code from question 2 to create a variable `ticker` with the contents of the variable `symbol`. Print the first 10 rows of the resulting data frame.
+## 3. Adapt your code from question 2 to create a variable `ticker` with the contents of the variable `symbol`. Use `relocate` to put `ticker` in the first column, and print the first 10 rows of the resulting data frame.
 
 ```{r}
 
@@ -67,9 +73,9 @@ The earliest date for which prices are available is...
 
 
 {{< pagebreak >}}
-## 4. Tickers can be pretty hard to decipher. Modify your code to scrape company names from yahoo finance, and store it in a variable `company` in your data frame. Try to remove the trailing ticker in parentheses and any whitespace to get just the company's name. Assign the resulting dataa frame to the name `symbol_prices`, and print the first 2 rows of the data frame.
+## 4. Tickers can be pretty hard to decipher. Modify your code to scrape company names from yahoo finance, and store it in a variable `company` in your data frame. Remove the trailing ticker in parentheses and any whitespace to get just the company's name. Assign the resulting data frame to the name `symbol_prices`, `relocate` the variables `ticker` and `company` to the front of the data frame, and print the first 10 rows.
 
-<!-- *Hint: It can be difficult to pin down selectors on some sites. If you have trouble, just manually enter `h1` in the SelectorGadget text field, hit enter/return, and see if that gets the information you want.* -->
+<!-- *Hint: It can be difficult to pin down selectors on some sites. If you have trouble, just manually enter `.svelte-ufs8hf` in the SelectorGadget text field, hit enter/return, and see if that gets the information you want. You could also try the simpler tag `h1`, but that might get other information you don't want. In that case, you would need to get all the elements and filter out any that are not specific to JPM.* -->
 
 ```{r}
 
@@ -78,7 +84,8 @@ The earliest date for which prices are available is...
 
 {{< pagebreak >}}
 ## 5. Use the variable `Open` in the data frame from question 4 to compute the stock's cumulative returns over the period of data you scraped.
-*Note: Make sure you get the dates in the right order when computing returns!*
+
+*Note: Make sure you get the right dates when computing returns!*
 
 ```{r}
 
@@ -86,22 +93,27 @@ The earliest date for which prices are available is...
 
 
 {{< pagebreak >}}
-## 6. Now let's try to scrape data over a custom date range. Go back to the historical data on yahoo finance and use the header to customize the time period to five years ("5Y") and the frequency to Monthly, then click Apply. Verify that the table updated. Now copy and paste the updated url into the code chunk below. Modify your code from question 4 to create a data frame of these monthly prices. Plot monthly `Open` prices over the period of data you scraped.
+## 6. Now let's use the Download option to work with yahoo finance data directly rather than having to scrape it. Go back to the historical data for JPM on yahoo finance and retrieve the link to download the data. Use `read_csv` to read in the data and plot `Open` prices over time.
 
-```{r, out.width = "100%"}
+```{r}
 
 ```
 
 
 {{< pagebreak >}}
-## 7. What if we want to focus on a different time period? In words, explain how you would modify your code from question 6 to depend on not just the variable `symbol` but also start and end dates that plot the share prices for `symbol` during the time you have been at Cornell.
+## 7. Now let's try to get lower-frequency price data over a longer time period. Go back to the historical data on yahoo finance and use the header to customize the time period to five years ("5Y") and the frequency to Monthly, then click Apply. Verify that the table updated. Now copy and paste your code from 6 and modify it to use this new url, plotting monthly `Open` prices over the past 5 years.
 
-...
-
-
-## 8. OPTIONAL: Try to implement your proposed approach from 7!
-<!-- *Hint: The yahoo finance url takes Unix times, which are the number of seconds since the start of January 1, 1970.* -->
-
-```{r, out.width = "100%"}
+```{r}
 
 ```
+
+
+{{< pagebreak >}}
+## 8. Now let's try to get the monthly price data over a custom date range: from January 1, 2000 to the present. Modify your code from 7 to depend on a variable `start_time` that encodes the date January 1, 2000 as a Unix time -- the number of seconds since the start of January 1, 1970. The result should be a plot of share prices from January 1, 2000 through the present.
+
+<!-- Hint: As hinted above, the yahoo finance query system relies on Unix times, which are the number of seconds since the start of January 1, 2000. To compute that number, you could use `mdy()` (for example) to convert the dates January 1, 2000 and January 1, 1970 to date format, and take the difference between the two dates. However, that will be in days. To convert to seconds, you could use `as.duration()` and then `as.numeric()` to get the seconds. Assign that number to `start_time` and you're off! After that you just need to modify the `str_glue()` call to utilize this object immediately following "period1=" within the url. -->
+
+```{r}
+
+```
+

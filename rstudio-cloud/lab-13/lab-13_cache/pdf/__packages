@@ -9,4 +9,5 @@ stringr
 forcats
 lubridate
 rvest
+httr
 knitr
