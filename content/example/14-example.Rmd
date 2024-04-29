@@ -26,4 +26,4 @@ editor_options:
 
 ## Cheatsheets
 
-[Click here to download the `purrr` cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/purrr.pdf)
+[Click here to download the `purrr` cheatsheet](https://rstudio.github.io/cheatsheets/purrr.pdf)

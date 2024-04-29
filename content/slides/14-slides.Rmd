@@ -38,7 +38,7 @@ opts_chunk$set(warning = FALSE, message = FALSE,
 ```{r packages-data, include=FALSE}
 library(tidyverse)
 
-load("data/sp500.RData")
+load("data/14-slides/sp500.RData")
 ```
 
 
@@ -69,15 +69,15 @@ Acknowledgements:
 
 Plan for this week:
   - Today: slides and a short example
-  - Thursday: course evaluations, prelim 2 Q&A, **Lab-14**
-    - If you come to class and work through the lab you should get full credit
+  - Thursday: course evaluations, prelim 2 Q&A, **lab-14**
+    - If you come to class and work through the lab, you will get full credit
     - Due Thursday at 11:59pm so you can focus on studying for prelim 2
 
 --
 
 Plan for next week:
-  - **Prelim 2** in class on Tuesday, May 9 at 9:40am
-  - **Lab 15 - Course Survey** due Monday, May 15 at 11:59pm
+  - **Prelim 2** in class on Tuesday, May 7
+  - **Lab 15 - Course Survey** due Monday, May 13 at 11:59pm
 
 --
 
@@ -118,8 +118,6 @@ With these objectives in mind...
 # Please complete course evaluations
 
 I take feedback seriously and will use it to improve this course!
-
-Extra useful since this is only the second offering of AEM 2850 / 5850
 
 --
 
@@ -261,8 +259,6 @@ We will focus on steps 1-3 due to time constraints
 
 # Step 1: Avoid hard-coding specific values
 
-What is "hard-coded" here?
-
 .left-code[
 ```{r stock-plot-aapl1a, eval=FALSE}
 sp500_prices |> 
@@ -277,13 +273,13 @@ sp500_prices |>
   scale_y_continuous(limits = c(0, NA)) +
   theme_bw()
 ```
+
+What is "hard-coded" here?
 ]
 
 ---
 
 # Step 1: Avoid hard-coding specific values
-
-How can we avoid this hard-coding?
 
 .left-code[
 ```{r stock-plot-aapl1b, eval=FALSE}
@@ -299,6 +295,8 @@ sp500_prices |>
   scale_y_continuous(limits = c(0, NA)) +
   theme_bw()
 ```
+
+How can we avoid this hard-coding?
 ]
 
 ---
@@ -469,7 +467,7 @@ make_plot("TSLA") #<<
 
 --
 
-- You can never write too many functions
+- You can (almost) never write too many functions
 
 --
 
@@ -595,7 +593,7 @@ length(all_plots)
 
 .pull-middle-3[
 ```{r fig.dim=c(4, 3), out.width="100%"}
-all_plots[[33]]
+all_plots[[35]]
 ```
 ]
 
@@ -603,7 +601,7 @@ all_plots[[33]]
 
 .pull-right-3[
 ```{r fig.dim=c(4, 3), out.width="100%"}
-all_plots[[498]]
+all_plots[[500]]
 ```
 ]
 
@@ -615,7 +613,7 @@ We can also extract results using logical expressions:
 
 .pull-left-3[
 ```{r failed-bank-1, fig.dim=c(4, 3), out.width="100%"}
-all_plots[all_symbols=="SIVB"]
+all_plots[all_symbols=="SIVBQ"]
 ```
 ]
 
@@ -627,12 +625,10 @@ all_plots[all_symbols=="SBNY"]
 
 .pull-right-3[
 ```{r failed-bank-3, fig.dim=c(4, 3), out.width="100%"}
-all_plots[all_symbols=="FRC"]
+all_plots[all_symbols=="FRCB"]
 ```
 
 ]
-
-.small[Note: these prices don't reflect the banks' failures since they end in 2022]
 
 ---
 
@@ -703,8 +699,6 @@ name: example
 
 # Plan for today
 
-<!-- [Prologue](#prologue) -->
-
 [Course evaluations](#course-evals-in-class)
 
 [Prelim 2 info](#prelim-2)
@@ -736,18 +730,18 @@ name: prelim-2
 
 # Prelim 2
 
-Same format as prelim 1 (write answers and code in `.qmd`, submit `.qmd`+`.pdf`)
+Same format as prelim 1 (write answers and code in `.qmd`, submit `.qmd` + `.pdf`)
 
 - **Covers everything since prelim 1** (weeks 7-14)
 - *Tentative* plan is to have ~8 questions:
-  - ~2 require no coding: "Name X ways to improve this data visualization"
+  - ~2 require no coding
+      - "Describe X ways to improve this data visualization"
+      - "Name Y ways one graphic is better/worse than another"
       - Tip: study the prologue sections of slides
   - ~1 is a mix of how to improve a dataviz, and then actually doing it
   - ~5 are coding questions where we specify the goal, and you get there
-      - ~3 have a sub-part where you describe an approach w/o writing code
+      - Some may have a sub-part where you describe an approach w/o code
 - I will list the number of points per question to help you allocate effort
-
-I pre-tested the prelim and believe it will be challenging but manageable
 
 Questions?
 
@@ -756,5 +750,4 @@ class: inverse, center, middle
 name: lab
 
 # lab-14
-
 

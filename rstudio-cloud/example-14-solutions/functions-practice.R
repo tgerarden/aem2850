@@ -14,8 +14,7 @@ library(tidyverse) # load the core tidyverse packages
 theme_set(theme_minimal()) # set the current theme to theme_minimal()
 # you can use theme_set(theme()) to return to defaults if you prefer
 
-# today we'll use data on stock prices from the S&P 500
-# these are the same data we used for mini project 1
+# today we'll use data on stock prices from the S&P 500 from 2019-2023
 
 
 # 0. Import S&P 500 data ----
@@ -24,7 +23,7 @@ load("sp500.RData")
 # what variables do we have in sp500_prices?
 names(sp500_prices)
 
-# for simplicity, let's start by filtering out companies that entered the S&P 500 during 2018-2022
+# for simplicity, filter out companies that entered S&P 500 during data period
 prices <- sp500_prices |>
   group_by(symbol) |>
   mutate(count = n()) |>
@@ -34,8 +33,9 @@ prices <- sp500_prices |>
 
 
 # 1. Writing a simple function ----
-# let's write a function that takes one argument: a symbol
-# and returns one number: that symbol's annualized return over 2018-2022
+# let's write a function that:
+#   - takes one argument: a symbol
+#   - returns one number: that symbol's annualized return over the data period
 # where to start?
 
 # let's try a test case!
@@ -59,14 +59,19 @@ prices <- sp500_prices |>
 # how can we avoid errors like this, or return a more informative error?
 # we can use control flow based on conditions that are either TRUE or FALSE
 # first use pull(symbol) to create an object symbols with all the tickers
-# then use that in an if statement to either make the plot or return a message
+# then use that in an if statement to either make the plot or print a message
+# after printing the message, add NA so the function returns a missing value
 
 
+# test your revised function using a ticker that does exist
+
+
+# test your revised function using a ticker that doesn't exist
 
 
 
 # 3. Mapping over multiple tickers ----
-# we can easily extend our computations to a vector of tickers by iteration or mapping
+# we can easily extend our work to a vector of tickers by iteration or mapping
 # how would we do that using map?
 
 
@@ -84,14 +89,23 @@ prices <- sp500_prices |>
 # what type of object(s) should it return?
 
 # one option is a data frame
-# for a data frame, you can return errors for missing symbols,
-# or just embed them as missing values in the data frame. try this option
+# start by computing returns for all symbols in the data frame also in ticker
 
 
 # test it out with a short list of tickers
 
 
-# now include a ticker that doesn't exist -- what happens?
+# now include a ticker that doesn't exist
+# what happens? how could we fix it?
+
+
+# modify the function to include missing tickers in the output:
+#   1. compute annualized returns as above
+#   2. use tibble to create a data frame with column symbol based on ticker
+#   3. join the tibble with annualized returns by symbol, return the result
+
+
+# test this function. what happens now?
 
 
 

@@ -131,8 +131,8 @@ lessons:
   - title: '<span class="content-title">Functions and iteration</span>'
     session: "Session 14"
     date: "Week 14"
-    # content: "14-content"
-    # example: "14-example"
+    content: "14-content"
+    example: "14-example"
     # assignment: "14-lab"
     bg: 2
 
