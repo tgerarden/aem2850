@@ -75,15 +75,26 @@ Here are some examples of what we get from calling that function:
 ```{r}
 get_annual_return("AAPL")
 get_annual_return("DYSON")
-map_dbl(
-  c("AAPL", "AMZN", "TSLA"),
-  get_annual_return
-)
 ```
 
 
 {{< pagebreak >}}
-## 1. Now let's modify the function to compute returns for multiple tickers directly, rather than using `map()` to do so. Write a function that filters the data to contain rows that meet the criterion `symbol %in% ticker`, compute annualized returns for each one, and then return the results in a data frame. Test it out with the tickers `c("AAPL", "AMZN", "TSLA")`, and then with the tickers `c("AAPL", "DYSON", "TSLA")`.
+## 1. Mapping over multiple tickers: We could extend our computations to a vector of tickers using imperative or functional programming techniques. Let's use the latter. Use `map()` to compute returns for `c("AAPL", "AMZN", "TSLA")` rather than calling `get_annual_return()` separately for each ticker.
+
+```{r}
+
+```
+
+\vfill
+## Now, instead of returning the numbers as a list, using `map_dbl()` to return them as a double vector.
+```{r}
+
+```
+\vfill
+
+
+{{< pagebreak >}}
+## 2. Now let's allow the function to compute returns for multiple tickers directly, rather than using `map()` to do so. Write a function that filters the data to contain rows that meet the criterion `symbol %in% ticker`, compute annualized returns for each one, and then return the results in a data frame. Test it out with the tickers `c("AAPL", "AMZN", "TSLA")`, and then with the tickers `c("AAPL", "DYSON", "TSLA")`.
 
 ```{r}
 
@@ -91,9 +102,9 @@ map_dbl(
 
 
 {{< pagebreak >}}
-## 2. Modify your code from 1. to make sure that tickers that are absent from the data are returned rather than removed. Test it out with the tickers `c("AAPL", "DYSON", "TSLA")`.
+## 3. Modify your code from 2. to make sure that tickers that are absent from the data are returned rather than removed. Test it out with the tickers `c("AAPL", "DYSON", "TSLA")`.
 
-*Hint: at the end of the function, you could use `tibble()` to create a data frame with the column `symbol` that contains the contents of `ticker`, and then join this data frame and the data frame of annual returns.*
+*Hint: at the end of the function, you could use `tibble()` to convert `ticker` into a data frame, and then join this data frame and the data frame of annual returns.*
 
 <!-- Note: you can modify the function to include missing tickers in three steps: 1. compute annualized returns as above; 2. use tibble to create a data frame with column symbol based on ticker; and 3. join the tibble with annualized returns by symbol, return the result. -->
 
@@ -121,7 +132,7 @@ raw_tidy_example <- "Metro_median_sale_price_uc_sfrcondo_month.csv" |>
 
 
 {{< pagebreak >}}
-## 1. Use the code on the previous page to write a function `tidy_data` that takes the argument `filename` and returns the tidied data. Call this function once to tidy the raw price data and once to tidy the adjusted price data, assigning the output to `raw_tidy` and `adj_tidy`. What years do `raw_tidy` and `adj_tidy` cover, respectively?
+## 1. Use the code on the previous page to write a function `tidy_data` that takes the argument `filename` and returns the tidied data. Call this function once to tidy the raw and once to tidy the adjusted price data, assigning the output to `raw_tidy` and `adj_tidy`. What years do `raw_tidy` and `adj_tidy` cover, respectively?
 
 ```{r message = FALSE}
 
