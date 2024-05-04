@@ -1,0 +1,199 @@
+---
+#########################################################
+# Steps to complete this prelim:
+#   1. Add your name to the author field of the yaml header
+#   2. Fill in the code chunks and use inline code to answer the questions 
+#   3. Click on "Render" directly above to render output (or Ctrl/Cmd-Shift-K)
+#   4. Repeat steps 2-3 until you are satisfied with the final product
+#   5. Download the files prelim-1.pdf AND prelim-1.qmd
+#   6. Upload prelim-1.pdf AND prelim-1.qmd to canvas
+# Reminder: you can run code chunks interactively, not just via Render
+# You can use keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
+#########################################################
+title: "Practice Prelim 1"
+subtitle: "AEM 2850 / AEM 5850"
+format: pdf
+urlcolor: blue
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+options(readr.show_col_types = FALSE) # omit read_csv output for clarity in pdf
+options(pillar.print_max = 12) # limit tibble printing default number of rows
+
+# read in and tidy vehicle data
+tidy_us_registrations <- read_csv("US_registrations.csv", skip = 1) |> 
+  rename("1973" = "1973 & OLDER") |> # or rename("1973" = 3)
+  filter(!is.na(make)) |> 
+  filter(!str_detect(make, "GRAND TOTAL")) |> 
+  select(-TOTAL) |> 
+  pivot_longer(-c(make, model), names_to = "model_year", values_to = "count") |> 
+  mutate(model_year = as.numeric(model_year)) |> 
+  mutate(age = 2006 - model_year)
+
+# read in tidy.csv
+tidy <- read_csv("tidy.csv")
+
+# read in taxi data
+trips <- read_csv("taxi-trips.csv")
+locations <- read_csv("taxi-locations.csv")
+```
+
+
+## Preface
+
+The goal of this prelim is to assess your facility with key data wrangling tasks we covered in the first five weeks of the course.
+
+We will work with multiple data sets, most of which are already loaded and all of which are available in the working directory of the project (see the Files pane on the lower right).
+
+
+## Instructions
+
+- You must complete Prelim 1 **in person** in Warren 150 during class
+- Prelim 1 is open internet, but **do not communicate with classmates**
+- Do not use packages outside the `tidyverse` packages we have already loaded for you (penalties may apply)
+- When done, **upload BOTH your .qmd and .pdf files** to canvas
+
+## Additional notes
+
+- The prelim is 100 points total, and each question states the number of points it is worth (*this is not true on the practice prelim but will be true on the actual prelim*)
+- **Render early and often** to avoid wasting time sorting out what code needs debugging
+- We will give partial credit if your answers are incomplete, especially if you provide comments or text that describes the logic of what you *would* do if you had more time
+- If you have trouble rendering your document, do not delete your work in progress code. That will make it hard for us to give you partial credit. Instead, you can:
+  - Comment out problematic code using `#` or keyboard shortcut Cntrl/Cmd-Shift-C
+  - Replace `{r}` with `{r, eval = FALSE}` at the top of the relevant code chunk
+  - Ask questions!
+
+<!--- Please leave the code above unchanged except for adding your name in the yaml header. Questions start from here. --->
+
+
+{{< pagebreak >}}
+## 1. The data frame `tidy_us_registrations` contains information on vehicle registrations in the U.S. Use it top determine what make - model combination has the most registrations in the data.
+
+```{r}
+tidy_us_registrations
+
+```
+### The make and model with the most registrations is...
+
+
+{{< pagebreak >}}
+## 2. Again using `tidy_us_registrations`, if we consider all different versions of the Ford F-150 to be a single model, rather than different models, would the answer to the previous question change? Why or why not?
+
+```{r}
+
+
+```
+...
+
+
+{{< pagebreak >}}
+## 3. Use `case_when()` to make a table of the share of registered vehicles that fall into the following age groups: `0-2 years old`, `3-5 years old`, `6-10 years old`, `11-15 years old`, and `16+ years old`. Use those age ranges in the table so the results are clear to the reader, and put them in order from youngest to oldest. Present the numbers as percentage points, so that they sum to 100.
+
+```{r}
+
+
+```
+
+
+
+{{< pagebreak >}}
+# Product reviews
+## 4a. The data frame `tidy` contains product reviews from Amazon. How many different products are there, based on different values of `name`?
+
+```{r}
+tidy
+
+```
+...
+
+
+\vfill
+## 4b. What is the most expensive product in `tidy`?
+
+```{r}
+
+
+```
+...
+
+
+{{< pagebreak >}}
+## 5a. Let's use `tidy` to look at reviews and ratings. Which product has the largest number of reviews that others marked as helpful?
+```{r}
+
+
+```
+...
+
+
+\vfill
+## 5b. Which product has the lowest average rating?
+
+```{r}
+
+
+```
+...
+
+
+{{< pagebreak >}}
+## 6. *Logic, strings, and regular expressions:* Let's zoom into products with "Kindle" in the name, but excluding cover and charger accessories. Use `tidy` to generate a logical variable/column in the data that indicates whether each product is a `tablet`, based on whether "Fire" is in a product's name. For each of the two categories -- tablet or not -- compute the number of products and average rating. Present the information in a table with two rows and three columns. Did the tablets receive higher or lower ratings than non-tablets (i.e., e-readers)?
+
+```{r}
+
+
+```
+...
+
+
+
+{{< pagebreak >}}
+# Taxi cabs
+## 7a. *Joins:* Now we'll use data on taxi trips in `trips` and taxi locations in `locations`. Join them based on the pick up location (`PULocation`) from `trips` and the location ID (`LocationID`) from `locations`, taking care to retain all rows from the trip data and no rows from the location data that do not match with the trips data. How many rows are in the joined data?
+
+```{r}
+trips
+
+locations
+```
+...
+
+
+\vfill
+## 7b. Are there any rows in `trips` with pick up locations that do not match a location in `locations`? If so, how many?
+```{r}
+
+
+```
+...
+
+
+\vfill
+## 7c. Are there any rows in the `locations` data that do not match the pick up location of at least one taxi trip? If so, how many?
+```{r}
+
+
+```
+...
+
+
+{{< pagebreak >}}
+## 8. Based on the joined data from 7a, how many trips originated in each borough? Please present the results as a small data frame with the same number of rows as there are boroughs in NYC.
+<!-- Note: You can google the number of boroughs in NYC and their names if you do not know off the top of your head. -->
+
+```{r}
+
+
+```
+
+
+{{< pagebreak >}}
+## 9. Now join the data to find the borough where the passenger was picked up as well as the borough where the passenger was dropped off (`DOLocationID`). Make a table of the most common three borough-to-borough trip combinations that did *NOT* start and end in the same borough. Please include the number of trips for each combination in the table.
+<!-- Note: As in 7a, please take care to retain all rows from the trip data and no rows from the location data that do not match with the trips data. -->
+
+```{r}
+
+
+```
+
