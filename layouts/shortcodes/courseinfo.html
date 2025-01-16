@@ -16,12 +16,20 @@
         <ul class="icon-list" style="list-style: none; padding-left: 0;">
             <li><i class="far fa-calendar"></i> {{ .Site.Params.course.days }}</li>
             <li><i class="far fa-calendar-alt"></i> {{ .Site.Params.course.dates }}</li>
-            <li>Section 1:</li>
-            <li><i class="far fa-clock"></i> {{ .Site.Params.course.time1 }}</li>
-            {{ if isset .Site.Params.course "location1" }}<li><i class="fas fa-university"></i> {{ .Site.Params.course.location1 }}</li>{{end}}
-            <li>Section 2:</li>
-            <li><i class="far fa-clock"></i> {{ .Site.Params.course.time2 }}</li>
-            {{ if isset .Site.Params.course "location2" }}<li><i class="fas fa-university"></i> {{ .Site.Params.course.location2 }}</li>{{end}}
+            <li>
+                <strong>Section 1:</strong>
+                <ul>
+                    <li><i class="far fa-clock"></i> {{ .Site.Params.course.time1 }}</li>
+                    {{ if isset .Site.Params.course "location1" }}<li><i class="fas fa-university"></i> {{ .Site.Params.course.location1 }}</li>{{end}}
+                </ul>
+            </li>
+            <li>
+                <strong>Section 2:</strong>
+                <ul>
+                    <li><i class="far fa-clock"></i> {{ .Site.Params.course.time2 }}</li>
+                    {{ if isset .Site.Params.course "location2" }}<li><i class="fas fa-university"></i> {{ .Site.Params.course.location2 }}</li>{{end}}
+                </ul>
+            </li>
         </ul>
     </div>
 
