@@ -13,13 +13,11 @@ output:
 
 
 
-Welcome to AEM 2850 / AEM 5850! I'd like to preface the syllabus with three points:
+Welcome to AEM 2850 / AEM 5850! I'd like to preface the syllabus with two points:
 
 1. **Your success in this class is important to me.** I am committed to making appropriate accommodations that meet your needs and that also allow you to complete the requirements of this course. My goal is for you to learn everything you want to learn in this class.
 
-2. **This course is a work in progress.** This is its third offering. This means you have a unique opportunity to help improve the class for yourself as well as for future students. Please take advantage of it! The best way to provide constructive feedback throughout the semester is by emailing me and/or the TAs.
-
-3. **Get the semester off to a good start:** **[read the syllabus](https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy)**!
+2. **Get the semester off to a good start:** **[read the syllabus](https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy)**!
 
 
 
@@ -32,28 +30,24 @@ Welcome to AEM 2850 / AEM 5850! I'd like to preface the syllabus with three poin
 
 ### Class
 
-Tuesdays and Thursdays 08:40 - 09:55 or 10:10 - 11:25 in Warren 150
+Classes meet Tuesdays and Thursdays:
+- Section 1: 10:10 - 11:25 in Warren 150
+- Section 2: 1:25 - 2:40 in Warren 101
 
 ### Professor office hours
 
-- Tuesdays 11:30am - 12:30pm  in Warren 464
+- Tuesdays 2:45pm - 3:45pm  in Warren 464
   - these are "drop-in" office hours---come at any time, in any number
 - Other times by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
 ### TA office hours
 
-<!-- All TA office hours take place in Warren 372. -->
-
-- Mondays 1:30-3:30 in Warren 370:
-  - Undergrad CA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu))
-  - Grad CA Riley Leonard ([ral346@cornell.edu](mailto:ral346@cornell.edu))
+- Mondays 2:00-5:00 in Warren 370:
+  <!-- - Undergrad CA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu)) -->
   - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
-- Mondays 3:30-7:00 in Warren 167:
-  - Grad CA Riley Leonard ([ral346@cornell.edu](mailto:ral346@cornell.edu))
-  - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
-  - Undergrad CA Aarya Tavshikar ([amt272@cornell.edu](mailto:amt272@cornell.edu))
-- Fridays 2:30-3:30 in Warren B50:
-  - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
+  - Grad TA Xiaorui Wang ([xw427@cornell.edu](mailto:xw427@cornell.edu))
+- Fridays, time and location TBD.
+  <!-- - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) -->
 
 [See below for tips on how to make the most of office hours and email.](#office-hours-and-email)
 
@@ -127,7 +121,7 @@ You will do all of your analysis with the open source (and free!) programming la
 
 R is free, but it can sometimes be a pain to install and configure. To make life easier, we'll start by using the free [Posit Cloud](https://posit.cloud/) service, which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R!
 
-<!-- We will have a shared class workspace in Posit Cloud that will let you quickly copy templates for examples, exercises, and mini projects. -->
+We will have a shared class workspace in Posit Cloud that will let you quickly copy templates for examples, exercises, and mini projects.
 
 Posit Cloud is convenient, but it can be slow and it is not designed to be able to handle larger datasets or more complicated analysis and graphics. You also can't use your own custom fonts with Posit Cloud. So you'll want to install R, RStudio, and other R packages on your own computer and wean yourself off of Posit Cloud over the first few weeks of the semester.
 
@@ -137,16 +131,12 @@ Posit Cloud is convenient, but it can be slow and it is not designed to be able 
 
 Programming can be difficult. Little errors in your code can cause hours of headache, even if you've been coding for years.
 
-<!-- Fortunately there are tons of online resources to help you with this. Two of the most important are [StackOverflow](https://stackoverflow.com/) (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and [RStudio Community](https://community.rstudio.com/) (a forum specifically designed for people using RStudio and the `tidyverse—that's you!). -->
-
 Fortunately there are tons of online resources to help you with this. Two of the most important are:
 1. [StackOverflow](https://stackoverflow.com/): a Q&A site with tons of answers to all sorts of programming questions
 2. [RStudio Community](https://community.rstudio.com/): a forum specifically for RStudio and the `tidyverse` (that's you!)
 <!-- 3. [ChatGPT](https://chat.openai.com): an AI-powered chatbot that can help debug code (among other things) -->
 
 These tools, and others, are valuable resources that can help you learn and work. That said, they can also provide misleading or incorrect answers. I encourage you to use them as tools for debugging your code, not as replacements for you and your developing expertise.[^1]
-
-<!-- If you use Twitter, post R-related questions and content with [#rstats](https://twitter.com/search?q=%23rstats). The community there is exceptionally generous and helpful. -->
 
 Searching for help with R online can sometimes be tricky because the program name is, ya know, the letter R. Search engines are generally smart enough to figure out what you mean when you search for "r scatterplot", but if it does struggle, try searching for "rstats" instead (e.g., "rstats scatterplot"). Also, since most of your R work will deal with `tidyverse` packages like `ggplot2`, it's often easier to use those keywords instead of the letter "r" (e.g., "ggplot scatterplot"). 
 
@@ -219,13 +209,11 @@ Your grade in this course will be based on completing the following assignments:
 - The **group project** is intended to synthesize and reinforce the individual skills you develop in class, and to provide examples of their application to business and life more generally.
 
 - **Class participation** and regular attendance are expected due to the interactive nature of this course.
-  - Completing in-class **examples** are an important part of class participation and learning. If you miss class, you are still expected to complete the in-class examples for any classes that you miss.
-  - Excessive absences and failure to complete weekly in-class examples will impact your final grade. There is no penalty for the first three absences (except for the in-class prelims, which are mandatory).
+  - Completing in-class **examples** are an important part of class participation and learning. If you miss class, you are still expected to complete the in-class examples for any classes that you miss by the end of that week.
+  - Excessive absences and failure to complete weekly in-class examples will impact your final grade. There is no penalty for the first three absences (except for the in-class prelims, which are mandatory irrespective of whether you miss class).
   - Please do not notify the instructor that you will miss class unless you anticipate missing more than three classes.
 
 **Note: Students in AEM 5850** will have to complete a few extra assignments and meet slightly different requirements for the project.
-
-<!-- **Class participation** can take many forms. The best form of participation is active participation during class. When we are on zoom you can do this using the zoom chat and hand-raising with camera and mic on. The bare minimum can best be described as “showing your presence and having some engagement” – questions typed in chat and questions posed after class count towards participation. To encourage some form of participation, I will often pose questions to the class. -->
 
 Please read [the assignments page](/assignment/) for more details on the assignments and their underlying rationale.
 
@@ -287,7 +275,10 @@ Life at Cornell can be complicated and challenging, especially during a pandemic
 ### Accommodations for students with disabilities
 Your access in this course is important. In order to have adequate time to arrange your approved accommodation, please request your accommodation letter as soon as possible. If you need an immediate accommodation for equal access, please speak with me in person, [email me](mailto:gerarden@cornell.edu), and/or email SDS at [sds_cu@cornell.edu](mailto:sds_cu@cornell.edu). If the need arises for additional accommodations during the semester, please contact SDS.
 
-**For students with testing accommodations,** we will manage alternative testing locations through Dyson for the Spring 2024 semester. If you are approved for exam accommodation(s), please be sure to have a letter sent from SDS to me as early in the semester as possible.
+**For students with testing accommodations,** please be sure to have a letter sent from SDS to me as early in the semester as possible.
+
+<!-- we will manage alternative testing locations through Dyson for the Spring 2024 semester. If you are approved for exam accommodation(s),  -->
+
 
 <!-- **For students with testing accommodations,** we are participating in the Alternative Testing Program for the Spring 2023 semester. If you are approved for exam accommodations, please request your exam accommodation(s) for this course and fill out an exam request form for each exam in this course via the [SDS student portal](https://cascade.accessiblelearning.com/Cornell/). -->
 
@@ -316,7 +307,7 @@ Each student in this course is expected to abide by the Cornell University Code 
 
 ### Sharing of course materials is prohibited
 
-Sharing of course materials is prohibited. These materials include, but are not limited to: zoom recordings, lecture hand-outs, in-class materials, exercises, and assignments. Accessing course materials through friends or indirectly online is a violation of the Code of Academic Integrity.
+Sharing of course materials is prohibited. These materials include, but are not limited to: in-class assignments, homework assignments, exams, and solutions. Accessing course materials through friends or indirectly online is a violation of the Code of Academic Integrity.
 <!-- https://theuniversityfaculty.cornell.edu/the-new-faculty-handbook/6-policies-and-assistance/6-1-instruction/33797-2/ -->
 
 

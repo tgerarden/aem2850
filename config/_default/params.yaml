@@ -63,15 +63,16 @@ teaching_assistant:
 
 course:
   number: "AEM 2850 / 5850"
-  semester: "Spring 2024"
+  semester: "Spring 2025"
   days: "Tuesdays and Thursdays"
-  time1: "08:40am - 09:55am (sec. 2)"
-  time2: "10:10am - 11:25am (sec. 1)"
-  location: "Warren 150"
-  dates: "January – May, 2024"
-  copyrightYear: "2024"
+  time1: "10:10am - 11:25am"
+  location1: "Warren 150"
+  time2: "01:25pm - 02:40pm"
+  location2: "Warren 101"
+  dates: "January – May, 2025"
+  copyrightYear: "2025"
 #  slack: "https://join.slack.com/t/msu-qs62738/shared_invite/zt-10u63bf0n-b0cePmz9NDhhw3MSUPBP5A"
-  office_hours: "Tuesday 11:30am - 12:30pm + by appointment"
+  office_hours: "Tuesday 2:45pm - 3:45pm + by appointment"
   appointment_url: 'https://aem2850.youcanbook.me'
   github: "tgerarden/aem2850"
 
