@@ -36,7 +36,7 @@ Classes meet Tuesdays and Thursdays:
 
 ### Professor office hours
 
-- Tuesdays 2:45pm - 3:45pm  in Warren 464
+- Tuesdays 11:30am - 12:30pm in Warren 464
   - these are "drop-in" office hours---come at any time, in any number
 - Other times by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
@@ -200,8 +200,8 @@ Email is a blessing and a curse. Here are some tips to help us get the most out 
 
 Your grade in this course will be based on completing the following assignments:
 
-- **Labs** are short weekly homework assignments that require you to practice programming.
-  - Late lab submissions will be accepted, with a penalty of 1 point per day late.
+- **Homeworks** are weekly assignments that require you to practice programming.
+  - Late homework submissions will be accepted, with a penalty of 1 point per day late.
 
 - **Prelims** are intended to assess programming and data visualization proficiency. Prelims will be completed in class.
   - In-class prelims are mandatory. No make up exams will be offered due to time conflicts (including but not limited to personal travel).
@@ -225,7 +225,7 @@ Please read [the assignments page](/assignment/) for more details on the assignm
 
 |Assignment          | Percent|
 |:-------------------|-------:|
-|Labs                |     35%|
+|Homeworks           |     35%|
 |Prelim 1            |     20%|
 |Prelim 2            |     20%|
 |Group project       |     20%|
