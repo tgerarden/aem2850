@@ -10,7 +10,7 @@ Here’s your roadmap for the semester! *Note:* this will inevitably change thro
 
 ### Overview
 
-The class is structured with three distinct bits. On Tuesday I will provide an overview of the topic for the week. On Thursday we will work through a hands-on example to gain programming experience. Finally, each week outside of class you will complete readings and labs (and other assignments later in the semester).
+The class is structured with three distinct bits. On Tuesday I will provide an overview of the topic for the week. On Thursday we will work through a hands-on example to gain programming experience. Finally, each week outside of class you will complete readings and homework assignments (and other assignments later in the semester).
 
 - [**Content**](/content/) (<i class="fas fa-book-reader"></i>): This page contains readings, guiding questions, and lecture slides for each topic.
 

@@ -18,7 +18,7 @@ You will do all of your work in this class with the open source (and free!) prog
 
 ## Posit Cloud
 
-R is free, but it can sometimes be a pain to install and configure. To make life easier, this course uses [posit.cloud](http://posit.cloud/), which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R! We have a shared class workspace on Posit Cloud that will let you quickly copy templates for labs and problem sets.
+R is free, but it can sometimes be a pain to install and configure. To make life easier, this course uses [posit.cloud](http://posit.cloud/), which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R! We have a shared class workspace on Posit Cloud that will let you quickly copy templates for examples and homework assignments.
 
 Go to <http://posit.cloud/> and create an account. You'll receive a link to join the shared class workspace separately. If you don't get this link, let me know and I will invite you.
 

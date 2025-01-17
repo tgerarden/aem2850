@@ -19,32 +19,13 @@ You will get the most of out this class if you:
 Each type of assignment in this class helps with one of these strategies.
 
 
-<!-- ### Reflections -->
-
-<!-- To encourage engagement with the course content, you'll need to write a ≈150 word reflection about the readings and lectures for the day. That's fairly short: there are ≈250 words on a typical double-spaced page in Microsoft Word (500 when single-spaced).  -->
-
-<!-- You can do a lot of different things with this memo: discuss something you learned from the course content, write about the best or worst data visualization you saw recently, connect the course content to your own work, etc. These reflections let you explore and answer some of the key questions of this course. -->
-
-<!-- The course content for each week will also include a set of questions specific to that topic. *You do not have to answer all (or any) of these questions*. They exist to guide your thinking, that's all. -->
-
-<!-- A TA will grade reflections using a check system: -->
-
-<!-- - ✔+: (*6 points (120%) in gradebook*) Reflection shows phenomenal thought and engagement with the course content. We will not assign these often. -->
-<!-- - ✔: (*5 points (100%) in gradebook*) Reflection is thoughtful, well-written, and shows engagement with the course content. This is the expected level of performance. -->
-<!-- - ✔−: (*2.5 points (50%) in gradebook*) Reflection is hastily composed, too short, and/or only cursorily engages with the course content. This grade signals that you need to improve next time. We hope not assign these often. -->
-
-<!-- Notice that is essentially a pass/fail or completion-based system. We're not grading your writing ability; we're not counting the exact number of words you're writing; and we're not looking for encyclopedic citations of every single reading to prove that you did indeed read everything. We are simply looking for thoughtful engagement. Do good work and you'll get a ✓. -->
-
-<!-- Please submit your reflections via canvas. You can choose whether to write them using R Markdown or to use another one of the formats listed in the canvas assignments. I recommend that you use R Markdown to gain more practice with R and RStudio. If you use R Markdown, `knit` the completed reflection to a PDF document and submit the resulting PDF file via canvas. -->
-
-
-### Labs
+### Homeworks
 
 Each week in class we will learn about how to do specific tasks in R. However, without practicing these principles and making graphics on your own, you won't remember what you learn.
 
-To practice, you will complete a brief set of exercises each week. These exercises will have about 8 short questions that are directly related to the topic for the week. You need to show that you made a good faith effort to work each question. There may also be a final question which requires significantly more thought and work. This will be where you get to show some creativity and stretch your abilities.
+To practice, you will complete a brief set of exercises each week. These exercises will have about 8 short questions that are directly related to the topic for the week. You need to show that you made a good faith effort to work through each question. There may also be a final question which requires significantly more thought and work. This will be where you get to show some creativity and stretch your abilities.
 
-<!-- A TA will grade labs using a check system: -->
+<!-- A TA will grade homework submissions using a check system: -->
 
 <!-- - ✔+: (*11 points (110%) in gradebook*) Exercises are complete. Knitted document is clean and easy to follow. Work is exceptional. We will not assign these often. -->
 <!-- - ✔: (*10 points (100%) in gradebook*) Exercises are complete and most answers are correct. This is the expected level of performance. -->
@@ -53,7 +34,7 @@ To practice, you will complete a brief set of exercises each week. These exercis
 
 <!-- This is essentially a pass/fail system. We're not grading your coding ability; we're not checking each line of code to make sure it produces some exact final figure; and we're not looking for perfect. Also note that a ✓ does not require 100% success. You will sometimes get stuck with weird errors that you can't solve, or the demands of pandemic living might occasionally become overwhelming. We are looking for good faith effort. Try hard, do good work, and you'll get a ✓. -->
 
-You may work together on the labs, but you must turn in your own answers. The default method will be to write these using Quarto, knit the completed lab to a PDF document, and submit the resulting PDF file via canvas.
+You may work together on the homework assignments, but you must turn in your own answers. The default method will be to write these using Quarto, knit the completed homework to a PDF document, and submit the resulting PDF file via canvas.
 
 
 ### Prelims

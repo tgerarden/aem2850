@@ -19,13 +19,13 @@ You will get the most of out this class if you:
 Each type of assignment in this class helps with one of these strategies.
 
 
-### Labs
+### Homeworks
 
 Each week in class we will learn about how to do specific tasks in R. However, without practicing these principles and making graphics on your own, you won't remember what you learn.
 
-To practice, you will complete a brief set of exercises each week. These exercises will have about 8 short questions that are directly related to the topic for the week. You need to show that you made a good faith effort to work each question. There may also be a final question which requires significantly more thought and work. This will be where you get to show some creativity and stretch your abilities.
+To practice, you will complete a brief set of exercises each week. These exercises will have about 8 short questions that are directly related to the topic for the week. You need to show that you made a good faith effort to work through each question. There may also be a final question which requires significantly more thought and work. This will be where you get to show some creativity and stretch your abilities.
 
-<!-- A TA will grade labs using a check system: -->
+<!-- A TA will grade homework submissions using a check system: -->
 
 <!-- - ✔+: (*11 points (110%) in gradebook*) Exercises are complete. Knitted document is clean and easy to follow. Work is exceptional. We will not assign these often. -->
 <!-- - ✔: (*10 points (100%) in gradebook*) Exercises are complete and most answers are correct. This is the expected level of performance. -->
@@ -34,7 +34,7 @@ To practice, you will complete a brief set of exercises each week. These exercis
 
 <!-- This is essentially a pass/fail system. We're not grading your coding ability; we're not checking each line of code to make sure it produces some exact final figure; and we're not looking for perfect. Also note that a ✓ does not require 100% success. You will sometimes get stuck with weird errors that you can't solve, or the demands of pandemic living might occasionally become overwhelming. We are looking for good faith effort. Try hard, do good work, and you'll get a ✓. -->
 
-You may work together on the labs, but you must turn in your own answers. The default method will be to write these using Quarto, knit the completed lab to a PDF document, and submit the resulting PDF file via canvas.
+You may work together on the homework assignments, but you must turn in your own answers. The default method will be to write these using Quarto, knit the completed homework to a PDF document, and submit the resulting PDF file via canvas.
 
 
 ### Prelims

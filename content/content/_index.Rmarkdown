@@ -14,7 +14,7 @@ output:
 
 ### Readings
 
-Each week we will have a set of readings that you should ideally complete ***before*** coming to lecture and working through the examples and labs for each topic.
+Each week we will have a set of readings that you should ideally complete ***before*** coming to lecture and working through the examples and homework assignments for each topic.
 
 ### Guiding questions
 

@@ -22,7 +22,7 @@ editor_options:
   - No office hours during February break
   - We will hold office hours Wednesday, Feb 28 (see canvas)
 - Prelim 1
-  - Will be similar in structure to labs, though slightly more open-ended questions and less direct guidance
+  - Will be similar in structure to homework assignments, though slightly more open-ended questions and less direct guidance
   - Prelim will be distributed on Posit Cloud at class start time
   - Complete and submit via canvas by class end time (penalties may apply)
   - Submit **both** the .pdf output **and** all your code within your .qmd file (self-contained)
