@@ -70,13 +70,11 @@ name: outline
 
 [Summary of key class details](#class-details)
 
-[Teaser example](#teaser)
+[Teaser programming example](#teaser)
 
-[Just show me the data!](#show-me-the-data)
+[What makes a great data visualization?](#beautiful-visualizations)
 
-[What makes a great visualization?](#beautiful-visualizations)
-
-[Basic base R (time permitting)](#outline-base-r)
+[Basic base R (for reference)](#outline-base-r)
 
 
 ---
@@ -261,9 +259,7 @@ class: title title-7
 
 1. Your success in this class is important to me
 
-2. This course is a work in progress
-
-3. Get the semester off to a good start: **[read the syllabus](https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy)**!
+2. Get the semester off to a good start: **[read the syllabus](https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy)**!
 
 
 ---
@@ -293,13 +289,11 @@ class: title title-7
 
 # A bit about our TAs
 
-### Graduate TA
+### Graduate TAs
 
 Victor Simoes Dornelas
 
-### Undergraduate TAs
-
-Jonathan Gotian
+Xiaorui Wang
 
 **We will post office hours and contact info on the course site and canvas**
 
@@ -371,7 +365,7 @@ the grammar of graphics, `ggplot2`
 .pull-left[
 #### Special Topics
 
-annotations, time, space, etc.
+functions, scraping, spatial data, etc.
 ]
 
 .pull-right[
@@ -393,6 +387,8 @@ We will follow the same general process each week:
 
 - **Thursday:** come to class, where we will work through hands-on examples
 
+- We will often blend together new material and hands-on examples both days
+
 - Work on the lab, attend office hours as needed
 
 - **Monday (following):** submit lab on canvas by 11:59pm (starting with Week 1)
@@ -402,13 +398,13 @@ We will follow the same general process each week:
 # Assignments
 
 .more-left[
-- **Labs** are short weekly homework assignments to practice programming
+- **Homeworks** are weekly assignments to practice programming
 
 - **Prelims** are intended to assess programming and data visualization proficiency
 
 - The **group project** is intended to synthesize and reinforce skills in real-world applications
 
-- **Class participation** is the best way to learn the material, attendance and completion of in-class examples is expected
+- **Class participation** is the best way to learn the material; attendance and completion of in-class examples is required
 ]
 
 
@@ -416,8 +412,8 @@ We will follow the same general process each week:
 assignments <- tribble(
   ~Points,  ~Assignment,
   # 14 * 5  , "Reflections (14 x 5 points each)",
-  # 30 , "Labs (13 x 10 points each)",
-  35      , "Labs",
+  # 30 , "Homeworks (13 x 10 points each)",
+  35      , "Homeworks",
   20      , "Prelim 1",
   20      , "Prelim 2",
   20      , "Group project",
@@ -454,7 +450,7 @@ bind_rows(assignments, assignments_total) %>%
 
 ### Email:
 
-You can also reach us by email. The best approach is to email both me and our grad TA Victor Simoes Dornelas at the same time. You can do that with one click [here](mailto:gerarden@cornell.edu,vs424@cornell.edu). **Please** read the syllabus for tips on how to make the most of email.
+You can also reach us by email. The best approach is to email both me and our grad TAs at the same time. You can do that with one click [here](mailto:gerarden@cornell.edu,vs424@cornell.edu,xw427@cornell.edu). **Please** read the syllabus for tips on how to make the most of email.
 
 
 ---
@@ -465,7 +461,7 @@ You can also reach us by email. The best approach is to email both me and our gr
 [aem2850.toddgerarden.com](https://aem2850.toddgerarden.com)
 
 ### Site for submitting work: (↑)
-[canvas.cornell.edu/courses/62697](https://canvas.cornell.edu/courses/62697)
+[canvas.cornell.edu/courses/74072](https://canvas.cornell.edu/courses/74072)
 - viewing announcements
 - viewing grades
 - you can also view and navigate the course site through canvas
@@ -508,7 +504,7 @@ layout: false
 name: teaser
 class: center middle section-title section-title-2 animated fadeIn
 
-# Teaser example
+# Teaser programming example
 
 ---
 
@@ -517,30 +513,24 @@ class: title title-2
 
 ---
 
-# How does 2024 compare to 2023 so far?
+# How does 2025 compare to 2024 so far?
 
-Go to [aem2850.toddgerarden.com/content/01-content](https://aem2850.toddgerarden.com/content/01-content/)
-
-Click the links to download the following files:
+Click to download files from [aem2850.toddgerarden.com/content/01-content](https://aem2850.toddgerarden.com/content/01-content/):
 - [Weather stations in NY](https://aem2850.toddgerarden.com/slides/data/01-slides/ny-stations.csv)
-- [Weather in NY in 2023](https://aem2850.toddgerarden.com/slides/data/01-slides/ny-weather-2023.csv)
 - [Weather in NY in 2024](https://aem2850.toddgerarden.com/slides/data/01-slides/ny-weather-2024.csv)
+- [Weather in NY in 2025](https://aem2850.toddgerarden.com/slides/data/01-slides/ny-weather-2025.csv)
 
-<!-- 1. Compute the difference in average temperature at Cornell University between January 2024 and January 2023 -->
-
-Let's make a plot that compares the evolution of daily max temps (TMAX) over January in 2023 and 2024
-
-Time permitting: do it on your own using software of your choice
+Let's make a plot that compares the evolution of Cornell's daily max temps (TMAX) over January in 2024 and 2025
 
 ---
 
-# How does 2024 compare to 2023 so far?
+# How does 2025 compare to 2024 so far?
 
 One way to do this in R. First, we'll need to import and prep the data:
 
 ```{r ithaca-weather-data}
 # load packages
-library(tidyverse); library(lubridate)
+library(tidyverse)
 # identify the Cornell station
 stations <- read_csv("data/01-slides/ny-stations.csv")
 cornell <- stations |> filter(str_detect(NAME, "CORNELL"))
@@ -555,13 +545,13 @@ clean_data <- function(y, s, m) {
            year = year(date)) |>
     filter(mon == m)
 }
-years <- c(2023, 2024)
+years <- c(2024, 2025)
 cornell_temps <- map(years, clean_data, cornell, 1) |> bind_rows()
 ```
 
 ---
 
-# How does 2024 compare to 2023 so far?
+# How does 2025 compare to 2024 so far?
 
 What do the data look like?
 
@@ -571,14 +561,16 @@ head(cornell_temps)
 
 ---
 
-# How does 2024 compare to 2023 so far?
+# How does 2025 compare to 2024 so far?
 
 .pull-left[
 ```{r ithaca-weather-plot1, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 # plot data
 cornell_temps |> 
-  ggplot(aes(x = day, 
-             y = TMAX)) + 
+  ggplot(aes(
+    x = day, 
+    y = TMAX
+  )) + 
   geom_point() + 
   theme_bw()
 ```
@@ -592,15 +584,17 @@ What's wrong with this plot?
 
 ---
 
-# How does 2024 compare to 2023 so far?
+# How does 2025 compare to 2024 so far?
 
 .pull-left[
 ```{r ithaca-weather-plot2, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 # plot data
 cornell_temps |> 
-  ggplot(aes(x = day, 
-             y = TMAX, 
-             color = as_factor(year))) + #<<
+  ggplot(aes(
+    x = day, 
+    y = TMAX, 
+    color = as_factor(year) #<<
+  )) +
   geom_point() + 
   theme_bw() +
   theme(legend.position = "bottom") #<<
@@ -615,22 +609,26 @@ What's wrong with this plot?
 
 ---
 
-# How does 2024 compare to 2023 so far?
+# How does 2025 compare to 2024 so far?
 
 .pull-left[
 ```{r ithaca-weather-plot3, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 # plot data
 cornell_temps |> 
-  ggplot(aes(x = day, 
-             y = TMAX, 
-             color = as_factor(year))) + 
+  ggplot(aes(
+    x = day, 
+    y = TMAX, 
+    color = as_factor(year)
+  )) + 
   geom_point() + 
   geom_smooth(se = FALSE) +  #<<
   theme_bw() +
   theme(legend.position = "bottom") +
-  labs(x = "Day of month",  #<<
-       y = "Max. daily temperature (F)",  #<<
-       color = "Year") #<<
+  labs( #<<
+    x = "Day of month",  #<<
+    y = "Max. daily temperature (F)",  #<<
+    color = "Year" #<<
+  ) #<<
 ```
 ]
 
@@ -640,7 +638,7 @@ cornell_temps |>
 
 ---
 
-# How does 2024 compare to 2023 so far?
+# How does 2025 compare to 2024 so far?
 
 This approach has two advantages over manually creating figures using software such as excel or sheets:
 1. we have a script to **reproduce** our work / share our methods with others
@@ -648,7 +646,7 @@ This approach has two advantages over manually creating figures using software s
 
 ---
 
-# How does 2024 compare to 2023 so far?
+# How does 2025 compare to 2024 so far?
 
 For example we can easily **generalize** this approach to other weather outcomes:
 
@@ -656,15 +654,19 @@ For example we can easily **generalize** this approach to other weather outcomes
 ```{r ithaca-weather-plot4, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 # plot data
 cornell_temps |> 
-  ggplot(aes(x = day, 
-             y = SNOW, #<<
-             color = as_factor(year))) + 
+  ggplot(aes(
+    x = day, 
+    y = SNOW, #<<
+    color = as_factor(year)
+  )) + 
   geom_jitter() + 
   theme_bw() +
   theme(legend.position = "bottom") +
-  labs(x = "Day of month",
-       y = "Snowfall (inches)", #<<
-       color = "Year")
+  labs(
+    x = "Day of month",
+    y = "Snowfall (inches)", #<<
+    color = "Year"
+  )
 ```
 ]
 
@@ -679,13 +681,13 @@ Note: NOAA publishes data with a slight lag
 
 ---
 
-# How does 2024 compare to 2023 so far?
+# How does 2025 compare to 2024 so far?
 
 For example we can easily **scale** this approach to more years:
 
 .pull-left[
 ```{r ithaca-weather-plot5, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-more_years <- 2020:2024 #<<
+more_years <- 2020:2025 #<<
 more_temps <- map(more_years, clean_data,  #<<
                   cornell, 1) |> 
   bind_rows()
@@ -716,134 +718,10 @@ Note: NOAA publishes data with a slight lag
 ---
 
 layout: false
-name: show-me-the-data
-class: center middle section-title section-title-3 animated fadeIn
-
-# Just show me the data!
-
----
-
-layout: true
-class: title title-3
-
-<!-- --- -->
-
-<!-- # What does this have to do with AEM 2850? -->
-
-<!-- .box-inv-2.medium[Truth does not require science or facts] -->
-
-<!-- Facts alone do not necessarily reveal truth -->
-
-<!-- .box-inv-2.medium.sp-after[Truth comes from aesthetic combination of **content** and **form**] -->
-
-<!-- There is no single ideal combination of **content** and **form** for all **audiences** -->
-
-<!-- Keep this in mind as a guiding principle for analyzing, visualizing, and communicating data -->
-
----
-
-# Just show me the data!
-
-Data is very powerful, but raw data is not usually enough
-
-.pull-left[
-```{r ithaca-weather-mean1}
-cornell_temps |>
-  group_by(year) |>
-  summarize(mean_max = mean(TMAX))
-```
-
-What's wrong with this calculation?
-
-]
-
---
-
-.pull-right[
-```{r ithaca-weather-mean2}
-cornell_temps |>
-  group_by(day) |>
-  filter(n() != 1) |>
-  group_by(year) |>
-  summarize(mean_max = mean(TMAX))
-```
-]
-
----
-
-# Just show me the data!
-
-```{r load-datasaurus-dozen, echo=FALSE}
-dozen <- read_tsv("data/DatasaurusDozen.tsv")
-my_data <- dozen %>% 
-  filter(dataset == "dino") %>% 
-  select(x, y)
-```
-
-**Here's another example:**
-
-.pull-left-3[
-```{r head-datasaurus}
-head(my_data, 10)
-```
-]
-
---
-
-.pull-middle-3[
-```{r summary-datasaurus, highlight.output=1}
-mean(my_data$x)
-mean(my_data$y)
-cor(my_data$x, my_data$y)
-```
-]
-
---
-
-.pull-right-3[
-&nbsp;
-
-.box-inv-3[Seems reasonable]
-
-&nbsp;
-
-.box-inv-3[Seems reasonable]
-
-&nbsp;
-
-.box-inv-3[No correlation]
-]
-
----
-
-# Oh no!
-
-.center[
-<figure>
-  <img src="img/01/DinoSequentialSmaller.gif" alt="Datasaurus Dozen" title="Datasaurus Dozen" width="100%">
-  <figcaption><a href="https://www.autodeskresearch.com/publications/samestats" target="_blank">The Datasaurus Dozen</a></figcaption>
-</figure>
-]
-
----
-
-# Raw data is not enough
-
-.box-inv-3.small[Each of these has the same mean, standard deviation, variance, and correlation]
-
-```{r plot-full-dozen, echo=FALSE, fig.dim=c(8, 4), out.width="85%"}
-ggplot(filter(dozen, dataset != "bullseye"), aes(x = x, y = y)) +
-  geom_point(size = 1) +
-  facet_wrap(vars(dataset))
-```
-
----
-
-layout: false
 name: beautiful-visualizations
 class: center middle section-title section-title-6 animated fadeIn
 
-# What makes a great visualization?
+# What makes a great data visualization?
 
 ---
 
@@ -852,7 +730,7 @@ class: title title-6
 
 ---
 
-# What makes a great visualization?
+# What makes a great data visualization?
 
 .center[
 
@@ -886,7 +764,7 @@ Alberto Cairo, *The Truthful Art*:
 
 ---
 
-# What makes a great visualization?
+# What makes a great data visualization?
 
 .box-inv-6["Graphical excellence is the **well-designed presentation of interesting data**—a matter of substance, of statistics, and of design … [It] consists of complex ideas communicated with clarity, precision, and efficiency. … [It] is that which **gives to the viewer the greatest number of ideas in the shortest time with the least ink in the smallest space** … [It] is nearly always multivariate … And graphical excellence requires **telling the truth about the data**."]
 
@@ -894,7 +772,7 @@ Alberto Cairo, *The Truthful Art*:
 
 ---
 
-# What makes a great visualization?
+# What makes a great data visualization?
 
 .center[
 
@@ -1014,8 +892,6 @@ No perceptual issues?
 
 Honesty + good judgment?
 
-**None of the above?**
-
 ]
 
 ---
@@ -1127,7 +1003,7 @@ ggplot(tibble(x = c(0, 70)), aes(x = x)) +
 ### Thursday:
 
 - Intro to `R`, `RStudio`, and `R Markdown` / `Quarto`
-- You will need your computer for coding exercises every Thursday
+- You will need your computer for coding exercises most days, every Thursday
 - See canvas announcement for instructions to get set up on [posit.cloud](http://posit.cloud/)
 
 
@@ -1137,7 +1013,7 @@ name: outline-base-r
 
 # Plan for the rest of today
 
-The plan for the rest of today is to introduce ourselves to **base** R
+Time permitting, let's introduce ourselves to **base** R
 
 [Introduction to base R](#intro)
 
@@ -1157,7 +1033,7 @@ name: intro
 
 # Introduction to base R
 
-(Some of this is just for reference, since we also cover it in example-01)
+(just for reference, since we will cover most of this in example-01)
 
 ---
 
