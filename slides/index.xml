@@ -2,4 +2,5 @@
 &lt;p>Climate Data Online
 &lt;a href="https://www.ncei.noaa.gov/cdo-web/" target="_blank" rel="noopener">https://www.ncei.noaa.gov/cdo-web/&lt;/a>&lt;/p>
 &lt;p>Search tool &amp;gt; Daily Summaries &amp;gt; Select Date Range [January] &amp;gt; Search for [States] &amp;gt; Enter a Search Term [New York] &amp;gt; click on New York &amp;gt; Add to Cart &amp;gt; Select the Output Format [Custom GHCN-Daily CSV] &amp;gt; Continue &amp;gt; Select [Nothing &amp;ndash; do not include Station Name] &amp;gt; Select [Precipitation] &amp;gt; Select [Air Temperature] &amp;gt; Continue &amp;gt; Enter email address &amp;gt; Continue&lt;/p>
-&lt;p>Note: after downloading, station names were manually removed, and excel converted the date formatting, so code was modified to work with those data rather than the raw data.&lt;/p></description></item></channel></rss>
+&lt;p>Note: after downloading, station names were manually removed, and excel converted the date formatting, so code was modified to work with those data rather than the raw data.&lt;/p>
+&lt;p>Need to fetch data from current and past year each time I prep the course (since past year data will be incomplete).&lt;/p></description></item></channel></rss>
