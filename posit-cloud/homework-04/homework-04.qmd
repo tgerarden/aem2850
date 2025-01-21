@@ -1,17 +1,17 @@
 ---
 #########################################################
-# Steps to complete this lab:
+# Steps to complete this homework:
 #   1. Add your name to the author field of the yaml header
 #   2. Fill in the code chunks and use inline code to answer the questions 
 #   3. Click on "Render" directly above to render output (or Ctrl/Cmd-Shift-K)
 #   4. Repeat steps 2-3 until you are satisfied with the final product
-#   5. Download the resulting file lab-xx.pdf
-#   6. Upload lab-xx.pdf to canvas
+#   5. Download the resulting file homework-xx.pdf
+#   6. Upload homework-xx.pdf to canvas
 # Note: this file may not Render properly until it is (partially) completed
 # Reminder: to get around this and work interactively, you can run code chunks on their own
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
-title: "Lab-04"
+title: "Homework-04"
 author: "Write your name here"
 date: today
 format: pdf
@@ -26,7 +26,7 @@ knitr::opts_chunk$set(message = FALSE)
 
 # Preface
 
-The goal of this assignment is to help you gain more familiarity with joining multiple data sets and working with logical vectors. In this lab we will continue providing some code snippets to serve as "scaffolding" to help guide you through each step. Over the course of the semester we will provide less scaffolding and more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
+The goal of this assignment is to help you gain more familiarity with joining multiple data sets and working with logical vectors. In this homework we will continue providing some code snippets to serve as "scaffolding" to help guide you through each step. Over the course of the semester we will provide less scaffolding and more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
 
 We will work with multiple data sets:
 

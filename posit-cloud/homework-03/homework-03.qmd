@@ -1,17 +1,17 @@
 ---
 #########################################################
-# Steps to complete this lab:
+# Steps to complete this homework:
 #   1. Add your name to the author field of the yaml header
 #   2. Fill in the code chunks and use inline code to answer the questions 
 #   3. Click on "Render" directly above to render output (or Ctrl/Cmd-Shift-K)
 #   4. Repeat steps 2-3 until you are satisfied with the final product
-#   5. Download the resulting file lab-xx.pdf
-#   6. Upload lab-xx.pdf to canvas
+#   5. Download the resulting file homework-xx.pdf
+#   6. Upload homework-xx.pdf to canvas
 # Note: this file may not Render properly until it is (partially) completed
 # Reminder: to get around this and work interactively, you can run code chunks on their own
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
-title: "Lab-03"
+title: "Homework-03"
 author: "Write your name here"
 date: today
 format: pdf
@@ -31,7 +31,7 @@ Starlink is a satellite network designed to provide internet to remote and under
 
 In 2021, the Brazilian government started a dialogue with SpaceX to increase internet provision in remote areas of Brazil, particularly in the Amazon region [(Business Insider, 2021)](https://www.businessinsider.com/elon-musk-met-brazil-government-spacex-starlink-internet-amazon-rainforest-2021-11). SpaceX was eventually authorized to provide Starlink internet in 2022 [(Valor International, 2022)](https://valorinternational.globo.com/business/news/2022/01/30/elon-musks-starlink-gets-greenlight-from-brazils-telecoms-regulator.ghtml).
 
-In this assignment, we will use R to investigate whether the plan of increasing access in remote areas of Brazil is coming along or not. The goal is to help you gain more familiarity with data import, tidy data, and relational data. In this lab we will continue providing some code snippets to serve as "scaffolding" to help guide you through each step. Over the course of the semester we will provide less scaffolding and more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
+In this assignment, we will use R to investigate whether the plan of increasing access in remote areas of Brazil is coming along or not. The goal is to help you gain more familiarity with data import, tidy data, and relational data. In this homework we will continue providing some code snippets to serve as "scaffolding" to help guide you through each step. Over the course of the semester we will provide less scaffolding and more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
 
 We will work with two data sets:
 

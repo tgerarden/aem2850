@@ -49,7 +49,7 @@ In this project, you will use tools from the tidyverse to wrangle and visualize 
   - **Please be concise** when writing text to summarize your work and discuss takeaways
   - **Make each graphic clear and comprehensible (even on its own):** follow best practices from class and readings when making visuals
   - **Do not include your source code in the memo** unless you think it is crucial for communicating your methods or findings. You can avoid printing the code in all the chunks by adding a code chunk that contains `knitr::opts_chunk$set(echo = FALSE)` at the start of the .qmd file (but below the yaml header).
-  - **Follow Quarto etiquette rules and style** that we introduced throughout the semester in labs: don't output extraneous messages or warnings, use nice formatting for tables, and adjust the dimensions for your figures as needed (see lab solutions for examples)
+  - **Follow Quarto etiquette rules and style** that we introduced throughout the semester in homeworks: don't output extraneous messages or warnings, use nice formatting for tables, and adjust the dimensions for your figures as needed (see lab solutions for examples)
 - Submit **both** a compiled PDF and a .zip of your project directory that is self-contained, with all of: the .qmd source file, .RProj, the data files we provided, any other scripts or data you used, etc. We should be able to open your project and render your document with one click
 - Do not use any packages other than those we use in class or are specifically referenced below
 - Each group will submit a single deliverable and receive a single grade, but I reserve the right to penalize students who do not contribute to their group.

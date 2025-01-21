@@ -1,14 +1,14 @@
 ---
 #########################################################
-# Steps to complete this lab:
+# Steps to complete this homework:
 #   1. Add your name to the author field of the yaml header
 #   2. Fill in the code chunks and use inline code to answer the questions 
 #   3. Click on "Render" directly above to render output (or Ctrl/Cmd-Shift-K)
 #   4. Repeat steps 2-3 until you are satisfied with the final product
-#   5. Download the resulting file lab-02.pdf
-#   6. Upload lab-02.pdf to canvas
+#   5. Download the resulting file homework-02.pdf
+#   6. Upload homework-02.pdf to canvas
 #########################################################
-title: "Lab-02"
+title: "Homework-02"
 author: "Write your name here"
 date: today
 format: pdf
@@ -22,7 +22,7 @@ library(tidyverse)
 
 ## Preface
 
-The goal of this assignment is to help you gain familiarity with data frames -- think "spreadsheets" -- and how to use **dplyr** functions to transform data. In this lab we are providing some code snippets to serve as "scaffolding" to help guide you through each step. As always, please come to office hours and reach out to your teaching staff if you have any questions.
+The goal of this assignment is to help you gain familiarity with data frames -- think "spreadsheets" -- and how to use **dplyr** functions to transform data. In this homework we are providing some code snippets to serve as "scaffolding" to help guide you through each step. As always, please come to office hours and reach out to your teaching staff if you have any questions.
 
 In some places the scaffolded code provides the argument `FALSE` to functons (e.g., `filter(FALSE)` in question 1). We did this to allow the file to render even before you do any coding. Please replace `FALSE` with your code, just as you have been replacing `_____` with your code in the examples.
 
