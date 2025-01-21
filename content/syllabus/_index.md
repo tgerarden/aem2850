@@ -42,11 +42,11 @@ Classes meet Tuesdays and Thursdays:
 
 ### TA office hours
 
-- Mondays 2:00-5:00 in Warren 370:
+- Mondays 2:00pm - 6:00pm in Warren 370:
   <!-- - Undergrad CA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu)) -->
-  - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
-  - Grad TA Xiaorui Wang ([xw427@cornell.edu](mailto:xw427@cornell.edu))
-- Fridays, time and location TBD.
+  - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) from 2-5pm
+  - Grad TA Xiaorui Wang ([xw427@cornell.edu](mailto:xw427@cornell.edu)) from 3-6pm
+- Fridays, time and location TBD
   <!-- - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) -->
 
 [See below for tips on how to make the most of office hours and email.](#office-hours-and-email)

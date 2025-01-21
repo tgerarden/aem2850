@@ -922,6 +922,72 @@ Source: [Kareem Carr](https://twitter.com/kareem_carr/status/1655614482432012289
 # What's right?
 
 .pull-left[
+<figure>
+  <img src="img/01/nba-jordans-favorite-shot.png" alt="Jordan's favorite shot" title="Jordan's favorite shot" width="100%">
+</figure>
+]
+
+???
+
+- Aesthetic issues
+- Substantive issues
+- Perceptual issues
+- Honesty + judgment issues
+
+--
+
+.pull-right[
+Simple and effective!
+
+Illustrates the power of a **good question** and **good data**
+
+How could it be improved or expanded upon?
+
+Source: [Andrew Gelman](https://statmodeling.stat.columbia.edu/2024/06/23/some-fun-basketball-graphs/)
+]
+
+???
+
+[Andrew Gelman on some fun basketball graphs](https://statmodeling.stat.columbia.edu/2024/06/23/some-fun-basketball-graphs/)
+
+---
+
+# What's right?
+
+.more-left[
+<figure>
+  <img src="img/01/nba-the-game-has-changed.png" alt="The game has changed (NBA shots heat map)" title="The game has changed chart" width="100%">
+</figure>
+]
+
+???
+
+- Aesthetic issues
+- Substantive issues
+- Perceptual issues
+- Honesty + judgment issues
+
+--
+
+.less-right[
+Clear title and labeling
+
+Juxtaposition
+
+Color scheme could be improved
+
+Source: [Andrew Gelman](https://statmodeling.stat.columbia.edu/2024/06/23/some-fun-basketball-graphs/)
+]
+
+???
+
+[Andrew Gelman on some fun basketball graphs](https://statmodeling.stat.columbia.edu/2024/06/23/some-fun-basketball-graphs/)
+
+---
+
+# What's right?
+
+.pull-left[
 
 ```{r flatten-the-curve, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
 high_mean <- 12
