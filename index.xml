@@ -1,4 +1,116 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 20 Jan 2025 16:18:07 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Installing R, RStudio, tidyverse, rmarkdown, and tinytex</title><link>https://aem2850.toddgerarden.com/resource/install/</link><pubDate>Tue, 25 Jan 2022 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/resource/install/</guid><description>&lt;p>You will do all of your work in this class with the open source (and free!) programming language &lt;a href="https://cran.r-project.org/" target="_blank" rel="noopener">R&lt;/a>. You will use &lt;a href="https://www.rstudio.com/" target="_blank" rel="noopener">RStudio&lt;/a> as the main program to access R. Think of R as an engine and RStudio as a car dashboard—R handles all the calculations and the actual statistics, while RStudio provides a nice interface for running R code.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 21 Jan 2025 16:10:56 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Intro to R, RStudio, and Quarto</title><link>https://aem2850.toddgerarden.com/example/01-example/</link><pubDate>Tue, 21 Jan 2025 16:10:56 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/01-example/</guid><description>&lt;h1 id="introduction-to-examples">Introduction to Examples&lt;/h1>
+&lt;p>Examples contain material we will discuss and use to learn R in class. These notes are &lt;em>not&lt;/em> comprehensive. Instead, they are meant as a helpful resource during and after class in case you are confused or have trouble remembering something we discussed.&lt;/p>
+&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
+&lt;li>Questions? Concerns?&lt;/li>
+&lt;li>Did anyone have trouble making an Posit Cloud account?
+&lt;ul>
+&lt;li>&lt;a href="https://posit.cloud/spaces/603428/join?access_code=BW7GYhvfb1D1WRVZGrUNMyMe6x_ciHGB92TulosG" target="_blank" rel="noopener">Here is the link to join the course workspace if you haven&amp;rsquo;t already&lt;/a>&lt;/li>
+&lt;li>&lt;strong>IMPORTANT NOTE:&lt;/strong> I and our TAs will be able to view your work. This is a feature but could also be a bug &amp;ndash; please don&amp;rsquo;t write or store anything in your course projects that you don&amp;rsquo;t want us to see. 😉&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Navigate to &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a> and open the project &lt;code>example-01&lt;/code> in our course workspace&lt;/li>
+&lt;li>R, RStudio, Posit Cloud basics
+&lt;ul>
+&lt;li>overview on this site, then move to posit.cloud&lt;/li>
+&lt;li>together: &lt;code>r-coding-intro.R&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>R Markdown / Quarto basics
+&lt;ul>
+&lt;li>overview on this site, then move to posit.cloud&lt;/li>
+&lt;li>together: &lt;code>quarto-formatting-example.qmd&lt;/code>&lt;/li>
+&lt;li>on your own: &lt;code>quarto-practice.qmd&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Time permitting: overview of some base R basics
+&lt;ul>
+&lt;li>&amp;ldquo;Introduction to base R&amp;rdquo; slides: &lt;a href="https://aem2850.toddgerarden.com/slides/01-slides.html">html&lt;/a> &lt;a href="https://aem2850.toddgerarden.com/slides/01-slides.pdf">PDF&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Feedback on class format welcome!&lt;/li>
+&lt;/ul>
+&lt;h2 id="cheatsheets">Cheatsheets&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.github.io/cheatsheets/rstudio-ide.pdf" target="_blank" rel="noopener">Click here to download the RStudio IDE cheatsheet&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://rstudio.github.io/cheatsheets/quarto.pdf" target="_blank" rel="noopener">Click here to download the Quarto cheatsheet&lt;/a>&lt;/p>
+&lt;h2 id="getting-started">Getting started with R and RStudio&lt;/h2>
+&lt;p>R is not a programming language like &lt;code>C&lt;/code> or &lt;code>Java&lt;/code>. It was not created by software engineers for software development. Instead, it was developed by statisticians as an interactive environment for data analysis. This interactivity makes it easy to explore data quickly, which is an indispensable feature for many tasks in business analytics, statistics, data science, and other fields.&lt;/p>
+&lt;p>If you have prior programming experience, you may be surprised by differences between R and other programming languages.&lt;/p>
+&lt;p>If you have no prior programming experience, you may initially be frustrated when learning R. That is normal! Learning to program is essentially learning to speak a new language. But in some ways it&amp;rsquo;s even more difficult, because your interlocutor is a computer who isn&amp;rsquo;t always great at telling you when you said something that made no sense.&lt;/p>
+&lt;p>Regardless of your prior experience, if you are patient, you will come to appreciate the power of R for data analysis and data visualization.&lt;/p>
+&lt;h2 id="r-and-the-r-console">R, and the R console&lt;/h2>
+&lt;p>You can think of R analogously to the engine in a car: it will power our work. One way to control that engine is to use the &lt;em>R console&lt;/em> to execute commands as you type them, or to run scripts you have already written. There are several ways to gain access to the R console. One way is to install R on your computer and open the built-in console, which looks like this:&lt;/p>
+&lt;p>
+&lt;figure >
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >&lt;img src="https://aem2850.toddgerarden.com/example/images/01/Rconsole.png" alt="Rconsole" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
+&lt;p>However, most people don&amp;rsquo;t use this console. Instead, they use an &lt;em>integrated development environment&lt;/em> (or IDE) to write, debug, and execute their code.&lt;/p>
+&lt;h2 id="rstudio">RStudio&lt;/h2>
+&lt;p>The IDE we will use in this class is RStudio. RStudio includes an editor with many R-specific features, a console to execute your code, and other useful panes, including one to show figures or view html documents you produce. RStudio looks like this:&lt;/p>
+&lt;p>
+&lt;figure >
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >&lt;img src="https://aem2850.toddgerarden.com/example/images/01/rstudio.png" alt="rstudio" loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
+&lt;p>RStudio will be our launching pad for data science projects. You can think of it as the dashboard in your car. It not only provides an editor for us to create and edit our scripts but also provides many other useful tools. In this section, we go over some of the basics.&lt;/p>
+&lt;h3 id="rstudio-panes">RStudio panes&lt;/h3>
+&lt;p>When you start RStudio for the first time, you will see three panes by default. The left pane shows the R console. On the right, the top pane includes tabs such as &lt;em>Environment&lt;/em> and &lt;em>History&lt;/em>, while the bottom pane shows six tabs: &lt;em>File&lt;/em>, &lt;em>Plots&lt;/em>, &lt;em>Packages&lt;/em>, &lt;em>Help&lt;/em>, &lt;em>Viewer&lt;/em>, and &lt;em>Presentation&lt;/em> (these tabs may change in new versions). You can click on each tab to move across the different features.&lt;/p>
+&lt;p>To start a new R script, you can click on File, then New File, then R Script.&lt;/p>
+&lt;p>This starts a new pane on the left and it is here where you can start writing your script.&lt;/p>
+&lt;h3 id="keyboard-shortcuts">Keyboard shortcuts&lt;/h3>
+&lt;p>Many tasks we perform with the mouse can be achieved with a combination of key strokes instead, or keyboard shortcuts For example, we just showed how to use the mouse to start a new script, but you can also use a shortcut: Ctrl+⇧+N on Windows and ⌘+⇧+N on macs.&lt;/p>
+&lt;p>Although using the mouse to explore RStudio&amp;rsquo;s dropdown menus is a good place to start, &lt;strong>I highly recommend that you memorize key bindings for the operations you use most&lt;/strong>. RStudio provides a useful cheat sheet with the most widely used commands. If you&amp;rsquo;re on a mac, you can access a list of keyboard by pressing ⌥+⇧+K. You might want to keep this in mind so you can look up keyboard shortcuts when you find yourself doing the same point-and-click operations repeatedly.&lt;/p>
+&lt;h3 id="tab-completion">Tab completion&lt;/h3>
+&lt;p>One advantage of using RStudio is that it has context-aware tab completion. This means that when you start typing the name of a package, function, or object you want to use, RStudio will automatically suggest ways to complete your input. You can take advantage of this by scrolling through the suggestions using up/down arrows and hitting tab to use the selected completion.&lt;/p>
+&lt;p>RStudio also does handy things like adding a close parentheses when you type an open parentheses, such as if you type &lt;code>library(&lt;/code>.&lt;/p>
+&lt;h3 id="running-commands-while-editing-scripts">Running commands while editing scripts&lt;/h3>
+&lt;p>There are many editors specifically made for coding. These are useful because color and indentation are automatically added to make code more readable. RStudio is one of these editors, and it was specifically developed for R. One of the main advantages provided by RStudio over other editors is that we can test our code easily as we edit our scripts.&lt;/p>
+&lt;p>You can see this by opening a new script. Give the script a name. You can do this through the editor by saving the current new unnamed script. To do this, click on the save icon or use the key binding Ctrl+S on Windows and ⌘+S on the Mac.&lt;/p>
+&lt;p>When you ask for the document to be saved for the first time, RStudio will prompt you for a name. A good convention is to use a descriptive name, with lower case letters, no spaces, only hyphens to separate words, and then followed by the suffix &lt;em>.R&lt;/em>. Call your script &lt;em>my-first-script.R&lt;/em>.&lt;/p>
+&lt;p>Now we are ready to start editing our first script. For example, you could write:&lt;/p>
+&lt;pre>&lt;code class="language-r">print(&amp;quot;welcome to RStudio&amp;quot;)
+&lt;/code>&lt;/pre>
+&lt;p>If you do this and hit ↩ in the editor, nothing will happen in the console.&lt;/p>
+&lt;p>To &lt;em>execute&lt;/em> your new script, you can click on the &lt;em>Run&lt;/em> button on the upper right side of the editing pane or use the keyboard shortcut: Ctrl+⇧+↩ on Windows or ⌘+⇧+↩ on Mac. When you do this, the console will show the command as well as its output:&lt;/p>
+&lt;pre>&lt;code>## [1] &amp;quot;welcome to RStudio&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>To run one line at a time instead of the entire script, you can use Ctrl+↩ on Windows and ⌘+↩ on Mac.&lt;/p>
+&lt;h3 id="lets-explore-posit-cloud">Let&amp;rsquo;s explore Posit Cloud&lt;/h3>
+&lt;p>&lt;a href="https://posit.cloud/" target="_blank" rel="noopener">Click here to access Posit Cloud&lt;/a>&lt;/p>
+&lt;h2 id="quarto--r-markdown">Quarto / R Markdown&lt;/h2>
+&lt;p>&lt;em>Note: Quarto is a new authoring framework that builds on R Markdown. If you are familiar with R Markdown it will be easy to transition to Quarto.&lt;/em>&lt;/p>
+&lt;p>Quarto provides a unified authoring framework for data science that combines your code, its results, and your prose commentary. Quarto documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.&lt;/p>
+&lt;p>Quarto files are designed to be used in three ways:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>For communicating to decision makers, who want to focus on the conclusions, not the code behind the analysis.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>For collaborating with others (including future you!) who are interested in your conclusions &lt;em>and&lt;/em> how you reached them.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>As an environment in which to &lt;em>do&lt;/em> business analytics, where you can capture not only what you did, but also what you were thinking.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>All three of these are relevant for this course. Hopefully you can see how the first could be useful in business settings where you need to present a summary of ideas or findings to a decision maker.&lt;/p>
+&lt;p>&lt;a href="https://quarto.org" target="_blank" rel="noopener">quarto.org&lt;/a> provides many more resources to help you as you begin to work with Quarto.&lt;/p>
+&lt;p>You may also find the &lt;a href="https://rstudio.github.io/cheatsheets/quarto.pdf" target="_blank" rel="noopener">Quarto cheatsheet&lt;/a> helpful when getting started.&lt;/p>
+&lt;h3 id="quarto-basics">Quarto basics&lt;/h3>
+&lt;p>Quarto files contain three types of content:&lt;/p>
+&lt;ol>
+&lt;li>An (optional) &lt;strong>YAML header&lt;/strong> surrounded by &lt;code>---&lt;/code>s.&lt;/li>
+&lt;li>&lt;strong>Chunks&lt;/strong> of R code surrounded by &lt;code>```&lt;/code>.&lt;/li>
+&lt;li>Text mixed with simple text formatting like &lt;code># heading&lt;/code> and &lt;code>_italics_&lt;/code>.&lt;/li>
+&lt;/ol>
+&lt;p>You can edit each of these to affect the final output.&lt;/p>
+&lt;p>When you are done composing your document, you can &lt;strong>render&lt;/strong> it by clicking Render or by using the keyboard shortcut ⌘+⇧+K. This will process the file through several steps to produce your output in the format you specify.&lt;/p>
+&lt;h3 id="markdown-basics">Markdown basics&lt;/h3>
+&lt;p>Markdown is a set of formatting conventions for plain text files that is widely used (beyond R). We will use an example file on RStudio Cloud to learn about some basic text formatting using Markdown. You can also read more about this in &lt;a href="https://r4ds.hadley.nz/quarto.html#sec-source-editor" target="_blank" rel="noopener">R for Data Science (2e)&lt;/a>.&lt;/p>
+&lt;h2 id="basic-base-r-slides">Basic base R slides&lt;/h2>
+&lt;p>Time permitting, in class or on your own time, you can learn about the basics of base R using slides accessible via these links (starting with &amp;ldquo;Introduction to base R&amp;rdquo;): &lt;a href="https://aem2850.toddgerarden.com/slides/01-slides.html">html&lt;/a> or &lt;a href="https://aem2850.toddgerarden.com/slides/01-slides.pdf">PDF&lt;/a>.&lt;/p></description></item><item><title>Installing R, RStudio, tidyverse, rmarkdown, and tinytex</title><link>https://aem2850.toddgerarden.com/resource/install/</link><pubDate>Tue, 25 Jan 2022 00:00:00 +0000</pubDate><guid>https://aem2850.toddgerarden.com/resource/install/</guid><description>&lt;p>You will do all of your work in this class with the open source (and free!) programming language &lt;a href="https://cran.r-project.org/" target="_blank" rel="noopener">R&lt;/a>. You will use &lt;a href="https://www.rstudio.com/" target="_blank" rel="noopener">RStudio&lt;/a> as the main program to access R. Think of R as an engine and RStudio as a car dashboard—R handles all the calculations and the actual statistics, while RStudio provides a nice interface for running R code.&lt;/p>
 &lt;h2 id="posit-cloud">Posit Cloud&lt;/h2>
 &lt;p>R is free, but it can sometimes be a pain to install and configure. To make life easier, this course uses &lt;a href="http://posit.cloud/" target="_blank" rel="noopener">posit.cloud&lt;/a>, which lets you run a full instance of RStudio in your web browser. This means you won&amp;rsquo;t have to install anything on your computer to get started with R! We have a shared class workspace on Posit Cloud that will let you quickly copy templates for examples and homework assignments.&lt;/p>
 &lt;p>Go to &lt;a href="http://posit.cloud/" target="_blank" rel="noopener">http://posit.cloud/&lt;/a> and create an account. You&amp;rsquo;ll receive a link to join the shared class workspace separately. If you don&amp;rsquo;t get this link, let me know and I will invite you.&lt;/p>
