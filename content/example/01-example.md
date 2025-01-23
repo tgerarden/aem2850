@@ -1,7 +1,7 @@
 ---
 title: "Intro to R, RStudio, and Quarto"
 linktitle: "Intro to R, RStudio, and Quarto"
-date: "`r format(Sys.time())`"
+date: "2025-01-21 16:10:56"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -103,7 +103,8 @@ When you ask for the document to be saved for the first time, RStudio will promp
 
 Now we are ready to start editing our first script. For example, you could write:
 
-```{r, eval = FALSE}
+
+``` r
 print("welcome to RStudio")
 ```
 
@@ -111,8 +112,9 @@ If you do this and hit ↩ in the editor, nothing will happen in the console.
 
 To _execute_ your new script, you can click on the _Run_ button on the upper right side of the editing pane or use the keyboard shortcut: Ctrl+⇧+↩ on Windows or ⌘+⇧+↩ on Mac. When you do this, the console will show the command as well as its output:
 
-```{r, echo = FALSE}
-print("welcome to RStudio")
+
+```
+## [1] "welcome to RStudio"
 ```
 
 To run one line at a time instead of the entire script, you can use Ctrl+↩ on Windows and ⌘+↩ on Mac.
@@ -123,7 +125,7 @@ To run one line at a time instead of the entire script, you can use Ctrl+↩ on 
 
 ## Quarto / R Markdown
 
-*Note: Quarto is an authoring framework that extends R Markdown. If you are familiar with R Markdown it will be easy to transition to Quarto.*
+*Note: Quarto is a new authoring framework that builds on R Markdown. If you are familiar with R Markdown it will be easy to transition to Quarto.*
 
 Quarto provides a unified authoring framework for data science that combines your code, its results, and your prose commentary. Quarto documents are fully reproducible and support dozens of output formats, like PDFs, Word files, slideshows, and more.
 
