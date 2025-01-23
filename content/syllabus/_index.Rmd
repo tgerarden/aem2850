@@ -47,11 +47,10 @@ Classes meet Tuesdays and Thursdays:
 ### TA office hours
 
 - Mondays 2:00pm - 6:00pm in Warren 370:
-  <!-- - Undergrad CA Jonathan Gotian ([jeg338@cornell.edu](mailto:jeg338@cornell.edu)) -->
-  - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) from 2-5pm
+  - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) from 2-4pm
   - Grad TA Xiaorui Wang ([xw427@cornell.edu](mailto:xw427@cornell.edu)) from 3-6pm
 - Fridays, time and location TBD
-  <!-- - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) -->
+  - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
 
 [See below for tips on how to make the most of office hours and email.](#office-hours-and-email)
 
@@ -189,7 +188,7 @@ I highly encourage you to utilize Professor and TA office hours, especially if y
 
 #### Email
 
-You can also reach us by email. The best approach for generic, time-sensitive questions is to email all of us at the same time (and reply-all in follow-up emails). You can do that with one click [here](mailto:gerarden@cornell.edu,vs424@cornell.edu,jeg338@cornell.edu,ral346@cornell.edu,amt272@cornell.edu).
+You can also reach us by email. The best approach for generic, time-sensitive questions is to email all of us at the same time (and reply-all in follow-up emails). You can do that with one click [here](mailto:gerarden@cornell.edu,vs424@cornell.edu,xw427@cornell.edu).
 
 
 Email is a blessing and a curse. Here are some tips to help us get the most out of our email exchanges:
