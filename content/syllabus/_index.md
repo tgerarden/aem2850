@@ -45,8 +45,8 @@ Classes meet Tuesdays and Thursdays:
 - Mondays 2:00pm - 6:00pm in Warren 370:
   - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) from 2-4pm
   - Grad TA Xiaorui Wang ([xw427@cornell.edu](mailto:xw427@cornell.edu)) from 3-6pm
-- Fridays, time and location TBD
-  - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu))
+- Fridays 2:00pm - 3:00pm in Warren 175:
+  - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) from 2-3pm
 
 [See below for tips on how to make the most of office hours and email.](#office-hours-and-email)
 
