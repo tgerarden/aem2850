@@ -1,7 +1,7 @@
 ---
 title: "Welcome to the tidyverse"
 linktitle: "Welcome to the tidyverse"
-date: "`r format(Sys.time())`"
+date: "2025-01-27 12:09:15"
 menu:
   content:
     parent: Course content

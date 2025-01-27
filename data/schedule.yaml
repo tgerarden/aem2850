@@ -13,7 +13,7 @@ lessons:
   - title: '<span class="content-title">Welcome to the tidyverse <br> Data transformation with dplyr</span>'
     session: "Session 2"
     date: "Week 2"
-    # content: "02-content"
+    content: "02-content"
     # example: "02-example"
     # assignment: "02-lab"
     bg: 2
@@ -35,7 +35,7 @@ lessons:
     # assignment: "04-lab"
     bg: 2
 
-  - title: '<span class="content-title">  <br> *February break: no class on Feb 18*</span>'
+  - title: '<span class="content-title">Strings and regular expressions <br> *February break: no class on Feb 18*</span>'
     session: "Session 5"
     date: "Week 5"
     # content: "05-content"
@@ -43,7 +43,7 @@ lessons:
     # assignment: "05-lab"
     bg: 1
 
-  - title: '<span class="content-title">Strings and regular expressions</span>'
+  - title: '<span class="content-title">Strings and regular expressions (cont.) <br> *Prelim 1*</span>'
     # and Proportions
     session: "Session 6"
     date: "Week 6"
@@ -53,7 +53,7 @@ lessons:
     bg: 2
 
   - title: '<i class="fas fa-star"></i> **Prelim 1 in class**'
-    date: "Date TBD in class"
+    date: "Feb 27 in class"
     # assignment: "final-project"
     bg: 3
 
