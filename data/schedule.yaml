@@ -14,7 +14,7 @@ lessons:
     session: "Session 2"
     date: "Week 2"
     content: "02-content"
-    # example: "02-example"
+    example: "02-example"
     # assignment: "02-lab"
     bg: 2
 
