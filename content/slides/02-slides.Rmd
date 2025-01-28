@@ -70,7 +70,7 @@ Acknowledgements:
 
 If you are new to the class, please review canvas and [course site](https://aem2850.toddgerarden.com)
 
-**Prelim dates:** Feb 29 and May 7 in class
+**Prelim dates:** Feb 27 and May 6 in class
 <!-- - SDS: we will use the Alternative Testing Program, submit form by Feb. 8 -->
 
 **Other reminders:**
@@ -82,13 +82,13 @@ If you are new to the class, please review canvas and [course site](https://aem2
 # Office hours update
 
 **TA office hours:**
-- Mondays 1:30pm - 3:30pm in Warren 370
-- Mondays 3:30pm - 5:00pm in Warren 167
-- Fridays 2:30pm - 3:30pm in Warren B50
+- Mondays 2:00pm - 6:00pm in Warren 370
+- Fridays 2:00pm - 3:00pm in Warren 175
 
 
-**My office hours:** Tuesdays 11:30 - 12:30 in Warren 464; [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
-- Caveat: I cannot hold office hours today
+**My office hours:**
+- Tuesdays 11:30 - 12:30 in Warren 464
+- Thursday afternoons by appointment: [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
 ---
 
@@ -101,7 +101,7 @@ If you are new to the class, please review canvas and [course site](https://aem2
 [Prologue](#prologue)
 
 [Tidyverse basics](#basics)
-  - [tibbles](#tibbles) and [pipes](#pipes)
+  - [data frames](#tibbles) and [pipes](#pipes)
 
 [Data transformation with dplyr](#dplyr)
   - [select](#select)
@@ -125,17 +125,17 @@ name: prologue
 
 <!-- I haven't read all the surveys yet, but here are some common phrases that came up: -->
 
-> excited
+> really excited!
 
 <br>
 
-> feeling great
+> I feel great
 
 <br>
 
 --
 
-> nervous but looking forward to it
+> nervous but excited
 
 <br>
 
@@ -154,9 +154,9 @@ us_states <- map_data("state")
 countries <- map_data("world") |> mutate(region = tolower(region))
 
 # IMPORT DATA ----
-responses <- readr::read_csv("data/survey-responses/lab-1-survey.csv")
-responses_timestamp <- file.mtime("data/survey-responses/lab-1-survey.csv") |> 
-  ymd_hms(tz = "America/Los_Angeles") |> 
+responses <- readr::read_csv("data/survey-responses/homework-1-survey.csv")
+responses_timestamp <- file.mtime("data/survey-responses/homework-1-survey.csv") |> 
+  # ymd_hms(tz = "America/Los_Angeles") |> 
   with_tz("America/New_York") # convert from pacific to eastern time
 
 where_were_from <- responses |> 
@@ -179,9 +179,8 @@ plot_countries <- where_were_from |>
       country == "United States of America" ~ "usa",
       # use the following command to identify labels that need updating
       # anti_join(plot_countries, countries, by = "region")
-      country == "ROK (South Korea)" ~ "south korea",
-      country == "I am a dual citizen of Korea and the US (+ I was raised in China)" ~ "south korea",
-      country == "US & China" ~ "usa", # arbitrarily taking first response
+      country == "American, Grew up in China" ~ "india", # arbitrarily taking first response
+      country == "Indian" ~ "india",
       TRUE ~ stringr::str_to_lower(country)
     )
   ) |> 
@@ -189,8 +188,10 @@ plot_countries <- where_were_from |>
 
 # SUMMARIZE SHARE OF STUDENTS FROM NY ----
 ny_share <- plot_states |> 
-  mutate(total = sum(count),
-         percent = count/total*100) |> 
+  mutate(
+    total = sum(count),
+    percent = round(count/total*100)
+  ) |> 
   filter(region=="new york") |> 
   select(region, percent) |> 
   rename(origin = region)
@@ -260,8 +261,9 @@ ggplot(data = our_states,
 # Are we all from the U.S.?
 
 
-```{r world-map, echo = FALSE, fig.width=14, fig.height=7}
+```{r world-map, echo = FALSE, fig.width=16, fig.height=7}
 # MAKE MAP OF COUNTRIES ----
+# anti_join(plot_countries, countries, by = "region") # check if don't match
 our_countries <- left_join(countries, plot_countries, by = "region")
 
 our_countries |> 
@@ -404,7 +406,7 @@ These other packages have to be loaded separately
 
 Today we'll focus on [**dplyr**](https://dplyr.tidyverse.org/)
 
-But first let's talk about tibbles and pipes
+But first let's talk about data frames and pipes
 
 
 ---
@@ -430,11 +432,17 @@ The most important object we'll work with is the **data frame**
 
 You can think of it as an Excel spreadsheet
 
+.pull-left[
 ```{r d}
 # Create a small data frame called "d"
-d <- data.frame(x = 1:2, y = 3:4) 
+d <- data.frame(x = c("a", "b", "c"), y = 7:9)
 d
 ```
+]
+
+.pull-right[
+
+]
 
 This is essentially just a table with columns named `x` and `y`
 
@@ -442,60 +450,42 @@ Each row is an observation telling us the values of both `x` and `y`
 
 ---
 
-# Tibbles are data frames with opinions
+# Aside: tibbles are data frames with opinions
 
-For this class you can think of tibbles and data frames as synonymous
+Tibbles are the default data frame in the tidyverse
 
 Tibbles have some advantages, such as pretty printing
 
---
-
-We will primarily use tibbles in this course
-
-Two functions may come in handy:
-- `as_tibble()` converts data frames to tibbles
-- `tibble()` creates new tibbles from scratch
-
-See `vignette("tibble")` for more
-
----
-
-# Printing a data.frame
-
-```{r data.frame}
-as.data.frame(starwars)
+.pull-left[
+```{r d2}
+# Print the small data frame called "d"
+d
 ```
+]
 
----
-
-# How could we make this look nicer?
-
-```{r data.frame.nicer}
-as.data.frame(starwars)
+.pull-right[
+```{r d3, highlight.output = c(1, 3)}
+# Convert d to a tibble for pretty printing
+as_tibble(d)
 ```
+]
+
+**For this class, we'll treat "tibbles" and "data frames" as synonymous**
+
+<!-- We will primarily use tibbles in this course -->
+
+<!-- Two functions may come in handy: -->
+<!-- - `as_tibble()` converts data frames to tibbles -->
+<!-- - `tibble()` creates new tibbles from scratch -->
+
+<!-- See `vignette("tibble")` for more -->
 
 ---
 
-# Printing a data.frame with head()
-
-```{r data.frame.head}
-head(as.data.frame(starwars))
-```
-
----
-
-# This still doesn't look very nice...
-
-```{r data.frame.head.nicer}
-head(as.data.frame(starwars))
-```
-
----
-
-# Printing a tibble
+# Here is another example of a data frame
 
 ```{r tibble, highlight.output = c(1, 3, 14, 15)}
-starwars
+starwars # this data frame comes the tidyverse package dplyr
 ```
 
 ---
@@ -524,7 +514,7 @@ They are identical for simple cases, but have some differences
 We will use `|>` in class
 
 **Keyboard shortcut:** use `Ctrl/Cmd+Shift+m` to insert the pipe (with spaces)
-- You can [set the RStudio keyboard shortcut](https://r4ds.hadley.nz/workflow-pipes.html) to use either `%>%` or `|>`
+<!-- - You can [set the RStudio keyboard shortcut](https://r4ds.hadley.nz/workflow-pipes.html) to use either `%>%` or `|>` -->
 
 ---
 
@@ -634,11 +624,11 @@ dplyr functions all have these things in common:
 
 # dplyr has five key verbs we will use
 
-1. `filter`: subset rows based on their values
+1. `select`: select columns (i.e., variables)
 
-2. `arrange`: reorder rows based on their values
+2. `filter`: subset rows based on their values
 
-3. `select`: select columns (i.e., variables)
+3. `arrange`: reorder rows based on their values
 
 4. `mutate`: create new columns
 
@@ -663,10 +653,11 @@ dplyr functions all have these things in common:
 Let's study these commands together using the `starwars` data frame that comes pre-packaged with dplyr
 
 ---
+name: select
 
-# Starwars
+# 1) dplyr::select
 
-This is what the `starwars` dataset looks like:
+Recall what the `starwars` data frame looks like:
 
 ```{r}
 starwars
@@ -674,26 +665,14 @@ starwars
 
 
 ---
-name: select
 
 # 1) dplyr::select
 
 `select` allows us to select columns / variables:
 
-.pull-left[
 ```{r select0, highlight.output = 1}
 starwars |> select(name)
 ```
-]
-
---
-
-.pull-right[
-`select` returns a tibble even though you only asked for one variable
-
-To get a vector, you can use:
-- `starwars |> pull(name)`
-]
 
 ---
 
@@ -723,16 +702,6 @@ If you just want to rename columns without subsetting them, use `rename`:
 ```{r rename2}
 starwars |>
   rename(alias = name, crib = homeworld)
-```
-
----
-
-# 1) dplyr::select
-
-`select(contains(PATTERN))` provides a handy shortcut:
-```{r select3}
-starwars |> 
-  select(name, contains("color"))
 ```
 
 ---
@@ -793,10 +762,11 @@ Or perhaps you want to subset the humans that are taller than I am:
 
 ```{r filter1, eval = FALSE}
 starwars |> 
+  select(name, height, species) |> 
   filter( 
     species == "Human", 
     height >= 194
-    ) 
+    )
 ```
 
 Can you name one? *Hint: there's only one*
@@ -805,28 +775,18 @@ Can you name one? *Hint: there's only one*
 
 ```{r filter1b, echo = FALSE, highlight.output = c(4)}
 starwars |> 
+  select(name, height, species) |> 
   filter( 
     species == "Human", 
     height >= 194
-    ) 
-```
-
-
----
-
-# 2) dplyr::filter
-
-Regular expressions work here too, with the help of the `stringr` package:
-```{r filter2}
-starwars |> 
-  filter(str_detect(name, "Skywalker"))
+    )
 ```
 
 ---
 
 # 2) dplyr::filter
 
-A common `filter` use case is identifying/removing missing data using `is.na`:
+A useful `filter` use case is identifying/removing missing data using `is.na`:
 ```{r filter3}
 starwars |> 
   filter(is.na(height))
@@ -883,8 +843,8 @@ knitr::include_graphics("img/02/dplyr_mutate.png")
 You can create new columns from scratch or by transforming existing columns:
 ```{r mutate0}
 starwars |> 
-  select(name, birth_year) |>
-  mutate(dog_years = birth_year * 7)
+  select(name, height) |>
+  mutate(height_in_inches = height / 2.54)
 ```
 
 ---
@@ -894,9 +854,9 @@ starwars |>
 You can create new columns from scratch or by transforming existing columns:
 ```{r mutate1}
 starwars |> 
-  select(name, birth_year) |>
-  mutate(dog_years = birth_year * 7) |>
-  mutate(comment = str_glue("{name} is {dog_years} in dog years.")) # or could use paste()
+  select(name, height) |>
+  mutate(height_in_inches = height / 2.54) |>
+  mutate(height_in_feet = height_in_inches / 12)
 ```
 
 ---
@@ -907,22 +867,23 @@ starwars |>
 `mutate` creates variables in order, so we can chain them together in a single call:
 ```{r mutate2}
 starwars |> 
-  select(name, birth_year) |>
-  mutate(dog_years = birth_year * 7, # separate with a comma
-         comment = str_glue("{name} is {dog_years} in dog years."))
+  select(name, height) |>
+  mutate(height_in_inches = height / 2.54, # separate with a comma
+         height_in_feet = height_in_inches / 12)
 ```
 
 ---
 
 # 4) dplyr::mutate
 
-Boolean, logical, and conditional operators all work well with `mutate`:
+Boolean, logical, and conditional operators all work well with `mutate`
+
+For example:
 ```{r mutate3, eval = FALSE}
 starwars |> 
+  filter(name=="Luke Skywalker" | name=="Anakin Skywalker") |> 
   select(name, height) |>
-  filter(name %in% c("Luke Skywalker", "Anakin Skywalker")) |> 
-  mutate(tall1 = height > 180) |>
-  mutate(tall2 = ifelse(height > 180, "Tall", "Short")) # same effect, but can choose labels
+  mutate(tall = height > 180)
 ```
 
 How many rows do you think this will return? How many columns?
@@ -931,10 +892,9 @@ How many rows do you think this will return? How many columns?
 
 ```{r mutate3b, echo = FALSE}
 starwars |> 
+  filter(name=="Luke Skywalker" | name=="Anakin Skywalker") |> 
   select(name, height) |>
-  filter(name %in% c("Luke Skywalker", "Anakin Skywalker")) |> 
-  mutate(tall1 = height > 180) |>
-  mutate(tall2 = ifelse(height > 180, "Tall", "Short")) # same effect, but can choose labels
+  mutate(tall = height > 180)
 ```
 
 ---
@@ -951,9 +911,11 @@ Often we want to get summary statistics or *collapse* our data
 **Example:** "What are the mininum, maximum, and average prices of `diamonds`?"
 ```{r summ0}
 diamonds |> 
-  summarize(min = min(price),      # calculate the min price
-            max = max(price),      # calculate the max price
-            average = mean(price)) # calculate the mean price
+  summarize(
+    min = min(price),      # calculate the min price
+    max = max(price),      # calculate the max price
+    average = mean(price)  # calculate the mean price
+  )
 ```
 
 ---
@@ -993,9 +955,8 @@ It depends on the context!
 `summarize` is particularly useful in combination with `group_by`:
 ```{r summ1}
 starwars |> 
-  group_by(species, gender) |> # for each species-gender combo
-  summarize(mean_height = mean(height, na.rm = TRUE)) |> # calculate the mean height
-  head() # then just print the first 6 rows for clarity
+  group_by(species) |> # for each species
+  summarize(mean_height = mean(height, na.rm = TRUE)) # calculate the mean height
 ```
 
 ---
@@ -1012,7 +973,19 @@ Groups are persistent (sort of), `ungroup` removes them
 class: inverse, center, middle
 name: goodies
 
-# Other dplyr goodies for your reference
+# Let's work through an example on Posit Cloud
+
+(the remaining slides contain other dplyr goodies for your reference)
+
+---
+
+# Other dplyr goodies: distinct
+
+`distinct` to isolate unique observations:
+```{r}
+starwars |> distinct(species)
+```
+
 
 ---
 
@@ -1032,17 +1005,6 @@ starwars |>
   group_by(species) |> summarize(num = n())
 ```
 ]
-
----
-
-# Other dplyr goodies: distinct
-
-`distinct` to isolate unique observations:
-```{r}
-starwars |> distinct(species)
-```
-
-
 
 ---
 

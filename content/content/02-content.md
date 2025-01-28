@@ -1,7 +1,7 @@
 ---
 title: "Welcome to the tidyverse"
 linktitle: "Welcome to the tidyverse"
-date: "2025-01-27 12:09:15"
+date: "2025-01-27 15:17:04"
 menu:
   content:
     parent: Course content
@@ -39,10 +39,10 @@ output:
 - What are pipes and what are they used for?
 
 
-<!-- ### Slides -->
+### Slides
 
-<!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
 
-<!-- {{< blogdown/slide-buttons >}} -->
+{{< blogdown/slide-buttons >}}
 
-<!-- **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands. -->
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.

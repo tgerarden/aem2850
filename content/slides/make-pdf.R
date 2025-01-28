@@ -3,6 +3,7 @@
 ## OPTION 1: pagedown::chrome_print ----
 
 pagedown::chrome_print("content/slides/xx-slides.html")
+pagedown::chrome_print("content/slides/xx-slides.html", timeout = 120)
 
 stopifnot(FALSE)
 
