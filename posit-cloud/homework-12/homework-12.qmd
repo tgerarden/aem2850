@@ -10,7 +10,7 @@
 # Reminder: to work interactively, you can run code chunks on their own
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
-title: "Homework-12"
+title: "Homework - Week 12"
 author: "your name here"
 date: today
 format: pdf
