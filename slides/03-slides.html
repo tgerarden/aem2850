@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data import and tidying</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Todd Gerarden" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/tdg-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+class: center middle main-title section-title-4
+
+# Data import and tidying
+
+.class-info[
+
+**Week 3**
+
+AEM 2850 / 5850 : R for Business Analytics&lt;br&gt;
+Cornell Dyson&lt;br&gt;
+Spring 2025
+
+Acknowledgements: 
+&lt;!-- [Andrew Heiss](https://datavizm20.classes.andrewheiss.com),  --&gt;
+&lt;!-- [Claus Wilke](https://wilkelab.org/SDS375/),  --&gt;
+[Grant McDermott](https://github.com/uo-ec607/lectures),
+[Allison Horst](https://github.com/allisonhorst/stats-illustrations),
+[R4DS (2e)](https://r4ds.hadley.nz/data-tidy.html)
+
+]
+
+
+---
+
+# Announcements
+
+Submit assignments via canvas
+- Homework - Week 2 was due yesterday (Monday) at 11:59pm
+
+We will not assign any late penalties for the survey and homework-02
+
+Late assignments will be penalized going forward
+- If something comes up, please email me, Victor, and Xiaorui **in advance**
+
+Questions before we get started?
+
+---
+
+# Plan for today
+
+[Prologue](#prologue)
+
+[Data import](#readr)
+  - [read_csv](#read_csv)
+  - [write_csv](#write_csv)
+  - [read_excel](#read_excel)
+
+[Tidy data](#tidyr)
+  - [pivot_longer](#pivot_longer)
+  - [pivot_wider](#pivot_wider)
+
+[Summary](#summary)
+
+
+---
+class: inverse, center, middle
+name: prologue
+
+# Prologue
+
+
+---
+
+# What are our concentrations?
+
+Take a guess: what's the most common concentration among classmates?
+
+--
+
+Let's figure this out using the course survey
+
+--
+
+First, let's **import** the data:
+
+
+``` r
+responses &lt;- read_csv("data/survey-responses/homework-1-survey.csv")
+```
+
+```
+## Rows: 85 Columns: 25
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## chr (25): Timestamp, Email Address, Name, Name pronunciation guide, netid, P...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+---
+
+# What are our concentrations?
+
+
+``` r
+responses |&gt; 
+  select(Concentration)
+```
+
+
+```
+## # A tibble: 84 × 1
+##    Concentration                
+##    &lt;chr&gt;                        
+##  1 Economic Policy              
+##  2 Business analytics           
+##  3 Economic and Financial Policy
+##  4 Public policy                
+##  5 Minor in Data Science        
+##  6 Finance                      
+##  7 Finance                      
+##  8 SBEE                         
+##  9 Accounting                   
+## 10 Business                     
+## # ℹ 74 more rows
+```
+
+What is the "level of observation" in this data frame? (i.e., what are the rows?)
+
+---
+
+# What are our concentrations?
+
+After some processing to get concentration counts, we get:
+
+
+```
+## # A tibble: 1 × 12
+##    acct    ba   dev  econ enviro finance  food    hr  mgmt  mktg other strategy
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;
+## 1     9    17     3     7     10      13     2     5     6     4    20        1
+```
+
+What is the "level of observation" in this data frame? (i.e., what are the rows?)
+
+--
+
+Is the best way to organize concentration counts?
+
+--
+
+How would you use counts to compute shares in this data frame?
+
+---
+
+# What are our "tidy" concentrations?
+
+Let's `pivot_longer` and `slice_max` to get the top 3:
+
+
+```
+## # A tibble: 3 × 2
+##   concentration count
+##   &lt;chr&gt;         &lt;int&gt;
+## 1 ba               17
+## 2 finance          13
+## 3 enviro           10
+```
+
+--
+
+How would you use what we learned last week to compute shares?
+
+--
+
+
+``` r
+tidy_concentrations |&gt; mutate(share = count / sum(count)) # easy!
+```
+
+
+```
+## # A tibble: 3 × 3
+##   concentration count share
+##   &lt;chr&gt;         &lt;int&gt; &lt;dbl&gt;
+## 1 ba               17 0.175
+## 2 finance          13 0.134
+## 3 enviro           10 0.103
+```
+
+---
+class: inverse, center, middle
+name: readr
+
+# Data import
+
+
+---
+
+# Data import
+
+Plain-text rectangular files are a common way to store and share data:
+- comma delimited files (`readr::read_csv`)
+- tab delimited files (`readr::read_tsv`)
+- fixed width files (`readr::read_fwf`)
+
+We will just cover csv files since `readr` syntax is transferable
+
+---
+
+# Super bowl ads: a csv example
+
+&lt;img src="img/03/superbowl-ads.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+???
+Image source: [FiveThirtyEight](https://github.com/fivethirtyeight/superbowl-ads)
+
+---
+
+# Super bowl ads in csv format
+
+&lt;img src="img/03/superbowl-raw.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+???
+Data source: [FiveThirtyEight](https://github.com/fivethirtyeight/superbowl-ads)
+
+---
+
+# Super bowl ads in csv format
+
+&lt;img src="img/03/superbowl-excel.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Getting from a csv to a data frame
+
+How are data frames and csv files similar?
+
+--
+- both are rectangular
+- csv lines often correspond to rows
+- csv commas delineate columns
+
+--
+
+How are they different?
+
+--
+- csv files do not store column types!
+
+---
+name: read_csv
+
+# 1) readr::read_csv
+
+`read_csv` helps us get from point a to point b:
+1. you give it the path to your csv file
+2. it takes the first line of data as column names by default
+3. it guesses column types and builds up a data frame
+
+Most csv files can be read using the defaults, so we will focus on that
+
+If you run into special cases, consult `?read_csv`
+
+---
+
+# An aside on paths
+
+We need to figure out what "path" to give `read_csv`
+
+--
+
+The simplest thing is to provide a "relative path" from the working directory
+
+**But where is the working directory?**
+
+**R scripts (.R)** in an R Project: default working directory is the project directory
+
+**Quarto (.qmd)**: default working directory is the location of the .qmd file
+
+In our RStudio Cloud projects, these will both be `/cloud/project`, which is the default directory for our projects and where we store our .qmd templates
+
+---
+
+# 1) readr::read_csv
+
+Here is an example for the file `superbowl.csv` inside the folder `data`:
+
+
+``` r
+ads &lt;- read_csv("data/superbowl.csv")
+```
+
+```
+## Rows: 247 Columns: 25
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## chr  (10): brand, superbowl_ads_dot_com_url, youtube_url, id, kind, etag, ti...
+## dbl   (7): year, view_count, like_count, dislike_count, favorite_count, comm...
+## lgl   (7): funny, show_product_quickly, patriotic, celebrity, danger, animal...
+## dttm  (1): published_at
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+--
+
+That was easy!
+
+???
+Note: readr intentionally never guesses that columns are integers as a safeguard ([source](https://github.com/tidyverse/readr/issues/1094#issuecomment-628612430))
+
+---
+
+# Now we're back to our old tricks
+
+.less-left[
+
+``` r
+ads |&gt; 
+  count(funny)
+```
+
+```
+## # A tibble: 2 × 2
+##   funny     n
+##   &lt;lgl&gt; &lt;int&gt;
+## 1 FALSE    76
+## 2 TRUE    171
+```
+]
+
+--
+
+.more-right[
+
+``` r
+ads |&gt; 
+  group_by(brand) |&gt; 
+  summarize(likes = sum(like_count, na.rm = TRUE)) |&gt; 
+  arrange(desc(likes))
+```
+
+```
+## # A tibble: 10 × 2
+##    brand      likes
+##    &lt;chr&gt;      &lt;dbl&gt;
+##  1 Doritos   326151
+##  2 NFL       224263
+##  3 Coca-Cola 160231
+##  4 Bud Light 104380
+##  5 Budweiser  88765
+##  6 Pepsi      14796
+##  7 Toyota      5316
+##  8 Hynudai     4204
+##  9 E-Trade     2624
+## 10 Kia         2127
+```
+]
+
+---
+name: write_csv
+
+# 2) readr::write_csv
+
+Use `write_csv` to write data to a `.csv`:
+
+
+``` r
+# overwrite the raw data (bad idea!)
+ads |&gt; 
+  write_csv("data/superbowl.csv")
+```
+
+--
+
+
+``` r
+# modify the data and then output it to a new file
+ads |&gt; 
+  select(year, brand, youtube_url) |&gt; 
+  write_csv("superbowl-urls.csv")
+```
+
+---
+name: read_excel
+
+# Importing excel data
+
+Wait, what about getting data from excel spreadsheets?
+
+--
+
+Use `readxl::read_excel()` for data that is stored in `.xls` or `.xlsx` format
+
+`readxl` isn't loaded as part of the core tidyverse, so we need to load it first:
+
+
+``` r
+library(readxl) # already installed as part of the tidyverse, but not loaded by default
+read_excel("data/readxl/datasets.xlsx", sheet = "mtcars") |&gt; head()
+```
+
+```
+## # A tibble: 6 × 11
+##     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  21       6   160   110  3.9   2.62  16.5     0     1     4     4
+## 2  21       6   160   110  3.9   2.88  17.0     0     1     4     4
+## 3  22.8     4   108    93  3.85  2.32  18.6     1     1     4     1
+## 4  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1
+## 5  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2
+## 6  18.1     6   225   105  2.76  3.46  20.2     1     0     3     1
+```
+
+---
+class: inverse, center, middle
+name: tidyr
+
+# Tidy data
+
+
+---
+
+&lt;img src="img/03/tidydata_1.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# *Why* "tidy" data?
+
+---
+
+&lt;img src="img/03/tidydata_3.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Which of these do you think is most tidy?
+
+.pull-left.small[
+
+``` r
+table1
+#&gt; # A tibble: 4 × 4
+#&gt;   country      year  cases population
+#&gt;   &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+#&gt; 1 Afghanistan  1999    745   19987071
+#&gt; 2 Afghanistan  2000   2666   20595360
+#&gt; 3 Brazil       1999  37737  172006362
+#&gt; 4 Brazil       2000  80488  174504898
+```
+
+
+``` r
+table2
+#&gt; # A tibble: 4 × 3
+#&gt;   country      year rate             
+#&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;            
+#&gt; 1 Afghanistan  1999 745/19987071     
+#&gt; 2 Afghanistan  2000 2666/20595360    
+#&gt; 3 Brazil       1999 37737/172006362  
+#&gt; 4 Brazil       2000 80488/174504898  
+```
+]
+
+.pull-right.small[
+
+``` r
+table3
+#&gt; # A tibble: 8 × 4
+#&gt;   country      year type           count
+#&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;
+#&gt; 1 Afghanistan  1999 cases            745
+#&gt; 2 Afghanistan  1999 population  19987071
+#&gt; 3 Afghanistan  2000 cases           2666
+#&gt; 4 Afghanistan  2000 population  20595360
+#&gt; 5 Brazil       1999 cases          37737
+#&gt; 6 Brazil       1999 population 172006362
+#&gt; # … with 2 more rows
+```
+]
+
+--
+
+Here, `table1`. Though in general, it can depend on your objectives!
+
+---
+
+# Why is `table1` a good choice?
+
+The `dplyr` functions from last week are designed to work with tidy data:
+
+
+
+.pull-left[
+
+``` r
+# compute rate per 10,000 people
+table1 |&gt;
+  mutate(rate = cases / population * 10000)
+```
+
+```
+## # A tibble: 4 × 5
+##   country      year cases population  rate
+##   &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
+## 1 Afghanistan  1999   745   19987071 0.373
+## 2 Afghanistan  2000  2666   20595360 1.29 
+## 3 Brazil       1999 37737  172006362 2.19 
+## 4 Brazil       2000 80488  174504898 4.61
+```
+]
+
+--
+
+.pull-right[
+
+``` r
+# compute cases per year
+table1 |&gt;
+  group_by(year) |&gt; 
+  summarize(cases = sum(cases))
+```
+
+```
+## # A tibble: 2 × 2
+##    year cases
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  1999 38482
+## 2  2000 83154
+```
+]
+
+
+---
+
+# Why is `table1` a good choice?
+
+The `ggplot2` functions we will learn are designed to work with tidy data:
+
+.pull-left[
+
+``` r
+# visualize changes over time
+table1 |&gt; 
+  ggplot(aes(
+    x = year, 
+    y = cases,
+    color = country
+    )) +
+  geom_line() +
+  geom_point() +
+  scale_x_continuous(breaks = c(1999, 2000)) +
+  theme_bw() +
+  theme(legend.position = "bottom")
+```
+]
+
+.pull-right[
+  ![](03-slides_files/figure-html/ggplot2-example-1.png)
+]
+
+
+---
+
+# HOW can we "tidy" data?
+
+**Key tidyr verbs**
+
+1. `pivot_longer`: Pivot wide data into long format
+
+2. `pivot_wider`: Pivot long data into wide format
+
+---
+name: pivot_longer
+
+# Let's start with an untidy dataset
+
+
+
+
+``` r
+stocks
+```
+
+```
+## # A tibble: 2 × 4
+##   date        AAPL  GOOG  MSFT
+##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 2025-02-03  234.  199.  412.
+## 2 2025-02-02  236.  195.  364.
+```
+
+We have 4 columns, the date and the stocks
+
+Why do I think this is untidy?
+
+--
+
+1. stock names `AAPL`, `GOOG`, `MSFT` are values, not variables
+2. cells contain prices, but there is no variable `price`
+
+---
+
+# 1) tidyr::pivot_longer
+
+Let's use `pivot_longer()` to get this in tidy form
+
+We want to pivot the stock name columns `AAPL`, `GOOG`, `MSFT` "longer"
+
+--
+
+We need to give three key pieces of information to `pivot_longer()`:
+
+1. **Which columns to pivot** using `c(AAPL, GOOG, MSFT)` or `-date`
+2. **What variable will hold the names** using `names_to = "stock"`
+3. **What variable will hold the values** using `values_to = "price"`
+
+--
+
+Here is what that syntax looks like:
+
+
+``` r
+stocks |&gt; 
+  pivot_longer(cols = c(AAPL, GOOG, MSFT), names_to = "stock", values_to = "price")
+```
+
+---
+
+# 1) tidyr::pivot_longer
+
+Here is what that syntax does:
+
+
+``` r
+stocks |&gt; pivot_longer(cols = c(AAPL, GOOG, MSFT), names_to = "stock", values_to = "price")
+```
+
+```
+## # A tibble: 6 × 3
+##   date       stock price
+##   &lt;date&gt;     &lt;chr&gt; &lt;dbl&gt;
+## 1 2025-02-03 AAPL   234.
+## 2 2025-02-03 GOOG   199.
+## 3 2025-02-03 MSFT   412.
+## 4 2025-02-02 AAPL   236.
+## 5 2025-02-02 GOOG   195.
+## 6 2025-02-02 MSFT   364.
+```
+
+--
+
+Let's save the "tidy" (i.e., long) stocks data frame for later use
+
+
+``` r
+tidy_stocks &lt;- stocks |&gt; 
+  pivot_longer(cols = -date, names_to = "stock", values_to = "price")
+```
+
+---
+
+# 1) tidyr::pivot_longer: How does it work?
+
+
+``` r
+df |&gt; 
+  pivot_longer(
+    cols = col1:col2,
+    names_to = "name",
+    values_to = "value"
+  )
+```
+
+.less-left[
+Existing variables such as `var` need to be repeated, once for each column in `cols`
+]
+
+.more-right[
+&lt;img src="img/03/pivot-longer-variables.png" width="85%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# 1) tidyr::pivot_longer: How does it work?
+
+
+``` r
+df |&gt; 
+  pivot_longer(
+    cols = col1:col2,
+    names_to = "name",
+    values_to = "value"
+  )
+```
+
+.less-left[
+Column names become values in a new variable, whose name is given by `names_to`
+  - repeated once for each row in the original
+]
+
+.more-right[
+&lt;img src="img/03/pivot-longer-column-names.png" width="85%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# 1) tidyr::pivot_longer: How does it work?
+
+
+``` r
+df |&gt; 
+  pivot_longer(
+    cols = col1:col2,
+    names_to = "name",
+    values_to = "value"
+  )
+```
+
+.less-left[
+Cell values become values in a new variable, with a name given by `values_to`
+]
+
+.more-right[
+&lt;img src="img/03/pivot-longer-cell-values.png" width="85%" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+name: pivot_wider
+
+# 2) tidyr::pivot_wider
+
+We can use `pivot_wider()` to make data "wide"
+
+Let's say we want to convert `tidy_stocks` back to `stocks`
+
+.pull-left[
+
+``` r
+tidy_stocks
+```
+
+```
+## # A tibble: 6 × 3
+##   date       stock price
+##   &lt;date&gt;     &lt;chr&gt; &lt;dbl&gt;
+## 1 2025-02-03 AAPL   234.
+## 2 2025-02-03 GOOG   199.
+## 3 2025-02-03 MSFT   412.
+## 4 2025-02-02 AAPL   236.
+## 5 2025-02-02 GOOG   195.
+## 6 2025-02-02 MSFT   364.
+```
+
+]
+
+.pull-right[
+
+``` r
+stocks
+```
+
+```
+## # A tibble: 2 × 4
+##   date        AAPL  GOOG  MSFT
+##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 2025-02-03  234.  199.  412.
+## 2 2025-02-02  236.  195.  364.
+```
+
+]
+
+---
+
+# 2) tidyr::pivot_wider
+
+.less-left[
+
+``` r
+tidy_stocks
+```
+
+```
+## # A tibble: 6 × 3
+##   date       stock price
+##   &lt;date&gt;     &lt;chr&gt; &lt;dbl&gt;
+## 1 2025-02-03 AAPL   234.
+## 2 2025-02-03 GOOG   199.
+## 3 2025-02-03 MSFT   412.
+## 4 2025-02-02 AAPL   236.
+## 5 2025-02-02 GOOG   195.
+## 6 2025-02-02 MSFT   364.
+```
+]
+
+.more-right[
+We need to give two key pieces of information to `pivot_wider()`:
+
+1. **What variable to get names from:** `names_from = "stock"`
+2. **What variable to get values from:** `values_from = "price"`
+
+`pivot_wider()` figures out the rest
+]
+
+---
+
+# 2) tidyr::pivot_wider
+
+
+``` r
+tidy_stocks |&gt; pivot_wider(names_from = stock, values_from = price)
+```
+
+```
+## # A tibble: 2 × 4
+##   date        AAPL  GOOG  MSFT
+##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 2025-02-03  234.  199.  412.
+## 2 2025-02-02  236.  195.  364.
+```
+
+--
+
+We just got our original data back!
+
+
+``` r
+stocks
+```
+
+```
+## # A tibble: 2 × 4
+##   date        AAPL  GOOG  MSFT
+##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 2025-02-03  234.  199.  412.
+## 2 2025-02-02  236.  195.  364.
+```
+
+---
+
+# 2) tidyr::pivot_wider
+
+
+``` r
+tidy_stocks |&gt; pivot_wider(names_from = date, values_from = price)
+```
+
+```
+## # A tibble: 3 × 3
+##   stock `2025-02-03` `2025-02-02`
+##   &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+## 1 AAPL          234.         236.
+## 2 GOOG          199.         195.
+## 3 MSFT          412.         364.
+```
+
+--
+
+Reversing the arguments effectively transposed the original data
+
+
+``` r
+stocks
+```
+
+```
+## # A tibble: 2 × 4
+##   date        AAPL  GOOG  MSFT
+##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 2025-02-03  234.  199.  412.
+## 2 2025-02-02  236.  195.  364.
+```
+
+---
+
+# tidyr resources
+
+[Data tidying with tidyr : : CHEATSHEET](https://rstudio.github.io/cheatsheets/tidyr.pdf)
+
+[Vignette](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) (from the **tidyr** package)
+
+``` r
+vignette("tidy-data")
+```
+
+[Ch. 5 of R for Data Science (2e)](https://r4ds.hadley.nz/data-tidy)
+
+[Original paper](https://vita.had.co.nz/papers/tidy-data.pdf) (Hadley Wickham, 2014 JSS)
+
+
+---
+class: inverse, center, middle
+name: summary
+
+# Summary
+
+---
+
+# Key verbs so far
+
+.pull-left-3[
+### Import
+#### readr
+1. `read_csv`
+2. `write_csv`
+
+#### readxl
+1. `read_excel`
+]
+
+.pull-middle-3[
+### Tidy
+#### tidyr
+1. `pivot_longer`
+2. `pivot_wider`
+]
+
+.pull-right-3[
+### Transform
+#### dplyr
+1. `filter`
+2. `arrange`
+3. `select`
+4. `mutate`
+5. `summarize`
+]
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
