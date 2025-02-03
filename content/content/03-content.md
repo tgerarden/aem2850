@@ -1,7 +1,7 @@
 ---
 title: "Data import and tidying"
 linktitle: "Data import and tidying"
-date: "`r format(Sys.time())`"
+date: "2025-02-03 13:32:30"
 menu:
   content:
     parent: Course content
