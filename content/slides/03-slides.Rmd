@@ -66,14 +66,13 @@ Acknowledgements:
 
 # Announcements
 
-We will not assign any late penalties for the survey and lab-02
+Submit assignments via canvas
+- Homework - Week 2 was due yesterday (Monday) at 11:59pm
+
+We will not assign any late penalties for the survey and homework-02
 
 Late assignments will be penalized going forward
-- If something comes up, please email me and Victor **in advance**
-
-Reminders:
-- Submit assignments via canvas
-  - Lab-02 was due yesterday (Monday) at 11:59pm
+- If something comes up, please email me, Victor, and Xiaorui **in advance**
 
 Questions before we get started?
 
@@ -110,11 +109,34 @@ Take a guess: what's the most common concentration among classmates?
 
 --
 
-```{r, echo = FALSE}
-load("data/survey-responses/survey-data.RData")
-concentrations_raw |> 
-  select(program, concentration)
+Let's figure this out using the course survey
+
+--
+
+First, let's **import** the data:
+
+```{r}
+responses <- read_csv("data/survey-responses/homework-1-survey.csv")
 ```
+
+---
+
+# What are our concentrations?
+
+```{r, eval=FALSE}
+responses |> 
+  select(Concentration)
+```
+
+```{r, echo=FALSE}
+# customize slightly to be representative
+responses |> 
+  select(Concentration) |> 
+  arrange(desc(row_number())) |> 
+  filter(row_number()!=1)
+```
+
+What is the "level of observation" in this data frame? (i.e., what are the rows?)
 
 ---
 
@@ -123,6 +145,7 @@ concentrations_raw |>
 After some processing to get concentration counts, we get:
 
 ```{r, echo = FALSE}
+load("data/survey-responses/survey-data.RData")
 concentrations |> select(-degree, -concentration, -program) |> 
   summarize_all(sum, na.rm = TRUE) |> 
    relocate(sort(tidyselect::peek_vars()))
@@ -244,9 +267,9 @@ name: read_csv
 # 1) readr::read_csv
 
 `read_csv` helps us get from point a to point b:
-- you give it the path to your csv file
-- it takes the first line of data as column names by default
-- it guesses column types and builds up a data frame
+1. you give it the path to your csv file
+2. it takes the first line of data as column names by default
+3. it guesses column types and builds up a data frame
 
 Most csv files can be read using the defaults, so we will focus on that
 
@@ -256,88 +279,25 @@ If you run into special cases, consult `?read_csv`
 
 # An aside on paths
 
-First we need to figure out what path to give `read_csv`
+We need to figure out what "path" to give `read_csv`
 
 --
 
-We have several options:
-- absolute paths
-  - `/Users/todd/aem2850/slides/data/superbowl.csv`
-  - `C:\aem2850\slides\data\superbowl.csv`
-- relative paths
-  - `data/superbowl.csv`
-- links
-  - [`https://raw.githubusercontent.com/superbowl-ads.csv`](https://raw.githubusercontent.com/fivethirtyeight/superbowl-ads/main/superbowl-ads.csv)
-- others
-  - see `?read_csv`
-
----
-
-# An aside on paths
-
-Relative paths are nice: work if you move R code to another directory or device
-
-**But what are they relative to?**
-
---
-
-The working directory
+The simplest thing is to provide a "relative path" from the working directory
 
 **But where is the working directory?**
-
---
 
 **R scripts (.R)** in an R Project: default working directory is the project directory
 
 **Quarto (.qmd)**: default working directory is the location of the .qmd file
 
---
-
 In our RStudio Cloud projects, these will both be `/cloud/project`, which is the default directory for our projects and where we store our .qmd templates
-
----
-
-# An aside on paths
-
-More generally, you can check your working directory using `getwd()`
-
-Example: here's the working directory for the slides' source code on my laptop:
-```{r get-wd}
-getwd()
-```
-
-`setwd()` will alter the working directory
-
----
-
-# An aside on paths
-
-Just for context, here is a list of (some) directories below the working directory
-
-```{r get-path-a, echo = FALSE}
-# list the directories below where this .Rmd file is
-fs::dir_tree(recurse = FALSE, type = "directory", glob = "*slides_*", invert = TRUE)
-```
-
---
-
-Now list (some of) the .csv files in the folder `data`:
-
-```{r get-path-b, echo = FALSE}
-fs::dir_tree("data", glob = "*superbowl.csv") # could instead list the *.csv files within data
-```
-
-`data/superbowl.csv` is the relative path from our working directory to our csv
-
-???
-
-Omitted code that uses `fs::dir_tree` to print pretty directory trees
 
 ---
 
 # 1) readr::read_csv
 
-So all we need to do is give that relative path to `read_csv`:
+Here is an example for the file `superbowl.csv` inside the folder `data`:
 
 ```{r read-ads}
 ads <- read_csv("data/superbowl.csv")
@@ -380,20 +340,19 @@ name: write_csv
 Use `write_csv` to write data to a `.csv`:
 
 ```{r write-ads, eval = FALSE}
-write_csv(ads, "data/superbowl.csv") # overwrite the raw data (bad idea!)
-
+# overwrite the raw data (bad idea!)
 ads |> 
-  select(year, brand, youtube_url) |> 
-  write_csv("superbowl-urls.csv") # write modified output to a new file
+  write_csv("data/superbowl.csv")
 ```
 
----
+--
 
-# csv is not always the best storage medium
-
-To preserve column specifications and save time when working in R, use `write_rds()` and `read_rds()` to save and open data frames in .RDS format
-
-For multiple objects, `save()` and `load()` are handy functions from base R that work with the .RData format
+```{r write-urls, eval = FALSE}
+# modify the data and then output it to a new file
+ads |> 
+  select(year, brand, youtube_url) |> 
+  write_csv("superbowl-urls.csv")
+```
 
 ---
 name: read_excel
@@ -410,28 +369,8 @@ Use `readxl::read_excel()` for data that is stored in `.xls` or `.xlsx` format
 
 ```{r readxl}
 library(readxl) # already installed as part of the tidyverse, but not loaded by default
-excel_sheets("data/readxl/datasets.xlsx") # list the sheets in datasets.xlsx
+read_excel("data/readxl/datasets.xlsx", sheet = "mtcars") |> head()
 ```
-
----
-
-# Importing excel data
-
-```{r}
-read_excel("data/readxl/datasets.xlsx", sheet = "mtcars")
-```
-
----
-
-# Importing excel data
-
-Can also use arguments like `range` to get data using excel lingo
-
-```{r}
-read_excel("data/readxl/datasets.xlsx", 
-           range = "mtcars!A1:D6") # note the combination of sheet and cell range
-```
-
 
 ---
 class: inverse, center, middle
@@ -442,10 +381,6 @@ name: tidyr
 
 ---
 
-# WHAT is "tidy" data?
-
----
-
 ```{r echo=FALSE, out.width='100%'}
 knitr::include_graphics("img/03/tidydata_1.jpg")
 ```
@@ -453,14 +388,7 @@ knitr::include_graphics("img/03/tidydata_1.jpg")
 
 ---
 
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/03/tidydata_2.jpg")
-```
-
-
----
-
-# WHY "tidy" data?
+# *Why* "tidy" data?
 
 ---
 
@@ -562,10 +490,13 @@ The `ggplot2` functions we will learn are designed to work with tidy data:
 ```{r ggplot2-example, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 # visualize changes over time
 table1 |> 
-  ggplot(aes(x = year, y = cases)) +
-  geom_line(aes(color = country)) +
-  geom_point(aes(color = country,
-                 shape = country)) +
+  ggplot(aes(
+    x = year, 
+    y = cases,
+    color = country
+    )) +
+  geom_line() +
+  geom_point() +
   scale_x_continuous(breaks = c(1999, 2000)) +
   theme_bw() +
   theme(legend.position = "bottom")
@@ -596,8 +527,8 @@ name: pivot_longer
 set.seed(12345)
 stocks <- tibble( # could use "tibble" instead of "data.frame" if you prefer
   date = Sys.Date() - 0:1,
-  AAPL = rnorm(2, 200, 15),
-  GOOG = rnorm(2, 150, 10),
+  AAPL = rnorm(2, 225, 15),
+  GOOG = rnorm(2, 200, 10),
   MSFT = rnorm(2, 400, 20)
   )
 ```
@@ -627,9 +558,9 @@ We want to pivot the stock name columns `AAPL`, `GOOG`, `MSFT` "longer"
 
 We need to give three key pieces of information to `pivot_longer()`:
 
-1. **Which columns to pivot** using `AAPL:MSFT` or `-date`
-2. **What variable will hold the names:** `names_to = "stock"`
-3. **What variable will hold the values:** `values_to = "price"`
+1. **Which columns to pivot** using `c(AAPL, GOOG, MSFT)` or `-date`
+2. **What variable will hold the names** using `names_to = "stock"`
+3. **What variable will hold the values** using `values_to = "price"`
 
 --
 
@@ -637,7 +568,7 @@ Here is what that syntax looks like:
 
 ```{r pivot_longer1a, eval=FALSE}
 stocks |> 
-  pivot_longer(cols = AAPL:MSFT, names_to = "stock", values_to = "price")
+  pivot_longer(cols = c(AAPL, GOOG, MSFT), names_to = "stock", values_to = "price")
 ```
 
 ---
@@ -647,7 +578,7 @@ stocks |>
 Here is what that syntax does:
 
 ```{r pivot_longer1b}
-stocks |> pivot_longer(cols = AAPL:MSFT, names_to = "stock", values_to = "price")
+stocks |> pivot_longer(cols = c(AAPL, GOOG, MSFT), names_to = "stock", values_to = "price")
 ```
 
 --

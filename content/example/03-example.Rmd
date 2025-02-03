@@ -19,9 +19,14 @@ editor_options:
 
 ## Plan for today
 - Questions? :raising_hand_woman:
-- Wrap up slides from Tuesday (as needed)
-- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-03` in our course workspace
-- Work through `import-tidy-practice.R`
+- Tuesday:
+  - Slides on data import
+  - Navigate to [posit.cloud](http://posit.cloud) and open the project `example-03-01` in our course workspace
+  - Work through `import-data-practice.R`
+- Thursday:
+  - Slides on tidy data
+  - Navigate to [posit.cloud](http://posit.cloud) and open the project `example-03-02` in our course workspace
+  - Work through `tidy-data-practice.R`
 - **Solutions** will be posted after class
 
 
