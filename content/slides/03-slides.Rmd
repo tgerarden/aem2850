@@ -374,6 +374,13 @@ read_excel("data/readxl/datasets.xlsx", sheet = "mtcars") |> head()
 
 ---
 class: inverse, center, middle
+name: example
+
+# Let's work through an example on Posit Cloud
+
+
+---
+class: inverse, center, middle
 name: tidyr
 
 # Tidy data
@@ -788,4 +795,10 @@ name: summary
 5. `summarize`
 ]
 
+
+---
+class: inverse, center, middle
+name: example
+
+# Let's work through an example on Posit Cloud
 
