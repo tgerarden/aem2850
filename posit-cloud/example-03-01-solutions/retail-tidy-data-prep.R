@@ -32,8 +32,3 @@ retail_tidy |>
   write_csv("posit-cloud/example-03-01/retail_tidy.csv")
 retail_tidy |>
   write_csv("posit-cloud/example-03-01-solutions/retail_tidy.csv")
-
-retail_tidy |>
-  write_csv("posit-cloud/example-03-02/retail_tidy.csv")
-retail_tidy |>
-  write_csv("posit-cloud/example-03-02-solutions/retail_tidy.csv")

@@ -72,7 +72,7 @@ zhvi |>
 # we will learn how to tidy these data on thursday
 # for now, import the already-tidy version from the sheet "ny_tidy"
 # assign the resulting data frame to zhvi_tidy
-zhvi <- read_excel(
+zhvi_tidy <- read_excel(
   "______.xlsx",
   ______ = "______"
 )
