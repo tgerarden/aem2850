@@ -199,16 +199,15 @@ intersect(names(airlines), names(flights))
 #     that flew from NYC to Miami International Airport (MIA)
 # the result should be a 3 x 2 data frame
 # hints:
-# 3. see above for the variable that links `flights` and `airlines`
-# 3. use dplyr verbs on `flights` to get a 3 x 1 data frame with:
+# - see above for the variable that links `flights` and `airlines`
+# - use dplyr verbs on `flights` to get a 3 x 1 data frame with:
 #    only rows that correspond to `dest == "MIA"`,
 #    only the variable carrier,
 #    only one row per carrier,
 #    then join to airlines
 mia_carriers <- flights |>
   filter(dest == "MIA") |>
-  select(carrier) |>
-  distinct()
+  distinct(carrier)
 mia_airlines <- left_join(mia_carriers, airlines)
 mia_airlines
 
@@ -216,8 +215,7 @@ mia_airlines
 # 3.2 did any of the carriers that flew to Miami also fly to Syracuse (SYR)?
 syr_carriers <- flights |>
   filter(dest == "SYR") |>
-  select(carrier) |>
-  distinct()
+  distinct(carrier)
 syr_airlines <- left_join(syr_carriers, airlines)
 syr_airlines
 # use inner join to find rows in both x and y
@@ -229,8 +227,7 @@ inner_join(mia_airlines, syr_airlines)
 # 3.3 did any of the carriers that flew to Miami also fly to Ithaca (ITH)?
 ith_carriers <- flights |>
   filter(dest == "ITH") |>
-  select(carrier) |>
-  distinct()
+  distinct(carrier)
 ith_airlines <- left_join(ith_carriers, airlines)
 ith_airlines
 # use inner join to find rows in both x and y
@@ -244,21 +241,18 @@ inner_join(mia_airlines, ith_airlines)
 #       which are connected by tailnum (as we saw earlier in this example)
 mia_tailnums <- flights |>
   filter(dest == "MIA") |>
-  select(tailnum) |>
-  distinct()
+  distinct(tailnum)
 left_join(mia_tailnums, planes) |>
   slice_min(year, n = 1)
 # or:
 left_join(mia_tailnums, planes) |>
-  arrange(year) |>
-  filter(row_number() == 1)
+  slice_min(year)
 # answer: the oldest plane was from 1956
 
 # bonus question: which carrier flew that plane?
 flights |>
   filter(dest == "MIA") |>
-  select(tailnum, carrier) |>
-  distinct() |>
+  distinct(tailnum, carrier) |>
   left_join(planes) |>
   filter(year == min(year, na.rm = TRUE)) |>
   select(tailnum, year, carrier) |>

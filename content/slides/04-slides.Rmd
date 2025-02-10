@@ -70,7 +70,7 @@ Acknowledgements:
 
 Reminders:
 - Submit assignments via canvas
-  - Lab-03 was due yesterday (Monday) at 11:59pm
+  - Homework - Week 3 was due yesterday (Monday) at 11:59pm
 
 Questions before we get started?
 
@@ -107,14 +107,16 @@ Take a guess: what's the most popular spectator sport among classmates?
 ```{r, echo = FALSE}
 load("data/survey-responses/survey-data.RData")
 n_sports <- 20
+sports <- sports |> 
+  str_replace("ice hockey", "hockey")
+# sports[!(sports %in% c("honestly i could watch anything and i would get invested"))] # just for pretty printing
 ```
 
 --
 
 Here are the first `r n_sports` responses:
 ```{r, echo = FALSE}
-sports[!(sports %in% c("honestly i could watch anything and i would get invested"))] |> # just for pretty printing
-  str_replace("esports \\(counter strike \\& fighting games\\)", "esports") |> 
+sports |> 
   head(n_sports)
 ```
 
@@ -208,7 +210,7 @@ Their **keys** are in color in the first column, and other data are in grey
 
 # Left join and right join
 
-Left and right joins add variables to the left and right data frames
+Left or right joins add variables to the left or right data frames
 
 .pull-left[
 ```{r echo=FALSE, out.width='100%'}
@@ -590,8 +592,7 @@ name: summary
 #### tidyr
 1. `pivot_longer`
 2. `pivot_wider`
-3. `separate`
-4. `unite`
+3. `separate_wider_delim`
 ]
 
 .pull-midright-4[
@@ -693,7 +694,7 @@ flights |>
 
 Numeric comparisons like `<`, `<=`, `>`, `>=`, `!=`, and `==` can be used to create logical vectors
 
-As we have seen, `==` is useful for comparing character vectors (i.e., strings)
+As we have seen, `==` and `!=` are useful for comparing characters (i.e., strings)
 
 ---
 
@@ -701,7 +702,7 @@ As we have seen, `==` is useful for comparing character vectors (i.e., strings)
 
 `is.na()` is a useful function for checking whether something is `NA`
 
-Why use `is.na(x)` when we could use `x == NA`?
+Why use `is.na(x)` when we could just use `x == NA`?
 
 --
 

@@ -197,8 +197,8 @@ ______
 #     that flew from NYC to Miami International Airport (MIA)
 # the result should be a 3 x 2 data frame
 # hints:
-# 3. see above for the variable that links `flights` and `airlines`
-# 3. use dplyr verbs on `flights` to get a 3 x 1 data frame with:
+# - see above for the variable that links `flights` and `airlines`
+# - use dplyr verbs on `flights` to get a 3 x 1 data frame with:
 #    only rows that correspond to `dest == "MIA"`,
 #    only the variable carrier,
 #    only one row per carrier,

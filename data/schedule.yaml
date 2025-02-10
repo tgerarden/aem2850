@@ -18,7 +18,7 @@ lessons:
     assignment: "02-homework"
     bg: 2
 
-  - title: '<span class="content-title">Data import and tidying</span>'
+  - title: '<span class="content-title">Data import <br> Data tidying</span>'
     session: "Session 3"
     date: "Week 3"
     content: "03-content"
@@ -30,8 +30,8 @@ lessons:
   - title: '<span class="content-title">Joins <br> Logic</span>'
     session: "Session 4"
     date: "Week 4"
-    # content: "04-content"
-    # example: "04-example"
+    content: "04-content"
+    example: "04-example"
     # assignment: "04-homework"
     bg: 2
 
