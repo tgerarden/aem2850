@@ -38,12 +38,19 @@ We will work with multiple data sets:
 <!--- Please leave the code above unchanged. Questions start from here. --->
 
 {{< pagebreak >}}
-## 1. Import `tidy_txhouse.csv` and `tidy_txpop.csv`, and create a data frame of sales, price, and population for all the city-year pairs that appear in **both** `tidy_txpop` and `tidy_txhouse`. Of these, which city had the most sales per capita in 2010? 
+## 1. Import `tidy_txhouse.csv` and `tidy_txpop.csv`, and create a data frame of sales, price, and population for all the city-year pairs that appear in **both** `tidy_txpop` and `tidy_txhouse`. Of these, which city had the most sales per capita in 2010?
+<!-- Tip: By using `pull` to get just the city name and assigning it to `most_spc`, we can embed the answer in text rather than simply printing a data frame. -->
 
 ```{r echo = TRUE}
 tidy_txhouse <- _____(_____)
+
 tidy_txpop <- _____(_____)
-most_spc <- inner_join(_____, _____, join_by(_____, _____)) |> 
+
+most_spc <- inner_join(
+  _____, 
+  _____, 
+  join_by(_____, _____)
+) |> 
   filter(_____ == _____) |> 
   mutate(sales_per_capita = _____ / _____) |> 
   slice_max(_____) |> 
@@ -53,7 +60,7 @@ The city with the most sales per capita in 2010 was `r most_spc`.
 
 
 {{< pagebreak >}}
-## 2. How many cities does `tidy_txhouse` include? How many cities does `tidy_txpop` include? Print those cities that are in `tidy_txhouse` but not included in `tidy_txpop`.
+## 2. How many different cities does `tidy_txhouse` include? How many cities does `tidy_txpop` include? Use a join command to print a data frame containing the cities that are in `tidy_txhouse` but not included in `tidy_txpop`.
 
 ``` {r echo = TRUE}
 tx_house_city <- _____ |> 
@@ -68,7 +75,11 @@ tx_pop_city <- _____|>
 
 The following cities are in `tidy_txhouse` but not `tidy_txpop`:
 ``` {r echo = TRUE}
-_____(_____, _____, join_by(_____))
+_____(
+  _____, 
+  _____, 
+  join_by(_____)
+)
 ```
 
 
@@ -76,21 +87,29 @@ _____(_____, _____, join_by(_____))
 ## 3. Calculate the average housing price for each of the cities that are in `tidy_txhouse` and in `tidy_txpop` over the period 2010 through 2012 (inclusive). Which city has the highest average housing price? Which city has the lowest average housing price?
 
 ``` {r echo = TRUE}
-highest_hp <- _____(tidy_txhouse, tx_pop_city, join_by(city)) |> 
+highest_price_city <- _____(
+  tidy_txhouse, 
+  tx_pop_city, 
+  join_by(city)
+) |> 
   _____(_____ & _____) |> 
   group_by(_____) |> 
   _____(mean_price = _____(price, na.rm = T)) |> 
   filter(mean_price == _____(mean_price))
 
-lowest_hp <- _____(tidy_txhouse, tx_pop_city, _____(city)) |> 
+lowest_price_city <- _____(
+  tidy_txhouse, 
+  tx_pop_city, 
+  _____(city)
+) |> 
   _____(_____ & _____) |> 
   _____(city) |> 
   _____(mean_price = _____(_____, _____ = T)) |> 
   _____(_____ == _____(_____))
 ```  
-`r highest_hp$city` has the highest housing price.
+`r highest_price_city |> pull(city)` has the highest housing price.
 
-`r lowest_hp$city` has the lowest housing price.
+`r lowest_price_city |> pull(city)` has the lowest housing price.
 
 
 {{< pagebreak >}}
@@ -101,13 +120,21 @@ lowest_hp <- _____(tidy_txhouse, tx_pop_city, _____(city)) |>
 tx_cities <- _____(_____) |> 
   filter(state == _____)
 
-highest_hp_county <- _____(_____, tx_cities, join_by(_____))
+highest_price_county <- _____(
+  _____, 
+  tx_cities, 
+  join_by(_____)
+)
 
-lowest_hp_county <- _____(lowest_hp, _____, _____(_____))
+lowest_price_county <- _____(
+  lowest_price_city, 
+  _____, 
+  _____(_____)
+)
 ```
-`r highest_hp$city` is in `r highest_hp_county$county_name` county.
+`r highest_price_city |> pull(city)` is in `r highest_price_county |> pull(county_name)` County.
 
-`r lowest_hp$city` is in `r lowest_hp_county$county_name` county.
+`r lowest_price_city |> pull(city)` is in `r lowest_price_county |> pull(county_name)` County.
 
 
 {{< pagebreak >}}
@@ -125,7 +152,7 @@ txcounty_wage <- us_county_wage |>
     cols = area_title, 
     delim = "_____", 
     names = c("_____", "_____"),
-    too_few = "align_end" # this arg specifies how to deal with cases w/ no delimiter (DC)
+    too_few = "align_end" # how to deal with cases w/ no delimiter (DC)
   ) |> 
   filter(_____ == "Texas")
 
@@ -133,17 +160,17 @@ highest_county_pay <- txcounty_wage |>
   semi_join(_____, by = join_by(county == county_name))
 
 lowest_county_pay <- _____ |> 
-  _____(lowest_hp_county, by = _____(_____ == _____))
+  _____(lowest_price_county, by = _____(_____ == _____))
 ```
 There are `r count(txcounty_wage)` Texas counties in the QCEW data.
 
-The annual pay for `r highest_hp_county$county_name` County is $`r format(highest_county_pay$avg_annual_pay, big.mark = ",")`.
+The average annual pay for `r highest_price_county |> pull(county_name)` County is $`r format(highest_county_pay |> pull(avg_annual_pay), big.mark = ",")`.
 
-The annual pay for `r lowest_hp_county$county_name` County is $`r format(lowest_county_pay$avg_annual_pay, big.mark = ",")`.
+The average annual pay for `r lowest_price_county |> pull(county_name)` County is $`r format(lowest_county_pay |> pull(avg_annual_pay), big.mark = ",")`.
 
 
 {{< pagebreak >}}
-## 6. Now let's import the data contained in `industry_wage_2021.csv`, which records the US average employment and wage by industry in 2021. Select `area_fips`, `own_code`, `industry_code`, `agglvl_code`, `size_code`, and `avg_annual_pay`. First look at NAICS2 industries, which are in rows indicated by the logical variable `naics2`. Join the wage data with information contained in `industry-titles.csv` so you know what the industry codes mean. Which of those industries have an average annual pay higher than $100,000?
+## 6. Now let's import the data contained in `industry_wage_2021.csv`, which records the US average employment and wage by industry in 2021. First look at NAICS2 industries, which are in rows indicated by the logical variable `naics2`. Join the wage data with information contained in `industry-titles.csv` so you know what the industry codes mean. Which of those industries have an average annual pay higher than $100,000?
 <!-- Tip: Print (output) just the industry titles for those industries as a data frame or vector. -->
 
 ```{r echo = TRUE}
@@ -152,27 +179,19 @@ _____
 
 
 {{< pagebreak >}}
-## 7. Mutate a new variable `wage_bin` indicating the level of pay by industry. Fill that new variable with ">120k" for rows with an industry annual pay greater than $120,000; "90k-120k" for $90,000-120,000; "60k-90k" for $60,000-90,000; and "0k-60k" for lower than $60,000. How many NAICS2 industries are there for each wage bin?
-
-```{r echo = TRUE}
-ind_wage |> 
-  filter(_____) |> 
-  mutate(wage_bin = case_when(
-    avg_annual_pay > _____ ~ ">120k",
-    _____ > _____  ~ "90k-120k",
-    _____ > _____  ~ "60k-90k",
-    _____ <= _____ ~ "0k-60k",
-  )) |> 
-  count(_____)
-```
-
-
-{{< pagebreak >}}
-## 8. Let's zoom in to the finance and insurance industry and focus on NAICS6 industries within it. What is the highest annual pay? Which industry is it? *Important instructions for this learning exercise:* When doing this, first use `ifelse` to generate a new variable `highest_wage` that equals `TRUE` for this industry, and `FALSE` otherwise, and then use it to filter the data to find the relevant industry (this is good practice even though it isn't the simplest way to answer the question!).
-<!-- Tip: We provided the columns `naics6` and `finance_and_insurance` to help you filter the data to get relevant rows for this problem. When looking for the industry with the highest annual pay, keep in mind that the largest number in a set of numbers is also known as the max. ;) -->
+## 7. Create a new variable `wage_bin` indicating the level of pay by industry. Fill that new variable with ">120k" for rows with an industry annual pay greater than $120,000; "90k-120k" for $90,000-120,000; "60k-90k" for $60,000-90,000; and "0k-60k" for lower than $60,000. How many NAICS2 industries are there for each wage bin?
 
 ```{r echo = TRUE}
 _____
 ```
-The highest annual pay in the finance and insurance industry is for the `r highest_fin_wage$industry_title` industry, where the average annual pay is $`r format(highest_fin_wage$avg_annual_pay, big.mark = ",")`.
+
+
+{{< pagebreak >}}
+## 8. Let's zoom in on NAICS6 industries within the broader finance and insurance industry, and find the one with the highest annual pay. First use filter to get the rows that correspond to that subgroup. Next, use `ifelse` to generate a new variable `highest_wage` that equals `TRUE` for the industry with the highest annual pay and `FALSE` otherwise. Use `highest_wage` to filter the data. Finally, join the data frame with `industry_titles` to get the industry title. Assign the resuling data frame to `highest_fin_wage`. (These steps are good practice even though they aren't the simplest way to answer the question!). Which industry has the highest annual pay?
+<!-- Tip: We provided the columns `naics6` and `finance_and_insurance` to help you filter the data to get relevant rows for this problem. -->
+
+```{r echo = TRUE}
+_____
+```
+The highest annual pay in the finance and insurance industry is for the `r highest_fin_wage |> pull(industry_title)` industry, where the average annual pay is $`r format(highest_fin_wage |> pull(avg_annual_pay), big.mark = ",")`.
 
