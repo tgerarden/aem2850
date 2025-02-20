@@ -38,7 +38,7 @@ lessons:
   - title: '<span class="content-title">Strings and regular expressions <br> *February break: no class on Feb 18*</span>'
     session: "Session 5"
     date: "Week 5"
-    # content: "05-content"
+    content: "05-content"
     # example: "05-example"
     # assignment: "05-homework"
     bg: 1

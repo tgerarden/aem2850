@@ -68,11 +68,14 @@ Acknowledgements:
 
 # Announcements
 
-No lab due next Monday (February break)
+Welcome back -- I hope you had a nice February break!
 
-Prelim 1 will be next Thursday, February 29 in class
+Homework - Week 4 is due next Monday
+
+Prelim 1 will be next Thursday, February 27 in class
   - Will cover everything so far **including this week's material**
-  - We will provide more guidance Thursday and via canvas
+    - This includes the example from Tuesday, February 25
+  - We will provide more guidance via canvas
   - Please contact me and SDS **as soon as possible** if you are eligible for testing accommodations and are not yet registered
 
 Questions before we get started?
@@ -82,151 +85,13 @@ Questions before we get started?
 
 # Plan for today
 
-[Prologue: clarifying group operations](#prologue)
+<!-- [Prologue: clarifying group operations](#prologue) -->
 
 [Working with strings in R](#working-with-strings)
 
 [Regular expressions](#regex)
 
 [Working with regular expressions in R](#working-with-regex)
-
-
----
-class: inverse, center, middle
-name: prologue
-
-# Prologue
-
----
-
-# Group operations
-
-Lab-04 included the following question:
-
-> **3. Calculate the average housing price for each of the cities that are in `tidy_txhouse` and in `tidy_txpop` over the period 2010 through 2012. Which city has the highest average housing price? Which city has the lowest average housing price?**
-
---
-
-This is a good example question to provide more detail on `group_by()` and `ungroup()`, which I mentioned in passing during week 2
-
-```{r, echo=FALSE}
-tidy_txhouse <- read_csv("data/05-slides/tidy_txhouse.csv", show_col_types = FALSE)
-tx_pop_city <- read_csv("data/05-slides/tidy_txpop.csv", show_col_types = FALSE) |> 
-  distinct(city)
-```
-
----
-
-# Reminder: dplyr::group_by
-
-`summarize` is particularly useful in combination with `group_by`:
-
-```{r}
-semi_join(tidy_txhouse, tx_pop_city) |>   # for cities in tidy_txhouse and tx_pop_city
-  filter(2010 <= year & year <= 2012) |>  # for years 2010-2012
-  group_by(city) |>                       # for each city #<< 
-  summarize(mean_price = mean(price))     # compute the mean price #<<
-```
-
----
-
-# Groups are persistent (sort of)
-
-.pull-left[
-```{r, highlight.output = c(2, 5, 6, 7)}
-semi_join(tidy_txhouse, tx_pop_city) |>
-  filter(2010 <= year & year <= 2012) |>
-  group_by(city) |> 
-  print(n = 5)
-```
-]
-
---
-
-.pull-right[
-```{r, highlight.output = 4}
-semi_join(tidy_txhouse, tx_pop_city) |>
-  filter(2010 <= year & year <= 2012) |>
-  group_by(city) |> 
-  summarize(mean_price = mean(price)) |> 
-  print(n = 5)
-```
-No groups?!
-]
-
----
-
-# Groups are persistent (sort of)
-
-.pull-left[
-`summarize()` drops the last group variable, so the output is not grouped by `city`
-
-By contrast `mutate()` does not unroll group variables unless you explicitly ask it to
-]
-
-.pull-right[
-```{r, highlight.output = c(2, 5, 6, 7)}
-semi_join(tidy_txhouse, tx_pop_city) |>
-  filter(2010 <= year & year <= 2012) |>
-  group_by(city) |> 
-  mutate(mean_price = mean(price))
-```
-]
-
----
-
-# Groups affect filter operations!
-
-.pull-left[
-```{r}
-semi_join(tidy_txhouse, tx_pop_city) |>
-  filter(2010 <= year & year <= 2012) |>
-  group_by(city) |> 
-  summarize(mean_price = mean(price)) |> #<<
-  filter(mean_price == max(mean_price)) #<<
-```
-
-Looks good!
-]
-
---
-
-.pull-right[
-```{r, highlight.output = 2}
-semi_join(tidy_txhouse, tx_pop_city) |>
-  filter(2010 <= year & year <= 2012) |>
-  group_by(city) |> 
-  mutate(mean_price = mean(price)) |> #<<
-  filter(mean_price == max(mean_price)) |>  #<<
-  head(5)
-```
-
-What went wrong?
-]
-
----
-
-# Groups affect filter operations!
-
-.pull-left[
-One way to get around this is to use `ungroup()` or `group_by()` with no arguments
-
-Now we get Austin and only Austin
-
-But we still get multiple rows, when we only need/want one
-]
-
-.pull-left[
-```{r, highlight.output = 2}
-semi_join(tidy_txhouse, tx_pop_city) |>
-  filter(2010 <= year & year <= 2012) |>
-  group_by(city) |> 
-  mutate(mean_price = mean(price)) |> 
-  ungroup() |> #<<
-  filter(mean_price == max(mean_price)) |> 
-  head(5)
-```
-]
 
 
 ---
@@ -244,6 +109,7 @@ name: working-with-strings
 flights |>
   select(carrier, tailnum, origin, dest)
 ```
+
 ```{r echo=FALSE, highlight.output = 3}
 # two separate code chunks just to focus on what matters (above),
 # and avoid confusion about this method to call object flights (below)
@@ -253,14 +119,27 @@ nycflights13::flights |>
 ]
 
 .pull-right[
+```{r, eval=FALSE, highlight.output = 3}
+read_csv("homework-1-survey.csv") |> 
+  select(Concentration)
+```
+
+```{r, echo=FALSE, highlight.output = 3}
+# customize slightly to be representative
+read_csv("data/survey-responses/homework-1-survey.csv") |> 
+  select(Concentration) |> 
+  arrange(desc(row_number())) |> 
+  filter(row_number()!=1)
+```
+
 ```{r highlight.output = 3, include=FALSE}
 read_csv("data/our-companies.csv") |> 
   select(name)
 ```
 
-```{r highlight.output = 3}
-tx_pop_city |> 
-  select(city)
+```{r highlight.output = 3, include=FALSE}
+# tx_pop_city |> 
+#   select(city)
 ```
 
 ]
@@ -367,16 +246,40 @@ These functions are locale dependent (e.g., "en_GB" vs "en_US")
 
 --
 
-We have seen `c()` combine arguments into a vector or list
+We have seen `c` combine arguments to make a **longer** vector or list:
 
-Similarly, `str_c()` combines arguments into a character vector:
+.pull-left[
 ```{r}
-str_c("a", "b", "c", "1", "2", "3")
+abc <- c("a", "b", "c")
+c(abc, "s")
 ```
+]
 
-Here, it combined six letters and numbers into a single string
+.pull-right[
+```{r, strip.white=FALSE}
 
-But we can also use it within data frames to combine strings at scale
+c(abc, abc)
+```
+]
+
+--
+
+By contrast, `str_c` combines arguments to make a **wider** character vector:
+.pull-left[
+```{r}
+str_c(abc, "s")
+```
+]
+
+.pull-right[
+```{r}
+str_c(abc, abc)
+```
+]
+
+--
+
+We can use `str_c` within data frames to combine strings at scale
 
 
 ---
@@ -392,30 +295,30 @@ theoffice |> slice_head(n = 1) |>
 
 ```{r, eval=FALSE}
 theoffice |> slice_head(n = 1) |> 
-    transmute(line = str_c(character, " said: ", text)) # mutate and keep only `line` #<<
+    mutate(line = str_c(character, " said: ", text), .keep = "none") # mutate and keep only `line` #<<
 ```
 
 --
 
 ```{r, echo=FALSE}
 theoffice |> slice_head(n = 1) |> 
-    transmute(line = str_c(character, " said: ", text)) # mutate and keep only `line` #<<
+    mutate(line = str_c(character, " said: ", text), .keep = "none") # mutate and keep only `line` #<<
 ```
 
 ---
 
 # 3) str_c()
 
-`str_c()` will automatically recycle fixed arguments like **" said: "** that are shorter than `character` and `text`:
+`str_c` will automatically recycle fixed arguments like `" said: "` that are shorter than `character` and `text`:
 
 ```{r}
 theoffice |> slice_head(n = 3) |> 
-    transmute(line = str_c(character, " said: ", text))
+    mutate(line = str_c(character, " said: ", text), .keep = "none")
 ```
 
 --
 
-`str_c()` and `str_glue()` work well with `mutate()` and `transmute()` because their output is the same length as their inputs
+`str_c()` and `str_glue()` work well with `mutate()` because their output is the same length as their inputs
 
 ---
 
@@ -425,7 +328,7 @@ theoffice |> slice_head(n = 3) |>
 
 ```{r}
 theoffice |> slice_head(n = 3) |> 
-    transmute(line = str_glue("{character} said: {text}")) # note the different syntax #<<
+  mutate(line = str_glue("{character} said: {text}"), .keep = "none") # note the different syntax #<<
 ```
 
 Items inside `{}` are evaluated as if they are outside the quotes
@@ -468,13 +371,35 @@ names
 
 The simplest patterns consist of literal characters
 
-.pull-left[
-```{r, eval=FALSE}
+--
+
+```{r}
 names
 ```
 
-```{r, echo=FALSE}
-print(names, width = 50)
+`str_view` is a handy classroom utility for class to see how patterns match:
+
+```{r}
+str_view(names, pattern = "J")
+```
+
+
+---
+
+# Pattern basics
+
+Literal pattern matches are case-sensitive by default
+
+--
+
+```{r}
+names
+```
+
+.pull-left[
+What do you think this will return?
+```{r, eval=FALSE}
+str_view(names, pattern = "M")
 ```
 ]
 
@@ -482,22 +407,25 @@ print(names, width = 50)
 What do you think this will return?
 
 ```{r, eval=FALSE}
-str_view(names, pattern = "J")
+str_view(names, pattern = "m")
 ```
 ]
 
 --
 
 .pull-left[
-`str_view()` is a handy utility to see how patterns match
+```{r, echo=FALSE}
+str_view(names, pattern = "M")
+```
 ]
 
 .pull-right[
 ```{r, echo=FALSE}
-str_view(names, pattern = "J")
+str_view(names, pattern = "m")
 ```
-Literal pattern matches are case-sensitive by default
 ]
+
+Note that these matches depend on **patterns**, not position
 
 
 ---
@@ -670,7 +598,7 @@ str_view(names, "S.*|O.*")
 See [Chapter 15 of R4DS (2e)](https://r4ds.hadley.nz/regexps.html#pattern-details) for more on:
 - **escaping**: matching meta-characters as if they were literal strings
 - **anchors**: match the start or end of a strong
-- **character classes** (continued)
+- **character classes**: (continued)
 - **quantifiers** (continued)
 - **operator precedence**: parentheses, etc.
 - **grouping**: back references, etc.
@@ -692,28 +620,55 @@ name: working-with-regex
 --
 
 .pull-left[
-```{r}
+```{r, echo=FALSE}
 first_4_characters <- theoffice |> 
   distinct(character) |> 
   slice_head(n = 4) |> 
   pull(character)
+```
+
+```{r}
 first_4_characters
 ```
 ]
 
---
-
 .pull-right[
 ```{r}
 str_detect(first_4_characters, "Dwight")
-
-str_detect(first_4_characters, "a")
 ```
 ]
 
 --
 
-<br>
+What do you think these statements will return?
+
+.pull-left[
+```{r, eval=FALSE}
+str_detect(first_4_characters, "a")
+```
+]
+
+.pull-right[
+```{r, eval=FALSE}
+str_detect(first_4_characters, "[aeiou]")
+```
+]
+
+--
+
+.pull-left[
+```{r, echo=FALSE}
+str_detect(first_4_characters, "a")
+```
+]
+
+.pull-right[
+```{r, echo=FALSE}
+str_detect(first_4_characters, "[aeiou]")
+```
+]
+
+--
 
 How could we fit this into our current workflow?
 
@@ -749,7 +704,7 @@ theoffice |> select(season, episode, character, text) |>
 
 You could use multiple calls to `str_detect`, or use alternation:
 
-```{r highlight.output = c(6, 10)}
+```{r}
 theoffice |> select(season, episode, character, text) |> 
   filter(str_detect(text, 
                     "sale|Sale")) # look for sale OR Sale #<<
@@ -771,12 +726,12 @@ theoffice |> select(season, episode, character, text) |>
 
 # 4) str_detect()
 
-Or use `regex()` to ignore all cases and control other pattern matching details
+Or use `regex` to ignore all cases and control other pattern matching details
 
-```{r}
+```{r highlight.output = c(1)}
 theoffice |> select(season, episode, character, text) |> 
   filter(str_detect(text, 
-                    regex("Sale", ignore_case = TRUE))) # ignore case #<<
+                    regex("sale", ignore_case = TRUE))) # ignore all cases #<<
 ```
 
 
@@ -803,7 +758,7 @@ theoffice |> select(season, episode, character, text) |>
 
 ```{r}
 theoffice |> 
-  filter(str_detect(text, regex("Sale", ignore_case = TRUE))) |> 
+  filter(str_detect(text, regex("sale", ignore_case = TRUE))) |> 
   count(character, sort = TRUE) #<<
 ```
 
@@ -836,7 +791,7 @@ theoffice |> select(character, text) |>
 
 # 5) str_count()
 
-`str_count()` can be used to count the number of matches in a string
+`str_count` can be used to count the number of matches in a string
 
 ```{r}
 theoffice |> 
@@ -870,7 +825,7 @@ Reminder: `[]` lets you match a set of characters; `^` inverts character class m
 
 # 6) str_replace()
 
-As the name suggests, `str_replace()` can be used to modify patterns in strings
+As the name suggests, `str_replace` can be used to modify patterns in strings
 
 ```{r}
 names
@@ -881,10 +836,18 @@ str_replace(names, "Dw", "Duhw") # jim's office pronunciation guide
 
 # 6) str_replace()
 
-`str_replace()` replaces the first match of a pattern
+`str_replace` replaces the first match of a pattern
 
-`str_replace_all()` replaces all matches of a pattern
+```{r}
+str_replace("Phyllis", "l", "!")
+```
 
-These functions pair naturally with `mutate()` just like `str_c()`, `str_glue()`, and `str_count()`
+`str_replace_all` replaces all matches of a pattern
+
+```{r}
+str_replace_all("Phyllis", "l", "!")
+```
+
+These pair naturally with `mutate` just like `str_c`, `str_glue`, and `str_count`
 
 <!-- https://r4ds.hadley.nz/regexps.html#replace-values -->
