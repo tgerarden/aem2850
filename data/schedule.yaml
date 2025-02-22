@@ -39,7 +39,7 @@ lessons:
     session: "Session 5"
     date: "Week 5"
     content: "05-content"
-    # example: "05-example"
+    example: "05-example"
     # assignment: "05-homework"
     bg: 1
 

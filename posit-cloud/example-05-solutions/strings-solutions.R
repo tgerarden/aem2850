@@ -43,13 +43,14 @@ amenities <- amenities |>
 
 # count the number of individual amenities using str_count()
 # assign it to a new variable count
-# one way to approximate this is by counting the commas (between each amenity)
+# approximate this by counting commas (between each amenity)
 # hint: how many commas are present if there is just one amenity?
 amenities <- amenities |>
   mutate(count = str_count(amenities, ",") + 1)
 
-# how similar are these measures? run the code below to plot count vs length
-# note: ggplot2 functions will not be on prelim 1!
+# how similar are these measures?
+# run the code below to plot count vs length
+# note: these ggplot functions will not be on prelim 1!
 amenities |>
   ggplot(aes(x = length, y = count)) +
   geom_point() +
@@ -67,11 +68,11 @@ amenities |>
 amenities |>
   filter(str_detect(amenities, "Wifi"))
 
-# now filter the data to find all listings with "Wifi" in any case using regex()
+# now filter to find all listings with "Wifi" in any case using regex()
 amenities |>
   filter(str_detect(amenities, regex("Wifi", ignore_case = TRUE)))
 
-# now do it by first creating a variable amenities_lower using str_to_lower(),
+# now do it by creating a variable amenities_lower using str_to_lower(),
 # and then use str_detect() to filter for "wifi"
 amenities |>
   mutate(amenities_lower = str_to_lower(amenities)) |>
@@ -110,13 +111,16 @@ amenities <- amenities |>
     has_wifi = str_detect(amenities, "Wifi|wifi")
   )
 
-# select has_wifi and has_parking, and pass them through the pipe to summarize_all(mean)
-# this will compute the share of listings with wifi, and the share with parking
+# select has_wifi and has_parking, and
+# pass them through the pipe to summarize_all(mean)
+# to compute the share of listings with each one
 amenities |>
   select(has_wifi, has_parking) |>
   summarize_all(mean)
 
-# what is the average review_scores_rating of listings with and without parking?
+# what is the average review_scores_rating of
+# listings with and without parking?
+# ignore NA values using "na.rm = TRUE" if needed
 amenities |>
   group_by(has_parking) |>
   summarize(mean_review = mean(review_scores_rating, na.rm = TRUE))
@@ -140,16 +144,17 @@ str_view(first_amenities)
 # what difference do you notice?
 
 
-# as it turns out, certain characters need special representations in strings
+# certain characters need special representations in strings
 # a good example is including single or double quotes in a string
-# this is problematic because we use these to define boundaries for strings!
-# try entering """ or ''' at the console, you will see that R will get confused
-# it expects you to finish the second string; you can hit Escape or ctrl-c to get unstuck
+# this is problematic since they define boundaries for strings!
+# if you enter """ or ''' at the console, R will get confused
+# because it expects you to finish the second string
+# (you can hit Escape or ctrl-c to get unstuck)
 
 
 # so things like this won't work:
 str_view(""The worst thing about prison was the dementors," said Michael Scott.")
-# if you want a literal double quote within a string, you can "escape" it using \:
+# to get a literal double quote within a string, "escape" it using \:
 str_view("\"The worst thing about prison was the dementors,\" said Michael Scott.")
 # or you can mix ' and " as follows:
 str_view('"The worst thing about prison was the dementors," said Michael Scott.')
@@ -159,11 +164,13 @@ str_view('"The worst thing about prison was the dementors," said Michael Scott.'
 
 
 # 2.2 Anchors ----
-# anchors can be used to search for patterns in specific locations within a string
+# anchors can be used to search for patterns in specific positions
 
-# say you want to analyze whether local airbnb landlords have better reviews that absentee landlords
-# use filter() and str_detect() to find listings where host_location includes "New York"
-# pass that through the pipe to count() to count how many there are
+# suppose you want to analyze whether local airbnb landlords
+#   have better reviews that absentee landlords
+# use filter() and str_detect() to find listings where
+#   host_location includes "New York" and pass them
+#   the pipe to count() to count how many there are
 listings |>
   filter(str_detect(host_location, "New York")) |>
   count()
@@ -174,14 +181,17 @@ listings |>
   select(contains("host"))
 
 # no. we want to find hosts in NYC, not just NYS!
-# we could anchor the search for "New York" at the beginning of host_location
+# we could anchor the search for "New York"
+#   at the beginning of host_location
 # ^ can be used to match the start of the string (e.g., "^New York")
-# do that to see how many listings have host_locations that start with "New York"
+# do that to see how many listings have
+#   host_locations that start with "New York"
 listings |>
   filter(str_detect(host_location, "^New York")) |>
   count()
 
-# similarly, you can search for things at the end of a string using $ (e.g., "United States$")
+# similarly, use $ to match patterns at the end of a string
+# find host_locations that end with "United States"
 listings |>
   filter(str_detect(host_location, "United States$")) |>
   count()
@@ -189,46 +199,56 @@ listings |>
 
 # 2.3 Repetition ----
 
-# what if we want to search for strings with patterns that are not contiguous?
-# let's investigate this by looking at all the descriptions that include "bedroom"
+# what if we want to search for strings with
+#   patterns that are not contiguous?
+# let's investigate this by looking at all the
+#   descriptions that include "bedroom"
 descriptions <- listings |> select(description)
 descriptions |>
   filter(str_detect(description, "bedroom"))
 
-# copy and modify the code above to find descriptions that use "bed room"
+# copy and modify the code above to find
+#   descriptions that use "bed room"
 descriptions |>
   filter(str_detect(description, "bed room"))
 
-# the metacharacter . can be used to match any single character
-# copy and modify the code above to find descriptions that use "bed" and "room"
-# separated by any 1 character (including a space)
+# the metacharacter . will match any single character
+# copy and modify the code above to match "bed" and "room"
+#   separated by any 1 character (including a space)
 descriptions |>
   filter(str_detect(description, "bed.room"))
 
-# the metacharacter ? can be used to match a character 0 or 1 times
-# this can be combined with other characters, or with metacharacters like .
-# copy and modify the code above to find descriptions that include "bed" and "room"
-# separated by any 0 or 1 characters
+# the metacharacter ? will match a character 0 or 1 times
+# this can be combined with other characters
+#   or with metacharacters like .
+# copy and modify the code above to find
+#   descriptions that include "bed" and "room"
+#   separated by any 0 or 1 characters
 # how is the result different from when you only used . above?
 descriptions |>
   filter(str_detect(description, "bed.?room"))
 
-# the metacharacter * can be used to match a character 0 or more times
-# this can be combined with other characters, or with metacharacters like .
-# copy and modify the code above to find descriptions that include "bed" and "room"
-# separated by any 0 or more characters
+# the metacharacter * will match a character 0 or more times
+# this can be combined with other characters
+#   or with metacharacters like .
+# copy and modify the code above to find
+#   descriptions that include "bed" and "room"
+#   separated by any 0 or more characters
 # how is the result different from your results above?
 descriptions |>
   filter(str_detect(description, "bed.*room"))
 
 
 # 3. Analyzing more strings ----
-# identify listings that have shared bathrooms vs not shared bathrooms
-# compute the average price and review_scores_rating for each group
-# note: you could use parse_number() to convert the string price to a number
-#   or: use str_replace() and as.numeric() to clean then convert strings to numbers
-# tip: remove missing reviews and prices to compare apples to apples,
-#   and to ensure the listings we are using for comparison are active
+# - match the pattern "share" (regardless of case) to
+#   find listings with shared vs not shared bathrooms
+# - convert prices from strings to numbers by
+#   - removing dollar signs: \\$
+#   - removing commas: ,
+#   - using as.numeric() to coerce
+# - remove cases with missing reviews OR prices
+# - for each group, compute the average
+#   price and review_scores_rating
 bath_data <- listings |>
   filter(!is.na(bathrooms_text)) |>
   mutate(shared_bath =
@@ -236,14 +256,15 @@ bath_data <- listings |>
              bathrooms_text,
              regex("share", ignore_case = TRUE)
              ),
-         price = parse_number(price) # or could use 3 lines below
-         # price = str_replace(price, "\\$", ""), # could also use str_remove
-         # price = str_replace(price, ",", ""), # could also use str_remove
-         # price = as.numeric(price)
+         price = str_replace(price, "\\$", ""), # or use str_remove
+         price = str_replace(price, ",", ""), # or use str_remove
+         price = as.numeric(price)
+         # or, we could simply use parse_number:
+         # price = parse_number(price)
   )
 
 bath_data |>
-  filter(!is.na(review_scores_rating) & !is.na(price)) |> # compare apples to apples
+  filter(!is.na(review_scores_rating) & !is.na(price)) |>
   group_by(shared_bath) |>
   summarize(
     price = mean(price),

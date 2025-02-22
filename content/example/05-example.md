@@ -1,0 +1,40 @@
+---
+title: "Strings and regular expressions"
+linktitle: "Strings and regular expressions"
+date: "2025-02-21 22:33:58"
+output:
+  blogdown::html_page:
+    keep_md: true # do this to save results in .md file
+    toc: false
+    fig_caption: false
+menu:
+  examples:
+    parent: Examples
+    weight: 1
+type: docs
+weight: 1
+editor_options:
+  chunk_output_type: console
+---
+
+## Announcements
+- Office hours
+  - No office hours during February break
+  - We will hold office hours Wednesday, Feb 28 (see canvas)
+- Prelim 1
+  - Will be similar in structure to homework assignments, though slightly more open-ended questions and less direct guidance
+  - Prelim will be distributed on Posit Cloud at class start time
+  - Complete and submit via canvas by class end time (penalties may apply)
+  - Submit **both** the .pdf output **and** all your code within your .qmd file (self-contained)
+
+
+## Plan for today
+- Questions? :raising_hand_woman:
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-05` in our course workspace
+- Work through `strings-practice.R` in `example-05`
+- **Solutions** will be posted after class
+
+
+## Cheatsheets
+
+[Click here to download the `stringr` cheatsheet](https://rstudio.github.io/cheatsheets/strings.pdf)

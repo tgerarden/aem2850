@@ -22,7 +22,7 @@
   padding: 0 0 0 2.5%;
 }
 
-.pull-right-3 ~ * {
+.pull-right-3 + * {
   clear: both;
 }
 
