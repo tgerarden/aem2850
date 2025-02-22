@@ -1,7 +1,7 @@
 ---
 title: "Strings and regular expressions"
 linktitle: "Strings and regular expressions"
-date: "2025-02-21 22:33:58"
+date: "2025-02-21 22:50:59"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -19,8 +19,7 @@ editor_options:
 
 ## Announcements
 - Office hours
-  - No office hours during February break
-  - We will hold office hours Wednesday, Feb 28 (see canvas)
+  - TAs will hold office hours Wednesday, Feb 26 (see canvas)
 - Prelim 1
   - Will be similar in structure to homework assignments, though slightly more open-ended questions and less direct guidance
   - Prelim will be distributed on Posit Cloud at class start time
