@@ -1,4 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 08 Feb 2025 09:45:30 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Joins and logic</title><link>https://aem2850.toddgerarden.com/example/04-example/</link><pubDate>Sat, 08 Feb 2025 09:45:30 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/04-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 21 Feb 2025 22:33:58 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Strings and regular expressions</title><link>https://aem2850.toddgerarden.com/example/05-example/</link><pubDate>Fri, 21 Feb 2025 22:33:58 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/05-example/</guid><description>&lt;h2 id="announcements">Announcements&lt;/h2>
+&lt;ul>
+&lt;li>Office hours
+&lt;ul>
+&lt;li>No office hours during February break&lt;/li>
+&lt;li>We will hold office hours Wednesday, Feb 28 (see canvas)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Prelim 1
+&lt;ul>
+&lt;li>Will be similar in structure to homework assignments, though slightly more open-ended questions and less direct guidance&lt;/li>
+&lt;li>Prelim will be distributed on Posit Cloud at class start time&lt;/li>
+&lt;li>Complete and submit via canvas by class end time (penalties may apply)&lt;/li>
+&lt;li>Submit &lt;strong>both&lt;/strong> the .pdf output &lt;strong>and&lt;/strong> all your code within your .qmd file (self-contained)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
+&lt;li>Questions? 🙋‍♀️&lt;/li>
+&lt;li>Navigate to &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a> and open the project &lt;code>example-05&lt;/code> in our course workspace&lt;/li>
+&lt;li>Work through &lt;code>strings-practice.R&lt;/code> in &lt;code>example-05&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Solutions&lt;/strong> will be posted after class&lt;/li>
+&lt;/ul>
+&lt;h2 id="cheatsheets">Cheatsheets&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.github.io/cheatsheets/strings.pdf" target="_blank" rel="noopener">Click here to download the &lt;code>stringr&lt;/code> cheatsheet&lt;/a>&lt;/p></description></item><item><title>Joins and logic</title><link>https://aem2850.toddgerarden.com/example/04-example/</link><pubDate>Sat, 08 Feb 2025 09:45:30 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/04-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
 &lt;li>Questions? 🙋‍♀️&lt;/li>
 &lt;li>Navigate to &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a> and open the project &lt;code>example-04-X&lt;/code> in our course workspace&lt;/li>

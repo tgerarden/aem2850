@@ -291,7 +291,7 @@ These functions are locale dependent (e.g., "en_GB" vs "en_US")
 
 We have seen `c` combine arguments to make a **longer** vector or list:
 
-.pull-left[
+.pull-left-3[
 
 ``` r
 abc &lt;- c("a", "b", "c")
@@ -303,7 +303,7 @@ c(abc, "s")
 ```
 ]
 
-.pull-right[
+.pull-middle-3[
 
 ``` r
 
@@ -315,10 +315,29 @@ c(abc, abc)
 ```
 ]
 
+.pull-right-3[
+
+``` r
+
+c(abc, NA)
+```
+
+```
+## [1] "a" "b" "c" NA
+```
+]
+
 --
 
 By contrast, `str_c` combines arguments to make a **wider** character vector:
-.pull-left[
+
+&lt;style type="text/css"&gt;
+/* Fix alignment of second set of columns */
+.pull-right-3 ~ * { clear: unset; }
+.pull-right-3 + * { clear: both; }
+&lt;/style&gt;
+
+.pull-left-3[
 
 ``` r
 str_c(abc, "s")
@@ -329,7 +348,7 @@ str_c(abc, "s")
 ```
 ]
 
-.pull-right[
+.pull-middle-3[
 
 ``` r
 str_c(abc, abc)
@@ -337,6 +356,17 @@ str_c(abc, abc)
 
 ```
 ## [1] "aa" "bb" "cc"
+```
+]
+
+.pull-right-3[
+
+``` r
+str_c(abc, NA)
+```
+
+```
+## [1] NA NA NA
 ```
 ]
 
@@ -542,6 +572,8 @@ str_view(names, pattern = "m")
 ```
 ]
 
+--
+
 .pull-right[
 
 ```
@@ -549,6 +581,8 @@ str_view(names, pattern = "m")
 ## [3] │ Pa&lt;m&gt;
 ```
 ]
+
+--
 
 Note that these matches depend on **patterns**, not position
 
@@ -837,6 +871,8 @@ str_detect(first_4_characters, "[aeiou]")
 ## [1]  TRUE FALSE  TRUE FALSE
 ```
 ]
+
+--
 
 .pull-right[
 
