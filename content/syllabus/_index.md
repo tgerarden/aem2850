@@ -146,9 +146,9 @@ Finally, there are some excellent tutorials on R available through [Posit Primer
 
 ### Generative Artificial Intelligence (GAI) policy
 
-Generative AI (GAI) tools are very powerful assistants for widely used programming languages like R.
+Generative AI (GAI) tools such as ChatGPT, Claude, and GitHub Copilot are very powerful assistants for widely used programming languages like R.
 
-You may use GAI tools in this course (e.g., ChatGPT, Claude, GitHub Copilot, etc.).
+You may use GAI tools in this course unless explicitly forbidden for a specific assignment.
 
 However, be aware of the limitations of GAI tools:
 
