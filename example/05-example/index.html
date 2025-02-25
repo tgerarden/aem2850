@@ -7,7 +7,7 @@
 <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
 <link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
 <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media=print onload="this.media='all'">
-<meta name=description content="Announcements  Office hours  TAs will hold office hours Wednesday, Feb 26 (see canvas)   Prelim 1  Will be similar in structure to homework assignments, though slightly more open-ended questions and less direct guidance Prelim will be distributed on Posit Cloud at class start time Complete and submit via canvas by class end time (penalties may apply) Submit both the .">
+<meta name=description content="Announcements  Office hours  TAs will hold office hours Wednesday, Feb 26 (see canvas)   Prelim 1  Will be similar in structure to homework assignments, though slightly more open-ended questions and less direct guidance We will not provide scaffolded code Prelim will be distributed on Posit Cloud at class start time Complete and submit via canvas by class end time (penalties may apply)   Instructions:  You must complete Prelim 1 in person in our assigned classroom during class Prelim 1 is open book and open internet, but do not communicate with classmates Do not use functions or other syntax that we have not explicitly covered in the course slides or in-class examples Do not use packages outside the tidyverse packages we have already loaded for you When done, upload BOTH your .">
 <link rel=alternate hreflang=en-us href=https://aem2850.toddgerarden.com/example/05-example/>
 <meta name=theme-color content="#B31B1B">
 <link rel=stylesheet href=/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css media=print onload="this.media='all'">
@@ -23,10 +23,10 @@
 <meta property="og:site_name" content="R for Business Analytics">
 <meta property="og:url" content="https://aem2850.toddgerarden.com/example/05-example/">
 <meta property="og:title" content="Strings and regular expressions | R for Business Analytics">
-<meta property="og:description" content="Announcements  Office hours  TAs will hold office hours Wednesday, Feb 26 (see canvas)   Prelim 1  Will be similar in structure to homework assignments, though slightly more open-ended questions and less direct guidance Prelim will be distributed on Posit Cloud at class start time Complete and submit via canvas by class end time (penalties may apply) Submit both the ."><meta property="og:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png">
+<meta property="og:description" content="Announcements  Office hours  TAs will hold office hours Wednesday, Feb 26 (see canvas)   Prelim 1  Will be similar in structure to homework assignments, though slightly more open-ended questions and less direct guidance We will not provide scaffolded code Prelim will be distributed on Posit Cloud at class start time Complete and submit via canvas by class end time (penalties may apply)   Instructions:  You must complete Prelim 1 in person in our assigned classroom during class Prelim 1 is open book and open internet, but do not communicate with classmates Do not use functions or other syntax that we have not explicitly covered in the course slides or in-class examples Do not use packages outside the tidyverse packages we have already loaded for you When done, upload BOTH your ."><meta property="og:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png">
 <meta property="twitter:image" content="https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
-<meta property="article:published_time" content="2025-02-21T22:50:59+00:00">
-<meta property="article:modified_time" content="2025-02-21T22:50:59+00:00">
+<meta property="article:published_time" content="2025-02-25T09:21:07+00:00">
+<meta property="article:modified_time" content="2025-02-25T09:21:07+00:00">
 <title>Strings and regular expressions | R for Business Analytics</title>
 </head>
 <body id=top data-spy=scroll data-offset=70 data-target=#TableOfContents class=page-wrapper data-wc-page-id=b8f42a1791bbea00781584f0e7202fb9>
@@ -81,7 +81,7 @@
 <h1>Strings and regular expressions</h1>
 <div class=article-metadata>
 <span class=article-date>
-Feb 21, 2025
+Feb 25, 2025
 </span>
 </div>
 </div>
@@ -97,11 +97,35 @@ Feb 21, 2025
 <li>Prelim 1
 <ul>
 <li>Will be similar in structure to homework assignments, though slightly more open-ended questions and less direct guidance</li>
+<li>We will not provide scaffolded code</li>
 <li>Prelim will be distributed on Posit Cloud at class start time</li>
 <li>Complete and submit via canvas by class end time (penalties may apply)</li>
-<li>Submit <strong>both</strong> the .pdf output <strong>and</strong> all your code within your .qmd file (self-contained)</li>
 </ul>
 </li>
+<li>Instructions:
+<ul>
+<li>You must complete Prelim 1 <strong>in person</strong> in our assigned classroom during class</li>
+<li>Prelim 1 is open book and open internet, but <strong>do not communicate with classmates</strong></li>
+<li>Do not use functions or other syntax that we have not explicitly covered in the course slides or in-class examples</li>
+<li>Do not use packages outside the <code>tidyverse</code> packages we have already loaded for you</li>
+<li>When done, <strong>upload BOTH your .qmd and .pdf files</strong> to <a href>canvas</a></li>
+</ul>
+</li>
+<li>Additional Notes:
+<ul>
+<li>The prelim is 100 points total, and each question states the number of points it is worth</li>
+<li><strong>Render early and often</strong> to avoid wasting time sorting out what code needs debugging</li>
+<li>We will give partial credit if your answers are incomplete, especially if you provide comments or text that describes the logic of what you <em>would</em> do if you had more time</li>
+<li>If you have trouble rendering your document, do not delete your work in progress code. That will make it hard for us to give you partial credit. Instead, you can:
+<ul>
+<li>Comment out problematic code using <code>#</code> or keyboard shortcut Cntrl/Cmd-Shift-C</li>
+<li>Replace <code>{r}</code> with <code>{r, eval = FALSE}</code> at the top of the relevant code chunk</li>
+<li>Ask questions!</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>GRADE PENALTIES AND/OR REFERRALS TO THE ACADEMIC INTEGRITY HEARING BOARD MAY APPLY</strong> if you fail to follow any instructions</li>
 </ul>
 <h2 id=plan-for-today>Plan for today</h2>
 <ul>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 21 Feb 2025 22:50:59 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Strings and regular expressions</title><link>https://aem2850.toddgerarden.com/example/05-example/</link><pubDate>Fri, 21 Feb 2025 22:50:59 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/05-example/</guid><description>&lt;h2 id="announcements">Announcements&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 25 Feb 2025 09:21:07 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Strings and regular expressions</title><link>https://aem2850.toddgerarden.com/example/05-example/</link><pubDate>Tue, 25 Feb 2025 09:21:07 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/05-example/</guid><description>&lt;h2 id="announcements">Announcements&lt;/h2>
 &lt;ul>
 &lt;li>Office hours
 &lt;ul>
@@ -8,11 +8,35 @@
 &lt;li>Prelim 1
 &lt;ul>
 &lt;li>Will be similar in structure to homework assignments, though slightly more open-ended questions and less direct guidance&lt;/li>
+&lt;li>We will not provide scaffolded code&lt;/li>
 &lt;li>Prelim will be distributed on Posit Cloud at class start time&lt;/li>
 &lt;li>Complete and submit via canvas by class end time (penalties may apply)&lt;/li>
-&lt;li>Submit &lt;strong>both&lt;/strong> the .pdf output &lt;strong>and&lt;/strong> all your code within your .qmd file (self-contained)&lt;/li>
 &lt;/ul>
 &lt;/li>
+&lt;li>Instructions:
+&lt;ul>
+&lt;li>You must complete Prelim 1 &lt;strong>in person&lt;/strong> in our assigned classroom during class&lt;/li>
+&lt;li>Prelim 1 is open book and open internet, but &lt;strong>do not communicate with classmates&lt;/strong>&lt;/li>
+&lt;li>Do not use functions or other syntax that we have not explicitly covered in the course slides or in-class examples&lt;/li>
+&lt;li>Do not use packages outside the &lt;code>tidyverse&lt;/code> packages we have already loaded for you&lt;/li>
+&lt;li>When done, &lt;strong>upload BOTH your .qmd and .pdf files&lt;/strong> to &lt;a href="">canvas&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Additional Notes:
+&lt;ul>
+&lt;li>The prelim is 100 points total, and each question states the number of points it is worth&lt;/li>
+&lt;li>&lt;strong>Render early and often&lt;/strong> to avoid wasting time sorting out what code needs debugging&lt;/li>
+&lt;li>We will give partial credit if your answers are incomplete, especially if you provide comments or text that describes the logic of what you &lt;em>would&lt;/em> do if you had more time&lt;/li>
+&lt;li>If you have trouble rendering your document, do not delete your work in progress code. That will make it hard for us to give you partial credit. Instead, you can:
+&lt;ul>
+&lt;li>Comment out problematic code using &lt;code>#&lt;/code> or keyboard shortcut Cntrl/Cmd-Shift-C&lt;/li>
+&lt;li>Replace &lt;code>{r}&lt;/code> with &lt;code>{r, eval = FALSE}&lt;/code> at the top of the relevant code chunk&lt;/li>
+&lt;li>Ask questions!&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>GRADE PENALTIES AND/OR REFERRALS TO THE ACADEMIC INTEGRITY HEARING BOARD MAY APPLY&lt;/strong> if you fail to follow any instructions&lt;/li>
 &lt;/ul>
 &lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
