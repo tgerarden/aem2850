@@ -1,7 +1,7 @@
 ---
 title: "Strings and regular expressions"
 linktitle: "Strings and regular expressions"
-date: "2025-02-21 22:50:59"
+date: "2025-02-25 09:21:07"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -22,10 +22,24 @@ editor_options:
   - TAs will hold office hours Wednesday, Feb 26 (see canvas)
 - Prelim 1
   - Will be similar in structure to homework assignments, though slightly more open-ended questions and less direct guidance
+  - We will not provide scaffolded code
   - Prelim will be distributed on Posit Cloud at class start time
   - Complete and submit via canvas by class end time (penalties may apply)
-  - Submit **both** the .pdf output **and** all your code within your .qmd file (self-contained)
-
+- Instructions:
+  - You must complete Prelim 1 **in person** in our assigned classroom during class
+  - Prelim 1 is open book and open internet, but **do not communicate with classmates**
+  - Do not use functions or other syntax that we have not explicitly covered in the course slides or in-class examples
+  - Do not use packages outside the `tidyverse` packages we have already loaded for you
+  - When done, **upload BOTH your .qmd and .pdf files** to [canvas]()
+- Additional Notes:
+  - The prelim is 100 points total, and each question states the number of points it is worth
+  - **Render early and often** to avoid wasting time sorting out what code needs debugging
+  - We will give partial credit if your answers are incomplete, especially if you provide comments or text that describes the logic of what you *would* do if you had more time
+  - If you have trouble rendering your document, do not delete your work in progress code. That will make it hard for us to give you partial credit. Instead, you can:
+    - Comment out problematic code using `#` or keyboard shortcut Cntrl/Cmd-Shift-C
+    - Replace `{r}` with `{r, eval = FALSE}` at the top of the relevant code chunk
+    - Ask questions!
+- **GRADE PENALTIES AND/OR REFERRALS TO THE ACADEMIC INTEGRITY HEARING BOARD MAY APPLY** if you fail to follow any instructions
 
 ## Plan for today
 - Questions? :raising_hand_woman:
