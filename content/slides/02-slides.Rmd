@@ -178,7 +178,7 @@ knitr::include_graphics("img/02/gggr-abc2.png")
 
 --
 
-I **strongly** encourage you to focus on learning essential syntax and then using these tools as helpers (or not at all), rather than relying on them as replacements for your own knowledge and function
+I **strongly** encourage you to focus on learning essential syntax and then, later, consider using these tools as helpers (or not at all), rather than relying on them as replacements for your own knowledge and function
 
 ---
 class: inverse, center, middle

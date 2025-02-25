@@ -1,7 +1,7 @@
 ---
 title: "Strings and regular expressions"
 linktitle: "Strings and regular expressions"
-date: "2025-02-25 09:21:07"
+date: "2025-02-25 09:47:15"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -30,7 +30,7 @@ editor_options:
   - Prelim 1 is open book and open internet, but **do not communicate with classmates**
   - Do not use functions or other syntax that we have not explicitly covered in the course slides or in-class examples
   - Do not use packages outside the `tidyverse` packages we have already loaded for you
-  - When done, **upload BOTH your .qmd and .pdf files** to [canvas]()
+  - When done, **upload BOTH your .qmd and .pdf files** to canvas
 - Additional Notes:
   - The prelim is 100 points total, and each question states the number of points it is worth
   - **Render early and often** to avoid wasting time sorting out what code needs debugging
@@ -39,7 +39,7 @@ editor_options:
     - Comment out problematic code using `#` or keyboard shortcut Cntrl/Cmd-Shift-C
     - Replace `{r}` with `{r, eval = FALSE}` at the top of the relevant code chunk
     - Ask questions!
-- **GRADE PENALTIES AND/OR REFERRALS TO THE ACADEMIC INTEGRITY HEARING BOARD MAY APPLY** if you fail to follow any instructions
+- **GRADE PENALTIES AND/OR REFERRALS TO THE ACADEMIC INTEGRITY HEARING BOARD MAY APPLY** if you fail to follow any instructions listed here or violate any policies listed on [the syllabus](/syllabus/)
 
 ## Plan for today
 - Questions? :raising_hand_woman:

@@ -35,6 +35,7 @@ Welcome to AEM 2850 / AEM 5850! I'd like to preface the syllabus with two points
 ### Class
 
 Classes meet Tuesdays and Thursdays:
+
 - Section 1: 10:10 - 11:25 in Warren 150
 - Section 2: 1:25 - 2:40 in Warren 101
 
@@ -147,7 +148,19 @@ Finally, there are some excellent tutorials on R available through [Posit Primer
 
 
 
+### Generative Artificial Intelligence (GAI) policy
 
+Generative AI (GAI) tools are very powerful assistants for widely used programming languages like R.
+
+You may use GAI tools in this course (e.g., ChatGPT, Claude, GitHub Copilot, etc.).
+
+However, be aware of the limitations of GAI tools:
+
+- GAI tools can be misleading
+- GAI tools often proposed code that does not function
+- GAI code can be difficult to debug if you do not understand the fundamentals
+
+I **strongly** encourage you to focus on learning essential syntax and then, later, consider using these tools as helpers (or not at all), rather than relying on them as replacements for your own knowledge and function.
 
 
 ## Success in this course
