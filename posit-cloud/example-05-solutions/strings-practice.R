@@ -99,12 +99,13 @@ amenities |>
 # 2. has_wifi that indicates whether amenities include the word "Wifi" or "wifi"
 ______
 
-# select has_wifi and has_parking, and
-# pass them through the pipe to summarize_all(mean)
+# use summarize to take the mean of each has_wifi and has_parking
 # to compute the share of listings with each one
 amenities |>
-  select(______, ______) |>
-  summarize_all(mean)
+  ______(
+    has_wifi = mean(______),
+    has_parking = mean(______)
+  )
 
 # what is the average review_scores_rating of
 # listings with and without parking?
@@ -148,35 +149,7 @@ str_view('"The worst thing about prison was the dementors," said Michael Scott.'
 # str_view() shows us what it "should" look like
 
 
-# 2.2 Anchors ----
-# anchors can be used to search for patterns in specific positions
-
-# suppose you want to analyze whether local airbnb landlords
-#   have better reviews that absentee landlords
-# use filter() and str_detect() to find listings where
-#   host_location includes "New York" and pass them
-#   the pipe to count() to count how many there are
-______
-
-# did that work?
-listings |>
-  filter(id==15789384) |>
-  select(contains("host"))
-
-# no. we want to find hosts in NYC, not just NYS!
-# we could anchor the search for "New York"
-#   at the beginning of host_location
-# ^ can be used to match the start of the string (e.g., "^New York")
-# do that to see how many listings have
-#   host_locations that start with "New York"
-______
-
-# similarly, use $ to match patterns at the end of a string
-# find host_locations that end with "United States"
-______
-
-
-# 2.3 Repetition ----
+# 2.2 Repetition ----
 
 # what if we want to search for strings with
 #   patterns that are not contiguous?
@@ -211,6 +184,34 @@ ______
 #   descriptions that include "bed" and "room"
 #   separated by any 0 or more characters
 # how is the result different from your results above?
+______
+
+
+# 2.3 Anchors ----
+# anchors can be used to search for patterns in specific positions
+
+# suppose you want to analyze whether local airbnb landlords
+#   have better reviews that absentee landlords
+# use filter() and str_detect() to find listings where
+#   host_location includes "New York" and pass them
+#   the pipe to count() to count how many there are
+______
+
+# did that work?
+listings |>
+  filter(id==15789384) |>
+  select(contains("host"))
+
+# no. we want to find hosts in NYC, not just NYS!
+# we could anchor the search for "New York"
+#   at the beginning of host_location
+# ^ can be used to match the start of the string (e.g., "^New York")
+# do that to see how many listings have
+#   host_locations that start with "New York"
+______
+
+# similarly, use $ to match patterns at the end of a string
+# find host_locations that end with "United States"
 ______
 
 

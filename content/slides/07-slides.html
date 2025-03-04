@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Mapping data to graphics and amounts</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Todd Gerarden" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/tdg-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+class: center middle main-title section-title-4
+
+# Mapping data to graphics and amounts
+
+.class-info[
+
+**Week 7**
+
+AEM 2850 / 5850 : R for Business Analytics&lt;br&gt;
+Cornell Dyson&lt;br&gt;
+Spring 2025
+
+Acknowledgements: 
+[Andrew Heiss](https://datavizm20.classes.andrewheiss.com), 
+[Claus Wilke](https://wilkelab.org/SDS375/)
+&lt;!-- [Grant McDermott](https://github.com/uo-ec607/lectures), --&gt;
+&lt;!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), --&gt;
+&lt;!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) --&gt;
+
+]
+
+---
+
+# Announcements
+
+This week marks the start of the data visualization component of this course
+
+Next lab is due Monday
+
+We will provide details on the group project in the next few weeks
+
+Questions before we get started?
+
+
+---
+
+# Plan for this week
+
+.pull-left[
+### Tuesday
+  - [Course progress](#progress)
+  - [Prologue](#prologue)
+  - [Data, aesthetics, &lt;br&gt; &amp; the grammar of graphics](#grammar-of-graphics)
+  - [Grammatical layers](#grammatical-layers)
+  - [example-07-1](#example-1)
+  &lt;!-- - [Prelim 1](#example-1) --&gt;
+  - [Reference: Putting it all together](#putting-it-together)
+  - [Reference: Additional layers](#additional-layers)
+]
+
+.pull-right[
+### Thursday
+  - [Prologue](#prologue-2)
+  - [Amounts](#amounts)
+  - [Plotting amounts using ggplot](#plotting-amounts)
+  - [example-07-2](#example-2)
+]
+
+---
+class: inverse, center, middle
+name: progress
+
+# Course progress
+
+---
+
+# Course objectives reminder
+
+1. Develop basic proficiency in `R` programming
+2. Understand data structures and manipulation
+3. Describe effective techniques for data visualization and communication
+4. Construct effective data visualizations
+5. Utilize course concepts and tools for business applications
+
+---
+
+# Where we've been
+
+1. **Develop basic proficiency in `R` programming**
+2. **Understand data structures and manipulation**
+3. Describe effective techniques for data visualization and communication
+4. Construct effective data visualizations
+5. Utilize course concepts and tools for business applications
+
+---
+
+# Where we're going next
+
+1. Develop basic proficiency in `R` programming
+2. Understand data structures and manipulation
+3. **Describe effective techniques for data visualization and communication**
+4. **Construct effective data visualizations**
+5. Utilize course concepts and tools for business applications
+
+---
+
+# Schedule overview
+
+#### Weeks 1-5: Programming Foundations
+
+#### Weeks 7-10: Data Visualization Foundations
+
+#### Weeks 11+: Special Topics (mix of programming and dataviz)
+
+See [aem2850.toddgerarden.com/schedule](https://aem2850.toddgerarden.com/schedule/) for details
+
+
+---
+class: inverse, center, middle
+name: prologue
+
+# Prologue
+
+
+---
+
+# [Health and wealth](https://www.youtube.com/watch?v=jbkSRLYSojo)
+
+&lt;img src="img/07/gapminder-screenshot.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+???
+
+Image source: [Gapminder](https://www.gapminder.org/tools/#$chart-type=bubbles)
+
+[Video](https://www.youtube.com/watch?v=jbkSRLYSojo)
+
+
+---
+class: inverse, center, middle
+name: grammar-of-graphics
+
+# Data, aesthetics,&lt;br&gt;&amp; the grammar of graphics
+
+---
+
+# Mapping data to aesthetics
+
+.pull-left.center[
+
+&lt;figure&gt;
+  &lt;img src="img/07/gg-book.jpg" alt="ZZZ" title="ZZZ" width="55%"&gt;
+&lt;/figure&gt;
+
+]
+
+.pull-right[
+
+### Data
+
+A column in a dataset
+
+### Aesthetics
+
+Visual properties of a graph
+
+Position, shape, color, etc.
+
+]
+
+---
+
+# Mapping data to aesthetics
+
+.pull-left[
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th class="cell-left"&gt;Data&lt;/th&gt;
+    &lt;th class="cell-left"&gt;Aesthetic&lt;/th&gt;
+    &lt;th class="cell-left"&gt;Geometry&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;Wealth&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Position (x)&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Point&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;Health&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Position (y)&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Point&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;Continent&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Color&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Point&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;Population&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Size&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Point&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+]
+
+.pull-right[
+&lt;img src="img/07/gapminder-screenshot.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+
+# Barebones `ggplot2::ggplot()` template
+
+
+``` r
+library(tidyverse) # tidyverse loads the package ggplot2
+```
+
+--
+
+We need to specify data, aesthetic mapping, and geometry:
+
+``` r
+ggplot(
+  data = DATA,
+  mapping = aes(AESTHETIC MAPPINGS)
+) +
+  GEOM_FUNCTION()
+```
+
+--
+
+Or, in the context of a data wrangling pipeline:
+
+``` r
+DATA |&gt; 
+  ... |&gt; # intermediate data wrangling (optional)
+  ggplot(aes(AESTHETIC MAPPINGS)) +
+  GEOM_FUNCTION()
+```
+
+---
+
+# Mapping from `gapminder` to aesthetics
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; country &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; continent &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; gdpPercap &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; lifeExp &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; pop &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 974.5803384 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 43.828 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 31889923 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; Albania &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Europe &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5937.029526 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 76.423 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3600523 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+``` r
+*_________ |&gt;
+  ggplot(aes(x = _________,
+             y = _______,
+             color = _________,
+             size = ___)) +
+  geom______() +
+  scale_x_log10() + theme_classic(base_size = 20) # ignore this line for now
+```
+
+Let's fill in the blanks... how do we start?
+
+---
+
+# Mapping from `gapminder` to aesthetics
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; country &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; continent &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; gdpPercap &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; lifeExp &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; pop &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 974.5803384 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 43.828 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 31889923 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; Albania &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Europe &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5937.029526 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 76.423 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3600523 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+``` r
+gapminder |&gt; 
+* ggplot(aes(x = _________,
+*            y = _______,
+             color = _________,
+             size = ___)) +
+  geom______() +
+  scale_x_log10() + theme_classic(base_size = 20) # ignore this line for now
+```
+
+Let's fill in the blanks... what should we map to x? y?
+
+---
+
+# Mapping from `gapminder` to aesthetics
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; country &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; continent &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; gdpPercap &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; lifeExp &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; pop &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 974.5803384 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 43.828 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 31889923 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; Albania &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Europe &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5937.029526 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 76.423 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3600523 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+``` r
+gapminder |&gt; 
+  ggplot(aes(x = gdpPercap,
+             y = lifeExp,
+*            color = _________,
+*            size = ___)) +
+  geom______() +
+  scale_x_log10() + theme_classic(base_size = 20) # ignore this line for now
+```
+
+Let's fill in the blanks... what should we map to color? size?
+
+---
+
+# Mapping from `gapminder` to aesthetics
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; country &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; continent &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; gdpPercap &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; lifeExp &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; pop &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 974.5803384 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 43.828 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 31889923 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; Albania &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Europe &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5937.029526 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 76.423 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3600523 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+``` r
+gapminder |&gt; 
+  ggplot(aes(x = gdpPercap,
+             y = lifeExp,
+             color = continent,
+             size = pop)) +
+* geom______() +
+  scale_x_log10() + theme_classic(base_size = 20) # ignore this line for now
+```
+
+Let's fill in the blanks... what geometry should we use?
+
+---
+
+# Mapping from `gapminder` to aesthetics
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; country &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; continent &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; gdpPercap &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; lifeExp &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; pop &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 974.5803384 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 43.828 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 31889923 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; Albania &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; Europe &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5937.029526 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 76.423 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3600523 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; … &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+``` r
+gapminder |&gt; 
+  ggplot(aes(x = gdpPercap,
+             y = lifeExp,
+             color = continent,
+             size = pop)) +
+  geom_point() +
+  scale_x_log10() + theme_classic(base_size = 20) # ignore this line for now
+```
+
+All done! Let's see what we get...
+
+---
+
+# Health and wealth
+
+&lt;img src="07-slides_files/figure-html/show-basic-gapminder-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse, center, middle
+name: grammatical-layers
+
+# Grammatical layers
+
+---
+
+# Grammar components as layers
+
+.pull-left[
+So far we know about data, aesthetics, and geometries
+
+Think of these components as **layers**
+
+Add to foundational `ggplot()` with `+`
+
+
+Why `+` and not `|&gt;`?
+&gt; ggplot2 was written before the pipe was discovered
+
+
+Treat the `+` the same as `|&gt;`
+
+]
+
+.pull-right[
+
+&amp;nbsp;
+
+![](img/07/ggplot-layers-short@4x.png)
+]
+
+???
+
+Layer analogy borrowed from [Thomas Lin Pedersen](https://www.data-imaginist.com/) and his ["Drawing Anything with ggplot2" workshop](https://github.com/thomasp85/ggplot2_workshop).
+
+Source for quote: [R4DS (2e)](https://r4ds.hadley.nz/workflow-style.html#ggplot2)
+
+---
+
+# Additional layers
+
+.pull-left[
+There are many other grammatical layers we can use to describe graphs!
+
+We can sequentially add layers to the foundational `ggplot()` plot to create complex figures
+
+We will primarily learn by doing, though this slide deck contains [a preview of additional layers](#additional-layers) in case you need some bedtime reading
+]
+
+.pull-right[
+![](img/07/ggplot-layers@4x.png)
+]
+
+
+---
+
+# A true grammar
+
+.pull-left[
+You have probably made graphics in Excel by searching through menus for a specific chart type, and then reshaping your data to work with it
+
+With the grammar of graphics, we don't talk about specific chart **types**
+]
+
+.pull-right[
+.center[
+&lt;figure&gt;
+  &lt;img src="img/07/excel-chart-types.png" alt="Excel chart types" title="Excel chart types" width="85%"&gt;
+&lt;/figure&gt;
+]
+]
+
+---
+
+# A true grammar
+
+.pull-left[
+With the grammar of graphics, we talk about specific chart **elements**
+
+- .small[Map a column to the x-axis, fill by a variable, `geom_col()` to get stacked bars]
+
+- .small[Geometries can be interchangeable (e.g., `geom_violin()` and `geom_boxplot()`)]
+
+This grammar is portable to other software like Tableau, which is [built on the grammar of graphics](https://www.tableau.com/about/blog/2015/4/getting-know-lee-wilkinson-tableaus-new-vp-statistics-38654)
+]
+
+.pull-right[
+![](img/07/ggplot-layers@4x.png)
+]
+
+---
+name: tidy-data
+
+# Tidy data revisited
+
+`ggplot()` is incredibly flexible
+
+For `ggplot()` to work its magic, your data frame needs to be **tidy**
+
+This requires a bit of upfront work, but it pays off
+
+As you will see, we can make many different plots without modifying our data
+
+---
+
+&lt;img src="img/07/tidydata_7.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: inverse, center, middle
+name: example-1
+
+# example-07-1:&lt;br&gt;mapping-data-to-graphics-practice.R
+
+
+---
+class: inverse, center, middle
+name: putting-it-together
+
+# Putting it all together
+
+
+---
+
+# Putting it all together
+
+In the example, we'll build a plot sequentially to see how each grammatical layer changes its appearance
+
+The rest of this section presents that code and output in slide form
+
+For illustrative purposes, let's use data on cars from the data frame `ggplot2::mpg`
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; manufacturer &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; model &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; year &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; trans &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; displ &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; hwy &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; drv &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; volkswagen &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; gti &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1999 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; manual(m5) &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 29 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; f &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; volkswagen &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; gti &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1999 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; auto(l4) &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 26 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; f &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; … &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; … &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+.left-code[
+### Start with data and aesthetics
+
+
+``` r
+*ggplot(data = mpg,
+*      aes(x = displ, # engine displacement
+*          y = hwy, # highway mpg
+*          color = drv))  # type of drive train
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/mpg-layers-1-1.png)
+]
+
+---
+
+.left-code[
+### Add a point geom
+
+
+``` r
+ggplot(data = mpg,
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+* geom_point()
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/mpg-layers-2-1.png)
+]
+
+---
+
+.left-code[
+### Add a smooth geom
+
+
+``` r
+ggplot(data = mpg,
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+* geom_smooth()
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/mpg-layers-3-1.png)
+]
+
+---
+
+.left-code[
+### Make it straight
+
+
+``` r
+ggplot(data = mpg,
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+* geom_smooth(method = "lm")
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/mpg-layers-4-1.png)
+]
+
+---
+
+.left-code[
+### Use a viridis color scale
+
+
+``` r
+ggplot(data = mpg,
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+* scale_color_viridis_d()
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/mpg-layers-5-1.png)
+]
+
+---
+
+.left-code[
+### Facet by drive train type
+
+
+``` r
+ggplot(data = mpg,
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_viridis_d() +
+* facet_wrap(vars(drv), ncol = 1)
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/mpg-layers-6-1.png)
+]
+
+---
+
+.left-code[
+### Add labels
+
+
+``` r
+ggplot(data = mpg,
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_viridis_d() +
+  facet_wrap(vars(drv), ncol = 1) +
+* labs(x = "Displacement", y = "Highway MPG",
+*      color = "Drive",
+*      title = "Larger engines use more fuel",
+*      subtitle = "Displacement measures engine size")
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/mpg-layers-7-1.png)
+]
+
+---
+
+.left-code[
+### Add a theme
+
+
+``` r
+ggplot(data = mpg,
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_viridis_d() +
+  facet_wrap(vars(drv), ncol = 1) +
+  labs(x = "Displacement", y = "Highway MPG",
+       color = "Drive",
+       title = "Larger engines use more fuel",
+       subtitle = "Displacement measures engine size") +
+* theme_bw()
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/mpg-layers-8-1.png)
+]
+
+---
+
+.left-code[
+### Modify the theme
+
+
+``` r
+ggplot(data = mpg, 
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_viridis_d() +
+  facet_wrap(vars(drv), ncol = 1) +
+  labs(x = "Displacement", y = "Highway MPG",
+       color = "Drive",
+       title = "Larger engines use more fuel",
+       subtitle = "Displacement measures engine size") +
+  theme_bw() +
+* theme(legend.position = "bottom",
+*       plot.title = element_text(face = "bold"))
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/mpg-layers-9-1.png)
+]
+
+---
+
+.left-code[
+### Finished!
+
+
+``` r
+ggplot(data = mpg, 
+       mapping = aes(x = displ,
+                     y = hwy,
+                     color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm") + 
+  scale_color_viridis_d() +
+  facet_wrap(vars(drv), ncol = 1) +
+  labs(x = "Displacement", y = "Highway MPG",
+       color = "Drive",
+       title = "Larger engines use more fuel",
+       subtitle = "Displacement measures engine size") +
+  theme_bw() +
+  theme(legend.position = "bottom",
+        plot.title = element_text(face = "bold"))
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/mpg-layers-finished-1.png)
+]
+
+
+---
+class: inverse, center, middle
+name: additional-layers
+
+# Reference: Additional layers
+
+---
+
+# Additional layers
+
+.pull-left[
+The next several slides contains a preview of additional layers
+
+These are intended as a reference
+]
+
+.pull-right[
+![](img/07/ggplot-layers@4x.png)
+]
+
+
+---
+
+# Aesthetics
+
+.pull-left-3.center[
+
+`color` (discrete)
+
+&lt;img src="07-slides_files/figure-html/aes-color-discrete-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+`color` (continuous)
+
+&lt;img src="07-slides_files/figure-html/aes-color-continuous-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-middle-3.center[
+
+`size`
+
+&lt;img src="07-slides_files/figure-html/aes-size-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+`fill`
+
+&lt;img src="07-slides_files/figure-html/aes-fill-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right-3.center[
+
+`shape`
+
+&lt;img src="07-slides_files/figure-html/aes-shape-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+`alpha` (opacity)
+
+&lt;img src="07-slides_files/figure-html/aes-alpha-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Geometries
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th class="cell-left"&gt;&lt;/th&gt;
+    &lt;th class="cell-left"&gt;Example geometry&lt;/th&gt;
+    &lt;th class="cell-left"&gt;What it makes&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;img src="img/07/geom_bar.png"&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;geom_col()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Bar charts&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;img src="img/07/geom_text.png"&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;geom_text()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Text&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;img src="img/07/geom_point.png"&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;geom_point()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Points&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;img src="img/07/geom_boxplot.png"&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;geom_boxplot()&lt;/code&gt;&amp;emsp;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Boxplots&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;img src="img/07/geom_sf.png"&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;geom_sf()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Maps&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+---
+
+# Geometries
+
+There are dozens of possible geometries
+
+Over the next several weeks we will cover a number of them
+
+See [the **ggplot2** documentation](https://ggplot2.tidyverse.org/reference/index.html#section-layer-geoms) for examples of all the different geometry layers
+
+---
+
+# Scales
+
+Scales change the properties of the variable mapping
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
+    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_x_continuous()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Make the x-axis continuous&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_x_continuous(breaks = 1:5)&amp;ensp;&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Manually specify axis ticks&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_x_log10()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Log the x-axis&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_color_gradient()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Use a gradient&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;scale_fill_viridis_d()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Fill with discrete viridis colors&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+---
+
+# Scales
+
+.pull-left[
+
+.center[`scale_x_log10()`]
+
+&lt;img src="07-slides_files/figure-html/scale-example-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-right[
+
+.center[`scale_color_viridis_d()`]
+
+&lt;img src="07-slides_files/figure-html/scale-example-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Facets
+
+Facets show subplots for different subsets of data
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
+    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;facet_wrap(vars(continent))&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Plot for each continent&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;facet_wrap(vars(continent, year))&lt;/code&gt;&amp;emsp;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Plot for each continent/year&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;facet_wrap(..., ncol = 1)&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Put all facets in one column&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;facet_wrap(..., nrow = 1)&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Put all facets in one row&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+---
+
+# Facets
+
+.pull-left[
+
+.center.small[`facet_wrap(vars(continent))`]
+
+&lt;img src="07-slides_files/figure-html/facet-example-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-right[
+
+.center.small[`facet_wrap(vars(continent, year))`]
+
+&lt;img src="07-slides_files/figure-html/facet-example-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Coordinates
+
+Change the coordinate system
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
+    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;coord_cartesian(ylim = c(1, 10))&lt;/code&gt;&amp;emsp;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Zoom in where y is 1–10&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;coord_flip()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Switch x and y&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;coord_polar()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Use polar coordinates&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+---
+
+# Coordinates
+
+.pull-left[
+
+.center.small[`coord_cartesian(ylim = c(70, 80), xlim = c(10000, 30000))`]
+
+&lt;img src="07-slides_files/figure-html/coord-example-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-right[
+
+.center.small[`coord_flip()`]
+
+&lt;img src="07-slides_files/figure-html/coord-example-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Labels
+
+Add labels to the plot with a single `labs()` layer
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
+    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;labs(title = "Neat title")&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Title&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;labs(caption = "Something")&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Caption&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;labs(y = "Something")&lt;/td&gt;
+    &lt;td class="cell-left"&gt;y-axis&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;labs(size = "Population")&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Title of size legend&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+---
+
+# Labels
+
+.left-code[
+
+``` r
+gapminder_2007 |&gt; 
+  ggplot(aes(x = gdpPercap, y = lifeExp, 
+             color = continent, size = pop)) +
+  geom_point() +
+  scale_x_log10() +
+  labs(title = "Health and wealth go together",
+       subtitle = "Data from 2007",
+       x = "Wealth (GDP per capita)",
+       y = "Health (life expectancy)",
+       color = "Continent",
+       size = "Population",
+       caption = "Source: The Gapminder Project")
+```
+]
+
+.right-plot[
+![](07-slides_files/figure-html/labels-example-1.png)
+]
+
+---
+
+# Theme
+
+`theme()` can be used to change the appearance of anything in a plot
+
+Lots of themes built in and available from other packages
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th class="cell-left"&gt;Example layer&lt;/th&gt;
+    &lt;th class="cell-left"&gt;What it does&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;theme_grey()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Default grey background&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;theme_bw()&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Black and white&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;theme_dark()&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Dark&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="cell-left"&gt;&lt;code class="remark-inline-code"&gt;theme_minimal()&lt;/code&gt;&lt;/td&gt;
+    &lt;td class="cell-left"&gt;Minimal&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+---
+
+# Theme
+
+.pull-left[
+
+.center.small[`theme_dark()`]
+
+&lt;img src="07-slides_files/figure-html/theme-example-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-right[
+
+.center.small[`theme_minimal()`]
+
+&lt;img src="07-slides_files/figure-html/theme-example-2-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# Theme
+
+There are collections of pre-built themes online, like [the **ggthemes** package](https://jrnold.github.io/ggthemes/)
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/07/ggthemes.png" alt="ggthemes" title="ggthemes" width="55%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Theme
+
+Organizations often make their own custom themes, like [the BBC](https://bbc.github.io/rcookbook/)
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/07/bbc-cookbook.png" alt="ggthemes" title="ggthemes" width="80%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Theme
+
+Make individual theme adjustments with `theme()`
+
+
+``` r
+theme_bw() + 
+theme(legend.position = "bottom",
+      plot.title = element_text(face = "bold"),
+      panel.grid = element_blank(),
+      axis.title.y = element_text(face = "italic"))
+```
+
+---
+
+# So many possibilities!
+
+.pull-left[
+![](img/07/ggplot-layers@4x.png)
+]
+
+.pull-right[
+These were just a few examples
+
+See [the **ggplot2** documentation](https://ggplot2.tidyverse.org/reference/index.html) for examples of everything you can do
+]
+
+
+
+
+
+
+
+---
+class: inverse, center, middle
+name: prologue-2
+
+# Prologue
+
+---
+
+# Remember our concentrations?
+
+How might we visualize these amounts?
+
+.less-left[
+
+```
+## # A tibble: 12 × 2
+##    concentration count
+##    &lt;chr&gt;         &lt;int&gt;
+##  1 oth              20
+##  2 ba               17
+##  3 fin              13
+##  4 sus              10
+##  5 acct              9
+##  6 econ              7
+##  7 mgmt              6
+##  8 hr                5
+##  9 mktg              4
+## 10 dev               3
+## 11 food              2
+## 12 strat             1
+```
+]
+
+--
+
+.more-right[
+&lt;img src="07-slides_files/figure-html/unnamed-chunk-5-1.png" width="1008" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# We could do the same thing with sports
+
+&lt;img src="07-slides_files/figure-html/unnamed-chunk-6-1.png" width="1008" style="display: block; margin: auto;" /&gt;
+
+---
+
+# What are our favorite public companies?
+
+--
+
+&lt;img src="07-slides_files/figure-html/unnamed-chunk-7-1.png" width="1008" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse, center, middle
+name: amounts
+
+# Amounts
+
+---
+
+# Yay bar plots!
+
+We are a lot better at visualizing line lengths than angles and areas
+
+.pull-left[
+
+&lt;img src="07-slides_files/figure-html/example-pie-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+--
+
+.pull-right[
+
+&lt;img src="07-slides_files/figure-html/example-bar-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Oh no bar plots!
+
+.center[
+&lt;figure&gt;
+&lt;img src="img/07/obamacareenrollment-fncchart.jpg" alt="Fox News Obamacare enrollment" title="Fox News Obamacare enrollment" width="85%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# What went wrong?
+
+.center[
+&lt;figure&gt;
+&lt;img src="img/07/obamacareenrollment-fncchart.jpg" alt="Fox News Obamacare enrollment" title="Fox News Obamacare enrollment" width="85%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# What went wrong?
+
+.pull-left.center[
+&lt;figure&gt;
+&lt;img src="img/07/female-height.png" alt="Average female height per country" title="Average female height per country" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+--
+
+.pull-right[
+
+**At least two problems:**
+
+1. truncated y axis
+2. area scales faster than height
+
+.small[This terrible figure brought to you by a former AEM 2850 / 5850 student!]
+]
+
+---
+
+# Bar plots and summary statistics
+
+.pull-left[
+
+&lt;img src="07-slides_files/figure-html/animal-weight-bar-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+--
+
+.pull-right[
+
+&lt;img src="07-slides_files/figure-html/animal-weight-points-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# General rules for bar charts
+
+Useful when the length of the bar is all that matters
+
+--
+
+Bar charts should always start at zero
+- Or: don't use bars!
+
+--
+
+Don't use bars for summary statistics. You throw away too much information.
+- We will come back to visualizing distributions / uncertainty next week
+
+
+---
+class: inverse, center, middle
+name: plotting-amounts
+
+# Plotting amounts using ggplot
+
+---
+
+# Plotting amounts using ggplot
+
+We'll use a summarized version of the gapminder dataset for examples
+
+
+``` r
+library(gapminder)
+gapminder_continents &lt;- gapminder |&gt;
+  filter(year == 2007) |&gt;  # only look at 2007
+  count(continent) |&gt;      # count the number of countries per continent
+  arrange(desc(n))         # sort by count, descending
+gapminder_continents
+```
+
+```
+## # A tibble: 5 × 2
+##   continent     n
+##   &lt;fct&gt;     &lt;int&gt;
+## 1 Africa       52
+## 2 Asia         33
+## 3 Europe       30
+## 4 Americas     25
+## 5 Oceania       2
+```
+
+---
+
+# Start with a simple bar plot
+
+.left-code.small-code[
+
+
+``` r
+gapminder_continents |&gt; 
+  ggplot(aes(x = continent, # continent to x
+             y = n)) +      # n countries to y
+* geom_col()                # add bars
+```
+How could we improve this?
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/gapminder-bars-1.png)
+
+]
+
+---
+
+# Add some color
+
+.left-code.small-code[
+
+
+``` r
+gapminder_continents |&gt; 
+  ggplot(aes(x = continent, 
+             y = n,
+*            fill = continent)) + # color bars
+  geom_col()
+```
+
+Do we need the fill legend?
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/gapminder-bars-colored-legend-1.png)
+
+]
+
+---
+
+# Add some color
+
+.left-code.small-code[
+
+
+``` r
+gapminder_continents |&gt; 
+  ggplot(aes(x = continent, y = n,
+             fill = continent)) +
+  geom_col() +
+* guides(fill = "none") # omit fill legend
+```
+
+Is "n" a good axis title?
+
+Do we need "continent" at all?
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/gapminder-bars-colored-1.png)
+
+]
+
+---
+
+# Add some labels
+
+.left-code.small-code[
+
+
+``` r
+gapminder_continents |&gt; 
+  ggplot(aes(x = continent, y = n,
+             fill = continent)) +
+  geom_col() +
+  guides(fill = "none") +
+* labs(x = NULL, y = "Number of countries")
+```
+
+Is alphabetical the best ordering?
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/gapminder-bars-labeled-1.png)
+
+]
+
+---
+
+# Order by data value
+
+.left-code.small-code[
+
+
+``` r
+gapminder_continents |&gt; 
+* ggplot(aes(x = fct_reorder(continent, n),
+             y = n, fill = continent)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+
+`fct_reorder(continent, n)` means "reorder the factor variable continent by n, smallest to largest"
+
+Factor is R's term for variables that have a fixed and known set of possible values
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/gapminder-bars-ordered-1.png)
+
+]
+
+---
+
+# Order by data value, descending
+
+.left-code.small-code[
+
+
+``` r
+gapminder_continents |&gt; 
+* ggplot(aes(x = fct_reorder(continent, -n),
+             y = n, fill = continent)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+
+`fct_reorder(continent, -n)` means "reorder the factor variable continent by n, largest to smallest"
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/gapminder-bars-reversed-1.png)
+
+]
+
+---
+
+# Another option is to encode order in the data
+
+.left-code.small-code[
+
+
+``` r
+# use `fct_inorder` to order levels of continent
+# based on how they appear in the data
+gapminder_ordered &lt;- gapminder_continents |&gt;
+  arrange(desc(n)) |&gt; # sort by count, descending
+* mutate(continent = fct_inorder(continent))
+gapminder_ordered |&gt; 
+* ggplot(aes(x = continent,
+             y = n, 
+             fill = continent)) +
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/gapminder-bars-fct_inorder-1.png)
+
+]
+
+---
+
+# Wait, what about geom_bar?
+
+Use `geom_bar` to count and plot in one step
+
+.left-code[
+
+
+``` r
+*gapminder |&gt; # old data: rows are countries
+  filter(year == 2007) |&gt;
+  ggplot(aes(x = continent, # note: no y aesthetic defined
+             fill = continent)) +
+* geom_bar() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/geom_bar-1.png)
+
+]
+
+---
+
+# Wait, what about geom_bar?
+
+Here we can reorder by frequency using `fct_infreq`
+
+.left-code[
+
+
+``` r
+gapminder |&gt;
+  filter(year == 2007) |&gt;
+* ggplot(aes(x = fct_infreq(continent),
+             fill = continent)) +
+  geom_bar() +
+  guides(fill = "none") +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/geom_bar-ordered-1.png)
+
+]
+
+---
+
+# We can also flip geom_col/bar axes
+
+Simply use `y = ` instead of `x = ` for the aesthetic mapping
+
+.left-code[
+
+
+``` r
+gapminder |&gt;
+  filter(year == 2007) |&gt;
+* ggplot(aes(y = fct_infreq(continent),
+             fill = continent)) +
+  geom_bar() +
+  guides(fill = "none") +
+* labs(x = "Number of countries", y = NULL)
+```
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/geom_bar-y-1.png)
+
+]
+
+---
+
+# We can also flip geom_col/bar axes
+
+`fct_rev()` reverses the order of factors
+
+.left-code[
+
+
+``` r
+gapminder |&gt;
+  filter(year == 2007) |&gt;
+* ggplot(aes(y = fct_rev(fct_infreq(continent)),
+             fill = continent)) +
+  geom_bar() +
+  guides(fill = "none") +
+  labs(x = "Number of countries", y = NULL)
+```
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/geom_bar-y-rev-1.png)
+
+]
+
+---
+
+# Grouped bar charts
+
+Use grouped bars or facets for higher dimensional datasets
+
+.left-code[
+
+``` r
+gapminder |&gt;
+  filter(year==1957 | year==2007) |&gt; 
+  group_by(continent, year) |&gt; 
+  summarize(
+    lifeExp = sum(lifeExp * pop) / sum(pop)
+  ) |&gt; 
+  ggplot(aes(x = continent,
+             y = lifeExp,
+*            fill = as_factor(year))) +
+* geom_col(position = "dodge") +
+  labs(x = NULL, 
+       y = "Life expectancy", fill = "Year")
+```
+`as_factor()` specifies that we want to treat `year` as distinct categories, not a continuous measure
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/geom_bar-grouped-1.png)
+
+]
+
+---
+
+# Facets
+
+Use grouped bars or facets for higher dimensional datasets
+
+.left-code[
+
+``` r
+gapminder |&gt;
+  filter(year==1957 | year==2007) |&gt; 
+  group_by(continent, year) |&gt; 
+  summarize(
+    lifeExp = sum(lifeExp * pop) / sum(pop)
+  ) |&gt; 
+  ggplot(aes(x = continent,
+             y = lifeExp,
+             fill = as_factor(year))) + 
+* geom_col() +
+* facet_wrap(vars(year)) +
+  guides(fill = "none") +
+  labs(x = NULL, 
+       y = "Life expectancy")
+```
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/geom_bar-faceted-1.png)
+
+]
+
+---
+
+# Alternative: Dots instead of bars
+
+Dots are preferable if we want to truncate the axes
+
+.left-code[
+
+
+``` r
+gapminder |&gt;
+  filter(year == 2007, continent == "Americas") |&gt;
+  ggplot(aes(x = lifeExp,
+             y = fct_reorder(country, lifeExp))) +
+* geom_point() +
+  guides(color = "none") +
+  labs(x = "Life expectancy (years)", y = NULL) +
+  theme_minimal()
+```
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/dots-1.png)
+
+]
+
+---
+class: inverse, center, middle
+name: example-2
+
+# example-07-2:&lt;br&gt;amounts-practice.R
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "%current%",
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

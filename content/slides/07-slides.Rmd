@@ -70,7 +70,7 @@ This week marks the start of the data visualization component of this course
 
 Next lab is due Monday
 
-We will provide details on the group project in the next 1-2 weeks
+We will provide details on the group project in the next few weeks
 
 Questions before we get started?
 
@@ -86,7 +86,8 @@ Questions before we get started?
   - [Data, aesthetics, <br> & the grammar of graphics](#grammar-of-graphics)
   - [Grammatical layers](#grammatical-layers)
   - [example-07-1](#example-1)
-  - [Prelim 1](#example-1)
+  <!-- - [Prelim 1](#example-1) -->
+  - [Reference: Putting it all together](#putting-it-together)
   - [Reference: Additional layers](#additional-layers)
 ]
 
@@ -243,133 +244,6 @@ knitr::include_graphics("img/07/gapminder-screenshot.png")
 ```
 ]
 
----
-
-# Mapping data to aesthetics using ggplot
-
-.pull-left[
-<table>
-  <tr>
-    <th class="cell-left">Data</th>
-    <th class="cell-left">Aesthetic</th>
-    <th class="cell-left">Geometry</th>
-  </tr>
-  <tr>
-    <td class="cell-left">Wealth</td>
-    <td class="cell-left">Position (x)</td>
-    <td class="cell-left">Point</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Health</td>
-    <td class="cell-left">Position (y)</td>
-    <td class="cell-left">Point</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Continent</td>
-    <td class="cell-left">Color</td>
-    <td class="cell-left">Point</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Population</td>
-    <td class="cell-left">Size</td>
-    <td class="cell-left">Point</td>
-  </tr>
-</table>
-]
-
-.pull-right[
-<table>
-  <tr>
-    <th class="cell-left">Data</th>
-    <th class="cell-left"><code class="remark-inline-code">aes()</code></th>
-    <th class="cell-left"><code class="remark-inline-code">geom</code></th>
-  </tr>
-  <tr>
-    <td class="cell-left">Wealth</td>
-    <td class="cell-left">?</td>
-    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">Health</td>
-    <td class="cell-left">?</td>
-    <td class="cell-left">?</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Continent</td>
-    <td class="cell-left"><code class="remark-inline-code">color</code></td>
-    <td class="cell-left">?</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Population</td>
-    <td class="cell-left">?</td>
-    <td class="cell-left">?</td>
-  </tr>
-</table>
-]
-
----
-
-# Mapping data to aesthetics using ggplot
-
-.pull-left[
-<table>
-  <tr>
-    <th class="cell-left">Data</th>
-    <th class="cell-left">Aesthetic</th>
-    <th class="cell-left">Geometry</th>
-  </tr>
-  <tr>
-    <td class="cell-left">Wealth</td>
-    <td class="cell-left">Position (x)</td>
-    <td class="cell-left">Point</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Health</td>
-    <td class="cell-left">Position (y)</td>
-    <td class="cell-left">Point</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Continent</td>
-    <td class="cell-left">Color</td>
-    <td class="cell-left">Point</td>
-  </tr>
-  <tr>
-    <td class="cell-left">Population</td>
-    <td class="cell-left">Size</td>
-    <td class="cell-left">Point</td>
-  </tr>
-</table>
-]
-
-.pull-right[
-<table>
-  <tr>
-    <th class="cell-left">Data</th>
-    <th class="cell-left"><code class="remark-inline-code">aes()</code></th>
-    <th class="cell-left"><code class="remark-inline-code">geom</code></th>
-  </tr>
-  <tr>
-    <td class="cell-left">Wealth</td>
-    <td class="cell-left"><code class="remark-inline-code">x</code></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">Health</td>
-    <td class="cell-left"><code class="remark-inline-code">y</code></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">Continent</td>
-    <td class="cell-left"><code class="remark-inline-code">color</code></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">Population</td>
-    <td class="cell-left"><code class="remark-inline-code">size</code>&emsp;</td>
-    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
-  </tr>
-</table>
-]
 
 ---
 
@@ -383,8 +257,10 @@ library(tidyverse) # tidyverse loads the package ggplot2
 
 We need to specify data, aesthetic mapping, and geometry:
 ```{r show-ggplot-template-1, eval=FALSE}
-ggplot(data = DATA,
-       mapping = aes(AESTHETIC MAPPINGS)) +
+ggplot(
+  data = DATA,
+  mapping = aes(AESTHETIC MAPPINGS)
+) +
   GEOM_FUNCTION()
 ```
 
@@ -577,141 +453,6 @@ Source for quote: [R4DS (2e)](https://r4ds.hadley.nz/workflow-style.html#ggplot2
 
 ---
 
-# Possible aesthetics
-
-.pull-left-3.center[
-
-`color` (discrete)
-
-```{r aes-color-discrete, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
-eg <- tribble(
-  ~x, ~y, ~size, ~x1,
-  "A", 1, 5, 1,
-  "B", 1, 10, 2,
-  "C", 1, 15, 3
-)
-
-# Color, discrete
-ggplot(eg, aes(x = x, y = y, color = x)) +
-  geom_point(size = 30) +
-  guides(color = "none") +
-  theme(axis.text.y = element_blank(),
-        axis.ticks = element_blank())
-```
-
-`color` (continuous)
-
-```{r aes-color-continuous, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
-# Color, continuous
-ggplot(eg, aes(x = x1, y = y, color = x1)) +
-  geom_point(size = 30) +
-  guides(color = "none") +
-  coord_cartesian(xlim = c(0.5, 3.5)) +
-  theme(axis.text.y = element_blank(),
-        axis.ticks = element_blank())
-```
-]
-
-.pull-middle-3.center[
-
-`size`
-
-```{r aes-size, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
-# Size
-ggplot(eg, aes(x = x, y = y, size = x)) +
-  geom_point() +
-  scale_size_discrete(range = c(2, 30)) +
-  guides(size = "none") +
-  theme(axis.text.y = element_blank(),
-        axis.ticks = element_blank())
-```
-
-`fill`
-
-```{r aes-fill, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
-# Fill
-ggplot(eg, aes(x = x, y = y, fill = x)) +
-  geom_point(size = 30, pch = 21, stroke = 5) +
-  guides(fill = "none") +
-  theme(axis.text.y = element_blank(),
-        axis.ticks = element_blank())
-```
-]
-
-.pull-right-3.center[
-
-`shape`
-
-```{r aes-shape, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
-# Shape
-ggplot(eg, aes(x = x, y = y, shape = x)) +
-  geom_point(size = 30) +
-  guides(shape = "none") +
-  theme(axis.text.y = element_blank(),
-        axis.ticks = element_blank())
-```
-
-`alpha` (opacity)
-
-```{r aes-alpha, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
-# Alpha
-ggplot(eg, aes(x = x, y = y, alpha = x)) +
-  geom_point(size = 30) +
-  guides(alpha = "none") +
-  theme(axis.text.y = element_blank(),
-        axis.ticks = element_blank())
-```
-]
-
----
-
-# Possible geometries
-
-<table>
-  <tr>
-    <th class="cell-left"></th>
-    <th class="cell-left">Example geometry</th>
-    <th class="cell-left">What it makes</th>
-  </tr>
-  <tr>
-    <td class="cell-left"><img src="img/07/geom_bar.png"></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_col()</code></td>
-    <td class="cell-left">Bar charts</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><img src="img/07/geom_text.png"></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_text()</code></td>
-    <td class="cell-left">Text</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><img src="img/07/geom_point.png"></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
-    <td class="cell-left">Points</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><img src="img/07/geom_boxplot.png"></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_boxplot()</code>&emsp;</td>
-    <td class="cell-left">Boxplots</td>
-  </tr>
-  <tr>
-    <td class="cell-left"><img src="img/07/geom_sf.png"></td>
-    <td class="cell-left"><code class="remark-inline-code">geom_sf()</code></td>
-    <td class="cell-left">Maps</td>
-  </tr>
-</table>
-
----
-
-# Possible geometries
-
-There are dozens of possible geometries
-
-Over the next several weeks we will cover a number of them
-
-See [the **ggplot2** documentation](https://ggplot2.tidyverse.org/reference/index.html#section-layer-geoms) for examples of all the different geometry layers
-
----
-
 # Additional layers
 
 .pull-left[
@@ -754,101 +495,13 @@ With the grammar of graphics, we talk about specific chart **elements**
 
 - .small[Map a column to the x-axis, fill by a variable, `geom_col()` to get stacked bars]
 
-- .small[Geometries can be interchangable (e.g., `geom_violin()` and `geom_boxplot()`)]
+- .small[Geometries can be interchangeable (e.g., `geom_violin()` and `geom_boxplot()`)]
 
 This grammar is portable to other software like Tableau, which is [built on the grammar of graphics](https://www.tableau.com/about/blog/2015/4/getting-know-lee-wilkinson-tableaus-new-vp-statistics-38654)
 ]
 
 .pull-right[
 ![](img/07/ggplot-layers@4x.png)
-]
-
----
-
-# Describing graphs with the grammar
-
-.left-code[
-.box-2.small[Map wealth to the x-axis, health to the y-axis, add points, color by continent, size by population, scale the x-axis with a log, and facet by year]
-
-```{r describe-1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-gapminder |> 
-  filter(year %in% c(2002, 2007)) |> 
-  ggplot(aes(x = gdpPercap,
-             y = lifeExp,
-             color = continent,
-             size = pop)) +
-  geom_point() +
-  scale_x_log10() + 
-  facet_wrap(vars(year), ncol = 1)
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("describe-1", "png")`)
-]
-
----
-
-# Describing graphs with the grammar
-
-.left-code[
-.box-2.small[Map health to the x-axis, add a histogram with bins for every 5 years, fill and facet by continent]
-
-```{r describe-2, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(data = gapminder_2007, 
-       mapping = aes(x = lifeExp,
-                     fill = continent)) +
-  geom_histogram(binwidth = 5, 
-                 color = "white") +
-  guides(fill = "none") +  # Turn off legend
-  facet_wrap(vars(continent))
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("describe-2", "png")`)
-]
-
----
-
-# Describing graphs with the grammar
-
-.left-code[
-.box-2.small[Map continent to the x-axis, health to the y-axis, add boxplots, fill by continent]
-
-```{r describe-3, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(data = gapminder, 
-       mapping = aes(x = continent,
-                     y = lifeExp,
-                     fill = continent)) +
-  geom_boxplot() +
-  guides(fill = "none")  # Turn off legend
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("describe-3", "png")`)
-]
-
----
-
-# Describing graphs with the grammar
-
-.left-code[
-.box-2.small[Map continent to the x-axis, health to the y-axis, add violin plots, fill by continent]
-
-```{r describe-4, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
-ggplot(data = gapminder, 
-       mapping = aes(x = continent,
-                     y = lifeExp,
-                     fill = continent)) +
-  geom_violin() + # we only had to change this! #<<
-  guides(fill = "none")  # Turn off legend
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("describe-4", "png")`)
 ]
 
 ---
@@ -862,7 +515,7 @@ For `ggplot()` to work its magic, your data frame needs to be **tidy**
 
 This requires a bit of upfront work, but it pays off
 
-We never had to modify `gapminder` to make all those different plots!
+As you will see, we can make many different plots without modifying our data
 
 ---
 
@@ -876,6 +529,13 @@ class: inverse, center, middle
 name: example-1
 
 # example-07-1:<br>mapping-data-to-graphics-practice.R
+
+
+---
+class: inverse, center, middle
+name: putting-it-together
+
+# Putting it all together
 
 
 ---
@@ -1124,7 +784,7 @@ ggplot(data = mpg,
 class: inverse, center, middle
 name: additional-layers
 
-# Additional layers
+# Reference: Additional layers
 
 ---
 
@@ -1140,6 +800,141 @@ These are intended as a reference
 ![](img/07/ggplot-layers@4x.png)
 ]
 
+
+---
+
+# Aesthetics
+
+.pull-left-3.center[
+
+`color` (discrete)
+
+```{r aes-color-discrete, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
+eg <- tribble(
+  ~x, ~y, ~size, ~x1,
+  "A", 1, 5, 1,
+  "B", 1, 10, 2,
+  "C", 1, 15, 3
+)
+
+# Color, discrete
+ggplot(eg, aes(x = x, y = y, color = x)) +
+  geom_point(size = 30) +
+  guides(color = "none") +
+  theme(axis.text.y = element_blank(),
+        axis.ticks = element_blank())
+```
+
+`color` (continuous)
+
+```{r aes-color-continuous, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
+# Color, continuous
+ggplot(eg, aes(x = x1, y = y, color = x1)) +
+  geom_point(size = 30) +
+  guides(color = "none") +
+  coord_cartesian(xlim = c(0.5, 3.5)) +
+  theme(axis.text.y = element_blank(),
+        axis.ticks = element_blank())
+```
+]
+
+.pull-middle-3.center[
+
+`size`
+
+```{r aes-size, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
+# Size
+ggplot(eg, aes(x = x, y = y, size = x)) +
+  geom_point() +
+  scale_size_discrete(range = c(2, 30)) +
+  guides(size = "none") +
+  theme(axis.text.y = element_blank(),
+        axis.ticks = element_blank())
+```
+
+`fill`
+
+```{r aes-fill, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
+# Fill
+ggplot(eg, aes(x = x, y = y, fill = x)) +
+  geom_point(size = 30, pch = 21, stroke = 5) +
+  guides(fill = "none") +
+  theme(axis.text.y = element_blank(),
+        axis.ticks = element_blank())
+```
+]
+
+.pull-right-3.center[
+
+`shape`
+
+```{r aes-shape, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
+# Shape
+ggplot(eg, aes(x = x, y = y, shape = x)) +
+  geom_point(size = 30) +
+  guides(shape = "none") +
+  theme(axis.text.y = element_blank(),
+        axis.ticks = element_blank())
+```
+
+`alpha` (opacity)
+
+```{r aes-alpha, echo=FALSE, fig.dim=c(4, 2), out.width="100%"}
+# Alpha
+ggplot(eg, aes(x = x, y = y, alpha = x)) +
+  geom_point(size = 30) +
+  guides(alpha = "none") +
+  theme(axis.text.y = element_blank(),
+        axis.ticks = element_blank())
+```
+]
+
+---
+
+# Geometries
+
+<table>
+  <tr>
+    <th class="cell-left"></th>
+    <th class="cell-left">Example geometry</th>
+    <th class="cell-left">What it makes</th>
+  </tr>
+  <tr>
+    <td class="cell-left"><img src="img/07/geom_bar.png"></td>
+    <td class="cell-left"><code class="remark-inline-code">geom_col()</code></td>
+    <td class="cell-left">Bar charts</td>
+  </tr>
+  <tr>
+    <td class="cell-left"><img src="img/07/geom_text.png"></td>
+    <td class="cell-left"><code class="remark-inline-code">geom_text()</code></td>
+    <td class="cell-left">Text</td>
+  </tr>
+  <tr>
+    <td class="cell-left"><img src="img/07/geom_point.png"></td>
+    <td class="cell-left"><code class="remark-inline-code">geom_point()</code></td>
+    <td class="cell-left">Points</td>
+  </tr>
+  <tr>
+    <td class="cell-left"><img src="img/07/geom_boxplot.png"></td>
+    <td class="cell-left"><code class="remark-inline-code">geom_boxplot()</code>&emsp;</td>
+    <td class="cell-left">Boxplots</td>
+  </tr>
+  <tr>
+    <td class="cell-left"><img src="img/07/geom_sf.png"></td>
+    <td class="cell-left"><code class="remark-inline-code">geom_sf()</code></td>
+    <td class="cell-left">Maps</td>
+  </tr>
+</table>
+
+---
+
+# Geometries
+
+There are dozens of possible geometries
+
+Over the next several weeks we will cover a number of them
+
+See [the **ggplot2** documentation](https://ggplot2.tidyverse.org/reference/index.html#section-layer-geoms) for examples of all the different geometry layers
 
 ---
 
