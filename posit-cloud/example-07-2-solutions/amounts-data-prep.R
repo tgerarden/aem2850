@@ -49,6 +49,12 @@ brewer_size <- readr::read_csv('https://raw.githubusercontent.com/rfordatascienc
          brewer_size = ifelse(numeric_size == 1, "1 to 100,000 Barrels",
                               ifelse(numeric_size == 100000, "100,001 to 1,000,000 Barrels",
                                      "1,000,001 Barrels and Over"))) %>%
+  # modify numeric_size for log-log plots
+  mutate(numeric_size = case_when(
+    numeric_size == 1 ~ 5e4,
+    numeric_size == 100000 ~ 5e5,
+    numeric_size == 1000000 ~ 5e6
+  )) |>
   select(-min_size, -max_size) %>%
   group_by(brewer_size, numeric_size, year) %>%
   summarize_all(sum)
