@@ -47,7 +47,7 @@ Acknowledgements:
 
 This week marks the start of the data visualization component of this course
 
-Next lab is due Monday
+Next homework is due Monday
 
 We will provide details on the group project in the next few weeks
 
@@ -76,6 +76,7 @@ Questions before we get started?
   - [Amounts](#amounts)
   - [Plotting amounts using ggplot](#plotting-amounts)
   - [example-07-2](#example-2)
+  - [Reference: more examples](#more-examples)
 ]
 
 ---
@@ -1378,11 +1379,6 @@ How might we visualize these amounts?
 &lt;img src="07-slides_files/figure-html/unnamed-chunk-5-1.png" width="1008" style="display: block; margin: auto;" /&gt;
 ]
 
----
-
-# We could do the same thing with sports
-
-&lt;img src="07-slides_files/figure-html/unnamed-chunk-6-1.png" width="1008" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -1390,7 +1386,7 @@ How might we visualize these amounts?
 
 --
 
-&lt;img src="07-slides_files/figure-html/unnamed-chunk-7-1.png" width="1008" style="display: block; margin: auto;" /&gt;
+&lt;img src="07-slides_files/figure-html/unnamed-chunk-6-1.png" width="1008" style="display: block; margin: auto;" /&gt;
 
 ---
 class: inverse, center, middle
@@ -1460,23 +1456,6 @@ We are a lot better at visualizing line lengths than angles and areas
 .small[This terrible figure brought to you by a former AEM 2850 / 5850 student!]
 ]
 
----
-
-# Bar plots and summary statistics
-
-.pull-left[
-
-&lt;img src="07-slides_files/figure-html/animal-weight-bar-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-]
-
---
-
-.pull-right[
-
-&lt;img src="07-slides_files/figure-html/animal-weight-points-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-]
 
 ---
 
@@ -1550,45 +1529,20 @@ How could we improve this?
 
 ]
 
+
 ---
 
-# Add some color
+# Start with a simple bar plot
 
 .left-code.small-code[
 
 
 ``` r
 gapminder_continents |&gt; 
-  ggplot(aes(x = continent, 
-             y = n,
-*            fill = continent)) + # color bars
-  geom_col()
+  ggplot(aes(x = continent, # continent to x
+             y = n)) +      # n countries to y
+* geom_col()                # add bars
 ```
-
-Do we need the fill legend?
-]
-
-.right-plot[
-
-![](07-slides_files/figure-html/gapminder-bars-colored-legend-1.png)
-
-]
-
----
-
-# Add some color
-
-.left-code.small-code[
-
-
-``` r
-gapminder_continents |&gt; 
-  ggplot(aes(x = continent, y = n,
-             fill = continent)) +
-  geom_col() +
-* guides(fill = "none") # omit fill legend
-```
-
 Is "n" a good axis title?
 
 Do we need "continent" at all?
@@ -1596,9 +1550,10 @@ Do we need "continent" at all?
 
 .right-plot[
 
-![](07-slides_files/figure-html/gapminder-bars-colored-1.png)
+![](07-slides_files/figure-html/gapminder-bars-2-1.png)
 
 ]
+
 
 ---
 
@@ -1609,10 +1564,9 @@ Do we need "continent" at all?
 
 ``` r
 gapminder_continents |&gt; 
-  ggplot(aes(x = continent, y = n,
-             fill = continent)) +
+  ggplot(aes(x = continent, 
+             y = n)) +
   geom_col() +
-  guides(fill = "none") +
 * labs(x = NULL, y = "Number of countries")
 ```
 
@@ -1635,9 +1589,8 @@ Is alphabetical the best ordering?
 ``` r
 gapminder_continents |&gt; 
 * ggplot(aes(x = fct_reorder(continent, n),
-             y = n, fill = continent)) +
+             y = n)) +
   geom_col() +
-  guides(fill = "none") +
   labs(x = NULL, y = "Number of countries")
 ```
 
@@ -1662,9 +1615,8 @@ Factor is R's term for variables that have a fixed and known set of possible val
 ``` r
 gapminder_continents |&gt; 
 * ggplot(aes(x = fct_reorder(continent, -n),
-             y = n, fill = continent)) +
+             y = n)) +
   geom_col() +
-  guides(fill = "none") +
   labs(x = NULL, y = "Number of countries")
 ```
 
@@ -1685,17 +1637,15 @@ gapminder_continents |&gt;
 
 
 ``` r
-# use `fct_inorder` to order levels of continent
+# use `fct_inorder` to order continent
 # based on how they appear in the data
 gapminder_ordered &lt;- gapminder_continents |&gt;
-  arrange(desc(n)) |&gt; # sort by count, descending
+  arrange(desc(n)) |&gt; # sort by count
 * mutate(continent = fct_inorder(continent))
 gapminder_ordered |&gt; 
 * ggplot(aes(x = continent,
-             y = n, 
-             fill = continent)) +
+             y = n)) +
   geom_col() +
-  guides(fill = "none") +
   labs(x = NULL, y = "Number of countries")
 ```
 ]
@@ -1708,105 +1658,32 @@ gapminder_ordered |&gt;
 
 ---
 
-# Wait, what about geom_bar?
+# Higher dimensional datasets
 
-Use `geom_bar` to count and plot in one step
-
-.left-code[
-
-
-``` r
-*gapminder |&gt; # old data: rows are countries
-  filter(year == 2007) |&gt;
-  ggplot(aes(x = continent, # note: no y aesthetic defined
-             fill = continent)) +
-* geom_bar() +
-  guides(fill = "none") +
-  labs(x = NULL, y = "Number of countries")
-```
-]
-
-.right-plot[
-
-![](07-slides_files/figure-html/geom_bar-1.png)
-
-]
-
----
-
-# Wait, what about geom_bar?
-
-Here we can reorder by frequency using `fct_infreq`
+`as_factor()` treats `year` as distinct categories, not a continuous measure
 
 .left-code[
-
 
 ``` r
 gapminder |&gt;
-  filter(year == 2007) |&gt;
-* ggplot(aes(x = fct_infreq(continent),
-             fill = continent)) +
-  geom_bar() +
-  guides(fill = "none") +
-  labs(x = NULL, y = "Number of countries")
+  filter(year==1957 | year==2007) |&gt; 
+  group_by(continent, year) |&gt; 
+  summarize(
+    lifeExp = sum(lifeExp * pop) / sum(pop)
+  ) |&gt; 
+  ggplot(aes(x = continent,
+             y = lifeExp,
+*            fill = as_factor(year))) +
+  geom_col() +
+  labs(x = NULL, 
+       y = "Life expectancy", fill = "Year")
 ```
+What is wrong with this visualization of life expectancy in two different years?
 ]
 
 .right-plot[
 
-![](07-slides_files/figure-html/geom_bar-ordered-1.png)
-
-]
-
----
-
-# We can also flip geom_col/bar axes
-
-Simply use `y = ` instead of `x = ` for the aesthetic mapping
-
-.left-code[
-
-
-``` r
-gapminder |&gt;
-  filter(year == 2007) |&gt;
-* ggplot(aes(y = fct_infreq(continent),
-             fill = continent)) +
-  geom_bar() +
-  guides(fill = "none") +
-* labs(x = "Number of countries", y = NULL)
-```
-]
-
-.right-plot[
-
-![](07-slides_files/figure-html/geom_bar-y-1.png)
-
-]
-
----
-
-# We can also flip geom_col/bar axes
-
-`fct_rev()` reverses the order of factors
-
-.left-code[
-
-
-``` r
-gapminder |&gt;
-  filter(year == 2007) |&gt;
-* ggplot(aes(y = fct_rev(fct_infreq(continent)),
-             fill = continent)) +
-  geom_bar() +
-  guides(fill = "none") +
-  labs(x = "Number of countries", y = NULL)
-```
-]
-
-.right-plot[
-
-![](07-slides_files/figure-html/geom_bar-y-rev-1.png)
+![](07-slides_files/figure-html/geom_bar-ungrouped-1.png)
 
 ]
 
@@ -1827,12 +1704,11 @@ gapminder |&gt;
   ) |&gt; 
   ggplot(aes(x = continent,
              y = lifeExp,
-*            fill = as_factor(year))) +
+             fill = as_factor(year))) + 
 * geom_col(position = "dodge") +
   labs(x = NULL, 
        y = "Life expectancy", fill = "Year")
 ```
-`as_factor()` specifies that we want to treat `year` as distinct categories, not a continuous measure
 ]
 
 .right-plot[
@@ -1861,7 +1737,7 @@ gapminder |&gt;
              fill = as_factor(year))) + 
 * geom_col() +
 * facet_wrap(vars(year)) +
-  guides(fill = "none") +
+* guides(fill = "none") +
   labs(x = NULL, 
        y = "Life expectancy")
 ```
@@ -1905,6 +1781,110 @@ class: inverse, center, middle
 name: example-2
 
 # example-07-2:&lt;br&gt;amounts-practice.R
+
+
+---
+class: inverse, center, middle
+name: more-examples
+
+# Reference: more examples
+
+
+---
+
+# Wait, what about geom_bar?
+
+Use `geom_bar` to count and plot in one step
+
+.left-code[
+
+
+``` r
+*gapminder |&gt; # old data: rows are countries
+  filter(year == 2007) |&gt;
+  ggplot(aes(x = continent)) + # note: no y arg
+* geom_bar() +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/geom_bar-1.png)
+
+]
+
+---
+
+# Wait, what about geom_bar?
+
+Here we can reorder by frequency using `fct_infreq`
+
+.left-code[
+
+
+``` r
+gapminder |&gt;
+  filter(year == 2007) |&gt;
+* ggplot(aes(x = fct_infreq(continent))) +
+  geom_bar() +
+  labs(x = NULL, y = "Number of countries")
+```
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/geom_bar-ordered-1.png)
+
+]
+
+---
+
+# We can also flip geom_col/bar axes
+
+Simply use `y = ` instead of `x = ` for the aesthetic mapping
+
+.left-code[
+
+
+``` r
+gapminder |&gt;
+  filter(year == 2007) |&gt;
+* ggplot(aes(y = fct_infreq(continent))) +
+  geom_bar() +
+* labs(x = "Number of countries", y = NULL)
+```
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/geom_bar-y-1.png)
+
+]
+
+---
+
+# We can also flip geom_col/bar axes
+
+`fct_rev()` reverses the order of factors
+
+.left-code[
+
+
+``` r
+gapminder |&gt;
+  filter(year == 2007) |&gt;
+* ggplot(aes(y = fct_rev(fct_infreq(continent)))) +
+  geom_bar() +
+  labs(x = "Number of countries", y = NULL)
+```
+]
+
+.right-plot[
+
+![](07-slides_files/figure-html/geom_bar-y-rev-1.png)
+
+]
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
