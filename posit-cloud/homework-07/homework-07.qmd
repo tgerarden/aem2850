@@ -54,6 +54,7 @@ diamonds |>
 
 {{< pagebreak >}}
 ## 2. Use `geom_bar` to reproduce the plot in question #1. Show the diamonds color at the y-axis, in a desending order by the number of diamonds from top to bottom.
+<!-- Tip: The final reference section of the slides from class this week have some examples of geom_bar() usage.  -->
 
 ``` {r echo = TRUE}
 diamonds |> # no need to manually count the number of diamonds by color this time
@@ -65,13 +66,13 @@ diamonds |> # no need to manually count the number of diamonds by color this tim
 
 
 {{< pagebreak >}}
-## 3. Calculate the average price of diamonds by color. Use `geom_col` to compare the average prices, with the x-axis being the color of the diamonds, the y-axis being the average price, and coloring the bars by color. Add labels to both axes. How is the color of the bars different from the first two questions? Why?
+## 3. Calculate the average price of diamonds by color. Use `geom_col` to compare the average prices, with the x-axis being the color of the diamonds, the y-axis being the average price, and mapping the variable `color` to the aesthetic `color` (not fill). Add labels to both axes. How is the color of the bars different from the first two questions? Why?
 <!-- No tips this time! -->
 
 ``` {r echo = TRUE}
 
 ```
-...
+The bars are...
 
 
 {{< pagebreak >}}
@@ -126,7 +127,7 @@ flights |>
 ``` {r echo = TRUE, fig.dim = c(3.6,2.3)}
 
 ```
-...
+It looks like the correlation between precipitation and departure delay is...
 
 
 {{< pagebreak >}}
@@ -136,5 +137,4 @@ flights |>
 ``` {r echo = TRUE}
 
 ```
-...
-
+The correlation between departure delay and visibility is...
