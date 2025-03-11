@@ -442,7 +442,7 @@ prior_programming |&gt;
 
 # Pie charts using ggplot
 
-How could we use ggplot to visualize *proportions* using stacked bars?
+How could we use ggplot to visualize *proportions* using a pie chart?
 
 --
 
@@ -453,7 +453,7 @@ Pie charts are just stacked bars in polar coordinates
 ``` r
 prior_programming |&gt;
   ggplot(aes(
-*   y = "", # x, not y
+*   y = "", # y, not x
     fill = prior_programming
   )) +
   geom_bar(position = "fill") +
