@@ -1,7 +1,7 @@
 ---
 title: "Proportions and distributions"
 linktitle: "Proportions and distributions"
-date: "`r format(Sys.time())`"
+date: "2025-03-10 10:09:30"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
