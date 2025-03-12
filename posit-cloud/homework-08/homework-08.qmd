@@ -76,7 +76,7 @@ speeds <- trips |>
 ```{r}
 
 ```
-
+...
 
 {{< pagebreak >}}
 ## 4. Make an overlapping density plot of the distribution of speeds. Fill by hour, treating hour as a categorical variable by encoding it as a factor (see `?as_factor()`). Adjust the transparency to make it more readable.
@@ -91,25 +91,40 @@ speeds <- trips |>
 ```{r}
 
 ```
+...
+
+\vfill
+## Comparing your plots from questions 3, 4, and 5, which one do you think is the most effective visualization? Why?
+...
 
 
 {{< pagebreak >}}
-## 6. Comparing your plots from questions 3, 4, and 5, which one do you think is the most effective visualization? Why?
-
-
-{{< pagebreak >}}
-## 7. How much do riders tip? Compute the tip percentage using `tip_amount` as a share of `fare_amount`, converted to percentage points. Remove outliers where tips are less than 0% or more than 100% so we can focus on the main part of the distribution. Create a histogram of tip percentage. Is the distribution [unimodal](https://en.wikipedia.org/wiki/Unimodality) or bimodal? Explain your answer.
+## 6. How much do riders tip? Compute the tip percentage using `tip_amount` as a share of `fare_amount`, converted to percentage points. Remove outliers where tips are less than 0% or more than 100% so we can focus on the main part of the distribution. Create a histogram of tip percentage. Is the distribution [unimodal](https://en.wikipedia.org/wiki/Unimodality) or bimodal? Explain your answer.
 ```{r}
 
 ```
-
+...
 
 
 {{< pagebreak >}}
-## 8. What fraction of NYC cab rides include a tip? Use the `trips` data to classify trips according to whether they included a tip amount of zero, or greater than zero. Remove any observations with negative tip amounts. Finally, make a plot of the proportion of rides that included a tip and did not include a tip. Of the three approaches we discussed in class (side-by-side bars, stacked bars, and pie charts), choose one that is effective at showing data as proportions of a whole, and explain your choice.
-<!-- Note: At least one of the three approaches is *not* a good choice and could result in point deductions depending on how you justify your approach. -->
-
+## 7. What fraction of NYC cab rides include a tip? Use the `trips` data to classify trips according to whether they included a tip amount of zero, or greater than zero. Remove any observations with negative tip amounts. Finally, make a side-by-side bar plot of the proportion of rides that included a tip and did not include a tip. Are side-by-side bars a good choice for this particular data visualization?
 ```{r}
 
 ```
+Side-by-side bars are ...
 
+
+{{< pagebreak >}}
+## 8. Now use the data to make a stacked bar plot of the proportion of rides that included a tip and did not include a tip. Are stacked bars a good choice for this particular data visualization?
+```{r}
+
+```
+Stacked bars are ...
+
+
+{{< pagebreak >}}
+## 9. Finally, use the data to make a pie chart of the proportion of rides that included a tip and did not include a tip. Is a pie chart a good choice for this particular data visualization?
+```{r}
+
+```
+A pie chart is ...
