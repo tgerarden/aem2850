@@ -1,4 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 12 Mar 2025 17:17:56 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 8</title><link>https://aem2850.toddgerarden.com/assignment/08-homework/</link><pubDate>Wed, 12 Mar 2025 17:17:56 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/08-homework/</guid><description>&lt;h2 id="homework">Homework&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 14 Mar 2025 21:27:49 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Time</title><link>https://aem2850.toddgerarden.com/example/09-example/</link><pubDate>Fri, 14 Mar 2025 21:27:49 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/09-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
+&lt;li>Questions? 🙋‍♀️&lt;/li>
+&lt;li>Tuesday:
+&lt;ul>
+&lt;li>Go through &lt;a href="https://aem2850.toddgerarden.com/content/09-content/">slides&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Thursday:
+&lt;ul>
+&lt;li>Open the &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a> project &lt;code>example-09&lt;/code>&lt;/li>
+&lt;li>Finish &lt;code>time-practice.R&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Solutions&lt;/strong> will be posted after class&lt;/li>
+&lt;/ul>
+&lt;h2 id="cheatsheets">Cheatsheets&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.github.io/cheatsheets/lubridate.pdf" target="_blank" rel="noopener">Click here to download the &lt;code>lubridate&lt;/code> cheatsheet&lt;/a>&lt;/p></description></item><item><title>Week 8</title><link>https://aem2850.toddgerarden.com/assignment/08-homework/</link><pubDate>Wed, 12 Mar 2025 17:17:56 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/08-homework/</guid><description>&lt;h2 id="homework">Homework&lt;/h2>
 &lt;p>Navigate to &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a>, open the project &lt;code>homework-08&lt;/code> in our course workspace, and follow the instructions in the file &lt;code>homework-08.qmd&lt;/code>.&lt;/p></description></item><item><title>Proportions and distributions</title><link>https://aem2850.toddgerarden.com/example/08-example/</link><pubDate>Mon, 10 Mar 2025 10:09:30 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/08-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
 &lt;li>Questions? 🙋‍♀️&lt;/li>
@@ -582,7 +599,25 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;li>
 &lt;p>&lt;a href="https://toolbox.google.com/datasetsearch" target="_blank" rel="noopener">&lt;strong>Google Dataset Search&lt;/strong>&lt;/a>: Google indexes thousands of public datasets; search for them here.&lt;/p>
 &lt;/li>
-&lt;/ul></description></item><item><title>Proportions and distributions</title><link>https://aem2850.toddgerarden.com/content/08-content/</link><pubDate>Mon, 10 Mar 2025 17:35:18 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/08-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;/ul></description></item><item><title>Time</title><link>https://aem2850.toddgerarden.com/content/09-content/</link><pubDate>Fri, 14 Mar 2025 21:26:40 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/09-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/time-series.html" target="_blank" rel="noopener">Chapter 13: Visualizing time series&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-trends.html" target="_blank" rel="noopener">Chapter 14: Visualizing trends&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;h4 id="optional-readings">Optional readings&lt;/h4>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/datetimes.html" target="_blank" rel="noopener">Chapter 17: Dates and times&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://flowingdata.com/2010/01/07/11-ways-to-visualize-changes-over-time-a-guide/" target="_blank" rel="noopener">11 Ways to Visualize Changes Over Time – A Guide&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
+&lt;ul>
+&lt;li>When is it okay (or not) to truncate the y-axis?&lt;/li>
+&lt;li>Many types of charts can communicate changes over time, but some are more appropriate in different situations. When is it best to use some of the different types (e.g., line graphs vs. area graphs vs. horizon charts vs. heatmaps, etc.)?&lt;/li>
+&lt;/ul>
+&lt;h3 id="slides">Slides&lt;/h3>
+&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
+&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/09-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/09-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
+&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Proportions and distributions</title><link>https://aem2850.toddgerarden.com/content/08-content/</link><pubDate>Mon, 10 Mar 2025 17:35:18 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/08-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-proportions.html" target="_blank" rel="noopener">Chapter 10: Visualizing proportions&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/histograms-density-plots.html" target="_blank" rel="noopener">Chapter 7: Visualizing distributions&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
