@@ -79,8 +79,8 @@ lessons:
   - title: '<span class="content-title">Time <br> Working with dates and times</span>'
     session: "Session 9"
     date: "Week 9"
-    # content: "09-content"
-    # example: "09-example"
+    content: "09-content"
+    example: "09-example"
     # assignment: "09-homework"
     bg: 1
 

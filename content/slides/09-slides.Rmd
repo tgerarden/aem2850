@@ -116,11 +116,11 @@ Acknowledgements:
 # Announcements
 
 Reminders:
-- **Group project groups due this Friday (March 22)** ([canvas link](https://canvas.cornell.edu/courses/62697/assignments/625794))
+- **Group project groups due this Friday (March 22)** ([canvas link](https://canvas.cornell.edu/courses/74072/assignments/761352))
   - Form groups of 3
-  - All students in each group must be enrolled at the same course level (2850 or 5850)
+  - All students in each group must be enrolled at the same course level
   - If unable to form a group of 3, please state that in your submission
-- **Group project due April 12** (full details to come in the next week)
+- **Group project due April 11** (full details to come soon!)
 
 Questions before we get started?
 
@@ -135,22 +135,22 @@ Questions before we get started?
   - [Visualizing time: the basics](#visualizing-time-basics)
     - [Visualizing amounts over time](#visualizing-amounts)
     - [Dates and times in R](#working-with-time)
-  - [Start example-08](#example)
+  - [Visualizing time: leveling up](#visualizing-time-advanced)
+    - [Animating plots](#animations)
+    - [Faceting plots](#faceting)
+    - [Connecting scatter plots](#connected-scatter-plots)
 ]
 
 .pull-right[
 ### Thursday
-  - [Visualizing time: leveling up](#visualizing-time-advanced)
-    - [Visualizing distributions](#visualizing-distributions)
-    - [Animating plots](#animations)
-    - [Faceting plots](#faceting)
-    - [Connecting scatter plots](#connected-scatter-plots)
-  - [Finish example-08](#example)
-]
+  - TAs will cover [example-09](#example)
 
 <br>
 
-[Starting, ending, and decomposing time (for reference)](#decomposing)
+### Reference slides at end of deck:
+  - [Visualizing distributions over time](#visualizing-distributions)
+  - [Starting, ending, and decomposing time](#decomposing)
+]
 
 ---
 name: prologue
@@ -369,7 +369,7 @@ https://statmodeling.stat.columbia.edu/2021/12/17/graphing-advice-if-zero-is-in-
 
 ---
 
-# Also: keep scales consistent, flag missing data
+# Keep date scales consistent, flag missing data
 
 &nbsp;
 
@@ -385,7 +385,7 @@ Alberto Cairo, *The Truthful Art*, chapter 8, figure 8.21
 
 ---
 
-# Also: don’t impute across categories
+# Aside: don’t impute across categories
 
 .pull-left[
 ```{r likert-imputation-bad, echo=FALSE, fig.width=4.8, fig.height=4.2, out.width="100%"}
@@ -471,8 +471,11 @@ How would you use these data to plot `adjusted` prices over time?
 gme_prices |> 
   ggplot(aes(x = date, y = adjusted)) +
   geom_point() + 
-  labs(x = NULL, y = "Share price ($)",
-       title = "GME to the moon")
+  labs(
+    x = NULL, 
+    y = "Share price ($)",
+    title = "GME to the moon"
+  )
 ```
 How could you reduce point overlap?
 ]
@@ -491,8 +494,11 @@ How could you reduce point overlap?
 gme_prices |> 
   ggplot(aes(x = date, y = adjusted)) +
   geom_point(size = 0.5) + #<<
-  labs(x = NULL, y = "Share price ($)",
-       title = "GME to the moon")
+  labs(
+    x = NULL, 
+    y = "Share price ($)",
+    title = "GME to the moon"
+  )
 ```
 How could you add a line to this?
 ]
@@ -512,8 +518,11 @@ gme_prices |>
   ggplot(aes(x = date, y = adjusted)) +
   geom_point(size = 0.5) +
   geom_line() + #<<
-  labs(x = NULL, y = "Share price ($)",
-       title = "GME to the moon")
+  labs(
+    x = NULL, 
+    y = "Share price ($)",
+    title = "GME to the moon"
+  )
 ```
 Which is better, points or lines?
 ]
@@ -527,19 +536,25 @@ Which is better, points or lines?
 
 # Time on x-axis: points vs lines
 
+Which is better?
+
+--
+
 It depends!
+
+--
 
 Points emphasize observations
 
 Lines emphasize trends
 
-Using lines for time series is often fine since data are evenly spaced and usually complete
+Using lines for time series data is common since data are evenly spaced and usually complete
 
 But lines are effectively made-up data, so be careful how you use them!
 
 ---
 
-# Time on x-axis + `geom_line/col()`
+# Time on x-axis + `geom_line()`
 
 The GameStop share price plot is clearer without points:
 
@@ -547,9 +562,12 @@ The GameStop share price plot is clearer without points:
 ```{r gme, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 gme_prices |> 
   ggplot(aes(x = date, y = adjusted)) +
-  geom_line() +
-  labs(x = NULL, y = "Share price ($)",
-       title = "GME to the moon")
+  geom_line() + #<<
+  labs(
+    x = NULL, 
+    y = "Share price ($)",
+    title = "GME to the moon"
+  )
 ```
 ]
 
@@ -560,7 +578,7 @@ gme_prices |>
 
 ---
 
-# Time on x-axis + `geom_line/col()`
+# Time on x-axis + `geom_line()`
 
 Can also use a fill for the area under a line, **as long as the y-axis starts at zero**
 
@@ -569,8 +587,11 @@ Can also use a fill for the area under a line, **as long as the y-axis starts at
 gme_prices |> 
   ggplot(aes(x = date, y = adjusted)) +
   geom_area(fill = "skyblue", color = "black") + #<<
-  labs(x = NULL, y = "Share price ($)",
-       title = "GME to the moon")
+  labs(
+    x = NULL, 
+    y = "Share price ($)",
+    title = "GME to the moon"
+  )
 ```
 ]
 
@@ -693,13 +714,13 @@ svb_failure
 
 .pull-left[
 ```{r}
-class(svb_failure)
+class("2023-03-10")
 ```
 ]
 
 .pull-right[
 ```{r}
-class("2023-03-10")
+class(svb_failure)
 ```
 ]
 
@@ -771,8 +792,12 @@ signature_failure - svb_failure
 --
 
 How many days are left until classes end?
-```{r}
-ymd(20240507) - today()
+```{r, eval = FALSE}
+ymd(20250506) - today()
+```
+
+```{r, echo = FALSE}
+ymd(20250506) - ymd(20250318)
 ```
 
 --
@@ -784,229 +809,10 @@ See [Chapter 17 of R4DS (2e)](https://r4ds.hadley.nz/datetimes.html) for functio
 
 ---
 class: inverse, center, middle
-name: example
-
-# example-08:<br>time-practice.R
-
-
----
-class: inverse, center, middle
 name: visualizing-time-advanced
 
 # Visualizing time: leveling up
 
-
----
-name: visualizing-distributions
-
-# Visualizing distributions over time
-
---
-
-We can also visualize how distributions evolve. How could you make this plot?
-
-```{r density-ridges, echo=FALSE, fig.width=7, fig.height=3.25, out.width="90%"}
-gapminder |> 
-    mutate(year = as_factor(year)) |> 
-    ggplot(
-      aes(x = lifeExp, 
-          y = fct_rev(year), 
-          fill = after_stat(x))
-      ) +
-    geom_density_ridges_gradient(
-      color = "white", 
-      quantile_lines = TRUE, 
-      quantiles = 2
-      ) +
-    guides(fill = "none") +
-    scale_fill_viridis_c() +
-    labs(x = "Life expectancy", 
-         y = NULL, fill = NULL) + 
-    theme_minimal()
-```
-
----
-
-# Let's start simple
-
-.left-code[
-```{r density-ridges-howto, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-library(ggridges) # for geom_density_ridges() #<<
-
-gapminder |> 
-    mutate(year = as_factor(year)) |> #<<
-    ggplot(
-      aes(x = lifeExp, 
-          y = year) # map time to y #<<
-      ) +
-    geom_density_ridges() # add geom #<<
-```
-
-How could we modify this to follow ↓ convention for time?
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("density-ridges-howto", "png")`)
-]
-
----
-
-# Follow ↓ convention for time
-
-.left-code[
-```{r density-ridges-howto-rev, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gapminder |> 
-    mutate(year = as_factor(year)) |> 
-    ggplot(
-      aes(x = lifeExp, 
-          y = fct_rev(year)) # reverse year #<<
-      ) +
-    geom_density_ridges()
-```
-How could we make the lines white?
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("density-ridges-howto-rev", "png")`)
-]
-
----
-
-# Add color to help visually separate densities
-
-.left-code[
-```{r density-ridges-howto-white, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gapminder |> 
-    mutate(year = as_factor(year)) |> 
-    ggplot(
-      aes(x = lifeExp, 
-          y = fct_rev(year))
-      ) +
-    geom_density_ridges(
-      color = "white"  # separate densities #<<
-      )
-```
-
-How could we add a line at the median of each density?
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("density-ridges-howto-white", "png")`)
-]
-
----
-
-# Add a line at the median of each density
-
-.left-code[
-```{r density-ridges-howto-median, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gapminder |> 
-    mutate(year = as_factor(year)) |> 
-    ggplot(
-      aes(x = lifeExp, 
-          y = fct_rev(year))
-      ) +
-    geom_density_ridges(
-      color = "white", 
-      quantile_lines = TRUE, # add lines #<<
-      quantiles = 2          # median #<<
-      )
-```
-
-How could we add a color gradient to the densities?
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("density-ridges-howto-median", "png")`)
-]
-
----
-
-# Fill the densities along the x axis
-
-.left-code[
-```{r density-ridges-howto-fill, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gapminder |> 
-    mutate(year = as_factor(year)) |> 
-    ggplot(
-      aes(x = lifeExp, 
-          y = fct_rev(year),
-          fill = after_stat(x)) # fill by x #<<
-      ) +
-    geom_density_ridges_gradient( #<<
-      # this is a special geom to fill along x #<<
-      color = "white", 
-      quantile_lines = TRUE, 
-      quantiles = 2
-      )
-```
-
-Use `after_stat(x)` to shade the *densities*, not the data itself
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("density-ridges-howto-fill", "png")`)
-]
-
----
-
-# Use colors that are better perceived
-
-.left-code[
-```{r density-ridges-howto-viridis, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gapminder |> 
-    mutate(year = as_factor(year)) |> 
-    ggplot(
-      aes(x = lifeExp, 
-          y = fct_rev(year),
-          fill = after_stat(x))
-      ) +
-    geom_density_ridges_gradient(
-      color = "white", 
-      quantile_lines = TRUE, 
-      quantiles = 2
-      ) +
-    scale_fill_viridis_c()  # nicer shading #<<
-```
-`viridis` colors are easier to perceive if color blind, and in black-and-white
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("density-ridges-howto-viridis", "png")`)
-]
-
----
-
-# Finish by cleaning the plot up
-
-.left-code[
-```{r density-ridges-howto-fancy, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-gapminder |> 
-    mutate(year = as_factor(year)) |> 
-    ggplot(
-      aes(x = lifeExp, 
-          y = fct_rev(year),
-          fill = after_stat(x))
-      ) +
-    geom_density_ridges_gradient(
-      color = "white", 
-      quantile_lines = TRUE, 
-      quantiles = 2
-      ) +
-    scale_fill_viridis_c() +
-    guides(fill = "none") +    # omit legend #<<
-    labs(x = "Life expectancy",# modify label #<<
-         y = NULL,             # omit labels #<<
-         fill = NULL) +        # omit labels #<<
-    theme_minimal(             # cleaner theme #<<
-      base_size = 14           # larger font #<<
-      )                        #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("density-ridges-howto-fancy", "png")`)
-]
 
 ---
 name: animations
@@ -1028,18 +834,44 @@ First, how would we make a static plot of the data?
 --
 
 .left-code[
-```{r gapminder-static, tidy=FALSE, fig.show="hide", fig.dim=c(8, 6), out.width="100%"}
+```{r gapminder-static-simple, tidy=FALSE, fig.show="hide", fig.dim=c(8, 6), out.width="100%"}
 library(gapminder) # gapminder data
 
 gapminder |> 
   ggplot(aes(x = gdpPercap, y = lifeExp,  #<<
              size = pop, color = continent)) + #<<
-  geom_point(alpha = 0.5, show.legend = FALSE) + #<<
-  scale_color_manual(
-    values = gapminder::continent_colors
-    ) +
-  scale_size_continuous(range = c(1, 15)) +
-  scale_x_log10(labels = label_dollar()) +
+  geom_point(alpha = 0.5, show.legend = FALSE)
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("gapminder-static-simple", "png")`)
+]
+
+
+???
+
+https://towardsdatascience.com/how-to-create-animated-plots-in-r-adf53a775961
+
+---
+
+# How can we make this animation in R?
+
+Let's clean this up a bit to match the gapminder formatting:
+
+.left-code[
+```{r gapminder-static, tidy=FALSE, fig.show="hide", fig.dim=c(8, 6), out.width="100%"}
+library(gapminder) # gapminder data
+
+gapminder |> 
+  ggplot(aes(x = gdpPercap, y = lifeExp,
+             size = pop, color = continent)) +
+  geom_point(alpha = 0.5, show.legend = FALSE) +
+  scale_color_manual(  #<<
+    values = gapminder::continent_colors  #<<
+  ) +  #<<
+  scale_x_log10(labels = label_dollar()) + #<<
+  scale_size_continuous(range = c(1, 15)) + #<<
   theme_classic(base_size = 20) +
   labs(x = "GDP per capita", 
        y = "Life expectancy",
@@ -1072,9 +904,9 @@ gapminder |>
   geom_point(alpha = 0.5, show.legend = FALSE) +
   scale_color_manual(
     values = gapminder::continent_colors
-    ) +
-  scale_size_continuous(range = c(1, 15)) +
+  ) +
   scale_x_log10(labels = label_dollar()) +
+  scale_size_continuous(range = c(1, 15)) +
   theme_classic(base_size = 20) +
   labs(x = "GDP per capita", 
        y = "Life expectancy",
@@ -1108,8 +940,8 @@ my_gapminder_animation <- gapminder |>
   ggplot(aes(x = gdpPercap, y = lifeExp, size = pop, color = continent)) +
   geom_point(alpha = 0.5, show.legend = FALSE) +
   scale_color_manual(values = gapminder::continent_colors) +
-  scale_size_continuous(range = c(1, 15)) +
   scale_x_log10(labels = label_dollar()) +
+  scale_size_continuous(range = c(1, 15)) +
   theme_classic(base_size = 20) +
   labs(x = "GDP per capita", 
        y = "Life expectancy",
@@ -1302,6 +1134,172 @@ plot_unempl <- ggplot(unemp_inflation, aes(x = date, y = unemployment)) +
 plot_inflation / plot_unempl
 ```
 
+]
+
+---
+class: inverse, center, middle
+name: example
+
+# example-09:<br>time-practice.R
+
+
+---
+class: inverse, center, middle
+name: visualizing-distributions
+
+# Visualizing distributions over time <br> (for reference)
+
+---
+
+# Visualizing distributions over time
+
+We can also visualize how distributions evolve. How could you make this plot?
+
+```{r density-ridges, echo=FALSE, fig.width=7, fig.height=3.25, out.width="90%"}
+gapminder |> 
+  mutate(year = as_factor(year)) |> 
+  ggplot(
+    aes(x = lifeExp, 
+        y = fct_rev(year))
+  ) +
+  geom_density_ridges(
+    color = "white", 
+    fill = "#B31B1B",
+    quantile_lines = TRUE, 
+    quantiles = 2
+  ) +
+  guides(fill = "none") +
+  scale_fill_viridis_c() +
+  labs(x = "Life expectancy", 
+       y = NULL, fill = NULL) + 
+  theme_minimal(base_size = 14)
+```
+
+---
+
+# Let's start simple
+
+.left-code[
+```{r density-ridges-howto, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+library(ggridges) # for geom_density_ridges() #<<
+
+gapminder |> 
+  mutate(year = as_factor(year)) |> #<<
+  ggplot(aes(
+    x = lifeExp, 
+    y = year # map time to y #<<
+  )) +
+  geom_density_ridges() # add geom #<<
+```
+
+How could we modify this to follow ↓ convention for time?
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("density-ridges-howto", "png")`)
+]
+
+---
+
+# Follow ↓ convention for time
+
+.left-code[
+```{r density-ridges-howto-rev, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+gapminder |> 
+  mutate(year = as_factor(year)) |> 
+  ggplot(aes(
+    x = lifeExp, 
+    y = fct_rev(year) # reverse year #<<
+  )) +
+  geom_density_ridges()
+```
+How could we make the lines white?
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("density-ridges-howto-rev", "png")`)
+]
+
+---
+
+# Add color to help visually separate densities
+
+.left-code[
+```{r density-ridges-howto-white, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+gapminder |> 
+  mutate(year = as_factor(year)) |> 
+  ggplot(aes(
+    x = lifeExp, 
+    y = fct_rev(year)
+  )) +
+  geom_density_ridges(
+    color = "white",  # separate densities #<<
+    fill = "#B31B1B"
+  )
+```
+
+How could we add a line at the median of each density?
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("density-ridges-howto-white", "png")`)
+]
+
+---
+
+# Add a line at the median of each density
+
+.left-code[
+```{r density-ridges-howto-median, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+gapminder |> 
+  mutate(year = as_factor(year)) |> 
+  ggplot(aes(
+    x = lifeExp, 
+    y = fct_rev(year)
+  )) +
+  geom_density_ridges(
+    color = "white",
+    fill = "#B31B1B",
+    quantile_lines = TRUE, # add lines #<<
+    quantiles = 2          # median #<<
+  )
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("density-ridges-howto-median", "png")`)
+]
+
+---
+
+# Finish by cleaning the plot up
+
+.left-code[
+```{r density-ridges-howto-fancy, tidy=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+gapminder |> 
+  mutate(year = as_factor(year)) |> 
+  ggplot(aes(
+    x = lifeExp, 
+    y = fct_rev(year)
+  )) +
+  geom_density_ridges(
+    color = "white",
+    fill = "#B31B1B",
+    quantile_lines = TRUE,
+    quantiles = 2
+  ) +
+  labs(                   #<<
+    x = "Life expectancy",# modify label #<<
+    y = NULL              # omit labels #<<
+  ) +                     #<<
+  theme_minimal(          # cleaner theme #<<
+    base_size = 14        # larger font #<<
+  )                       #<<
+```
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("density-ridges-howto-fancy", "png")`)
 ]
 
 ---
