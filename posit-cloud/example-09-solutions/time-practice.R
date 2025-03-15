@@ -10,16 +10,14 @@
 # we need to install packages once before we can use them
 # install.packages("tidyverse") # in this case, it has already been done for you in this project
 library(tidyverse) # load the core tidyverse packages, which include lubridate
-# library(Quandl) # load Quandl package (https://data.nasdaq.com/tools/r)
 
 # use theme_set to get clean plots without having to specify the theme each time
 theme_set(theme_minimal()) # set the current theme to theme_minimal()
 # you can use theme_set(theme()) to return to defaults if you prefer
 
-# today we'll explore some economic data to learn about working with dates and visualizing time data
-# the data come from FRED (https://fred.stlouisfed.org), though accessed via the quandl api
-# in order to use the API, you either need to work locally or register and then use your own API key
-# for convenience, i created csv files store in data/ but also include the code used to get the data
+# today we'll use economic data from FRED
+# (https://fred.stlouisfed.org)
+# for convenience, i created csv files store in data/
 
 
 # 1. it's your birthday ----
@@ -39,20 +37,20 @@ class(my_bdate)
 # use an alternative date convention and convert it to a date
 alt_bdate <- mdy("______")
 
-# what month were you born in?
+# what year were you born in?
 year(______)
 
 # what month were you born in?
-______(______)
+______(my_bdate)
 
 # what month were you born in, labeled in english?
-
+______(my_bdate, label = ______)
 
 # what day of the year were you born on?
 yday(______)
 
 # what day of the month were you born on?
-______(______)
+______(my_bdate)
 
 # what day of the week were you born on?
 
@@ -61,7 +59,7 @@ ______(______)
 
 
 # how many days old are you? assign this to my_days
-______ - ______
+today() - ______
 my_days <- ______ - ______
 
 # what type of object is my_days?
@@ -77,60 +75,58 @@ my_days <- ______ - ______
 
 # 2. Import and visualize oil price data ----
 # oil prices are an important economic indicator
-# could use quandl to import WTI (US) and Brent (EU) prices from FRED
-# oil_prices <- Quandl(c("FRED/DCOILWTICO", "FRED/DCOILBRENTEU"))
-# but we did this in advance, so we can just `data/oil_prices.csv`
+# let's see how they varied over the past 25 years
+# import the data in data/oil_prices.csv
 oil_prices <- read_csv("data/oil_prices.csv")
 
 
-# tidy the data, filtering to post 2000
-# renaming the variables by position for convenience
-# i used the names "date" "wti" and "brent"
+# tidy the data so that each row only contains one price
+# make sure the date variable is a date object, not character
 
 
 # use the tidy data to plot wti prices over time as points
 
 
-# add a line
+# add a line to the plot of wti prices
 
 
-# now plot lines (only) for both wti and brent, coloring by type
+# now plot only lines, for both prices, coloring by type
 # add a horizontal line at 0 using geom_hline()
 
 
 
 # 3. Import and visualize GDP data ----
-# use quandl to import FRED's seasonally adjusted GDP data
-# use FRED/GDPC1, which is in real terms, rather than GDP (which is nominal)
-# gdp <- Quandl("FRED/GDPC1")
+# import the data in data/gdp.csv
 gdp <- read_csv("data/gdp.csv")
-
-# inspect the data frame's structure
-
 
 # make a line plot of GDP over time
 
 
 # put the y axis scale in logs using scale_y_log10()
-# many economic and business indicators exhibit constant growth rates, which lead to exponential trends
-# plotting data in logs is often a convenient way to visualize these data
+# many economic indicators exhibit constant growth rates,
+# which lead to exponential trends
+# using logs is often a good way way to visualize these data
 
 
 # let's go back to levels rather than logs
-# use lubridate and dplyr functions to make the same plot for annual data
-# create a year variable, group by that, and take the sum of Value within each year, then plot it
+# the gdp data are quarterly
+# use lubridate and dplyr functions to an annual plot:
+# 1. create a year variable
+# 2. group by year
+# 3. take the sum of gdp within each year
+# 4. then plot it
 
 
 # plot gdp from my_bday to the present
+# filter the data by comparing date to my_bday
 
 
 # make a line plot of gdp from 2000 to the present
+# filter the data by comparing date to "2000-01-01"
 
 
 
-# PLEASE STOP HERE AND LET US KNOW THAT YOU ARE DONE
-# IF YOU FINISH WITH TIME TO SPARE, YOU CAN JUMP AHEAD TO SECTION 6
-# WE WILL COVER SECTIONS 4-5 ON THURSDAY
+# PLEASE PUT YOUR NAME TENT DOWN LET US KNOW THAT YOU ARE DONE
 
 
 # 4. Gapminder animation revisited ----
@@ -151,25 +147,28 @@ gapminder_points <- gapminder |>
   scale_color_manual(
     values = continent_colors # continent_colors comes from gapminder
   ) +
-  scale_size_continuous(range = c(1, 15)) +
   scale_x_log10(labels = scales::label_dollar()) + # scales is a tidyverse package
+  scale_size_continuous(range = c(1, 15)) +
   theme_classic(base_size = 20) +
   labs(
     x = "GDP per capita",
     y = "Life expectancy",
-    title = "Year: {frame_time}"
-  ) + # transition_time makes {frame_time} available
+    title = "Year: {frame_time}" # transition_time makes {frame_time} available
+  ) +
   transition_time(year) + # tell gganimate to use year for animation transitions
   ease_aes('linear') # default progression
 animate(gapminder_points, renderer = gifski_renderer())
 
+# one way is using filters:
 # find the outlier country with GDP per capita over $100,000 in the 1950s
-# one way is using filters
 
 
-# or plot text using geom_text (or geom_label) instead of geom_point
+# another option is to create an animation with labels:
+# 1. copy and paste the plot code above
+# 2. replace geom_point with geom_text
 # note: for plotting text, the aesthetic mapping needs to include a `label`
-# you might also want to omit the size mapping to make the chart more readable
+# 3. omit the size mapping to make the chart more readable
+# 4. use animate to create the animation
 
 
 # can you think of any reasons that country was an outlier in terms of gdp/capita?
@@ -179,7 +178,7 @@ animate(gapminder_points, renderer = gifski_renderer())
 
 
 # 5. OJ prices and sales over time ----
-# import data/oj.csv, which contains data from a retailer on oj prices and sales
+# import data/oj.csv, which contains retailer data on oj prices and sales
 
 
 # the data are organized by brand
@@ -197,32 +196,31 @@ animate(gapminder_points, renderer = gifski_renderer())
 # make a scatter plot using the tropicana data, without using time at all
 
 
-# modify your previous plot to use log scales (scale_x_log10, scale_y_log10)
+# modify your previous plot to use log scales (scale_x_log10 + scale_y_log10)
 
 
 # make a version of your last plot that includes all brands
-# add a linear fit line using geom_smooth()
+# map brand to color
+# add a linear fit line using geom_smooth(method = "lm")
 
 
 # as time allows:
 # make a line plot of both sales and prices, in facets, over time for tropicana
-# you will want to use the scales argument to facet_wrap here
+# you will want to use the scales = "free_y" argument to facet_wrap here
 
 
 # if you were the retailer, how could you use the data to inform your strategy?
-# what are the pros and cons of your two different visualizations for this purpose?
+# what are the pros and cons of your two visualizations for this purpose?
 # what more would you want to know, or to do with the data?
 
 
+# OPTIONAL, TIME PERMITTING:
 # 6. Make a more polished GDP plot ----
 # try to make this: https://fred.stlouisfed.org/graph/fredgraph.png?g=MOiP
 
 # 6.1. first you will need to process recessions data:
 # 6.1.1. get data on the start and end dates of recessions (FRED/USREC)
-# go ahead and filter to post-2000 data for convenience
-# rec <- Quandl("FRED/USREC") |>
-#   filter(Date >= "2000-01-01") |>
-#   arrange(Date)
+# import the data from data/rec.csv
 rec <- read_csv("data/rec.csv")
 
 # 6.1.2. use dplyr tools to isolate periods when recessions start/end
@@ -247,17 +245,21 @@ rec <- read_csv("data/rec.csv")
 
 
 # 6.4. use ggsave to save the plot as a .png file
-# you will probably want to specify the dimensions (e.g., width = 8, height = 4.5)
+# specify the dimensions; width = 8, height = 4.5
+ggsave(
+  "_____",
+  width = 8,
+  height = 4.5
+)
 
 
-
+# OPTIONAL, TIME PERMITTING:
 # 7. Recessionary oil prices ----
 # use your code from 3 to make a plot of WTI prices with recession shading
 
 
 # use ggsave to save the plot as a .png file
-# you will probably want to specify the dimensions (e.g., width = 8, height = 4.5)
+# specify the dimensions; width = 8, height = 4.5
 
 
 # do you think the Great Recession and COVID affected oil prices? how? why?
-
