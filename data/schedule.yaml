@@ -81,7 +81,7 @@ lessons:
     date: "Week 9"
     content: "09-content"
     example: "09-example"
-    # assignment: "09-homework"
+    assignment: "09-homework"
     bg: 1
 
   - title: '<span class="content-title">Relationships</span>'

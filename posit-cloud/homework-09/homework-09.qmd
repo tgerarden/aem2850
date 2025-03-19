@@ -24,10 +24,12 @@ library(scales) # functions for making nicer scales
 
 # omit warnings and center plots by default
 library(knitr)
-opts_chunk$set(warning = FALSE, 
-               message = FALSE,
-               fig.align = "center",
-               out.width = "85%")
+opts_chunk$set(
+  warning = FALSE, 
+  message = FALSE,
+  fig.align = "center",
+  out.width = "85%"
+)
 ```
 
 # Preface
@@ -52,11 +54,12 @@ We will work with monthly data on home prices from [Zillow Research](https://www
 
 
 {{< pagebreak >}}
-## 2. Visualize the price distribution across years, using the type of plot that you think is most appropriate. Show the median price per year in the plot. Add tweaks that you think can improve the plot. How do the distribution and the median price change over years?
+## 2. Visualize the price distribution across years, using the type of plot that you think is most appropriate. Show the median price per year in the plot. Add tweaks that you think can improve the plot. How do the median price and price distribution change over years?
 
 ```{r}
 
 ```
+The median price and price distribution...
 
 
 {{< pagebreak >}}
@@ -68,7 +71,7 @@ We will work with monthly data on home prices from [Zillow Research](https://www
 
 
 {{< pagebreak >}}
-## 4. Add a colored rectangle to the plot in question 3, showing the period of pandemic, from March 2020 to the last period of the data. Use a caption below the figure to explain what the shading indicates. Use your plot object `nyc_plot` as the starting point rather than duplicating your code from above.
+## 4. Use `geom_rect` to add a colored rectangle to the plot from question 3 showing the period of pandemic, from March 2020 to the last period of the data. Use a caption below the figure to explain what the shading indicates. Use your plot object `nyc_plot` as the starting point rather than duplicating your code from above.
 
 ```{r}
 
@@ -83,7 +86,7 @@ We will work with monthly data on home prices from [Zillow Research](https://www
 
 
 ```
-...
+Yes/No...
 
 
 {{< pagebreak >}}
@@ -92,6 +95,7 @@ We will work with monthly data on home prices from [Zillow Research](https://www
 ```{r}
 
 ```
+These patterns do/do not make sense to me...
 
 
 {{< pagebreak >}}
@@ -107,6 +111,13 @@ We will work with monthly data on home prices from [Zillow Research](https://www
 ## 8. Now import `Metro_sales_count_now_uc_sfrcondo_month.csv`, which contains sales counts. Tidy and join the sales data with the adjusted price data. Keep the observations for New York City. Make a scatter plot mapping sales to the x-axis and adjusted prices to the y-axis. What pattern do you see? Is it consistent with your expectation? What are some potential explanations for the pattern you see?
 
 ```{r, echo = FALSE}
+# you might want to separate the data tidying code from the plotting code
+# if you want to omit code from the pdf, you can use `echo = FALSE`
+# `echo = FALSE` omits any code in this chunk from the pdf output
+
+```
+
+```{r}
 
 ```
 ...
