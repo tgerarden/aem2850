@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 15 Mar 2025 13:20:05 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 9</title><link>https://aem2850.toddgerarden.com/assignment/09-homework/</link><pubDate>Sat, 15 Mar 2025 13:20:05 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/09-homework/</guid><description>&lt;h2 id="homework">Homework&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 24 Mar 2025 10:39:36 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 10</title><link>https://aem2850.toddgerarden.com/assignment/10-homework/</link><pubDate>Mon, 24 Mar 2025 10:39:36 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/10-homework/</guid><description>&lt;h2 id="no-homework-this-week">No homework this week&lt;/h2>
+&lt;p>There is no homework for this week. Have a great Spring break!&lt;/p></description></item><item><title>Week 9</title><link>https://aem2850.toddgerarden.com/assignment/09-homework/</link><pubDate>Sat, 15 Mar 2025 13:20:05 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/09-homework/</guid><description>&lt;h2 id="homework">Homework&lt;/h2>
 &lt;p>Navigate to &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a>, open the project &lt;code>homework-09&lt;/code> in our course workspace, and follow the instructions in the file &lt;code>homework-09.qmd&lt;/code>.&lt;/p></description></item><item><title>Time</title><link>https://aem2850.toddgerarden.com/example/09-example/</link><pubDate>Fri, 14 Mar 2025 21:27:49 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/09-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
 &lt;li>Questions? 🙋‍♀️&lt;/li>
@@ -600,7 +601,26 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;li>
 &lt;p>&lt;a href="https://toolbox.google.com/datasetsearch" target="_blank" rel="noopener">&lt;strong>Google Dataset Search&lt;/strong>&lt;/a>: Google indexes thousands of public datasets; search for them here.&lt;/p>
 &lt;/li>
-&lt;/ul></description></item><item><title>Time</title><link>https://aem2850.toddgerarden.com/content/09-content/</link><pubDate>Fri, 14 Mar 2025 21:26:40 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/09-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;/ul></description></item><item><title>Relationships</title><link>https://aem2850.toddgerarden.com/content/10-content/</link><pubDate>Mon, 24 Mar 2025 10:02:57 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/10-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-associations.html" target="_blank" rel="noopener">Chapter 12: Visualizing associations&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://kieranhealy.org/blog/archives/2016/01/16/two-y-axes/" target="_blank" rel="noopener">Two Y-Axes&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="optional-readings">Optional readings&lt;/h4>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/data-visualize#visualizing-relationships" target="_blank" rel="noopener">Section 1.5: Visualizing relationships&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://socviz.co/modeling.html#modeling" target="_blank" rel="noopener">Chapter 6: Working with models&lt;/a> of &lt;em>Data Visualization&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
+&lt;ul>
+&lt;li>How can you correctly and honestly communicate relationships between variables? How can you communicate the uncertainty in those relationships?&lt;/li>
+&lt;li>What are the dangers of visualizing two variables?&lt;/li>
+&lt;li>When is it appropriate to use two y-axes?&lt;/li>
+&lt;/ul>
+&lt;h3 id="slides">Slides&lt;/h3>
+&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
+&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/10-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/10-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
+&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Time</title><link>https://aem2850.toddgerarden.com/content/09-content/</link><pubDate>Fri, 14 Mar 2025 21:26:40 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/09-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/time-series.html" target="_blank" rel="noopener">Chapter 13: Visualizing time series&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-trends.html" target="_blank" rel="noopener">Chapter 14: Visualizing trends&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
