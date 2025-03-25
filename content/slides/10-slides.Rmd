@@ -69,12 +69,13 @@ Acknowledgements:
 # Announcements
 
 Reminders:
-- Group project due April 19 ([link](https://aem2850.toddgerarden.com/assignment/group-project/))
-  - We set up group-specific workspaces on Posit Cloud for the project to allow simultaneous collaborative editing
-  - Instructions are posted there and on canvas
+- Group project due April 18 ([link](https://canvas.cornell.edu/courses/74072/assignments/761351))
+  - We will set up group-specific workspaces on posit cloud for the project to allow simultaneous collaborative editing
+  - Still: save your work early and often to avoid overwriting each other's work
+  - Log out and close your posit cloud browser tab between sessions
+  - Instructions to be posted on posit cloud and on canvas
   - Make a plan and start early!
-- Victor will help you work through this Thursday's example
-- No lab-10 due to spring break
+- No homework-10 due to spring break
 
 Questions before we get started?
 
@@ -138,7 +139,7 @@ You have to choose where the y-axes start and stop, which means...
 
 --
 
-...you can force the two trends to line up however you want!
+...you can force the two trends to line up however you want.
 
 
 ---
@@ -159,27 +160,12 @@ The revised axes ranges reflect a comparable proportional change
 
 ---
 
-# The rare triple y-axis
-
-.small.center[
-<figure>
-  <img src="img/10/triple-y-axis.png" alt="Acemoglu and Restrepo triple y-axis" title="Acemoglu and Restrepo triple y-axis" width="65%">
-  <figcaption>Source: Daron Acemoglu and Pascual Restrepo, "The Race Between Man and Machine: Implications of Technology for Growth, Factor Shares and Employment"</figcaption>
-</figure>
-]
-
-???
-
-Daron Acemoglu and Pascual Restrepo, ["The Race Between Man and Machine: Implications of Technology for Growth, Factor Shares and Employment"](https://economics.mit.edu/files/10866)
-
----
-
 # What could we do instead?
 
 --
 
 .pull-left[
-- Use multiple plots!
+- Use multiple plots
 
 ```{r solar-data-facet, echo=FALSE, fig.dim=c(4, 3), out.width="100%"}
 solar_data <- read_csv("data/solar-data.csv") |> 
@@ -208,7 +194,7 @@ solar_data |>
 --
 
 .pull-right[
-- Use scatter plots instead
+- Use scatter plots
 
 ```{r solar-data-scatter, echo=FALSE, fig.dim=c(4, 3), out.width="100%"}
 solar_data |> 
@@ -231,56 +217,11 @@ solar_data |>
 
 **1. Facets** are great when using a common geometry (we've already seen that)
 
-**2. Combining multiple plot objects** can be more flexible
+**2. Combining multiple plot objects** can be more flexible (see, e.g., `patchwork`)
 
---
-
-Let's use Ithaca weather data to see an example of combining plots:
-
-```{r}
+```{r include=FALSE}
 ithaca_weather <- read_csv("data/ithaca-weather-2021.csv")
-
-ithaca_weather |> 
-  select(STATION, NAME, DATE, TMAX, SNOW) |> 
-  head(3)
 ```
-
-
----
-
-# Combining multiple plots in R
-
-.left-code[
-```{r ithaca-weather-patchwork, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
-library(patchwork) #<<
-
-# make a plot of temperatures
-temp_plot <- ggplot(ithaca_weather, 
-                    aes(x = DATE, y = TMAX)) +
-  geom_line() + geom_smooth() +
-  labs(x = NULL, y = "Fahrenheit")
-
-# make a plot of snowfall
-snow_plot <- ggplot(ithaca_weather,   
-                    aes(x = DATE, y = SNOW)) + 
-  geom_col() + 
-  labs(x = NULL, y = "Snowfall (inches)")
-
-# use patchwork to combine the two plots       #<<
-temp_plot +    # simply use + to combine plots #<<
-  snow_plot +  # then add on custom options    #<<
-  plot_layout( #   using plot_layout           #<<
-    ncol = 1,  # layout, like with facet_wrap  #<<
-    heights = c(7, 3) # relative heights       #<<
-  )                                            #<<
-```
-]
-
---
-
-.right-plot[
-![](`r knitr::fig_chunk("ithaca-weather-patchwork", "png")`)
-]
 
 
 ---
@@ -289,7 +230,7 @@ temp_plot +    # simply use + to combine plots #<<
 
 --
 
-When the two axes measure the same thing
+When the two axes measure the same thing (e.g., indexing, conversion, etc.)
 
 --
 
@@ -297,6 +238,10 @@ When the two axes measure the same thing
 ggplot(ithaca_weather, aes(x = DATE, y = TMAX)) +
   geom_line() +
   geom_smooth() +
+  scale_x_date(
+    date_breaks = "1 month",
+    date_labels = "%b"
+  ) +
   scale_y_continuous(sec.axis = 
                        sec_axis(trans = ~ (32 - .) * -5/9,
                                 name = "Celsius")) +
@@ -307,86 +252,6 @@ ggplot(ithaca_weather, aes(x = DATE, y = TMAX)) +
   theme_minimal() +
   theme(plot.title = element_text(face = "bold"))
 ```
-
----
-
-# Making the base plot in R
-
-.left-code[
-```{r ithaca-weather-single, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-ggplot(ithaca_weather, 
-       aes(x = DATE, y = TMAX)) +
-  geom_line() +                           #<<
-  geom_smooth() +                         #<<
-  labs(x = NULL, y = "Fahrenheit")
-```
-
-How could we add a second axis?
-
-Do any functions come to mind?
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("ithaca-weather-single", "png")`)
-]
-
----
-
-# Adding a second scale in R
-
-.left-code[
-```{r ithaca-weather-dual, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-ggplot(ithaca_weather, 
-       aes(x = DATE, y = TMAX)) +
-  geom_line() +
-  geom_smooth() +
-  scale_y_continuous(                     #<<
-    sec.axis =                            #<<
-      sec_axis(trans = ~ (. - 32) * 5/9,  #<<
-               name = "Celsius")          #<<
-  ) +                                     #<<
-  labs(x = NULL, y = "Fahrenheit")
-```
-
-We provided this formula for the **trans**formation argument:
-
-.small.center[`Celsius = (Fahrenheit - 32) * 5/9`]
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("ithaca-weather-dual", "png")`)
-]
-
----
-
-# Adding a second scale in R
-
-.left-code[
-```{r review-dual, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 4.2), out.width="100%"}
-car_counts <- mpg |> count(drv)
-
-total_cars <- car_counts |> pull(n) |> sum()
-
-car_counts |> 
-  ggplot(aes(x = drv, y = n)) +
-  geom_col() +
-  scale_y_continuous(               #<<
-    sec.axis = sec_axis(            #<<
-      transform = ~ . / total_cars, #<<
-      labels = scales::percent,     #<<
-      name = "Share"),              #<<
-    ) +                             #<<
-  labs(y = "Number")
-```
-This makes it a lot easier to see proportions with side-by-side bars!
-
-Note: **total_cars** is not in **car_counts**
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("review-dual", "png")`)
-]
-
 
 ---
 
@@ -546,9 +411,7 @@ ithaca_weather |>
   geom_point()
 
 ithaca_weather |> 
-  summarize(cor(TMIN, TMAX)) |> #<<
-  pull() |> # extract cor from data frame
-  round(2)  # round to 2 decimal places
+  summarize(cor(TMIN, TMAX)) #<<
 ```
 
 **Strong positive correlation**
@@ -571,9 +434,7 @@ ithaca_weather |>
   geom_point()
 
 ithaca_weather |> 
-  summarize(cor(TMIN, SNOW)) |> #<<
-  pull() |> # extract cor from data frame
-  round(2)  # round to 2 decimal places
+  summarize(cor(TMIN, SNOW)) #<<
 ```
 
 **Weak negative correlation**
@@ -638,7 +499,11 @@ reviews <- read_csv("data/10-slides/review_summary.csv")
 colnames(reviews) <- colnames(reviews) |> 
   str_remove("review_scores_")
   
-reviews |> 
+reviews_subset <- reviews |> 
+  filter(rating>=4 & accuracy>=4) |> 
+  sample_n(20)
+
+reviews_subset |> 
   ggplot(aes(x = accuracy, y = rating)) +
   geom_point(alpha = 0.5) +
   labs(x = "Accuracy rating",
@@ -653,10 +518,10 @@ reviews |>
 .pull-right[
 
 ```{r review-residuals, echo=FALSE, fig.dim=c(4.8, 4.2), out.width="100%"}
-review_model <- lm(rating ~ accuracy, data = reviews)
+review_model <- lm(rating ~ accuracy, data = reviews_subset)
 review_fitted <- augment(review_model, se_fit = TRUE)
 
-reviews |> 
+reviews_subset |> 
   ggplot(aes(x = accuracy, y = rating)) +
   geom_point(alpha = 0.25) +
   labs(x = "Accuracy rating",
@@ -666,7 +531,7 @@ reviews |>
                aes(x = accuracy, xend = accuracy,
                    y = rating, yend = .fitted),
                alpha = 0.25) +
-    geom_smooth(method = "lm", formula = "y ~ x")
+  geom_smooth(method = "lm", formula = "y ~ x", se = FALSE)
 ```
 
 ]
@@ -677,9 +542,9 @@ reviews |>
 
 Base R has some basic modeling tools:
 ```{r model-template, eval=FALSE}
-name_of_model <- lm(<Y> ~ <X>, data = <DATA>) # use lm to fit simple linear models
+<MODEL> <- lm(<Y> ~ <X>, data = <DATA>) # use lm to fit simple linear models
 
-summary(name_of_model) # see model details
+summary(<MODEL>) # see model details
 ```
 
 --
@@ -689,10 +554,10 @@ The `broom` package provides helpful tools for tidying model output:
 library(broom)
 
 # convert model estimates to a data frame for plotting
-tidy(name_of_model)
+tidy(<MODEL>)
 
 # return a data frame that includes predictions, residuals, etc.
-augment(name_of_model)
+augment(<MODEL>)
 ```
 
 ---
@@ -701,7 +566,7 @@ augment(name_of_model)
 
 Let's use some real-world data to explore linear regression
 
-Put yourself in the shoes of a landlord trying to decide how much to invest in improvements across these categories:
+Put yourself in the shoes of an Airbnb host trying to decide how much to invest in improvements across these categories:
 
 .center[
 <figure>
@@ -730,6 +595,8 @@ review_model <- lm(
 Note how we didn't write anything for the $\beta_0$ or $\varepsilon$ terms
 
 What do you think the sign on $\beta_1$ is?
+
+How large do you think $\beta_1$ is?
 
 ]
 
@@ -802,6 +669,7 @@ tidy(review_model) |>
 $$
 \widehat{\text{rating}} = 0.76 + 0.83 \times \text{accuracy}
 $$
+Note: this is an example where `alpha` helps with overplotting
 ]
 
 .pull-right[
@@ -829,6 +697,7 @@ tidy(review_model) |>
 $$
 \widehat{\text{rating}} = 0.76 + 0.83 \times \text{accuracy}
 $$
+Note: this is an example where `alpha` helps with overplotting
 ]
 
 .pull-right[
@@ -848,21 +717,21 @@ reviews |>
 
 # Visualization of a continuous variable
 
-.more-left[
-Reminder: `geom_smooth(method = "lm")` allows us to skip the estimation step!
+.pull-left[
+.small[Recall: `geom_smooth(method = "lm")` allows us to skip the estimation step!]
 
 ```{r tidy-review-model-geom_smooth-code, eval=FALSE, fig.dim=c(4.8, 4.2), out.width="100%"}
 reviews |> 
   ggplot(aes(x = accuracy, y = rating)) +
   geom_point(alpha = 0.25) +
-  geom_smooth( #<<
-    method = "lm",     # smoothing function #<<
-    se = FALSE         # omit confidence bands #<<
-  )                    #<<
+  geom_smooth(       #<<
+    method = "lm",   # smoothing function #<<
+    se = FALSE       # omit confidence bands #<<
+  )                  #<<
 ```
 ]
 
-.less-right[
+.pull-right[
 ```{r tidy-review-model-geom_smooth-plot, echo=FALSE, fig.dim=c(4.8, 4.2), out.width="100%"}
 reviews |> 
   ggplot(aes(x = accuracy, y = rating)) +
@@ -888,14 +757,14 @@ We're not limited to just one explanatory variable!
 $$
 y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_n x_n + \varepsilon
 $$
-
-&nbsp;
+<br>
 
 --
 
 ```{r build-review-model-big}
 review_model_big <- lm(rating ~ accuracy + cleanliness + 
-                         communication + location + checkin + value, 
+                         communication + location + 
+                         checkin + value, 
                        data = reviews)
 ```
 
@@ -930,11 +799,17 @@ $$
 $$
 --
 
-Do you think the coefficient on `accuracy` will be smaller, larger, or the same as in the simpler model? Why?
+Why are we doing this? Wasn't it complicated enough already?!
+
+--
+
+We want to use these data to inform our Airbnb hosting strategy. What are the pros and cons of the two models for this purpose?
 
 ---
 
 # Multiple regression
+
+Will the coefficient on `accuracy` will be smaller, larger, or the same? Why?
 
 --
 
@@ -1009,7 +884,7 @@ Each coefficient has its own estimate and standard errors
 
 --
 
-The results can change as you move each slider (continuous variable) up and down and flip each switch (categorical variable) on and off
+The results change as you move sliders (continuous variables) up and down or flip switches (categorical variables) on and off
 
 --
 
@@ -1024,7 +899,10 @@ Convert the model results to a data frame with `tidy()`
 .small-code[
 ```{r tidy-coef-plot-review}
 # tidy the estimates (reformatting names is not required)
-review_coefs <- tidy(review_model_big, conf.int = TRUE) |> 
+review_coefs <- tidy(
+  review_model_big, # get the model's coefficients
+  conf.int = TRUE   # include confidence intervals
+) |> 
   filter(term!="(Intercept)")
 
 review_coefs
@@ -1038,20 +916,20 @@ review_coefs
 Plot the point estimate and confidence intervals with `geom_pointrange()`
 
 .left-code[
-```{r coef-plot-review, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
+```{r coef-plot-review, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
 review_coefs |> 
   ggplot(aes(x = estimate, 
              y = fct_reorder(term, estimate))) +
   geom_pointrange(aes(xmin = conf.low,  #<<
                       xmax = conf.high)) + #<<
   geom_vline(xintercept = 0, color = "red") + #<<
-  labs(x = "coefficient estimate",
+  labs(x = "relationship with overall rating",
        y = NULL)
 ```
 
 What do you take away from this?
 
-Should this inform where you decide to focus your investment as a landlord?
+Should this inform where you decide to focus your investment as a host?
 ]
 
 .right-plot[
@@ -1062,13 +940,13 @@ Should this inform where you decide to focus your investment as a landlord?
 
 # Marginal effects plots
 
-**Remember that we interpret individual coefficients while holding the others constant**
+**Remember we interpret individual coefficients while holding others constant**
 
 We move one slider while leaving all the other sliders and switches alone
 
 --
 
-**Same principle applies to visualizing the effect**
+**The same principle applies to visualizing a variable's effect**
 
 --
 
@@ -1086,7 +964,7 @@ Create a data frame of values you want to manipulate and values you want to hold
 
 --
 
-Must include all the explanatory variables in the model
+The data frame must include all the explanatory variables in the model
 
 ---
 
@@ -1096,16 +974,32 @@ Must include all the explanatory variables in the model
 ```{r build-simple-new-data}
 reviews_new_data <- reviews |> 
   select(rating, accuracy, cleanliness, checkin, communication, location, value) |> 
-  mutate(
-    across(
-      c(cleanliness, checkin, communication, location, value),
-      ~ mean(.x, na.rm = TRUE)
-    )
-  )
-
-head(reviews_new_data)
+  mutate(   # use mutate to modify existing variables #<<
+    across( # transform multiple columns the same way #<<
+      c(cleanliness, checkin, communication, location, value), # specify columns #<<
+      \(x) mean(x, na.rm = TRUE)                               # specify transformation #<<
+    ) #<<
+  ) #<<
 ```
 ]
+
+--
+
+`\(x) mean(x, na.rm = TRUE)` is a small anonymous "lambda function" that operates on inputs just like a named function. This function:
+1. takes in a column of the data, `x`
+2. applies the `mean` function to `x` (ignoring missing values)
+3. returns the result
+
+This function is applied to each column, with its output populating each column
+
+---
+
+# Marginal effects plots
+
+Here is what the resulting data frame looks like:
+```{r build-simple-new-data-print}
+reviews_new_data
+```
 
 ---
 
@@ -1114,9 +1008,11 @@ head(reviews_new_data)
 Plug each of those rows of data into the model with `augment()`
 
 ```{r augment-simple-review-data, highlight.output=c(1,2,10)}
-predicted_reviews <- augment(review_model_big,           # our estimated model
-                             newdata = reviews_new_data, # our new data for plotting
-                             interval = "confidence")    # add confidence intervals
+predicted_reviews <- augment(
+  review_model_big,           # our estimated model
+  newdata = reviews_new_data, # our new data for plotting
+  interval = "confidence"     # add confidence intervals
+  )
 
 head(predicted_reviews)
 ```
@@ -1127,28 +1023,28 @@ head(predicted_reviews)
 
 Plot the fitted values for each row
 
-.left-code[
-```{r mfx-plot-review, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
+.pull-left[
+```{r mfx-plot-review, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
 mfx_plot <- predicted_reviews |>
   ggplot(aes(x = accuracy, y = rating)) +
   geom_point(alpha = 0.25) +
-  geom_line( # multivariate regression #<<
+  geom_line( # multivariate predictions #<<
     aes(y = .fitted), #<<
     color = "#B31B1B", #<<
     linewidth = 1 #<<
   ) + #<<
-  geom_ribbon(aes(ymin = .lower, #<<
-                  ymax = .upper), #<<
-              fill = "#B31B1B", #<<
-              alpha = 0.5) + #<<
+  geom_ribbon( # confidence intervals #<<
+    aes(ymin = .lower, ymax = .upper), #<<
+    fill = "#B31B1B", #<<
+    alpha = 0.5 #<<
+  ) + #<<
   labs(x = "Accuracy rating",
-       y = "Overall rating",
-       title = "Airbnb reviews")
+       y = "Overall rating")
 mfx_plot
 ```
 ]
 
-.right-plot[
+.pull-right[
 ![](`r knitr::fig_chunk("mfx-plot-review", "png")`)
 ]
 
@@ -1160,12 +1056,11 @@ How does this regression line compare to our univariate regression line?
 
 --
 
-.left-code[
-```{r mfx-plot-compare, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
+.pull-left[
+```{r mfx-plot-compare, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
 mfx_plot +
-  geom_smooth( # univariate regression
-    method = "lm"
-    )
+  # add the univariate regression line
+  geom_smooth(method = "lm")
 ```
 
 What do you take away from this?
@@ -1173,7 +1068,7 @@ What do you take away from this?
 Should this affect how much you invest in accuracy?
 ]
 
-.right-plot[
+.pull-right[
 ![](`r knitr::fig_chunk("mfx-plot-compare", "png")`)
 ]
 
@@ -1183,7 +1078,7 @@ Should this affect how much you invest in accuracy?
 
 # Stepping back
 
-Which of these plots would be more useful to Airbnb landlords? Why?
+Which of these plots would be more useful to Airbnb hosts? Why?
 
 .pull-left[
 ![](`r knitr::fig_chunk("coef-plot-review", "png")`)
