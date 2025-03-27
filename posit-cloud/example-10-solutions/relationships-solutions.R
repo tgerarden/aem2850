@@ -1,4 +1,4 @@
-# AEM 2850 - Example 8
+# AEM 2850 - Example 10
 # Plan for today:
 # - Questions?
 # - On our own devices: work through this script
@@ -26,25 +26,25 @@ theme_set(theme_minimal()) # set the current theme to theme_minimal()
 # import data
 listings <- read_csv("listings.csv")
 
-# what variables do we have? 
+# what variables do we have?
 names(listings)
 
 # first, let's look at the distribution of price
-listings |> 
+listings |>
   ggplot(aes(x = price)) +
   geom_histogram(color = "white", binwidth = 200, boundary = 0)
 
-# what is the minimum price? 
-listings |> 
+# what is the minimum price?
+listings |>
   summarize(min(price))
 
 # now, let's look at the distribution of accommodates
-listings |> 
+listings |>
   ggplot(aes(x = accommodates)) +
   geom_histogram(color = "white", binwidth = 1, boundary = 0)
 
 # what is the minimum accommodates?
-listings |> 
+listings |>
   summarize(min(accommodates))
 
 # make a new data frame "dat" for analysis that:
@@ -54,9 +54,9 @@ listings |>
 # for simplicity, only include listings of two room types: "Entire room/apt" and "Private room"
 # finally, generate a variable log_price = log(price)
 dat <- listings |>
-  filter(price>0 & price<=1000) |> 
-  filter(accommodates>0 & accommodates<=10) |> 
-  filter(room_type == "Entire home/apt" | room_type == "Private room") |> 
+  filter(price>0 & price<=1000) |>
+  filter(accommodates>0 & accommodates<=10) |>
+  filter(room_type == "Entire home/apt" | room_type == "Private room") |>
   mutate(log_price = log(price))
 
 # next let's explore the association of prices and some room characteristics
@@ -66,37 +66,45 @@ dat <- listings |>
 
 # 2. Scatter plots ----
 # use a scatter plot to visualize the association between price and accommodates
-dat |> 
+dat |>
   ggplot(aes(x = accommodates, y = price)) +
-  geom_point() 
+  geom_point()
 
 # label the x-axis by 1, 2, ..., 10 using the breaks argument to scale_x_continuous
-dat |> 
+dat |>
   ggplot(aes(x = accommodates, y = price)) +
   geom_point() +
   scale_x_continuous(breaks = 1:10)
 
 # a lot of points lay on top of each other at the lower end of prices
-# use the geom_point argument position = "jitter" to help visualize them
-# adjust the size and transparency of the points by setting size = 0.1, alpha = 0.5
+# use the geom_point argument alpha = 0.1 to help visualize them
+dat |>
+  ggplot(aes(x = accommodates, y = price)) +
+  geom_point(alpha = 0.1) +
+  scale_x_continuous(breaks = 1:10)
+
+# that's better, but it's still hard to see patterns due to overplotting
+# another option is to add noise to the points to help differentiate them
+# try this using the geom_point argument position = "jitter"
+# adjust their size and transparency by setting size = 0.1, alpha = 0.5
 dat |>
   ggplot(aes(x = accommodates, y = price)) +
   geom_point(position = "jitter", size = 0.1, alpha = 0.5) +
   scale_x_continuous(breaks = 1:10)
 
 # do price and accommodates show any correlation?
-dat |> 
+dat |>
   summarize(correlation = cor(accommodates, price))
 
-# what if we use log(price) on the y-axis? 
+# what if we use log_price on the y-axis?
 dat |>
   ggplot(aes(x = accommodates, y = log_price)) +
   geom_point(position = "jitter", size = 0.1, alpha = 1) +
-  scale_x_continuous(breaks = 1:10) 
+  scale_x_continuous(breaks = 1:10)
 
-# the correlation between log(price) and accommodates looks stronger
-# now check the correlation coefficient between log(price) and accommodation
-dat |> 
+# the relationship between log_price and accommodates looks a bit different
+# now check the correlation coefficient between log_price and accommodation
+dat |>
   summarize(correlation = cor(accommodates, log_price))
 
 # let's go back to price (not log_price)
@@ -119,6 +127,7 @@ price_linear <- lm(price ~ accommodates, data = dat)
 tidy(price_linear, conf.int = TRUE)
 
 # how do we interpret the coefficient on `accommodates`?
+# do you think it reflects guest demand, host costs, or both?
 
 # can you visualize this linear relationship using geom_smooth?
 dat |>
@@ -127,14 +136,14 @@ dat |>
   geom_smooth(method = "lm")
 
 
-# 3.2: now let's estimate a model where the dependent variable is log(price)
+# 3.2: now let's estimate a model where the dependent variable is log_price
 # continue to use the independent variable accommodates
 price_loglinear <- lm(log_price ~ accommodates, data = dat)
 
 # tidy the model output
 tidy(price_loglinear, conf.int = TRUE)
 
-# how do we interpret the coefficient of `accommodates`?
+# how do we interpret the coefficient of `accommodates` now?
 
 # can you visualize this linear relationship using geom_smooth?
 dat |>
@@ -151,14 +160,15 @@ dat |>
 # 4.1 multivariate regression
 # estimate a "big" linear model that includes:
 # price, accommodates, bedrooms, room_type, and neighbourhood_group
-price_model_big <- lm(price ~ accommodates + bedrooms + room_type + neighbourhood_group, 
-                      data = dat)
-
+price_model_big <- lm(
+  price ~ accommodates + bedrooms + room_type + neighbourhood_group,
+  data = dat
+)
 
 # tidy the results
 tidy(price_model_big, conf.int = TRUE)
 
-# what is the coefficient of `accommodates` now? 
+# what is the coefficient of `accommodates` now?
 # is it the same as the one we obtained from the univariate model?
 # how do we interpret this coefficient?
 # how do we interpret the other coefficients?
@@ -167,81 +177,106 @@ tidy(price_model_big, conf.int = TRUE)
 
 # 4.2 coefficient plots
 # use geom_pointrange() to plot the point estimates and confidence intervals
-price_coef <- tidy(price_model_big, conf.int = TRUE) |> 
+price_coef <- tidy(price_model_big, conf.int = TRUE) |>
   filter(term != "(Intercept)")
 
-ggplot(price_coef, 
-       aes(x = estimate,
-           y = fct_rev(term))) +
-  geom_pointrange(aes(xmin = conf.low,
-                      xmax = conf.high)) +
+price_coef |>
+  ggplot(aes(x = estimate, y = fct_rev(term))) +
+  geom_pointrange(aes(xmin = conf.low, xmax = conf.high)) +
   geom_vline(xintercept = 0, color = "red")
 
 
 # 4.3 marginal effects
-# let's plot the marginal effect of accommodations holding other attributes fixed
-# hold bedrooms at its mean, fix room_type at private room, and neighbourhood_group at Manhattan
-
-# create a dataset with accommodates change from 1 to 10
-# hold the other variables constant at the chosen level
+# let's plot the marginal effect of accommodations with other attributes fixed
+# use tibble to create a dataset `listings_new_data` with:
+# accommodates 1, 2, 3, ..., 10
+# hold bedrooms at its mean
+# fix room_type at "Private room"
+# fix neighbourhood_group at "Manhattan"
 listings_new_data <- tibble(
-  accommodates = c(1:10),
+  accommodates = 1:10,
   bedrooms = dat |> pull(bedrooms) |> mean(na.rm = TRUE),
   room_type = "Private room",
   neighbourhood_group = "Manhattan"
 )
 
 # use augment() to make predictions for these new data
-predicted_price <- augment(price_model_big,
-                           newdata = listings_new_data,
-                           interval = "confidence")
+# use the argument interval = "confidence" to include confidence intervals
+predicted_price <- augment(
+  price_model_big,
+  newdata = listings_new_data,
+  interval = "confidence"
+)
 
 # use geom_line to visualize marginal effects
 # use geom_ribbon to visualize confidence intervals
-predicted_price |> 
+# using geom_line after geom_ribbon will plot it on top
+predicted_price |>
   ggplot(aes(x = accommodates, y = .fitted)) +
-  geom_ribbon(aes(ymin = .lower,
-                  ymax = .upper),
-              fill = "skyblue",
-              alpha = 0.5) +
-  geom_line(linewidth = 1, color = "dodgerblue") +
-  scale_x_continuous(breaks = seq(2,10,2))
+  geom_ribbon(
+    aes(ymin = .lower, ymax = .upper),
+    fill = "skyblue",
+    alpha = 0.75
+  ) +
+  geom_line(linewidth = 1, color = "plum") +
+  scale_x_continuous(breaks = seq(2, 10, 2)) +
+  labs(
+    x = "Number of guests an Airbnb accommodates",
+    y = "Price per night (model predictions)"
+  )
 
 
-# bonus: visualize marginal effects for different room types
+# OPTIONAL: BONUS MATERIAL ----
+# visualize marginal effects for different room types
 # hold bedrooms at its mean level, and fix neighbourhood group at Manhattan
+# one way to do this is by using the function expand_grid() instead of tibble
+# and a vector of multiple room types for room_type
 listings_new_data_fancy <- expand_grid(
-  accommodates = c(1:10),
+  accommodates = 1:10,
   bedrooms = dat |> pull(bedrooms) |> mean(na.rm = TRUE),
-  room_type = c("Private room","Entire home/apt"),
+  room_type = c("Private room", "Entire home/apt"),
   neighbourhood_group = "Manhattan"
 )
 
 # use augment() to make predictions for these new data
-predicted_price_fancy <- augment(price_model_big,
-                                 newdata = listings_new_data_fancy,
-                                 interval = "confidence")
+predicted_price_fancy <- augment(
+  price_model_big,
+  newdata = listings_new_data_fancy,
+  interval = "confidence"
+)
 
 # use geom_line to visualize marginal effects, coloring by room_type
 # use geom_ribbon to visualize confidence intervals, filling by room_type
-predicted_price_fancy |> 
+predicted_price_fancy |>
   ggplot(aes(x = accommodates, y = .fitted)) +
   geom_ribbon(aes(ymin = .lower,
                   ymax = .upper,
                   fill = room_type),
               alpha = 0.5) +
   geom_line(aes(color = room_type), linewidth = 1) +
-  scale_x_continuous(breaks = seq(2,10,2))
+  scale_x_continuous(breaks = seq(2, 10, 2)) +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "Number of guests an Airbnb accommodates",
+    y = "Price per night (model predictions)",
+    color = "Room type",
+    fill = "Room type"
+  )
 
 # or facet the plot by room type
-predicted_price_fancy |> 
+predicted_price_fancy |>
   ggplot(aes(x = accommodates, y = .fitted)) +
   geom_ribbon(aes(ymin = .lower,
-                  ymax = .upper,
-                  fill = room_type),
-              alpha = 0.5) +
-  geom_line(aes(color = room_type), linewidth = 1) +
+                  ymax = .upper),
+              alpha = 0.25) +
+  geom_line(linewidth = 1) +
   scale_x_continuous(breaks = seq(2,10,2)) +
-  facet_wrap(~room_type)
+  facet_wrap(~room_type) +
+  labs(
+    x = "Number of guests an Airbnb accommodates",
+    y = "Price per night (model predictions)"
+  )
 
-# how would you allow for different slopes for each room_type?
+# how could you allow for different slopes for each room_type using lm?
+# one way would be to estimate separate regressions for each room_type
+# one way to achieve this is by including interaction effects

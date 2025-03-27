@@ -1,4 +1,4 @@
-# AEM 2850 - Example 8
+# AEM 2850 - Example 10
 # Plan for today:
 # - Questions?
 # - On our own devices: work through this script
@@ -72,18 +72,23 @@ dat <- listings |>
 
 
 # a lot of points lay on top of each other at the lower end of prices
-# use the geom_point argument position = "jitter" to help visualize them
-# adjust the size and transparency of the points by setting size = 0.1, alpha = 0.5
+# use the geom_point argument alpha = 0.1 to help visualize them
+
+
+# that's better, but it's still hard to see patterns due to overplotting
+# another option is to add noise to the points to help differentiate them
+# try this using the geom_point argument position = "jitter"
+# adjust their size and transparency by setting size = 0.1, alpha = 0.5
 
 
 # do price and accommodates show any correlation?
 
 
-# what if we use log(price) on the y-axis?
+# what if we use log_price on the y-axis?
 
 
-# the correlation between log(price) and accommodates looks stronger
-# now check the correlation coefficient between log(price) and accommodation
+# the relationship between log_price and accommodates looks a bit different
+# now check the correlation coefficient between log_price and accommodation
 
 
 # let's go back to price (not log_price)
@@ -103,19 +108,20 @@ price_linear <- lm()
 tidy(price_linear, conf.int = TRUE)
 
 # how do we interpret the coefficient on `accommodates`?
+# do you think it reflects guest demand, host costs, or both?
 
 # can you visualize this linear relationship using geom_smooth?
 
 
 
-# 3.2: now let's estimate a model where the dependent variable is log(price)
+# 3.2: now let's estimate a model where the dependent variable is log_price
 # continue to use the independent variable accommodates
 price_loglinear <- lm()
 
 # tidy the model output
 
 
-# how do we interpret the coefficient of `accommodates`?
+# how do we interpret the coefficient of `accommodates` now?
 
 # can you visualize this linear relationship using geom_smooth?
 
@@ -129,8 +135,10 @@ price_loglinear <- lm()
 # 4.1 multivariate regression
 # estimate a "big" linear model that includes:
 # price, accommodates, bedrooms, room_type, and neighbourhood_group
-price_model_big <- lm()
-
+price_model_big <- lm(
+  # formula
+  # data
+)
 
 # tidy the results
 
@@ -149,22 +157,28 @@ price_model_big <- lm()
 
 
 # 4.3 marginal effects
-# let's plot the marginal effect of accommodations holding other attributes fixed
-# hold bedrooms at its mean, fix room_type at private room, and neighbourhood_group at Manhattan
-
-# create a dataset with accommodates change from 1 to 10
-# hold the other variables constant at the chosen level
+# let's plot the marginal effect of accommodations with other attributes fixed
+# create a dataset `listings_new_data` with:
+# accommodates 1, 2, 3, ..., 10
+# hold bedrooms at its mean
+# fix room_type at "Private room"
+# fix neighbourhood_group at "Manhattan"
 
 
 # use augment() to make predictions for these new data
+# use the argument interval = "confidence" to include confidence intervals
 
 
 # use geom_line to visualize marginal effects
 # use geom_ribbon to visualize confidence intervals
+# using geom_line after geom_ribbon will plot it on top
 
 
-# bonus: visualize marginal effects for different room types
+# OPTIONAL: BONUS MATERIAL ----
+# visualize marginal effects for different room types
 # hold bedrooms at its mean level, and fix neighbourhood group at Manhattan
+# one way to do this is by using the function expand_grid() instead of tibble
+# and a vector of multiple room types for room_type
 
 
 # use augment() to make predictions for these new data
@@ -177,4 +191,6 @@ price_model_big <- lm()
 # or facet the plot by room type
 
 
-# how would you allow for different slopes for each room_type?
+# how could you allow for different slopes for each room_type using lm?
+# one way would be to estimate separate regressions for each room_type
+# one way to achieve this is by including interaction effects

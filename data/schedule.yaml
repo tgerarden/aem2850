@@ -88,7 +88,7 @@ lessons:
     session: "Session 10"
     date: "Week 10"
     content: "10-content"
-    # example: "10-example"
+    example: "10-example"
     assignment: "10-homework"
     bg: 2
 
@@ -107,7 +107,7 @@ lessons:
     bg: 1
 
   - title: '<i class="fas fa-star"></i> **Group project due**'
-    date: "Apr 11 at 11:59PM"
+    date: "Apr 18 at 11:59PM"
     # assignment: "group-project"
     bg: 3
     bottomborder: True
