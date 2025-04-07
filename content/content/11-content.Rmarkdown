@@ -19,12 +19,12 @@ output:
 
 ### Readings
 - <i class="fas fa-book"></i> [Chapter 15: Visualizing geospatial data](https://clauswilke.com/dataviz/geospatial-data.html) of *Fundamentals of Data Visualization*
-- <i class="fab fa-youtube"></i> Vox: [Why all world maps are wrong](https://www.youtube.com/watch?v=kIID5FDi2JQ)
 
 
 #### Optional readings
 - <i class="fas fa-book"></i> [Chapter 7: Draw maps](http://socviz.co/maps.html) of *Data Visualization*
 - <i class="fas fa-external-link-square-alt"></i> [Drawing beautiful maps programmatically with R, sf and ggplot2](https://r-spatial.org//r/2018/10/25/ggplot2-sf.html)
+- <i class="fab fa-youtube"></i> Vox: [Why all world maps are wrong](https://www.youtube.com/watch?v=kIID5FDi2JQ)
 - <i class="fas fa-external-link-square-alt"></i> [Bloomberg: When maps lie](https://www.citylab.com/design/2015/06/when-maps-lie/396761/)
 - <i class="fas fa-external-link-square-alt"></i> [xkcd: Map projections](https://xkcd.com/977/)
 

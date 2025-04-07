@@ -1,6 +1,6 @@
 ---
-title: "Functions and iteration"
-linktitle: "Functions and iteration"
+title: "Text"
+linktitle: "Text"
 date: "`r format(Sys.time())`"
 menu:
   content:
@@ -18,14 +18,17 @@ output:
 ---
 
 ### Readings
-- <i class="fas fa-book"></i> [Chapter 25: Functions](https://r4ds.hadley.nz/functions.html) of *R for Data Science (2e)*
-- <i class="fas fa-book"></i> [Chapter 26: Iteration](https://r4ds.hadley.nz/iteration.html) of *R for Data Science (2e)*
+- <i class="fas fa-book"></i> [Preface](https://www.tidytextmining.com/preface.html) of *Text Mining with R: A Tidy Approach*
+
+
+#### Optional readings
+- <i class="fas fa-external-link-square-alt"></i> [How to Visualize Qualitative Data](http://annkemery.com/qual-dataviz/)
+- <i class="fas fa-external-link-square-alt"></i> [These are the words most associated with men and women, according to Facebook status updates](https://www.washingtonpost.com/news/the-intersect/wp/2016/05/28/these-are-the-words-most-associated-with-men-and-women-according-to-facebook-status-updates/)
 
 
 ### Guiding questions
-- When should you write a function?
-- What are some advantages of writing functions relative to copy-and-paste?
-- What is conditional execution?
+- Why is qualitative data difficult to visualize?
+- Why are word clouds so problematic? When is it (not) okay to use them? 
 
 
 ### Slides
@@ -35,4 +38,3 @@ The slides for today's lesson are available online as an HTML file. Use the butt
 {{< blogdown/slide-buttons >}}
 
 **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.
-

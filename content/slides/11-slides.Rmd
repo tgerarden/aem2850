@@ -86,12 +86,13 @@ Acknowledgements:
 
 # Announcements
 
-Group project due next Friday, April 19 ([link](https://aem2850.toddgerarden.com/assignment/group-project/))
+Group project due next Friday, April 19
 
 Office hours by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
 **Thursday's in-class example = this week's lab**
 - Goal is to get practice without overloading you given the group project deadline next week
+- Next Monday's office hours will be reserved for group project questions
 
 Questions before we get started?
 
@@ -160,9 +161,9 @@ name: progress
 
 All of the above, plus special topics!
 - Week 11: Space
-- Week 12: Text
-- Week 13: Functions and iteration
-- Week 14: Web scraping
+- Week 12: Functions and iteration
+- Week 13: Web scraping
+- Week 14: Text
 
 ---
 
@@ -252,8 +253,8 @@ Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishm
 
 .center[
 <figure>
-  <img src="img/11/business-map-temps-anomalies.png" alt="July 1999 temperature anomalies" title="July 1999 temperature anomalies" width="50%">
-  <img src="img/11/business-map-locations.png" alt="U.S. business locations" title="U.S. business locations" width="50%">
+  <img src="img/11/business-map-temps-anomalies-no-legend.png" alt="July 1999 temperature anomalies" title="July 1999 temperature anomalies" width="49%">
+  <img src="img/11/business-map-locations.png" alt="U.S. business locations" title="U.S. business locations" width="49%">
 </figure>
 ]
 
@@ -265,17 +266,20 @@ Jawad M Addoum, David T Ng, Ariel Ortiz-Bobea, Temperature Shocks and Establishm
 
 # Geospatial data can mislead us...
 
-How is this **choropleth map** misleading?
+How is this **choropleth map** of 2016 presidential election results misleading?
 
 .center[
 <figure>
-  <img src="img/11/white-house-framed-map.png" alt="White House framed map of election results" title="White House framed map of election results" width="48%">
+  <img src="img/11/election-map-2016-state.png" alt="Map of 2016 Presidential election results by state" title="Map of 2016 Presidential election results by state" width="70%">
 </figure>
 ]
 
 ???
 
-https://thehill.com/blogs/blog-briefing-room/332927-trump-will-hang-map-of-2016-election-results-in-the-white-house
+1. State outcomes mask variation within states
+2. Land does not vote
+
+https://demcastusa.com/2019/11/11/land-doesnt-vote-people-do-this-electoral-map-tells-the-real-story/
 
 ---
 
@@ -291,7 +295,7 @@ https://thehill.com/blogs/blog-briefing-room/332927-trump-will-hang-map-of-2016-
 
 https://demcastusa.com/2019/11/11/land-doesnt-vote-people-do-this-electoral-map-tells-the-real-story/
 
-[Cryptic command](https://stackoverflow.com/questions/31781238/using-ffmpeg-to-convert-gif-to-mp4-output-doesnt-play-on-android) to convert gif to mp4: 
+[Cryptic command](https://stackoverflow.com/questions/31781238/using-ffmpeg-to-convert-gif-to-mp4-output-doesnt-play-on-android) to convert gif to mp4:
 
 ```text
 ffmpeg -r 30 -i input.gif -movflags faststart -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" out.mp4
@@ -481,7 +485,7 @@ Geographic information is shared as **shapefiles**
 
 --
 
-These are *not* like regular single CSV files!
+These are *not* like tabular data stored in a single CSV file!
 
 --
 
@@ -505,11 +509,13 @@ The `sf` package represents simple features as native R objects
 
 --
 
-Goal is to present information about *spatial geometries* according to some *attribute* (e.g., population, sales, etc.)
+A common goal is to present information about *spatial geometries* according to some *attribute* (e.g., population, sales, etc.)
 
 --
 
-To make it easy to combine *attributes* with *spatial geometries*, `sf` stores feature geometries in the data frame column `geometry`
+`sf` makes this easy by storing both types of information in a data frame:
+  - Attributes are stored in "normal" columns
+  - Spatial geometries in a special `geometry` column
 
 ---
 
@@ -527,6 +533,14 @@ world_shapes <- read_sf("data/ne_110m_admin_0_countries/ne_110m_admin_0_countrie
 ```{r}
 class(world_shapes)
 ```
+
+--
+
+Though class order matters!
+
+If `sf` does not come first, it may not be treated as a spatial data frame
+
+When joining an `sf` data with other data, start with the `sf` data frame
 
 ---
 
@@ -738,7 +752,7 @@ See [here](https://bookdown.org/robinlovelace/geocompr/intro.html) or [here](htt
 
 ```{r}
 counties |> 
-  mutate(area = st_area(counties)) # sf::st_area() computes areas #<<
+  mutate(area = st_area(counties)) # sf::st_area() computes areas of spatial geometries #<<
 ```
 
 ---
@@ -753,7 +767,7 @@ counties |>
   ) |> #<<
   ggplot(aes(fill = area)) + #<<
   geom_sf() +
-  scale_fill_viridis_c(alpha = 0.5) +
+  scale_fill_viridis_c() +
   theme_minimal()
 ```
 ]
@@ -764,20 +778,20 @@ counties |>
 
 ---
 
-# No `geometry` column?
-
-Make your own with `st_as_sf()`
+# Convert existing data to `sf` format
 
 .less-left.small-code[
-```{r convert-fake, echo=FALSE}
-other_data <- tribble(
-  ~city, ~long, ~lat,
-  "Cornell", -76.475266, 42.454323,
-  "Cancun", -86.84656, 21.17429
+No `geometry` column?
+
+```{r convert-fake}
+# tibble creates data frames
+other_data <- tibble(
+  city = c("Cornell", "Cancun"),
+  long = c(-76.475266, -86.84656),
+  lat = c(42.454323, 21.17429)
 )
-```
- 
-```{r show-other}
+
+# print our data frame
 other_data
 ```
 ]
@@ -785,6 +799,8 @@ other_data
 --
 
 .more-right.small-code[
+Make your own with `st_as_sf()`!
+
 ```{r show-converted}
 other_data |> 
   st_as_sf( #<<
@@ -817,7 +833,31 @@ The distance from Cornell to Cancun is `r round(st_distance(other_sf)[2, 1]/1e3)
 
 ---
 
-# Map the trip from Cornell to Cancun
+# Let's map Cornell and Cancun
+
+.left-code[
+```{r cornell-cancun-map-blank, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+world_shapes |> 
+  filter(GU_A3 %in% c("CAN", "MEX", "USA")) |> 
+  ggplot() +
+  geom_sf() +
+  coord_sf(crs = "+proj=robin")
+```
+How could we add points for Cornell and Cancun to this map?
+]
+
+.right-plot[
+![](`r knitr::fig_chunk("cornell-cancun-map-blank", "png")`)
+]
+
+
+???
+
+Or to make great circle plots: https://www.findingyourway.io/blog/2018/02/28/2018-02-28_great-circles-with-sf-and-leaflet/
+
+---
+
+# Let's map Cornell and Cancun
 
 .left-code[
 ```{r cornell-cancun-map, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
@@ -831,10 +871,10 @@ world_shapes |>
   ) + #<<
   coord_sf(crs = "+proj=robin")
 ```
-What will this code produce?
+Two ways to do this:
+1. Add a `geom_sf` using `other_sf`
+2. Bind `world_shapes` and `other_sf` first, then plot
 ]
-
---
 
 .right-plot[
 ![](`r knitr::fig_chunk("cornell-cancun-map", "png")`)
@@ -882,46 +922,6 @@ For anything else…
   <img src="img/11/shapefile-search.png" alt="Search for shapefiles" title="Search for shapefiles" width="65%">
 </figure>
 ]
-
----
-
-# Scales
-
-.pull-left-3[
-<figure>
-  <img src="img/11/download_thumbs_10m.jpg" alt="10m scale" title="10m scale" width="100%">
-</figure>
-
-.small.center[1:10m = 1:10,000,000]
-
-.small.center[1 cm = 100 km]
-]
-
-.pull-middle-3[
-<figure>
-  <img src="img/11/download_thumbs_50m.jpg" alt="50m scale" title="50m scale" width="100%">
-</figure>
-
-.small.center[1:50m = 1:50,000,000]
-
-.small.center[ 1cm = 500 km]
-]
-
-.pull-right-3[
-<figure>
-  <img src="img/11/download_thumbs_110m.jpg" alt="110m scale" title="110m scale" width="100%">
-</figure>
-
-.small.center[1:110m = 1:110,000,000]
-
-.small.center[1 cm = 1,100 km]
-]
-
---
-
-&nbsp;
-
-Using too high of a resolution makes your maps slow and huge
 
 ---
 class: inverse, center, middle
@@ -1055,4 +1055,45 @@ There are good and bad projections for a particular use case
 .small[[This](https://www.earthdatascience.org/courses/earth-analytics/spatial-data-r/understand-epsg-wkt-and-other-crs-definition-file-types/) is an excellent overview of how this all works]
 
 .small[And [this](https://web.archive.org/web/20200225021219/https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/OverviewCoordinateReferenceSystems.pdf) is a really really helpful overview of all these moving parts]
+
+
+---
+
+# Scales
+
+.pull-left-3[
+<figure>
+  <img src="img/11/download_thumbs_10m.jpg" alt="10m scale" title="10m scale" width="100%">
+</figure>
+
+.small.center[1:10m = 1:10,000,000]
+
+.small.center[1 cm = 100 km]
+]
+
+.pull-middle-3[
+<figure>
+  <img src="img/11/download_thumbs_50m.jpg" alt="50m scale" title="50m scale" width="100%">
+</figure>
+
+.small.center[1:50m = 1:50,000,000]
+
+.small.center[ 1cm = 500 km]
+]
+
+.pull-right-3[
+<figure>
+  <img src="img/11/download_thumbs_110m.jpg" alt="110m scale" title="110m scale" width="100%">
+</figure>
+
+.small.center[1:110m = 1:110,000,000]
+
+.small.center[1 cm = 1,100 km]
+]
+
+--
+
+&nbsp;
+
+Using too high of a resolution makes your maps slow and huge
 

@@ -98,10 +98,10 @@ lessons:
   - title: '**Special Topics**'
     header: True
 
-  - title: '<span class="content-title">Functions and iteration</span>'
+  - title: '<span class="content-title">Space</span>'
     session: "Session 11"
     date: "Week 11"
-    # content: "11-content"
+    content: "11-content"
     # example: "11-example"
     # assignment: "11-homework"
     bg: 1
@@ -112,7 +112,7 @@ lessons:
     bg: 3
     bottomborder: True
 
-  - title: '<span class="content-title">Web scraping</span>'
+  - title: '<span class="content-title">Functions and iteration</span>'
     session: "Session 12"
     date: "Week 12"
     # content: "12-content"
@@ -120,7 +120,7 @@ lessons:
     # assignment: "12-homework"
     bg: 2
 
-  - title: '<span class="content-title">Space</span>'
+  - title: '<span class="content-title">Web scraping</span>'
     session: "Session 13"
     date: "Week 13"
     # content: "13-content"
