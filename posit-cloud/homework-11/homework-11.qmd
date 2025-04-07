@@ -32,9 +32,9 @@ opts_chunk$set(warning = FALSE, message = FALSE,
 
 The goal of this assignment is to help you gain more familiarity with using **ggplot** to visualize geospatial data. As always, please come to office hours and reach out to your teaching staff if you have any questions.
 
-## Knitting
+## Rendering
 
-Since the maps in this homework contain a lot of data, knitting may be slower than usual. We recommend running your code interactively (e.g., in chunks) so you can work on each problem separately without needing to knit the entire document repeatedly. Then you can knit the final product for submission when ready.
+Since the maps in this homework contain a lot of data, rendering may be slower than usual. We recommend running your code interactively (e.g., in chunks) so you can work on each problem separately without needing to render the entire document repeatedly. Then you can render the final product for submission when ready.
 
 ## Data
 
@@ -128,6 +128,6 @@ listings <- read_csv("listings.csv")
 
 [^insideairbnb]: Inside Airbnb is a mission driven activist project with the objective to: *Provide data that quantifies the impact of short-term rentals on housing and residential communities; and also provides a platform to support advocacy for policies to protect our cities from the impacts of short-term rentals.*
 
-[^viridis-tidyverse]: Several `viridis` scales are loaded with `tidyverse`, since they are included in the package `ggplot2` we have used for all our plots.
+[^viridis-tidyverse]: Several `viridis` scales are loaded with `tidyverse`, since they are included in the package `ggplot2`.
 
 [^review-data]: As a reminder from a previous assignment: each row corresponds to a listing `id`, and variables summarize all the reviews for that listing. For context, [here is the reviews page](https://www.airbnb.com/rooms/2595/reviews) for the first listing in the data. In the top left corner you can see that Airbnb reviews include an overall rating (`review_scores_rating`) and several sub-ratings for specific things (e.g., cleanliness, stored in the column `review_scores_cleanliness`).

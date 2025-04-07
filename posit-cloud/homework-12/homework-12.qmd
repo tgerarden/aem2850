@@ -10,7 +10,7 @@
 # Reminder: to work interactively, you can run code chunks on their own
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
-title: "Homework - Week 12"
+title: "Homework - Week 14"
 author: "your name here"
 date: today
 format: pdf
@@ -18,97 +18,168 @@ urlcolor: blue
 ---
 
 ```{r setup, include = FALSE}
-library(tidyverse)
-library(tidytext)
-library(RColorBrewer)
-library(wordcloud)
-
-# use set.seed to ensure word cloud is reproducible
-set.seed(2850)
+library(tidyverse) # purrr is part of core tidyverse so loads here
 
 # center plots by default
 library(knitr)
 knitr::opts_chunk$set(fig.align = "center",
-                      out.width = "75%")
-theme_set(theme_bw())
+                      out.width = "85%")
 ```
 
 # Preface
 
-The goal of this assignment is to help you gain more familiarity with processing text data. As always, please come to office hours and reach out to your teaching staff if you have any questions.
+The goal of this assignment is to help you gain familiarity with writing functions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
 
 ## Data
 
-We will work with data on data scientist job postings in the U.S. scraped from popular job boards by [JobSpikr](https://www.kaggle.com/datasets/jobspikr/data-scientist-job-postings-from-the-usa?select=data_scientist_united_states_job_postings_jobspikr.csv).
+We will start by wrapping up the example from Tuesday using data from the S&P 500.
 
-```{r message = FALSE}
-job_posts <- read_csv("data_scientist_united_states_job_postings.csv") |> 
-  select(-cursor, -contains("contact"), -uniq_id, -html_job_description) |> 
-  relocate(crawl_timestamp, url, .after = last_col())
-job_posts |> 
-  head(5)
+```{r load-price-data, include = FALSE}
+load("sp500.RData")
+prices <- sp500_prices |>
+  group_by(symbol) |>
+  mutate(count = n()) |>
+  ungroup() |>
+  filter(count == max(count)) |>
+  select(-count)
 ```
 
-{{< pagebreak >}}
-## 1. Let's start by looking at the job title. We see that all of the job titles for the first few entries include "data scientist." Tokenize `job_title` to bigrams (i.e., n-grams with n = 2). Use a bar chart to show the top ten bigrams that appear in `job_title`, in order from most to least frequent.
-<!-- *Note: To avoid case sensitivity, `unnest_tokens` converts text to all lower cases by default.* -->
-
-```{r out.width = "65%"}
-
-```
-\vfill
-## What are the most common bigrams? Do they make sense to you?
-...
+Then we will work with the monthly Zillow data from [Zillow Research](https://www.zillow.com/research/data/) that we have seen before. As a reminder, `Metro_median_sale_price_uc_sfrcondo_month.csv` contains raw monthly median sale price data. Smoothed and seasonally adjusted price data is in `Metro_median_sale_price_uc_sfrcondo_sm_sa_month.csv`.
 
 
 {{< pagebreak >}}
-## 2. Let's look at the category of the jobs in `job_posts`. Tokenize `category` into individual words and remove the stop words contained in `stop_words`. Assign the tokens to the variable `word`, then `count` up the unique instances of `word`, and assign the resulting data frame to the name `category_count`. Then use a bar chart to show the top 10 most common words, in order from most to least frequent.
-<!-- *Note: `stop_words` is a data frame from the `tidytext` package, which was already loaded above.* -->
+# Part 1: S&P 500 Returns
+
+By the end of class on Tuesday, we had created a function that took a stock's ticker symbol as its argument. For valid tickers, it computed and returned annualized returns over 2018-2022. For invalid tickers, it returned an informative error message. Here is that function:
 
 ```{r}
-
+get_annual_return <- function(ticker){
+  symbols <- prices |> pull(symbol) # or instead put prices$symbol within the if()
+  if(ticker %in% symbols){
+    prices |>
+      filter(symbol == ticker) |>
+      filter(date==min(date) | date==max(date)) |>
+      mutate(cumulative_return = (adjusted - lag(adjusted)) / lag(adjusted) ) |>
+      filter(!is.na(cumulative_return)) |>
+      transmute(annualized_return = ((1 + cumulative_return)^(1/5) - 1) * 100) |>
+      pull(annualized_return)
+  } else {
+    print(str_glue("The ticker {ticker} is not available."))
+    NA
+  }
+}
 ```
 
+Here are some examples of what we get from calling that function:
 
-{{< pagebreak >}}
-## 3. Let's try using a word cloud to visualize the tokens we extracted from `category`. Since this is not something we covered in class, we have provided the code for you below. You just need to remove `eval = FALSE` from the top of the code chunk, so it says `{r out.width = "50%"}` rather than `{r out.width = "50%", eval = FALSE}`.
-<!-- *Tip: If the code does not work as expected, confirm that the data frame and variable names you created from question 2 match the instructions and the object names in the code below.* -->
-<!-- *Note: We are using `wordcloud()` from the package `wordcloud` to make a word cloud plot. Remember that you can type ?wordcloud to get the help file to understand how to use a new function. Also note that `wordcloud()` does not take data frames as an argument. We are getting around this by using `pull()` as a way to get each of the vectors of words from inside the data frame `category_count`.* -->
-
-```{r out.width = "50%", eval = FALSE}
-wordcloud(
-  words = category_count |> pull(word), # make sure category_count, word
-  freq = category_count |> pull(n),     #   and n are in your data frame
-  scale = c(3, 0.5),
-  min.freq = 5,
-  max.words = 100, 
-  random.order = FALSE, 
-  rot.per = 0.30, 
-  colors = brewer.pal(8, "Dark2")
+```{r}
+get_annual_return("AAPL")
+get_annual_return("DYSON")
+map_dbl(
+  c("AAPL", "AMZN", "TSLA"),
+  get_annual_return
 )
 ```
+
+
+{{< pagebreak >}}
+## 1. Now let's modify the function to compute returns for multiple tickers directly, rather than using `map()` to do so. Write a function that filters the data to contain rows that meet the criterion `symbol %in% ticker`, compute annualized returns for each one, and then return the results in a data frame. Test it out with the tickers `c("AAPL", "AMZN", "TSLA")`, and then with the tickers `c("AAPL", "DYSON", "TSLA")`.
+
+```{r}
+
+```
+
+
+{{< pagebreak >}}
+## 2. Modify your code from 1. to make sure that tickers that are absent from the data are returned rather than removed. Test it out with the tickers `c("AAPL", "DYSON", "TSLA")`.
+
+*Hint: at the end of the function, you could use `tibble()` to create a data frame with the column `symbol` that contains the contents of `ticker`, and then join this data frame and the data frame of annual returns.*
+
+<!-- Note: you can modify the function to include missing tickers in three steps: 1. compute annualized returns as above; 2. use tibble to create a data frame with column symbol based on ticker; and 3. join the tibble with annualized returns by symbol, return the result. -->
+
+```{r}
+
+```
+
+
+
+
+{{< pagebreak >}}
+# Part 2: Zillow Data
+
+Here is some code that imports and tidies Zillow sales price data in a few steps: (1) importing a file based on the string it starts with, (2) dropping the observations for the region of "United States", (3) separating `RegionName` into two variables `City` and `State`, (4) pivoting the data longer, and (5) converting `date` into date format and generating the variables `year` and `month`.
+
+```{r message = FALSE}
+raw_tidy_example <- "Metro_median_sale_price_uc_sfrcondo_month.csv" |> 
+  read_csv() |> 
+  filter(RegionName != "United States") |> 
+  separate(RegionName, c("City","State"), sep =",") |>
+  pivot_longer(-c(RegionID, SizeRank, City, State, RegionType, StateName), 
+               names_to = "date", values_to = "price") |>
+  mutate(date = ymd(date), year = year(date), month = month(date))
+```
+
+
+{{< pagebreak >}}
+## 1. Use the code on the previous page to write a function `tidy_data` that takes the argument `filename` and returns the tidied data. Call this function once to tidy the raw price data and once to tidy the adjusted price data, assigning the output to `raw_tidy` and `adj_tidy`. What years do `raw_tidy` and `adj_tidy` cover, respectively?
+
+```{r message = FALSE}
+
+```
+
+
+{{< pagebreak >}}
+## 2. Can you modify the function in question 1 so that it can be used to tidy either price data or sales data, based on a second argument that specifies which one the user is asking for? What years do the sales data cover?
+
+*Note: `Metro_sales_count_now_uc_sfrcondo_month.csv` contains monthly sales counts.*
+
+```{r message = FALSE}
+
+```
+
+
 \vfill
-## Comment on the word cloud: Is it easy to digest?
-...
+### Note: an alternative way to approach this would be to detect whether the data are price or sales based on the filenames. We could also start by checking to make sure the file exists, and returning an error if not. See the solutions for an example.
 
 
 {{< pagebreak >}}
-## 4. Where are these jobs located? Use a bar chart to show the number of job postings of the top 10 cities. 
-<!-- *Note: For this, you can just take the contents of city at face value, you do not need to modify it.* -->
+## Plotting Zillow Data
 
-```{r}
+Here is some code that plots the time series of raw prices over time for one city:
+
+``` {r, warning=FALSE, out.width="75%"}
+raw_tidy_example |> # use data we just tidied
+  filter(City == "New York") |>
+  ggplot(aes(x = date, y = price)) +
+  geom_line() +
+  scale_x_date(
+    breaks = scales::breaks_width("1 year"),
+    labels = scales::label_date("%Y")
+  )  +
+  scale_y_continuous(labels=scales::dollar_format()) +
+  labs(
+    x = "",
+    y = "Median Home Price",
+    title = "New York"
+  ) +
+  theme_minimal()
+```
+
+
+{{< pagebreak >}}
+## 3. Adapt the code above to create a function `plot_city_price` that plots the time series of raw prices over time for whatever city is provided as its argument. Call this function to make a plot for `"Los Angeles-Long Beach-Anaheim"`.
+
+``` {r, warning=FALSE, message=FALSE, fig.show="hold", out.width="75%"}
 
 ```
 
 
 {{< pagebreak >}}
-## 5. What software skills are most commonly required for these jobs? To find out, create logical variables to indicate whether each `job_description` contains the following skill requirements: R, python, tableau, java, and sql. Then calculate the share of postings that require each of these skills, and show them in a bar plot where the y axis ranges from a share of 0 (no listings) to 1 (all listings).
-<!-- *Note: This is a refresher on some of the content we learned in Week 5. As you know, you can use `str_detect()` to detect whether `job_descriptions` contain each skill (though you may have to get creative for detecting R without too many false positives!). You should also either start by using `str_to_lower()` to convert job titles to lowercase, or use `regex(., ignore_case = TRUE)` within `str_detect()` to avoid issues with cases.* -->
-<!-- *Tip: Here is guidance for one way (but not the only way) to approach this problem: Use a single call to `transmute()` to create a series of columns, one for each skill, that contain `TRUE` or `FALSE` based on the output of `str_detect()`. Then, to compute the share of postings the require each skill, `summarize_all(mean)` may come in handy. Finally, it might help to pivot that data to a tidy format. * -->
+## 4. Uncomment the code below to see how we can use `map()` in conjunction with `walk(print)` to print the output of map without returning the objects themselves and their pesky indices.
 
-```{r}
-
+``` {r, warning=FALSE, message=FALSE, fig.show="hold", out.width="50%"}
+# c("New York", "Los Angeles-Long Beach-Anaheim", "Chicago") |> 
+#   map(plot_city_price) |> 
+#   walk(print)
 ```
 
-## Do your results make sense? If not, can you improve them?
-...
