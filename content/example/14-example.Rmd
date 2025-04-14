@@ -1,6 +1,6 @@
 ---
-title: "Functions and iteration"
-linktitle: "Functions and iteration"
+title: "Text"
+linktitle: "Text"
 date: "`r format(Sys.time())`"
 output:
   blogdown::html_page:
@@ -18,12 +18,7 @@ editor_options:
 ---
 
 ## Plan for today
-- Short lecture
-- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-14` in our course workspace
-- Work through `functions-practice.R`
+- Questions? :raising_hand_woman:
+- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-12` in our course workspace
+- Work through `text-practice.R`
 - **Solutions** will be posted after class
-
-
-## Cheatsheets
-
-[Click here to download the `purrr` cheatsheet](https://rstudio.github.io/cheatsheets/purrr.pdf)

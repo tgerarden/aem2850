@@ -86,11 +86,11 @@ Acknowledgements:
 
 # Announcements
 
-Group project due next Friday, April 19
+Group project due next Friday, April 18
 
 Office hours by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
-**Thursday's in-class example = this week's lab**
+**Thursday's in-class example = this week's homework**
 - Goal is to get practice without overloading you given the group project deadline next week
 - Next Monday's office hours will be reserved for group project questions
 

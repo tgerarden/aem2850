@@ -38,7 +38,7 @@ opts_chunk$set(warning = FALSE, message = FALSE,
 ```{r packages-data, include=FALSE}
 library(tidyverse)
 
-load("data/14-slides/sp500.RData")
+load("data/12-slides/sp500.RData")
 ```
 
 
@@ -48,7 +48,7 @@ class: center, middle
 
 .class-info[
 
-**Week 14**
+**Week 12**
 
 AEM 2850 / 5850 : R for Business Analytics<br>
 Cornell Dyson<br>
@@ -67,102 +67,41 @@ Acknowledgements:
 
 # Announcements
 
-Plan for this week:
-  - Today: slides and a short example
-  - Thursday: course evaluations, prelim 2 Q&A, **lab-14**
-    - If you come to class and work through the lab, you will get full credit
-    - Due Thursday at 11:59pm so you can focus on studying for prelim 2
+**Group project due this Friday, April 18!**
 
---
+Office hours for the rest of this week:
+  - Tuesday: Prof. Gerarden open office hours from 11:30-12:30 in Warren 464
+  - Tuesday: Prof. Gerarden by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
+  - Thursday: Prof. Gerarden by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
+  - Friday: TA office hours from 2:00-3:00 in Warren 175
 
-Plan for next week:
-  - **Prelim 2** in class on Tuesday, May 7
-  - **Lab 15 - Course Survey** due Monday, May 13 at 11:59pm
-
---
+We will have a regular homework this week (due Monday 4/21)
+  - We will have regular TA office hours on Monday
 
 Questions before we get started?
 
 ---
 
-# Plan for today
+# Plan for this week
 
-<!-- [Prologue](#prologue) -->
+.pull-left[
+### Tuesday
+  - [Intro to functions and iteration](#functions-intro)
+  - [example-12-1](#example-1)
+]
 
-[Course evaluations](#course-evals)
-
-[Functions and iteration](#functions)
-
-[example-14](#example)
-
----
-class: inverse, center, middle
-name: course-evals
-
-# Course evaluations
-
----
-
-# Course objectives reminder
-
-1. Develop basic proficiency in `R` programming
-2. Understand data structures and manipulation
-3. Describe effective techniques for data visualization and communication
-4. Construct effective data visualizations
-5. Utilize course concepts and tools for business applications
-
-With these objectives in mind...
-
----
-
-# Please complete course evaluations
-
-I take feedback seriously and will use it to improve this course!
-
---
-
-Concrete suggestions are most helpful
-
---
-
-**I would appreciate your feedback through two channels:**
-
-1. Lab 15 - Course Feedback Survey (on canvas)
-2. University course evaluations
-
---
-
-Both will be anonymous
-
-**I will give you time to complete these in class on Thursday**
-
----
-
-# Lab 15 - course feedback survey
-
-Anonymous: canvas reports whether you submit but does not link responses to individuals
-
-Survey is very short, should only take 5 minutes!
-
-I will give you time in class Thursday to complete it
-
----
-
-# University course evaluations
-
-Anonymous: we just get summary reports, after grades are submitted
-
-**I will award a bonus point on Lab 15 for completing evaluations**
-
-I will give you time in class Thursday to complete it
-
-Thank you in advance for your feedback!
+.pull-right[
+### Thursday
+  - [Conditional execution](#conditional-execution)
+  - [Functions with multiple arguments](#multiple-arguments)
+  - [example-12-2](#example-2)
+]
 
 ---
 class: inverse, center, middle
-name: functions
+name: functions-intro
 
-# Functions and iteration
+# Intro to functions and iteration
 
 ---
 
@@ -471,7 +410,7 @@ make_plot("TSLA") #<<
 
 --
 
-- When you find yourself writing the same code 2-3 times, put it into a function
+- When you find yourself writing the same code 3+ times, put it into a function
 
 --
 
@@ -562,9 +501,7 @@ plots[[2]]
 --
 
 .pull-right-3.small-code[
-```{r fig.dim=c(4, 3), out.width="100%"}
-plots[[3]]
-```
+The syntax `plots[[x]]` allows us to drill down into the list `plots` and extract whatever object is in the `x`th position (here: a ggplot)
 ]
 
 ---
@@ -611,24 +548,13 @@ all_plots[[500]]
 
 We can also extract results using logical expressions:
 
-.pull-left-3[
-```{r failed-bank-1, fig.dim=c(4, 3), out.width="100%"}
-all_plots[all_symbols=="SIVBQ"]
-```
-]
-
-.pull-middle-3[
-```{r failed-bank-2, fig.dim=c(4, 3), out.width="100%"}
-all_plots[all_symbols=="SBNY"]
-```
-]
-
-.pull-right-3[
-```{r failed-bank-3, fig.dim=c(4, 3), out.width="100%"}
+```{r failed-bank-code, fig.dim=c(4, 3), out.width="45%", eval = FALSE}
 all_plots[all_symbols=="FRCB"]
 ```
 
-]
+```{r failed-bank-output, fig.dim=c(4, 3), out.width="45%", echo = FALSE}
+all_plots[all_symbols=="FRCB"][[1]] # extract plot from list
+```
 
 ---
 
@@ -688,66 +614,32 @@ plots <- map(symbols, make_plot)
 
 **But there is nothing wrong with using them!**
 
----
-class: inverse, center, middle
-name: example
-
-# example-14
-
-
----
-
-# Plan for today
-
-[Course evaluations](#course-evals-in-class)
-
-[Prelim 2 info](#prelim-2)
-
-[lab-14](#lab)
-
----
-name: course-evals-in-class
-
-# Please take 10 mins to complete course evals
-
-I take feedback seriously and will use it to improve this course!
-
-Concrete suggestions are most helpful
-
-**I would appreciate your feedback through two channels:**
-
-1. Lab 15 - Course Feedback Survey (on canvas through May 19)
-2. University course evaluations (open through May 12)
-
-Both will be anonymous
-
-Reminder: **bonus point on Lab 15 for completing university evaluations**
-
-*Note: if you prefer to wait to complete the evaluations until after prelim 2, please feel free to do so. But please don't forget!*
-
----
-name: prelim-2
-
-# Prelim 2
-
-Same format as prelim 1 (write answers and code in `.qmd`, submit `.qmd` + `.pdf`)
-
-- **Covers everything since prelim 1** (weeks 7-14)
-- *Tentative* plan is to have ~8 questions:
-  - ~2 require no coding
-      - "Describe X ways to improve this data visualization"
-      - "Name Y ways one graphic is better/worse than another"
-      - Tip: study the prologue sections of slides
-  - ~1 is a mix of how to improve a dataviz, and then actually doing it
-  - ~5 are coding questions where we specify the goal, and you get there
-      - Some may have a sub-part where you describe an approach w/o code
-- I will list the number of points per question to help you allocate effort
-
-Questions?
+We can practice using `for` loops during the example if time permits
 
 ---
 class: inverse, center, middle
-name: lab
+name: example-1
 
-# lab-14
+# example-12-1
+
+---
+class: inverse, center, middle
+name: conditional-execution
+
+# Conditional execution
+
+
+---
+class: inverse, center, middle
+name: multiple-arguments
+
+# Functions with multiple arguments
+
+
+
+---
+class: inverse, center, middle
+name: example-2
+
+# example-12-2
 

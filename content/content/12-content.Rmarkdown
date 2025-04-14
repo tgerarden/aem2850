@@ -21,6 +21,9 @@ output:
 - <i class="fas fa-book"></i> [Chapter 25: Functions](https://r4ds.hadley.nz/functions.html) of *R for Data Science (2e)*
 - <i class="fas fa-book"></i> [Chapter 26: Iteration](https://r4ds.hadley.nz/iteration.html) of *R for Data Science (2e)*
 
+#### Optional readings
+- <i class="fas fa-book"></i> [Chapter 27.5: `for` loops](https://r4ds.hadley.nz/base-R.html#for-loops) of *R for Data Science (2e)*
+
 
 ### Guiding questions
 - When should you write a function?
