@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 07 Apr 2025 11:19:21 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Space</title><link>https://aem2850.toddgerarden.com/example/11-example/</link><pubDate>Mon, 07 Apr 2025 11:19:21 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/11-example/</guid><description>&lt;h2 id="announcements">Announcements&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 14 Apr 2025 15:28:29 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Functions and iteration</title><link>https://aem2850.toddgerarden.com/example/12-example/</link><pubDate>Mon, 14 Apr 2025 15:28:29 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/12-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
+&lt;li>Questions? 🙋‍♀️&lt;/li>
+&lt;li>Tuesday:
+&lt;ul>
+&lt;li>Go through &lt;a href="https://aem2850.toddgerarden.com/content/12-content/">slides&lt;/a>&lt;/li>
+&lt;li>Open the &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a> project &lt;code>example-12-1&lt;/code>&lt;/li>
+&lt;li>Work through &lt;code>intro-functions-practice.R&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Thursday:
+&lt;ul>
+&lt;li>Go through &lt;a href="https://aem2850.toddgerarden.com/content/12-content/">slides&lt;/a>&lt;/li>
+&lt;li>Open the &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a> project &lt;code>example-12-2&lt;/code>&lt;/li>
+&lt;li>Work through &lt;code>more-functions-practice.R&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Solutions&lt;/strong> will be posted at the end of the week&lt;/li>
+&lt;/ul>
+&lt;h2 id="cheatsheets">Cheatsheets&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.github.io/cheatsheets/purrr.pdf" target="_blank" rel="noopener">Click here to download the &lt;code>purrr&lt;/code> cheatsheet&lt;/a>&lt;/p></description></item><item><title>Space</title><link>https://aem2850.toddgerarden.com/example/11-example/</link><pubDate>Mon, 07 Apr 2025 11:19:21 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/11-example/</guid><description>&lt;h2 id="announcements">Announcements&lt;/h2>
 &lt;ul>
 &lt;li>Group project reminders: please read the instructions carefully
 &lt;ul>
