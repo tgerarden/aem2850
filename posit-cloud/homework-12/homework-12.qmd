@@ -10,7 +10,7 @@
 # Reminder: to work interactively, you can run code chunks on their own
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
-title: "Homework - Week 14"
+title: "Homework - Week 12"
 author: "your name here"
 date: today
 format: pdf
@@ -30,60 +30,147 @@ knitr::opts_chunk$set(fig.align = "center",
 
 The goal of this assignment is to help you gain familiarity with writing functions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
 
+Do not get put off by the number of pages in this homework! Roughly half of it is background material that we will go over in class.
+
 ## Data
 
 We will start by wrapping up the example from Tuesday using data from the S&P 500.
 
 ```{r load-price-data, include = FALSE}
 load("sp500.RData")
+
 prices <- sp500_prices |>
   group_by(symbol) |>
   mutate(count = n()) |>
   ungroup() |>
   filter(count == max(count)) |>
   select(-count)
+
+prices_1y <- prices |> 
+  filter(time_length(max(date) - date, "years")<=1)
+
+prices_ytd <- prices |> 
+  filter(date>="2025-01-01")
+
+biotech_symbols <- c("ABBV", "AMGN", "BIIB", "GILD", "INCY", "MRNA", "REGN", "VRTX")
 ```
 
 Then we will work with the monthly Zillow data from [Zillow Research](https://www.zillow.com/research/data/) that we have seen before. As a reminder, `Metro_median_sale_price_uc_sfrcondo_month.csv` contains raw monthly median sale price data. Smoothed and seasonally adjusted price data is in `Metro_median_sale_price_uc_sfrcondo_sm_sa_month.csv`.
 
 
 {{< pagebreak >}}
-# Part 1: S&P 500 Returns
+# Background on Control Flow and Conditional Execution
 
-By the end of class on Tuesday, we had created a function that took a stock's ticker symbol as its argument. For valid tickers, it computed and returned annualized returns over 2018-2022. For invalid tickers, it returned an informative error message. Here is that function:
+We can use special statements to control the flow of a program based on whether a condition is met. We will focus on what is known as conditional execution. As a starting point, let's refresh our memory on what happens if we test a condition:
 
 ```{r}
-get_annual_return <- function(ticker){
-  symbols <- prices |> pull(symbol) # or instead put prices$symbol within the if()
-  if(ticker %in% symbols){
-    prices |>
-      filter(symbol == ticker) |>
-      filter(date==min(date) | date==max(date)) |>
-      mutate(cumulative_return = (adjusted - lag(adjusted)) / lag(adjusted) ) |>
-      filter(!is.na(cumulative_return)) |>
-      transmute(annualized_return = ((1 + cumulative_return)^(1/5) - 1) * 100) |>
-      pull(annualized_return)
+3 > 2
+```
+
+We can use `if` statements to use logical comparisons to control what our code does:
+
+```{r}
+if (TRUE) {
+  "You are seeing this message because the condition TRUE was met."
+}
+```
+
+We can extend the power of this conditional execution by combining `if` with `else if` and `else`. Here is one simple example:
+
+```{r}
+my_condition <- TRUE
+if (my_condition) {
+  "The condition was met :)"
+} else {
+  "The condition was not met :("
+}
+
+my_condition <- FALSE
+if (my_condition) {
+  "The condition was met :)"
+} else {
+  "The condition was not met :("
+}
+```
+
+
+{{< pagebreak >}}
+# Conditional Execution within Functions
+
+Let's use a slightly more complicated example to demonstrate how conditional execution can be used to control what functions do:
+
+```{r}
+get_letter_grade <- function(x) {
+  if (x >= 93) {
+    "A"
+  } else if (x >= 90) {
+    "A-"
+  } else if (x >= 87) {
+    "B+"
+  } else if (x >= 83) {
+    "B"
   } else {
-    print(str_glue("The ticker {ticker} is not available."))
-    NA
+    "B- or lower"
   }
 }
 ```
 
-Here are some examples of what we get from calling that function:
+Here is what the function returns for several different inputs:
+```{r}
+get_letter_grade(93.5)
+get_letter_grade(92.99)
+get_letter_grade(88.3)
+get_letter_grade(79)
+```
+
+
+{{< pagebreak >}}
+# Part 1: S&P 500 Returns
+
+During class on Tuesday, we had created a function that took a stock's ticker symbol as its argument. For valid tickers, it computed and returned annualized returns over the period April 2020 through April 2025. For invalid tickers, the code would fail. Here is that function:
+
+```{r}
+get_annual_return <- function(ticker){
+  prices |>
+    filter(symbol == ticker) |>
+    filter(date==min(date) | date==max(date)) |>
+    mutate(cumul_return = (adjusted - lag(adjusted)) / lag(adjusted) ) |>
+    filter(!is.na(cumul_return)) |>
+    mutate(annualized_return = ((1 + cumul_return)^(1/5) - 1) * 100) |>
+    pull(annualized_return)
+}
+```
+
+Here are some examples of what we got from calling that function:
 
 ```{r}
 get_annual_return("AAPL")
-get_annual_return("DYSON")
 map_dbl(
   c("AAPL", "AMZN", "TSLA"),
   get_annual_return
 )
+get_annual_return("DYSON")
 ```
 
 
 {{< pagebreak >}}
-## 1. Now let's modify the function to compute returns for multiple tickers directly, rather than using `map()` to do so. Write a function that filters the data to contain rows that meet the criterion `symbol %in% ticker`, compute annualized returns for each one, and then return the results in a data frame. Test it out with the tickers `c("AAPL", "AMZN", "TSLA")`, and then with the tickers `c("AAPL", "DYSON", "TSLA")`.
+## 1. Revise our function using conditional execution to provide an informative message to users when they supply an invalid ticker. First, `pull` all the tickers in the `price` data frame and assign them to the name `symbols`. Then use that object in an `if` statement to either output the number, or to `print` the message "The ticker XXXX is not available." Finally, after printing the message, add `NA` so the function returns a missing value.
+
+```{r}
+
+```
+
+## If you use `map_dbl` to apply `get_annual_return` to AAPL, AMZN, TSLA, and DYSON, will the code fail as it did in example-12-1? Why or why not?
+
+```{r}
+
+```
+
+The code does/does not fail because...
+
+
+{{< pagebreak >}}
+## 2. Modify your code from 1. to depend on two arguments, `df` and `ticker`, where `df` is a data frame to be used for computing annualized returns. The function should no longer depend directly on the `prices` data frame. Call the function with the ticker "XOM" to test it.
 
 ```{r}
 
@@ -91,17 +178,77 @@ map_dbl(
 
 
 {{< pagebreak >}}
-## 2. Modify your code from 1. to make sure that tickers that are absent from the data are returned rather than removed. Test it out with the tickers `c("AAPL", "DYSON", "TSLA")`.
+## 3. Modify your code from 2. to automatically detect the number of years rather than hard-coding the number of years as 5. There are several ways to do this. To keep things simple and focus on functions, just create a variable `years = time_length(date - lag(date), "years")` and use that variable in computing annualized returns.
 
-*Hint: at the end of the function, you could use `tibble()` to create a data frame with the column `symbol` that contains the contents of `ticker`, and then join this data frame and the data frame of annual returns.*
-
-<!-- Note: you can modify the function to include missing tickers in three steps: 1. compute annualized returns as above; 2. use tibble to create a data frame with column symbol based on ticker; and 3. join the tibble with annualized returns by symbol, return the result. -->
+<!-- A simpler option would be to extract the year of each date and take the difference: `years = year(date) - year(lag(date))`. However, this would not work well for prices from January 1 through December 31 of the same year, for example. -->
 
 ```{r}
 
 ```
 
+## Call the function with the data frame `prices_1y` and ticker "XOM" to compute annualized returns for Exxon Mobil over the course of 2024.
+```{r}
 
+```
+
+## Call the function with the data frame `prices_ytd` and ticker "XOM" to compute annualized returns for Exxon Mobil over the course of 2025 so far (year to date).
+```{r}
+
+```
+
+
+{{< pagebreak >}}
+# Iteration using `for` Loops
+
+As we saw in class, we can use functional programming methods like `map` to apply functions to a number of arguments. Another option is to use `for` loops to control the iteration process. See [here](https://aem2850.toddgerarden.com/slides/12-slides.html#42) for an example from the slides.
+
+Here is a simple reminder of the basic mechanics of `for` loops:
+
+```{r}
+items <- c("item a", "item b", "item c", "item d")
+
+# seq_along(items) generates the sequence 1, 2, ..., length(items)
+seq_along(items)
+
+# loop through items, printing the index
+for (i in seq_along(items)) {
+  print(i)
+}
+
+# loop through items, printing the contents of items
+for (i in seq_along(items)) {
+  print(items[i])
+}
+
+# we used print because output within a loop will not print by default
+for (i in seq_along(items)) {
+  items[i]
+}
+```
+
+
+{{< pagebreak >}}
+## 4. Go back to our original function, copied below for convenience. Write a simple `for` loop to that calls `get_annual_return` and prints the annualized return for all the tickers in `biotech_symbols`. You do not need to populate an object as we did in the slides and with the `map` functions.
+
+```{r}
+# do not edit this code chunk
+get_annual_return <- function(ticker){
+  prices |>
+    filter(symbol == ticker) |>
+    filter(date==min(date) | date==max(date)) |>
+    mutate(cumul_return = (adjusted - lag(adjusted)) / lag(adjusted) ) |>
+    filter(!is.na(cumul_return)) |>
+    mutate(annualized_return = ((1 + cumul_return)^(1/5) - 1) * 100) |>
+    pull(annualized_return)
+}
+
+biotech_symbols
+```
+
+```{r}
+# write your for loop in this code chunk
+
+```
 
 
 {{< pagebreak >}}
@@ -121,7 +268,7 @@ raw_tidy_example <- "Metro_median_sale_price_uc_sfrcondo_month.csv" |>
 
 
 {{< pagebreak >}}
-## 1. Use the code on the previous page to write a function `tidy_data` that takes the argument `filename` and returns the tidied data. Call this function once to tidy the raw price data and once to tidy the adjusted price data, assigning the output to `raw_tidy` and `adj_tidy`. What years do `raw_tidy` and `adj_tidy` cover, respectively?
+## 5. Use the code on the previous page to write a function `tidy_data` that takes the argument `filename` and returns the tidied data. Call this function once to tidy the raw price data and once to tidy the adjusted price data, assigning the output to `raw_tidy` and `adj_tidy`. What years do `raw_tidy` and `adj_tidy` cover, respectively?
 
 ```{r message = FALSE}
 
@@ -129,7 +276,7 @@ raw_tidy_example <- "Metro_median_sale_price_uc_sfrcondo_month.csv" |>
 
 
 {{< pagebreak >}}
-## 2. Can you modify the function in question 1 so that it can be used to tidy either price data or sales data, based on a second argument that specifies which one the user is asking for? What years do the sales data cover?
+## 6. Can you modify the function in question 1 so that it can be used to tidy either price data or sales data, based on a second argument that specifies which one the user is asking for? What years do the sales data cover?
 
 *Note: `Metro_sales_count_now_uc_sfrcondo_month.csv` contains monthly sales counts.*
 
@@ -145,10 +292,10 @@ raw_tidy_example <- "Metro_median_sale_price_uc_sfrcondo_month.csv" |>
 {{< pagebreak >}}
 ## Plotting Zillow Data
 
-Here is some code that plots the time series of raw prices over time for one city:
+Here is some code that uses the data we just tidied to plot the time series of raw prices over time for one city:
 
 ``` {r, warning=FALSE, out.width="75%"}
-raw_tidy_example |> # use data we just tidied
+raw_tidy_example |> 
   filter(City == "New York") |>
   ggplot(aes(x = date, y = price)) +
   geom_line() +
@@ -167,7 +314,7 @@ raw_tidy_example |> # use data we just tidied
 
 
 {{< pagebreak >}}
-## 3. Adapt the code above to create a function `plot_city_price` that plots the time series of raw prices over time for whatever city is provided as its argument. Call this function to make a plot for `"Los Angeles-Long Beach-Anaheim"`.
+## 7. Adapt the code above to create a function `plot_city_price` that plots the time series of raw prices over time for whatever city is provided as its argument. Call this function to make a plot for `"Los Angeles-Long Beach-Anaheim"`.
 
 ``` {r, warning=FALSE, message=FALSE, fig.show="hold", out.width="75%"}
 
@@ -175,7 +322,7 @@ raw_tidy_example |> # use data we just tidied
 
 
 {{< pagebreak >}}
-## 4. Uncomment the code below to see how we can use `map()` in conjunction with `walk(print)` to print the output of map without returning the objects themselves and their pesky indices.
+## 8. Uncomment the code below to see how we can use `map()` in conjunction with `walk(print)` to print the output of map without returning the objects themselves and their pesky indices.
 
 ``` {r, warning=FALSE, message=FALSE, fig.show="hold", out.width="50%"}
 # c("New York", "Los Angeles-Long Beach-Anaheim", "Chicago") |> 

@@ -24,9 +24,8 @@ editor_options:
   - Open the [posit.cloud](http://posit.cloud) project `example-12-1`
   - Work through `intro-functions-practice.R`
 - Thursday:
-  - Go through [slides](/content/12-content/)
-  - Open the [posit.cloud](http://posit.cloud) project `example-12-2`
-  - Work through `more-functions-practice.R`
+  - Open the [posit.cloud](http://posit.cloud) project `homework-12`
+  - Work through `homework-12.qmd` in class as a group
 - **Solutions** will be posted at the end of the week
 
 
