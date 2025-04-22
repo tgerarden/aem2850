@@ -123,7 +123,7 @@ lessons:
   - title: '<span class="content-title">Web scraping</span>'
     session: "Session 13"
     date: "Week 13"
-    # content: "13-content"
+    content: "13-content"
     # example: "13-example"
     # assignment: "13-homework"
     bg: 1

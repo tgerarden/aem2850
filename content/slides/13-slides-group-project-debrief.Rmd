@@ -1,0 +1,39 @@
+---
+class: inverse, center, middle
+name: group-project
+
+# Group project
+
+---
+
+# Overall feedback
+
+Overall we were pleased with everyone's work
+
+This assignment was meant to push you, and it was interesting to see the approaches different groups took
+
+---
+
+# Group project highlights
+
+Several groups included an executive summary, concluding analysis, and/or recommendations to tie the report together
+
+Some groups provided market-specific discussion of the results. For example:
+  - Why Dieselgate could have benefited VW's competitors
+  - Why just looking at other automakers' returns around the time of Dieselgate can't tell us whether they were better or worse off
+
+Some very clear slide decks with key visualizations and takeaways
+- One group added the Dyson logo in post-processing
+- Fun fact: quarto can use powerpoint templates
+
+---
+
+# Grading
+
+Average grade was 91%
+
+We will post these scores along with feedback on canvas
+
+Please contact Victor if you have questions about grading, see math errors, etc.
+
+If you have follow-up questions after speaking with Victor, please contact me

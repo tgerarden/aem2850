@@ -68,13 +68,13 @@ Spring 2025
 
 Only two full weeks left!
 
-Group project graded, will discuss at end of class
+<!-- Group project graded, will discuss at end of class -->
 
 Remaining deadlines:
-  - Lab 13 will be due Monday
-  - Lab 14 will be our example in class next Thursday
-  - Prelim 2 on May 7 in class (two weeks from today)
-    - I will give more guidance on this soon
+  - Homework-13 will be due Monday
+  - Homework-14 will be our example in class next Thursday
+  - Prelim 2 on May 6 in class (two weeks from today)
+    <!-- - I will give more guidance on this soon -->
 
 Questions before we get started?
 
@@ -88,7 +88,7 @@ Questions before we get started?
   - [Cornell sports](#cornell-sports)
   - [College rankings](#college-rankings)
 
-[Group project debrief](#group-project)
+<!-- [Group project debrief](#group-project) -->
 
 ---
 class: inverse, center, middle
@@ -135,7 +135,7 @@ When is web scraping not useful?
 
 - When data is publicly available in other formats (e.g., csv)
 
-- When the site owner offers a way to access data directly
+- When the site owner offers a way to access data directly (e.g., via an API)
 
 --
 
@@ -204,8 +204,8 @@ Source: [https://rvest.tidyverse.org/articles/rvest.html](https://rvest.tidyvers
 HTML has a hierarchical structure formed by **elements** that consist of:
 1. a start tag (e.g., `<h1>`)
   - optional attributes (e.g., `id='first'`)
-2. an end tag (e.g., `</h1>`)
-3. contents in between tags (e.g., `A heading`)
+2. contents in between tags (e.g., `A heading`)
+3. an end tag (e.g., `</h1>`)
 
 ```{r eval=FALSE}
 <html>
@@ -370,7 +370,7 @@ big_red |>
 
 # Scraping text using `dt` tag
 
-Step 3: use `html_text2()` to convert the sports to a data frame
+Step 3: use `html_text2()` to convert the sports to a character vector
 
 ```{r eval = FALSE}
 big_red <- read_html("https://en.wikipedia.org/wiki/Cornell_Big_Red")
@@ -496,9 +496,9 @@ head(big_red_table, 8)
 
 ```{r echo=FALSE, eval=FALSE}
 full_join(
-    big_red_table |> select(1) |> mutate(sport = `Men's sports`),
-    big_red_table |> select(2) |> mutate(sport = `Women's sports`),
-    join_by(sport)
+  big_red_table |> select(1) |> mutate(sport = `Men's sports`),
+  big_red_table |> select(2) |> mutate(sport = `Women's sports`),
+  join_by(sport)
 ) |> 
   arrange(sport)
 ```
@@ -506,18 +506,18 @@ full_join(
 
 ```{r echo=FALSE, eval=FALSE}
 tidy_big_red <- full_join(
-    big_red_table |> select(sport = 1) |> mutate(mens = TRUE),
-    big_red_table |> select(sport = 2) |> mutate(womens = TRUE),
-    join_by(sport)
+  big_red_table |> select(sport = 1) |> mutate(mens = TRUE),
+  big_red_table |> select(sport = 2) |> mutate(womens = TRUE),
+  join_by(sport)
 ) |> 
   arrange(sport) |> 
   filter(sport != "" & !str_detect(sport, "^†")) |> 
-  pivot_longer(-sport, names_to = "pronoun", values_to = "has_team")
+  pivot_longer(-sport, names_to = "gender", values_to = "has_team")
 ```
 
 ```{r}
 tidy_big_red <- big_red_table |> 
-  pivot_longer(everything(), names_to = "pronoun", values_to = "sport") |> 
+  pivot_longer(everything(), names_to = "gender", values_to = "sport") |> 
   filter(sport != "" & !str_detect(sport, "^†")) # remove things that aren't sports
 
 tidy_big_red
@@ -527,21 +527,21 @@ tidy_big_red
 
 # Scraped data frames are data frames
 
-What function(s) could we use to determine how many pronoun-sport pairs there are in `tidy_big_red`?
+What function(s) could we use to determine how many gender category-sport pairs there are in `tidy_big_red`?
 
 --
 
 .pull-left[
 ```{r}
 tidy_big_red |> 
-    count()
+  count()
 ```
 ]
 
 .pull-right[
 ```{r}
 tidy_big_red |> 
-    nrow()
+  nrow()
 ```
 ]
 
@@ -553,27 +553,37 @@ tidy_big_red |>
 
 # Scraped data frames are data frames
 
-What function could we use to determine how many distinct sports there are in `tidy_big_red`?
+What function(s) could we use to determine how many distinct sports there are in `tidy_big_red`?
 
 --
 
+.pull-left[
 ```{r}
 tidy_big_red |> 
-    pull(sport) |> 
-    n_distinct()
+  distinct(sport) |> 
+  count()
 ```
+]
+
+.pull-right[
+```{r}
+tidy_big_red |> 
+  select(sport) |> 
+  n_distinct()
+```
+]
 
 ---
 
 # Scraped data frames are data frames
 
-What function could we use to determine how many distinct sports are there for each pronoun?
+What function could we use to determine how many distinct sports are there for each gender category?
 
 --
 
 ```{r}
 tidy_big_red |> 
-  count(pronoun)
+  count(gender)
 ```
 
 ---
@@ -585,14 +595,14 @@ How could we scrape college rankings?
 
 .center[
 <figure>
-  <a href="https://en.wikipedia.org/wiki/College_and_university_rankings_in_the_United_States">
+  <a href="https://web.archive.org/web/20220405170508/https://en.wikipedia.org/wiki/College_and_university_rankings_in_the_United_States">
     <img src="img/13/college-rankings.png" width="75%">
   </a>
 </figure>
 ]
 
-.small[
-*The site has changed, so we will scrape from a 2022 archive of it using the [The Wayback Machine](https://web.archive.org/web/20220405170508/https://en.wikipedia.org/wiki/College_and_university_rankings_in_the_United_States)*
+.tiny[
+*The site has changed over time, so we will scrape an archive from [The Wayback Machine](https://web.archive.org/web/20220405170508/https://en.wikipedia.org/wiki/College_and_university_rankings_in_the_United_States). One of web scraping's many challenges!*
 ]
 
 ???
@@ -677,7 +687,11 @@ all_tables <- rankings |>
 
 ```{r}
 class(all_tables) # we get a list of tables
+```
 
+--
+
+```{r}
 length(all_tables) # 11 tables, to be exact
 ```
 
@@ -720,47 +734,8 @@ str_which(all_tables, "Parents")
 
 ```{r highlight.output = c(3,14)}
 # now extract table(s) with "Parents"
-# below we use `[]` syntax to extract the tables by index
+# below we use `[]` syntax to extract the table by index
 # this is because because all_tables is a list, not a data frame
 all_tables[str_detect(all_tables, "Parents")]
 ```
 
----
-class: inverse, center, middle
-name: group-project
-
-# Group project
-
----
-
-# Overall feedback
-
-Overall we were pleased with everyone's work
-
-This assignment was meant to push you, and it was interesting to see the approaches different groups took
-
----
-
-# Group project highlights
-
-Several groups included an executive summary, concluding analysis, and/or recommendations to tie the report together
-
-Some groups provided market-specific discussion of the results. For example:
-  - Why Dieselgate could have benefited VW's competitors
-  - Why just looking at other automakers' returns around the time of Dieselgate can't tell us whether they were better or worse off
-
-Some very clear slide decks with key visualizations and takeaways
-- One group added the Dyson logo in post-processing
-- Fun fact: quarto can use powerpoint templates
-
----
-
-# Grading
-
-Average grade was 91%
-
-We will post these scores along with feedback on canvas
-
-Please contact Victor if you have questions about grading, see math errors, etc.
-
-If you have follow-up questions after speaking with Victor, please contact me
