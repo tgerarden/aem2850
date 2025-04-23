@@ -1,7 +1,7 @@
 ---
 title: "Web scraping"
 linktitle: "Web scraping"
-date: "2025-04-23 15:16:01"
+date: "2025-04-23 15:43:25"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -19,6 +19,7 @@ editor_options:
 
 ## Plan for today
 - Questions? :raising_hand_woman:
+- [Group project debrief](/slides/13-slides.html#70)
 - Navigate to [posit.cloud](http://posit.cloud) and open the project `example-13` in our course workspace
 - Work through `web-scraping-practice.R` as a group
 - **Solutions** will be posted after class
