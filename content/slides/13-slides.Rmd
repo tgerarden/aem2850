@@ -90,6 +90,8 @@ Questions before we get started?
 
 [Group project debrief](#group-project)
 
+[Prelim 2](#prelim-2)
+
 ---
 class: inverse, center, middle
 name: web-scraping-basics
@@ -762,9 +764,9 @@ This assignment was meant to push you, and it was interesting to see the approac
 
 Many groups included things like executive summaries, a table of contents, etc. to tie the report together
 
-At least one group went above and beyond by providing a secondary visualization that they thought improved on the one we had asked for
+One group went above and beyond by providing a secondary visualization that they thought improved on the one we had asked for
 
-Some very clear slide decks with key visualizations and takeaways
+AEM 5850 groups produced clear slide decks with key results
 - Groups rose to the challenge of using our old tools to output something new
 - One group added some real polish in post-processing
 - Fun fact: quarto can use powerpoint templates
@@ -775,7 +777,70 @@ Some very clear slide decks with key visualizations and takeaways
 
 Median grade was 90%
 
-We will post scores along with feedback on canvas
+We posted scores along with feedback on canvas
 
 Please email me, Victor, and Xiaorui if you have any questions about grading
 - Do this in a single email so we all have access to the same information
+
+Questions?
+
+---
+class: inverse, center, middle
+name: prelim-2
+
+# Prelim 2
+
+---
+
+# Motivation
+
+Use prelims to assess what you have each learned this semester
+
+Benefit from using a mix of assessments that provide more signal, less noise
+
+Learn from experience of other programming courses on campus
+
+---
+
+# Prelim 2 last year
+
+Last year, prelim 2 was a mix of data visualization and programming concepts
+
+Roughly 1/2 of the points did not require writing any code
+
+Examples:
+1. "Describe four changes you would make to improve this data visualization without losing any information."
+2. "Describe three changes you could make to this visualization to better illustrate the ideas in the text above."
+
+---
+
+# Prelim 2 this year
+
+This year, prelim 2 will emphasize the same content
+
+Format: paper exam, closed-book (-notes, -computer, etc.)
+
+It will stress concepts more than syntax (but will test both)
+
+We will have multiple question types, including but not limited to:
+1. improve this data visualization
+2. explain how you would approach a coding task
+3. explain what this function call would return
+4. explain whether/why this code would fail
+5. write code snippets
+
+If we ask you to write code snippets, we will provide a function reference sheet
+
+---
+
+# Prelim 2 preparation
+
+We will provide practice questions next week
+
+I will offer extra office hours by appointment
+
+The TAs will have regular open office hours May 2 and May 5
+
+We are working to schedule an extra review session on May 5 in the late afternoon
+
+Questions?
