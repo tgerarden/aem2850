@@ -133,7 +133,7 @@ lessons:
     date: "Week 14"
     content: "14-content"
     example: "14-example"
-    # assignment: "14-homework"
+    assignment: "14-homework"
     bg: 2
 
 #  - title: '**Conclusion**'

@@ -10,7 +10,7 @@
 # Reminder: to work interactively, you can run code chunks on their own
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
-title: "Homework - Week 12"
+title: "Homework - Week 14"
 author: "your name here"
 date: today
 format: pdf
@@ -71,7 +71,7 @@ job_posts |>
 
 
 {{< pagebreak >}}
-## 3. Let's try using a word cloud to visualize the tokens we extracted from `category`. Since this is not something we covered in class, we have provided the code for you below. You just need to remove `eval = FALSE` from the top of the code chunk, so it says `{r out.width = "50%"}` rather than `{r out.width = "50%", eval = FALSE}`.
+## 3. Let's try using a word cloud to visualize the tokens we extracted from `category`. Since this is not something we covered in class, we have provided the code for you below. You just need to remove `eval = FALSE` from the top of the code chunk, so it says `{r out.width = "50%"}`.
 <!-- *Tip: If the code does not work as expected, confirm that the data frame and variable names you created from question 2 match the instructions and the object names in the code below.* -->
 <!-- *Note: We are using `wordcloud()` from the package `wordcloud` to make a word cloud plot. Remember that you can type ?wordcloud to get the help file to understand how to use a new function. Also note that `wordcloud()` does not take data frames as an argument. We are getting around this by using `pull()` as a way to get each of the vectors of words from inside the data frame `category_count`.* -->
 
@@ -104,7 +104,7 @@ wordcloud(
 {{< pagebreak >}}
 ## 5. What software skills are most commonly required for these jobs? To find out, create logical variables to indicate whether each `job_description` contains the following skill requirements: R, python, tableau, java, and sql. Then calculate the share of postings that require each of these skills, and show them in a bar plot where the y axis ranges from a share of 0 (no listings) to 1 (all listings).
 <!-- *Note: This is a refresher on some of the content we learned in Week 5. As you know, you can use `str_detect()` to detect whether `job_descriptions` contain each skill (though you may have to get creative for detecting R without too many false positives!). You should also either start by using `str_to_lower()` to convert job titles to lowercase, or use `regex(., ignore_case = TRUE)` within `str_detect()` to avoid issues with cases.* -->
-<!-- *Tip: Here is guidance for one way (but not the only way) to approach this problem: Use a single call to `transmute()` to create a series of columns, one for each skill, that contain `TRUE` or `FALSE` based on the output of `str_detect()`. Then, to compute the share of postings the require each skill, `summarize_all(mean)` may come in handy. Finally, it might help to pivot that data to a tidy format. * -->
+<!-- *Tip: Here is guidance for one way (but not the only way) to approach this problem: Use a single call to `mutate()` to create a series of columns, one for each skill, that contain `TRUE` or `FALSE` based on the output of `str_detect()`. Then, to compute the share of postings the require each skill, you just need to `summarize()` the data by computing the mean of each logical variable. Finally, it might help to pivot that data to a tidy format. * -->
 
 ```{r}
 
