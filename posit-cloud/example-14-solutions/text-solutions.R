@@ -1,4 +1,4 @@
-# AEM 2850 - Example 12
+# AEM 2850 - Example 14
 # Plan for today:
 # - Questions?
 # - On our own devices: work through this script
@@ -33,11 +33,15 @@ names(listings)
 # use tidytext::unnest_tokens to tokenize all the words in the name variable
 #   put the tokens in a column named word
 # filter out stop words contained in the object tidytext::stop_words
+# relocate id and word to the front of the data frame
 # assign the resulting data frame to name_words
 name_words <- listings |>
-  unnest_tokens(output = word,
-                input = name) |>
-  anti_join(stop_words, join_by(word))
+  unnest_tokens(
+    output = word,
+    input = name
+  ) |>
+  anti_join(stop_words, join_by(word)) |>
+  relocate(id, word)
 
 # what does the resulting data frame look like?
 name_words
@@ -53,11 +57,14 @@ name_words |>
 # there are a bunch of airbnb-specific words we may want to treat as stop words
 # use the combine function c() to make your own list of about 10-20 words like bedroom, apartment, etc.
 # assign them to the name airbnb_stop_words
-airbnb_stop_words <- c("private", "bedroom", "bed", "apartment", "studio", "manhattan", "apt", "loft",
-                       "east", "west", "central", "midtown", "upper", "village", "harlem", "times", "chelsea",
-                       "1", "2", "1br", "br",
-                       "nyc", "location", "york",
-                       "park", "square", "hotel")
+airbnb_stop_words <- c(
+  "private", "bedroom", "bed", "apartment", "studio", "apt", "loft",
+  "manhattan", "east", "west", "central", "midtown", "upper",
+  "village", "harlem", "times", "chelsea",
+  "1", "2", "1br", "br",
+  "nyc", "location", "york",
+  "park", "square", "hotel"
+)
 
 # filter out those words and then count again
 # you may want to revise your stop words above and do this again
@@ -79,7 +86,7 @@ reviews_words <- reviews |>
   unnest_tokens(
     output = word,
     input = comments
-    )
+  )
 
 # read in the sentiments data stored in afinn_sentiments.csv and join it to the review_words
 # assign the result to reviews_sentiments
@@ -94,7 +101,7 @@ reviews_sentiments |>
   group_by(id) |>
   summarize(value = mean(value)) |>
   slice_min(value, n = 5) |>
-  inner_join(reviews) |> 
+  inner_join(reviews) |>
   pull(comments)
 
 # how do you think this sentiment analysis performed?
@@ -107,7 +114,7 @@ reviews_sentiments |>
   group_by(id) |>
   summarize(value = mean(value)) |>
   slice_max(value, n = 5) |>
-  inner_join(reviews) |> 
+  inner_join(reviews) |>
   pull(comments)
 
 # now compute average sentiment of words in all the reviews for each listing_id
@@ -119,7 +126,7 @@ reviews_sentiments |>
   filter(value <= -2) |>
   inner_join(reviews) |>
   arrange(value) |>
-  select(listing_id, comments) |> 
+  select(listing_id, comments) |>
   head(20)
 
 # how well do you think this method worked? do you notice anything interesting?
@@ -128,6 +135,12 @@ reviews_sentiments |>
 
 # do most listings have reviews with positive or negative (average) sentiment?
 # how could you visualize the range of different sentiments across listings?
+reviews_sentiments |>
+  group_by(listing_id) |>
+  summarize(value = mean(value)) |>
+  ggplot(aes(x = value)) +
+  geom_histogram()
+
 reviews_sentiments |>
   group_by(listing_id) |>
   summarize(value = mean(value)) |>

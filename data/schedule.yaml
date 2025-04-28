@@ -132,7 +132,7 @@ lessons:
     session: "Session 14"
     date: "Week 14"
     content: "14-content"
-    # example: "14-example"
+    example: "14-example"
     # assignment: "14-homework"
     bg: 2
 
