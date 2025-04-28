@@ -117,8 +117,7 @@ There are ... columns in the data frame.
 {{< pagebreak >}}
 ## 8. What if we want to focus on a different time period? Customize your function from question 7 to take three arguments: the ticker, start date, and end date (in date format). Use the function to make a data frame of monthly prices for the ticker `GS` from January 1, 2000 through December 31, 2024, and make a plot of Open prices analogous to the one from question 7 (but for just Goldman Sachs).
 
-<!-- Hint: The yahoo finance query system relies on Unix times, which are the number of seconds since the start of January 1, 2000. To compute that number, you could use `mdy()` (for example) to convert the dates January 1, 2000 and January 1, 1970 to date format, and take the difference between the two dates. However, that will be in days. We need seconds. To convert to seconds, you could use `as.duration()` and then `as.numeric()` to get the seconds. Plug that number into the url for web scraping and you're off! -->
-
+<!-- Hint: The yahoo finance query system relies on Unix times, which are the number of seconds since the start of January 1, 1970. To compute that number, you could use `mdy()` (for example) to convert the start date and January 1, 1970 to date format, and take the difference between the two dates. However, that will be in days. We need seconds. To convert to seconds, you could use `as.duration()` and then `as.numeric()` to get the seconds. Repeat those steps for the end date. Plug those numbers into the url for web scraping and you're off! -->
 
 ```{r}
 
