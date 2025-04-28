@@ -41,6 +41,7 @@ library(tidytext)
 # install.packages("textdata") # needed for AFINN and NRC sentiment lexicons
 library(textdata)
 
+# install.packages("devtools")
 # devtools::install_github("bradleyboehmke/harrypotter")
 library(harrypotter)
 set.seed(1234)
@@ -71,7 +72,7 @@ class: center, middle
 
 .class-info[
 
-**Week 12**
+**Week 14**
 
 AEM 2850 / 5850 : R for Business Analytics<br>
 Cornell Dyson<br>
@@ -91,28 +92,40 @@ Acknowledgements:
 # Announcements
 
 Plan for this week:
-  - Today: slides and a short example
-  - Thursday: course evaluations, prelim 2 Q&A, **homework-12**
-    - If you come to class and work through the lab, you will get full credit
+  - Tuesday: slides and a short example
+  - Thursday: prelim 2 Q&A, time to complete course evaluations, **homework-14**
+    - If you come to class and work through the homework, you will get full credit
     - Due Thursday at 11:59pm so you can focus on studying for prelim 2
 
 --
 
 Plan for next week:
-  - **Prelim 2** in class on Tuesday, May X
-  - **Homework 15 - Course Survey** due Monday, May XX at 11:59pm
+  - **Prelim 2** in class on Tuesday, May 6
+  - **Homework 15 - Course Survey** due Monday, May 12 at 11:59pm
+    - I will give you time in class on Thursday to complete this
+
+--
+
+Questions before we get started?
 
 ---
 
-# Plan for today
+# Plan for this week
 
-[Course evaluations](#course-evals)
+.pull-left[
+### Tuesday
+  - [Course evaluations reminder](#course-evals)
+  - [Prologue](#prologue)
+  - [Text mining with R](#tidytext)
+  - [Time permitting: n-gram ratios](#n-gram-ratios)
+]
 
-[Prologue](#prologue)
-
-[Text mining with R](#tidytext)
-
-[Time permitting: n-gram ratios](#n-gram-ratios)
+.pull-right[
+### Thursday
+  - [Prelim 2 Q&A](#prelim-2)
+  - [Complete course evaluations](#course-evals-in-class)
+  - [Homework-14](#homework)
+]
 
 ---
 class: inverse, center, middle
@@ -144,36 +157,20 @@ Concrete suggestions are most helpful
 
 --
 
-**I would appreciate your feedback through two channels:**
+**I would appreciate your feedback through two *anonymous* channels:**
 
 1. Homework 15 - Course Feedback Survey (on canvas)
 2. University course evaluations
 
 --
 
-Both will be anonymous
-
 **I will give you time to complete these in class on Thursday**
 
----
-
-# Homework 15 - course feedback survey
-
-Anonymous: canvas reports whether you submit but does not link responses to individuals
-
-Survey is very short, should only take 5 minutes!
-
-I will give you time in class Thursday to complete it
-
----
-
-# University course evaluations
-
-Anonymous: we just get summary reports, after grades are submitted
+--
 
 **I will award a bonus point on Homework 15 for completing evaluations**
 
-I will give you time in class Thursday to complete it
+--
 
 Thank you in advance for your feedback!
 
@@ -202,7 +199,7 @@ theoffice # this is an object from the schrute package
 
 .center[
 <figure>
-  <img src="img/12/word-cloud.png" alt="Bad word cloud" title="Bad word cloud" width="85%">
+  <img src="img/14/word-cloud.png" alt="Bad word cloud" title="Bad word cloud" width="85%">
 </figure>
 ]
 
@@ -236,7 +233,7 @@ theoffice # this is an object from the schrute package
 .pull-left[
 .center[
 <figure>
-  <img src="img/12/email-word-cloud.jpg" alt="What Happened? word cloud" title="What Happened? word cloud" width="100%">
+  <img src="img/14/email-word-cloud.jpg" alt="What Happened? word cloud" title="What Happened? word cloud" width="100%">
 </figure>
 ]
 ]
@@ -258,7 +255,7 @@ https://twitter.com/s_soroka/status/907941270735278085
 
 .center[
 <figure>
-  <img src="img/12/breakups.png" alt="Twitter word cloud before and after breakups" title="Twitter word cloud before and after breakups" width="100%">
+  <img src="img/14/breakups.png" alt="Twitter word cloud before and after breakups" title="Twitter word cloud before and after breakups" width="100%">
 </figure>
 ]
 
@@ -278,11 +275,11 @@ https://www.vice.com/en/article/ezvaba/what-our-breakups-look-like-on-twitter
 
 .center[
 <figure>
-  <img src="img/12/layoffs_wordcloud.png" alt="Washington Post word cloud of tech CEO layoff memos" title="Washington Post word cloud of tech CEO layoff memos" width="58%">
+  <img src="img/14/layoffs_wordcloud.png" alt="Washington Post word cloud of tech CEO layoff memos" title="Washington Post word cloud of tech CEO layoff memos" width="58%">
 </figure>
 ]
 
-What makes this better or worse than a traditional word cloud?
+What makes this better than a traditional word cloud? What makes this worse?
 
 ???
 
@@ -294,9 +291,9 @@ https://www.washingtonpost.com/business/interactive/2023/tech-layoffs-company-me
 
 .center[
 <figure>
-  <img src="img/12/layoffs_economy.png" alt="Washington Post analysis of tech CEO layoff memos" title="Washington Post analysis of tech CEO layoff memos" width="75%">
-  <img src="img/12/layoffs_economic_factors.png" alt="Washington Post analysis of tech CEO layoff memos" title="Washington Post analysis of tech CEO layoff memos" width="75%">
-  <img src="img/12/layoffs_apologies.png" alt="Washington Post analysis of tech CEO layoff memos" title="Washington Post analysis of tech CEO layoff memos" width="75%">
+  <img src="img/14/layoffs_economy.png" alt="Washington Post analysis of tech CEO layoff memos" title="Washington Post analysis of tech CEO layoff memos" width="75%">
+  <img src="img/14/layoffs_economic_factors.png" alt="Washington Post analysis of tech CEO layoff memos" title="Washington Post analysis of tech CEO layoff memos" width="75%">
+  <img src="img/14/layoffs_apologies.png" alt="Washington Post analysis of tech CEO layoff memos" title="Washington Post analysis of tech CEO layoff memos" width="75%">
 </figure>
 ]
 
@@ -306,19 +303,13 @@ https://www.washingtonpost.com/business/interactive/2023/tech-layoffs-company-me
 
 ---
 
-background-image: url("img/12/he-she-julia.png")
-background-position: center
-background-size: cover
+# Even better: other methods to visualize text
 
-???
-
-https://pudding.cool/2017/08/screen-direction/
-
----
-
-background-image: url("img/12/minimap-1.png")
-background-position: center
-background-size: contain
+.center[
+<figure>
+  <img src="img/14/minimap-1.png" alt="Map of US state mentions in song lyrics" title="Map of US state mentions in song lyrics" width="70%">
+</figure>
+]
 
 ???
 
@@ -337,15 +328,15 @@ name: tidytext
 
 We already learned about strings and regular expressions in week 5
 
-Many of our data frames include `chr` variables that are useful for filtering and other operations (e.g., stock tickers used in the group project)
+Many of our data frames include `chr` variables with **structured text** that are useful for filtering and other operations (e.g., stock tickers)
 
 --
 
-This week we will learn more about methods to glean insights from unstructured text (as well as revisit and reinforce what we learned in week 5)
+This week we will learn about methods to glean insights from **unstructured text** (as well as revisit and reinforce what we learned in week 5)
 
 --
 
-**Text mining** refers to this process of converting unstructured text to higher-quality information
+**Text mining** refers to this process of extracting structured information from unstructured text
 
 ---
 
@@ -393,7 +384,7 @@ We will use the `tidytext` package
 
 .pull-right.center[
 <figure>
-  <img src="img/12/cover.png" alt="Tidy text mining with R" title="Tidy text mining with R" width="80%">
+  <img src="img/14/cover.png" alt="Tidy text mining with R" title="Tidy text mining with R" width="80%">
 </figure>
 ]
 
@@ -441,7 +432,7 @@ Tidy text format: a table with one **token** per row
 
 --
 
-What is a token?
+What is a token in the context of text analysis?
 
 --
 
@@ -767,7 +758,7 @@ As always, tools and tricks from the layered grammar of graphics apply:
 ```{r hp-bigrams, cache=TRUE, echo=FALSE, fig.width=8, fig.height=3.5, out.width="95%"}
 hp_bigrams <- hp |> 
   unnest_tokens("bigram", text, token = "ngrams", n = 2) |> 
-  separate(bigram, c("word1", "word2"), sep = " ") |> 
+  separate(bigram, c("word1", "word2"), sep = " ") |> # outdated syntax (separate_wider_del)
   anti_join(stop_words, join_by(word1 == word)) |> 
   anti_join(stop_words, join_by(word2 == word)) |> 
   unite(bigram, word1, word2, sep = " ") |> 
@@ -865,7 +856,8 @@ $$
 # Get a list of words in all the books
 hp_words <- hp |> 
   unnest_tokens("word", text) |> 
-  count(book, word, sort = TRUE)
+  count(book, word, sort = TRUE) |> 
+  filter(word!="c") # filter out em dashes coded as "c"
 
 # Add the tf-idf for these words
 hp_tf_idf <- hp_words |> 
@@ -1197,17 +1189,49 @@ plot_word_ratios |>
 
 
 ---
+class: inverse, center, middle
+name: prelim-2
 
-# Plan for today
-
-[Course evaluations](#course-evals-in-class)
-
-[Prelim 2 info](#prelim-2)
-
-[homework-14](#homework)
+# Prelim 2
 
 ---
+
+# Prelim 2
+
+Format: paper exam, closed-book (-notes, -computer, etc.)
+
+It will stress concepts more than syntax (but will test both)
+
+We will have multiple question types, including but not limited to:
+1. improve this data visualization
+2. explain how you would approach a coding task
+3. explain what this function call would return
+4. explain whether/why this code would fail
+5. write code snippets
+
+If we ask you to write code snippets, we will provide a function reference sheet
+
+---
+
+# Prelim 2 preparation
+
+We will provide practice questions next week
+
+I have extra office hours by appointment May 1 and May 2
+
+The TAs will have regular open office hours May 2 and May 5
+
+The TAs will host an extra review session on May 5
+
+Questions?
+
+---
+class: inverse, center, middle
 name: course-evals-in-class
+
+# Course evaluations
+
+---
 
 # Please take 10 mins to complete course evals
 
@@ -1217,36 +1241,16 @@ Concrete suggestions are most helpful
 
 **I would appreciate your feedback through two channels:**
 
-1. Homework 15 - Course Feedback Survey (on canvas through May 19)
-2. University course evaluations (open through May 12)
+1. Homework 15 - Course Feedback Survey (on canvas)
+2. University course evaluations
 
 Both will be anonymous
 
 Reminder: **bonus point on Homework 15 for completing university evaluations**
 
 ---
-name: prelim-2
-
-# Prelim 2
-
-Same format as prelim 1 (write answers and code in `.qmd`, submit `.qmd` + `.pdf`)
-
-- **Covers everything since prelim 1** (weeks 7-14)
-- *Tentative* plan is to have ~8 questions:
-  - ~2 require no coding
-      - "Describe X ways to improve this data visualization"
-      - "Name Y ways one graphic is better/worse than another"
-      - Tip: study the prologue sections of slides
-  - ~1 is a mix of how to improve a dataviz, and then actually doing it
-  - ~5 are coding questions where we specify the goal, and you get there
-      - Some may have a sub-part where you describe an approach w/o code
-- I will list the number of points per question to help you allocate effort
-
-Questions?
-
----
 class: inverse, center, middle
 name: homework
 
-# homework-14
+# Homework-14
 
