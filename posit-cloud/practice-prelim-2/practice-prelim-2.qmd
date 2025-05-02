@@ -10,7 +10,7 @@
 # Reminder: you can run code chunks interactively, not just via Render
 # You can use keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
-title: "Practice Prelim 2"
+title: "Practice Questions for Prelim 2"
 subtitle: "AEM 2850 / AEM 5850"
 format: pdf
 urlcolor: blue
@@ -28,97 +28,183 @@ knitr::opts_chunk$set(fig.align = "center",
                       warning=FALSE, 
                       message = FALSE)
 
+# create college_majors data frame
+college_majors <- fivethirtyeight::college_recent_grads |> 
+  filter(major_category %in% c("Arts", "Engineering", "Business"))
+
 # import airline reviews data
 airline_reviews <- read_csv("airline_reviews.csv")
 
-# specify the roster_url for scraping
-roster_url <- "https://classes.cornell.edu/search/roster/FA23?q=&subjects%5B%5D=AEM&days-type=any&crseAttrs-type=any&breadthDistr-type=any&pi="
-
-# import yelp restaurant reviews data
-yelp <- read_csv("yelp-listings.csv")
+# Import S&P 500 price data
+load("sp500.RData")
+aapl_prices <- sp500_prices |>
+  filter(symbol == "AAPL") |> 
+  mutate(year = year(date)) |> 
+  filter(year>= 2020 & year<=2024)
+aapl_benchmark <- aapl_prices |>
+  filter(date==min(date) | date==max(date)) |>
+  mutate(cum_return = (adjusted - lag(adjusted)) / lag(adjusted) ) |>
+  filter(!is.na(cum_return)) |>
+  mutate(ann_return = ((1 + cum_return)^(1/5) - 1) * 100) |>
+  pull(ann_return)
 ```
 
+<!-- # Name: ______________________ \hfill netid: _______ -->
+
+\vspace{-1.75cm}
+
+# READ THESE NOTES FIRST:
+
+- Prelim 2 will cover all content we covered in weeks 7 through 14
+  - Prelim 2 will also rely on prerequisite knowledge of fundamental concepts we learned in the first part of the course, but the questions are not designed to test that knowledge directly
+- These practice questions are intended as a study resource, not a comprehensive guide
+- These practice questions are not exhaustive in terms of topics and question types
+- These practice questions are not necessarily representative of the weight that different topics and question types will receive on Prelim 2
+
+----
 
 ## Preface
 
-The goal of this prelim is to assess your understanding of data visualization concepts and facility with key visualization and programming tools covered in weeks 7 through 14 of the course.
+The goal of this prelim is to assess your understanding of data visualization concepts and facility with key visualization and programming tools covered in weeks 7 through 14.
 
 
 ## Instructions
 
-- You must complete Prelim 2 **in person** in Warren 150 during class
-- Prelim 2 is open internet, but **do not communicate with classmates (or others!)**
-- Do not use packages outside the `tidyverse` packages we have already loaded for you (penalties may apply)
-- When done, **upload BOTH your .qmd and .pdf files** to canvas
+- You must complete Prelim 2 in person during class
+- Prelim 2 is a closed-book paper prelim
+- When done, hand in your completed prelim and have a great summer!
 
 ## Additional notes
 
-- There are 8 questions worth a total of 100 points. The total number of points per question is stated with each question
-- **Render early and often** to avoid wasting time sorting out what code needs debugging
+- There are X questions worth a total of 100 points. The total number of points per question is stated with each question
 - We will give partial credit if your answers are incomplete, especially if you provide comments or text that describes the logic of what you *would* do if you had more time
-- If you have trouble rendering your document, do not delete your work in progress code. That will make it hard for us to give you partial credit. Instead, you can:
-  - Comment out problematic code using `#` or keyboard shortcut Cntrl/Cmd-Shift-C
-  - Replace `{r}` with `{r, eval = FALSE}` at the top of the relevant code chunk
-  - Ask questions!
 
-<!--- Please leave the code above unchanged except for adding your name in the yaml header. Questions start from here. --->
 
 {{< pagebreak >}}
-# Improving Data Visualizations
+# Multiple choice: circle one answer per question.
 
-## 1. [12 points] Earlier this semester we worked with data on college major salaries. We want to make a plot to compare the median salaries for the top 10 college majors relative to one another, both as individual majors and across categories of majors (e.g., Business, Engineering, etc.). Here is a first attempt:
+## Q. [X points] What is one risk of truncating the y-axis in a bar chart?  
+a. Harder to match color to category
+b. Chart may look too crowded
+c. It may exaggerate small differences
+d. It causes R to crash
+
+\vfill
+## Q. [X points] Which ggplot geom is best for visualizing data over time?
+a. `geom_point()`
+b. `geom_col()`
+c. `geom_line()`
+d. `geom_histogram()`
+
+\vfill
+## Q. [X points] What is the purpose of an `if` statement?
+a. To rename variables
+b. To automate downloads
+c. To apply styles to ggplot2 charts
+d. To control which code runs under certain conditions
+
+\vfill
+## Q. [X points] Which function listed below is used for web scraping?
+a. `read_csv()`
+b. `read_sf()`
+c. `read_html()`
+c. `read_lines()`
+
+
+{{< pagebreak >}}
+# Short answer
+
+## Q. [X points] Name one advantage and one disadvantage of using word clouds for text analysis.
+
+*Advantage:* 
+
+\vfill
+*Disdvantage:* 
+
+\vfill
+## Q. [X points] True or False: “Pie charts are best for subtle differences between many categories.” Explain.
+
+
+\vfill
+\vfill
+## Q. [X points] True or False: “Web scraping using the `rvest` function `read_html()` works well on client-side websites because the function does not rely on having html code that contains all the information we see when we visit a webpage.” Explain.
+
+\vfill
+\vfill
+{{< pagebreak >}}
+## Q. [X points] Earlier this semester we worked with data on college major salaries. We want to make a plot to compare the median salaries for the top 10 college majors relative to one another, both as individual majors and across categories of majors (e.g., Business, Engineering, etc.). Here is a first attempt:
 
 ```{r echo = FALSE}
 knitr::include_graphics("salaries.png")
 ```
 
-## Describe four changes you could make to improve this data visualization without losing any information.
+## Describe four conceptual changes you could make to improve this data visualization without losing any information, and explain what issue each change is meant to address.
 
 *Note: do not write code for this part. You may name the function(s) you would use, but that is not required for full credit -- you just need to describe the changes you would make.*
 
-1. ...
+1. 
+\vfill
 
-2. ...
+2. 
+\vfill
 
-3. ...
+3. 
+\vfill
 
-4. ...
+4. 
+\vfill
 
+\vfill
 
 
 {{< pagebreak >}}
-## 2. [12 points] We want to compare *categories* of majors according to the median salary of all the majors in each category, not just the top 10. The graph below presents the distribution of median salaries for three categories. Describe two changes you could make to more effectively compare the three different categories, and then edit the code below to implement your proposed changes.
+## Q. [X points] Now we want to compare *categories* of majors according to the median salaries of all the majors in each category, not just the top 10 majors overall. The code below creates the graph below, which presents the distribution of median salaries for three categories. Describe two changes you could make to more effectively compare the three different categories, explain what issue each change is meant to address, and then edit the code below to implement your proposed changes.
 
-1. ...
+1. 
+\vfill
 
-2. ...
+2. 
+\vfill
 
-```{r fig.dim = c(6, 5), out.height = "35%"}
-fivethirtyeight::college_recent_grads |> 
-  filter(major_category %in% c("Arts", "Engineering", "Business")) |> 
+\vfill
+```{r fig.dim = c(6, 5), out.height = "35%", eval=FALSE}
+college_majors |> 
   ggplot(aes(x = median, fill = major_category)) +
   geom_histogram() +
-  scale_x_continuous(breaks = seq(0, 100000, 25000),
-                     labels = scales::label_dollar(),
-                     limits = c(0, NA)) +
+  scale_x_continuous(
+    labels = scales::label_dollar(),
+    limits = c(0, NA)
+  ) +
   guides(fill = "none") +
-  labs(x = "Median Salary",
-       y = "Number of Majors",
-       title = "Earnings vary by major, but some categories earn more than others")
+  labs(
+    x = "Median Salary",
+    y = "Number of Majors",
+    title = "Earnings vary by major, but some categories earn more than others"
+  )
 ```
 
-{{< pagebreak >}}
-## *Note: we included a static version of the image on this page so you can easily compare your revised graphic to the original:*
-```{r echo = FALSE, out.height = "35%"}
-# you should NOT edit this code
-# this just makes sure you can compare back to the original after making changes
-knitr::include_graphics("salaries_distributions.png")
+\vfill
+
+```{r fig.dim = c(6, 5), out.height = "35%", echo=FALSE}
+college_majors |> 
+  ggplot(aes(x = median, fill = major_category)) +
+  geom_histogram() +
+  scale_x_continuous(
+    labels = scales::label_dollar(),
+    limits = c(0, NA)
+  ) +
+  guides(fill = "none") +
+  labs(
+    x = "Median Salary",
+    y = "Number of Majors",
+    title = "Earnings vary by major, but some categories earn more than others"
+  )
 ```
 
-
+\vspace{-1.5cm}
 
 {{< pagebreak >}}
-## 3. [9 points] The plot below comes from an article about economic development and globalization. The text of the article explains it as follows:
+## Q. [X points] The plot below comes from an article about economic development and globalization. The text of the article explains it as follows:
 
 > "[The figure] plots countries’ revealed comparative advantage in office machines... against the average years of schooling of the adult population... China is above the regression line, indicating that its specialization in the sector is greater than one would expect given its level of education, but it is hardly an extreme outlier. Other middle-income countries—including Costa Rica, the Philippines, Malaysia, and Thailand—have larger positive residuals."
 
@@ -126,85 +212,88 @@ knitr::include_graphics("salaries_distributions.png")
 knitr::include_graphics("clutterplot.png")
 ```
 
-## Describe three changes you could make to this visualization to better illustrate the ideas in the text above.
+## Describe three changes you could make to this visualization to better illustrate the ideas in the text above, and explain what issue each change is meant to address.
 
-*Notes: do not write code for this. Do not worry about what "comparative advantage in office machines" means -- we are looking for generic data visualization suggestions, not anything specific to the outcome plotted on the y axis. Also do not suggest changes to the data used to make this chart -- think instead about how you could modify aesthetic mappings, layers, etc.*
+*Notes: Do not worry about what "comparative advantage in office machines" means -- we are looking for generic data visualization suggestions, not anything specific to the outcome plotted on the y axis. Also do not suggest changes to the data used to make this chart -- think instead about how you could modify aesthetic mappings, layers, etc.*
 
-1. ...
+1. 
+\vfill
 
-2. ...
+2. 
+\vfill
 
-3. ...
-
+3. 
+\vfill
 
 
 {{< pagebreak >}}
-# Analyzing Airline Reviews
+## Q. [X points] Below is a basic scatterplot we made using a data frame called `airline_reviews` that contains reviews of different airlines' flights. In the data frame, each observation (i.e., row) corresponds to an individual review, and the `overall` and `value_for_money` review scores take on integer values.
 
-## 4. [12 points] We imported some airline reviews data for you at the beginning of this file and assigned it to the name `airline_reviews`. Use `airline_reviews` to make a bar/column plot to compare the average of `overall` ratings for each `airline`. There should be one bar/column per `airline`, and the length/height should correspond to the average of `overall` ratings for that `airline`. Arrange the bars/columns in descending order by rating, and make the area of the bars/columns `skyblue`. Make sure that any text on the plot is clear and understandable, and does not overlap other text. Use `theme_bw()`.
-
-*Note: in the problem statement above, the terms bar and column are used as synonyms. It is your job to choose the appropriate geometry based on what information the prompt asks you to convey in your visualization.*
-
-```{r}
-
+```{r echo=FALSE, out.height = "30%"}
+airline_reviews |> 
+  ggplot(aes(x = value_for_money, y = overall)) +
+  geom_point()
 ```
 
 
+## Write code to replicate the plot above using the data frame `airline_reviews`.
+
+*Note: We are asking you to replicate the plot above, even if you do not think it is an effective data visualization. Do not spend time trying to improve it.*
+
+\vfill
+
+## Is your basic scatterplot very informative about the relationship between the two variables? If not, write a brief code snippet below that would produce more informative output. It could be an adaptation of the visualization above, but it does not necessarily have to be a visualization.
+
+\vfill
+
+
 {{< pagebreak >}}
-## 5. [12 points] In the data set, customers not only give an overall rating, but also rate different aspects of flights. Make a basic scatterplot of `overall` vs `value_for_money` without customizing the geometry or adding other layers.
+## Q. [X points] The code below computes Apple's annualized return using the data frame `aapl_prices`, which includes data that range in `date` from `r min(aapl_prices$date)` through `r max(aapl_prices$date)`. The data frame also contains a variable `year` that contains the year corresponding to each `date`. Here are the first two rows of the data frame:
 
-*Note: For this question, you will not be graded on the aesthetic presentation of your graph, so don't waste time making nice labels, etc.*
 ```{r}
+aapl_prices |> head(2)
+```
 
+## Consider the function `get_annual_return()` that returns Apple's annualized return since a `start_year` of the user's choice:
+```{r}
+get_annual_return <- function(start_year){
+  years <- 2025 - start_year
+  aapl_prices |>
+    filter(year >= start_year) |>
+    filter(date==min(date) | date==max(date)) |>
+    mutate(cum_return = (adjusted - lag(adjusted)) / lag(adjusted) ) |>
+    filter(!is.na(cum_return)) |>
+    mutate(ann_return = ((1 + cum_return)^(1/years) - 1) * 100) |>
+    pull(ann_return)
+}
 ```
 
 \vfill
-## Is your basic scatterplot very informative about the relationship between the two variables? If not, name one way you could make it more informative, and use words to describe how you would implement your suggestion.
+## Circle all the function calls below that will return valid annualized returns:
 
-*Note: do not write code for this part. You may name the function(s) you would use, but that is not required for full credit -- you just need to describe the approach you would take.*
-
-...
+a. `get_annual_return(2015)`
+\vfill
+b. `get_annual_return(2020)`
+\vfill
+c. `get_annual_return("January 1, 2022")`
+\vfill
+d. `get_annual_return(2025)`
 
 
 {{< pagebreak >}}
-## 6. [12 points] Visualizations are not always the best way to summarize relationships. Use linear regression to model `overall` as a function of `value_for_money`. Print the results using `summary()`. Describe the interpretation of the coefficient on `value_for_money` in words.
+## Q. [X points] Your report on Volkswagen's Dieselgate circulated among executives in the auto industry and a few of them are interested in hiring you as a consultant. Ford, Toyota, and General Motors shared spreadsheets with you containing their sales in 2024 of various vehicle types (sedan, SUV, truck, etc) by state. The three spreadsheets are very different, but upon importing them into R you noticed that some of the variables have the same names across all three and are measured in comparable ways (`vehicle_type` and `n_sales`).
 
-```{r}
+## Describe two different approaches you could take to calculate the total number of vehicles sold in the US by brand and vehicle type. For each one, name specific functions you would use, and how they would work in this context.
 
-```
+*Note: We will award credit based on the logic of your approaches first and foremost, followed by your understanding of key functions needed to implement the approach. You are not expected to write a complete code snippet that will run without errors (and will not receive any extra credit if you do).*
 
-...
+1. 
 
 \vfill
-## How would your interpretation of the coefficient on `value_for_money` change if you added other factors such as `seat_comfort` and `entertainment` into the model? Do you think the coefficient would be larger or smaller than the coefficient you estimated above?
 
-...
+2. 
+\vfill
 
-
-{{< pagebreak >}}
-# Scraping the Course Roster
-
-## 7. [15 points] Pre-enroll has come and gone, but the course roster lives on. Scrape the names of Fall 2023 AEM courses from the course roster. Use the url contained in the object `roster_url`, pre-assigned for you at the beginning of this file. Use the CSS selector ".title-coursedescr" to extract course titles. Convert the extracted html to a character vector (not a table/data frame) called `course_names`. Print the `head()` of `course_names`.
-
-```{r}
-
-```
+## How do the two approaches you proposed compare? Would you say one is better than the other? Why?
 
 \vfill
-## You could use a similar method to scrape course numbers using the CSS selector ".title-subjectcode". Suppose you did, and assigned it to another object, `course_numbers`. How could you combine the information you scraped to identify course numbers for all the courses with the word "Accounting" in the name?
-
-*Note: do not write code for this part. You may name the function(s) you would use, but that is not required for full credit -- you just need to describe the approach you would take.*
-
-...
-
-
-{{< pagebreak >}}
-# Mapping Yelp Reviews in Boston
-
-## 8. [16 points] Read in the shapefile with spatial data about the neighborhoods of Boston contained in the folder `boston`. Use `left_join` to augment these data with the data in `yelp` (created above for you), which contains restaurant listings in each row and the neighborhood of each listing in the column `Name`. Be careful to start with the neighborhoods data to preserve the `sf` nature of the data frame. Then count the number of listings in each neighborhood and make a map of Boston neighborhoods, using `fill` to shade each neighborhood according to the number of listings in it. Customize the title, fill scale, and legend as time allows.
-
-*Note: if you have trouble, consider plotting the map of neighborhoods without the number of restaurant listings (using just the `boston` spatial data), or printing a table of the number of listings per neighborhood (using just the `yelp` data), or both, so we can award partial credit.*
-
-```{r}
-
-```
