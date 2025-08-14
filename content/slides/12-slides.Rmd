@@ -52,7 +52,7 @@ class: center, middle
 
 AEM 2850 / 5850 : R for Business Analytics<br>
 Cornell Dyson<br>
-Spring 2025
+Fall 2025
 
 Acknowledgements: 
 <!-- [Andrew Heiss](https://datavizm20.classes.andrewheiss.com) -->

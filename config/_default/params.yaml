@@ -53,22 +53,20 @@ instructor:
   email: gerarden@cornell.edu
   url: "https://www.toddgerarden.com"
   office: "Warren 464"
-  # twitter: 'toddgerarden'
   contact_policy: >-
     Email is best for short and concrete questions. Please use office hours for complex or open-ended questions.
 
 course:
   number: "AEM 2850 / 5850"
-  semester: "Spring 2025"
+  semester: "Fall 2025"
   days: "Tuesdays and Thursdays"
   time1: "10:10am - 11:25am"
-  location1: "Warren 150"
+  location1: "Warren 173"
   time2: "01:25pm - 02:40pm"
   location2: "Warren 101"
-  dates: "January – May, 2025"
+  dates: "August – December, 2025"
   copyrightYear: "2025"
-#  slack: "https://join.slack.com/t/msu-qs62738/shared_invite/zt-10u63bf0n-b0cePmz9NDhhw3MSUPBP5A"
-  office_hours: "Tuesday 2:45pm - 3:45pm + by appointment"
+  office_hours: "Tuesday 11:30am - 12:30pm + by appointment"
   appointment_url: 'https://aem2850.youcanbook.me'
   github: "tgerarden/aem2850"
 

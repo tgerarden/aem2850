@@ -32,7 +32,7 @@ Welcome to AEM 2850 / AEM 5850! I'd like to preface the syllabus with two points
 
 Classes meet Tuesdays and Thursdays:
 
-- Section 1: 10:10 - 11:25 in Warren 150
+- Section 1: 10:10 - 11:25 in Warren 173
 - Section 2: 1:25 - 2:40 in Warren 101
 
 ### Professor office hours
@@ -43,11 +43,14 @@ Classes meet Tuesdays and Thursdays:
 
 ### TA office hours
 
-- Mondays 2:00pm - 6:00pm in Warren 370:
-  - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) from 2-4pm
-  - Grad TA Xiaorui Wang ([xw427@cornell.edu](mailto:xw427@cornell.edu)) from 3-6pm
-- Fridays 2:00pm - 3:00pm in Warren 175:
-  - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) from 2-3pm
+- Mondays, time and location TBD.
+- Fridays, time and location TBD.
+
+<!-- - Mondays 2:00pm - 6:00pm in Warren 370: -->
+<!--   - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) from 2-4pm -->
+<!--   - Grad TA Xiaorui Wang ([xw427@cornell.edu](mailto:xw427@cornell.edu)) from 3-6pm -->
+<!-- - Fridays 2:00pm - 3:00pm in Warren 175: -->
+<!--   - Grad TA Victor Simoes Dornelas ([vs424@cornell.edu](mailto:vs424@cornell.edu)) from 2-3pm -->
 
 [See below for tips on how to make the most of office hours and email.](#office-hours-and-email)
 
@@ -67,7 +70,7 @@ After taking this course, students will have the tools to complete basic tasks i
 5.	Utilize course concepts and tools for business applications
 
 ### Prerequisites:
-- There are none! This is introductory programming course
+- There are none! This is an introductory programming course
 - AEM 2010, AEM 2011, or equivalent (Spreadsheet Modeling) is helpful but not required
 
 <!-- ## Class Notes -->
@@ -222,7 +225,7 @@ Your grade in this course will be based on completing the following assignments:
 
 - **Class participation** and regular attendance are expected due to the interactive nature of this course.
   - Completing in-class **examples** are an important part of class participation and learning. If you miss class, you are still expected to complete the in-class examples for any classes that you miss by the end of that week.
-  - Excessive absences and failure to complete weekly in-class examples will impact your final grade. There is no penalty for the first three absences (except for the in-class prelims, which are mandatory irrespective of whether you miss class).
+  - Excessive absences and failure to complete weekly in-class examples will impact your final grade. There is no penalty for the first three absences, but you are still expected to complete the in-class examples for any classes that you miss by the end of that week. Prelim attendance is mandatory.
   - Please do not notify the instructor that you will miss class unless you anticipate missing more than three classes.
 
 **Note: Students in AEM 5850** will have to complete a few extra assignments and meet slightly different requirements for the project.
@@ -267,7 +270,7 @@ Please read [the assignments page](/assignment/) for more details on the assignm
 
 ## Course resources
 
-**I am fully committed to making sure that you learn everything you are hoping to learn from this class.** I will make whatever accommodations I can to help you finish your assignments, do well on your project, and learn and understand the class material.
+**I am fully committed to making sure that you learn everything you are hoping to learn from this class.**
 
 <!-- If you need extra help, or if you need more time with something, or if you feel like you're behind or not understanding everything, **do not suffer in silence!** Talk to me! I will work with you. If you tell me you're having trouble, I will not judge you or think less of you. I hope you'll extend me the same grace. -->
 
