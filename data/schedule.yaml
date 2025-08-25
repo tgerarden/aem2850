@@ -43,7 +43,7 @@ lessons:
     # # assignment: "05-homework"
     bg: 1
 
-  - title: '<span class="content-title">Prelim 1 Review <br> *No class on Oct 2*</span>'
+  - title: '<span class="content-title">Prelim 1 review <br> *No class on Oct 2*</span>'
     # and Proportions
     session: "Session 6"
     date: "Week 6"
@@ -138,7 +138,7 @@ lessons:
 #  - title: '**Conclusion**'
 #    header: True
 
-  - title: '<span class="content-title">Prelim 2 Review <br> *No class on Dec 4*</span>'
+  - title: '<span class="content-title">Prelim 2 review <br> *No class on Dec 4*</span>'
     # and Proportions
     session: "Session 15"
     date: "Week 15"
