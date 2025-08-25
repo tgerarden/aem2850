@@ -116,7 +116,7 @@ Acknowledgements:
 # Announcements
 
 Reminders:
-- **Group project groups due this Friday (March 22)** ([canvas link](https://canvas.cornell.edu/courses/74072/assignments/761352))
+- **Group project groups due this Friday (March 22)** ([canvas link]())
   - Form groups of 3
   - All students in each group must be enrolled at the same course level
   - If unable to form a group of 3, please state that in your submission

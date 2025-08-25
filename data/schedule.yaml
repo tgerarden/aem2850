@@ -5,7 +5,7 @@ lessons:
   - title: '<span class="content-title">Welcome to AEM 2850! <br> Intro to R, RStudio, and Quarto</span>'
     session: "Session 1"
     date: "Week 1"
-    # content: "01-content"
+    content: "01-content"
     # example: "01-example"
     # assignment: "01-homework"
     bg: 1

@@ -1,4 +1,13 @@
-# Data source
+# Data sources
+
+## S&P 500 prices
+
+https://fred.stlouisfed.org/series/SP500
+
+Frequency: daily, close
+Timeframe: Max
+
+## Weather
 
 Climate Data Online
 https://www.ncei.noaa.gov/cdo-web/

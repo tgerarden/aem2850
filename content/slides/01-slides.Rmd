@@ -81,7 +81,7 @@ name: outline
 
 layout: false
 name: r-business-analytics
-class: center middle section-title section-title-2 animated fadeIn
+class: inverse, center, middle
 
 # Why take R for Business Analytics?
 
@@ -244,14 +244,9 @@ Skills from this course can also be used for other programming languages
 
 layout: false
 name: class-details
-class: center middle section-title section-title-7 animated fadeIn
+class: inverse, center, middle
 
 # Class details
-
----
-
-layout: true
-class: title title-7
 
 ---
 
@@ -280,8 +275,9 @@ class: title title-7
 - Came to Cornell in 2018
 
 - Interested in:
-  - Energy economics
+  - Energy markets
   - Climate tech
+  - Innovation
   - Working with data
 ]
 
@@ -391,7 +387,7 @@ We will follow the same general process each week:
 
 - Work on the homework, attend office hours as needed
 
-- **Monday (following):** submit homework on canvas by 11:59pm (starting with Week 1)
+- **Monday (following):** submit homework on canvas by 11:59pm
 
 ---
 
@@ -442,13 +438,12 @@ bind_rows(assignments, assignments_total) %>%
 
 ### Office hours:
 
-- TAs: TBD
-<!-- - Grad TA Victor Simoes Dornelas: Mondays 1:30pm - 3:30pm in Warren TBD -->
-<!-- - Undergrad TAs: TBD -->
-- Tuesdays 11:30am - 12:30pm: Prof. Gerarden in Warren 464
-- Other times by appointment: Prof. Gerarden, at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
-
-### Email:
+- Teaching Assistants:
+  - Mondays 2:00pm - 6:00pm in Warren 370
+  - Fridays 1:00pm - 2:00pm, location TBD
+- Prof. Gerarden:
+  - Tuesdays 11:30am - 12:30pm in Warren 464
+  - Other times by appointment: [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
 You can also reach us by email. The best approach is to email both me and our grad TAs at the same time. You can do that with one click [here](mailto:gerarden@cornell.edu,vs424@cornell.edu,xw427@cornell.edu). **Please** read the syllabus for tips on how to make the most of email.
 
@@ -461,7 +456,7 @@ You can also reach us by email. The best approach is to email both me and our gr
 [aem2850.toddgerarden.com](https://aem2850.toddgerarden.com)
 
 ### Site for submitting work: (↑)
-[canvas.cornell.edu/courses/74072](https://canvas.cornell.edu/courses/74072)
+[https://canvas.cornell.edu/courses/76511](https://canvas.cornell.edu/courses/76511)
 - viewing announcements
 - viewing grades
 - you can also view and navigate the course site through canvas
@@ -494,7 +489,7 @@ You can also reach us by email. The best approach is to email both me and our gr
 ---
 
 layout: false
-class: center middle section-title section-title-2 animated fadeIn
+class: inverse, center, middle
 
 # Questions about the class?
 
@@ -502,25 +497,31 @@ class: center middle section-title section-title-2 animated fadeIn
 
 layout: false
 name: teaser
-class: center middle section-title section-title-2 animated fadeIn
+class: inverse, center, middle
 
 # Teaser programming example
 
 ---
 
-layout: true
-class: title title-2
-
----
-
 # How does 2025 compare to 2024 so far?
 
-Click to download files from [aem2850.toddgerarden.com/content/01-content](https://aem2850.toddgerarden.com/content/01-content/):
-- [Weather stations in NY](https://aem2850.toddgerarden.com/slides/data/01-slides/ny-stations.csv)
-- [Weather in NY in 2024](https://aem2850.toddgerarden.com/slides/data/01-slides/ny-weather-2024.csv)
-- [Weather in NY in 2025](https://aem2850.toddgerarden.com/slides/data/01-slides/ny-weather-2025.csv)
+Let's make a plot that compares returns of the S&P 500 this year versus last year
 
-Let's make a plot that compares the evolution of Cornell's daily max temps (TMAX) over January in 2024 and 2025
+You can download the raw data on the S&P 500 price index [here](https://aem2850.toddgerarden.com/slides/data/01-slides/SP500.csv)
+
+.pull-left[
+How would you use these data to compare *returns* in 2025 vs 2024?
+]
+
+.pull-right[
+<figure>
+  <img src="img/01/sp500-prices.png" alt="S&P 500 price data" title="S&P 500 price data" width="95%">
+</figure>
+]
+
+???
+
+Source: https://fred.stlouisfed.org/series/SP500
 
 ---
 
@@ -528,50 +529,52 @@ Let's make a plot that compares the evolution of Cornell's daily max temps (TMAX
 
 One way to do this in R. First, we'll need to import and prep the data:
 
-```{r ithaca-weather-data}
-# load packages
+```{r sp500-data}
+# load the tidyverse package
 library(tidyverse)
-# identify the Cornell station
-stations <- read_csv("data/01-slides/ny-stations.csv")
-cornell <- stations |> filter(str_detect(NAME, "CORNELL"))
-# read in and bind relevant data
-clean_data <- function(y, s, m) {
-  str_glue("data/01-slides/ny-weather-", y, ".csv") |>
-    read_csv() |>
-    inner_join(s, by = "STATION") |>
-    mutate(date = mdy(DATE),
-           mon = month(date),
-           day = day(date),
-           year = year(date)) |>
-    filter(mon == m)
-}
-years <- c(2024, 2025)
-cornell_temps <- map(years, clean_data, cornell, 1) |> bind_rows()
+
+# import the data
+prices <- read_csv("data/01-slides/SP500.csv")
+
+# compute returns each year
+returns <- prices |> 
+  mutate(
+    year = year(observation_date),
+    md   = format(observation_date, "%m-%d")
+  ) |> 
+  filter(!is.na(SP500)) |> 
+  group_by(year) |> 
+  arrange(observation_date, .by_group = TRUE) |> 
+  mutate(annual_return = (SP500 / first(SP500) - 1) * 100)
 ```
 
----
-
-# How does 2025 compare to 2024 so far?
-
-What do the data look like?
-
-```{r}
-head(cornell_temps)
+```{r, echo=FALSE}
+all_returns <- returns |> 
+  ungroup() |> 
+  # drop leap days
+  filter(md != "02-29") |>
+  # use a fake calendar year for plotting
+  mutate(date = as.Date(paste0("2001-", md))) |> 
+  filter(year>=2021)
+returns <- all_returns |> 
+  filter(year>=2024)
 ```
+
 
 ---
 
 # How does 2025 compare to 2024 so far?
 
 .pull-left[
-```{r ithaca-weather-plot1, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+```{r sp500-plot1, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 # plot data
-cornell_temps |> 
+returns |> 
   ggplot(aes(
-    x = day, 
-    y = TMAX
+    x = date, 
+    y = annual_return
   )) + 
-  geom_point() + 
+  geom_line() + 
+  scale_x_date(date_labels = "%b") +
   theme_bw()
 ```
 
@@ -579,7 +582,7 @@ What's wrong with this plot?
 ]
 
 .pull-right[
-  ![](`r knitr::fig_chunk("ithaca-weather-plot1", "png")`)
+  ![](`r knitr::fig_chunk("sp500-plot1", "png")`)
 ]
 
 ---
@@ -587,15 +590,16 @@ What's wrong with this plot?
 # How does 2025 compare to 2024 so far?
 
 .pull-left[
-```{r ithaca-weather-plot2, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+```{r sp500-plot2, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 # plot data
-cornell_temps |> 
+returns |> 
   ggplot(aes(
-    x = day, 
-    y = TMAX, 
+    x = date, 
+    y = annual_return, 
     color = as_factor(year) #<<
   )) +
-  geom_point() + 
+  geom_line() + 
+  scale_x_date(date_labels = "%b") +
   theme_bw() +
   theme(legend.position = "bottom") #<<
 ```
@@ -604,7 +608,7 @@ What's wrong with this plot?
 ]
 
 .pull-right[
-  ![](`r knitr::fig_chunk("ithaca-weather-plot2", "png")`)
+  ![](`r knitr::fig_chunk("sp500-plot2", "png")`)
 ]
 
 ---
@@ -612,28 +616,29 @@ What's wrong with this plot?
 # How does 2025 compare to 2024 so far?
 
 .pull-left[
-```{r ithaca-weather-plot3, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+```{r sp500-plot3, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 # plot data
-cornell_temps |> 
+returns |> 
   ggplot(aes(
-    x = day, 
-    y = TMAX, 
+    x = date, 
+    y = annual_return, 
     color = as_factor(year)
   )) + 
-  geom_point() + 
-  geom_smooth(se = FALSE) +  #<<
+  geom_line() + 
+  scale_x_date(date_labels = "%b") +
   theme_bw() +
   theme(legend.position = "bottom") +
   labs( #<<
-    x = "Day of month",  #<<
-    y = "Max. daily temperature (F)",  #<<
-    color = "Year" #<<
+    x = "Month of year",  #<<
+    y = "Annual return (%)",  #<<
+    color = NULL, #<<
+    title = "S&P 500 returns over the years" #<<
   ) #<<
 ```
 ]
 
 .pull-right[
-  ![](`r knitr::fig_chunk("ithaca-weather-plot3", "png")`)
+  ![](`r knitr::fig_chunk("sp500-plot3", "png")`)
 ]
 
 ---
@@ -642,36 +647,38 @@ cornell_temps |>
 
 This approach has two advantages over manually creating figures using software such as excel or sheets:
 1. we have a script to **reproduce** our work / share our methods with others
-2. we can **generalize** and **scale** this much more easily than manual approach
+2. we can **generalize** and **scale** this much more easily than manual approaches
 
 ---
 
 # How does 2025 compare to 2024 so far?
 
-For example we can easily **generalize** this approach to other weather outcomes:
+For example we can easily **generalize** this approach to other outcomes:
 
 .pull-left[
-```{r ithaca-weather-plot4, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+```{r sp500-plot4, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 # plot data
-cornell_temps |> 
+returns |> 
   ggplot(aes(
-    x = day, 
-    y = SNOW, #<<
+    x = date, 
+    y = SP500, #<<
     color = as_factor(year)
   )) + 
-  geom_jitter() + 
+  geom_line() + 
+  scale_x_date(date_labels = "%b") +
   theme_bw() +
   theme(legend.position = "bottom") +
   labs(
-    x = "Day of month",
-    y = "Snowfall (inches)", #<<
-    color = "Year"
+    x = "Month of year",
+    y = "S&P price index", #<<
+    color = NULL,
+    title = "S&P 500 prices over the years" #<<
   )
 ```
 ]
 
 .pull-right[
-  ![](`r knitr::fig_chunk("ithaca-weather-plot4", "png")`)
+  ![](`r knitr::fig_chunk("sp500-plot4", "png")`)
 ]
 
 ???
@@ -686,81 +693,38 @@ Note: NOAA publishes data with a slight lag
 For example we can easily **scale** this approach to more years:
 
 .pull-left[
-```{r ithaca-weather-plot5, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
-more_years <- 2020:2025 #<<
-more_temps <- map(more_years, clean_data,  #<<
-                  cornell, 1) |> 
-  bind_rows()
-# use old code to plot new data!
-more_temps |>  #<<
-  ggplot(aes(x = day, 
-             y = TMAX,
-             color = as_factor(year))) + 
-  geom_point(alpha = 0.5) + 
-  geom_smooth(se = FALSE) + 
+```{r sp500-plot5, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
+all_returns |>  #<<
+  ggplot(aes(
+    x = date, 
+    y = annual_return,
+    color = as_factor(year)
+  )) + 
+  geom_line() + 
+  scale_x_date(date_labels = "%b") +
   theme_bw() +
   theme(legend.position = "bottom") +
-  labs(x = "Day of month",
-       y = "Max. daily temperature (F)",
-       color = "Year")
+  labs(
+    x = "Month of year",
+    y = "Annual return (%)",
+    color = NULL,
+    title = "S&P 500 returns over the years"
+  )
 ```
 ]
 
 .pull-right[
-  ![](`r knitr::fig_chunk("ithaca-weather-plot5", "png")`)
+  ![](`r knitr::fig_chunk("sp500-plot5", "png")`)
 ]
-
-???
-
-Note: NOAA publishes data with a slight lag
 
 
 ---
 
 layout: false
 name: beautiful-visualizations
-class: center middle section-title section-title-6 animated fadeIn
+class: inverse, center, middle
 
 # What makes a great data visualization?
-
----
-
-layout: true
-class: title title-6
-
----
-
-# What makes a great data visualization?
-
-.center[
-
-.box-inv-6.medium[Truthful]
-
-.box-inv-6.medium[Functional]
-
-.box-inv-6.medium[Beautiful]
-
-.box-inv-6.medium[Insightful]
-
-.box-inv-6.medium[Enlightening]
-
-.box-6.tiny[Alberto Cairo, *The Truthful Art*]
-
-]
-
-???
-
-Alberto Cairo, *The Truthful Art*:
-
-> 1. It is truthful, as it’s based on thorough and honest research.
-> 
-> 2. It is functional, as it constitutes an accurate depiction of the data, and it’s built in a way that lets people do meaningful operations based on it (seeing change in time).
-> 
-> 3. It is beautiful, in the sense of being attractive, intriguing, and even aesthetically pleasing for its intended audience—scientists, in the first place, but the general public, too.
-> 
-> 4. It is insightful, as it reveals evidence that we would have a hard time seeing otherwise.
-> 
-> 5. It is enlightening because if we grasp and accept the evidence it depicts, it will change our minds for the better.
 
 ---
 
@@ -787,6 +751,44 @@ Alberto Cairo, *The Truthful Art*:
 .box-6.tiny[Kieran Healy, *Data Visualization: A Practical Introduction*]
 
 ]
+
+---
+
+# Does anyone know what this is from?
+
+.center[
+<figure>
+  <img src="img/01/gpt-5-deception-chart.png.webp" alt="GPT-5 release chart from OpenAI" title="GPT-5 release chart from OpenAI" width="88%">
+</figure>
+]
+
+???
+
+Source: https://www.pcgamer.com/software/ai/openais-performance-charts-in-the-gpt-5-launch-video-are-such-a-mess-you-have-to-think-gpt-5-itself-probably-made-them-and-the-companys-attempted-fixes-raise-even-more-questions/
+
+---
+
+# What's wrong?
+
+.more-left[
+<figure>
+  <img src="img/01/gpt-5-academic-chart.png" alt="GPT-5 release chart from OpenAI" title="GPT-5 release chart from OpenAI" width="85%">
+</figure>
+]
+
+.less-right[
+Good aesthetics?
+
+No substantive issues?
+
+No perceptual issues?
+
+Honesty + good judgment?
+]
+
+???
+
+Source: https://www.reddit.com/r/dataisugly/comments/1mk5wdb/this_chart_from_openais_official_gpt5_release/
 
 ---
 
@@ -875,50 +877,6 @@ Source: https://statmodeling.stat.columbia.edu/2023/12/30/how-not-to-be-fooled-b
 
 ---
 
-# What's wrong?
-
-.pull-left[
-<figure>
-  <img src="img/01/end-wokeness-tweet.jpeg" alt="Violent crime bar chart" title="Violent crime bar chart" width="80%">
-</figure>
-]
-
-.pull-right[
-Good aesthetics?
-
-No substantive issues?
-
-No perceptual issues?
-
-Honesty + good judgment?
-
-]
-
----
-
-# What's wrong?
-
-.pull-left[
-<figure>
-  <img src="img/01/end-wokeness-tweet.jpeg" alt="Violent crime bar chart" title="Violent crime bar chart" width="80%">
-</figure>
-]
-
-.pull-right[
-Missing context: base rate fallacy <br> (most Americans are white)
-
-Missing context: omits same-race crime
-
-Comparisons confounded by differences in age, wealth, etc.
-
-Measurement of crime may be biased
-
-Source: [Kareem Carr](https://twitter.com/kareem_carr/status/1655614482432012289?s=51&t=4udrKjeRsQs6F0rXVlys_A) (click for more)
-
-]
-
----
-
 # What's right?
 
 .pull-left[
@@ -940,8 +898,6 @@ Source: [Kareem Carr](https://twitter.com/kareem_carr/status/1655614482432012289
 Simple and effective!
 
 Illustrates the power of a **good question** and **good data**
-
-How could it be improved or expanded upon?
 
 Source: [Andrew Gelman](https://statmodeling.stat.columbia.edu/2024/06/23/some-fun-basketball-graphs/)
 ]
@@ -982,80 +938,6 @@ Source: [Andrew Gelman](https://statmodeling.stat.columbia.edu/2024/06/23/some-f
 ???
 
 [Andrew Gelman on some fun basketball graphs](https://statmodeling.stat.columbia.edu/2024/06/23/some-fun-basketball-graphs/)
-
----
-
-# What's right?
-
-.pull-left[
-
-```{r flatten-the-curve, echo=FALSE, fig.dim=c(4.8, 3.75), out.width="100%"}
-high_mean <- 12
-high_sd <- 4
-flat_mean <- 35
-flat_sd <- 12
-
-ggplot(tibble(x = c(0, 70)), aes(x = x)) +
-  stat_function(geom = "area", fun = dnorm, n = 1000,
-                args = list(mean = high_mean, sd = high_sd),
-                fill = "#FF4136", alpha = 0.8) +
-  stat_function(geom = "area", fun = dnorm, n = 1000,
-                args = list(mean = flat_mean, sd = flat_sd),
-                fill = "#0074D9", alpha = 0.8) +
-  geom_hline(yintercept = dnorm(flat_mean, flat_mean, flat_sd),
-             linetype = "61", color = "grey75") +
-  annotate(geom = "text", x = qnorm(0.5, high_mean, high_sd),
-           y = dnorm(qnorm(0.5, high_mean, high_sd), high_mean, high_sd) / 2,
-           label = "Without\nprotective\nmeasures", color = "white", size = 3,
-           family = "Fira Sans Condensed", fontface = "bold") + 
-  annotate(geom = "text", x = qnorm(0.5, flat_mean, sd = flat_sd),
-           y = dnorm(qnorm(0.5, flat_mean, sd = flat_sd), flat_mean, sd = flat_sd) / 2,
-           label = "With protective\nmeasures", color = "white", size = 3,
-           family = "Fira Sans Condensed", fontface = "bold") + 
-  annotate(geom = "text", x = 40, y = dnorm(flat_mean, flat_mean, sd = flat_sd),
-           label = "Healthcare system capacity", vjust = -0.5, hjust = 0, size = 3,
-           family = "Fira Sans Condensed", fontface = "bold") + 
-  labs(x = "Time since first case",
-       y = "# of\ncases",
-       title = "Flatten the curve!",
-       subtitle = "Slow down community spread by social distancing",
-       caption = "Adapted from the CDC and The Economist\nVisit flattenthecurve.com") +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0)) +
-  theme_minimal(base_family = "Fira Sans Condensed Light") +
-  theme(panel.grid = element_blank(),
-        axis.line = element_line(color = "black"),
-        axis.text = element_blank(),
-        axis.title = element_text(family = "Fira Sans Condensed", face = "bold"),
-        axis.title.y = element_text(angle = 0, vjust = 0.5),
-        plot.title = element_text(family = "Fira Sans Condensed", face = "bold", size = rel(1.7)),
-        plot.subtitle = element_text(size = rel(1.2), color = "grey50"),
-        plot.caption = element_text(color = "grey50"))
-```
-
-]
-
-???
-
-- Aesthetic issues
-- Substantive issues
-- Perceptual issues
-- Honesty + judgment issues
-
---
-
-.pull-right.center[
-
-<figure>
-  <img src="img/01/bergstrom-tweet.png" alt="Carl Bergstrom tweet" title="Carl Bergstrom tweet" width="100%">
-  <figcaption><a href="https://twitter.com/CT_Bergstrom/status/1235865328074153986" target="_blank">Thread by Carl T. Bergstrom</a></figcaption>
-</figure>
-
-]
-
-???
-
-[Carl Bergstrom on the flatten the curve visualization](https://twitter.com/CT_Bergstrom/status/1235865328074153986)
 
 ---
 

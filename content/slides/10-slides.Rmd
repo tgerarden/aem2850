@@ -69,7 +69,7 @@ Acknowledgements:
 # Announcements
 
 Reminders:
-- Group project due April 18 ([link](https://canvas.cornell.edu/courses/74072/assignments/761351))
+- Group project due April 18 ([link]())
   - We will set up group-specific workspaces on posit cloud for the project to allow simultaneous collaborative editing
   - Still: save your work early and often to avoid overwriting each other's work
   - Log out and close your posit cloud browser tab between sessions
