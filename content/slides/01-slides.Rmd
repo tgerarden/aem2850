@@ -440,7 +440,7 @@ bind_rows(assignments, assignments_total) %>%
 
 - Teaching Assistants:
   - Mondays 2:00pm - 6:00pm in Warren 370
-  - Fridays 1:00pm - 2:00pm, location TBD
+  - Fridays 1:00pm - 2:00pm in Warren B05
 - Prof. Gerarden:
   - Tuesdays 11:30am - 12:30pm in Warren 464
   - Other times by appointment: [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
