@@ -1,7 +1,7 @@
 ---
 title: "Intro to R, RStudio, and Quarto"
 linktitle: "Intro to R, RStudio, and Quarto"
-date: "2025-08-25 16:39:40"
+date: "2025-08-27 16:12:55"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
@@ -25,7 +25,7 @@ Examples contain material we will discuss and use to learn R in class. These not
 ## Plan for today
 - Questions? Concerns?
 - Did anyone have trouble making an Posit Cloud account?
-  - [Here is the link to join the course workspace if you haven't already]()
+  - [Here is the link to join the course workspace if you haven't already](https://posit.cloud/spaces/681882/join?access_code=gD8JoGqZsScG1LNGmA8g-k7me5LMfYoB1VLMSwI6)
   - **IMPORTANT NOTE:** I and our TAs will be able to view your work. This is a feature but could also be a bug -- please don't write or store anything in your course projects that you don't want us to see. :wink:
 - Navigate to [posit.cloud](http://posit.cloud) and open the project `example-01` in our course workspace
 - R, RStudio, Posit Cloud basics
