@@ -68,9 +68,9 @@ Acknowledgements:
 
 # Announcements
 
-If you are new to the class, please review canvas and [course site](https://aem2850.toddgerarden.com)
+If you are new to the class, please review canvas and the [course site](https://aem2850.toddgerarden.com)
 
-**Prelim dates:** Feb 27 and May 6 in class
+**Prelim dates:** Oct 2 and Dec 4 at 7:30pm
 <!-- - SDS: we will use the Alternative Testing Program, submit form by Feb. 8 -->
 
 **Other reminders:**
@@ -79,11 +79,11 @@ If you are new to the class, please review canvas and [course site](https://aem2
 
 ---
 
-# Office hours update
+# Office hours
 
 **TA office hours:**
 - Mondays 2:00pm - 6:00pm in Warren 370
-- Fridays 2:00pm - 3:00pm in Warren 175
+- Fridays 1:00pm - 2:00pm in Warren B05
 
 
 **My office hours:**
@@ -123,14 +123,28 @@ name: gai
 
 # Generative AI policy
 
-Generative AI (GAI) tools are very powerful assistants for widely used programming languages like R
+Generative AI (GenAI) tools are very powerful assistants for widely used programming languages like R
 
-You may use GAI tools in this course (e.g., ChatGPT, Claude, GitHub Copilot, etc.)
+You may use GenAI tools in this course **unless explicitly forbidden** for a specific assignment
 
-However, be aware of the limitations of GAI tools:
-  - GAI tools can be misleading
-  - GAI tools often proposed code that does not function
-  - GAI code can be difficult to debug if you do not understand the fundamentals
+However, be aware of the limitations of GenAI tools:
+  - GenAI tools can be misleading
+  - GenAI tools often propose code that does not function
+  - GenAI code can be difficult to debug if you do not understand the fundamentals
+
+---
+
+# Generative AI tools can be misleading
+
+.center[
+<figure>
+  <img src="img/01/gpt-5-deception-chart.png.webp" alt="GPT-5 release chart from OpenAI" title="GPT-5 release chart from OpenAI" width="88%">
+</figure>
+]
+
+???
+
+Source: https://www.pcgamer.com/software/ai/openais-performance-charts-in-the-gpt-5-launch-video-are-such-a-mess-you-have-to-think-gpt-5-itself-probably-made-them-and-the-companys-attempted-fixes-raise-even-more-questions/
 
 ---
 
@@ -193,17 +207,17 @@ name: prologue
 
 <!-- I haven't read all the surveys yet, but here are some common phrases that came up: -->
 
-> really excited!
+> I'm excited to learn more about R!
 
 <br>
 
-> I feel great
+> I think the pace is just right!
 
 <br>
 
 --
 
-> nervous but excited
+> Slightly nervous
 
 <br>
 
@@ -247,8 +261,9 @@ plot_countries <- where_were_from |>
       country == "United States of America" ~ "usa",
       # use the following command to identify labels that need updating
       # anti_join(plot_countries, countries, by = "region")
-      country == "American, Grew up in China" ~ "india", # arbitrarily taking first response
-      country == "Indian" ~ "india",
+      country == "Australia, New Zealand, India, UAE: Lost count at this point" ~ "australia", # arbitrarily taking first response
+      country == "London, England" ~ "uk",
+      country == "Hong Kong" ~ "china",
       TRUE ~ stringr::str_to_lower(country)
     )
   ) |> 
@@ -319,7 +334,7 @@ ggplot(data = our_states,
        xlim = c(-125, -70), ylim = c(25, 52)
     ) +
   theme_minimal(base_size = 24) +
-  viridis::scale_fill_viridis() +
+  scale_fill_viridis_c() +
   labs(x = NULL, y = NULL, fill = "# of us")
 ```
 
@@ -339,7 +354,7 @@ our_countries |>
   ggplot(aes(x = long, y = lat, group = group, fill = n)) +
   geom_polygon(color = "gray90", linewidth = 0.1) +
   theme_minimal(base_size = 24) +
-  viridis::scale_fill_viridis() +
+  scale_fill_viridis_c() +
   labs(x = NULL, y = NULL, fill = "# of us")
 ```
 
@@ -374,13 +389,13 @@ This course will primarily use the tidyverse
 
 You can think of it as a particular "dialect" of R
 
-This dialect is similar to human language
+Why we're using the tidyverse:
+- Intuitive if you're new to programming
+- Consistent philosophy and syntax
+- Great documentation and community support
+- For data wrangling and plotting, it's 🔥
 
-Intuitive if you're new to programming
-
-Not representative of all R programming
-
-Base R and `data.table` are alternative "dialects"
+But not representative of all R programming
 ]
 
 .less-right[
@@ -388,45 +403,6 @@ Base R and `data.table` are alternative "dialects"
 knitr::include_graphics("img/02/r_first_then.png")
 ```
 ]
-
----
-
-# Tidyverse vs. base R
-
-Lots of debate over tidyverse vs. base R
-
---
-
-Why we're using the tidyverse:
-- Consistent philosophy and syntax
-- Great documentation and community support
-- For data wrangling and plotting, tidyverse is 🔥
-
---
-
-<br>
-
-Base R is still great, can do some things tidyverse can't
-
-**data.table** is another great alternative for data wrangling
-
----
-
-# Tidyverse vs. base R
-
-Often a correspondence between tidyverse and base R commands:
-
-| tidyverse  |  base |
-|---|---|
-| `?readr::read_csv`  | `?utils::read.csv` |
-|  `?dplyr::if_else` |  `?base::ifelse` |
-|  `?tibble::tibble` |  `?base::data.frame` |
-
-Tidyverse alternatives typically offer extra features
-
---
-
-**Remember:** There are always multiple ways to do something in R
 
 ---
 
@@ -484,6 +460,10 @@ name: tibbles
 
 There are many different *types* (or *classes*) of objects
 
+What are some examples from last week?
+
+--
+
 Here are some objects that we'll be working with regularly:
 - vectors
 - matrices
@@ -498,63 +478,25 @@ Here are some objects that we'll be working with regularly:
 
 The most important object we'll work with is the **data frame**
 
-You can think of it as an Excel spreadsheet
-
 .pull-left[
 ```{r d}
 # Create a small data frame called "d"
-d <- data.frame(x = c("a", "b", "c"), y = 7:9)
+d <- tibble(x = c("a", "b", "c"), y = 7:9)
 d
 ```
 ]
 
-.pull-right[
+.pull-right.small[
+Think of it as a spreadsheet
 
+Tibbles are the tidyverse term for data frame
+
+*We'll treat "tibbles" and "data frames" as synonymous*
 ]
 
 This is essentially just a table with columns named `x` and `y`
 
 Each row is an observation telling us the values of both `x` and `y`
-
----
-
-# Aside: tibbles are data frames with opinions
-
-Tibbles are the default data frame in the tidyverse
-
-Tibbles have some advantages, such as pretty printing
-
-.pull-left[
-```{r d2}
-# Print the small data frame called "d"
-d
-```
-]
-
-.pull-right[
-```{r d3, highlight.output = c(1, 3)}
-# Convert d to a tibble for pretty printing
-as_tibble(d)
-```
-]
-
-**For this class, we'll treat "tibbles" and "data frames" as synonymous**
-
-<!-- We will primarily use tibbles in this course -->
-
-<!-- Two functions may come in handy: -->
-<!-- - `as_tibble()` converts data frames to tibbles -->
-<!-- - `tibble()` creates new tibbles from scratch -->
-
-<!-- See `vignette("tibble")` for more -->
-
----
-
-# Here is another example of a data frame
-
-```{r tibble, highlight.output = c(1, 3, 14, 15)}
-starwars # this data frame comes the tidyverse package dplyr
-```
 
 ---
 name: pipes
@@ -569,19 +511,16 @@ Pipes allow us to pass information through a sequence of operations
 
 --
 
-The tidyverse loads the `magrittr` pipe, denoted `%>%`
-
-R now has a native pipe, denoted `|>` (since R version 4.1.0)
-
---
-
-They are identical for simple cases, but have some differences
-
---
-
-We will use `|>` in class
+In this class, we will use R's native pipe: `|>`
 
 **Keyboard shortcut:** use `Ctrl/Cmd+Shift+m` to insert the pipe (with spaces)
+
+--
+
+You might also see the `magrittr` pipe, denoted `%>%`
+
+They are identical for simple cases (but have some differences)
+
 <!-- - You can [set the RStudio keyboard shortcut](https://r4ds.hadley.nz/workflow-pipes.html) to use either `%>%` or `|>` -->
 
 ---
@@ -746,50 +685,33 @@ starwars |> select(name)
 
 # 1) dplyr::select
 
-You can get fancy: use commas to select multiple columns, deselect a column using "-", and select consecutive columns using "first:last"
-```{r select1}
-starwars |> 
-  select(name:skin_color, species, -height)
+You can use commas to select multiple columns, deselect a column using "-"
+
+.pull-left[
+```{r select1left}
+vitals <- starwars |> 
+  select(name, species, mass, height)
+vitals
 ```
+]
+
+.pull-right[
+```{r select1right}
+new_vitals <- vitals |> 
+  select(-height)
+new_vitals
+```
+]
 
 ---
 
-# 1) dplyr::select
-
-You can also rename your selected variables at the same time:
-```{r select2}
-starwars |>
-  select(alias = name, crib = homeworld)
-```
-
----
-
-# 1) dplyr::select
+# 1) dplyr::rename
 
 If you just want to rename columns without subsetting them, use `rename`:
-```{r rename2}
+```{r rename}
 starwars |>
   rename(alias = name, crib = homeworld)
 ```
-
----
-
-# 1) dplyr::~~select~~ relocate
-
-You can also use `relocate` to move important variables to the "front" of a data frame without subsetting:
-```{r relocate4}
-starwars |> 
-  relocate(species, homeworld) |>
-  head(5)
-```
-
----
-# 1) dplyr::~~select~~ relocate
-
-```{r echo=FALSE, out.width='65%'}
-knitr::include_graphics("img/02/dplyr_relocate.png")
-```
-
 
 ---
 class: inverse, center, middle
@@ -834,7 +756,7 @@ starwars |>
   filter( 
     species == "Human", 
     height >= 194
-    )
+  )
 ```
 
 Can you name one? *Hint: there's only one*
@@ -847,7 +769,7 @@ starwars |>
   filter( 
     species == "Human", 
     height >= 194
-    )
+  )
 ```
 
 ---

@@ -19,8 +19,15 @@ editor_options:
 
 ## Plan for this week's example
 - Questions? :raising_hand_woman:
-- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-02` in our course workspace
-- Work through `intro-tidyverse-practice.R`
+- Navigate to [posit.cloud](http://posit.cloud)
+- Tuesday:
+  - Review slides as a class
+  - Open the project `example-02-1` in our course workspace
+  - Work through `intro-tidyverse-practice.R`
+- Thursday:
+  - Review slides as a class
+  - Open the project `example-02-2` in our course workspace
+  - Work through `data-wrangling-practice.R`
 - We will explore data from [this FiveThirtyEight article](https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/)
   <!-- - On our own devices: 1. Getting Comfortable with Data Frames -->
   <!-- - As a group: discuss results, answer questions -->
