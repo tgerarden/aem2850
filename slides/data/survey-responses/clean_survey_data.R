@@ -10,8 +10,8 @@ responses <- all_responses
 
 enrolled_students <-
   rbind(
-    read_csv("content/slides/data/survey-responses/enrollment-sec1-jan27.csv"),
-    read_csv("content/slides/data/survey-responses/enrollment-sec2-jan27.csv")
+    read_csv("content/slides/data/survey-responses/enrollment-sec1-sep1.csv"),
+    read_csv("content/slides/data/survey-responses/enrollment-sec2-sep1.csv")
     ) |>
   select(netid = `NET ID`)
 
@@ -97,27 +97,20 @@ companies <- responses |>
   mutate(
     ticker = case_match(
       ticker,
-      "TSLA/NVDA" ~ "TSLA",
-      "None" ~ NA,
-      "DOCS (London Stock Exchange)" ~ "DOCS",
-      "CVS Health" ~ "CVS",
-      "AAPL, GOOGL" ~ "AAPL",
-      "NVIDIA Corp" ~ "NVDA",
-      "N/A" ~ NA,
-      "Apple" ~ "AAPL",
-      "APL" ~ "AAPL",
-      "APPL" ~ "AAPL",
-      "I didn't learnt much about that." ~ NA,
-      "Do not really have one" ~ NA,
-      "DIS, UTHR" ~ "DIS",
-      "NASDAQ: FLNC" ~ "FLNC",
-      "DIS (Walt Disney Co)" ~ "DIS",
-      "It's hard question, as I don't have any favorite comes to mind right now. Maybe, Netflix Inc." ~ "NFLX",
+      "NVID" ~ "NVDA",
+      "NVIDIA" ~ "NVDA",
       "Nvidia" ~ "NVDA",
-      "227.44 Apple" ~ "AAPL",
-      "Don't have any" ~ NA,
-      "NASDAQ:AAPL" ~ "AAPL",
-      "Estee Lauder Companies Inc.  (EL)" ~ "EL",
+      "Pfizer" ~ "PFE",
+      "Apple" ~ "AAPL",
+      "BRK" ~ "BRK-A",
+      "NYSE: CRM" ~ "CRM",
+      "NASDAQ: GOOG" ~ "GOOG",
+      "NASDAQ: WEN" ~ "WEN",
+      "VONN (vontobel)" ~ "VONN",
+      "NYSE: BABA" ~ "BABA",
+      "VOO (I don't know if this counts)" ~ "VOO",
+      "TECENT(00700.HK)" ~ "TCEHY",
+      "$META" ~ "META",
       .default = ticker
     )
   )
