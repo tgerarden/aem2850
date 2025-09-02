@@ -215,8 +215,8 @@ Your grade in this course will be based on completing the following assignments:
 - **Homeworks** are weekly assignments that require you to practice programming.
   - Late homework submissions will be accepted, with a penalty of 1 point per day late.
 
-- **Prelims** are intended to assess programming and data visualization proficiency. Prelims will be completed in class.
-  - In-class prelims are mandatory. No make up exams will be offered due to time conflicts (including but not limited to personal travel).
+- **Prelims** are intended to assess programming and data visualization proficiency. Prelims will be completed in person. See [the schedule](/schedule/) for prelim dates and times.
+  - In-person prelims are mandatory. No make up exams will be offered due to time conflicts (including but not limited to personal travel).
 
 - The **group project** is intended to synthesize and reinforce the individual skills you develop in class, and to provide examples of their application to business and life more generally.
 
