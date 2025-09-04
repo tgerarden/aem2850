@@ -24,11 +24,11 @@ college_salaries <- college_majors |>
 # 1. Developing our Data Wrangling Skills -----
 
 # 1.1 dplyr::filter -----
-# use dplyr::filter to find and print just the row where major takes on the value "Finance"
+# use dplyr::filter to find the row where major takes on the value "Finance"
 college_salaries |>
   filter(major == "Finance")
 
-# use dplyr::filter to find and print just the row where major_category takes on the value "Business"
+# use dplyr::filter to find the row where major_category is "Business"
 college_salaries |>
   filter(major_category == "Business")
 
@@ -103,7 +103,7 @@ college_majors |>
   summarize(total = sum(total, na.rm = TRUE)/10^6)
 
 
-# 1.5 dplyr::ground_by -----
+# 1.5 dplyr::group_by -----
 # now add up students "by" major_category, in thousands
 college_majors |>
   group_by(major_category) |>

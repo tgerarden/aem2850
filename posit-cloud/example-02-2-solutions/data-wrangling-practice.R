@@ -24,11 +24,11 @@ college_salaries <- college_majors |>
 # 1. Developing our Data Wrangling Skills -----
 
 # 1.1 dplyr::filter -----
-# use dplyr::filter to find and print just the row where major takes on the value "Finance"
+# use dplyr::filter to find the row where major takes on the value "Finance"
 college_salaries |>
   filter(major ______ "Finance")
 
-# use dplyr::filter to find and print just the row where major_category takes on the value "Business"
+# use dplyr::filter to find the row where major_category is "Business"
 college_salaries |>
   filter(major_category ______ "______")
 

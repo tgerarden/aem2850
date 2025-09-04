@@ -36,6 +36,7 @@ head(flights) # print the first six lines to fit on one page
 <!--- Please leave the code above unchanged. Questions start from here. --->
 
 {{< pagebreak >}}
+
 ## 1. In this data set, `arr_delay` is a variable that records the arrival delays in minutes. Negative times represent early arrivals. Use dplyr::filter to find: (1) the flights that arrived more than two hours late, and (2) the flights that arrived earlier than scheduled. What is the proportion of flights that arrived more than two hours late? What is the proportion of flights that arrived earlier than scheduled time?
 <!-- Tip: Flights that arrived two hours late are those whose arrival delay is larger than 120 minutes. Flights that arrived earlier are those whose arrival delay is negative. -->
 ```{r echo = TRUE}
@@ -57,6 +58,7 @@ A proportion of `r round(two_hour_late/total, 2)` of the flights arrived more th
 
 
 {{< pagebreak >}}
+
 ## 2. How many flights have a missing `dep_time`? Look at the other variables that are also missing. What might these rows represent?
 <!-- Tip: is.na() can help you find the missing values. Try to combine dplyr::filter with is.na(). The function count() will then count up the number of rows that meet that condition. -->
 ``` {r echo = TRUE}
@@ -68,6 +70,7 @@ These rows probably represent...
 
 
 {{< pagebreak >}}
+
 ## 3. Use two different methods to select variables of `dep_time`, `sched_dep_time`, `dep_delay`, `arr_time`, `sched_arr_time`, `arr_delay`. Put `arr_delay` in the first column.
 <!-- Tip: Use dplyr::select to select variables. Here are a few options: 
 (1) List variable names that you want to choose;
@@ -77,15 +80,16 @@ These rows probably represent...
 You can also use dplyr::relocate to reorder columns.
 -->
 ``` {r echo = TRUE}
-# method a
+# Method 1: ----
 # write your code here
 
-# method b
+# Method 2: ----
 # write your code here
 ```
 
 
 {{< pagebreak >}}
+
 ## 4a. Use dplyr::arrange to sort flights by arrival delays in descending order and print the result.
 ``` {r echo = TRUE}
 # sort flights by arrival delays in descending order
@@ -106,6 +110,7 @@ The worst arrival delay was `r worst_delay` minutes.
 
 
 {{< pagebreak >}}
+
 ## 5. Select `air_time` and `distance`. Generate a new varible `speed` that is calculated as `distance` divided by `air_time` (in miles/min). Then create a variable `mph` that contains speed in miles/hour.
 ``` {r echo = TRUE}
 flights |>
@@ -118,6 +123,7 @@ flights |>
 
 
 {{< pagebreak >}}
+
 ## 6a. Calculate the average arrival delay by carrier.
 <!-- Tip: Combine dplyr::group_by and dplyr::summarize to find the average arrival delay by carrier. Be careful! There are missing values in arr_delay. You want to ignore these missing values when calculating the mean. To do so, you can use mean(_____, na.rm = TRUE). 
 Note: dplyr::summarize and dplyr::summarise are synonyms, so you can use whichever you are most comfortable with.-->
@@ -138,7 +144,8 @@ flights |>
 
 
 {{< pagebreak >}}
-## 7. What hour(s) of the day should you fly if you want to avoid delays as much as possible, based on scehduled departure hour (`hour`)?
+
+## 7. Arriving early is better than arriving late. Based on the data, what hours of the day are on average better for flying if you want to avoid arrival delays, based on the scheduled departure hour (`hour`)?
 <!-- Tip: Compute the average delay for each hour, and sort the data according to average delay (with the shortest delays on top and longest delays at the bottom). Print the result, and then finish the sentence below with a summary of which hours are best for avoiding delays (on average). -->
 ``` {r echo = TRUE}
 # write your code here

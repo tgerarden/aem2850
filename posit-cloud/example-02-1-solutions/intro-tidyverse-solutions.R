@@ -74,10 +74,32 @@ dim(college_salaries)
 college_majors |>
   select(major, total)
 
+# use contains() to select major, total, and any column that contains "job"
+college_majors |>
+  select(major, total, contains("job"))
+
 # use contains() to select major, total, and any column that contains "employed"
 college_majors |>
   select(major, total, contains("employed"))
 
-# use contains() to select major, total, and any column that contains "job"
+# get the names of the columns in the data frame college_majors
 college_majors |>
-  select(major, total, contains("job"))
+  names()
+# or:
+names(college_majors)
+
+# how could we select column names that contain employed but NOT unemployed?
+# first, select major and all the columns that contain "employed"
+college_majors |> 
+  select(major, contains("employed"))
+
+# second, find a way to remove columns that contain unemployed
+college_majors |> 
+  select(major, contains("employed"), -unemployed, -unemployment_rate)
+# or:
+college_majors |> 
+  select(major, contains("employed"), -contains("unemployed"))
+
+# let's try to do the same thing a different way using starts_with()
+college_majors |> 
+  select(major, starts_with("employed"))
