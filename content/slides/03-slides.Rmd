@@ -66,7 +66,8 @@ Acknowledgements:
 
 # Announcements
 
-Submit assignments via canvas
+Submit assignments via gradescope
+- Either via canvas or directly in gradescope
 - Homework - Week 2 was due yesterday (Monday) at 11:59pm
 
 We will not assign any late penalties for the survey and homework-02
@@ -78,8 +79,10 @@ Questions before we get started?
 
 ---
 
-# Plan for today
+# Plan for this week
 
+.pull-left[
+### Tuesday
 [Prologue](#prologue)
 
 [Data import](#readr)
@@ -87,12 +90,19 @@ Questions before we get started?
   - [write_csv](#write_csv)
   - [read_excel](#read_excel)
 
+[example-03-1](#example-1)
+]
+
+.pull-right[
+### Thursday
 [Tidy data](#tidyr)
   - [pivot_longer](#pivot_longer)
   - [pivot_wider](#pivot_wider)
 
 [Summary](#summary)
 
+[example-03-2](#example-2)
+]
 
 ---
 class: inverse, center, middle
@@ -129,11 +139,10 @@ responses |>
 ```
 
 ```{r, echo=FALSE}
-# customize slightly to be representative
+# customize slightly to be more representative
 responses |> 
   select(Concentration) |> 
-  arrange(desc(row_number())) |> 
-  filter(row_number()!=1)
+  arrange(desc(row_number()))
 ```
 
 What is the "level of observation" in this data frame? (i.e., what are the rows?)
@@ -165,8 +174,17 @@ How would you use counts to compute shares in this data frame?
 
 # What are our "tidy" concentrations?
 
-Let's `pivot_longer` and `slice_max` to get the top 3:
 
+.pull-left[
+Let's `pivot_longer` and `slice_max` to get the top 3:
+]
+
+.pull-right[
+How would you use what we learned last week to compute shares?
+]
+
+
+.pull-left[
 ```{r, echo = FALSE}
 # now show off what we can do with pivot_longer()
 concentrations |> select(-degree, -concentration, -program) |> 
@@ -175,15 +193,15 @@ concentrations |> select(-degree, -concentration, -program) |>
   filter(concentration!="other") |>
   slice_max(count, n = 3)
 ```
+]
 
 --
 
-How would you use what we learned last week to compute shares?
-
---
+.pull-right[
 
 ```{r, eval = FALSE}
-tidy_concentrations |> mutate(share = count / sum(count)) # easy!
+tidy_concentrations |> 
+  mutate(share = count / sum(count))
 ```
 
 ```{r, echo = FALSE}
@@ -194,6 +212,7 @@ concentrations |> select(-degree, -concentration, -program) |>
   filter(concentration!="other") |> 
   slice_max(count, n = 3)
 ```
+]
 
 ---
 class: inverse, center, middle
@@ -279,7 +298,7 @@ If you run into special cases, consult `?read_csv`
 
 # An aside on paths
 
-We need to figure out what "path" to give `read_csv`
+We need to figure out what "path" to give `read_csv` to get to our file
 
 --
 
@@ -374,9 +393,9 @@ read_excel("data/readxl/datasets.xlsx", sheet = "mtcars") |> head()
 
 ---
 class: inverse, center, middle
-name: example
+name: example-1
 
-# Let's work through an example on Posit Cloud
+# example-03-1:<br>import-data-practice.R
 
 
 ---
@@ -421,7 +440,7 @@ table1
 ```
 
 ```{r, eval=FALSE}
-table2
+table3
 #> # A tibble: 4 × 3
 #>   country      year rate             
 #>   <chr>       <dbl> <chr>            
@@ -434,7 +453,7 @@ table2
 
 .pull-right.small[
 ```{r, eval=FALSE}
-table3
+table2
 #> # A tibble: 8 × 4
 #>   country      year type           count
 #>   <chr>       <dbl> <chr>          <dbl>
@@ -517,7 +536,7 @@ table1 |>
 
 ---
 
-# HOW can we "tidy" data?
+# *How* can we "tidy" data?
 
 **Key tidyr verbs**
 
@@ -604,7 +623,7 @@ tidy_stocks <- stocks |>
 ```{r, eval=FALSE}
 df |> 
   pivot_longer(
-    cols = col1:col2,
+    cols = c(col1, col2),
     names_to = "name",
     values_to = "value"
   )
@@ -627,8 +646,8 @@ knitr::include_graphics("img/03/pivot-longer-variables.png")
 ```{r, eval=FALSE}
 df |> 
   pivot_longer(
-    cols = col1:col2,
-    names_to = "name",
+    cols = c(col1, col2),
+    names_to = "name", #<<
     values_to = "value"
   )
 ```
@@ -651,9 +670,9 @@ knitr::include_graphics("img/03/pivot-longer-column-names.png")
 ```{r, eval=FALSE}
 df |> 
   pivot_longer(
-    cols = col1:col2,
+    cols = c(col1, col2),
     names_to = "name",
-    values_to = "value"
+    values_to = "value" #<<
   )
 ```
 
@@ -704,8 +723,8 @@ tidy_stocks
 .more-right[
 We need to give two key pieces of information to `pivot_wider()`:
 
-1. **What variable to get names from:** `names_from = "stock"`
-2. **What variable to get values from:** `values_from = "price"`
+1. **What variable to get names from:** `names_from = stock`
+2. **What variable to get values from:** `values_from = price`
 
 `pivot_wider()` figures out the rest
 ]
@@ -730,13 +749,13 @@ stocks
 
 # 2) tidyr::pivot_wider
 
+Reversing the arguments effectively transposes the original data:
+
 ```{r pivot_wider1b}
 tidy_stocks |> pivot_wider(names_from = date, values_from = price)
 ```
 
 --
-
-Reversing the arguments effectively transposed the original data
 
 ```{r}
 stocks
@@ -798,7 +817,7 @@ name: summary
 
 ---
 class: inverse, center, middle
-name: example
+name: example-2
 
-# Let's work through an example on Posit Cloud
+# example-03-2:<br>tidy-data-practice.R
 

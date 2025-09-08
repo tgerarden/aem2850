@@ -56,14 +56,14 @@ table1 |>
 
 
 # 2. Import and tidy data -----
-table3 <- read_csv("table3.csv") # use read_csv to read in table3.csv and assign it to table3
+table3 <- read_csv("table3.csv") # read in table3.csv and assign it to table3
 table3 # let's take a look
 
 # use separate_wider_delim to split "rate" into "cases" and "population"
 table3 |>
   separate_wider_delim( # this is a new function so we've coded it up for you
     cols = rate,        # the existing column with data we want to separate
-    delim = "/",      # the characters that separate (delimit) the data
+    delim = "/",        # the characters that separate (delimit) the data
     names = c("cases", "population") # names for the new columns
   )
 
@@ -71,23 +71,23 @@ table3 |>
 table3 |>
   separate_wider_delim( # this is a new function so we've coded it up for you
     cols = rate,        # the existing column with data we want to separate
-    delim = "/",      # the characters that separate (delimit) the data
+    delim = "/",        # the characters that separate (delimit) the data
     names = c("cases", "population") # names for the new columns
   ) |>
   mutate(case_rate = ______ / ______ * 10000)
 # did something go wrong? if so, can you modify the code fix it?
 # hint: try using mutate with as.integer() to convert cases and population
 table3 |>
-  separate_wider_delim( # this is a new function so we've coded it up for you
-    cols = rate,        # the existing column with data we want to separate
-    delim = "/",      # the characters that separate (delimit) the data
-    names = c("cases", "population") # names for the new columns
+  separate_wider_delim(
+    cols = rate,
+    delim = "/",
+    names = c("cases", "population")
   ) |>
   mutate(
     cases = as.integer(______), # or as.numeric()
     population = as.integer(______), # or as.numeric()
     case_rate = ______ / ______ * 10000
-    )
+  )
 
 
 # PLEASE STOP HERE AND LET US KNOW THAT YOU ARE DONE
@@ -113,7 +113,7 @@ zhvi_tidy <- zhvi |>
   rename(______ = RegionName) |>
   ______(-RegionType, -______) |>
   pivot_longer(
-    cols = -______, # pivot everything but the column city
+    cols = -city,       # pivot everything but the column city
     names_to = "______",
     ______ = "______"
   )
@@ -180,15 +180,19 @@ retail_tidy
 # make a plot of yoy_pct_change over time for naics == "TOTAL" for the entire USA
 retail_tidy |>
   filter(stateabbr == "USA" & naics == "TOTAL") |>
-  mutate(yearmonth = str_replace(yearmonth, "yy", ""), # remove leading yy from yearmonth
-         date = ym(yearmonth)) |> # convert yearmonth to a date for plotting
-  ggplot(aes(x = date, y = as.numeric(yoy_pct_change))) +
+  mutate(
+    yearmonth = str_replace(yearmonth, "yy", ""), # remove leading yy from yearmonth
+    date = ym(yearmonth) # convert yearmonth to a date for plotting
+  ) |>
+  ggplot(aes(x = date, y = yoy_pct_change)) +
   geom_col() +
   theme_bw() +
-  labs(x = "Month",
-       y = "Year-over-Year Percentage Change",
-       title = "U.S. Retail Spending Over Time",
-       caption = "Data Source: U.S. Census Bureau's Monthly State Retail Sales")
+  labs(
+    x = "Month",
+    y = "Year-over-Year Percentage Change",
+    title = "U.S. Retail Spending Over Time",
+    caption = "Data Source: U.S. Census Bureau's Monthly State Retail Sales"
+  )
 
 # challenge: replicate the plot above for Gasoline Stations in NY
 # you can start by copying and pasting the code you wrote above, then editing it

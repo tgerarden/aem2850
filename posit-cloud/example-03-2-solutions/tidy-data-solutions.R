@@ -30,7 +30,7 @@ table1 <- table2 |> # assign the tidy data to table1
   pivot_wider(
     names_from = "type",
     values_from = "count"
-    )
+  )
 table1 # let's take a look
 
 # 1.3 work with tidy data
@@ -56,14 +56,14 @@ table1 |>
 
 
 # 2. Import and tidy data -----
-table3 <- read_csv("table3.csv") # use read_csv to read in table3.csv and assign it to table3
+table3 <- read_csv("table3.csv") # read in table3.csv and assign it to table3
 table3 # let's take a look
 
 # use separate_wider_delim to split "rate" into "cases" and "population"
 table3 |>
   separate_wider_delim( # this is a new function so we've coded it up for you
     cols = rate,        # the existing column with data we want to separate
-    delim = "/",      # the characters that separate (delimit) the data
+    delim = "/",        # the characters that separate (delimit) the data
     names = c("cases", "population") # names for the new columns
   )
 
@@ -71,7 +71,7 @@ table3 |>
 table3 |>
   separate_wider_delim( # this is a new function so we've coded it up for you
     cols = rate,        # the existing column with data we want to separate
-    delim = "/",      # the characters that separate (delimit) the data
+    delim = "/",        # the characters that separate (delimit) the data
     names = c("cases", "population") # names for the new columns
   ) |>
   mutate(case_rate = cases / population * 10000)
@@ -113,7 +113,7 @@ zhvi_tidy <- zhvi |>
   rename(city = RegionName) |>
   select(-RegionType, -StateName) |>
   pivot_longer(
-    cols = -city, # pivot everything but the column city
+    cols = -city,       # pivot everything but the column city
     names_to = "date",
     values_to = "price"
   )
@@ -180,15 +180,19 @@ retail_tidy
 # make a plot of yoy_pct_change over time for naics == "TOTAL" for the entire USA
 retail_tidy |>
   filter(stateabbr == "USA" & naics == "TOTAL") |>
-  mutate(yearmonth = str_replace(yearmonth, "yy", ""), # remove leading yy from yearmonth
-         date = ym(yearmonth)) |> # convert yearmonth to a date for plotting
-  ggplot(aes(x = date, y = as.numeric(yoy_pct_change))) +
+  mutate(
+    yearmonth = str_replace(yearmonth, "yy", ""), # remove leading yy from yearmonth
+    date = ym(yearmonth) # convert yearmonth to a date for plotting
+  ) |>
+  ggplot(aes(x = date, y = yoy_pct_change)) +
   geom_col() +
   theme_bw() +
-  labs(x = "Month",
-       y = "Year-over-Year Percentage Change",
-       title = "U.S. Retail Spending Over Time",
-       caption = "Data Source: U.S. Census Bureau's Monthly State Retail Sales")
+  labs(
+    x = "Month",
+    y = "Year-over-Year Percentage Change",
+    title = "U.S. Retail Spending Over Time",
+    caption = "Data Source: U.S. Census Bureau's Monthly State Retail Sales"
+  )
 
 # challenge: replicate the plot above for Gasoline Stations in NY
 # you can start by copying and pasting the code you wrote above, then editing it
@@ -196,12 +200,16 @@ retail_tidy |>
 # how does it compare to the first plot?
 retail_tidy |>
   filter(stateabbr == "NY" & naics == "447") |>
-  mutate(yearmonth = str_replace(yearmonth, "yy", ""), # remove leading yy from yearmonth
-         date = ym(yearmonth)) |> # convert yearmonth to a date for plotting
-  ggplot(aes(x = date, y = as.numeric(yoy_pct_change))) +
+  mutate(
+    yearmonth = str_replace(yearmonth, "yy", ""), # remove leading yy from yearmonth
+    date = ym(yearmonth) # convert yearmonth to a date for plotting
+  ) |>
+  ggplot(aes(x = date, y = yoy_pct_change)) +
   geom_col() +
   theme_bw() +
-  labs(x = "Month",
-       y = "Year-over-Year Percentage Change",
-       title = "Retail Spending Over Time at Gas Stations in NY",
-       caption = "Data Source: U.S. Census Bureau's Monthly State Retail Sales")
+  labs(
+    x = "Month",
+    y = "Year-over-Year Percentage Change",
+    title = "Retail Spending Over Time at Gas Stations in NY",
+    caption = "Data Source: U.S. Census Bureau's Monthly State Retail Sales"
+  )

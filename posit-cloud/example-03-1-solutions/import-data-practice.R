@@ -24,6 +24,22 @@ table2 # let's take a look
 table3 <- ______("______")
 table3 # let's take a look
 
+# use read_csv to read in table4.csv and assign it to table4
+table4 <- read_csv("table4.csv")
+
+# what went wrong? try again:
+table4 <- ______("______")
+table4 # let's take a look
+
+# use write_csv to write table 4 to mytable4.csv (not within data/)
+______ |>
+  ______("______")
+# why don't we need assignment here?
+
+# now try the code that failed before, but using mytable4.csv. does it work?
+mytable4 <- read_csv("mytable4.csv")
+mytable4 # let's take a look
+
 
 # 2. Import and transform zillow data -----
 # zillow-data.xlsx contains Zillow Home Value Index data
@@ -69,7 +85,7 @@ zhvi |>
 # ...
 # ...
 
-# we will learn how to tidy these data on thursday
+# we will learn how to tidy shortly
 # for now, import the already-tidy version from the sheet "ny_tidy"
 # assign the resulting data frame to zhvi_tidy
 zhvi_tidy <- read_excel(
@@ -84,6 +100,10 @@ zhvi_tidy
 zhvi_tidy |>
   ______(city == "Ithaca, NY") |>
   summarize(mean_price = ______(______))
+
+
+# 3. Practice transforming zillow data -----
+# WORK INDEPENDENTLY THROUGH THIS SECTION AND RAISE YOUR HAND WITH QUESTIONS
 
 # use dplyr functions to find the city with the highest mean price
 # sort mean prices from highest to lowest, then slice_head() the first row
@@ -100,13 +120,13 @@ zhvi_tidy |>
   arrange(desc(______)) |>
   slice_head(n = ______)
 
-# now use the convenience function slice_max to get the top city
+# now use the convenience function slice_max() to get the top city
 zhvi_tidy |>
   group_by(______) |>
   ______(mean_price = ______(______)) |>
   slice_max(______)
 
-# do that again, but get the top 3 cities
+# do that again, but get the top 3 cities with the highest mean price
 zhvi_tidy |>
   group_by(______) |>
   ______(mean_price = ______(______)) |>
@@ -122,7 +142,7 @@ ______
 # PLEASE STOP HERE AND LET US KNOW THAT YOU ARE DONE
 
 
-# 2. Import, tidy, and transform retail sales data -----
+# 4. Import, tidy, and transform retail sales data -----
 # the census publishes estimates of state-level Monthly State Retail Sales
 # at https://www.census.gov/retail/state_retail_sales.html
 # let's look at retail sales year-over-year percentage changes
@@ -149,15 +169,19 @@ ______
 # note: you just need to fill in the missing pieces of the filter() command
 retail_tidy |>
   filter(______ == "USA" & naics == "______") |>
-  mutate(yearmonth = str_replace(yearmonth, "yy", ""), # remove leading yy from yearmonth
-         date = ym(yearmonth)) |> # convert yearmonth to a date for plotting
-  ggplot(aes(x = date, y = as.numeric(yoy_pct_change))) +
+  mutate(
+    yearmonth = str_replace(yearmonth, "yy", ""), # remove leading yy
+    date = ym(yearmonth) # convert yearmonth to a date for plotting
+  ) |>
+  ggplot(aes(x = date, y = yoy_pct_change)) +
   geom_col() +
   theme_bw() +
-  labs(x = "Month",
-       y = "Year-over-Year Percentage Change",
-       title = "U.S. Retail Spending Over Time",
-       caption = "Data Source: U.S. Census Bureau's Monthly State Retail Sales")
+  labs(
+    x = "Month",
+    y = "Year-over-Year Percentage Change",
+    title = "U.S. Retail Spending Over Time",
+    caption = "Data Source: U.S. Census Bureau's Monthly State Retail Sales"
+  )
 
 # challenge: replicate the plot above for Gasoline Stations in NY
 # you can start by copying and pasting the code you wrote above, then editing it

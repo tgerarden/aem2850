@@ -43,6 +43,7 @@ We will work with two data sets:
 <!--- Please leave the code above unchanged. Questions start from here. --->
 
 {{< pagebreak >}}
+
 ## 1. Import `Internet access in Brazil (2022-2024).xlsx` and assign it to a new object named `access`. You may need to specify the range of cells in the spreadsheet that should be imported. We'll consider the level of observation to be a state-year-month.
 
 ## Based on what we saw in class, is this data frame "tidy"? Why or why not? Also, look at the column types (character, double, etc.); do they seem appropriate given the type of information contained in each one?
@@ -60,6 +61,7 @@ Yes/no, the column types do/don't seem appropriate for the data they contain.
 
 
 {{< pagebreak >}}
+
 ## 2. To start tidying the data, focus first on the columns whose names appear to be year-month combinations (in YYYYMM format -- e.g., "202202" is Feb. 2022). Use `pivot_longer` to transform the data frame, and then create two new columns: `year`, containing the year of the observation, and `month`, containing the month.  Assign the result to a new object named `access_long`. Print the data frame `access_long`.
 <!-- Tip: Pay attention to column types after using pivot_longer. Take that into account when you create `year` and `month`.-->
 
@@ -80,6 +82,7 @@ access_long
 
 
 {{< pagebreak >}}
+
 ## 3. We'll ignore the distinction between area types (rural, suburban and urban), so aggregate the data frame `access_long` up to the `state`-`provider`-`remote_area`-`year`-`month` level by grouping and calculating the total number of connections (watch out for missing data!). Ungroup the data frame after summarizing. You do not need to retain `year_month`. Assign the resulting data frame to `access_aggreg` and print it.
 
 ``` {r echo = TRUE}
@@ -93,6 +96,7 @@ access_aggreg
 
 
 {{< pagebreak >}}
+
 ## 4. Finish tidying this data set by using `pivot_wider` so that `access_aggreg` shows for any given state, year, and month: (i) the number of Starlink connections in remote areas; (ii) Starlink connections in non-remote areas; (iii) connections to other providers in remote areas; and (iv) connections to other providers in non-remote areas. Assign the resulting data frame to `access_wide` and print it.
 
 ## Note the new columns created have non-intuitive names. Use `rename` to give them names you think are intuitive for you and anyone who might look at your code.
@@ -115,6 +119,7 @@ access_wide
 
 
 {{< pagebreak >}}
+
 ## 5. We now have the number of connections of each type by provider in each state at any given year and month. However, we still need to find out which states are located in the Amazon area.
 
 ## Import `brazil_regions.csv` and assign it to a new object named `regions`. The Brazilian Amazon is mostly contained in the North region, so *later* we'll want to single out states that are located there. With that in mind, is this data frame tidy? If not, why is that a problem, given what we want to do with this data?
@@ -130,6 +135,7 @@ Yes/no, the data frame is/is not tidy, because...
 
 
 {{< pagebreak >}}
+
 ## 6. Use `pivot_longer` to tidy up `regions` and assign it to `states`. Print the resulting data frame. Then `filter` for rows in `states` corresponding to the North region, `pull` the states' names stored in `state`, and assign it to a new object named `north_states`. What are these states?
 <!-- Less code scaffolding this time! -->
 
@@ -152,6 +158,7 @@ The states located in the North region are: `r paste(north_states, collapse = ",
 
 
 {{< pagebreak >}}
+
 ## 7. Let's go back to the internet data. Filter `access_wide` so that only North states remain in the data frame, and assign the resulting data frame to `access_tidy`. When was Starlink first introduced in each state? You can present the answer to this question in a small data frame with 7 rows.
 <!-- Tip: You can use the syntax `%in%` in conjunction with `filter` to identify the rows where `state` takes on a value contained in `north_states`. -->
 
@@ -170,6 +177,7 @@ access_tidy |>
 
 
 {{< pagebreak >}}
+
 ## 8. Using only 2024 data, and separately for each state, calculate Starlink’s share of remote connections as one column and the share of non-remote connections as another column. Would you say Starlink's entry in the Brazilian internet market is having a larger impact in remote or in non-remote areas of the Amazon? Recalling what you read in the introduction, is this result consistent with SpaceX's expectations for Starlink?
 <!-- Tip: First, calculate the fraction of connections in remote areas that are provided by Starlink in each month (in 2024). Then, calculate the same fraction for non-remote areas. Finally, use `summarize` to take the average of those monthly shares to collapse the data to state-level averages for the year 2024.You should be able to use the resulting data frame to answer the final part of the question. -->
 
