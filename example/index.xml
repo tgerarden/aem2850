@@ -1,4 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 01 Sep 2025 15:26:19 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Welcome to the tidyverse</title><link>https://aem2850.toddgerarden.com/example/02-example/</link><pubDate>Mon, 01 Sep 2025 15:26:19 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/02-example/</guid><description>&lt;h2 id="plan-for-this-weeks-example">Plan for this week&amp;rsquo;s example&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 08 Sep 2025 15:52:10 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Data import and tidying</title><link>https://aem2850.toddgerarden.com/example/03-example/</link><pubDate>Mon, 08 Sep 2025 15:52:10 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/03-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
+&lt;li>Questions? 🙋‍♀️&lt;/li>
+&lt;li>Tuesday:
+&lt;ul>
+&lt;li>Slides on data import&lt;/li>
+&lt;li>Navigate to &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a> and open the project &lt;code>example-03-01&lt;/code> in our course workspace&lt;/li>
+&lt;li>Work through &lt;code>import-data-practice.R&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Thursday:
+&lt;ul>
+&lt;li>Slides on tidy data&lt;/li>
+&lt;li>Navigate to &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a> and open the project &lt;code>example-03-02&lt;/code> in our course workspace&lt;/li>
+&lt;li>Work through &lt;code>tidy-data-practice.R&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Solutions&lt;/strong> will be posted after class&lt;/li>
+&lt;/ul>
+&lt;h2 id="cheatsheets">Cheatsheets&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.github.io/cheatsheets/data-import.pdf" target="_blank" rel="noopener">Click here to download the &lt;code>readr&lt;/code> cheatsheet&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://rstudio.github.io/cheatsheets/tidyr.pdf" target="_blank" rel="noopener">Click here to download the &lt;code>tidyr&lt;/code> cheatsheet&lt;/a>&lt;/p></description></item><item><title>Welcome to the tidyverse</title><link>https://aem2850.toddgerarden.com/example/02-example/</link><pubDate>Mon, 01 Sep 2025 15:26:19 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/02-example/</guid><description>&lt;h2 id="plan-for-this-weeks-example">Plan for this week&amp;rsquo;s example&lt;/h2>
 &lt;ul>
 &lt;li>Questions? 🙋‍♀️&lt;/li>
 &lt;li>Navigate to &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a>&lt;/li>

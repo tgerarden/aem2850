@@ -10,8 +10,8 @@ responses <- all_responses
 
 enrolled_students <-
   rbind(
-    read_csv("content/slides/data/survey-responses/enrollment-sec1-sep1.csv"),
-    read_csv("content/slides/data/survey-responses/enrollment-sec2-sep1.csv")
+    read_csv("content/slides/data/survey-responses/enrollment-sec1-sep8.csv"),
+    read_csv("content/slides/data/survey-responses/enrollment-sec2-sep8.csv")
     ) |>
   select(netid = `NET ID`)
 
@@ -49,7 +49,7 @@ concentrations_raw <- responses |>
     program = case_when(
       str_detect(degree, "BA") ~ "BA",
       str_detect(degree, "Bachelor of Arts") ~ "BA",
-      str_detect(degree, "BS|AEM|Dyson") ~ "BS",
+      str_detect(degree, "BS") ~ "BS",
       str_detect(degree, "Applied Economics and Management") ~ "BS",
       str_detect(degree, "MPS") ~ "MPS",
       str_detect(degree, "MPA") ~ "MPA",
@@ -61,8 +61,9 @@ concentrations_raw <- responses |>
       str_detect(degree, "MMH") ~ "MMH",
       str_detect(degree, "MA") ~ "MA",
       str_detect(degree, "bs") ~ "BS",
-      TRUE ~ NA
-      # TRUE ~ "BS"
+      str_detect(degree, "AEM") ~ "BS", # assign remaining AEM to BS, not MPS
+      # TRUE ~ NA
+      TRUE ~ "BS"
     )
   ) |>
   # coarse definition
@@ -77,19 +78,22 @@ concentrations <- concentrations_raw |>
   mutate(concentration = tolower(concentration)) |>
   mutate(ba = str_detect(concentration, "business analytics"),
          acct = str_detect(concentration, "accounting"),
-         dev = str_detect(concentration, "development"),
+         dev = str_detect(concentration, "development") | str_detect(concentration, "ide"),
          econ = str_detect(concentration, "economics") | str_detect(degree, "Econ"),
-         # entr = str_detect(concentration, "entrepreneurship"),
+         entr = str_detect(concentration, "entrepreneurship"),
          enviro = str_detect(concentration, "sustainable|sustainability|environmental|eere|sbep|sbee"),
          finance = str_detect(concentration, "finance") | str_detect(concentration, "finace"), # BS finance and MPS behavioral finance
-         food = str_detect(concentration, "food"),
+         food = str_detect(concentration, "food") | str_detect(concentration, "fae"),
          mktg = str_detect(concentration, "marketing"),
          mgmt = str_detect(concentration, "management") | concentration=="tm", # management + tech management + agribusiness management
-         strategy = str_detect(concentration, "strategy"),
-         hr = str_detect(concentration, "human resources|hr ")
+         strategy = str_detect(concentration, "strategy")
          ) |>
-  mutate(other = (ba + acct + dev + econ + enviro + finance + food + mktg + mgmt + strategy + hr)==0)
+  mutate(other = (ba + acct + dev + econ + entr + enviro + finance + food + mktg + mgmt + strategy)==0)
 
+# check "other" cases:
+concentrations |>
+  filter((ba + acct + dev + econ + entr + enviro + finance + food + mktg + mgmt + strategy)==0) |>
+  select(degree, concentration)
 
 # COMPANIES ----
 companies <- responses |>
@@ -100,8 +104,12 @@ companies <- responses |>
       "NVID" ~ "NVDA",
       "NVIDIA" ~ "NVDA",
       "Nvidia" ~ "NVDA",
+      "NVEDIA, APPLE" ~ "NVDA",
       "Pfizer" ~ "PFE",
       "Apple" ~ "AAPL",
+      "APPL" ~ "AAPL",
+      "$AAPL" ~ "AAPL",
+      "NVDA, META, AAPL" ~ "META",
       "BRK" ~ "BRK-A",
       "NYSE: CRM" ~ "CRM",
       "NASDAQ: GOOG" ~ "GOOG",
