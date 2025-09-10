@@ -23,14 +23,14 @@ lessons:
     date: "Week 3"
     content: "03-content"
     example: "03-example"
-    # assignment: "03-homework"
+    assignment: "03-homework"
     bg: 1
     bottomborder: True
 
   - title: '<span class="content-title">Joins <br> Logic</span>'
     session: "Session 4"
     date: "Week 4"
-    # content: "04-content"
+    content: "04-content"
     # example: "04-example"
     # assignment: "04-homework"
     bg: 2
