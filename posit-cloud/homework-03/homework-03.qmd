@@ -37,7 +37,7 @@ We will work with two data sets:
 
 1. **Internet access in Brazil (2022-2024).xlsx**, constructed with data found from the Brazilian regulatory agency for telecommunications [(source)](https://dados.gov.br/dados/conjuntos-dados/acessos---banda-larga-fixa). It measures Internet access by counting the number of fixed connections to the Internet for each month from Jan. 2022 to Dec. 2024. Counts are broken down by state, provider, type of area within the state, and whether the area is considered remote or not.
 
-2. **brazil_regions.csv**, which identifies the region where each of the 27 Brazilian states is located. There are five regions in total. Though not necessary, you can read more about Brazilian regions on [Wikipedia](https://en.wikipedia.org/wiki/Regions_of_Brazil).
+2. **brazil_regions.csv**, which identifies which of the 5 regions each of the 27 Brazilian states is located in. In this data set, each column represents a state, and each row, a region. A cell containing the number 1 indicates that the state is located in that region; conversely, the number 0 means that the state is not located in that region.
 
 
 <!--- Please leave the code above unchanged. Questions start from here. --->
