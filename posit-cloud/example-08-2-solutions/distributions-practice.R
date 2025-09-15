@@ -8,7 +8,7 @@
 
 # 0. Loading packages and prepping data -----
 # we need to install packages once before we can use them
-# install.packages("tidyverse") # in this case, it has already been done for you in this project
+# install.packages("tidyverse") # this has already been done for you
 library(tidyverse) # load the core tidyverse packages
 # install.packages("ggridges") # in this case, it has already been done for you in this project
 library(ggridges) # load the ggridges package so we can use geom_density_ridges()
@@ -18,7 +18,7 @@ theme_set(theme_minimal()) # set the current theme to theme_minimal()
 # you can use theme_set(theme()) to return to defaults if you prefer
 
 # today we'll explore data on Airbnb listings from New York City
-# the data come from Inside Airbnb, a mission driven activist project with the objective to:
+# the data come from Inside Airbnb, an activist project:
 #   Provide data that quantifies the impact of short-term rentals on housing and residential communities; and also provides a platform to support advocacy for policies to protect our cities from the impacts of short-term rentals.
 # http://insideairbnb.com
 

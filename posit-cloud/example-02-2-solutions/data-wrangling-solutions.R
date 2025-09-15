@@ -1,4 +1,4 @@
-# AEM 2850 - example-02-02
+# AEM 2850 - example-02-2
 # Plan for today:
 # - Questions?
 # - As a group, work through 1. Developing our Data Wrangling Skills
@@ -8,7 +8,7 @@
 
 # 0. Loading the tidyverse and college_majors -----
 # we need to install packages once before we can use them
-# install.packages("tidyverse") # in this case, it has already been done for you in this project
+# install.packages("tidyverse") # this has already been done for you
 library(tidyverse) # load the core tidyverse packages
 
 # today we will continue to use the data from this 538 article: https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/

@@ -1,4 +1,4 @@
-# AEM 2850 - Example 4-2
+# AEM 2850 - example-04-2
 # Plan for today:
 # - Questions?
 # - Go through slides
@@ -9,9 +9,9 @@
 
 # 0. Loading packages -----
 # we need to install packages once before we can use them
-# install.packages("tidyverse") # in this case, it has already been done for you in this project
+# install.packages("tidyverse") # this has already been done for you
 library(tidyverse) # load the core tidyverse packages
-# install.packages("nycflights13") # in this case, it has already been done for you in this project
+# install.packages("nycflights13") # this has already been done for you
 library(nycflights13) # load data frames we'll use later
 
 

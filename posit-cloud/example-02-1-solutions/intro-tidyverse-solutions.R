@@ -1,4 +1,4 @@
-# AEM 2850 - example-02-01
+# AEM 2850 - example-02-1
 # Plan for today:
 # - Questions?
 # - As a group, work through this script
@@ -9,7 +9,7 @@
 
 # 0. Loading the tidyverse -----
 # we need to install packages once before we can use them
-# install.packages("tidyverse") # in this case, it has already been done for you in this project
+# install.packages("tidyverse") # this has already been done for you
 library(tidyverse) # load the core tidyverse packages
 
 
@@ -90,16 +90,16 @@ names(college_majors)
 
 # how could we select column names that contain employed but NOT unemployed?
 # first, select major and all the columns that contain "employed"
-college_majors |> 
+college_majors |>
   select(major, contains("employed"))
 
 # second, find a way to remove columns that contain unemployed
-college_majors |> 
+college_majors |>
   select(major, contains("employed"), -unemployed, -unemployment_rate)
 # or:
-college_majors |> 
+college_majors |>
   select(major, contains("employed"), -contains("unemployed"))
 
 # let's try to do the same thing a different way using starts_with()
-college_majors |> 
+college_majors |>
   select(major, starts_with("employed"))

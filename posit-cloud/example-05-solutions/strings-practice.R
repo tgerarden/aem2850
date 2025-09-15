@@ -8,12 +8,12 @@
 
 # 0. Loading packages and prepping data -----
 # we need to install packages once before we can use them
-# install.packages("tidyverse") # in this case, it has already been done for you in this project
+# install.packages("tidyverse") # this has already been done for you
 library(tidyverse) # load the core tidyverse packages
 
 # today we'll explore textual data on Airbnb listings from New York City
-# the data come from Inside Airbnb, a mission driven activist project with the objective to:
-#   Provide data that quantifies the impact of short-term rentals on housing and residential communities;
+# the data come from Inside Airbnb, an activist project:
+
 #   and also provides a platform to support advocacy for policies to protect our cities from the impacts of short-term rentals.
 # http://insideairbnb.com
 

@@ -69,7 +69,7 @@ Acknowledgements:
 # Announcements
 
 Reminders:
-- Submit assignments via canvas
+- Submit assignments via canvas / gradescope
   - Homework - Week 3 was due yesterday (Monday) at 11:59pm
 
 Questions before we get started?
@@ -78,18 +78,25 @@ Questions before we get started?
 
 # Plan for this week
 
+.pull-left[
+### Tuesday
 [Prologue](#prologue)
 
-[Joins (Tuesday)](#joins)
-  - [Join animations](#join-animations)
-  - [example-04-1](#example-04-1)
-  - [Additional slides on joins for your reference](#joins-extra)
+[Joins](#joins)
+  <!-- - [Join animations](#join-animations) -->
+  <!-- - [Reference slides on joins](#joins-extra) -->
 
-[Logic (Thursday)](#logic)
+[example-04-1](#example-04-1)
+]
+
+.pull-right[
+### Thursday
+[Logic](#logic)
   - [Boolean algebra](#boolean-algebra)
   - [Conditional transformations](#conditionals)
-  - [example-04-2](#example-04-2)
 
+[example-04-2](#example-04-2)
+]
 
 
 ---
@@ -189,7 +196,7 @@ We **join** them together to answer questions
 You can visualize the operations [here](https://r4ds.hadley.nz/joins)
 
 ---
-class: center, middle
+class: inverse, center, middle
 name: join-animations
 
 # Join animations
@@ -240,7 +247,7 @@ With multiple matches between `x` and `y`, all combinations of matches are retur
 knitr::include_graphics("img/04/left-join-extra.gif")
 ```
 
-`x2` is duplicated to join one row in `x` to multiple rows in `y`
+In this example, `x2` is duplicated to join one row in `x` to multiple rows in `y`
 
 ???
 
@@ -301,13 +308,13 @@ knitr::include_graphics("img/04/anti-join.gif")
 Source: <https://github.com/gadenbuie/tidyexplain>
 
 ---
-class: center, middle
+class: inverse, center, middle
 name: example-04-1
 
 # example-04-1
 
 ---
-class: center, middle
+class: inverse, center, middle
 name: joins-extra
 
 # Additional slides on joins for your reference
@@ -628,11 +635,17 @@ name: logic
 
 # Logical vectors
 
-What are logical vectors, or logicals?
+What values can the logical data type take?
 
 --
 
-Logicals take on only three values: `TRUE`, `FALSE`, or `NA`
+Logical values can be `TRUE`, `FALSE`, or `NA`
+
+--
+
+What are **logical vectors**?
+
+--
 
 Logical vectors are just vectors ("columns") that only contain `TRUE`, `FALSE`, or `NA`
 
@@ -758,7 +771,7 @@ flights |>
 
 # %in%
 
-`x %in% y` is a useful tool for identifying whether a value in `x` is contained in `y`
+`x %in% y` is a useful shortcut for identifying whether a value in `x` is contained in `y`
 
 ```{r eval=TRUE}
 flights |> 
@@ -844,7 +857,7 @@ flights |>
 `condition ~ output` syntax is new; watch out for overlapping conditions!
 
 ---
-class: center, middle
+class: inverse, center, middle
 name: example-04-2
 
 # example-04-2

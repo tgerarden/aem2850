@@ -7,7 +7,7 @@
 
 # 0. Loading packages and prepping data -----
 # we need to install packages once before we can use them
-# install.packages("tidyverse") # in this case, it has already been done for you in this project
+# install.packages("tidyverse") # this has already been done for you
 library(tidyverse) # load the core tidyverse packages
 
 # use theme_set to get clean plots without having to specify the theme each time

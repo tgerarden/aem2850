@@ -1,4 +1,4 @@
-# AEM 2850 - Example 4-1
+# AEM 2850 - example-04-1
 # Plan for today:
 # - Questions?
 # - Go through slides
@@ -9,9 +9,9 @@
 
 # 0. Loading packages -----
 # we need to install packages once before we can use them
-# install.packages("tidyverse") # in this case, it has already been done for you in this project
+# install.packages("tidyverse") # this has already been done for you
 library(tidyverse) # load the core tidyverse packages
-# install.packages("nycflights13") # in this case, it has already been done for you in this project
+# install.packages("nycflights13") # this has already been done for you
 library(nycflights13) # load data frames we'll use later
 
 
@@ -141,7 +141,7 @@ planes |>
   left_join(flights, join_by(tailnum)) |>
   select(contains("year"))
 
-# if we do this, we actually don't need the join_by() function, since
+# if we do this, we technically don't need the join_by() function, since
 # there are no longer two different variables with the same name
 planes |>
   rename(year_built = year) |>
@@ -172,7 +172,7 @@ planes |>
 flights
 # observations in flights are at the level of:
 #   year - month - day - sched_dep_time - carrier - flight number
-# so "time_hour - carrier - flight" can be used as the compound primary key for `flights`
+# so "time_hour - carrier - flight" can be used as the primary key for `flights`
 
 # print the data in airlines
 airlines
@@ -180,7 +180,7 @@ airlines
 # so "carrier" is the primary key for `airlines`
 
 # check to make sure "carrier" uniquely identifies observations (rows)
-# since this is a small data frame, you could confirm it visually using
+# since this is a small data frame, you could confirm it visually using count
 airlines |>
   count(carrier)
 # for larger data frames, combining count with filter makes this scalable

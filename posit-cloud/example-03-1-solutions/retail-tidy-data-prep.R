@@ -1,6 +1,6 @@
 # 0. Loading packages -----
 # we need to install packages once before we can use them
-# install.packages("tidyverse") # in this case, it has already been done for you in this project
+# install.packages("tidyverse") # this has already been done for you
 library(tidyverse) # load the core tidyverse packages
 library(readxl) # load readxl (installed as part of the tidyverse, but not loaded by default)
 

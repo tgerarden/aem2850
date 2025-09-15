@@ -1,7 +1,7 @@
 ---
 title: "Joins and logic"
 linktitle: "Joins and logic"
-date: "`r format(Sys.time())`"
+date: "2025-09-15 15:29:46"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file

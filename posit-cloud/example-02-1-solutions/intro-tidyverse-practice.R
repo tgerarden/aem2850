@@ -1,4 +1,4 @@
-# AEM 2850 - example-02-01
+# AEM 2850 - example-02-1
 # Plan for today:
 # - Questions?
 # - As a group, work through this script
@@ -9,7 +9,7 @@
 
 # 0. Loading the tidyverse -----
 # we need to install packages once before we can use them
-# install.packages("tidyverse") # in this case, it has already been done for you in this project
+# install.packages("tidyverse") # this has already been done for you
 library(tidyverse) # load the core tidyverse packages
 
 
@@ -77,7 +77,7 @@ college_majors ______
 # use contains() to select major, total, and any column that contains "job"
 college_majors |>
   ______(major, total, contains("______"))
-  
+
 # use contains() to select major, total, and any column that contains "employed"
 college_majors |>
   ______(major, total, ______("______"))
