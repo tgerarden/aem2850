@@ -623,7 +623,7 @@ tidy_stocks <- stocks |>
 ```{r, eval=FALSE}
 df |> 
   pivot_longer(
-    cols = c(col1, col2),
+    cols = c(col1, col2), #<<
     names_to = "name",
     values_to = "value"
   )

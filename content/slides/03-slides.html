@@ -632,8 +632,8 @@ stocks
 ## # A tibble: 2 × 4
 ##   date        AAPL  GOOG  MSFT
 ##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 2025-09-08  234.  199.  412.
-## 2 2025-09-07  236.  195.  364.
+## 1 2025-09-15  234.  199.  412.
+## 2 2025-09-14  236.  195.  364.
 ```
 
 We have 4 columns, the date and the stocks
@@ -686,12 +686,12 @@ stocks |&gt; pivot_longer(cols = c(AAPL, GOOG, MSFT), names_to = "stock", values
 ## # A tibble: 6 × 3
 ##   date       stock price
 ##   &lt;date&gt;     &lt;chr&gt; &lt;dbl&gt;
-## 1 2025-09-08 AAPL   234.
-## 2 2025-09-08 GOOG   199.
-## 3 2025-09-08 MSFT   412.
-## 4 2025-09-07 AAPL   236.
-## 5 2025-09-07 GOOG   195.
-## 6 2025-09-07 MSFT   364.
+## 1 2025-09-15 AAPL   234.
+## 2 2025-09-15 GOOG   199.
+## 3 2025-09-15 MSFT   412.
+## 4 2025-09-14 AAPL   236.
+## 5 2025-09-14 GOOG   195.
+## 6 2025-09-14 MSFT   364.
 ```
 
 --
@@ -712,7 +712,7 @@ tidy_stocks &lt;- stocks |&gt;
 ``` r
 df |&gt; 
   pivot_longer(
-    cols = c(col1, col2),
+*   cols = c(col1, col2),
     names_to = "name",
     values_to = "value"
   )
@@ -791,12 +791,12 @@ tidy_stocks
 ## # A tibble: 6 × 3
 ##   date       stock price
 ##   &lt;date&gt;     &lt;chr&gt; &lt;dbl&gt;
-## 1 2025-09-08 AAPL   234.
-## 2 2025-09-08 GOOG   199.
-## 3 2025-09-08 MSFT   412.
-## 4 2025-09-07 AAPL   236.
-## 5 2025-09-07 GOOG   195.
-## 6 2025-09-07 MSFT   364.
+## 1 2025-09-15 AAPL   234.
+## 2 2025-09-15 GOOG   199.
+## 3 2025-09-15 MSFT   412.
+## 4 2025-09-14 AAPL   236.
+## 5 2025-09-14 GOOG   195.
+## 6 2025-09-14 MSFT   364.
 ```
 
 ]
@@ -811,8 +811,8 @@ stocks
 ## # A tibble: 2 × 4
 ##   date        AAPL  GOOG  MSFT
 ##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 2025-09-08  234.  199.  412.
-## 2 2025-09-07  236.  195.  364.
+## 1 2025-09-15  234.  199.  412.
+## 2 2025-09-14  236.  195.  364.
 ```
 
 ]
@@ -831,12 +831,12 @@ tidy_stocks
 ## # A tibble: 6 × 3
 ##   date       stock price
 ##   &lt;date&gt;     &lt;chr&gt; &lt;dbl&gt;
-## 1 2025-09-08 AAPL   234.
-## 2 2025-09-08 GOOG   199.
-## 3 2025-09-08 MSFT   412.
-## 4 2025-09-07 AAPL   236.
-## 5 2025-09-07 GOOG   195.
-## 6 2025-09-07 MSFT   364.
+## 1 2025-09-15 AAPL   234.
+## 2 2025-09-15 GOOG   199.
+## 3 2025-09-15 MSFT   412.
+## 4 2025-09-14 AAPL   236.
+## 5 2025-09-14 GOOG   195.
+## 6 2025-09-14 MSFT   364.
 ```
 ]
 
@@ -862,8 +862,8 @@ tidy_stocks |&gt; pivot_wider(names_from = stock, values_from = price)
 ## # A tibble: 2 × 4
 ##   date        AAPL  GOOG  MSFT
 ##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 2025-09-08  234.  199.  412.
-## 2 2025-09-07  236.  195.  364.
+## 1 2025-09-15  234.  199.  412.
+## 2 2025-09-14  236.  195.  364.
 ```
 
 --
@@ -879,8 +879,8 @@ stocks
 ## # A tibble: 2 × 4
 ##   date        AAPL  GOOG  MSFT
 ##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 2025-09-08  234.  199.  412.
-## 2 2025-09-07  236.  195.  364.
+## 1 2025-09-15  234.  199.  412.
+## 2 2025-09-14  236.  195.  364.
 ```
 
 ---
@@ -896,7 +896,7 @@ tidy_stocks |&gt; pivot_wider(names_from = date, values_from = price)
 
 ```
 ## # A tibble: 3 × 3
-##   stock `2025-09-08` `2025-09-07`
+##   stock `2025-09-15` `2025-09-14`
 ##   &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;
 ## 1 AAPL          234.         236.
 ## 2 GOOG          199.         195.
@@ -914,8 +914,8 @@ stocks
 ## # A tibble: 2 × 4
 ##   date        AAPL  GOOG  MSFT
 ##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 2025-09-08  234.  199.  412.
-## 2 2025-09-07  236.  195.  364.
+## 1 2025-09-15  234.  199.  412.
+## 2 2025-09-14  236.  195.  364.
 ```
 
 ---
