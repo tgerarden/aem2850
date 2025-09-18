@@ -38,6 +38,7 @@ We will work with multiple data sets:
 <!--- Please leave the code above unchanged. Questions start from here. --->
 
 {{< pagebreak >}}
+
 ## 1. Import `tidy_txhouse.csv` and `tidy_txpop.csv`, and create a data frame of sales, price, and population for all the city-year pairs that appear in **both** `tidy_txpop` and `tidy_txhouse`. Of these, which city had the most sales per capita in 2010?
 <!-- Tip: By using `pull` to get just the city name and assigning it to `most_spc`, we can embed the answer in text rather than simply printing a data frame. -->
 
@@ -60,7 +61,8 @@ The city with the most sales per capita in 2010 was `r most_spc`.
 
 
 {{< pagebreak >}}
-## 2. How many different cities does `tidy_txhouse` include? How many cities does `tidy_txpop` include? Use a join command to print a data frame containing the cities that are in `tidy_txhouse` but not included in `tidy_txpop`.
+
+## 2. How many different cities does `tidy_txhouse` include? How many cities does `tidy_txpop` include? Use a join command to print a data frame containing the cities that are in `tidy_txhouse` but not included in `tidy_txpop`. Make sure each city only appears once in the resulting data frame.
 
 ``` {r echo = TRUE}
 tx_house_city <- _____ |> 
@@ -84,27 +86,23 @@ _____(
 
 
 {{< pagebreak >}}
-## 3. Calculate the average housing price for each of the cities that are in `tidy_txhouse` and in `tidy_txpop` over the period 2010 through 2012 (inclusive). Which city has the highest average housing price? Which city has the lowest average housing price?
+
+## 3. Use a filtering join to identify the cities in `tidy_txhouse` that are also in `tidy_txpop`. Then, for those cities that appear in both data frames, calculate the average housing price for each of the cities, averaging over over the period 2010 through 2012 (inclusive). Which city has the highest average housing price? Which city has the lowest average housing price?
 
 ``` {r echo = TRUE}
-highest_price_city <- _____(
+city_average_prices <- _____(
   tidy_txhouse, 
   tx_pop_city, 
   join_by(city)
 ) |> 
   _____(_____ & _____) |> 
   group_by(_____) |> 
-  _____(mean_price = _____(price, na.rm = T)) |> 
+  _____(mean_price = _____(price, na.rm = T))
+
+highest_price_city <- city_average_prices |> 
   filter(mean_price == _____(mean_price))
 
-lowest_price_city <- _____(
-  tidy_txhouse, 
-  tx_pop_city, 
-  _____(city)
-) |> 
-  _____(_____ & _____) |> 
-  _____(city) |> 
-  _____(mean_price = _____(_____, _____ = T)) |> 
+lowest_price_city <- city_average_prices |> 
   _____(_____ == _____(_____))
 ```  
 `r highest_price_city |> pull(city)` has the highest housing price.
@@ -113,12 +111,13 @@ lowest_price_city <- _____(
 
 
 {{< pagebreak >}}
+
 ## 4. For the two cities with the highest and lowest housing prices you found in Q3, what counties are they in?
 <!-- Tip: Import the data in `us_cities.csv`, filter out the cities in Texas, and assign it to a new object `tx_cities`. Then think through how it can help you answer this question. -->
 
 ```{r echo = TRUE}
 tx_cities <- _____(_____) |> 
-  filter(state == _____)
+  filter(state_id == _____)
 
 highest_price_county <- _____(
   _____, 
@@ -132,13 +131,14 @@ lowest_price_county <- _____(
   _____(_____)
 )
 ```
-`r highest_price_city |> pull(city)` is in `r highest_price_county |> pull(county_name)` County.
+`r highest_price_city |> pull(city)` is in `r highest_price_county |> pull(county_name)`.
 
-`r lowest_price_city |> pull(city)` is in `r lowest_price_county |> pull(county_name)` County.
+`r lowest_price_city |> pull(city)` is in `r lowest_price_county |> pull(county_name)`.
 
 
 {{< pagebreak >}}
-## 5. Now let's import the datasets `us_county_wage_2021.csv` and `area-titles.csv`. The first dataset records employment and wage data by `area_fips` in 2021. The second dataset contains the name that each `area_fips` corresponds to. Join these data to find all combinations that appear in both datasets, separate `area_title` into the variables `county` and `state`, and filter the counties in Texas. How many counties are there in Texas? What are the average annual pay in the two counties from Q4?
+
+## 5. Now let's import the datasets `us_county_wage_2024.csv` and `area-titles.csv`. The first dataset records employment and wage data by `area_fips` in 2024. The second dataset contains the name that each `area_fips` corresponds to. Join these data to find all combinations that appear in both datasets, separate `area_title` into the variables `county` and `state`, and filter the counties in Texas. How many counties are there in Texas? What are the average annual pay in the two counties from Q4?
 <!-- Tip: Look at the contents of `area_title` to determine what delimiter to use for separating it into two separate variables. -->
 
 ```{r echo = TRUE}
@@ -164,13 +164,14 @@ lowest_county_pay <- _____ |>
 ```
 There are `r count(txcounty_wage)` Texas counties in the QCEW data.
 
-The average annual pay for `r highest_price_county |> pull(county_name)` County is $`r format(highest_county_pay |> pull(avg_annual_pay), big.mark = ",")`.
+The average annual pay for `r highest_price_county |> pull(county_name)` is $`r format(highest_county_pay |> pull(avg_annual_pay), big.mark = ",")`.
 
-The average annual pay for `r lowest_price_county |> pull(county_name)` County is $`r format(lowest_county_pay |> pull(avg_annual_pay), big.mark = ",")`.
+The average annual pay for `r lowest_price_county |> pull(county_name)` is $`r format(lowest_county_pay |> pull(avg_annual_pay), big.mark = ",")`.
 
 
 {{< pagebreak >}}
-## 6. Now let's import the data contained in `industry_wage_2021.csv`, which records the US average employment and wage by industry in 2021. First look at NAICS2 industries, which are in rows indicated by the logical variable `naics2`. Join the wage data with information contained in `industry-titles.csv` so you know what the industry codes mean. Which of those industries have an average annual pay higher than $100,000?
+
+## 6. Now let's import the data contained in `industry_wage_2024.csv`, which records the US average employment and wage by industry in 2024. First look at NAICS2 industries, which are in rows indicated by the logical variable `naics2`. Join the wage data with information contained in `industry-titles.csv` so you know what the industry codes mean. Which of those industries have an average annual pay higher than $125,000?
 <!-- Tip: Print (output) just the industry titles for those industries as a data frame or vector. -->
 
 ```{r echo = TRUE}
@@ -179,6 +180,7 @@ _____
 
 
 {{< pagebreak >}}
+
 ## 7. Create a new variable `wage_bin` indicating the level of pay by industry. Fill that new variable with ">120k" for rows with an industry annual pay greater than $120,000; "90k-120k" for $90,000-120,000; "60k-90k" for $60,000-90,000; and "0k-60k" for lower than $60,000. How many NAICS2 industries are there for each wage bin?
 
 ```{r echo = TRUE}
@@ -187,6 +189,7 @@ _____
 
 
 {{< pagebreak >}}
+
 ## 8. Let's zoom in on NAICS6 industries within the broader finance and insurance industry, and find the one with the highest annual pay. First use filter to get the rows that correspond to that subgroup. Next, use `ifelse` to generate a new variable `highest_wage` that equals `TRUE` for the industry with the highest annual pay and `FALSE` otherwise. Use `highest_wage` to filter the data. Finally, join the data frame with `industry_titles` to get the industry title. Assign the resuling data frame to `highest_fin_wage`. (These steps are good practice even though they aren't the simplest way to answer the question!). Which industry has the highest annual pay?
 <!-- Tip: We provided the columns `naics6` and `finance_and_insurance` to help you filter the data to get relevant rows for this problem. -->
 

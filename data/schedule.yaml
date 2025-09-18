@@ -32,13 +32,13 @@ lessons:
     date: "Week 4"
     content: "04-content"
     example: "04-example"
-    # assignment: "04-homework"
+    assignment: "04-homework"
     bg: 2
 
   - title: '<span class="content-title">Strings and regular expressions</span>'
     session: "Session 5"
     date: "Week 5"
-    # content: "05-content"
+    content: "05-content"
     # example: "05-example"
     # # assignment: "05-homework"
     bg: 1
