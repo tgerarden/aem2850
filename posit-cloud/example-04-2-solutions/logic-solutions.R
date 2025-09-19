@@ -112,6 +112,19 @@ flights |>
   filter(!is.na(dep_time) & is.na(arr_time))
 # what do you think happened to these flights?
 
+# let's revisit our results on the share of on-time daytime flights
+# what share of flights seem to be canceled daytime flights, based on arr_delay?
+flights |>
+  mutate(canceled = (sched_dep_time > 600 & sched_dep_time < 2000 & is.na(arr_delay))) |>
+  summarize(share = mean(canceled))
+
+# how can we combine the two conditions on arr_delay to get the share
+# of daytime flights that are on-time daytime flights
+# (treating canceled flights as NOT on time)
+flights |>
+  mutate(on_time = sched_dep_time > 600 & sched_dep_time < 2000 & arr_delay < 20 & !is.na(arr_delay)) |>
+  summarize(share = mean(on_time))
+
 
 # 2.3 if_else()
 # customize the cutoff for "too early!" below for you
