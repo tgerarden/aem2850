@@ -68,13 +68,12 @@ Acknowledgements:
 
 # Announcements
 
-Welcome back -- I hope you had a nice February break!
+No homework due next Monday because...
 
-Homework - Week 4 is due next Monday
-
-Prelim 1 will be next Thursday, February 27 in class
+Prelim 1 will be next Thursday, October 2 at 7:30pm in Warren 173 and 175
   - Will cover everything so far **including this week's material**
-    - This includes the example from Tuesday, February 25
+  - Tuesday, Sep 30: review session in class
+  - Thursday, Oct 2: no class (room is yours to use)
   - We will provide more guidance via canvas
   - Please contact me and SDS **as soon as possible** if you are eligible for testing accommodations and are not yet registered
 
@@ -83,8 +82,10 @@ Questions before we get started?
 
 ---
 
-# Plan for today
+# Plan for this week
 
+.pull-left[
+### Tuesday
 <!-- [Prologue: clarifying group operations](#prologue) -->
 
 [Working with strings in R](#working-with-strings)
@@ -92,6 +93,14 @@ Questions before we get started?
 [Regular expressions](#regex)
 
 [Working with regular expressions in R](#working-with-regex)
+]
+
+.pull-right[
+### Thursday
+
+[example-05](#example-05)
+]
+
 
 
 ---
@@ -336,10 +345,6 @@ theoffice |> slice_head(n = 3) |>
     mutate(line = str_c(character, " said: ", text), .keep = "none")
 ```
 
---
-
-`str_c()` and `str_glue()` work well with `mutate()` because their output is the same length as their inputs
-
 ---
 
 # 3) str_glue()
@@ -355,6 +360,9 @@ Items inside `{}` are evaluated as if they are outside the quotes
 
 This can be handy when combining many fixed and variable strings
 
+--
+
+`str_c()` and `str_glue()` work well with `mutate()` because their output is the same length as their inputs
 
 ---
 class: inverse, center, middle
@@ -548,6 +556,10 @@ str_view(names, "M.*l") # match strings with M, then any number of any character
 str_view(names, "M.*l") # match strings with M, then any number of any characters, then l
 ```
 
+--
+
+Note that quantifiers modify the pattern they follow: we used `.*`, not `*.`
+
 ---
 
 # Character classes
@@ -708,8 +720,8 @@ How could we fit this into our current workflow?
 
 ```{r}
 theoffice |> select(season, episode, character, text) |> 
-  filter(str_detect(text,    # where to match a pattern #<<
-                    "sale")) # what pattern to match #<<
+  filter(str_detect(text,    # where to match a pattern: the column named "text" #<<
+                    "sale")) # what pattern to match: the pattern "sale" #<<
 ```
 
 ---
@@ -819,6 +831,8 @@ theoffice |> select(character, text) |>
 
 `str_count` can be used to count the number of matches in a string
 
+--
+
 ```{r}
 theoffice |> 
   distinct(character) |> 
@@ -853,6 +867,8 @@ Reminder: `[]` lets you match a set of characters; `^` inverts character class m
 
 As the name suggests, `str_replace` can be used to modify patterns in strings
 
+--
+
 ```{r}
 names
 str_replace(names, "Dw", "Duhw") # jim's office pronunciation guide
@@ -877,3 +893,10 @@ str_replace_all("Phyllis", "l", "!")
 These pair naturally with `mutate` just like `str_c`, `str_glue`, and `str_count`
 
 <!-- https://r4ds.hadley.nz/regexps.html#replace-values -->
+
+
+---
+class: inverse, center, middle
+name: example-05
+
+# example-05
