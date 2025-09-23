@@ -407,7 +407,7 @@ theoffice |&gt; slice_head(n = 1) |&gt;
 
 ``` r
 theoffice |&gt; slice_head(n = 1) |&gt; 
-*   mutate(line = str_c(character, " said: ", text), .keep = "none") # mutate and keep only `line`
+*   mutate(line = str_c(character, " said: ", text))
 ```
 
 --
@@ -429,8 +429,9 @@ theoffice |&gt; slice_head(n = 1) |&gt;
 
 ``` r
 theoffice |&gt; slice_head(n = 3) |&gt; 
-    mutate(line = str_c(character, " said: ", text), .keep = "none")
+    mutate(line = str_c(character, " said: ", text))
 ```
+
 
 ```
 ## # A tibble: 3 × 1
@@ -450,8 +451,9 @@ theoffice |&gt; slice_head(n = 3) |&gt;
 
 ``` r
 theoffice |&gt; slice_head(n = 3) |&gt; 
-* mutate(line = str_glue("{character} said: {text}"), .keep = "none") # note the different syntax
+* mutate(line = str_glue("{character} said: {text}")) # note the different syntax
 ```
+
 
 ```
 ## # A tibble: 3 × 1
