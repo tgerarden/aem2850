@@ -325,7 +325,7 @@ theoffice |> slice_head(n = 1) |>
 
 ```{r, eval=FALSE}
 theoffice |> slice_head(n = 1) |> 
-    mutate(line = str_c(character, " said: ", text), .keep = "none") # mutate and keep only `line` #<<
+    mutate(line = str_c(character, " said: ", text)) #<<
 ```
 
 --
@@ -341,7 +341,12 @@ theoffice |> slice_head(n = 1) |>
 
 `str_c` will automatically recycle fixed arguments like `" said: "` that are shorter than `character` and `text`:
 
-```{r}
+```{r, eval=FALSE}
+theoffice |> slice_head(n = 3) |> 
+    mutate(line = str_c(character, " said: ", text))
+```
+
+```{r, echo=FALSE}
 theoffice |> slice_head(n = 3) |> 
     mutate(line = str_c(character, " said: ", text), .keep = "none")
 ```
@@ -352,7 +357,12 @@ theoffice |> slice_head(n = 3) |>
 
 `str_glue()` provides similar functionality, but different syntax:
 
-```{r}
+```{r, eval=FALSE}
+theoffice |> slice_head(n = 3) |> 
+  mutate(line = str_glue("{character} said: {text}")) # note the different syntax #<<
+```
+
+```{r, echo=FALSE}
 theoffice |> slice_head(n = 3) |> 
   mutate(line = str_glue("{character} said: {text}"), .keep = "none") # note the different syntax #<<
 ```
