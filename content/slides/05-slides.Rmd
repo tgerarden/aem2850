@@ -68,12 +68,13 @@ Acknowledgements:
 
 # Announcements
 
-No homework due next Monday because...
+<!-- No homework due next Monday because... -->
 
 Prelim 1 will be next Thursday, October 2 at 7:30pm in Warren 173 and 175
   - Will cover everything so far **including this week's material**
   - Tuesday, Sep 30: review session in class
-  - Thursday, Oct 2: no class (room is yours to use)
+  - Thursday, Oct 2: no class
+  - Extra office hours TBD
   - We will provide more guidance via canvas
   - Please contact me and SDS **as soon as possible** if you are eligible for testing accommodations and are not yet registered
 
