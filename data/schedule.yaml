@@ -39,11 +39,11 @@ lessons:
     session: "Session 5"
     date: "Week 5"
     content: "05-content"
-    # example: "05-example"
+    example: "05-example"
     # # assignment: "05-homework"
     bg: 1
 
-  - title: '<span class="content-title">Prelim 1 review <br> *No class on Oct 2*</span>'
+  - title: '<span class="content-title">Prelim 1 review <br> *No class on Oct 2; optional office hours*</span>'
     # and Proportions
     session: "Session 6"
     date: "Week 6"
@@ -138,8 +138,7 @@ lessons:
 #  - title: '**Conclusion**'
 #    header: True
 
-  - title: '<span class="content-title">Prelim 2 review <br> *No class on Dec 4*</span>'
-    # and Proportions
+  - title: '<span class="content-title">Prelim 2 review <br> *No class on Dec 4; optional office hours*</span>'
     session: "Session 15"
     date: "Week 15"
     # # content: "06-content"

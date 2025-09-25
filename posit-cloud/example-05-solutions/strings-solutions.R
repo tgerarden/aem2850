@@ -50,7 +50,7 @@ amenities <- amenities |>
 
 # how similar are these measures?
 # run the code below to plot count vs length
-# note: these ggplot functions will not be on prelim 1!
+# note: these ggplot, geom_point, theme_bw functions will not be on prelim 1!
 amenities |>
   ggplot(aes(x = length, y = count)) +
   geom_point() +
@@ -68,38 +68,22 @@ amenities |>
 amenities |>
   filter(str_detect(amenities, "Wifi"))
 
-# now filter to find all listings with "Wifi" in any case using regex()
-amenities |>
-  filter(str_detect(amenities, regex("Wifi", ignore_case = TRUE)))
-
-# now do it by creating a variable amenities_lower using str_to_lower(),
+# now filter to find all listings with "Wifi" in any case:
+# by creating a variable amenities_lower using str_to_lower(),
 # and then use str_detect() to filter for "wifi"
 amenities |>
   mutate(amenities_lower = str_to_lower(amenities)) |>
   filter(str_detect(amenities_lower, "wifi"))
+
+# now filter to find all listings with "Wifi" in any case using regex()
+amenities |>
+  filter(str_detect(amenities, regex("Wifi", ignore_case = TRUE)))
 
 # how did these three approaches compare?
 # find the instances that use wifi in any capitalization other than "Wifi"
 amenities |>
   filter(str_detect(amenities, regex("wifi", ignore_case = TRUE))) |>
   filter(!str_detect(amenities, "Wifi"))
-
-
-# regular expressions can help us parse long strings like amenities
-# run the code below to count the different types of wifi in amenities
-amenities |>
-  mutate(wifi = str_extract(
-    string = amenities,
-    pattern = regex("(\\w+\\s)?wifi", ignore_case = TRUE)
-  )) |>
-  count(wifi)
-
-# what is the regular expression "(\\w+\\s)?wifi" doing?
-# \\w+ matches one or more "word" characters (letters or numbers)
-# \\s matches whitespace
-# ? makes the word and space in () optional
-# so this will extract wifi and the word that precedes it, if applicable
-# `ignore_case = TRUE` this avoids case sensitivity of "wifi"
 
 
 # now let's use str_detect() to create two new logical variables:
@@ -227,6 +211,7 @@ listings |>
 # we could anchor the search for "New York"
 #   at the beginning of host_location
 # ^ can be used to match the start of the string (e.g., "^New York")
+# note: this is NOT the same as negation of character classes, [^aeiou]
 # do that to see how many listings have
 #   host_locations that start with "New York"
 listings |>
@@ -241,22 +226,22 @@ listings |>
 
 
 # 3. Analyzing more strings ----
-# - match the pattern "share" (regardless of case) to
-#   find listings with shared vs not shared bathrooms
+# - start with listings
+# - remove rows where `bathrooms_text` is missing (NA)
+# - match "share" (regardless of case) in `bathrooms_text`
+#   to find listings with shared vs not shared bathrooms
 # - convert prices from strings to numbers by
-#   - removing dollar signs: \\$
-#   - removing commas: ,
+#   - using str_replace to remove dollar signs: \\$
+#   - using str_replace to remove commas: ,
 #   - using as.numeric() to coerce
-# - remove cases with missing reviews OR prices
-# - for each group, compute the average
-#   price and review_scores_rating
+# - assign the result to bath_data
 bath_data <- listings |>
   filter(!is.na(bathrooms_text)) |>
   mutate(shared_bath =
            str_detect(
              bathrooms_text,
              regex("share", ignore_case = TRUE)
-             ),
+           ),
          price = str_replace(price, "\\$", ""), # or use str_remove
          price = str_replace(price, ",", ""), # or use str_remove
          price = as.numeric(price)
@@ -264,6 +249,11 @@ bath_data <- listings |>
          # price = parse_number(price)
   )
 
+# using bath_data:
+# - remove cases with missing reviews OR missing prices
+# - for each group of `shared_bath`, compute the
+#   average price and review_scores_rating
+# how does having a shared bath correlate with prices? reviews?
 bath_data |>
   filter(!is.na(review_scores_rating) & !is.na(price)) |>
   group_by(shared_bath) |>
@@ -271,5 +261,3 @@ bath_data |>
     price = mean(price),
     mean_review = mean(review_scores_rating)
   )
-
-# how does having a shared bath correlate with reviews? prices?
