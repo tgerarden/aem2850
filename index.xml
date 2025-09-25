@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 25 Sep 2025 09:25:11 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Strings and regular expressions</title><link>https://aem2850.toddgerarden.com/example/05-example/</link><pubDate>Thu, 25 Sep 2025 09:25:11 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/05-example/</guid><description>&lt;h2 id="announcements">Announcements&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 25 Sep 2025 09:35:55 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Strings and regular expressions</title><link>https://aem2850.toddgerarden.com/example/05-example/</link><pubDate>Thu, 25 Sep 2025 09:35:55 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/05-example/</guid><description>&lt;h2 id="announcements">Announcements&lt;/h2>
 &lt;h3 id="homework---week-5">Homework - Week 5&lt;/h3>
 &lt;ul>
 &lt;li>Will be due Monday at 11:59pm&lt;/li>
@@ -18,7 +18,7 @@
 &lt;/ul>
 &lt;/li>
 &lt;li>Format: 75-minute paper exam, closed-book (-notes, -computer, etc.)&lt;/li>
-&lt;li>It will stress both concepts and syntax&lt;/li>
+&lt;li>It will emphasize both concepts and syntax&lt;/li>
 &lt;li>We will have multiple question types, including but not limited to:
 &lt;ol>
 &lt;li>multiple choice&lt;/li>
@@ -34,8 +34,12 @@
 &lt;/ul>
 &lt;h3 id="prelim-1-preparation">Prelim 1 preparation&lt;/h3>
 &lt;ul>
-&lt;li>Complete the homework for this week, attend regular office hours as needed&lt;/li>
-&lt;li>We will offer practice questions by early next week&lt;/li>
+&lt;li>Complete the homework for this week
+&lt;ul>
+&lt;li>Attend regular Friday and Monday office hours as needed&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>We will offer practice questions early next week&lt;/li>
 &lt;li>Come to class on Sep 30 for the review session&lt;/li>
 &lt;li>Come to Prof. Gerarden&amp;rsquo;s office hours:
 &lt;ul>
@@ -43,7 +47,7 @@
 &lt;li>Or &lt;a href="http://aem2850.youcanbook.me" target="_blank" rel="noopener">by appointment&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>Optional: come to class on Oct 2 for TA office hours (you may come to either/both)&lt;/li>
+&lt;li>Optional: come to class on Oct 2 for TA office hours&lt;/li>
 &lt;/ul>
 &lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
