@@ -40,7 +40,7 @@ lessons:
     date: "Week 5"
     content: "05-content"
     example: "05-example"
-    # # assignment: "05-homework"
+    assignment: "05-homework"
     bg: 1
 
   - title: '<span class="content-title">Prelim 1 review <br> *No class on Oct 2; optional office hours*</span>'
