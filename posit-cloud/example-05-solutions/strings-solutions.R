@@ -12,10 +12,7 @@
 library(tidyverse) # load the core tidyverse packages
 
 # today we'll explore textual data on Airbnb listings from New York City
-# the data come from Inside Airbnb, an activist project:
-#   Provide data that quantifies the impact of short-term rentals on housing and residential communities;
-#   and also provides a platform to support advocacy for policies to protect our cities from the impacts of short-term rentals.
-# http://insideairbnb.com
+# the data come from Inside Airbnb, an activist project: http://insideairbnb.com
 
 
 # 0. Import airbnb listings ----

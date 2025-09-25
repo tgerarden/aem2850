@@ -18,9 +18,7 @@ theme_set(theme_minimal()) # set the current theme to theme_minimal()
 # you can use theme_set(theme()) to return to defaults if you prefer
 
 # today we'll explore data on Airbnb listings from New York City
-# the data come from Inside Airbnb, an activist project:
-#   Provide data that quantifies the impact of short-term rentals on housing and residential communities; and also provides a platform to support advocacy for policies to protect our cities from the impacts of short-term rentals.
-# http://insideairbnb.com
+# the data come from Inside Airbnb, an activist project: http://insideairbnb.com
 
 
 # 1. Import airbnb listings ----
