@@ -1,0 +1,120 @@
+---
+#########################################################
+# Steps to complete this homework:
+#   1. Add your name to the author field of the yaml header
+#   2. Fill in the code chunks and use inline code to answer the questions 
+#   3. Click on "Render" directly above to render output (or Ctrl/Cmd-Shift-K)
+#   4. Repeat steps 2-3 until you are satisfied with the final product
+#   5. Download the resulting file homework-xx.pdf
+#   6. Upload homework-xx.pdf to canvas
+# Note: this file may not Render properly until it is (partially) completed
+# Reminder: to get around this and work interactively, you can run code chunks on their own
+# You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
+#########################################################
+title: "Homework - Week 5"
+author: "Write your name here"
+date: today
+format: pdf
+urlcolor: blue
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+# the next line causes the output to omit output from functions like read_csv()
+knitr::opts_chunk$set(message = FALSE)
+```
+
+# Preface
+
+The goal of this assignment is to introduce you to string manipulation and regular expressions. These tools enable you to identify patterns and extract information from text data. As in class, we'll stick to the functions provided by the **stringr** package (part of the **tidyverse**). Regular expressions, or `regex`, are supported by many functions in R, including those in **stringr**. You may find it helpful to refer to the [R stringr cheat sheet](https://rstudio.github.io/cheatsheets/html/strings.html) and the [R for Data Science chapter on strings](https://r4ds.hadley.nz/strings.html).
+
+We will work with multiple data sets:
+
+1. Headlines and sentiment analysis of news articles mentioning Apple Inc. from 2018 to 2024 [(`aapl_news.csv`)](https://www.kaggle.com/datasets/brandonpay/apple-stock-data-and-news-sentiment?select=aapl_news.csv).
+    a. Each row corresponds to a news article
+    b. The data frame contains the variable names: `{r} names(read_csv("aapl_news.csv"))`
+2. Release dates of all iPhone models up until 2024 [(`iphone_release_dates.csv`)](https://www.knowyourmobile.com/phones/every-single-iphone-released-to-date-a-complete-list-updated/).
+    a. Each row corresponds to an iPhone model (e.g., "iPhone 16")
+    b. The data frame contains the variable names: `{r} names(read_csv("iphone_release_dates.csv"))`
+
+
+<!--- Please leave the code above unchanged. Questions start from here. --->
+
+{{< pagebreak >}}
+
+## 1. Import the data in `aapl_news.csv` and assign it to a concise name. Each article is assigned to one of three sentiment categories: positive, neutral, or negative. To warm up, create a data frame that summarizes the number of articles (i.e., rows) that are classified into each sentiment category, then use that to compute the share of articles in each sentiment category. Print the resulting data frame below. Which of the three categories is the most common type of news coverage for Apple, according to these data?
+
+```{r echo = TRUE}
+
+```
+
+The most common type of news coverage for Apple is...
+
+
+{{< pagebreak >}}
+
+## 2. While every article mentions Apple at some point, not all of them explicitly mention it in the headline. How many articles feature the word "Apple" in the headline, with that specific capitalization?
+
+``` {r echo = TRUE}
+
+```
+
+\vfill
+
+## 3. How many articles feature the word "Apple" in the headline, with _any_ capitalization?
+<!-- Tip: Start with your answer to 2, and then modify it. -->
+
+``` {r echo = TRUE}
+
+```
+
+
+{{< pagebreak >}}
+
+## 4. Some headlines mention tech companies other than Apple. Create a new column `other_tech` that counts the number of occurrences of the words "Google", "Alphabet", "Amazon", "Microsoft", "Meta", and "Nvidia" in each headline, with any capitalization. For each value of `other_tech`, compute the share of articles that have a positive sentiment, and present the results in a data frame. Does the share of positive articles increase or decrease as the number of competitor firms mentioned in the headline increase?
+<!-- Tip: To compute the share of articles that have a positive sentiment, break the step into two parts: First, use group_by() to compute the number separately for each value of `other_tech`. Then, use summarize() to compute the share with positive sentiment, keeping in mind that you can do math with logical vectors that result from logical comparisons (TRUE = 1, FALSE = 0). -->
+
+```{r echo = TRUE}
+
+```
+
+The share of positive articles [...] as the number of competitor firms mentioned in the headline increases.
+
+
+{{< pagebreak >}}
+
+## 5. Import the data in `iphone_release_dates.csv` and assign it to a concise name. Use `str_extract()` to find components of the `release_date` variable that match certain patterns. First, create a new variable `release_year`, which contains the year of release as an integer. Then, create a new variable `release_month`, which contains the month of release as a string. Once you have both variables, use `count()` to count the number of models (i.e., rows) released in each `release_year`-`release_month` combination. Assign the resulting data frame to a name (recycling the original name is okay). Use the data frame to determine which month is the most common release month for new iPhone models.
+<!-- Tip: str_extract() has syntax just like str_detect() or str_count(), it just returns the matching pattern instead of a logical or integer count. There are many different ways to approach the regular expressions you need for this problem. To extract years, you could first look for numbers using the character class [0-9] (but be careful, `release_date` has numbers in multiple places!). Another option would be to use the anchor $ to extract the last four characters in the date. Be sure to convert `release_year` to an integer. To extract months, you could use the character class [A-Za-z], perhaps with another metacharacter like + or *. -->
+
+```{r echo = TRUE}
+
+```
+
+New iPhone models are most often released in...
+
+
+{{< pagebreak >}}
+
+## 6. Join the data frame you created above with `aapl_news` by year and month, making sure you preserve all news headlines. Filter the joined data so that you have only headlines that mention the word "iPhone", keeping in mind that capitalization might vary (e.g., "iphone", "IPhone", etc.). Create a new column `was_iphone_released` that takes value `TRUE` if any number of iPhones was released in the same year-month as the article, and `FALSE` otherwise. Present a table showing the share of articles in each sentiment category, with sentiments in the columns and whether the articles came out in months with and without an iPhone release in the rows. How does sentiment compare between articles published in months when a new iPhone model was released versus not?
+<!-- Tip: Let's break this down into smaller steps:
+  (1) Use the appropriate join function to merge the two data sets, and filter the headlines using string matching.
+  (2) To create the `was_iphone_released` column, you can exploit the fact that, after the join, any year-month without iPhone releases will have missing values for `n`.
+  (3) Count headlines per sentiment category and whether the year-month had an iPhone release or not, by providing both `was_iphone_released` and `sentiment` as arguments to `count()`.
+  (4) Within each type of year-month (with and without iPhone release), create a new column `share` with the fraction of articles in each sentiment category.
+  (5) Pivot the table to make it wider and get the desired format.
+-->
+
+```{r echo = TRUE}
+# Step 1: join and filter the data
+
+# Step 2: create logical variable was_iphone_released
+
+# Step 3: count headlines per was_iphone_released and sentiment category
+
+# Step 4: compute share of articles with each sentiment by was_iphone_released
+
+# Step 5: pivot the data to get the desired format
+
+```
+
+The sentiment of articles that mention the iPhone is [...] in months when a new iPhone is released, compared to other months.

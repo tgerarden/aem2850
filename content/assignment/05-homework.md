@@ -1,0 +1,26 @@
+---
+title: "Week 5"
+linktitle: "Week 5"
+date: "2025-09-24 22:01:42"
+output:
+  blogdown::html_page:
+    keep_md: true # do this to save results in .md file
+    toc: false
+    fig_caption: false
+menu:
+  assignment:
+    parent: Assignments
+    weight: 1
+type: docs
+weight: 1
+editor_options:
+  chunk_output_type: console
+---
+
+## Homework
+
+Navigate to [posit.cloud](http://posit.cloud), open the project `homework-05` in our course workspace, and follow the instructions in the file `homework-05.qmd`.
+
+**Note:** This week we continued to provide scaffolded code in `homework-05.qmd`. However, we also provided a version without scaffolded code, named `homework-05-blank.qmd`, in case you prefer to be able to Render your file along the way without filling in all the blanks (`_____`), which cause the code to fail and therefore prevent the file from rendering.
+
+**Strings and regular expressions will be included in prelim 1.**

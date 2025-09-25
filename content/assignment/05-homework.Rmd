@@ -17,8 +17,10 @@ editor_options:
   chunk_output_type: console
 ---
 
-## No homework this week
+## Homework
 
-There is no homework this week due to February break.
+Navigate to [posit.cloud](http://posit.cloud), open the project `homework-05` in our course workspace, and follow the instructions in the file `homework-05.qmd`.
 
-<!-- **Strings and regular expressions will be included in prelim 1.** -->
+**Note:** This week we continued to provide scaffolded code in `homework-05.qmd`. However, we also provided a version without scaffolded code, named `homework-05-blank.qmd`, in case you prefer to be able to Render your file along the way without filling in all the blanks (`_____`), which cause the code to fail and therefore prevent the file from rendering.
+
+**Strings and regular expressions will be included in prelim 1.**
