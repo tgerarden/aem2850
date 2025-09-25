@@ -1,4 +1,59 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 15 Sep 2025 15:29:46 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Joins and logic</title><link>https://aem2850.toddgerarden.com/example/04-example/</link><pubDate>Mon, 15 Sep 2025 15:29:46 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/04-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 25 Sep 2025 09:25:11 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Strings and regular expressions</title><link>https://aem2850.toddgerarden.com/example/05-example/</link><pubDate>Thu, 25 Sep 2025 09:25:11 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/05-example/</guid><description>&lt;h2 id="announcements">Announcements&lt;/h2>
+&lt;h3 id="homework---week-5">Homework - Week 5&lt;/h3>
+&lt;ul>
+&lt;li>Will be due Monday at 11:59pm&lt;/li>
+&lt;li>We continued to provide scaffolded code in &lt;code>homework-05.qmd&lt;/code>&lt;/li>
+&lt;li>We also provided a version without scaffolded code, named &lt;code>homework-05-blank.qmd&lt;/code>
+&lt;ul>
+&lt;li>This file will Render without any edits, unlike &lt;code>homework-05.qmd&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Note:&lt;/strong> The last 1-2 questions are fairly involved. They are meant as an opportunity to practice, not a source of stress. For Prelim 1 on October 2, we will not ask you to write such long pieces of code from scratch. However, we may ask you to write short code snippets, or outline the key steps to approach a more complicated programming task conceptually (in words, not code), or both.&lt;/li>
+&lt;/ul>
+&lt;h3 id="prelim-1-overview">Prelim 1 overview&lt;/h3>
+&lt;ul>
+&lt;li>October 2 at 7:30pm in person in Warren Hall
+&lt;ul>
+&lt;li>Will post room assignments to canvas in advance&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Format: 75-minute paper exam, closed-book (-notes, -computer, etc.)&lt;/li>
+&lt;li>It will stress both concepts and syntax&lt;/li>
+&lt;li>We will have multiple question types, including but not limited to:
+&lt;ol>
+&lt;li>multiple choice&lt;/li>
+&lt;li>short answer questions that stress concepts&lt;/li>
+&lt;li>explain whether/why a code snippet we give you would run/fail&lt;/li>
+&lt;li>tell us what some code would return&lt;/li>
+&lt;li>explain how you approach a coding task conceptually&lt;/li>
+&lt;li>name key functions we have learned&lt;/li>
+&lt;li>write brief code snippets&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>We will post more information on canvas early next week&lt;/li>
+&lt;/ul>
+&lt;h3 id="prelim-1-preparation">Prelim 1 preparation&lt;/h3>
+&lt;ul>
+&lt;li>Complete the homework for this week, attend regular office hours as needed&lt;/li>
+&lt;li>We will offer practice questions by early next week&lt;/li>
+&lt;li>Come to class on Sep 30 for the review session&lt;/li>
+&lt;li>Come to Prof. Gerarden&amp;rsquo;s office hours:
+&lt;ul>
+&lt;li>Tuesday, September 30 from 11:30 - 12:30&lt;/li>
+&lt;li>Or &lt;a href="http://aem2850.youcanbook.me" target="_blank" rel="noopener">by appointment&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Optional: come to class on Oct 2 for TA office hours (you may come to either/both)&lt;/li>
+&lt;/ul>
+&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
+&lt;li>Questions? 🙋‍♀️&lt;/li>
+&lt;li>Navigate to &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a> and open the project &lt;code>example-05&lt;/code> in our course workspace&lt;/li>
+&lt;li>Work through &lt;code>strings-practice.R&lt;/code> in &lt;code>example-05&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Solutions&lt;/strong> will be posted after class&lt;/li>
+&lt;/ul>
+&lt;h2 id="cheatsheets">Cheatsheets&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.github.io/cheatsheets/strings.pdf" target="_blank" rel="noopener">Click here to download the &lt;code>stringr&lt;/code> cheatsheet&lt;/a>&lt;/p></description></item><item><title>Joins and logic</title><link>https://aem2850.toddgerarden.com/example/04-example/</link><pubDate>Mon, 15 Sep 2025 15:29:46 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/04-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
 &lt;li>Questions? 🙋‍♀️&lt;/li>
 &lt;li>Navigate to &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a>&lt;/li>
