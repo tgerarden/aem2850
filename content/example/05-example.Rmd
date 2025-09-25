@@ -30,7 +30,7 @@ editor_options:
 - October 2 at 7:30pm in person in Warren Hall
   - Will post room assignments to canvas in advance
 - Format: 75-minute paper exam, closed-book (-notes, -computer, etc.)
-- It will stress both concepts and syntax
+- It will emphasize both concepts and syntax
 - We will have multiple question types, including but not limited to:
   1. multiple choice
   2. short answer questions that stress concepts
@@ -42,13 +42,14 @@ editor_options:
 - We will post more information on canvas early next week
 
 ### Prelim 1 preparation
-- Complete the homework for this week, attend regular office hours as needed
-- We will offer practice questions by early next week
+- Complete the homework for this week
+  - Attend regular Friday and Monday office hours as needed
+- We will offer practice questions early next week
 - Come to class on Sep 30 for the review session
 - Come to Prof. Gerarden's office hours:
   - Tuesday, September 30 from 11:30 - 12:30
   - Or [by appointment](http://aem2850.youcanbook.me)
-- Optional: come to class on Oct 2 for TA office hours (you may come to either/both)
+- Optional: come to class on Oct 2 for TA office hours
 
 ## Plan for today
 - Questions? :raising_hand_woman:
