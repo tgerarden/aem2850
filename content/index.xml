@@ -1,4 +1,45 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 22 Sep 2025 15:43:09 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Strings and regular expressions</title><link>https://aem2850.toddgerarden.com/content/05-content/</link><pubDate>Mon, 22 Sep 2025 15:43:09 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/05-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 29 Sep 2025 16:10:42 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Prelim 1 review</title><link>https://aem2850.toddgerarden.com/content/06-content/</link><pubDate>Mon, 29 Sep 2025 16:10:42 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/06-content/</guid><description>&lt;h2 id="prelim-1-overview">Prelim 1 overview&lt;/h2>
+&lt;ul>
+&lt;li>October 2 at 7:30pm in person in Warren Hall
+&lt;ul>
+&lt;li>Will post room assignments to canvas in advance&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Format: 75-minute paper exam, closed-book (-notes, -computer, etc.)&lt;/li>
+&lt;li>It will emphasize both concepts and syntax&lt;/li>
+&lt;li>We will have multiple question types, including but not limited to:
+&lt;ol>
+&lt;li>multiple choice&lt;/li>
+&lt;li>short answer questions that stress concepts&lt;/li>
+&lt;li>explain whether/why a code snippet we give you would run/fail&lt;/li>
+&lt;li>tell us what some code would return&lt;/li>
+&lt;li>explain how you approach a coding task conceptually&lt;/li>
+&lt;li>name key functions we have learned&lt;/li>
+&lt;li>write brief code snippets&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="office-hours-before-prelim-1">Office hours before prelim 1&lt;/h3>
+&lt;ul>
+&lt;li>Come to Prof. Gerarden&amp;rsquo;s office hours:
+&lt;ul>
+&lt;li>Tuesday, September 30 from 11:30 - 12:30&lt;/li>
+&lt;li>Or &lt;a href="http://aem2850.youcanbook.me" target="_blank" rel="noopener">by appointment&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Optional: come to class on Oct 2 for TA office hours&lt;/li>
+&lt;/ul>
+&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
+&lt;li>Questions about prelim logistics? 🙋‍♀️&lt;/li>
+&lt;li>Questions about specific content? 🙋‍♂️&lt;/li>
+&lt;li>Practice prelim (as time allows)&lt;/li>
+&lt;/ul>
+&lt;h3 id="practice-prelim-questions">Practice prelim questions&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://aem2850.toddgerarden.com/content/practice-prelims/prelim-1-practice.pdf">Practice questions for prelim 1&lt;/a>&lt;/li>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> Solutions will be posted after class&lt;/li>
+&lt;/ul></description></item><item><title>Strings and regular expressions</title><link>https://aem2850.toddgerarden.com/content/05-content/</link><pubDate>Mon, 22 Sep 2025 15:43:09 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/05-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/strings.html" target="_blank" rel="noopener">Read chapter 14: Strings&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/regexps.html" target="_blank" rel="noopener">Read chapter 15: Regular expressions&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
