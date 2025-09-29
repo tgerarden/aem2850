@@ -1,0 +1,49 @@
+---
+title: "Prelim 1 review"
+linktitle: "Prelim 1 review"
+date: "2025-09-29 16:10:42"
+menu:
+  content:
+    parent: Course content
+    weight: 6
+type: docs
+# bibliography: "../../static/bib/references.bib"
+# csl: "../../static/bib/chicago-fullnote-bibliography-no-bib.csl"
+# slides: "06-slides"
+
+output:
+  blogdown::html_page:
+    keep_md: true # do this to save results in .md file
+    toc: false
+---
+
+## Prelim 1 overview
+- October 2 at 7:30pm in person in Warren Hall
+  - Will post room assignments to canvas in advance
+- Format: 75-minute paper exam, closed-book (-notes, -computer, etc.)
+- It will emphasize both concepts and syntax
+- We will have multiple question types, including but not limited to:
+  1. multiple choice
+  2. short answer questions that stress concepts
+  3. explain whether/why a code snippet we give you would run/fail
+  4. tell us what some code would return
+  5. explain how you approach a coding task conceptually
+  6. name key functions we have learned
+  7. write brief code snippets
+
+### Office hours before prelim 1
+- Come to Prof. Gerarden's office hours:
+  - Tuesday, September 30 from 11:30 - 12:30
+  - Or [by appointment](http://aem2850.youcanbook.me)
+- Optional: come to class on Oct 2 for TA office hours
+
+## Plan for today
+- Questions about prelim logistics? :raising_hand_woman:
+- Questions about specific content? :raising_hand_man:
+- Practice prelim (as time allows)
+
+
+### Practice prelim questions
+
+- <i class="fas fa-book"></i> [Practice questions for prelim 1](/content/practice-prelims/prelim-1-practice.pdf)
+- <i class="fas fa-book"></i> Solutions will be posted after class

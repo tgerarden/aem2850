@@ -1,0 +1,281 @@
+---
+title: "Practice Questions for Prelim 1"
+subtitle: "AEM 2850 / AEM 5850 -- Fall 2025"
+format: pdf
+urlcolor: blue
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(readxl)
+
+# set global options for all code chunks
+library(knitr)
+knitr::opts_chunk$set(
+  fig.align = "center",
+  out.width = "75%",
+  warning = FALSE, 
+  message = FALSE
+)
+```
+
+\vspace{-1.75cm}
+
+# READ THESE NOTES FIRST:
+
+- Prelim 1 will cover all content we covered in weeks 1 through 5
+- These practice questions are intended as a study resource, not a comprehensive guide
+- These practice questions are not exhaustive in terms of topics and question types
+- These practice questions are not necessarily representative of the weight that different topics and question types will receive on Prelim 1
+
+
+## Preface
+
+The goal of this prelim is to assess your familiarity with programming concepts, ability to approach programming tasks, and facility with key data wrangling tasks we covered in weeks 1 through 5 of the course.
+
+
+## Instructions
+
+- You must complete Prelim 1 in person
+- Prelim 1 is a closed-book paper prelim
+- Manage your time carefully
+- If you get stuck, move on and come back later as time allows
+
+## Additional notes
+
+- There are X questions worth a total of 100 points. The total number of points per question is stated with each question
+- We will give partial credit if your answers are incomplete, especially if you outline the logic of what you *would* do if you had more time
+
+
+{{< pagebreak >}}
+
+# Multiple Choice: circle only one answer per question
+
+## Q. [X points] What does the `mutate()` function do in the tidyverse?
+
+a. Filters rows
+b. Creates new variables
+c. Changes column names
+d. Removes duplicates
+
+
+\vfill
+## Q. [X points] Which join keeps all rows from the left table and only matching rows from the right?
+
+a. `inner_join()`
+b. `right_join()`
+c. `left_join()`
+d. `full_join()`
+
+
+\vfill
+## Q. [X points] What does `%in%` do in R?
+a. It checks if a vector is contained in another vector
+b. It adds elements to a vector
+c. The same thing as `==`
+d. It checks whether elements of one vector are contained in another vector
+
+
+\vfill
+## Q. [X points] Suppose you want to keep only rows where the value of `price` is greater than 100. Which code would you use?
+
+a. `filter(price < 100)`
+b. `select(price > 100)`
+c. `filter(price > 100)`
+d. `arrange(price > 100)`
+
+
+\vfill
+## Q. [X points] Which operator checks for exact equality in R?
+
+a. `=`
+b. `==`
+c. `:=`
+d. `is_equal()`
+
+
+
+\vfill
+
+{{< pagebreak >}}
+
+# Multiple Choices: circle any number of answers per question
+
+## Q. [X points] Which of the following expressions return `TRUE`?
+
+a.
+```{r eval=FALSE}
+5!=4
+```
+
+b.
+```{r eval=FALSE}
+!FALSE
+```
+
+c.
+```{r eval=FALSE}
+TRUE & FALSE
+```
+
+d.
+```{r eval=FALSE}
+2 > 1 | NA
+```
+
+e.
+```{r eval=FALSE}
+!(FALSE | TRUE)
+```
+
+
+
+\vfill
+
+
+{{< pagebreak >}}
+
+# Short Answer
+
+## Q. [X points] When using a tidyverse join function to combine data frames, how does R determine which columns to use as join keys if you don't provide explicit instructions?
+
+
+
+\vfill
+## Q. [X points] What is the purpose of `read_csv()` and, at a high level, what does it do?
+
+
+
+\vfill
+## Q. [X points] Will this expression return 5? Why or why not?
+
+```{r eval=FALSE}
+"3" + "2"
+```
+
+\vfill
+
+
+{{< pagebreak >}}
+
+## Q. [X points] A marketing analyst is asked to analyze promotional campaign performance by combining data on promotions (e.g., `Buy1Get1`) across each season, and then analyzing each promotion separately. They receive the following data frame of results from the campaigns:
+
+```{r echo=FALSE}
+promo_data <- tibble(
+  campaign    = rep(c("Spring-Save20", "Spring-Buy1Get1", "Fall-Save20", "Winter-Save20"), 7),
+  impressions = rep(c(12000, 18000, 15000, 16000), 7),
+  clicks      = rep(c(800, 1200, 900, 1000), 7),
+  conversions = rep(c(75, 130, 95, 110), 7),
+  spend       = rep(c(300, 500, 400, 450), 7)
+)
+promo_data |> 
+  print(n = 4)
+```
+
+## Are the data tidy? Why or why not?
+
+
+\vfill
+
+## If the data are not tidy, what (if anything) would you do to make them tidy? Explain what your conceptual approach would be, name the function(s) you would use, and describe any important argument(s) you would include.
+
+*Note: If the data are already tidy, you can leave this question blank or restate that here. We will award credit based on the logic of your approach first and foremost, followed by your understanding of key functions needed to implement the approach. You are not expected to write a complete code snippet that will run without errors (and will not receive any extra credit if you do), though you are welcome to do so if it helps you to explain your answer.*
+
+
+\vfill
+\vfill
+
+
+{{< pagebreak >}}
+
+## Q. [X points] Consider the following data frame `stocks`:
+
+```{r echo=FALSE}
+set.seed(12345)
+stocks <- tibble( # could use "tibble" instead of "data.frame" if you prefer
+  date = as.Date("2025-10-02") - 1:2,
+  AAPL = rnorm(2, 225, 15),
+  GOOG = rnorm(2, 200, 10),
+  MSFT = rnorm(2, 400, 20)
+  ) |> 
+  pivot_longer(-date, names_to = "stock", values_to = "price")
+stocks
+```
+
+## If you ran the following code, how many rows and columns will the result contain? What are the column names?
+
+```{r eval=FALSE}
+stocks |> 
+  pivot_wider(names_from = stock, values_from = price)
+```
+
+
+
+{{< pagebreak >}}
+
+## Q. [X points] The `coffee_sales` dataset below contains sales data from March 2024 to February 2025:
+
+```{r echo=FALSE}
+coffee_sales <- read_excel("coffee_sales.xlsx", sheet = "coffee_sales", skip = 3)
+coffee_sales |> print(n = 5)
+```
+
+## You wrote code to compute the **total monthly sales** for each available month in **2024**:
+
+```{r eval=FALSE}
+coffee_sales |> 
+  filter(year == 2024) |> 
+  group_by(month) |> 
+  summarise(total_sales = sum(money))
+```
+
+## Do you think the above code will produce the correct total sales for every month? Why or why not?
+
+
+\vfill
+
+## If not, how would you revise your approach to do so?
+
+
+\vfill
+
+{{< pagebreak >}}
+
+## Q. [X points] You've been asked to analyze purchase behavior for an e-commerce company. The company stores customer details in one table, and tracks each order in another:
+
+```{r echo=FALSE}
+customers <- tibble(
+  customer_id = c(101, 102, 103),
+  name        = c("Alice Kim", "Brian Chen", "Carlos Lopez"),
+  segment     = c("Premium", "Standard", "Standard")
+)
+```
+
+```{r}
+customers
+```
+
+```{r echo=FALSE}
+orders <- tibble(
+  order_id    = c(201, 202, 203, 204),
+  customer_id = c(101, 102, 101, 104),
+  order_date  = as.Date(c("2023-10-01", "2023-10-02", "2023-10-05", "2023-10-07")),
+  amount      = c(120, 75, 90, 60)
+)
+```
+
+```{r}
+orders
+```
+
+
+## The company asked you to analyze all the purchases by customer type. Your manager told you to start by merging the tables using `customer_id`, preserving all purchases without introducing unnecessary information. Write a brief code snippet to share with your manager.
+
+
+
+\vfill
+
+## How many rows will the resulting data frame contain?
+
+
+\vfill
