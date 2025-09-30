@@ -1,7 +1,7 @@
 ---
 title: "Prelim 1 review"
 linktitle: "Prelim 1 review"
-date: "2025-09-30 14:45:07"
+date: "2025-09-30 14:45:21"
 menu:
   content:
     parent: Course content
@@ -47,5 +47,3 @@ output:
 
 - <i class="fas fa-book"></i> [Practice questions for prelim 1](/content/practice-prelims/prelim-1-practice.pdf)
 - <i class="fas fa-book"></i> [Solutions: Practice questions for prelim 1](/content/practice-prelims/prelim-1-practice-solutions.pdf)
-
-- <i class="fas fa-book"></i> Solutions will be posted after class
