@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 30 Sep 2025 14:45:07 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Prelim 1 review</title><link>https://aem2850.toddgerarden.com/content/06-content/</link><pubDate>Tue, 30 Sep 2025 14:45:07 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/06-content/</guid><description>&lt;h2 id="prelim-1-overview">Prelim 1 overview&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 30 Sep 2025 14:45:21 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Prelim 1 review</title><link>https://aem2850.toddgerarden.com/content/06-content/</link><pubDate>Tue, 30 Sep 2025 14:45:21 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/06-content/</guid><description>&lt;h2 id="prelim-1-overview">Prelim 1 overview&lt;/h2>
 &lt;ul>
 &lt;li>October 2 at 7:30pm in person in Warren Hall
 &lt;ul>
@@ -37,15 +37,8 @@
 &lt;/ul>
 &lt;h3 id="practice-prelim-questions">Practice prelim questions&lt;/h3>
 &lt;ul>
-&lt;li>
-&lt;p>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://aem2850.toddgerarden.com/content/practice-prelims/prelim-1-practice.pdf">Practice questions for prelim 1&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://aem2850.toddgerarden.com/content/practice-prelims/prelim-1-practice-solutions.pdf">Solutions: Practice questions for prelim 1&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;i class="fas fa-book">&lt;/i> Solutions will be posted after class&lt;/p>
-&lt;/li>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://aem2850.toddgerarden.com/content/practice-prelims/prelim-1-practice.pdf">Practice questions for prelim 1&lt;/a>&lt;/li>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://aem2850.toddgerarden.com/content/practice-prelims/prelim-1-practice-solutions.pdf">Solutions: Practice questions for prelim 1&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Strings and regular expressions</title><link>https://aem2850.toddgerarden.com/content/05-content/</link><pubDate>Mon, 22 Sep 2025 15:43:09 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/05-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/strings.html" target="_blank" rel="noopener">Read chapter 14: Strings&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
