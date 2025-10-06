@@ -60,15 +60,15 @@ lessons:
   - title: '**Data Visualization Foundations**'
     header: True
 
-  - title: '<span class="content-title">Mapping data to graphics <br> Amounts</span>'
+  - title: '<span class="content-title">Mapping data to graphics <br> Amounts <br> Proportions</span>'
     session: "Session 7"
     date: "Week 7"
-    # content: "07-content"
+    content: "07-content"
     # example: "07-example"
     # assignment: "07-homework"
     bg: 2
 
-  - title: '<span class="content-title">*Fall Break: No class on Oct 14* <br> Proportions <br> Distributions</span>'
+  - title: '<span class="content-title">*Fall Break: No class on Oct 14* <br> Distributions</span>'
     session: "Session 8"
     date: "Week 8"
     # content: "08-content"
@@ -93,7 +93,7 @@ lessons:
     bg: 2
 
   - title: '<i class="fas fa-star"></i> **Group project due**'
-    date: "TBD"
+    date: "Nov. 7 at 11:59pm"
     # # assignment: "group-project"
     bg: 3
     bottomborder: True

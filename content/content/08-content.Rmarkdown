@@ -1,6 +1,6 @@
 ---
-title: "Proportions and distributions"
-linktitle: "Proportions and distributions"
+title: "Distributions"
+linktitle: "Distributions"
 date: "`r format(Sys.time())`"
 menu:
   content:
@@ -19,7 +19,6 @@ output:
 
 ### Readings
 
-- <i class="fas fa-book"></i> [Chapter 10: Visualizing proportions](https://clauswilke.com/dataviz/visualizing-proportions.html) of *Fundamentals of Data Visualization*
 - <i class="fas fa-book"></i> [Chapter 7: Visualizing distributions](https://clauswilke.com/dataviz/histograms-density-plots.html) of *Fundamentals of Data Visualization*
 - <i class="fas fa-book"></i> [Section 4.6: Histograms and density plots](https://socviz.co/groupfacettx.html#histograms) of *Data Visualization*
 
@@ -38,7 +37,6 @@ output:
 
 ### Guiding questions
 
-- What are some pros and cons of pie charts, stacked bars, and side-by-side bars for visualizing proportions?
 - Why is it important to visualize all the variation in a variable?
 - What are some geometries that can be used to visualize distributions?
 
