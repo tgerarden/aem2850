@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 06 Oct 2025 15:52:58 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Mapping data to graphics, amounts, and proportions</title><link>https://aem2850.toddgerarden.com/content/07-content/</link><pubDate>Mon, 06 Oct 2025 15:52:58 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/07-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
-&lt;!-- - &lt;i class="fab fa-youtube">&lt;/i> Hans Rosling: [200 Countries, 200 Years, 4 Minutes](https://www.youtube.com/watch?v=jbkSRLYSojo) -->
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 06 Oct 2025 21:38:12 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Mapping data to graphics, amounts, and proportions</title><link>https://aem2850.toddgerarden.com/content/07-content/</link><pubDate>Mon, 06 Oct 2025 21:38:12 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/07-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
+&lt;li>&lt;i class="fab fa-youtube">&lt;/i> Hans Rosling: &lt;a href="https://www.youtube.com/watch?v=jbkSRLYSojo" target="_blank" rel="noopener">200 Countries, 200 Years, 4 Minutes&lt;/a>&lt;/li>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/aesthetic-mapping" target="_blank" rel="noopener">Chapter 2: Visualizing data&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="http://socviz.co/makeplot.html" target="_blank" rel="noopener">Chapter 3: Make a plot&lt;/a> of &lt;em>Data Visualization&lt;/em>&lt;/li>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-amounts" target="_blank" rel="noopener">Chapter 6: Visualizing amounts&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
@@ -17,20 +17,15 @@
 &lt;ul>
 &lt;li>Why is it important to visualize variables and data?&lt;/li>
 &lt;li>What does it mean to map data to graph aesthetics?&lt;/li>
-&lt;/ul>
-&lt;!-- - What data was mapped to which aesthetics in Rosling's video? -->
-&lt;ul>
 &lt;li>How can bar charts help or hinder our ability to understand amounts?&lt;/li>
 &lt;li>What are the pros and cons of grouped bars?&lt;/li>
 &lt;li>When are stacked bars useful?&lt;/li>
 &lt;li>What are some pros and cons of pie charts, stacked bars, and side-by-side bars for visualizing proportions?&lt;/li>
 &lt;/ul>
-&lt;!-- ### Slides -->
-&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
-&lt;!--
+&lt;h3 id="slides">Slides&lt;/h3>
+&lt;p>The slides for today&amp;rsquo;s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).&lt;/p>
 &lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/07-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/07-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
--->
-&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item><item><title>Prelim 1 review</title><link>https://aem2850.toddgerarden.com/content/06-content/</link><pubDate>Tue, 30 Sep 2025 14:45:21 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/06-content/</guid><description>&lt;h2 id="prelim-1-overview">Prelim 1 overview&lt;/h2>
+&lt;p>&lt;strong>Fun fact&lt;/strong>: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands.&lt;/p></description></item><item><title>Prelim 1 review</title><link>https://aem2850.toddgerarden.com/content/06-content/</link><pubDate>Tue, 30 Sep 2025 14:45:21 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/06-content/</guid><description>&lt;h2 id="prelim-1-overview">Prelim 1 overview&lt;/h2>
 &lt;ul>
 &lt;li>October 2 at 7:30pm in person in Warren Hall
 &lt;ul>
