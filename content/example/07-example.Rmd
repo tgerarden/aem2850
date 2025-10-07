@@ -1,6 +1,6 @@
 ---
-title: "Mapping data to graphics and amounts"
-linktitle: "Mapping data to graphics and amounts"
+title: "Mapping data to graphics, amounts, and proportions"
+linktitle: "Mapping data to graphics, amounts, and proportions"
 date: "`r format(Sys.time())`"
 output:
   blogdown::html_page:
@@ -22,11 +22,12 @@ editor_options:
 - Tuesday:
   - Go through [slides](/content/07-content/)
   - Open the [posit.cloud](http://posit.cloud) project `example-07-1`
-  - Work through `mapping-data-to-graphics-practice.R`
+  - Work through `amounts-practice.R`
+  - Time permitting: `optional-mapping-data-to-graphics-practice.R`
 - Thursday:
   - Go through [slides](/content/07-content/)
   - Open the [posit.cloud](http://posit.cloud) project `example-07-2`
-  - Work through `amounts-practice.R`
+  - Work through `proportions-practice.R`
 - **Solutions** will be posted after class
 
 ## Cheatsheets

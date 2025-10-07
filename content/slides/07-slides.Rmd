@@ -1,5 +1,5 @@
 ---
-title: "Mapping data to graphics and amounts"
+title: "Mapping data to graphics, amounts, and proportions"
 author: "Todd Gerarden"
 output:
   xaringan::moon_reader:
@@ -37,13 +37,12 @@ opts_chunk$set(warning = FALSE, message = FALSE,
 
 ```{r packages-data, include=FALSE}
 library(tidyverse)
-library(ggthemes)
 library(gapminder)
 ```
 
 class: center middle main-title section-title-4
 
-# Mapping data to graphics and amounts
+# Mapping data to graphics, amounts, and proportions
 
 .class-info[
 
@@ -68,9 +67,13 @@ Acknowledgements:
 
 This week marks the start of the data visualization component of this course
 
-Next homework is due Monday
+No homework this week due to Fall Break 😎
+
+The group project will be due Friday, Nov. 7 at 11:59pm
 
 We will provide details on the group project in the next few weeks
+
+We are grading Prelim 1 and will update you when we can
 
 Questions before we get started?
 
@@ -84,20 +87,17 @@ Questions before we get started?
   - [Course progress](#progress)
   - [Prologue](#prologue)
   - [Data, aesthetics, <br> & the grammar of graphics](#grammar-of-graphics)
-  - [Grammatical layers](#grammatical-layers)
+  - [Amounts](#amounts)
+  - [Plotting amounts using ggplot](#plotting-amounts)
   - [example-07-1](#example-1)
-  <!-- - [Prelim 1](#example-1) -->
-  - [Reference: Putting it all together](#putting-it-together)
-  - [Reference: Additional layers](#additional-layers)
+  - [Reference: More examples](#more-examples)
 ]
 
 .pull-right[
 ### Thursday
-  - [Prologue](#prologue-2)
-  - [Amounts](#amounts)
-  - [Plotting amounts using ggplot](#plotting-amounts)
+  - [Proportions](#proportions)
   - [example-07-2](#example-2)
-  - [Reference: more examples](#more-examples)
+  - [Reference: Additional layers](#additional-layers)
 ]
 
 ---
@@ -155,22 +155,66 @@ name: prologue
 
 # Prologue
 
+---
+
+# Remember our concentrations?
+
+How might we visualize these amounts?
+
+.less-left[
+```{r, echo = FALSE}
+load("data/survey-responses/survey-data.RData")
+concentrations_tidy <- concentrations |> 
+  rename(
+    sus = enviro,
+    fin = finance,
+    oth = other,
+    strat = strategy
+    ) |>
+  select(-degree, -concentration, -program) |>
+  summarize_all(sum, na.rm = TRUE) |>
+  pivot_longer(everything(), names_to = "concentration", values_to = "count") |>
+  arrange(desc(count))
+concentrations_tidy
+```
+]
+
+--
+
+.more-right[
+```{r, echo = FALSE}
+concentrations_tidy |> 
+  ggplot(aes(x = fct_reorder(concentration, -count), y = count)) +
+  geom_col() +
+  scale_y_continuous(breaks = scales::breaks_pretty()) +
+  theme_xaringan(text_font_size = 38) +
+  theme(axis.title.y = element_text(size = 40)) +
+  labs(x = NULL,
+       y = "Number of Concentrators")
+```
+]
+
 
 ---
 
-# [Health and wealth](https://www.youtube.com/watch?v=jbkSRLYSojo)
+# What are our favorite public companies?
 
-```{r echo=FALSE, out.width='75%'}
-knitr::include_graphics("img/07/gapminder-screenshot.png")
-# click the link above to access the youtube
-# could switch to use youtube html embed code to make the entire plot a link
+--
+
+```{r, echo = FALSE}
+companies |>
+  filter(!is.na(name)) |>
+  mutate(name = str_to_title(name),
+         name = str_replace(name, "\\s?/.*", ""),
+         name = str_replace(name, ",?\\s?Inc.?", ""),
+         name = str_replace(name, " S\\.a\\.", "")) |> 
+  ggplot(aes(y = fct_rev(fct_infreq(name)))) +
+  geom_bar() +
+  theme_xaringan(text_font_size = 20) +
+  theme(axis.title.x = element_text(size = 36)) +
+  labs(x = "Number of Potential Investors",
+       y = NULL)
 ```
-
-???
-
-Image source: [Gapminder](https://www.gapminder.org/tools/#$chart-type=bubbles)
-
-[Video](https://www.youtube.com/watch?v=jbkSRLYSojo)
 
 
 ---
@@ -207,9 +251,15 @@ Position, shape, color, etc.
 
 ---
 
-# Mapping data to aesthetics
+# An example: Health vs wealth
 
 .pull-left[
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics("img/07/gapminder-screenshot.png")
+```
+]
+
+.pull-right[
 <table>
   <tr>
     <th class="cell-left">Data</th>
@@ -237,12 +287,6 @@ Position, shape, color, etc.
     <td class="cell-left">Point</td>
   </tr>
 </table>
-]
-
-.pull-right[
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/07/gapminder-screenshot.png")
-```
 ]
 
 
@@ -414,12 +458,6 @@ gapminder_2007 |>
 ```
 
 ---
-class: inverse, center, middle
-name: grammatical-layers
-
-# Grammatical layers
-
----
 
 # Grammar components as layers
 
@@ -470,315 +508,962 @@ We will primarily learn by doing, though this slide deck contains [a preview of 
 
 
 ---
+class: inverse, center, middle
+name: amounts
 
-# A true grammar
+# Amounts
+
+---
+
+# Yay bar plots!
+
+We are a lot better at visualizing line lengths than angles and areas
 
 .pull-left[
-You have probably made graphics in Excel by searching through menus for a specific chart type, and then reshaping your data to work with it
 
-With the grammar of graphics, we don't talk about specific chart **types**
-]
-
-.pull-right[
-.center[
-<figure>
-  <img src="img/07/excel-chart-types.png" alt="Excel chart types" title="Excel chart types" width="85%">
-</figure>
-]
-]
-
----
-
-# A true grammar
-
-.pull-left[
-With the grammar of graphics, we talk about specific chart **elements**
-
-- .small[Map a column to the x-axis, fill by a variable, `geom_col()` to get stacked bars]
-
-- .small[Geometries can be interchangeable (e.g., `geom_violin()` and `geom_boxplot()`)]
-
-This grammar is portable to other software like Tableau, which is [built on the grammar of graphics](https://www.tableau.com/about/blog/2015/4/getting-know-lee-wilkinson-tableaus-new-vp-statistics-38654)
-]
-
-.pull-right[
-![](img/07/ggplot-layers@4x.png)
-]
-
----
-name: tidy-data
-
-# Tidy data revisited
-
-`ggplot()` is incredibly flexible
-
-For `ggplot()` to work its magic, your data frame needs to be **tidy**
-
-This requires a bit of upfront work, but it pays off
-
-As you will see, we can make many different plots without modifying our data
-
----
-
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("img/07/tidydata_7.jpg")
+```{r example-pie, echo=FALSE, fig.dim=c(4.8, 3), out.width="100%"}
+concentrations_tidy |> 
+  ggplot(aes(x = "", y = count, fill = concentration)) +
+  geom_col() +
+  coord_polar(theta = "y") +
+  labs(fill = "Concentration") +
+  theme_void()
 ```
 
+]
+
+--
+
+.pull-right[
+
+```{r example-bar, echo=FALSE, fig.dim=c(4.8, 3), out.width="100%"}
+concentrations_tidy |> 
+  ggplot(aes(x = fct_reorder(concentration, -count), y = count, fill = concentration)) +
+  geom_col() +
+  scale_y_continuous(breaks = scales::breaks_pretty()) +
+  guides(fill = "none") +
+  labs(x = "Concentration", y = "Number of Concentrators") +
+  theme_minimal()
+```
+
+]
+
+---
+
+# Oh no bar plots!
+
+.center[
+<figure>
+<img src="img/07/obamacareenrollment-fncchart.jpg" alt="Fox News Obamacare enrollment" title="Fox News Obamacare enrollment" width="85%">
+</figure>
+]
+
+---
+
+# What went wrong?
+
+.center[
+<figure>
+<img src="img/07/obamacareenrollment-fncchart.jpg" alt="Fox News Obamacare enrollment" title="Fox News Obamacare enrollment" width="85%">
+</figure>
+]
+
+---
+
+# What went wrong?
+
+.pull-left.center[
+<figure>
+<img src="img/07/female-height.png" alt="Average female height per country" title="Average female height per country" width="100%">
+</figure>
+]
+
+--
+
+.pull-right[
+
+**At least two problems:**
+
+1. truncated y axis
+2. area scales faster than height
+
+.small[This terrible figure brought to you by a former AEM 2850 / 5850 student!]
+]
+
+
+---
+
+# General rules for bar charts
+
+Useful when the length of the bar is all that matters
+
+--
+
+Bar charts should always start at zero
+- Or: don't use bars!
+
+--
+
+Don't use bars for summary statistics. You throw away too much information.
+- We will come back to visualizing distributions / uncertainty next week
+
+
+---
+class: inverse, center, middle
+name: plotting-amounts
+
+# Plotting amounts using ggplot
+
+---
+
+# Plotting amounts using ggplot
+
+We'll use a summarized version of the gapminder dataset for examples
+
+```{r }
+library(gapminder)
+gapminder_continents <- gapminder |>
+  filter(year == 2007) |>  # only look at 2007
+  count(continent) |>      # count the number of countries per continent
+  arrange(desc(n))         # sort by count, descending
+gapminder_continents
+```
+
+---
+
+# Start with a simple bar plot
+
+.left-code.small-code[
+
+```{r gapminder-bars, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder_continents |> 
+  ggplot(aes(x = continent, # continent to x
+             y = n)) +      # n countries to y
+  geom_col()                # add bars #<<
+```
+How could we improve this?
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("gapminder-bars", "png")`)
+
+]
+
+
+---
+
+# Start with a simple bar plot
+
+.left-code.small-code[
+
+```{r gapminder-bars-2, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder_continents |> 
+  ggplot(aes(x = continent, # continent to x
+             y = n)) +      # n countries to y
+  geom_col()                # add bars #<<
+```
+Is "n" a good axis title?
+
+Do we need "continent" at all?
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("gapminder-bars-2", "png")`)
+
+]
+
+
+---
+
+# Add some labels
+
+.left-code.small-code[
+
+```{r gapminder-bars-labeled, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder_continents |> 
+  ggplot(aes(x = continent, 
+             y = n)) +
+  geom_col() +
+  labs(x = NULL, y = "Number of countries") #<<
+```
+
+Is alphabetical the best ordering?
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("gapminder-bars-labeled", "png")`)
+
+]
+
+---
+
+# Order by data value
+
+.left-code.small-code[
+
+```{r gapminder-bars-ordered, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder_continents |> 
+  ggplot(aes(x = fct_reorder(continent, n),  #<<
+             y = n)) +
+  geom_col() +
+  labs(x = NULL, y = "Number of countries")
+```
+
+`fct_reorder(continent, n)` means "reorder the factor variable continent by n, smallest to largest"
+
+Factor is R's term for variables that have a fixed and known set of possible values
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("gapminder-bars-ordered", "png")`)
+
+]
+
+---
+
+# Order by data value, descending
+
+.left-code.small-code[
+
+```{r gapminder-bars-reversed, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder_continents |> 
+  ggplot(aes(x = fct_reorder(continent, -n), #<<
+             y = n)) +
+  geom_col() +
+  labs(x = NULL, y = "Number of countries")
+```
+
+`fct_reorder(continent, -n)` means "reorder the factor variable continent by n, largest to smallest"
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("gapminder-bars-reversed", "png")`)
+
+]
+
+---
+
+# Higher dimensional datasets
+
+`as_factor()` treats `year` as distinct categories, not a continuous measure
+
+.left-code[
+```{r geom_bar-ungrouped, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder |>
+  filter(year==1957 | year==2007) |> 
+  group_by(continent, year) |> 
+  summarize(
+    lifeExp = sum(lifeExp * pop) / sum(pop)
+  ) |> 
+  ggplot(aes(x = continent,
+             y = lifeExp,
+             fill = as_factor(year))) + #<<
+  geom_col() +
+  labs(x = NULL, 
+       y = "Life expectancy", fill = "Year")
+```
+What is wrong with this visualization of life expectancy in two different years?
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("geom_bar-ungrouped", "png")`)
+
+]
+
+---
+
+# Grouped bar charts
+
+Use grouped bars or facets for higher dimensional datasets
+
+.left-code[
+```{r geom_bar-grouped, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder |>
+  filter(year==1957 | year==2007) |> 
+  group_by(continent, year) |> 
+  summarize(
+    lifeExp = sum(lifeExp * pop) / sum(pop)
+  ) |> 
+  ggplot(aes(x = continent,
+             y = lifeExp,
+             fill = as_factor(year))) + 
+  geom_col(position = "dodge") + #<<
+  labs(x = NULL, 
+       y = "Life expectancy", fill = "Year")
+```
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("geom_bar-grouped", "png")`)
+
+]
+
+---
+
+# Facets
+
+Use grouped bars or facets for higher dimensional datasets
+
+.left-code[
+```{r geom_bar-faceted, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder |>
+  filter(year==1957 | year==2007) |> 
+  group_by(continent, year) |> 
+  summarize(
+    lifeExp = sum(lifeExp * pop) / sum(pop)
+  ) |> 
+  ggplot(aes(x = continent,
+             y = lifeExp,
+             fill = as_factor(year))) + 
+  geom_col() + #<<
+  facet_wrap(vars(year)) + #<<
+  guides(fill = "none") + #<<
+  labs(x = NULL, 
+       y = "Life expectancy")
+```
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("geom_bar-faceted", "png")`)
+
+]
+
+---
+
+# Alternative: Dots instead of bars
+
+Dots are preferable if we want to truncate the axes
+
+.left-code[
+
+```{r dots, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder |>
+  filter(year == 2007, continent == "Americas") |>
+  ggplot(aes(x = lifeExp,
+             y = fct_reorder(country, lifeExp))) +
+  geom_point() + #<<
+  guides(color = "none") +
+  labs(x = "Life expectancy (years)", y = NULL) +
+  theme_minimal()
+```
+]
+
+.right-plot[
+
+![](`r knitr::fig_chunk("dots", "png")`)
+
+]
 
 ---
 class: inverse, center, middle
 name: example-1
 
-# example-07-1:<br>mapping-data-to-graphics-practice.R
+# example-07-1:<br>amounts-practice.R
 
 
 ---
 class: inverse, center, middle
-name: putting-it-together
+name: more-examples
 
-# Putting it all together
+# Reference: More examples
 
-
----
-
-# Putting it all together
-
-In the example, we'll build a plot sequentially to see how each grammatical layer changes its appearance
-
-The rest of this section presents that code and output in slide form
-
-For illustrative purposes, let's use data on cars from the data frame `ggplot2::mpg`
-
-```{r head-mpg, echo=FALSE}
-mpg |> 
-  filter(manufacturer=="volkswagen") |> 
-  slice(1:2) |> 
-  select(manufacturer, model, year, trans, displ, hwy, drv) |> 
-  mutate_all(as.character) |> 
-  bind_rows(tibble(manufacturer = "…", model = "…", year = "…", trans = "…", displ = "…", hwy = "…", drv = "…")) |> 
-  knitr::kable(format = "html")
-```
 
 ---
+
+# Wait, what about geom_bar?
+
+Use `geom_bar` to count and plot in one step
 
 .left-code[
-### Start with data and aesthetics
 
-```{r mpg-layers-1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,                              #<<
-       aes(x = displ, # engine displacement     #<<
-           y = hwy, # highway mpg               #<<
-           color = drv))  # type of drive train #<<
+```{r geom_bar, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder |> # old data: rows are countries #<<
+  filter(year == 2007) |>
+  ggplot(aes(x = continent)) + # note: no y arg
+  geom_bar() + #<<
+  labs(x = NULL, y = "Number of countries")
 ```
 ]
 
 .right-plot[
-![](`r knitr::fig_chunk("mpg-layers-1", "png")`)
+
+![](`r knitr::fig_chunk("geom_bar", "png")`)
+
 ]
 
 ---
 
-.left-code[
-### Add a point geom
+# Wait, what about geom_bar?
 
-```{r mpg-layers-2, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() #<<
+Here we can reorder by frequency using `fct_infreq`
+
+.left-code[
+
+```{r geom_bar-ordered, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder |>
+  filter(year == 2007) |>
+  ggplot(aes(x = fct_infreq(continent))) + #<<
+  geom_bar() +
+  labs(x = NULL, y = "Number of countries")
 ```
 ]
 
 .right-plot[
-![](`r knitr::fig_chunk("mpg-layers-2", "png")`)
+
+![](`r knitr::fig_chunk("geom_bar-ordered", "png")`)
+
 ]
 
 ---
 
-.left-code[
-### Add a smooth geom
+# We can also flip geom_col/bar axes
 
-```{r mpg-layers-3, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth() #<<
+Simply use `y = ` instead of `x = ` for the aesthetic mapping
+
+.left-code[
+
+```{r geom_bar-y, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder |>
+  filter(year == 2007) |>
+  ggplot(aes(y = fct_infreq(continent))) + #<<
+  geom_bar() +
+  labs(x = "Number of countries", y = NULL) #<<
 ```
 ]
 
 .right-plot[
-![](`r knitr::fig_chunk("mpg-layers-3", "png")`)
+
+![](`r knitr::fig_chunk("geom_bar-y", "png")`)
+
 ]
 
 ---
 
-.left-code[
-### Make it straight
+# We can also flip geom_col/bar axes
 
-```{r mpg-layers-4, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") #<<
+`fct_rev()` reverses the order of factors
+
+.left-code[
+
+```{r geom_bar-y-rev, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
+gapminder |>
+  filter(year == 2007) |>
+  ggplot(aes(y = fct_rev(fct_infreq(continent)))) + #<<
+  geom_bar() +
+  labs(x = "Number of countries", y = NULL)
 ```
 ]
 
 .right-plot[
-![](`r knitr::fig_chunk("mpg-layers-4", "png")`)
+
+![](`r knitr::fig_chunk("geom_bar-y-rev", "png")`)
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+class: inverse, center, middle
+name: proportions
+
+# Proportions
+
+---
+
+# Last week we plotted amounts
+
+```{r, echo=FALSE}
+load("data/survey-responses/survey-data.RData")
+
+prior_programming |> 
+  ggplot(aes(x = fct_rev(prior_programming))) +
+  geom_bar() +
+  labs(x = NULL,
+       y = "number of students",
+       title = "Have you done any programming before?") +
+  theme_xaringan() +
+  theme(axis.title.y = element_text(size = 32))
+```
+
+---
+
+# How else could we visualize these data?
+
+```{r, echo=FALSE}
+prior_programming |> 
+  ggplot(aes(x = fct_rev(prior_programming))) +
+  geom_bar() +
+  labs(x = NULL,
+       y = "number of students",
+       title = "Have you done any programming before?") +
+  theme_xaringan() +
+  theme(axis.title.y = element_text(size = 32))
+```
+
+---
+
+# Have you done any programming before?
+
+.pull-left-3[
+```{r, echo=FALSE, fig.height = 6, fig.width = 9}
+prior_programming |> 
+    count(prior_programming) |> 
+    mutate(share = n / sum(n)) |> 
+    ggplot(aes(x = fct_rev(prior_programming), y = share)) +
+    geom_col() +
+    labs(x = NULL,
+         y = "share of students") +
+    theme_xaringan() +
+    theme(axis.title.y = element_text(size = 44))
+```
+]
+
+.pull-middle-3[
+```{r, echo=FALSE, fig.height = 6, fig.width = 9}
+prior_programming |> 
+  count(prior_programming) |> 
+  ggplot(aes(x = n, y = "", fill = fct_rev(prior_programming))) +
+  geom_col() +
+  coord_polar() +
+  scale_x_continuous(
+    name = NULL, breaks = NULL
+  ) +
+  scale_xaringan_fill_discrete(direction = -1) +
+  labs(x = NULL,
+       y = NULL,
+       fill = NULL) +
+  theme_xaringan(text_font_size = 48)
+```
+]
+
+.pull-right-3[
+```{r, echo=FALSE, fig.height = 6, fig.width = 9}
+prior_programming |>
+  ggplot(aes(x = "", fill = prior_programming)) +
+  geom_bar(position = "fill") +
+  coord_flip() +
+  scale_xaringan_fill_discrete() +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  labs(x = NULL,
+       y = "share of students",
+       fill = NULL) +
+  theme_xaringan(text_font_size = 48) +
+  theme(axis.title.x = element_text(size = 44)) +
+  theme(legend.position = "bottom")
+```
+]
+
+--
+
+Which do you think is best?
+
+--
+
+Does it depend on what you want to communicate?
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   |   |   |   
 ]
 
 ---
 
-.left-code[
-### Use a viridis color scale
+# Pros and cons of different approaches
 
-```{r mpg-layers-5, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-5", "png")`)
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
 ]
 
 ---
 
-.left-code[
-### Facet by drive train type
+# Pros and cons of different approaches
 
-```{r mpg-layers-6, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-6", "png")`)
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             |   |   |  
 ]
 
 ---
 
-.left-code[
-### Add labels
+# Pros and cons of different approaches
 
-```{r mpg-layers-7, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) +
-  labs(x = "Displacement", y = "Highway MPG",  #<<
-       color = "Drive",   #<<
-       title = "Larger engines use more fuel",  #<<
-       subtitle = "Displacement measures engine size")  #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-7", "png")`)
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
 ]
 
 ---
 
-.left-code[
-### Add a theme
+# Pros and cons of different approaches
 
-```{r mpg-layers-8, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg,
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) +
-  labs(x = "Displacement", y = "Highway MPG",
-       color = "Drive",
-       title = "Larger engines use more fuel",
-       subtitle = "Displacement measures engine size") +
-  theme_bw() #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-8", "png")`)
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      |   |   |  
 ]
 
 ---
 
-.left-code[
-### Modify the theme
+# Pros and cons of different approaches
 
-```{r mpg-layers-9, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg, 
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) +
-  labs(x = "Displacement", y = "Highway MPG",
-       color = "Drive",
-       title = "Larger engines use more fuel",
-       subtitle = "Displacement measures engine size") +
-  theme_bw() +
-  theme(legend.position = "bottom", #<<
-        plot.title = element_text(face = "bold")) #<<
-```
-]
-
-.right-plot[
-![](`r knitr::fig_chunk("mpg-layers-9", "png")`)
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
 ]
 
 ---
 
-.left-code[
-### Finished!
+# Pros and cons of different approaches
 
-```{r mpg-layers-finished, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 5), out.width="100%"}
-ggplot(data = mpg, 
-       mapping = aes(x = displ,
-                     y = hwy,
-                     color = drv)) +
-  geom_point() +
-  geom_smooth(method = "lm") + 
-  scale_color_viridis_d() +
-  facet_wrap(vars(drv), ncol = 1) +
-  labs(x = "Displacement", y = "Highway MPG",
-       color = "Drive",
-       title = "Larger engines use more fuel",
-       subtitle = "Displacement measures engine size") +
-  theme_bw() +
-  theme(legend.position = "bottom",
-        plot.title = element_text(face = "bold"))
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            |   |   |  
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+Works well for a large number of subsets         |   |   |   
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+Works well for a large number of subsets         | ✖ | ✖ | ✔ 
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+Works well for a large number of subsets         | ✖ | ✖ | ✔ 
+Works well for time series and similar           |   |   |  
+]
+
+---
+
+# Pros and cons of different approaches
+
+.small.center[
+               | Pie chart | Stacked bars | Side-by-side bars
+:----------    | :-------: | :----------: | :---------------:
+Allows easy comparison of relative proportions   | ✖ | ✖ | ✔ 
+Shows data as proportions of a whole             | ✔ | ✔ | ✖
+Emphasizes simple fractions (1/2, 1/3, ...)      | ✔ | ✖ | ✖
+Visually appealing for small datasets            | ✔ | ✖ | ✔
+Works well for a large number of subsets         | ✖ | ✖ | ✔ 
+Works well for time series and similar           | ✖ | ✔ | ✖
+]
+
+--
+
+No one visualization fits all scenarios!
+
+```{r, include=FALSE}
+theme_xaringan_restore_defaults() # revert to ggplot2 defaults for remainder
+theme_set(theme_gray(base_size = 18)) # increase base text size
+```
+
+---
+
+# Side-by-side bars using ggplot
+
+How could we use ggplot to visualize *proportions* using side-by-side bars?
+
+--
+
+.pull-left[
+We could do it manually:
+```{r side-by-side-bars-1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+prior_programming |> 
+    count(prior_programming) |> #<<
+    mutate(share = n / sum(n)) |> #<<
+    ggplot(aes(
+      x = prior_programming, 
+      y = share
+      )) +
+    geom_col() + 
+    labs(x = NULL,
+         y = "share of students")
+```
+
+How could we reverse the bars' order?
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("side-by-side-bars-1", "png")`)
+]
+
+---
+
+# Side-by-side bars using ggplot
+
+<br>
+
+.pull-left[
+```{r side-by-side-bars-2, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+prior_programming |> 
+    count(prior_programming) |> 
+    mutate(share = n / sum(n)) |> 
+    ggplot(aes(
+      x = fct_reorder( #<<
+        prior_programming,  #<<
+        -share #<<
+        ), #<<
+      y = share
+      )) +
+    geom_col() + 
+    labs(x = NULL,
+         y = "share of students")
 ```
 ]
 
 .right-plot[
-![](`r knitr::fig_chunk("mpg-layers-finished", "png")`)
+  ![](`r knitr::fig_chunk("side-by-side-bars-2", "png")`)
 ]
+
+---
+
+# Side-by-side bars using ggplot
+
+`fct_rev()` also works well since there are only two categories:
+
+.pull-left[
+```{r side-by-side-bars-3, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+prior_programming |> 
+    count(prior_programming) |> 
+    mutate(share = n / sum(n)) |> 
+    ggplot(aes(
+      x = fct_rev(prior_programming), #<<
+      y = share
+      )) +
+    geom_col() + 
+    labs(x = NULL,
+         y = "share of students")
+```
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("side-by-side-bars-3", "png")`)
+]
+
+---
+
+# Stacked bars using ggplot
+
+How could we use ggplot to visualize *proportions* using stacked bars?
+
+--
+
+.pull-left[
+Again, we could do it manually:
+```{r stacked-bars-1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+prior_programming |>
+    count(prior_programming) |> 
+    mutate(share = n / sum(n)) |> 
+    ggplot(aes(
+        x = "",    # provide dummy to x #<<
+        y = share, # plot shares on y #<<
+        fill = prior_programming #<<
+    )) +
+    geom_col()
+```
+By default, `geom_col` stacks bars if they fall in the same place (`x`)
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("stacked-bars-1", "png")`)
+]
+
+---
+
+# Stacked bars using ggplot
+
+Alternatively, we could use `geom_bar()` to count and plot the data for us
+
+.pull-left[
+```{r stacked-bars-2, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+prior_programming |>
+  ggplot(aes(
+    x = "", 
+    fill = prior_programming
+  )) +
+  geom_bar()
+```
+
+But this gives us *counts*. We want *shares*!
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("stacked-bars-2", "png")`)
+]
+
+---
+
+# Stacked bars using ggplot
+
+The argument `position = "fill"` scales everything to sum to 1
+
+.pull-left[
+```{r stacked-bars-3, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+prior_programming |>
+  ggplot(aes(
+    x = "", 
+    fill = prior_programming
+  )) +
+  geom_bar(position = "fill") + #<<
+  labs(x = NULL, y = "share")
+```
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("stacked-bars-3", "png")`)
+]
+
+---
+
+# Pie charts using ggplot
+
+How could we use ggplot to visualize *proportions* using a pie chart?
+
+--
+
+Pie charts are just stacked bars in polar coordinates
+
+.pull-left[
+```{r pie-chart-1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+prior_programming |>
+  ggplot(aes(
+    y = "", # y, not x #<<
+    fill = prior_programming
+  )) +
+  geom_bar(position = "fill") +
+  coord_polar() # convert to polar coordinates #<<
+```
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("pie-chart-1", "png")`)
+]
+
+---
+
+# Pie charts using ggplot
+
+It takes some work to create a clean pie chart using ggplot
+
+.pull-left[
+```{r pie-chart-2, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
+prior_programming |>
+  ggplot(aes(
+    y = "", 
+    fill = fct_rev(prior_programming)
+  )) +
+  geom_bar(position = "fill") +
+  coord_polar() +
+  scale_x_continuous(
+    name = NULL, breaks = NULL
+  ) +
+  scale_y_discrete(
+    name = NULL, breaks = NULL
+  ) +
+  labs(
+    title = "Share of students with\nprior programming experience",
+    fill = NULL
+  )
+```
+]
+
+.right-plot[
+  ![](`r knitr::fig_chunk("pie-chart-2", "png")`)
+]
+
+---
+class: inverse, center, middle
+name: example-2
+
+# example-07-2:<br>proportions-practice.R
+
+
+
+
+
+
+
 
 
 ---
@@ -1282,563 +1967,4 @@ These were just a few examples
 See [the **ggplot2** documentation](https://ggplot2.tidyverse.org/reference/index.html) for examples of everything you can do
 ]
 
-
-
-
-
-
-
----
-class: inverse, center, middle
-name: prologue-2
-
-# Prologue
-
----
-
-# Remember our concentrations?
-
-How might we visualize these amounts?
-
-.less-left[
-```{r, echo = FALSE}
-load("data/survey-responses/survey-data.RData")
-concentrations_tidy <- concentrations |> 
-  rename(
-    sus = enviro,
-    fin = finance,
-    oth = other,
-    strat = strategy
-    ) |>
-  select(-degree, -concentration, -program) |>
-  summarize_all(sum, na.rm = TRUE) |>
-  pivot_longer(everything(), names_to = "concentration", values_to = "count") |>
-  arrange(desc(count))
-concentrations_tidy
-```
-]
-
---
-
-.more-right[
-```{r, echo = FALSE}
-concentrations_tidy |> 
-  ggplot(aes(x = fct_reorder(concentration, -count), y = count)) +
-  geom_col() +
-  scale_y_continuous(breaks = scales::breaks_pretty()) +
-  theme_xaringan(text_font_size = 38) +
-  theme(axis.title.y = element_text(size = 40)) +
-  labs(x = NULL,
-       y = "Number of Concentrators")
-```
-]
-
-
----
-
-# What are our favorite public companies?
-
---
-
-```{r, echo = FALSE}
-companies |>
-  filter(!is.na(name)) |>
-  mutate(name = str_to_title(name),
-         name = str_replace(name, "\\s?/.*", ""),
-         name = str_replace(name, ",?\\s?Inc.?", ""),
-         name = str_replace(name, " S\\.a\\.", "")) |> 
-  ggplot(aes(y = fct_rev(fct_infreq(name)))) +
-  geom_bar() +
-  theme_xaringan(text_font_size = 20) +
-  theme(axis.title.x = element_text(size = 36)) +
-  labs(x = "Number of Potential Investors",
-       y = NULL)
-```
-
----
-class: inverse, center, middle
-name: amounts
-
-# Amounts
-
----
-
-# Yay bar plots!
-
-We are a lot better at visualizing line lengths than angles and areas
-
-.pull-left[
-
-```{r example-pie, echo=FALSE, fig.dim=c(4.8, 3), out.width="100%"}
-concentrations_tidy |> 
-  ggplot(aes(x = "", y = count, fill = concentration)) +
-  geom_col() +
-  coord_polar(theta = "y") +
-  labs(fill = "Concentration") +
-  theme_void()
-```
-
-]
-
---
-
-.pull-right[
-
-```{r example-bar, echo=FALSE, fig.dim=c(4.8, 3), out.width="100%"}
-concentrations_tidy |> 
-  ggplot(aes(x = fct_reorder(concentration, -count), y = count, fill = concentration)) +
-  geom_col() +
-  scale_y_continuous(breaks = scales::breaks_pretty()) +
-  guides(fill = "none") +
-  labs(x = "Concentration", y = "Number of Concentrators") +
-  theme_minimal()
-```
-
-]
-
----
-
-# Oh no bar plots!
-
-.center[
-<figure>
-<img src="img/07/obamacareenrollment-fncchart.jpg" alt="Fox News Obamacare enrollment" title="Fox News Obamacare enrollment" width="85%">
-</figure>
-]
-
----
-
-# What went wrong?
-
-.center[
-<figure>
-<img src="img/07/obamacareenrollment-fncchart.jpg" alt="Fox News Obamacare enrollment" title="Fox News Obamacare enrollment" width="85%">
-</figure>
-]
-
----
-
-# What went wrong?
-
-.pull-left.center[
-<figure>
-<img src="img/07/female-height.png" alt="Average female height per country" title="Average female height per country" width="100%">
-</figure>
-]
-
---
-
-.pull-right[
-
-**At least two problems:**
-
-1. truncated y axis
-2. area scales faster than height
-
-.small[This terrible figure brought to you by a former AEM 2850 / 5850 student!]
-]
-
-
----
-
-# General rules for bar charts
-
-Useful when the length of the bar is all that matters
-
---
-
-Bar charts should always start at zero
-- Or: don't use bars!
-
---
-
-Don't use bars for summary statistics. You throw away too much information.
-- We will come back to visualizing distributions / uncertainty next week
-
-
----
-class: inverse, center, middle
-name: plotting-amounts
-
-# Plotting amounts using ggplot
-
----
-
-# Plotting amounts using ggplot
-
-We'll use a summarized version of the gapminder dataset for examples
-
-```{r }
-library(gapminder)
-gapminder_continents <- gapminder |>
-  filter(year == 2007) |>  # only look at 2007
-  count(continent) |>      # count the number of countries per continent
-  arrange(desc(n))         # sort by count, descending
-gapminder_continents
-```
-
----
-
-# Start with a simple bar plot
-
-.left-code.small-code[
-
-```{r gapminder-bars, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder_continents |> 
-  ggplot(aes(x = continent, # continent to x
-             y = n)) +      # n countries to y
-  geom_col()                # add bars #<<
-```
-How could we improve this?
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("gapminder-bars", "png")`)
-
-]
-
-
----
-
-# Start with a simple bar plot
-
-.left-code.small-code[
-
-```{r gapminder-bars-2, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder_continents |> 
-  ggplot(aes(x = continent, # continent to x
-             y = n)) +      # n countries to y
-  geom_col()                # add bars #<<
-```
-Is "n" a good axis title?
-
-Do we need "continent" at all?
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("gapminder-bars-2", "png")`)
-
-]
-
-
----
-
-# Add some labels
-
-.left-code.small-code[
-
-```{r gapminder-bars-labeled, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder_continents |> 
-  ggplot(aes(x = continent, 
-             y = n)) +
-  geom_col() +
-  labs(x = NULL, y = "Number of countries") #<<
-```
-
-Is alphabetical the best ordering?
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("gapminder-bars-labeled", "png")`)
-
-]
-
----
-
-# Order by data value
-
-.left-code.small-code[
-
-```{r gapminder-bars-ordered, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder_continents |> 
-  ggplot(aes(x = fct_reorder(continent, n),  #<<
-             y = n)) +
-  geom_col() +
-  labs(x = NULL, y = "Number of countries")
-```
-
-`fct_reorder(continent, n)` means "reorder the factor variable continent by n, smallest to largest"
-
-Factor is R's term for variables that have a fixed and known set of possible values
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("gapminder-bars-ordered", "png")`)
-
-]
-
----
-
-# Order by data value, descending
-
-.left-code.small-code[
-
-```{r gapminder-bars-reversed, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder_continents |> 
-  ggplot(aes(x = fct_reorder(continent, -n), #<<
-             y = n)) +
-  geom_col() +
-  labs(x = NULL, y = "Number of countries")
-```
-
-`fct_reorder(continent, -n)` means "reorder the factor variable continent by n, largest to smallest"
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("gapminder-bars-reversed", "png")`)
-
-]
-
----
-
-# Another option is to encode order in the data
-
-.left-code.small-code[
-
-```{r gapminder-bars-fct_inorder, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-# use `fct_inorder` to order continent
-# based on how they appear in the data
-gapminder_ordered <- gapminder_continents |>
-  arrange(desc(n)) |> # sort by count
-  mutate(continent = fct_inorder(continent)) #<<
-gapminder_ordered |> 
-  ggplot(aes(x = continent, #<<
-             y = n)) +
-  geom_col() +
-  labs(x = NULL, y = "Number of countries")
-```
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("gapminder-bars-fct_inorder", "png")`)
-
-]
-
----
-
-# Higher dimensional datasets
-
-`as_factor()` treats `year` as distinct categories, not a continuous measure
-
-.left-code[
-```{r geom_bar-ungrouped, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder |>
-  filter(year==1957 | year==2007) |> 
-  group_by(continent, year) |> 
-  summarize(
-    lifeExp = sum(lifeExp * pop) / sum(pop)
-  ) |> 
-  ggplot(aes(x = continent,
-             y = lifeExp,
-             fill = as_factor(year))) + #<<
-  geom_col() +
-  labs(x = NULL, 
-       y = "Life expectancy", fill = "Year")
-```
-What is wrong with this visualization of life expectancy in two different years?
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("geom_bar-ungrouped", "png")`)
-
-]
-
----
-
-# Grouped bar charts
-
-Use grouped bars or facets for higher dimensional datasets
-
-.left-code[
-```{r geom_bar-grouped, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder |>
-  filter(year==1957 | year==2007) |> 
-  group_by(continent, year) |> 
-  summarize(
-    lifeExp = sum(lifeExp * pop) / sum(pop)
-  ) |> 
-  ggplot(aes(x = continent,
-             y = lifeExp,
-             fill = as_factor(year))) + 
-  geom_col(position = "dodge") + #<<
-  labs(x = NULL, 
-       y = "Life expectancy", fill = "Year")
-```
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("geom_bar-grouped", "png")`)
-
-]
-
----
-
-# Facets
-
-Use grouped bars or facets for higher dimensional datasets
-
-.left-code[
-```{r geom_bar-faceted, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder |>
-  filter(year==1957 | year==2007) |> 
-  group_by(continent, year) |> 
-  summarize(
-    lifeExp = sum(lifeExp * pop) / sum(pop)
-  ) |> 
-  ggplot(aes(x = continent,
-             y = lifeExp,
-             fill = as_factor(year))) + 
-  geom_col() + #<<
-  facet_wrap(vars(year)) + #<<
-  guides(fill = "none") + #<<
-  labs(x = NULL, 
-       y = "Life expectancy")
-```
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("geom_bar-faceted", "png")`)
-
-]
-
----
-
-# Alternative: Dots instead of bars
-
-Dots are preferable if we want to truncate the axes
-
-.left-code[
-
-```{r dots, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder |>
-  filter(year == 2007, continent == "Americas") |>
-  ggplot(aes(x = lifeExp,
-             y = fct_reorder(country, lifeExp))) +
-  geom_point() + #<<
-  guides(color = "none") +
-  labs(x = "Life expectancy (years)", y = NULL) +
-  theme_minimal()
-```
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("dots", "png")`)
-
-]
-
----
-class: inverse, center, middle
-name: example-2
-
-# example-07-2:<br>amounts-practice.R
-
-
----
-class: inverse, center, middle
-name: more-examples
-
-# Reference: more examples
-
-
----
-
-# Wait, what about geom_bar?
-
-Use `geom_bar` to count and plot in one step
-
-.left-code[
-
-```{r geom_bar, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder |> # old data: rows are countries #<<
-  filter(year == 2007) |>
-  ggplot(aes(x = continent)) + # note: no y arg
-  geom_bar() + #<<
-  labs(x = NULL, y = "Number of countries")
-```
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("geom_bar", "png")`)
-
-]
-
----
-
-# Wait, what about geom_bar?
-
-Here we can reorder by frequency using `fct_infreq`
-
-.left-code[
-
-```{r geom_bar-ordered, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder |>
-  filter(year == 2007) |>
-  ggplot(aes(x = fct_infreq(continent))) + #<<
-  geom_bar() +
-  labs(x = NULL, y = "Number of countries")
-```
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("geom_bar-ordered", "png")`)
-
-]
-
----
-
-# We can also flip geom_col/bar axes
-
-Simply use `y = ` instead of `x = ` for the aesthetic mapping
-
-.left-code[
-
-```{r geom_bar-y, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder |>
-  filter(year == 2007) |>
-  ggplot(aes(y = fct_infreq(continent))) + #<<
-  geom_bar() +
-  labs(x = "Number of countries", y = NULL) #<<
-```
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("geom_bar-y", "png")`)
-
-]
-
----
-
-# We can also flip geom_col/bar axes
-
-`fct_rev()` reverses the order of factors
-
-.left-code[
-
-```{r geom_bar-y-rev, fig.show="hide", tidy=FALSE, message=FALSE, fig.dim=c(4.8, 3.5), out.width="100%"}
-gapminder |>
-  filter(year == 2007) |>
-  ggplot(aes(y = fct_rev(fct_infreq(continent)))) + #<<
-  geom_bar() +
-  labs(x = "Number of countries", y = NULL)
-```
-]
-
-.right-plot[
-
-![](`r knitr::fig_chunk("geom_bar-y-rev", "png")`)
-
-]
 
