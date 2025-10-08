@@ -988,7 +988,7 @@ name: proportions
 
 ---
 
-# Last week we plotted amounts
+# Last class we plotted amounts
 
 ```{r, echo=FALSE}
 load("data/survey-responses/survey-data.RData")
@@ -1424,7 +1424,7 @@ prior_programming |>
 
 # Pie charts using ggplot
 
-It takes some work to create a clean pie chart using ggplot
+It takes some work to create a clean pie chart using ggplot!
 
 .pull-left[
 ```{r pie-chart-2, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.5), out.width="100%"}
