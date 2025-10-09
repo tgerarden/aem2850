@@ -42,7 +42,7 @@ library(tidyverse)
 
 class: center middle main-title section-title-4
 
-# Proportions and distributions
+# Distributions
 
 .class-info[
 

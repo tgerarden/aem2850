@@ -1,7 +1,7 @@
 ---
 title: "Distributions"
 linktitle: "Distributions"
-date: "`r format(Sys.time())`"
+date: "2025-10-08 21:26:59"
 menu:
   content:
     parent: Course content
