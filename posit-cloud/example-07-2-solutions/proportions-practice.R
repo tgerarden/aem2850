@@ -1,4 +1,4 @@
-# AEM 2850 - Example 8
+# AEM 2850 - Example 7-2
 # Plan for today:
 # - Questions?
 # - On our own devices: work through this script
@@ -41,7 +41,13 @@ _____
 # the frequency with which each neighbourhood_group appears in the data
 _____
 
-# now add descriptive axis labels
+# now add descriptive axis labels using labs()
+_____
+
+# nice work!
+# but what if we want to label the y-axis with proportions?
+# go back to your original code using geom_col()
+# modify it to plot shares, not counts
 _____
 
 
@@ -87,8 +93,6 @@ _____
 _____
 
 # add scale_x_continuous(breaks = NULL) to remove the axis ticks
-_____
-
 # add scale_y_discrete(breaks = NULL) to remove the (invisible) axis ticks
 _____
 
@@ -120,19 +124,20 @@ _____
 
 # these two visualizations are based on the same data,
 # but they are not equally good at what they do
-# which is preferable depends on the message you want to communicate
+# which one is better depends on the message you want to communicate
 
 
 # 4. Colors in ggplot2 ----
-# in the slides we saw some examples of using color, fill, etc. as parameters rather than aesthetics
+# in the slides we saw some examples of using color, fill, etc.
+#   as **parameters** rather than **aesthetics**
 # how do we know what colors R will understand? (e.g., "skyblue")
 # here is a quick primer on the options that are available to you by default
-# you can use RBG codes (either on your own or through other packages) to customize colors with virtually limitless possibilities
+# you can use RBG codes to customize colors with nearly limitless possibilities
 
-# first: use the help to learn more about color related aesthetic (color, fill, alpha)
+# reference: to learn more about color related aesthetic (color, fill, alpha)
 ?aes_colour_fill_alpha
 
-# read the help to find a command that will list all the pre-defined colors available in R, and enter it
+# run this command to list all the pre-defined colors available in R
 grDevices::colors()
 
 # add color = "white" to your stacked bar chart from above
@@ -173,9 +178,5 @@ all_listings |>
 
 # you can even modify the theme so that the axis labels are carnelian
 # just add the layer below to your code from above
+____ +
 theme(text = element_text(color = "#B31B1B"))
-
-
-# 5. Feedback ----
-# how did this format go vs the format we used in examples earlier in the course?
-# please shoot me an email (gerarden@cornell.edu) if you have any strong opinions!
