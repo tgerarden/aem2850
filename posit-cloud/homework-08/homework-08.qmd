@@ -11,7 +11,7 @@
 # Reminder: to get around this and work interactively, you can run code chunks on their own
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
-title: "Homework - Week 8"
+title: "Homework - Weeks 7-8"
 author: "Write your name here"
 date: today
 format: pdf
@@ -33,11 +33,60 @@ opts_chunk$set(
 
 # Preface
 
-The goal of this assignment is to help you gain more familiarity with using **ggplot** to visualize proportions and distributions. In this homework we provide less scaffolding and more open-ended questions. As always, please come to office hours and reach out to your teaching staff if you have any questions.
+The goal of this assignment is to help you gain more familiarity with using **ggplot** to visualize amounts, proportions, and distributions. In this homework we are providing a mix of questions that provide code snippets to serve as "scaffolding" as well as open-ended questions with no code snippets. As always, please come to office hours and reach out to your teaching staff if you have any questions.
 
-## Data
+# Part 1: Diamonds
 
-We will work with data on NYC Yellow cab trip data in January 2021 from [TCL](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page). We'll start by importing these data and assigning them to the name `trips`, and creating another data frame assigned to the name `speeds`.
+First, we are going to work with the `diamonds` data. Here is what the data frame looks like:
+
+``` {r echo = FALSE}
+diamonds
+```
+
+
+<!--- Please leave the code above unchanged. Questions start from here. --->
+
+## 1. In `diamonds`, one variable `color` takes on the values `r fct_unique(diamonds$color)`. Count the number of diamonds of each color. Use `goem_col` to plot a bar chart, with x-axis being the level of `color` of a diamond, and y-axis the number of diamonds per `color`. Fill the bars by `color`. Label the x-axis "Color", and the y-axis "Number of diamonds". Exclude the fill legend using `guides(fill = "none")`.
+
+``` {r echo = TRUE}
+diamonds |> 
+  count(_____) |> # count the number of diamonds by color
+  ggplot(aes(x = _____, y = _____, fill = _____)) +   
+  geom_col() +
+  guides(fill = "none") +
+  labs(x = "_____", y = "_____")
+```
+
+
+{{< pagebreak >}}
+
+## 2. Replicate your plot from question #1, but replace the `fill` aesthetic with `color`. Make sure to replace `guides(fill = "none")` with `guides(color = "none")`. How is the color of the bars different from the first question? Why?
+<!-- No tips this time! -->
+
+```{r}
+
+```
+
+
+{{< pagebreak >}}
+
+## 3. Use `geom_bar` to reproduce the plot in question #1. Show the diamonds color at the y-axis, in a desending order by the number of diamonds from top to bottom.
+<!-- Tip: The final reference section of the slides from class this week have some examples of geom_bar() usage.  -->
+
+``` {r echo = TRUE}
+diamonds |> # no need to manually count the number of diamonds by color this time
+  ggplot(aes(y = fct_rev(fct_infreq(_____)), fill = _____)) +
+  geom_bar() +
+  guides(fill = "none") +
+  labs(x = "_____", y = "_____")
+```
+
+
+{{< pagebreak >}}
+
+# Part 2: NYC Yellow cab trips
+
+For the remaining questions, we will work with data on NYC Yellow cab trips. We'll start by importing these data and assigning them to the name `trips`, and creating another data frame assigned to the name `speeds`.
 ```{r}
 trips <- read_csv("taxi-trips.csv")
 
@@ -48,12 +97,13 @@ speeds <- trips |>
   ) |> 
   filter(duration > 0 & trip_distance > 0) |> 
   select(pickup_datetime, dropoff_datetime, hour, trip_distance, duration) |> 
-  mutate(speed = trip_distance / (as.numeric(duration)/60/60)) |> 
+  mutate(speed = trip_distance / (as.numeric(duration)/60/60)) |>
   filter(speed < 55) # filter out 55+ miles per hour
 ```
 
 
 {{< pagebreak >}}
+
 ## 1. We'll start by making some simple visualizations of the distribution of the trip distance. First, make a histogram. Make the first bar start right at zero, customize the bins or binwidth to suit your tastes, and use a named color to delineate between bars. 
 
 ```{r}
@@ -62,6 +112,7 @@ speeds <- trips |>
 
 
 {{< pagebreak >}}
+
 ## 2. Make a density plot of the distribution of the trip distance.
 
 ```{r}
@@ -70,6 +121,7 @@ speeds <- trips |>
 
 
 {{< pagebreak >}}
+
 ## 3. Use the data frame `speeds` to plot the density of trip speeds, faceting by the hour during which the trip began. Use `geom_density`'s `fill` argument to fill the densities with a named color or hex code of your choice. Arrange the facets so they are in 6 rows and 4 columns. What, if any, conclusions can you draw from the resulting plot?
 <!-- Note: We provided some code at the top of this quarto document to calculate the speed and hour of day during which each trip originated, because we haven't had time to cover working with dates and times yet. On future assignments you may be expected to do similar operations and calculations without being provided answers. -->
 
@@ -79,6 +131,7 @@ speeds <- trips |>
 ...
 
 {{< pagebreak >}}
+
 ## 4. Make an overlapping density plot of the distribution of speeds. Fill by hour, treating hour as a categorical variable by encoding it as a factor (see `?as_factor()`). Adjust the transparency to make it more readable.
 ```{r}
 
@@ -86,6 +139,7 @@ speeds <- trips |>
 
 
 {{< pagebreak >}}
+
 ## 5. Reproduce the plot above as a ridgeline plot instead of an overlapping density plot. Fill all the densities with a single named color of your choice, and use `color` to make the density lines themselves white. What, if any, conclusions can you draw from the resulting plot?
 
 ```{r}
@@ -99,15 +153,8 @@ speeds <- trips |>
 
 
 {{< pagebreak >}}
-## 6. How much do riders tip? Compute the tip percentage using `tip_amount` as a share of `fare_amount`, converted to percentage points. Remove outliers where tips are less than 0% or more than 100% so we can focus on the main part of the distribution. Create a histogram of tip percentage. Is the distribution [unimodal](https://en.wikipedia.org/wiki/Unimodality) or bimodal? Explain your answer.
-```{r}
 
-```
-...
-
-
-{{< pagebreak >}}
-## 7. What fraction of NYC cab rides include a tip? Use the `trips` data to classify trips according to whether they included a tip amount of zero, or greater than zero. Remove any observations with negative tip amounts. Finally, make a side-by-side bar plot of the proportion of rides that included a tip and did not include a tip. Are side-by-side bars a good choice for this particular data visualization?
+## 6. What fraction of NYC cab rides include a tip? Use the `trips` data to classify trips according to whether they included a `tip_amount` of zero, or greater than zero. Remove any observations with negative tip amounts. Finally, make a side-by-side bar plot of the proportion of rides that included a tip and did not include a tip. Are side-by-side bars a good choice for this particular data visualization?
 ```{r}
 
 ```
@@ -115,7 +162,8 @@ Side-by-side bars are ...
 
 
 {{< pagebreak >}}
-## 8. Now use the data to make a stacked bar plot of the proportion of rides that included a tip and did not include a tip. Are stacked bars a good choice for this particular data visualization?
+
+## 7. Now use the data to make a stacked bar plot of the proportion of rides that included a tip and did not include a tip. Are stacked bars a good choice for this particular data visualization?
 ```{r}
 
 ```
@@ -123,7 +171,8 @@ Stacked bars are ...
 
 
 {{< pagebreak >}}
-## 9. Finally, use the data to make a pie chart of the proportion of rides that included a tip and did not include a tip. Is a pie chart a good choice for this particular data visualization?
+
+## 8. Finally, use the data to make a pie chart of the proportion of rides that included a tip and did not include a tip. Is a pie chart a good choice for this particular data visualization?
 ```{r}
 
 ```
