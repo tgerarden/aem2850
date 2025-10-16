@@ -1,4 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 06 Oct 2025 21:31:48 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Mapping data to graphics, amounts, and proportions</title><link>https://aem2850.toddgerarden.com/example/07-example/</link><pubDate>Mon, 06 Oct 2025 21:31:48 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/07-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 15 Oct 2025 18:27:26 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Distributions</title><link>https://aem2850.toddgerarden.com/example/08-example/</link><pubDate>Wed, 15 Oct 2025 18:27:26 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/08-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
+&lt;li>Questions? 🙋‍♀️&lt;/li>
+&lt;li>Tuesday:
+&lt;ul>
+&lt;li>&lt;em>Fall Break: No class on Oct 14&lt;/em> 🥳&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Thursday:
+&lt;ul>
+&lt;li>Go through &lt;a href="https://aem2850.toddgerarden.com/content/08-content/">slides&lt;/a>&lt;/li>
+&lt;li>Open the &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a> project &lt;code>example-08&lt;/code>&lt;/li>
+&lt;li>Work through &lt;code>distributions-practice.R&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Solutions&lt;/strong> will be posted after class&lt;/li>
+&lt;/ul>
+&lt;h2 id="cheatsheets">Cheatsheets&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.github.io/cheatsheets/data-visualization.pdf" target="_blank" rel="noopener">Click here to download the &lt;code>ggplot&lt;/code> cheatsheet&lt;/a>&lt;/p></description></item><item><title>Mapping data to graphics, amounts, and proportions</title><link>https://aem2850.toddgerarden.com/example/07-example/</link><pubDate>Mon, 06 Oct 2025 21:31:48 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/07-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
 &lt;li>Questions? 🙋‍♀️&lt;/li>
 &lt;li>Tuesday:

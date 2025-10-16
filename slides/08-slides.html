@@ -45,18 +45,31 @@ Acknowledgements:
 
 # Announcements
 
-Prelim 1 grades are posted on canvas
-
-Questions about your grade? Please:
-  1. Meet with Victor first for clarification regarding any grade deductions
-  2. If you have further questions, [schedule a meeting with me](https://aem2850.youcanbook.me/)
-  3. [Email me](mailto:gerarden@cornell.edu) if the available meeting times do not work for you
-
-Prelim 2 may be more difficult, may be a different format, or both
+Welcome back from Fall Break!
 
 --
 
-We will provide details on the group project in the next 1-2 weeks
+Prelim 1 grades will be released on this afternoon
+
+The average grade was 74%. Great work -- it was a tough prelim!
+
+--
+
+**I plan to curve final letter grades** so that the average is in the B+ to A- range
+
+Please see the canvas announcement and gradescope for more information
+
+**We will accept regrade requests through Thursday, October 23**
+
+--
+
+_**Please**_ see me if you are concerned about your ability to succeed in this course
+
+---
+
+# Announcements
+
+We will provide details on the group project soon
 
 --
 
@@ -121,7 +134,7 @@ Uncertainty in models and simulations
 
 --
 
-Histograms, densities, box plots, etc.
+Histograms, densities, box plots
 
 ---
 
@@ -285,67 +298,13 @@ gapminder_2002 |&gt;
 * geom_density(fill = "skyblue")
 ```
 
-We can use aesthetics as parameters inside a geom rather than inside an **aes()** statement
+We can use aesthetics as *parameters* inside a geom rather than inside an **aes()** statement
 
 Here we used **fill = "skyblue"**
 ]
 
 .right-plot[
   ![](08-slides_files/figure-html/basic-density-color-1.png)
-]
-
----
-  
-# Density plots: bandwidths
-
-Different options for calculus change the plot shape
-
-.pull-left-3[
-.center.small[`bw = 1`]
-
-&lt;img src="08-slides_files/figure-html/gaussian-bw-1-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-  
-]
-
---
-  
-.pull-middle-3[
-.center.small[`bw = 10`]
-
-&lt;img src="08-slides_files/figure-html/gaussian-bw-10-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
---
-  
-.pull-right-3[
-.center.small[`bw = "nrd0"` &lt;small&gt;(default)&lt;/small&gt;]
-    
-&lt;img src="08-slides_files/figure-html/gaussian-bw-auto-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
----
-  
-# Density plots: kernels
-  
-Different options for calculus change the plot shape
-
-.pull-left-3[
-.center.small[`kernel = "gaussian"`]
-
-&lt;img src="08-slides_files/figure-html/gaussian-kernel-gaussian-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-  
-]
-
-.pull-middle-3[
-.center.small[`"epanechnikov"`]
-
-&lt;img src="08-slides_files/figure-html/gaussian-kernel-epanechnikov-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
-.pull-right-3[
-.center.small[`"rectangular"`]
-
-&lt;img src="08-slides_files/figure-html/gaussian-kernel-rectangular-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -477,6 +436,8 @@ gapminder_2002 |&gt;
 * facet_wrap(vars(continent)) +
 * guides(fill = "none")
 ```
+
+Note: we could also omit&lt;br&gt;`fill = continent`
 ]
 
 .right-plot[
@@ -563,7 +524,7 @@ gapminder_2002 |&gt;
 class: inverse, center, middle
 name: example-2
 
-# example-08-2:&lt;br&gt;distributions-practice.R
+# example-08:&lt;br&gt;distributions-practice.R
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
