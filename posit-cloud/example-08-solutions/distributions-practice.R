@@ -10,7 +10,7 @@
 # we need to install packages once before we can use them
 # install.packages("tidyverse") # this has already been done for you
 library(tidyverse) # load the core tidyverse packages
-# install.packages("ggridges") # in this case, it has already been done for you in this project
+# install.packages("ggridges") # this has already been done for you
 library(ggridges) # load the ggridges package so we can use geom_density_ridges()
 
 # use theme_set to get clean plots without having to specify the theme each time
@@ -122,7 +122,7 @@ our_histogram
 # what happens to the bars that previously exceeded 2500?
 
 
-# what happens if you limit the y axis to above -2500 and put NA for the upper value?
+# what if you limit the y axis to above -2500 and put NA for the upper value?
 
 
 
@@ -142,8 +142,3 @@ our_histogram
 
 # visualize the distribution of reviews using a log scale
 
-
-
-# 7. Feedback ----
-# how did this format go vs the format we used in examples earlier in the course?
-# please shoot me an email (gerarden@cornell.edu) if you have any strong opinions!

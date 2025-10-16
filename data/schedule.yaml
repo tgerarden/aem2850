@@ -71,8 +71,8 @@ lessons:
   - title: '<span class="content-title">*Fall Break: No class on Oct 14* <br> Distributions</span>'
     session: "Session 8"
     date: "Week 8"
-    # content: "08-content"
-    # example: "08-example"
+    content: "08-content"
+    example: "08-example"
     # assignment: "08-homework"
     bg: 1
 

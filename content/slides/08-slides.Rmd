@@ -65,18 +65,31 @@ Acknowledgements:
 
 # Announcements
 
-Prelim 1 grades are posted on canvas
-
-Questions about your grade? Please:
-  1. Meet with Victor first for clarification regarding any grade deductions
-  2. If you have further questions, [schedule a meeting with me](https://aem2850.youcanbook.me/)
-  3. [Email me](mailto:gerarden@cornell.edu) if the available meeting times do not work for you
-
-Prelim 2 may be more difficult, may be a different format, or both
+Welcome back from Fall Break!
 
 --
 
-We will provide details on the group project in the next 1-2 weeks
+Prelim 1 grades will be released on this afternoon
+
+The average grade was 74%. Great work -- it was a tough prelim!
+
+--
+
+**I plan to curve final letter grades** so that the average is in the B+ to A- range
+
+Please see the canvas announcement and gradescope for more information
+
+**We will accept regrade requests through Thursday, October 23**
+
+--
+
+_**Please**_ see me if you are concerned about your ability to succeed in this course
+
+---
+
+# Announcements
+
+We will provide details on the group project soon
 
 --
 
@@ -169,7 +182,7 @@ Uncertainty in models and simulations
 
 --
 
-Histograms, densities, box plots, etc.
+Histograms, densities, box plots
 
 ---
 
@@ -348,97 +361,13 @@ gapminder_2002 |>
   geom_density(fill = "skyblue") #<<
 ```
 
-We can use aesthetics as parameters inside a geom rather than inside an **aes()** statement
+We can use aesthetics as *parameters* inside a geom rather than inside an **aes()** statement
 
 Here we used **fill = "skyblue"**
 ]
 
 .right-plot[
   ![](`r knitr::fig_chunk("basic-density-color", "png")`)
-]
-
----
-  
-# Density plots: bandwidths
-
-Different options for calculus change the plot shape
-
-.pull-left-3[
-.center.small[`bw = 1`]
-
-```{r gaussian-bw-1, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-gapminder_2002 |> 
-  ggplot(aes(x = lifeExp)) +
-  geom_density(fill = "skyblue",
-               kernel = "gaussian", bw = 1)
-```
-  
-]
-
---
-  
-.pull-middle-3[
-.center.small[`bw = 10`]
-
-```{r gaussian-bw-10, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-gapminder_2002 |> 
-  ggplot(aes(x = lifeExp)) +
-  geom_density(fill = "skyblue",
-               kernel = "gaussian", bw = 10)
-```
-]
-
---
-  
-.pull-right-3[
-.center.small[`bw = "nrd0"` <small>(default)</small>]
-    
-```{r gaussian-bw-auto, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-gapminder_2002 |> 
-  ggplot(aes(x = lifeExp)) +
-  geom_density(fill = "skyblue",
-               kernel = "gaussian")
-```
-]
-
----
-  
-# Density plots: kernels
-  
-Different options for calculus change the plot shape
-
-.pull-left-3[
-.center.small[`kernel = "gaussian"`]
-
-```{r gaussian-kernel-gaussian, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-gapminder_2002 |> 
-  ggplot(aes(x = lifeExp)) +
-  geom_density(fill = "skyblue",
-               kernel = "gaussian")
-```
-  
-]
-
-.pull-middle-3[
-.center.small[`"epanechnikov"`]
-
-```{r gaussian-kernel-epanechnikov, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-gapminder_2002 |> 
-  ggplot(aes(x = lifeExp)) +
-  geom_density(fill = "skyblue",
-               kernel = "epanechnikov")
-```
-]
-
-.pull-right-3[
-.center.small[`"rectangular"`]
-
-```{r gaussian-kernel-rectangular, echo=FALSE, fig.dim=c(4.5, 4.2), out.width="100%"}
-gapminder_2002 |> 
-  ggplot(aes(x = lifeExp)) +
-  geom_density(fill = "skyblue",
-               kernel = "rectangular")
-```
 ]
 
 ---
@@ -619,6 +548,8 @@ gapminder_2002 |>
   facet_wrap(vars(continent)) + #<<
   guides(fill = "none") #<<
 ```
+
+Note: we could also omit<br>`fill = continent`
 ]
 
 .right-plot[
@@ -702,4 +633,4 @@ gapminder_2002 |>
 class: inverse, center, middle
 name: example-2
 
-# example-08-2:<br>distributions-practice.R
+# example-08:<br>distributions-practice.R
