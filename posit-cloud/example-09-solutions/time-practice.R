@@ -22,35 +22,38 @@ theme_set(theme_minimal()) # set the current theme to theme_minimal()
 
 # 1. it's your birthday ----
 # before visualizing time, let's start with a special date: your birth date
-# write your birth date below in "YYYY-MM-DD" format and assign it to my_bday
-my_bday <- "____-__-__"
+# write your birth date below in "YYYY-MM-DD" format and assign it to bday
+bday <- "____-__-__"
 
-# what type of object is my_bday?
+# what type of object is bday?
 class(______)
 
-# use lubridate::ymd() to convert my_bday to a date, and assign it to my_bdate
-my_bdate <- ______(my_bday)
+# use lubridate::ymd() to convert bday to a date, and assign it to bdate
+bdate <- ______(bday)
 
-# what type of object is my_bday?
-class(my_bdate)
+# what type of object is bday?
+class(bdate)
 
 # use an alternative date convention and convert it to a date
 alt_bdate <- mdy("______")
+
+# check to see whether bdate and alt_bdate are the same
+bdate==alt_bdate
 
 # what year were you born in?
 year(______)
 
 # what month were you born in?
-______(my_bdate)
+______(bdate)
 
 # what month were you born in, labeled in english?
-______(my_bdate, label = ______)
+______(bdate, label = ______)
 
 # what day of the year were you born on?
 yday(______)
 
 # what day of the month were you born on?
-______(my_bdate)
+______(bdate)
 
 # what day of the week were you born on?
 
@@ -58,18 +61,18 @@ ______(my_bdate)
 # what day of the week were you born on, labeled in english?
 
 
-# how many days old are you? assign this to my_days
+# how many days old are you? assign this to days
 today() - ______
-my_days <- ______ - ______
+days <- ______ - ______
 
-# what type of object is my_days?
+# what type of object is days?
 
 
 # lubridate offers a **duration** type that is stored in seconds
-# use as.duration() to convert my_days from difftime to duration, assign it to my_duration
+# use as.duration() to convert days to duration, assign it to duration
 
 
-# print my_duration
+# print duration
 
 
 
@@ -79,18 +82,26 @@ my_days <- ______ - ______
 # import the data in data/oil_prices.csv
 oil_prices <- read_csv("data/oil_prices.csv")
 
+# look at oil_prices. is it tidy? why or why not?
+oil_prices
 
 # tidy the data so that each row only contains one price
 # make sure the date variable is a date object, not character
-
+tidy_oil_prices <- oil_prices |>
+  pivot_longer(
+    -date,
+    names_to = "type",
+    values_to = "price"
+  ) |>
+  mutate(date = mdy(date))
 
 # use the tidy data to plot wti prices over time as points
 
 
-# add a line to the plot of wti prices
+# now make a line plot wti prices (no points)
 
 
-# now plot only lines, for both prices, coloring by type
+# now plot lines, for both prices, coloring by type
 # add a horizontal line at 0 using geom_hline()
 
 
@@ -117,8 +128,8 @@ gdp <- read_csv("data/gdp.csv")
 # 4. then plot it
 
 
-# plot gdp from my_bday to the present
-# filter the data by comparing date to my_bday
+# plot monthly gdp from bdate to the present
+# filter the data by comparing date to bdate
 
 
 # make a line plot of gdp from 2000 to the present
@@ -159,8 +170,8 @@ gapminder_points <- gapminder |>
   ease_aes('linear') # default progression
 animate(gapminder_points, renderer = gifski_renderer())
 
-# one way is using filters:
-# find the outlier country with GDP per capita over $100,000 in the 1950s
+# what is the outlier country with GDP per capita over $100,000 in the 1950s?
+# one way to find out is by using filter
 
 
 # another option is to create an animation with labels:
@@ -179,42 +190,38 @@ animate(gapminder_points, renderer = gifski_renderer())
 
 # 5. OJ prices and sales over time ----
 # import data/oj.csv, which contains retailer data on oj prices and sales
-
+oj <- read_csv("data/oj.csv")
 
 # the data are organized by brand
 # time in these data is represented by week
 # what data type is the column/variable week? is it a date or something else?
 
 
-# use the variable week to make a column plot of tropicana sales over time
+# use the variable week to make a line plot of tropicana sales over time
 
 
-# make a connected scatter plot using the tropicana data
-# is this an effective data visualization? why or why not?
+# now let's make a tidy version of oj for the brand tropicana
+tropicana <- oj |>
+  filter(brand == "tropicana") |>
+  pivot_longer(c(sales, price), names_to = "type", values_to = "value")
+tropicana
+
+# let's try to understand how sales and prices change over time
+# do they seem to move in the same direction, opposite directions, or at random?
+# make a line plot of both sales and prices, in two facets, for tropicana
 
 
-# make a scatter plot using the tropicana data, without using time at all
-
-
-# modify your previous plot to use log scales (scale_x_log10 + scale_y_log10)
-
-
-# make a version of your last plot that includes all brands
-# map brand to color
-# add a linear fit line using geom_smooth(method = "lm")
-
-
-# as time allows:
-# make a line plot of both sales and prices, in facets, over time for tropicana
+# what went wrong?
+# try again, but putting the facets in one column (ncol = 1)
 # you will want to use the scales = "free_y" argument to facet_wrap here
 
 
+# what do you take away from this plot?
 # if you were the retailer, how could you use the data to inform your strategy?
-# what are the pros and cons of your two visualizations for this purpose?
 # what more would you want to know, or to do with the data?
+# next week we will think through these kind of relationships
 
 
-# OPTIONAL, TIME PERMITTING:
 # 6. Make a more polished GDP plot ----
 # try to make this: https://fred.stlouisfed.org/graph/fredgraph.png?g=MOiP
 
@@ -224,25 +231,50 @@ animate(gapminder_points, renderer = gifski_renderer())
 rec <- read_csv("data/rec.csv")
 
 # 6.1.2. use dplyr tools to isolate periods when recessions start/end
-# (hint: think window functions for offsets)
+# (hint: think window functions like lag for offsets)
+rec_start_end <- rec |>
+  mutate(change = value - lag(value)) |>
+  filter(change != 0)
 
-
-# 6.1.3. make a data frame where each row is a recession, and columns are start/end dates
-
+# 6.1.3. make a data frame where each row is a recession,
+# and columns are start/end dates
+recessions <- tibble(
+  start = filter(rec_start_end, change == 1) |> pull(date),
+  end = filter(rec_start_end, change == -1) |> pull(date)
+)
+recessions
 
 # 6.2. filter gpd to post-2000 data and convert GDP from billions to trillions
 # assign resulting data frame to a variable
+gdp_recent <- gdp |>
+  filter(date >= "2000-01-01") |>
+  mutate(gdp = gdp/1e3)
 
-
-# 6.3. now make a plot using the two data frames
+# 6.3. now make a plot using the two data frames, in stages
 # we need to give data and mappings to each geometry without confusing them
-# we can do this by calling ggplot without arguments, and then
-# passing the data and aesthetic mappings directly to each geom function
-# geom_rect: map start and end dates to xmin and xmax, -Inf and Inf to ymin and ymax
-# fill your rectangles and color your line
-# add informative labels
-# state your data source
+# we can do this by calling ggplot without arguments, and then passing
+# the data and aesthetic mappings directly to each geom function
 
+# start by plotting gdp over time that way
+ggplot() +
+  geom_line(
+    data = gdp_recent,
+    aes(x = date, y = gdp),
+    color = "#B31B1B",
+    linewidth = 1
+  )
+
+# now let's add shading for periods of recession
+# start by copying your code from above
+# then use geom_rect with data = recessions;
+# aes: map start and end dates to xmin and xmax, -Inf and Inf to ymin and ymax;
+# outside aes: set the fill color to #222222, and set alpha to 0.2
+_____
+
+# finally, add informative labels
+# start by copying your code from above
+# ideally: state your data source using labs(caption = "...")
+_____
 
 # 6.4. use ggsave to save the plot as a .png file
 # specify the dimensions; width = 8, height = 4.5
@@ -253,12 +285,17 @@ ggsave(
 )
 
 
-# OPTIONAL, TIME PERMITTING:
 # 7. Recessionary oil prices ----
-# use your code from 3 to make a plot of WTI prices with recession shading
+# make a data frame with just WTI prices
+wti_prices <- tidy_oil_prices |>
+  filter(type == "wti")
+
+# adapt your code from 6 to make a plot of WTI prices with recession shading
+# note: most of it does not need to change!
+# add a horizontal line at y = 0 using geom_hline()
 
 
-# use ggsave to save the plot as a .png file
+# use ggsave to save the plot as a .pdf file
 # specify the dimensions; width = 8, height = 4.5
 
 
