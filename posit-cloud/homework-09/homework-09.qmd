@@ -11,7 +11,7 @@
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
 title: "Homework - Week 9"
-author: "Your Name Here"
+author: "Write your name here"
 date: today
 format: pdf
 urlcolor: blue
@@ -32,19 +32,26 @@ opts_chunk$set(
 )
 ```
 
+\vspace{-2cm}
+
 # Preface
 
 The goal of this assignment is to help you gain more familiarity with using **ggplot** to visualize time. As always, please come to office hours and reach out to your teaching staff if you have any questions.
 
+\vspace{-0.5cm}
+
 ## Data
 
-We will work with monthly data on home prices from [Zillow Research](https://www.zillow.com/research/data/). For this lab, we will work with raw data from `Metro_median_sale_price_uc_sfrcondo_month.csv` and smoothed and seasonally adjusted data from `Metro_median_sale_price_uc_sfrcondo_sm_sa_month.csv`. Each data set contains monthly a measure of home sales prices for 94 US metropolitan statistical areas. The two data series start at different times, but both end in January 2022. Start by importing the raw data and the seasonally adjusted data and assigning them to `raw` and `adj`, respectively.
+We will work with monthly data on home prices from [Zillow Research](https://www.zillow.com/research/data/). For this lab, we will work with raw data from `Metro_median_sale_price_uc_sfrcondo_month.csv` and smoothed and seasonally adjusted data from `Metro_median_sale_price_uc_sfrcondo_sm_sa_month.csv`. Each data set contains monthly a measure of home sales prices for 94 US metropolitan statistical areas. The two data series start at different times, but both end in January 2022. We'll start by importing the raw data and the seasonally adjusted data and assigning them to `raw` and `adj`, respectively.
 ```{r}
-
+raw <- read_csv("Metro_median_sale_price_uc_sfrcondo_month.csv")
+adj <- read_csv("Metro_median_sale_price_uc_sfrcondo_sm_sa_month.csv")
+raw |> head(3)
 ```
 
 
 {{< pagebreak >}}
+
 ## 1. We'll start by tidying the data `raw`. Drop the row that contains information for the entire United States, and then tidy the data set so that each observation is an MSA-date. Filter out observations with missing prices. Convert `date` into date format. Generate new variables of `year` and `month` indicating the year and month of the date. Convert the prices to thousands. Assign the new data set to `raw_tidy`. Print `raw_tidy` to check its contents.
 <!-- Hint: You may find the function ymd() very handy to convert strings to dates. -->
 
@@ -54,6 +61,7 @@ We will work with monthly data on home prices from [Zillow Research](https://www
 
 
 {{< pagebreak >}}
+
 ## 2. Visualize the price distribution across years, using the type of plot that you think is most appropriate. Show the median price per year in the plot. Add tweaks that you think can improve the plot. How do the median price and price distribution change over years?
 
 ```{r}
@@ -63,6 +71,7 @@ The median price and price distribution...
 
 
 {{< pagebreak >}}
+
 ## 3. Use `geom_line()` to visualize the sale price over time in New York City. Put the aesthetic mappings within `geom_line()` rather than `ggplot()`. Assign it to `nyc_plot` and then print it.
 
 ```{r}
@@ -71,7 +80,9 @@ The median price and price distribution...
 
 
 {{< pagebreak >}}
-## 4. Use `geom_rect` to add a colored rectangle to the plot from question 3 showing the period of pandemic, from March 2020 to the last period of the data. Use a caption below the figure to explain what the shading indicates. Use your plot object `nyc_plot` as the starting point rather than duplicating your code from above.
+
+## 4. Use `geom_rect()` to add a colored rectangle to the plot from question 3 showing the period of pandemic, from March 2020 to the last period of the data. Use a caption below the figure to explain what the shading indicates. Use your plot object `nyc_plot` as the starting point rather than duplicating your code from above.
+<!-- Hint: See example-09-solutions on posit cloud if you are not sure how to create a shaded rectangle using geom_rect(). -->
 
 ```{r}
 
@@ -79,6 +90,7 @@ The median price and price distribution...
 
 
 {{< pagebreak >}}
+
 ## 5. Do you see any seasonality in the plot of question 3? Now use the same procedure to wrangle the data `adj`. Overlay the two time series from the raw data and the seasonally adjusted data for New York City in one plot. Compare the two lines. What difference(s) do you see?
 <!-- Hint: There are multiple ways that you could overlay two time series in one plot. One way is to start with the two tidy data frames and add a variable with the same name to each, for example, `type`, which contains a string that indicates whether the rows contain raw or adjusted prices. Then use  `bind_rows()` or `rbind` to stack the raw and the seasonally adjusted data sets. Finally, when making the plot, you may include `color = type` in the aesthetics to distinguish the two time series by color. A second way is to join the two data sets by date and then `pivot_longer` the data. Finally, another "non-tidy" way would be to use multiple calls to `geom_line()` with multiple datasets or a joined dataset that is not tidy. -->
 
@@ -90,6 +102,7 @@ Yes/No...
 
 
 {{< pagebreak >}}
+
 ## 6. Now let's work with the seasonally adjusted price data. Choose the four MSAs with `SizeRank` from 1 to 4. Visualize prices over time, faceting by MSA. Optional: Do these patterns make sense to you? If not, you could investigate the data source further to see if you can explain any discrepancies between the results and what you expected.
 
 ```{r}
@@ -99,25 +112,11 @@ These patterns do/do not make sense to me...
 
 
 {{< pagebreak >}}
+
 ## 7. Use the adjusted price to caclulate the average of the sale price per year per MSA. Then caclulate the annual price growth rate per region: $(p_t - p_{t-1})/p_{t-1}$. Express them as percentage points (i.e., ranging from -100 to 100+, not -1 to 1+). Find the cities with the largest and smallest growth rate in 2021. Use the resulting data frame to plot the annual growth rates over time using a bar chart for these two cities, with each city as a separate facet. Use different colors for the interior of the bars depending on whether the growth rate was positive or negative each year.
-<!-- Hint: This question is a combination of data wrangling and data visualization. You may approach it in several steps: First, calculate the annual price growth rate and store it as a new object. Second, find the two cities with the largest and smallest growth rate in 2021, and store them into two objects. Lastly, filter the annual price growth rate data to keep only the two cities, and then plot the growth rate as instructed. Note: Other approaches that yield the same results are also acceptable. -->
+<!-- Hint: This question is a combination of data wrangling and data visualization. You may approach it in several steps: First, calculate the annual price growth rate and store it as a new object. You can use the function lag() to get the previous year's price when doing so. Second, find the two cities with the largest and smallest growth rate in 2021 (it may help to store them in two separate objects). Lastly, filter the annual price growth rate data to keep only the two cities, and then plot the growth rate as instructed. Note: Other approaches that yield the same results are also acceptable. -->
 
 ```{r}
 
 ```
 
-
-{{< pagebreak >}}
-## 8. Now import `Metro_sales_count_now_uc_sfrcondo_month.csv`, which contains sales counts. Tidy and join the sales data with the adjusted price data. Keep the observations for New York City. Make a scatter plot mapping sales to the x-axis and adjusted prices to the y-axis. What pattern do you see? Is it consistent with your expectation? What are some potential explanations for the pattern you see?
-
-```{r, echo = FALSE}
-# you might want to separate the data tidying code from the plotting code
-# if you want to omit code from the pdf, you can use `echo = FALSE`
-# `echo = FALSE` omits any code in this chunk from the pdf output
-
-```
-
-```{r}
-
-```
-...

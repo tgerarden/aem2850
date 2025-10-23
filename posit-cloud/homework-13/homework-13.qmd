@@ -11,7 +11,7 @@
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
 title: "Homework - Week 13"
-author: "your name here"
+author: Write your name here
 date: today
 format: pdf
 urlcolor: blue
