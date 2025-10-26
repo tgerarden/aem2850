@@ -87,7 +87,7 @@ lessons:
   - title: '<span class="content-title">Relationships</span>'
     session: "Session 10"
     date: "Week 10"
-    # content: "10-content"
+    content: "10-content"
     # example: "10-example"
     # assignment: "10-homework"
     bg: 2
