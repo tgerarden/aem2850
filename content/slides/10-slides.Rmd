@@ -68,7 +68,15 @@ Acknowledgements:
 
 # Announcements
 
-Group projects are due Friday, November 14
+**Homework - Week 9** was due last night
+- We posted it on posit cloud and gradescope, but not canvas
+- So I have extended the deadline through this Friday, Oct 31
+
+**Homework - Week 10** will not exist, to give time for the group project
+
+**Homework - Week 11** will be done in class, to give time for the group project
+
+**Group projects** are due Friday, November 14
 - Make a plan and start early!
 
 --
