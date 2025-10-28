@@ -68,30 +68,34 @@ Acknowledgements:
 
 # Announcements
 
-Reminders:
-- Group project due April 18 ([link]())
-  - We will set up group-specific workspaces on posit cloud for the project to allow simultaneous collaborative editing
-  - Still: save your work early and often to avoid overwriting each other's work
-  - Log out and close your posit cloud browser tab between sessions
-  - Instructions to be posted on posit cloud and on canvas
-  - Make a plan and start early!
-- No homework-10 due to spring break
+Group projects are due Friday, November 14
+- Make a plan and start early!
+
+--
 
 Questions before we get started?
 
 ---
 
-# Plan for today
+# Plan for this week
 
+.pull-left[
+### Tuesday
 [Prologue: The dangers of dual y-axes](#dual-y-axes)
 
 [Visualizing relationships between a numerical and a categorical variable](#correlations-categorical)
 
-[Visualizing relationships between two numerical variables](#correlations-numerical)
+[Visualizing correlations](#correlations)
 
-  - [Visualizing correlations](#correlations)
+[example-10-1](#example-10-1)
+]
 
-  - [Visualizing regressions](#regressions)
+.pull-right[
+### Thursday
+[Visualizing regressions](#regressions)
+
+[example-10-2](#example-10-2)
+]
 
 
 ---
@@ -105,7 +109,7 @@ name: dual-y-axes
 # Oh no!
 
 .small.center[
-<figure>
+<figure style="padding-top: 5px;">
   <img src="img/10/spurious-correlation.svg" alt="Spurious correlation between Mount Everest climbs and hotdog consumption" title="Spurious correlation between Mount Everest climbs and hotdog consumption" width="100%">
   <figcaption>Source: <a href="https://www.tylervigen.com/spurious-correlations" target="_blank">Tyler Vigen's spurious correlations</a></figcaption>
 </figure>
@@ -165,7 +169,7 @@ The revised axes ranges reflect a comparable proportional change
 --
 
 .pull-left[
-- Use multiple plots
+**Use multiple plots (e.g., facets)**
 
 ```{r solar-data-facet, echo=FALSE, fig.dim=c(4, 3), out.width="100%"}
 solar_data <- read_csv("data/solar-data.csv") |> 
@@ -194,7 +198,7 @@ solar_data |>
 --
 
 .pull-right[
-- Use scatter plots
+**Use scatter plots**
 
 ```{r solar-data-scatter, echo=FALSE, fig.dim=c(4, 3), out.width="100%"}
 solar_data |> 
@@ -211,21 +215,6 @@ solar_data |>
 
 ---
 
-# How could we make multiple plots in R?
-
---
-
-**1. Facets** are great when using a common geometry (we've already seen that)
-
-**2. Combining multiple plot objects** can be more flexible (see, e.g., `patchwork`)
-
-```{r include=FALSE}
-ithaca_weather <- read_csv("data/ithaca-weather-2021.csv")
-```
-
-
----
-
 # When are dual y-axes defensible?
 
 --
@@ -235,6 +224,8 @@ When the two axes measure the same thing (e.g., indexing, conversion, etc.)
 --
 
 ```{r ithaca-weather-dual-nice, echo=FALSE, message=FALSE, fig.dim=c(7, 3), out.width="100%"}
+ithaca_weather <- read_csv("data/ithaca-weather-2021.csv")
+
 ggplot(ithaca_weather, aes(x = DATE, y = TMAX)) +
   geom_line() +
   geom_smooth() +
@@ -443,6 +434,12 @@ ithaca_weather |>
 .right-plot[
 ![](`r knitr::fig_chunk("ithaca-weather-scatterplot-2", "png")`)
 ]
+
+---
+class: inverse, center, middle
+name: example-10-1
+
+# example-10-1:<br>relationships-practice.R
 
 ---
 
@@ -956,22 +953,20 @@ Plug a bunch of values into the model and find the predicted outcome
 
 Plot the values and predicted outcome
 
+--
+
+*We will not cover the process of creating marginal effects plots due to time constraints*
+
 ---
 
 # Marginal effects plots
 
-Create a data frame of values you want to manipulate and values you want to hold constant
+How do the multivariate and univariate regression lines compare?
 
 --
 
-The data frame must include all the explanatory variables in the model
-
----
-
-# Marginal effects plots
-
-.small-code[
-```{r build-simple-new-data}
+.pull-left[
+```{r mfx-plot-compare, echo=FALSE, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
 reviews_new_data <- reviews |> 
   select(rating, accuracy, cleanliness, checkin, communication, location, value) |> 
   mutate(   # use mutate to modify existing variables #<<
@@ -980,51 +975,13 @@ reviews_new_data <- reviews |>
       \(x) mean(x, na.rm = TRUE)                               # specify transformation #<<
     ) #<<
   ) #<<
-```
-]
 
---
-
-`\(x) mean(x, na.rm = TRUE)` is a small anonymous "lambda function" that operates on inputs just like a named function. This function:
-1. takes in a column of the data, `x`
-2. applies the `mean` function to `x` (ignoring missing values)
-3. returns the result
-
-This function is applied to each column, with its output populating each column
-
----
-
-# Marginal effects plots
-
-Here is what the resulting data frame looks like:
-```{r build-simple-new-data-print}
-reviews_new_data
-```
-
----
-
-# Marginal effects plots
-
-Plug each of those rows of data into the model with `augment()`
-
-```{r augment-simple-review-data, highlight.output=c(1,2,10)}
 predicted_reviews <- augment(
   review_model_big,           # our estimated model
   newdata = reviews_new_data, # our new data for plotting
   interval = "confidence"     # add confidence intervals
-  )
+)
 
-head(predicted_reviews)
-```
-
----
-
-# Marginal effects plots
-
-Plot the fitted values for each row
-
-.pull-left[
-```{r mfx-plot-review, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
 mfx_plot <- predicted_reviews |>
   ggplot(aes(x = accuracy, y = rating)) +
   geom_point(alpha = 0.25) +
@@ -1040,36 +997,23 @@ mfx_plot <- predicted_reviews |>
   ) + #<<
   labs(x = "Accuracy rating",
        y = "Overall rating")
-mfx_plot
-```
-]
 
-.pull-right[
-![](`r knitr::fig_chunk("mfx-plot-review", "png")`)
-]
-
----
-
-# Marginal effects plots
-
-How does this regression line compare to our univariate regression line?
-
---
-
-.pull-left[
-```{r mfx-plot-compare, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
 mfx_plot +
   # add the univariate regression line
   geom_smooth(method = "lm")
 ```
 
-What do you take away from this?
-
-Should this affect how much you invest in accuracy?
+![](`r knitr::fig_chunk("mfx-plot-compare", "png")`)
 ]
 
 .pull-right[
-![](`r knitr::fig_chunk("mfx-plot-compare", "png")`)
+<span style="color:#B31B1B; font-weight:bold">Red line:</span> multivariate
+
+<span style="color:#3366FF; font-weight:bold">Blue line:</span> univariate
+
+What do you take away from this?
+
+Should this affect how much you invest in accuracy?
 ]
 
 
@@ -1092,21 +1036,7 @@ Which of these plots would be more useful to Airbnb hosts? Why?
 
 # Not just OLS!
 
-These plots are for an OLS model built with `lm()`
-
-.pull-left[
-![](`r knitr::fig_chunk("coef-plot-review", "png")`)
-]
-
-.pull-right[
-![](`r knitr::fig_chunk("mfx-plot-compare", "png")`)
-]
-
----
-
-# Any type of statistical model
-
-The same techniques work for pretty much any model R can run
+The same techniques work for pretty much any statistical model R can run
 
 --
 
@@ -1123,3 +1053,10 @@ The same techniques work for pretty much any model R can run
 --
 
 If it has coefficients and/or makes predictions, you can (and should) visualize it!
+
+---
+class: inverse, center, middle
+name: example-10-2
+
+# example-10-2:<br>regression-practice.R
+

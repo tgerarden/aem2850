@@ -19,8 +19,14 @@ editor_options:
 
 ## Plan for today
 - Questions? :raising_hand_woman:
-- Navigate to [posit.cloud](http://posit.cloud) and open the project `example-10` in our course workspace
-- Work through `relationships-practice.R`
+- Tuesday:
+  - Go through [slides](/content/10-content/)
+  - Open the [posit.cloud](http://posit.cloud) project `example-10-1`
+  - Work through `relationships-practice.R`
+- Thursday:
+  - Go through [slides](/content/10-content/)
+  - Open the [posit.cloud](http://posit.cloud) project `example-10-2`
+  - Work through `regression-practice.R`
 - **Solutions** will be posted after class
 
 
