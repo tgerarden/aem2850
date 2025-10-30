@@ -560,9 +560,6 @@ library(broom)
 
 # convert model estimates to a data frame for plotting
 tidy(<MODEL>)
-
-# return a data frame that includes predictions, residuals, etc.
-augment(<MODEL>)
 ```
 
 ---
