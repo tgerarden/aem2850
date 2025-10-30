@@ -89,7 +89,7 @@ lessons:
     date: "Week 10"
     content: "10-content"
     example: "10-example"
-    # assignment: "10-homework"
+    assignment: "10-homework"
     bg: 2
 
   - title: '**Special Topics**'
