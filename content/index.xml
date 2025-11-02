@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 27 Oct 2025 22:06:42 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Relationships</title><link>https://aem2850.toddgerarden.com/content/10-content/</link><pubDate>Mon, 27 Oct 2025 22:06:42 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/10-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 01 Nov 2025 21:17:21 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Space</title><link>https://aem2850.toddgerarden.com/content/11-content/</link><pubDate>Sat, 01 Nov 2025 21:17:21 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/11-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/geospatial-data.html" target="_blank" rel="noopener">Chapter 15: Visualizing geospatial data&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;h4 id="optional-readings">Optional readings&lt;/h4>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="http://socviz.co/maps.html" target="_blank" rel="noopener">Chapter 7: Draw maps&lt;/a> of &lt;em>Data Visualization&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://r-spatial.org//r/2018/10/25/ggplot2-sf.html" target="_blank" rel="noopener">Drawing beautiful maps programmatically with R, sf and ggplot2&lt;/a>&lt;/li>
+&lt;li>&lt;i class="fab fa-youtube">&lt;/i> Vox: &lt;a href="https://www.youtube.com/watch?v=kIID5FDi2JQ" target="_blank" rel="noopener">Why all world maps are wrong&lt;/a>&lt;/li>
+&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://www.citylab.com/design/2015/06/when-maps-lie/396761/" target="_blank" rel="noopener">Bloomberg: When maps lie&lt;/a>&lt;/li>
+&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://xkcd.com/977/" target="_blank" rel="noopener">xkcd: Map projections&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
+&lt;ul>
+&lt;li>How can you know if a map projection is truthful or misleading?&lt;/li>
+&lt;li>What&amp;rsquo;s wrong (or not wrong) with using points on maps? Choropleths? Lines?&lt;/li>
+&lt;/ul>
+&lt;!-- ### Slides -->
+&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+&lt;!--
+&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/11-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/11-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
+-->
+&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item><item><title>Relationships</title><link>https://aem2850.toddgerarden.com/content/10-content/</link><pubDate>Mon, 27 Oct 2025 22:06:42 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/10-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/visualizing-associations.html" target="_blank" rel="noopener">Chapter 12: Visualizing associations&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
 &lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://kieranhealy.org/blog/archives/2016/01/16/two-y-axes/" target="_blank" rel="noopener">Two Y-Axes&lt;/a>&lt;/li>
