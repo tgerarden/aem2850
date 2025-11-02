@@ -98,7 +98,7 @@ lessons:
   - title: '<span class="content-title">Space</span>'
     session: "Session 11"
     date: "Week 11"
-    # content: "11-content"
+    content: "11-content"
     # example: "11-example"
     # assignment: "11-homework"
     bg: 1
