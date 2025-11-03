@@ -1,7 +1,7 @@
 ---
 title: "Space"
 linktitle: "Space"
-date: "2025-11-01 21:17:21"
+date: "2025-11-03 15:40:33"
 menu:
   content:
     parent: Course content
@@ -34,10 +34,10 @@ output:
 - What's wrong (or not wrong) with using points on maps? Choropleths? Lines?
 
 
-<!-- ### Slides -->
+### Slides
 
-<!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).
 
-<!-- {{< blogdown/slide-buttons >}} -->
+{{< blogdown/slide-buttons >}}
 
-<!-- **Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands. -->
+**Fun fact**: If you type <kbd>?</kbd> (or <kbd>shift</kbd> + <kbd>/</kbd>) while going through the slides, you can see a list of special slide-specific commands.

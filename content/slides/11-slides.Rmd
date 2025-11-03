@@ -86,7 +86,7 @@ Acknowledgements:
 
 # Announcements
 
-Group project due next Friday, April 18
+Group project due next Friday, November 14
 
 Office hours by appointment at [aem2850.youcanbook.me](https://aem2850.youcanbook.me)
 
@@ -159,23 +159,11 @@ name: progress
 4. Construct effective data visualizations
 5. Utilize course concepts and tools for business applications
 
-All of the above, plus special topics!
+**All of the above, plus special topics!**
 - Week 11: Space
 - Week 12: Functions and iteration
 - Week 13: Web scraping
 - Week 14: Text
-
----
-
-# Schedule overview
-
-#### Weeks 1-4: Programming Foundations
-
-#### Weeks 5-10: Data Visualization Foundations
-
-#### Weeks 11+: Special Topics (mix of programming and dataviz)
-
-See [aem2850.toddgerarden.com/schedule](https://aem2850.toddgerarden.com/schedule/) for details
 
 ---
 class: inverse, center, middle
@@ -401,14 +389,14 @@ https://www.census.gov/dataviz/visualizations/051/
 
 .center[
 <figure>
-  <img src="img/11/nyt-ukraine-refugees.png" alt="Refugees from Ukraine" title="Refugees from Ukraine" width="70%">
-  <figcaption><a href="https://www.nytimes.com/interactive/2022/03/15/opinion/ukraine-refugee-crisis.html" target="_blank">The New York Times, "Refugees from Ukraine, Feb. 24 - Mar. 13, 2022"</a></figcaption>
+  <img src="img/11/nyc-photo-locations-large.jpg" alt="NYC photo locations by locals and tourists" title="NYC photo locations by locals and tourists" width="60%">
+  <figcaption><a href="https://www.flickr.com/photos/walkingsf/4672195208/in/album-72157624209158632/" target="_blank">Photos taken in NYC: blue = locals; red = tourists; yellow = unknown</a></figcaption>
 </figure>
 ]
 
 ???
 
-https://www.nytimes.com/interactive/2022/03/15/opinion/ukraine-refugee-crisis.html
+https://www.flickr.com/photos/walkingsf/4672195208/in/album-72157624209158632/
 
 ---
 
@@ -540,7 +528,7 @@ Though class order matters!
 
 If `sf` does not come first, it may not be treated as a spatial data frame
 
-When joining an `sf` data with other data, start with the `sf` data frame
+**When joining an `sf` data with other data, start with the `sf` data frame**
 
 ---
 
@@ -838,7 +826,8 @@ The distance from Cornell to Cancun is `r round(st_distance(other_sf)[2, 1]/1e3)
 .left-code[
 ```{r cornell-cancun-map-blank, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 world_shapes |> 
-  filter(GU_A3 %in% c("CAN", "MEX", "USA")) |> 
+  rename(code = GU_A3) |> # (country code)
+  filter(code %in% c("CAN", "MEX", "USA")) |> 
   ggplot() +
   geom_sf() +
   coord_sf(crs = "+proj=robin")
@@ -862,7 +851,8 @@ Or to make great circle plots: https://www.findingyourway.io/blog/2018/02/28/201
 .left-code[
 ```{r cornell-cancun-map, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4, 3), out.width="100%"}
 world_shapes |> 
-  filter(GU_A3 %in% c("CAN", "MEX", "USA")) |> 
+  rename(code = GU_A3) |> # (country code)
+  filter(code %in% c("CAN", "MEX", "USA")) |> 
   ggplot() +
   geom_sf() +
   geom_sf( #<<
