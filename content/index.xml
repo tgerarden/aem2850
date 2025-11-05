@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 03 Nov 2025 15:40:33 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Space</title><link>https://aem2850.toddgerarden.com/content/11-content/</link><pubDate>Mon, 03 Nov 2025 15:40:33 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/11-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Content overview | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/content/</link><atom:link href="https://aem2850.toddgerarden.com/content/index.xml" rel="self" type="application/rss+xml"/><description>Content overview</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 05 Nov 2025 15:42:28 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Content overview</title><link>https://aem2850.toddgerarden.com/content/</link></image><item><title>Functions and iteration</title><link>https://aem2850.toddgerarden.com/content/12-content/</link><pubDate>Wed, 05 Nov 2025 15:42:28 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/12-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/functions.html" target="_blank" rel="noopener">Chapter 25: Functions&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/iteration.html" target="_blank" rel="noopener">Chapter 26: Iteration&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;h4 id="optional-readings">Optional readings&lt;/h4>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/base-R.html#for-loops" target="_blank" rel="noopener">Chapter 27.5: &lt;code>for&lt;/code> loops&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
+&lt;ul>
+&lt;li>When should you write a function?&lt;/li>
+&lt;li>What are some advantages of writing functions relative to copy-and-paste?&lt;/li>
+&lt;li>What is conditional execution?&lt;/li>
+&lt;/ul>
+&lt;!-- ### Slides -->
+&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+&lt;!--
+&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/12-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/12-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
+-->
+&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item><item><title>Space</title><link>https://aem2850.toddgerarden.com/content/11-content/</link><pubDate>Mon, 03 Nov 2025 15:40:33 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/11-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://clauswilke.com/dataviz/geospatial-data.html" target="_blank" rel="noopener">Chapter 15: Visualizing geospatial data&lt;/a> of &lt;em>Fundamentals of Data Visualization&lt;/em>&lt;/li>
 &lt;/ul>

@@ -1,4 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 27 Oct 2025 15:46:10 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Relationships</title><link>https://aem2850.toddgerarden.com/example/10-example/</link><pubDate>Mon, 27 Oct 2025 15:46:10 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/10-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Code examples | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/example/</link><atom:link href="https://aem2850.toddgerarden.com/example/index.xml" rel="self" type="application/rss+xml"/><description>Code examples</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 05 Nov 2025 15:44:51 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Code examples</title><link>https://aem2850.toddgerarden.com/example/</link></image><item><title>Space</title><link>https://aem2850.toddgerarden.com/example/11-example/</link><pubDate>Wed, 05 Nov 2025 15:44:51 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/11-example/</guid><description>&lt;h2 id="announcements">Announcements&lt;/h2>
+&lt;ul>
+&lt;li>Group project reminders: please read the instructions carefully
+&lt;ul>
+&lt;li>Treat this as a memo/report for a manager, not a problem set&lt;/li>
+&lt;li>&lt;strong>You will be graded on presentation&lt;/strong>, not just content
+&lt;ul>
+&lt;li>&lt;strong>Include an introduction or executive summary&lt;/strong> to summarize your work and findings&lt;/li>
+&lt;li>You will lose points if you include unnecessary instruction text and code!&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Office hours over the next week:
+&lt;ul>
+&lt;li>Prof: Thursday, Monday, Thursday &lt;a href="http://aem2850.youcanbook.me" target="_blank" rel="noopener">by appointment&lt;/a>&lt;/li>
+&lt;li>TA Victor: Friday 1:00-2:00 in Warren B05&lt;/li>
+&lt;li>TAs: Monday 2:00-6:00 in Warren 370&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
+&lt;ul>
+&lt;li>Questions? 🙋‍♀️&lt;/li>
+&lt;li>This week&amp;rsquo;s example will be the homework for week 11&lt;/li>
+&lt;li>Navigate to &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a> and open the project &lt;code>homework-11&lt;/code> in our course workspace&lt;/li>
+&lt;li>Work through &lt;code>homework-11.qmd&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="cheatsheets">Cheatsheets&lt;/h2>
+&lt;p>&lt;a href="https://rstudio.github.io/cheatsheets/sf.pdf" target="_blank" rel="noopener">Click here to download the &lt;code>sf&lt;/code> cheatsheet&lt;/a>&lt;/p></description></item><item><title>Relationships</title><link>https://aem2850.toddgerarden.com/example/10-example/</link><pubDate>Mon, 27 Oct 2025 15:46:10 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/10-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
 &lt;li>Questions? 🙋‍♀️&lt;/li>
 &lt;li>Tuesday:
