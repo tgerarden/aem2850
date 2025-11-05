@@ -99,8 +99,8 @@ lessons:
     session: "Session 11"
     date: "Week 11"
     content: "11-content"
-    # example: "11-example"
-    # assignment: "11-homework"
+    example: "11-example"
+    assignment: "11-homework"
     bg: 1
 
   - title: '<i class="fas fa-star"></i> **Group project due**'
@@ -112,7 +112,7 @@ lessons:
   - title: '<span class="content-title">Functions and iteration</span>'
     session: "Session 12"
     date: "Week 12"
-    # content: "12-content"
+    content: "12-content"
     # example: "12-example"
     # assignment: "12-homework"
     bg: 2

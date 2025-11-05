@@ -11,7 +11,7 @@
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
 title: "Homework - Week 11"
-author: Write your name here
+author: "Write your name here"
 date: today
 format: pdf
 urlcolor: blue
@@ -45,6 +45,7 @@ listings <- read_csv("listings.csv")
 
 
 {{< pagebreak >}}
+
 ## 1. We'll start by plotting locations without formally treating them as spatial data. Use `geom_point()` to make a scatter plot of listing locations. Adjust the transparency by setting `alpha = 0.1` to make it easier to see which locations have higher and lower densities of listings. Color by borough (e.g., Bronx, Brooklyn, etc.).
 ```{r}
 
@@ -52,6 +53,7 @@ listings <- read_csv("listings.csv")
 
 
 {{< pagebreak >}}
+
 ## 2. Use `read_sf()` to read in the shapefile `nybb_22a/nybb.shp` and assign it to `boroughs`. Then use `geom_sf()` to plot the spatial data contained in `boroughs`, and `fill` by `BoroName`.
 ```{r}
 
@@ -59,6 +61,7 @@ listings <- read_csv("listings.csv")
 
 
 {{< pagebreak >}}
+
 ## 3. Now we'll combine the listings data with these new spatial data. Use `count()` or `summarize()` to count the number of listings in each borough. Join the resulting data frame with `boroughs`. Use `geom_sf()` to plot the boroughs as in 2, but now `fill` by the number of Airbnb listings in each borough to make a choropleth map. Add `scale_fill_viridis_c()` to alter the default fill colors.[^viridis-tidyverse]
 ```{r}
 
@@ -66,6 +69,7 @@ listings <- read_csv("listings.csv")
 
 
 {{< pagebreak >}}
+
 ## 4. Now use the joined data to compute the number of listings per square mile, then use that to recreate your choropleth map from 3. Do the patterns look similar to or different from the map you created in 3? Do you think one is better than the other? Why or why not?
 <!-- Hint: print `boroughs` and look at the type information for `geometry` to try to figure out what units `Shape_Area` is in, and/or use google to try to figure it out. -->
 ```{r}
@@ -74,6 +78,7 @@ listings <- read_csv("listings.csv")
 
 
 {{< pagebreak >}}
+
 ## 5. Let's do some data work. Use `st_as_sf()` to convert the Airbnb listings in Manhattan to an `sf` data frame. Set the coordinate reference system by including the argument `crs = st_crs("WGS84")` in your call to `st_as_sf()`. Assign this new object to `listing_locations`.
 ```{r}
 
@@ -94,6 +99,7 @@ listings <- read_csv("listings.csv")
 ```
 
 {{< pagebreak >}}
+
 ## Finally, start making a visualization using the `boroughs` map of Manhattan as a base map. Then plot the listings in Manhattan and `color` by the distance to Times Square. Adjust the transparency by setting `alpha = 0.1`, and add `scale_color_viridis_c()` to customize the color scheme.
 ```{r}
 
@@ -101,6 +107,7 @@ listings <- read_csv("listings.csv")
 
 
 {{< pagebreak >}}
+
 ## 6. Read in `review_summary.csv`.[^review-data] Isolate the properties with at least 10 reviews and `review_scores_location` of at least 4. Join the `review_scores_location` variable to `listing_locations`. Make a plot similar to the one from 5 using the review data: Start making a visualization using the `boroughs` map of Manhattan as a base map. Then add the listings using `geom_sf()` and `color` by `review_scores_location`. Adjust the transparency by setting `alpha = 0.1`, and add `scale_color_viridis_c()` to customize the color scheme. Based on your knowledge of the location of Times Square from before, does proximity to Times Square seem to matter for location ratings?
 <!-- Tip: when joining sf data frames and regular data frames, start with the sf data frame if you want to keep the spatial attributes. Otherwise the spatial nature of the data frame can be discarded. -->
 ```{r}
@@ -109,6 +116,7 @@ listings <- read_csv("listings.csv")
 
 
 {{< pagebreak >}}
+
 ## 7. Use `lm()` to estimate a linear regression model to confirm your visual analysis of whether proximity to Times Square matters for location ratings. Use `review_scores_location` as the dependent variable and distance to Times Square as the independent variable. Print a `summary()` of the results and comment on your findings. Do you think this is a good model of location ratings?
 ```{r}
 

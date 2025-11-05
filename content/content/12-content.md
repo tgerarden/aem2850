@@ -1,7 +1,7 @@
 ---
 title: "Functions and iteration"
 linktitle: "Functions and iteration"
-date: "`r format(Sys.time())`"
+date: "2025-11-05 15:42:28"
 menu:
   content:
     parent: Course content
