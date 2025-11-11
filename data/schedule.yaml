@@ -113,8 +113,8 @@ lessons:
     session: "Session 12"
     date: "Week 12"
     content: "12-content"
-    # example: "12-example"
-    # assignment: "12-homework"
+    example: "12-example"
+    assignment: "12-homework"
     bg: 2
 
   - title: '<span class="content-title">Web scraping</span>'

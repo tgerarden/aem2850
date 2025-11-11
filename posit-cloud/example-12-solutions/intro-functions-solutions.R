@@ -1,4 +1,4 @@
-# AEM 2850 - Example 12-1
+# AEM 2850 - Example 12
 # Plan for today:
 # - Questions?
 # - On our own devices: work through this script
@@ -31,18 +31,79 @@ prices <- sp500_prices |>
   filter(count == max(count)) |>
   select(-count)
 
+# compute NVDA's return over 5 years
+nvda_return <- prices |>
+  filter(symbol == "NVDA") |>
+  filter(date==min(date) | date==max(date)) |>
+  mutate(cumulative_return = (adjusted - lag(adjusted)) / lag(adjusted) ) |>
+  filter(!is.na(cumulative_return)) |>
+  pull(cumulative_return)
 
-# 1. Writing a simple function ----
+nvda_return
+
+str_glue("NVDA's 5-year cumulative return was {round(nvda_return*100)}%.")
+
+
+# 1. Computing annualized returns from cumulative returns ----
+# let's write a function that:
+#   - takes one argument: a cumulative return over 5 years
+#   - returns one number: the annualized return
+# where to start?
+
+# let's try a test case using NVIDIA
+((1 + nvda_return)^(1/5) - 1) * 100
+
+# now generalize that into a function annualized_return
+# that takes the argument cumulative_return
+annualized_return <- function(cumulative_return) {
+  ((1 + cumulative_return)^(1/5) - 1) * 100
+}
+
+# call that function with the arguments:
+# nvda_return, 0 (0%), 0.5 (50%)
+annualized_return(nvda_return)
+annualized_return(0)
+annualized_return(0.5)
+
+
+# 2. Computing annualized returns over different time horizons ----
+# let's write a function that:
+#   - takes two arguments: a cumulative return, and a number of years
+#   - returns one number: the annualized return
+# where to start?
+
+# let's try a test case using NVIDIA, with years <- 5
+years <- 5
+((1 + nvda_return)^(1/years) - 1) * 100
+
+# now generalize that into a function annualized_return
+# that takes the arguments cumulative_return and years
+annualized_return <- function(cumulative_return, years) {
+  ((1 + cumulative_return)^(1/years) - 1) * 100
+}
+
+# call that function with the argument nvda_return
+annualized_return(nvda_return)
+# what went wrong?
+# note that the function did not find the object years from the test case. why?
+
+# call that function with the arguments nvda_return, 5
+annualized_return(nvda_return, 5)
+
+# call that function with the arguments nvda_return, 50
+annualized_return(nvda_return, 50)
+
+
+# 3. Computing annualized returns from tickers ----
 # let's write a function that:
 #   - takes one argument: a symbol
 #   - returns one number: that symbol's annualized return over the data period
 # where to start?
 
-# let's try a test case!
-# what company do you want to use? what symbol?
+# let's try a test case using NVIDIA
 # for simplicity we can start by hard-coding the time length (5 years)
 prices |>
-  filter(symbol == "NFLX") |>
+  filter(symbol == "NVDA") |>
   filter(date==min(date) | date==max(date)) |>
   mutate(cumulative_return = (adjusted - lag(adjusted)) / lag(adjusted) ) |>
   filter(!is.na(cumulative_return)) |>
@@ -60,14 +121,14 @@ get_annual_return <- function(ticker){
     pull(annualized_return)
 }
 
-# test it out a few times
-get_annual_return("NFLX")
+# test it out with a few different tickers
+get_annual_return("NVDA")
 get_annual_return("AAPL")
 get_annual_return("AMZN")
 get_annual_return("TSLA")
 
 
-# 2. Mapping over multiple tickers ----
+# 4. Mapping over multiple tickers ----
 # we can easily extend our work to a vector of tickers by iteration or mapping
 # how would we do that using map?
 map(
@@ -93,15 +154,15 @@ map_dbl(
 )
 
 
-# 3. Extending our function to multiple tickers ----
+# 5. Extending our function to multiple tickers ----
 # now let's allow the function to compute returns for multiple tickers
 # what type of object(s) should it return?
 
 # one option is a data frame
-# start by computing returns for all symbols in the data frame also in ticker
-get_annual_returns <- function(ticker){
+# start by computing returns for all symbols in the data frame also in tickers
+get_annual_returns <- function(tickers){
   prices |>
-    filter(symbol %in% ticker) |>
+    filter(symbol %in% tickers) |>
     group_by(symbol) |>
     filter(date==min(date) | date==max(date)) |>
     mutate(cumulative_return = (adjusted - lag(adjusted)) / lag(adjusted) ) |>
@@ -145,7 +206,7 @@ get_annual_returns <- function(ticker){
 get_annual_returns(c("AAPL", "WTF", "TSLA"))
 
 
-# 4. Time permitting: for loops----
+# 6. Time permitting: for loops----
 # write a for loop that calls your original function `get_annual_return`
 # for a number of tickers and combines the results in a double vector
 # if you have extra time, try doing it again, but store the results in a list

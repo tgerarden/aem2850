@@ -1,7 +1,7 @@
 ---
 title: "Functions and iteration"
 linktitle: "Functions and iteration"
-date: "`r format(Sys.time())`"
+date: "2025-11-10 13:03:10"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
