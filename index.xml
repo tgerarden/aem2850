@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 10 Nov 2025 13:03:35 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 12</title><link>https://aem2850.toddgerarden.com/assignment/12-homework/</link><pubDate>Mon, 10 Nov 2025 13:03:35 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/12-homework/</guid><description>&lt;h2 id="homework">Homework&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Course materials | R for Business Analytics</title><link>https://aem2850.toddgerarden.com/</link><atom:link href="https://aem2850.toddgerarden.com/index.xml" rel="self" type="application/rss+xml"/><description>Course materials</description><generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 12 Nov 2025 15:08:30 +0000</lastBuildDate><image><url>https://aem2850.toddgerarden.com/media/icon_hua5466350784c0319d6bf17c8623ebf4f_44852_512x512_fill_lanczos_center_3.png</url><title>Course materials</title><link>https://aem2850.toddgerarden.com/</link></image><item><title>Week 12</title><link>https://aem2850.toddgerarden.com/assignment/12-homework/</link><pubDate>Mon, 10 Nov 2025 13:03:35 +0000</pubDate><guid>https://aem2850.toddgerarden.com/assignment/12-homework/</guid><description>&lt;h2 id="homework">Homework&lt;/h2>
 &lt;p>Navigate to &lt;a href="http://posit.cloud" target="_blank" rel="noopener">posit.cloud&lt;/a>, open the project &lt;code>homework-12&lt;/code> in our course workspace, and follow the instructions in the file &lt;code>homework-12.qmd&lt;/code>.&lt;/p></description></item><item><title>Functions and iteration</title><link>https://aem2850.toddgerarden.com/example/12-example/</link><pubDate>Mon, 10 Nov 2025 13:03:10 +0000</pubDate><guid>https://aem2850.toddgerarden.com/example/12-example/</guid><description>&lt;h2 id="plan-for-today">Plan for today&lt;/h2>
 &lt;ul>
 &lt;li>Questions? 🙋‍♀️&lt;/li>
@@ -698,7 +698,22 @@ summarize(avg_hwy = mean(hwy)) # Find the average hwy in each group
 &lt;li>
 &lt;p>&lt;a href="https://toolbox.google.com/datasetsearch" target="_blank" rel="noopener">&lt;strong>Google Dataset Search&lt;/strong>&lt;/a>: Google indexes thousands of public datasets; search for them here.&lt;/p>
 &lt;/li>
-&lt;/ul></description></item><item><title>Functions and iteration</title><link>https://aem2850.toddgerarden.com/content/12-content/</link><pubDate>Mon, 10 Nov 2025 13:02:45 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/12-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;/ul></description></item><item><title>Web scraping</title><link>https://aem2850.toddgerarden.com/content/13-content/</link><pubDate>Wed, 12 Nov 2025 15:08:30 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/13-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
+&lt;ul>
+&lt;li>&lt;i class="fas fa-external-link-square-alt">&lt;/i> &lt;a href="https://rvest.tidyverse.org/articles/rvest.html" target="_blank" rel="noopener">Web scraping 101&lt;/a> from &lt;code>vignette(&amp;quot;rvest&amp;quot;)&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h3 id="guiding-questions">Guiding questions&lt;/h3>
+&lt;ul>
+&lt;li>When is web scraping useful?&lt;/li>
+&lt;li>What is html?&lt;/li>
+&lt;li>What is the difference between client-side and server-side web scraping?&lt;/li>
+&lt;/ul>
+&lt;!-- ### Slides -->
+&lt;!-- The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). -->
+&lt;!--
+&lt;p>&lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/13-slides.html">&lt;i class="fas fa-external-link-alt">&lt;/i> View all slides in new window&lt;/a> &lt;a class="btn btn-primary btn-lg" target="_blank" href="https://aem2850.toddgerarden.com/slides/13-slides.pdf" role="button">&lt;i class="far fa-file-pdf">&lt;/i> Download PDF of all slides&lt;/a>&lt;/p>
+-->
+&lt;!-- **Fun fact**: If you type &lt;kbd>?&lt;/kbd> (or &lt;kbd>shift&lt;/kbd> + &lt;kbd>/&lt;/kbd>) while going through the slides, you can see a list of special slide-specific commands. --></description></item><item><title>Functions and iteration</title><link>https://aem2850.toddgerarden.com/content/12-content/</link><pubDate>Mon, 10 Nov 2025 13:02:45 +0000</pubDate><guid>https://aem2850.toddgerarden.com/content/12-content/</guid><description>&lt;h3 id="readings">Readings&lt;/h3>
 &lt;ul>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/functions.html" target="_blank" rel="noopener">Chapter 25: Functions&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
 &lt;li>&lt;i class="fas fa-book">&lt;/i> &lt;a href="https://r4ds.hadley.nz/iteration.html" target="_blank" rel="noopener">Chapter 26: Iteration&lt;/a> of &lt;em>R for Data Science (2e)&lt;/em>&lt;/li>
