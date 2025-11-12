@@ -19,6 +19,7 @@ urlcolor: blue
 
 ```{r setup, include = FALSE}
 library(tidyverse) # purrr is part of core tidyverse so loads here
+library(scales) # plot functions like breaks_width, label_date, label_currency
 
 # center plots by default
 library(knitr)
@@ -50,7 +51,8 @@ prices_1y <- prices |>
   filter(time_length(max(date) - date, "years")<=1)
 
 prices_ytd <- prices |> 
-  filter(date>="2025-01-01")
+  mutate(year = year(date)) |> 
+  filter(year==max(year))
 
 biotech_symbols <- c("ABBV", "AMGN", "BIIB", "GILD", "INCY", "MRNA", "REGN", "VRTX")
 ```
@@ -59,6 +61,7 @@ Then we will work with the monthly Zillow data from [Zillow Research](https://ww
 
 
 {{< pagebreak >}}
+
 # Background on Control Flow and Conditional Execution
 
 We can use special statements to control the flow of a program based on whether a condition is met. We will focus on what is known as conditional execution. As a starting point, let's refresh our memory on what happens if we test a condition:
@@ -95,6 +98,7 @@ if (my_condition) {
 
 
 {{< pagebreak >}}
+
 # Conditional Execution within Functions
 
 Let's use a slightly more complicated example to demonstrate how conditional execution can be used to control what functions do:
@@ -125,6 +129,7 @@ get_letter_grade(79)
 
 
 {{< pagebreak >}}
+
 # Part 1: S&P 500 Returns
 
 During class on Tuesday, we had created a function that took a stock's ticker symbol as its argument. For valid tickers, it computed and returned annualized returns over the period April 2020 through April 2025. For invalid tickers, the code would fail. Here is that function:
@@ -154,11 +159,14 @@ get_annual_return("DYSON")
 
 
 {{< pagebreak >}}
+
 ## 1. Revise our function using conditional execution to provide an informative message to users when they supply an invalid ticker. First, `pull` all the tickers in the `price` data frame and assign them to the name `symbols`. Then use that object in an `if` statement to either output the number, or to `print` the message "The ticker XXXX is not available." Finally, after printing the message, add `NA` so the function returns a missing value.
 
 ```{r}
 
 ```
+
+\vfill
 
 ## If you use `map_dbl` to apply `get_annual_return` to AAPL, AMZN, TSLA, and DYSON, will the code fail as it did in example-12-1? Why or why not?
 
@@ -168,8 +176,11 @@ get_annual_return("DYSON")
 
 The code does/does not fail because...
 
+\vfill
+
 
 {{< pagebreak >}}
+
 ## 2. Modify your code from 1. to depend on two arguments, `df` and `ticker`, where `df` is a data frame to be used for computing annualized returns. The function should no longer depend directly on the `prices` data frame. Call the function with the ticker "XOM" to test it.
 
 ```{r}
@@ -178,6 +189,7 @@ The code does/does not fail because...
 
 
 {{< pagebreak >}}
+
 ## 3. Modify your code from 2. to automatically detect the number of years rather than hard-coding the number of years as 5. There are several ways to do this. To keep things simple and focus on functions, just create a variable `years = time_length(date - lag(date), "years")` and use that variable in computing annualized returns.
 
 <!-- A simpler option would be to extract the year of each date and take the difference: `years = year(date) - year(lag(date))`. However, this would not work well for prices from January 1 through December 31 of the same year, for example. -->
@@ -186,18 +198,24 @@ The code does/does not fail because...
 
 ```
 
-## Call the function with the data frame `prices_1y` and ticker "XOM" to compute annualized returns for Exxon Mobil over the course of 2024.
+\vfill
+
+## Call the function with the data frame `prices_1y` and ticker "XOM" to compute annualized returns for Exxon Mobil over the last year of the data.
 ```{r}
 
 ```
 
-## Call the function with the data frame `prices_ytd` and ticker "XOM" to compute annualized returns for Exxon Mobil over the course of 2025 so far (year to date).
+\vfill
+
+## Call the function with the data frame `prices_ytd` and ticker "XOM" to compute annualized returns for Exxon Mobil over the calendar year so far (year to date).
 ```{r}
 
 ```
 
+\vfill
 
 {{< pagebreak >}}
+
 # Iteration using `for` Loops
 
 As we saw in class, we can use functional programming methods like `map` to apply functions to a number of arguments. Another option is to use `for` loops to control the iteration process. See [here](https://aem2850.toddgerarden.com/slides/12-slides.html#42) for an example from the slides.
@@ -228,6 +246,7 @@ for (i in seq_along(items)) {
 
 
 {{< pagebreak >}}
+
 ## 4. Go back to our original function, copied below for convenience. Write a simple `for` loop to that calls `get_annual_return` and prints the annualized return for all the tickers in `biotech_symbols`. You do not need to populate an object as we did in the slides and with the `map` functions.
 
 ```{r}
@@ -252,22 +271,30 @@ biotech_symbols
 
 
 {{< pagebreak >}}
+
 # Part 2: Zillow Data
 
-Here is some code that imports and tidies Zillow sales price data in a few steps: (1) importing a file based on the string it starts with, (2) dropping the observations for the region of "United States", (3) separating `RegionName` into two variables `City` and `State`, (4) pivoting the data longer, and (5) converting `date` into date format and generating the variables `year` and `month`.
+Here is some code that imports and tidies Zillow sales price data in a few steps:
+
+1. importing a file based on the string it starts with,
+2. dropping the observations for the region of "United States",
+3. separating `RegionName` into two variables `City` and `State`,
+4. pivoting the data longer, and
+5. converting `date` into date format and generating the variables `year` and `month`.
 
 ```{r message = FALSE}
 raw_tidy_example <- "Metro_median_sale_price_uc_sfrcondo_month.csv" |> 
   read_csv() |> 
   filter(RegionName != "United States") |> 
-  separate(RegionName, c("City","State"), sep =",") |>
-  pivot_longer(-c(RegionID, SizeRank, City, State, RegionType, StateName), 
+  separate_wider_delim(RegionName, delim =", ", names = c("City","State")) |>
+  pivot_longer(-c(RegionID, SizeRank, City, State, RegionType, StateName),
                names_to = "date", values_to = "price") |>
   mutate(date = ymd(date), year = year(date), month = month(date))
 ```
 
 
 {{< pagebreak >}}
+
 ## 5. Use the code on the previous page to write a function `tidy_data` that takes the argument `filename` and returns the tidied data. Call this function once to tidy the raw price data and once to tidy the adjusted price data, assigning the output to `raw_tidy` and `adj_tidy`. What years do `raw_tidy` and `adj_tidy` cover, respectively?
 
 ```{r message = FALSE}
@@ -276,7 +303,8 @@ raw_tidy_example <- "Metro_median_sale_price_uc_sfrcondo_month.csv" |>
 
 
 {{< pagebreak >}}
-## 6. Can you modify the function in question 1 so that it can be used to tidy either price data or sales data, based on a second argument that specifies which one the user is asking for? What years do the sales data cover?
+
+## 6. Modify the function in question 5 so that it can be used to tidy either price data or sales data, based on a second argument that specifies which one the user is asking for. What years do the sales data cover?
 
 *Note: `Metro_sales_count_now_uc_sfrcondo_month.csv` contains monthly sales counts.*
 
@@ -290,6 +318,7 @@ raw_tidy_example <- "Metro_median_sale_price_uc_sfrcondo_month.csv" |>
 
 
 {{< pagebreak >}}
+
 ## Plotting Zillow Data
 
 Here is some code that uses the data we just tidied to plot the time series of raw prices over time for one city:
@@ -300,12 +329,12 @@ raw_tidy_example |>
   ggplot(aes(x = date, y = price)) +
   geom_line() +
   scale_x_date(
-    breaks = scales::breaks_width("1 year"),
-    labels = scales::label_date("%Y")
+    breaks = breaks_width("1 year"),
+    labels = label_date("%Y")
   )  +
-  scale_y_continuous(labels=scales::dollar_format()) +
+  scale_y_continuous(labels = label_currency()) +
   labs(
-    x = "",
+    x = NULL,
     y = "Median Home Price",
     title = "New York"
   ) +
@@ -314,7 +343,10 @@ raw_tidy_example |>
 
 
 {{< pagebreak >}}
+
 ## 7. Adapt the code above to create a function `plot_city_price` that plots the time series of raw prices over time for whatever city is provided as its argument. Call this function to make a plot for `"Los Angeles-Long Beach-Anaheim"`.
+
+<!-- Note: The code chunk options below are just used to simplify the output. -->
 
 ``` {r, warning=FALSE, message=FALSE, fig.show="hold", out.width="75%"}
 
@@ -322,11 +354,16 @@ raw_tidy_example |>
 
 
 {{< pagebreak >}}
+
 ## 8. Uncomment the code below to see how we can use `map()` in conjunction with `walk(print)` to print the output of map without returning the objects themselves and their pesky indices.
 
-``` {r, warning=FALSE, message=FALSE, fig.show="hold", out.width="50%"}
-# c("New York", "Los Angeles-Long Beach-Anaheim", "Chicago") |> 
-#   map(plot_city_price) |> 
+<!-- Note: The code chunk options below are just used to simplify the output. -->
+
+``` {r, warning=FALSE, message=FALSE, fig.show="hold", out.width="45%"}
+# map(
+#   c("New York", "Los Angeles-Long Beach-Anaheim", "Chicago"),
+#   plot_city_price
+# ) |> 
 #   walk(print)
 ```
 

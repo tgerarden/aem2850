@@ -1,7 +1,7 @@
 ---
 title: "Web scraping"
 linktitle: "Web scraping"
-date: "`r format(Sys.time())`"
+date: "2025-11-12 15:08:30"
 menu:
   content:
     parent: Course content
