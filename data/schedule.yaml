@@ -109,7 +109,7 @@ lessons:
     bg: 3
     bottomborder: True
 
-  - title: '<span class="content-title">Functions and iteration</span>'
+  - title: '<span class="content-title">Functions and iteration <br> Conditional execution</span>'
     session: "Session 12"
     date: "Week 12"
     content: "12-content"
