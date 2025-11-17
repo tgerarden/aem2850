@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Web scraping</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Todd Gerarden" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/tdg-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+
+class: center, middle
+
+# Web scraping
+
+.class-info[
+
+**Week 13**
+
+AEM 2850 / 5850 : R for Business Analytics&lt;br&gt;
+Cornell Dyson&lt;br&gt;
+Fall 2025
+]
+
+---
+
+# Announcements
+
+This is our last full week of class! 😢
+
+&lt;!-- Group project graded, will discuss at end of class --&gt;
+
+**Homework - Week 13** will be due Monday
+
+**Homework - Week 14** will not exist due to time constraints
+  - But next Tuesday's material is still fair game for Prelim 2!
+
+**Prelim 2** is December 4 at 7:30pm
+  - I will provide more information at the end of class today
+  - I will post practice problems before Thanksgiving Break
+
+Questions before we get started?
+
+---
+
+# Plan for today
+
+[Web scraping basics](#web-scraping-basics)
+
+[Web scraping with rvest](#rvest)
+  - [Cornell sports](#cornell-sports)
+  - [College rankings](#college-rankings)
+
+[robots.txt](#robots-txt)
+
+&lt;!-- [Group project debrief](#group-project) --&gt;
+
+[Prelim 2](#prelim-2)
+
+---
+class: inverse, center, middle
+name: web-scraping-basics
+
+# Web scraping basics
+
+---
+# What is web scraping?
+
+--
+
+Getting data or "content" off the web and onto our computers
+
+--
+
+We get content off the web all the time!
+- Copy and paste
+- Read and take notes
+- Screenshot
+
+--
+
+The goal of web **scraping** is to write computer code to help us automate this process and store the results in a machine-readable format
+
+
+---
+
+# Why would we want to scrape data?
+
+When is web scraping useful?
+
+--
+
+- When the data is publicly available
+
+- When you can't get the data in a more convenient format
+
+--
+
+When is web scraping not useful?
+
+--
+
+- When data is publicly available in other formats (e.g., csv)
+
+- When the site owner offers a way to access data directly (e.g., via an API)
+
+--
+
+Web scraping is time consuming and costly (for both you and "them")
+
+---
+
+# Server-side vs client-side content
+
+### 1. Server-side
+
+- Host server "builds" site and sends HTML code that our browser renders
+- All the information is embedded in the website's HTML
+
+--
+
+### 2. Client-side
+
+- Site contains an empty template of HTML and CSS
+- When we visit, our browser sends a *request* to the host server
+- The server sends a *response* script that our browser uses to populate the HTML template with information we want
+
+--
+
+**We will focus on server-side web scraping due to time constraints**
+
+---
+
+# What is HTML?
+
+--
+
+HTML stands for "HyperText Markup Language" and looks like this:
+
+
+``` r
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Page title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1 id='first'&gt;A heading&lt;/h1&gt;
+  &lt;p&gt;Some text &amp;amp; &lt;b&gt;some bold text.&lt;/b&gt;&lt;/p&gt;
+  &lt;img src='myimg.png' width='100' height='100'&gt;
+&lt;/body&gt;
+```
+
+---
+
+# What is HTML?
+
+HTML has a hierarchical structure formed by **elements** that consist of:
+1. a start tag
+  - optional attributes
+2. contents
+3. an end tag
+
+???
+
+Source: [https://rvest.tidyverse.org/articles/rvest.html](https://rvest.tidyverse.org/articles/rvest.html)
+
+
+---
+
+# What is HTML?
+
+HTML has a hierarchical structure formed by **elements** that consist of:
+1. a start tag (e.g., `&lt;h1&gt;`)
+  - optional attributes (e.g., `id='first'`)
+2. contents in between tags (e.g., `A heading`)
+3. an end tag (e.g., `&lt;/h1&gt;`)
+
+
+``` r
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Page title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+* &lt;h1 id='first'&gt;A heading&lt;/h1&gt;
+  &lt;p&gt;Some text &amp;amp; &lt;b&gt;some bold text.&lt;/b&gt;&lt;/p&gt;
+  &lt;img src='myimg.png' width='100' height='100'&gt;
+&lt;/body&gt;
+```
+
+???
+
+Source: [https://rvest.tidyverse.org/articles/rvest.html](https://rvest.tidyverse.org/articles/rvest.html)
+
+
+---
+
+# What is HTML?
+
+**Elements**
+
+- There are over 100 HTML elements
+- Look up tags to learn about them as needed
+
+--
+
+**Contents**
+
+- Most elements can have content in between start and end tags
+- Content can be text or more elements (as **children**)
+
+--
+
+**Attributes**
+
+- Attributes like `id` and `class` are used with CSS to control page appearance
+- These attributes are useful for scraping data
+
+???
+
+Source: [https://rvest.tidyverse.org/articles/rvest.html](https://rvest.tidyverse.org/articles/rvest.html)
+
+---
+
+# What is CSS?
+
+--
+
+CSS stands for **C**ascading **S**tyle **S**heets
+
+- Tool for defining visual appearance of HTML
+
+**CSS selectors** help identify what we want to scrape
+
+We will learn by example using the extension/bookmarklet [SelectorGadget](https://selectorgadget.com)
+
+???
+
+Source: [https://rvest.tidyverse.org/articles/rvest.html](https://rvest.tidyverse.org/articles/rvest.html)
+
+---
+class: inverse, center, middle
+name: rvest
+
+# Web scraping with rvest
+
+
+---
+
+# The rvest package
+
+[rvest](https://rvest.tidyverse.org/index.html) (as in "harvest") is part of the tidyverse
+
+
+``` r
+library(rvest) # installed with tidyverse but needs to be loaded
+```
+
+--
+
+We will cover several functions that make it easy to scrape data from web pages:
+- `read_html` reads HTML, much like `read_csv` reads .csv files
+- `html_element(s)` find HTML elements using CSS selectors or XPath expressions
+- `html_text2` retrieves text from HTML elements
+- `html_table` parses HTML tables into data frames
+
+--
+
+Let's learn these commands by working through two examples
+
+---
+name: cornell-sports
+
+# Example 1: Cornell Big Red on Wikipedia
+
+How could we scrape a list of varsity sports?
+
+.center[
+&lt;figure&gt;
+  &lt;a href="https://en.wikipedia.org/wiki/Cornell_Big_Red"&gt;
+    &lt;img src="img/13/big-red.png" width="90%"&gt;
+  &lt;/a&gt;
+&lt;/figure&gt;
+]
+
+???
+
+Source: https://en.wikipedia.org/wiki/Cornell_Big_Red
+
+---
+
+# Option 1: use `dt` tag to get headings
+
+&lt;figure&gt;
+  &lt;img src="img/13/big-red-selector-text.png" width="100%"&gt;
+&lt;/figure&gt;
+
+???
+
+Source: https://en.wikipedia.org/wiki/Cornell_Big_Red
+
+---
+
+# Scraping text using `dt` tag
+
+Step 1: use `read_html()` to read in html from the url of interest
+
+
+``` r
+*big_red &lt;- read_html("https://en.wikipedia.org/wiki/Cornell_Big_Red")
+
+big_red
+```
+
+```
+## {html_document}
+## &lt;html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-1 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-enabled skin-theme-clientpref-day vector-sticky-header-enabled vector-toc-available" lang="en" dir="ltr"&gt;
+## [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
+## [2] &lt;body class="skin--responsive skin-vector skin-vector-search-vue mediawik ...
+```
+
+---
+
+# Scraping text using `dt` tag
+
+Step 2: use `html_elements()` to extract every instance of a `dt` tag
+
+
+``` r
+big_red &lt;- read_html("https://en.wikipedia.org/wiki/Cornell_Big_Red")
+
+big_red |&gt; 
+* html_elements("dt") |&gt; # dt tag is for terms in a description list
+  head(8)
+```
+
+
+```
+## {xml_nodeset (8)}
+## [1] &lt;dt&gt;Baseball&lt;/dt&gt;
+## [2] &lt;dt&gt;Men's basketball&lt;/dt&gt;
+## [3] &lt;dt&gt;Women's basketball&lt;/dt&gt;
+## [4] &lt;dt&gt;Men's cross country&lt;/dt&gt;
+## [5] &lt;dt&gt;Women's cross country&lt;/dt&gt;
+## [6] &lt;dt&gt;Women's fencing&lt;/dt&gt;
+## [7] &lt;dt&gt;Football&lt;/dt&gt;
+## [8] &lt;dt&gt;Sprint football&lt;/dt&gt;
+```
+
+---
+
+# Scraping text using `dt` tag
+
+Step 3: use `html_text2()` to convert the sports to a character vector
+
+
+``` r
+big_red &lt;- read_html("https://en.wikipedia.org/wiki/Cornell_Big_Red")
+
+big_red_text &lt;- big_red |&gt; 
+  html_elements("dt") |&gt; # dt tag is for terms in a description list
+* html_text2()           # convert html to text
+
+head(big_red_text)       # looks good!
+```
+
+
+```
+## [1] "Baseball"              "Men's basketball"      "Women's basketball"   
+## [4] "Men's cross country"   "Women's cross country" "Women's fencing"
+```
+
+--
+
+.less-left[
+
+``` r
+length(big_red_text) # hmm...
+```
+
+```
+## [1] 78
+```
+]
+
+--
+
+.more-right[
+
+``` r
+tail(big_red_text) # uh-oh...
+```
+
+```
+## [1] "WFTDA" "MRDA"  "USARL" "NARL"  "USAR"  "WTT"
+```
+]
+
+--
+
+That doesn't seem right...
+
+---
+
+# What went wrong?
+
+--
+
+.less-left[
+1. Got irrelevant data
+]
+
+.more-right[
+&lt;figure&gt;
+  &lt;img src="img/13/big-red-selector-external.png" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# What went wrong?
+
+.less-left[
+1. Got irrelevant data
+
+2. Didn't get relevant data
+]
+
+.more-right.center[
+&lt;figure&gt;
+  &lt;img src="img/13/big-red-selector-other.png" width="65%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Option 2: use `.wikitable` tag to get table
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/13/big-red-selector-table.png" width="80%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+Source: https://en.wikipedia.org/wiki/Cornell_Big_Red
+
+---
+
+# Scraping tables using `.wikitable` tag
+
+Step 1: use `read_html()` to read in html from the url of interest
+
+
+``` r
+*big_red &lt;- read_html("https://en.wikipedia.org/wiki/Cornell_Big_Red")
+```
+
+--
+
+Step 2: use `html_element()` to extract the first table element
+
+
+``` r
+big_red |&gt; 
+* html_element(".wikitable")   # extract the first .wikitable
+```
+
+```
+## {html_node}
+## &lt;table class="wikitable" style=""&gt;
+## [1] &lt;tbody&gt;\n&lt;tr&gt;\n&lt;th scope="col" style="background-color:#B31B1B;color:#FFF ...
+```
+
+---
+
+# Scraping tables using `.wikitable` tag
+
+Step 3: use `html_table()` to convert the table into a data frame
+
+
+``` r
+big_red_table &lt;- big_red |&gt; 
+  html_element(".wikitable") |&gt; # extract the first .wikitable
+* html_table()                  # convert html to a data frame
+
+head(big_red_table, 8)
+```
+
+```
+## # A tibble: 8 × 2
+##   `Men's sports` `Women's sports`
+##   &lt;chr&gt;          &lt;chr&gt;           
+## 1 Baseball       Basketball      
+## 2 Basketball     Cross country   
+## 3 Cross country  Equestrian      
+## 4 Football       Fencing         
+## 5 Golf           Field hockey    
+## 6 Ice hockey     Gymnastics      
+## 7 Lacrosse       Ice hockey      
+## 8 Polo           Lacrosse
+```
+
+---
+
+# Scraped data frames are data frames
+
+
+
+
+
+
+
+``` r
+tidy_big_red &lt;- big_red_table |&gt; 
+  pivot_longer(everything(), names_to = "gender", values_to = "sport") |&gt; 
+  filter(sport != "" &amp; !str_detect(sport, "^†")) # remove things that aren't sports
+
+tidy_big_red
+```
+
+```
+## # A tibble: 35 × 2
+##    gender         sport        
+##    &lt;chr&gt;          &lt;chr&gt;        
+##  1 Men's sports   Baseball     
+##  2 Women's sports Basketball   
+##  3 Men's sports   Basketball   
+##  4 Women's sports Cross country
+##  5 Men's sports   Cross country
+##  6 Women's sports Equestrian   
+##  7 Men's sports   Football     
+##  8 Women's sports Fencing      
+##  9 Men's sports   Golf         
+## 10 Women's sports Field hockey 
+## # ℹ 25 more rows
+```
+
+---
+
+# Scraped data frames are data frames
+
+What function(s) could we use to determine how many gender category-sport pairs there are in `tidy_big_red`?
+
+--
+
+.pull-left[
+
+``` r
+tidy_big_red |&gt; 
+  count()
+```
+
+```
+## # A tibble: 1 × 1
+##       n
+##   &lt;int&gt;
+## 1    35
+```
+]
+
+.pull-right[
+
+``` r
+tidy_big_red |&gt; 
+  nrow()
+```
+
+```
+## [1] 35
+```
+]
+
+--
+
+(Or we could have gone back one slide to look at the tibble header...)
+
+---
+
+# Scraped data frames are data frames
+
+What function(s) could we use to determine how many distinct sports there are in `tidy_big_red`?
+
+--
+
+.pull-left[
+
+``` r
+tidy_big_red |&gt; 
+  distinct(sport) |&gt; 
+  count()
+```
+
+```
+## # A tibble: 1 × 1
+##       n
+##   &lt;int&gt;
+## 1    25
+```
+]
+
+.pull-right[
+
+``` r
+tidy_big_red |&gt; 
+  select(sport) |&gt; 
+  n_distinct()
+```
+
+```
+## [1] 25
+```
+]
+
+---
+
+# Scraped data frames are data frames
+
+What function could we use to determine how many distinct sports are there for each gender category?
+
+--
+
+
+``` r
+tidy_big_red |&gt; 
+  count(gender)
+```
+
+```
+## # A tibble: 2 × 2
+##   gender             n
+##   &lt;chr&gt;          &lt;int&gt;
+## 1 Men's sports      17
+## 2 Women's sports    18
+```
+
+---
+name: college-rankings
+
+# Example 2: College rankings on Wikipedia
+
+How could we scrape college rankings?
+
+.center[
+&lt;figure&gt;
+  &lt;a href="https://web.archive.org/web/20220405170508/https://en.wikipedia.org/wiki/College_and_university_rankings_in_the_United_States"&gt;
+    &lt;img src="img/13/college-rankings.png" width="75%"&gt;
+  &lt;/a&gt;
+&lt;/figure&gt;
+]
+
+.tiny[
+*The site has changed over time, so we will scrape an archive from [The Wayback Machine](https://web.archive.org/web/20220405170508/https://en.wikipedia.org/wiki/College_and_university_rankings_in_the_United_States). One of web scraping's many challenges!*
+]
+
+???
+
+Source: https://en.wikipedia.org/wiki/College_and_university_rankings_in_the_United_States#U.S._News_&amp;_World_Report_Best_Colleges_Ranking
+
+---
+
+# Use `.wikitable` tag to get the first table
+
+
+``` r
+rankings &lt;- read_html("https://web.archive.org/web/20220405170508/https://en.wikipedia.org/wiki/College_and_university_rankings_in_the_United_States")
+
+first_table &lt;- rankings |&gt; 
+* html_element(".wikitable") |&gt; # extract the first .wikitable
+* html_table()                  # convert html to a data frame
+
+first_table
+```
+
+```
+## # A tibble: 21 × 5
+##    Top national universit…¹ `2022 rank` ``    Top liberal arts col…² `2022 rank`
+##    &lt;chr&gt;                          &lt;int&gt; &lt;lgl&gt; &lt;chr&gt;                        &lt;int&gt;
+##  1 Princeton University               1 NA    Williams College                 1
+##  2 Columbia University                2 NA    Amherst College                  2
+##  3 Harvard University                 2 NA    Swarthmore College               3
+##  4 Massachusetts Institute…           2 NA    Pomona College                   4
+##  5 Yale University                    5 NA    Wellesley College                5
+##  6 Stanford University                6 NA    Bowdoin College                  6
+##  7 University of Chicago              6 NA    United States Naval A…           6
+##  8 University of Pennsylva…           8 NA    Claremont McKenna Col…           8
+##  9 California Institute of…           9 NA    Carleton College                 9
+## 10 Duke University                    9 NA    Middlebury College               9
+## # ℹ 11 more rows
+## # ℹ abbreviated names: ¹​`Top national universities[13]`,
+## #   ²​`Top liberal arts colleges[14]`
+```
+
+---
+
+# Scraped data frames are data frames
+
+How does Cornell stack up?
+
+--
+
+How could we find it within a table with many other schools?
+
+--
+
+
+``` r
+first_table |&gt; 
+  select(uni = 1, rank = 2) |&gt;       # select and rename the first two columns
+* filter(str_detect(uni, "Cornell")) # use pattern matching to find Cornell
+```
+
+```
+## # A tibble: 1 × 2
+##   uni                 rank
+##   &lt;chr&gt;              &lt;int&gt;
+## 1 Cornell University    17
+```
+
+---
+
+# What if CSS selectors match multiple tables?
+
+.pull-left[
+&lt;figure&gt;
+    &lt;img src="img/13/college-rankings-us-news.png" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+.pull-right[
+&lt;figure&gt;
+    &lt;img src="img/13/college-rankings-parents-dream.png" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# What if CSS selectors match multiple tables?
+
+#### Multiple options:
+
+#### 1. Tweak CSS selectors to uniquely identify element (if possible)
+
+#### 2. Scrape all of them, then use familiar R tools to extract data
+
+--
+
+Let's try option 2
+
+---
+
+# Scrape all the tables
+
+Use `html_elements()` to extract all matching elements
+
+
+``` r
+all_tables &lt;- rankings |&gt; 
+* html_elements(".wikitable") |&gt; # extract all the .wikitables
+  html_table()                   # convert html to a data frame
+```
+
+--
+
+
+``` r
+class(all_tables) # we get a list of tables
+```
+
+```
+## [1] "list"
+```
+
+--
+
+
+``` r
+length(all_tables) # 11 tables, to be exact
+```
+
+```
+## [1] 11
+```
+
+---
+
+# How could we extract individual tables?
+
+
+```
+## # A tibble: 3 × 2
+##   `Top national universities[13]` `2022 rank`
+##   &lt;chr&gt;                                 &lt;int&gt;
+## 1 Princeton University                      1
+## 2 Columbia University                       2
+## 3 Harvard University                        2
+```
+
+
+```
+## # A tibble: 3 × 2
+##   University                            `Students' Dream  College Ranking`
+##   &lt;chr&gt;                                                              &lt;int&gt;
+## 1 Stanford University                                                    1
+## 2 Harvard University                                                     2
+## 3 University of California, Los Angeles                                  3
+```
+
+
+```
+## # A tibble: 3 × 2
+##   University                            `Parents' Dream  College Ranking`
+##   &lt;chr&gt;                                                             &lt;int&gt;
+## 1 Stanford University                                                   1
+## 2 Princeton University                                                  2
+## 3 Massachusetts Institute of Technology                                 3
+```
+
+---
+
+# String matching again!
+
+
+``` r
+# use str_detect() to search for tables with "Parents"
+str_detect(all_tables, "Parents")
+```
+
+```
+##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+```
+
+--
+
+
+``` r
+# or use str_which() to get position of matching object(s)
+str_which(all_tables, "Parents")
+```
+
+```
+## [1] 8
+```
+
+
+---
+
+# You are fulfilling your parents' dreams
+
+
+``` r
+# now extract table(s) with "Parents"
+# below we use `[]` syntax to extract the table by index
+# this is because because all_tables is a list, not a data frame
+all_tables[str_detect(all_tables, "Parents")]
+```
+
+```
+## [[1]]
+## # A tibble: 10 × 2
+*##    University                            `Parents' Dream  College Ranking`
+##    &lt;chr&gt;                                                             &lt;int&gt;
+##  1 Stanford University                                                   1
+##  2 Princeton University                                                  2
+##  3 Massachusetts Institute of Technology                                 3
+##  4 Harvard University                                                    4
+##  5 New York University                                                   5
+##  6 University of Pennsylvania                                            6
+##  7 University of Michigan                                                7
+##  8 Duke University                                                       8
+##  9 University of California, Los Angeles                                 9
+*## 10 Cornell University                                                   10
+```
+
+
+---
+class: inverse, center, middle
+name: robots-txt
+
+# robots.txt
+
+---
+
+# robots.txt
+
+So far we have scraped data from Wikipedia without much on legality or ethics
+
+We acknowledged that scraping is costly to "us" and "them"
+
+But how do we know what we "should" and "should not" scrape?
+
+---
+
+# The Robots Exclusion Protocol
+
+The Robots Exclusion Protocol is a *voluntary* standard for web scraping
+
+Site owners provide guidance via `robots.txt` files
+
+Let's take a look at some examples
+
+---
+
+# Does Reddit want us to scrape data?
+
+Reddit's [robots.txt](https://www.reddit.com/robots.txt/) says:
+
+.center[
+&lt;figure&gt;
+  &lt;a href="https://www.reddit.com/robots.txt/"&gt;
+    &lt;img src="img/13/reddit-robots-txt.png" width="100%"&gt;
+  &lt;/a&gt;
+&lt;/figure&gt;
+]
+
+???
+
+Source: https://www.reddit.com/robots.txt/
+
+
+---
+
+# Does Wikipedia want us to scrape data?
+
+https://en.wikipedia.org/robots.txt
+
+For users like us (`User-agent: *`), they say that:
+
+&gt; "Friendly, low-speed bots are welcome viewing article pages, but not dynamically-generated pages please."
+
+---
+
+# Does Yahoo Finance want us to scrape data?
+
+https://finance.yahoo.com/robots.txt
+
+For scraping bots like `anthropic-ai`, they disallow the entire site
+
+For others, like us, they disallow specific pages
+
+We can safely scrape content from other pages within the site
+
+---
+class: inverse, center, middle
+name: prelim-2
+
+# Prelim 2
+
+---
+
+# Prelim 2 overview
+
+Prelim 2 will cover material from **Weeks 7 through 14**
+
+Format: paper exam, closed-book (-notes, -computer, etc.)
+
+It will stress concepts more than syntax (but will test both)
+
+We will have multiple question types, including but not limited to:
+1. improve this data visualization
+2. explain how you would approach a coding task
+3. explain what this function call would return
+4. explain whether/why this code would fail
+5. write code snippets
+
+---
+
+# Prelim 2 preparation
+
+I will provide practice questions before Thanksgiving Break
+
+We will host extra office hours leading up to the test:
+- Monday, Dec 1: the TAs will have regular open office hours
+- Tuesday, Dec 2: review session in class
+- Thursday, Dec 4: no class (optional TA office hours)
+
+Questions?
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "%current%",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": false
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
