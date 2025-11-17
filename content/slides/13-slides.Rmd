@@ -52,29 +52,24 @@ class: center, middle
 AEM 2850 / 5850 : R for Business Analytics<br>
 Cornell Dyson<br>
 Fall 2025
-
-<!-- Acknowledgements:  -->
-<!-- [Andrew Heiss](https://datavizm20.classes.andrewheiss.com) -->
-<!-- [Claus Wilke](https://wilkelab.org/SDS375/) -->
-<!-- [Grant McDermott](https://github.com/uo-ec607/lectures) -->
-<!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), -->
-<!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) -->
-<!-- [Ed Rubin](https://github.com/edrubin/EC524W22) -->
 ]
 
 ---
 
 # Announcements
 
-Only two full weeks left!
+This is our last full week of class! 😢
 
 <!-- Group project graded, will discuss at end of class -->
 
-Remaining deadlines:
-  - Homework-13 will be due Monday
-  - Homework-14 will be our example in class next Thursday
-  - Prelim 2 on May 6 in class (two weeks from today)
-    <!-- - I will give more guidance on this soon -->
+**Homework - Week 13** will be due Monday
+
+**Homework - Week 14** will not exist due to time constraints
+  - But next Tuesday's material is still fair game for Prelim 2!
+
+**Prelim 2** is December 4 at 7:30pm
+  - I will provide more information at the end of class today
+  - I will post practice problems before Thanksgiving Break
 
 Questions before we get started?
 
@@ -88,7 +83,9 @@ Questions before we get started?
   - [Cornell sports](#cornell-sports)
   - [College rankings](#college-rankings)
 
-[Group project debrief](#group-project)
+[robots.txt](#robots-txt)
+
+<!-- [Group project debrief](#group-project) -->
 
 [Prelim 2](#prelim-2)
 
@@ -233,7 +230,7 @@ Source: [https://rvest.tidyverse.org/articles/rvest.html](https://rvest.tidyvers
 **Elements**
 
 - There are over 100 HTML elements
-- Google tags to learn about them as needed
+- Look up tags to learn about them as needed
 
 --
 
@@ -263,11 +260,7 @@ CSS stands for **C**ascading **S**tyle **S**heets
 
 - Tool for defining visual appearance of HTML
 
---
-
 **CSS selectors** help identify what we want to scrape
-
---
 
 We will learn by example using the extension/bookmarklet [SelectorGadget](https://selectorgadget.com)
 
@@ -744,45 +737,70 @@ all_tables[str_detect(all_tables, "Parents")]
 
 ---
 class: inverse, center, middle
-name: group-project
+name: robots-txt
 
-# Group project
-
----
-
-# Overall feedback
-
-Good job!
-
-Overall we were pleased with everyone's work
-
-This assignment was meant to push you, and it was interesting to see the approaches different groups took
+# robots.txt
 
 ---
 
-# Group project highlights
+# robots.txt
 
-Many groups included things like executive summaries, a table of contents, etc. to tie the report together
+So far we have scraped data from Wikipedia without much on legality or ethics
 
-One group went above and beyond by providing a secondary visualization that they thought improved on the one we had asked for
+We acknowledged that scraping is costly to "us" and "them"
 
-AEM 5850 groups produced clear slide decks with key results
-- Groups rose to the challenge of using our old tools to output something new
-- One group added some real polish in post-processing
-- Fun fact: quarto can use powerpoint templates
+But how do we know what we "should" and "should not" scrape?
 
 ---
 
-# Grading
+# The Robots Exclusion Protocol
 
-Median grade was 90%
+The Robots Exclusion Protocol is a *voluntary* standard for web scraping
 
-We posted scores along with feedback on canvas
+Site owners provide guidance via `robots.txt` files
 
-Please email me, Victor, and Xiaorui if you have any questions about grading
-- Do this in a single email so we all have access to the same information
+Let's take a look at some examples
 
-Questions?
+---
+
+# Does Reddit want us to scrape data?
+
+Reddit's [robots.txt](https://www.reddit.com/robots.txt/) says:
+
+.center[
+<figure>
+  <a href="https://www.reddit.com/robots.txt/">
+    <img src="img/13/reddit-robots-txt.png" width="100%">
+  </a>
+</figure>
+]
+
+???
+
+Source: https://www.reddit.com/robots.txt/
+
+
+---
+
+# Does Wikipedia want us to scrape data?
+
+https://en.wikipedia.org/robots.txt
+
+For users like us (`User-agent: *`), they say that:
+
+> "Friendly, low-speed bots are welcome viewing article pages, but not dynamically-generated pages please."
+
+---
+
+# Does Yahoo Finance want us to scrape data?
+
+https://finance.yahoo.com/robots.txt
+
+For scraping bots like `anthropic-ai`, they disallow the entire site
+
+For others, like us, they disallow specific pages
+
+We can safely scrape content from other pages within the site
 
 ---
 class: inverse, center, middle
@@ -792,31 +810,9 @@ name: prelim-2
 
 ---
 
-# Motivation
+# Prelim 2 overview
 
-Use prelims to assess what you have each learned this semester
-
-Benefit from using a mix of assessments that provide more signal, less noise
-
-Learn from experience of other programming courses on campus
-
----
-
-# Prelim 2 last year
-
-Last year, prelim 2 was a mix of data visualization and programming concepts
-
-Roughly 1/2 of the points did not require writing any code
-
-Examples:
-1. "Describe four changes you would make to improve this data visualization without losing any information."
-2. "Describe three changes you could make to this visualization to better illustrate the ideas in the text above."
-
----
-
-# Prelim 2 this year
-
-This year, prelim 2 will emphasize the same content
+Prelim 2 will cover material from **Weeks 7 through 14**
 
 Format: paper exam, closed-book (-notes, -computer, etc.)
 
@@ -829,18 +825,15 @@ We will have multiple question types, including but not limited to:
 4. explain whether/why this code would fail
 5. write code snippets
 
-If we ask you to write code snippets, we will provide a function reference sheet
-
 ---
 
 # Prelim 2 preparation
 
-We will provide practice questions next week
+I will provide practice questions before Thanksgiving Break
 
-I will offer extra office hours by appointment
-
-The TAs will have regular open office hours May 2 and May 5
-
-We are working to schedule an extra review session on May 5 in the late afternoon
+We will host extra office hours leading up to the test:
+- Monday, Dec 1: the TAs will have regular open office hours
+- Tuesday, Dec 2: review session in class
+- Thursday, Dec 4: no class (optional TA office hours)
 
 Questions?
