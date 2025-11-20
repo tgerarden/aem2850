@@ -1,7 +1,7 @@
 ---
 title: "Web scraping"
 linktitle: "Web scraping"
-date: "`r format(Sys.time())`"
+date: "2025-11-19 22:29:54"
 output:
   blogdown::html_page:
     keep_md: true # do this to save results in .md file
