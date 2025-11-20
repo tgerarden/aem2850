@@ -11,7 +11,7 @@
 # You can do this using keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
 #########################################################
 title: "Homework - Week 13"
-author: Write your name here
+author: "Write your name here"
 date: today
 format: pdf
 urlcolor: blue
@@ -20,10 +20,6 @@ urlcolor: blue
 ```{r setup, include = FALSE}
 library(tidyverse) # load the core tidyverse packages
 library(rvest) # load rvest (from tidyverse) for web scraping
-
-# set a user agent for simulating a web browser session later
-library(httr) # load httr, which is installed as a dependency of the tidyverse
-agent <- user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
 
 # set global options for all code chunks
 library(knitr)
@@ -44,28 +40,37 @@ We will get data for this assignment from the web.
 
 
 {{< pagebreak >}}
-## 1. Let's warm up by building on our work to scrape stock prices from this week's example. Write code that scrapes Goldman Sach's historical daily share price from [https://finance.yahoo.com/quote/GS/history](https://finance.yahoo.com/quote/GS/history). Clean the data, converting Date to a date and all other variables to doubles. Print the first 10 rows of the resulting data frame. What is the earliest date for which prices are available?
 
-*Note: If you don't know where to start, review example-13-solutions on posit cloud!*
+## 1. Let's warm up by building on our work to scrape stock prices from this week's example. Write code that scrapes Goldman Sach's historical daily share price from [https://stooq.com/q/d/?s=GS.us](https://stooq.com/q/d/?s=GS.us). Clean the data, converting Date to a date and all other variables to doubles. Print the first 10 rows of the resulting data frame. What is the earliest date for which prices are available?
+
+*Note: We're providing code for this problem to get you started, but you can also review example-13-solutions on posit cloud!*
 
 ```{r}
+gs_prices <- "https://stooq.com/q/d/?s=GS.us" |> 
+  read_html() |>
+  html_element("table#fth1") |>
+  html_table(header = TRUE) |>
+  select(-`No.`, -Change) |> 
+  type_convert() |>
+  mutate(Date = dmy(Date))
 
+gs_prices
 ```
-The earliest date for which prices are available is ...
+The earliest date for which prices are available is...
 
 
 {{< pagebreak >}}
+
 ## 2. Now generalize your code from question 1 into a function that takes a ticker as an input and returns historical daily prices. As before, clean the data and convert Date to a date and all other variables to doubles. Have the function return the data frame. Test the function with a ticker of your choice, so that it prints the first 10 rows of the data frame below.
 
-<!-- *Note: example-13-solutions could be helpful here, too!* -->
-
 ```{r}
 
 ```
 
 
 {{< pagebreak >}}
-## 3. Adapt your function from question 2 to create a variable `symbol` in the data frame that contains the value of the argument `ticker`. Use your revised function in conjunction with `map()` to scrape prices for several of the top employers for Dyson graduates: Bank of America, Barclays, Capital One, Citigroup, Goldman Sachs, J.P. Morgan, Lazard, and Morgan Stanley. Use the function `bind_rows()` to combine the list of data frames into a single data frame. How many rows are in the data frame?
+
+## 3. Adapt your function from question 2 to create a variable `symbol` in the data frame that contains the value of the argument `ticker`. Use your revised function in conjunction with `map()` to scrape prices for several of the top employers for Dyson graduates: Bank of America, Barclays, Capital One, Citigroup, Goldman Sachs, J.P. Morgan, Lazard, and Morgan Stanley. Assign the resulting list to `prices_list`. Use the function `bind_rows()` to combine the list of data frames into a single data frame (i.e., write `bind_rows(prices_list)`). How many rows are in the data frame?
 
 <!-- Note: you don't need to print the data frame. -->
 
@@ -76,11 +81,12 @@ There are ... rows in the data frame.
 
 
 {{< pagebreak >}}
-## 4. Tickers can be pretty hard to decipher. Modify your function to scrape company names from yahoo finance using the selector `"title"`, and store it in a variable `company` in the data frame your function returns. Remove the trailing ticker in parentheses and any whitespace to get just the company's name. Use the revised function to create a data frame for the companies from question 3. How many columns are in the data frame?
+
+## 4. Tickers can be pretty hard to decipher. Modify your function to scrape company names from using the selector `"#f18"`, and store it in a variable `company` in the data frame your function returns. Remove the leading text `"Historical data: "`, the trailing ticker in parentheses, and any whitespace to get just the company's name. Use the revised function to create a data frame for the companies from question 3. How many columns are in the data frame?
 
 *Note: It's best practice to minimize requests to websites when scraping, so please only `read_html()` once within the function.*
 
-<!-- *It can be difficult to pin down selectors on some sites. In some cases, SelectorGadget doesn't even work! One solution to this is to view the page source and search through it for the contents you are after (e.g., "JPMorgan") in order to find candidate selectors. We are providing the selector "title" so you can focus more on the scraping process than the art of identifying the right selectors. -->
+<!-- *It can be difficult to pin down selectors on some sites. In some cases, SelectorGadget doesn't even work! One solution to this is to view the page source and search through it for the contents you are after (e.g., "JPMorgan") in order to find candidate selectors. We are providing the selector "#f18" so you can focus more on the scraping process than the art of identifying the right selectors. -->
 
 ```{r}
 
@@ -89,6 +95,7 @@ There are ... columns in the data frame.
 
 
 {{< pagebreak >}}
+
 ## 5. Use the variable `Open` in the data frame from question 4 to compute cumulative returns for each company over the period of data you scraped. Plot the amounts in a graph with the best performing stock first and worst performing stock last, labeled using company names (not tickers).
 
 <!-- *Note: Make sure you get the right dates when computing returns!* -->
@@ -99,6 +106,7 @@ There are ... columns in the data frame.
 
 
 {{< pagebreak >}}
+
 ## 6. Use the variable `Open` in the data frame from question 4 to plot share prices over time for each company in facets using the option `scales = "free_y"`. Make sure the facets are labeled with company names (not tickers).
 
 ```{r out.width = "100%"}
@@ -107,7 +115,12 @@ There are ... columns in the data frame.
 
 
 {{< pagebreak >}}
-## 7. Now let’s try to scrape data over a custom date range. Go back to the historical data on yahoo ﬁnance and use the header to customize the frequency to Monthly and time period to ﬁve years (“5Y”). Verify that the table updated. Now copy and paste the updated url into the code chunk below. Modify your code from question 4 to create a data frame of monthly prices for each ticker, and then plot the Open prices over time for each company in facets using the option `scales = "free_y"`.
+
+# Just for fun
+
+*Note: These two questions are not required as part of this homework. They will not factor into your grade either way (positive or negative). We're just leaving them here in case you want more practice.*
+
+## Now let’s try to scrape data over a custom date range. Go back to the historical data and use the header to customize the frequency to Monthly and time period from Nov 20, 2020 to Nov 20, 2025. Click Show. Scroll down to the bottom of the page and right click on the link "Download data in csv file..." to copy the link. Paste the updated url into the code chunk below. Modify your code from question 4 to use this link in conjunction with `read_csv()` in order to to create a data frame of monthly prices for each ticker. Finally, plot the Open prices over time for each company in facets using the option `scales = "free_y"`.
 
 ```{r out.width = "100%"}
 
@@ -115,9 +128,10 @@ There are ... columns in the data frame.
 
 
 {{< pagebreak >}}
-## 8. What if we want to focus on a different time period? Customize your function from question 7 to take three arguments: the ticker, start date, and end date (in date format). Use the function to make a data frame of monthly prices for the ticker `GS` from January 1, 2000 through December 31, 2024, and make a plot of Open prices analogous to the one from question 7 (but for just Goldman Sachs).
 
-<!-- Hint: The yahoo finance query system relies on Unix times, which are the number of seconds since the start of January 1, 1970. To compute that number, you could use `mdy()` (for example) to convert the start date and January 1, 1970 to date format, and take the difference between the two dates. However, that will be in days. We need seconds. To convert to seconds, you could use `as.duration()` and then `as.numeric()` to get the seconds. Repeat those steps for the end date. Plug those numbers into the url for web scraping and you're off! -->
+## What if we want to focus on a different time period? Customize your "just for fun" function to take three arguments: the ticker, start date, and end date (in date format). Use the function to make a data frame of monthly prices for the ticker `GS` from January 1, 2000 through December 31, 2024, and make a plot of Open prices analogous to the one from question 7 (but for just Goldman Sachs).
+
+<!-- Hint: The query system relies on dates in YYYYMMDD format. You can get dates tha conform with this format by converting the start date to a character using `as.character()` and then removing the hyphens using `str_remove_all("-")`. Repeat those steps for the end date. Plug those numbers into the url for getting the csv file and you're off! -->
 
 ```{r}
 
