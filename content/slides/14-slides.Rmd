@@ -92,17 +92,15 @@ Acknowledgements:
 # Announcements
 
 Plan for this week:
-  - Tuesday: slides and a short example
-  - Thursday: prelim 2 Q&A, time to complete course evaluations, **homework-14**
-    - If you come to class and work through the homework, you will get full credit
-    - Due Thursday at 11:59pm so you can focus on studying for prelim 2
-
+  - Tuesday: slides and example-14
+  - Thursday: No class due to Thanksgiving Break
+  
 --
 
 Plan for next week:
-  - **Prelim 2** in class on Tuesday, May 6
-  - **Homework 15 - Course Survey** due Monday, May 12 at 11:59pm
-    - I will give you time in class on Thursday to complete this
+  - Tuesday: **Prelim 2 Q&A** and **Course evaluations**
+  - Thursday: optional TA office hours in class
+  - Thursday evening: **Prelim 2 at 7:30pm in MLT 228**
 
 --
 
@@ -114,67 +112,17 @@ Questions before we get started?
 
 .pull-left[
 ### Tuesday
-  - [Course evaluations reminder](#course-evals)
   - [Prologue](#prologue)
   - [Text mining with R](#tidytext)
   - [example-14](#example-14)
+  - [Time permitting: tf-idf](#tf-idf)
   - [Time permitting: n-gram ratios](#n-gram-ratios)
 ]
 
 .pull-right[
 ### Thursday
-  - [Prelim 2 Q&A](#prelim-2)
-  - [Complete course evaluations](#course-evals-in-class)
-  - [Homework-14](#homework)
-  - [Time permitting: finish example-14](#homework)
+  - *Thanksgiving Break:<br>No class on Nov 27*
 ]
-
----
-class: inverse, center, middle
-name: course-evals
-
-# Course evaluations
-
----
-
-# Course objectives reminder
-
-1. Develop basic proficiency in `R` programming
-2. Understand data structures and manipulation
-3. Describe effective techniques for data visualization and communication
-4. Construct effective data visualizations
-5. Utilize course concepts and tools for business applications
-
-With these objectives in mind...
-
----
-
-# Please complete course evaluations
-
-I take feedback seriously and will use it to improve this course!
-
---
-
-Concrete suggestions are most helpful
-
---
-
-**I would appreciate your feedback through two *anonymous* channels:**
-
-1. Homework 15 - Course Feedback Survey (on canvas)
-2. University course evaluations
-
---
-
-**I will give you time to complete these in class on Thursday**
-
---
-
-**I will award a bonus point on Homework 15 for completing evaluations**
-
---
-
-Thank you in advance for your feedback!
 
 ---
 class: inverse, center, middle
@@ -368,11 +316,11 @@ Topics and LDA
 
 **Sentiment analysis**
 
-**tf-idf**
+tf-idf
 
 Topics and LDA
 
-**We will cover tokens, sentiment analysis, and tf-idf** (time permitting)
+**We will cover tokens and sentiment analysis** given time constraints
 
 ---
 
@@ -602,7 +550,7 @@ That's better!
 
 # Tokenization: n-grams
 
-**n** contiguous tokens are an **n-gram**
+**n** contiguous tokens form an **n-gram**
 
 Example: two consecutive words are a bigram
 
@@ -835,6 +783,20 @@ ggplot(hp_sentiment,
 ```
 
 ---
+class: inverse, center, middle
+name: example-14
+
+# example-14
+
+
+---
+class: inverse, center, middle
+name: tf-idf
+
+# tf-idf
+
+
+---
 
 # tf-idf
 
@@ -880,13 +842,6 @@ ggplot(hp_tf_idf_plot, aes(y = fct_reorder(word, tf_idf), x = tf_idf, fill = boo
   labs(y = NULL) +
   theme_bw()
 ```
-
-
----
-class: inverse, center, middle
-name: example-14
-
-# example-14
 
 
 ---
@@ -1195,71 +1150,4 @@ plot_word_ratios |>
   theme(legend.position = "bottom")
 ```
 ]
-
-
----
-class: inverse, center, middle
-name: prelim-2
-
-# Prelim 2
-
----
-
-# Prelim 2
-
-Format: paper exam, closed-book (-notes, -computer, etc.)
-
-It will stress concepts more than syntax (but will test both)
-
-We will have multiple question types, including but not limited to:
-1. improve this data visualization
-2. multiple choice and short answer questions
-3. explain how you would approach a coding task, including key functions (but not full code)
-4. explain what code we provide would do
-5. write short code snippets
-
-**TBD:** we *may* provide a function reference sheet (will announce by Monday AM)
-
----
-
-# Prelim 2 preparation
-
-We will provide practice questions by Friday, May 2
-
-I have extra office hours by appointment May 1 and May 2
-
-The TAs will have regular open office hours May 2 and May 5
-
-The TAs will host an extra review session on May 5 (see canvas for details)
-
-Questions?
-
----
-class: inverse, center, middle
-name: course-evals-in-class
-
-# Course evaluations
-
----
-
-# Please take 10 mins to complete course evals
-
-I take feedback seriously and will use it to improve this course!
-
-Concrete suggestions are most helpful
-
-**I would appreciate your feedback through two channels:**
-
-1. Homework 15 - Course Feedback Survey (on canvas)
-2. University course evaluations
-
-Both will be anonymous
-
-Reminder: **bonus point on Homework 15 for completing university evaluations**
-
----
-class: inverse, center, middle
-name: homework
-
-# Homework-14
 

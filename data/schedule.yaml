@@ -128,9 +128,9 @@ lessons:
   - title: '<span class="content-title">Text</span>'
     session: "Session 14"
     date: "Week 14"
-    # content: "14-content"
-    # example: "14-example"
-    # assignment: "14-homework"
+    content: "14-content"
+    example: "14-example"
+    assignment: "14-homework"
     bg: 2
 
   - title: '<span class="content-title">*Thanksgiving Break: No class on Nov 27*</span>'

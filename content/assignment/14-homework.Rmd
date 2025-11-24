@@ -17,6 +17,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Homework
+## No homework this week
 
-Navigate to [posit.cloud](http://posit.cloud), open the project `homework-14` in our course workspace, and follow the instructions in the file `homework-14.qmd`.
+There is no homework for this week. Have a nice Thanksgiving Break!

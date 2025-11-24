@@ -1,0 +1,390 @@
+---
+title: "Conclusion"
+author: "Todd Gerarden"
+output:
+  xaringan::moon_reader:
+    lib_dir: "libs"
+    css: ["xaringan-themer.css", "css/tdg-slides.css"]
+#    css: ['default', 'metropolis', 'metropolis-fonts']
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%"
+      ratio: "16:9"
+      navigation:
+        scroll: false
+      # beforeInit: "libs/offline-mathjax.js"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(base_color = "#B31B1B",
+                  text_font_size = "1.4rem")
+xaringanExtra::use_xaringan_extra(c("tile_view"))
+```
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(warning = FALSE, message = FALSE, 
+                      #cache = TRUE,
+                      fig.retina = 3, fig.align = "center",
+                      fig.width=14, fig.height=7)
+```
+
+```{r packages-data, include=FALSE}
+library(tidyverse)
+```
+
+
+
+class: center, middle
+
+# Conclusion
+
+.class-info[
+
+**Week 15**
+
+AEM 2850 / 5850 : R for Business Analytics<br>
+Cornell Dyson<br>
+Fall 2025
+
+<!-- Acknowledgements:  -->
+<!-- [Andrew Heiss](https://datavizm20.classes.andrewheiss.com) -->
+<!-- [Claus Wilke](https://wilkelab.org/SDS375/) -->
+<!-- [Grant McDermott](https://github.com/uo-ec607/lectures) -->
+<!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), -->
+<!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) -->
+<!-- [Ed Rubin](https://github.com/edrubin/EC524W22) -->
+]
+
+---
+
+# Announcements
+
+Lab-14 deadline extended to Wednesday (see canvas announcement)
+
+Final project plan feedback on canvas
+
+Final project details, rubric [posted on course site](https://aem2850.toddgerarden.com/assignment/final-project/)
+
+Extra office hours appointments available
+
+Questions before we get started?
+
+---
+
+# Plan for today
+
+[Course evaluations](#course-evals)
+
+[Final project guidance](#final-project)
+
+[Parting thoughts](#parting-thoughts)
+
+---
+class: inverse, center, middle
+name: course-evals
+
+# Course evaluations
+
+---
+
+# Course objectives reminder
+
+1. Develop basic proficiency in `R` programming
+2. Understand data structures and manipulation
+3. Describe effective techniques for data visualization and communication
+4. Construct effective data visualizations
+5. Utilize course concepts and tools for business applications
+
+---
+
+# Where we've been (weeks 1-4)
+
+1. **Develop basic proficiency in `R` programming**
+2. **Understand data structures and manipulation**
+3. Describe effective techniques for data visualization and communication
+4. Construct effective data visualizations
+5. Utilize course concepts and tools for business applications
+
+---
+
+# Where we've been (weeks 5-10)
+
+1. Develop basic proficiency in `R` programming
+2. Understand data structures and manipulation
+3. **Describe effective techniques for data visualization and communication**
+4. **Construct effective data visualizations**
+5. **Utilize course concepts and tools for business applications**
+
+---
+
+# Where we've been (weeks 11-15)
+
+1. **Develop basic proficiency in `R` programming**
+2. **Understand data structures and manipulation**
+3. **Describe effective techniques for data visualization and communication**
+4. **Construct effective data visualizations**
+5. **Utilize course concepts and tools for business applications**
+
+---
+
+# Where we're going next (weeks 15+)
+
+Last week we covered **web scraping** by popular demand
+
+This week we'll wrap up the course
+
+But you don't have to stop learning!
+
+**Please feel free to come see me in office hours if you want to discuss topics we didn't have time to cover this semester**
+
+---
+
+# Course evaluations
+
+I take feedback seriously and will use it to improve this course!
+
+Extra useful since this is the first offering of AEM 2850
+
+--
+
+Concrete suggestions are most helpful
+
+--
+
+**I would appreciate your feedback through two channels:**
+
+1. Reflection - Week 15 - Course Feedback Survey
+2. University course evaluations
+
+--
+
+Both will be anonymous
+
+---
+
+# University course evaluations
+
+Anonymous: we just get summary reports, after grades are submitted
+
+I will give you time to complete them in class next Tuesday
+
+**I will award a bonus point on Reflection 15 for completing evaluations**
+
+Thank you in advance for your feedback!
+
+--
+
+**I will give you time now to complete evaluations in class**
+
+---
+class: inverse, center, middle
+name: final-project
+
+# Final project
+
+---
+
+# Key steps and timeline
+
+### ~~Step 1: Choose a group by Friday, April 29~~
+
+### ~~Step 2: Choose data and make a plan by Thursday, May 5~~
+
+### Step 3: Execute your plan
+
+### Step 4: Submit your final project by Thursday, May 19 at 4:30pm
+
+---
+
+# Expectations and grading
+
+I posted more detailed instructions and a grading rubric [on the course site](https://aem2850.toddgerarden.com/assignment/final-project/)
+
+Let's go through them now
+
+--
+
+Any questions?
+
+---
+class: inverse, center, middle
+name: parting-thoughts
+
+# Parting thoughts
+
+---
+
+# Why take R for Business Analytics?
+
+<br>
+
+.center[
+<img src = "img/01/Data_science_venn.svg", width = 60%></img>
+]
+
+
+---
+
+# Why take R for Business Analytics?
+
+<br>
+
+.center[
+<img src = "img/01/Data_visualization_venn.svg", width = 60%></img>
+]
+
+
+---
+
+# Why R for Business Analytics?
+
+<img src = "img/01/Rlogo.svg", width = 25%, style = "position:absolute; top: 25%; left: 15%;"></img>
+
+<img src = "img/01/rstudio-logo.png", width = 35%, style = "position:absolute; top: 65%; left: 8%;"></img>
+
+<img src = "img/01/tidyverse-packages.png", width = 50%, style = "position:absolute; top: 25%; left: 45%;"></img>
+
+???
+
+The R logo [is distributed](https://www.r-project.org/logo/) under the terms of the Creative Commons Attribution-ShareAlike 4.0 International license ([CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)).
+
+RStudio tidyverse hex stickers [are distributed](https://github.com/rstudio/hex-stickers) under [CC0.](https://github.com/rstudio/hex-stickers/blob/master/LICENSE.md)
+
+Tidyverse image came from RStudio education blog post [here](https://education.rstudio.com/blog/2020/07/teaching-the-tidyverse-in-2020-part-1-getting-started/)
+
+---
+
+# Why R for Data Visualization?
+
+.pull-left[
+
+<figure>
+  <img src="img/01/ggplot2.svg" alt="ggplot logo" title="ggplot logo" width="85%">
+</figure>
+
+]
+
+.pull-right[
+
+&nbsp;
+
+<figure>
+  <img src="img/01/ggplot-layers@4x.png" alt="ggplot logo" title="ggplot logo" width="100%">
+</figure>
+
+]
+
+---
+
+# Why R for Data Visualization?
+
+.center[
+<figure>
+  <img src="img/01/complexity-chart@4x.png" alt="Complexity chart" title="Complexity chart" width="65%">
+</figure>
+]
+
+---
+
+# Broader lessons
+
+---
+
+# Just show me the data?
+
+.center[
+<figure>
+  <img src="img/01/DinoSequentialSmaller.gif" alt="Datasaurus Dozen" title="Datasaurus Dozen" width="100%">
+  <figcaption><a href="https://www.autodeskresearch.com/publications/samestats" target="_blank">The Datasaurus Dozen</a></figcaption>
+</figure>
+]
+
+---
+
+# Raw data is not enough!
+
+This semester we developed tools and practices for:
+  - Data cleaning
+  - Data visualizing
+  - Data analysis
+
+--
+
+Many of the lessons we learned are independent of software choice!
+
+--
+
+I hope they help you when working in Excel, python, R, Tableau, etc.
+
+---
+
+# What makes a great visualization?
+
+.center[
+
+Truthful
+
+Functional
+
+Beautiful
+
+Insightful
+
+Enlightening
+
+Alberto Cairo, *The Truthful Art*
+
+]
+
+???
+
+Alberto Cairo, *The Truthful Art*:
+
+> 1. It is truthful, as it’s based on thorough and honest research.
+> 
+> 2. It is functional, as it constitutes an accurate depiction of the data, and it’s built in a way that lets people do meaningful operations based on it (seeing change in time).
+> 
+> 3. It is beautiful, in the sense of being attractive, intriguing, and even aesthetically pleasing for its intended audience—scientists, in the first place, but the general public, too.
+> 
+> 4. It is insightful, as it reveals evidence that we would have a hard time seeing otherwise.
+> 
+> 5. It is enlightening because if we grasp and accept the evidence it depicts, it will change our minds for the better.
+
+---
+
+# What makes a great visualization?
+
+> "Graphical excellence is the **well-designed presentation of interesting data**—a matter of substance, of statistics, and of design … [It] consists of complex ideas communicated with clarity, precision, and efficiency. … [It] is that which **gives to the viewer the greatest number of ideas in the shortest time with the least ink in the smallest space** … [It] is nearly always multivariate … And graphical excellence requires **telling the truth about the data**."
+
+Edward Tufte, *The Visual Display of Quantitative Information*, p. 51
+
+---
+
+# What makes a great visualization?
+
+.center[
+
+Good aesthetics
+
+No substantive issues
+
+No perceptual issues
+
+Honesty + good judgment
+
+Kieran Healy, *Data Visualization: A Practical Introduction*
+
+]
+
+---
+class: inverse, center, middle
+
+# Thank you!
+
