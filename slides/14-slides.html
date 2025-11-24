@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Text</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Todd Gerarden" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="css/tdg-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+class: center, middle
+
+# Text
+
+.class-info[
+
+**Week 14**
+
+AEM 2850 / 5850 : R for Business Analytics&lt;br&gt;
+Cornell Dyson&lt;br&gt;
+Fall 2025
+
+Acknowledgements: 
+[Andrew Heiss](https://datavizm20.classes.andrewheiss.com)
+&lt;!-- [Claus Wilke](https://wilkelab.org/SDS375/),  --&gt;
+&lt;!-- [Grant McDermott](https://github.com/uo-ec607/lectures), --&gt;
+&lt;!-- [Jenny Bryan](https://stat545.com/join-cheatsheet.html), --&gt;
+&lt;!-- [Allison Horst](https://github.com/allisonhorst/stats-illustrations) --&gt;
+
+]
+
+---
+
+# Announcements
+
+Plan for this week:
+  - Tuesday: slides and example-14
+  - Thursday: No class due to Thanksgiving Break
+  
+--
+
+Plan for next week:
+  - Tuesday: **Prelim 2 Q&amp;A** and **Course evaluations**
+  - Thursday: optional TA office hours in class
+  - Thursday evening: **Prelim 2 at 7:30pm in MLT 228**
+
+--
+
+Questions before we get started?
+
+---
+
+# Plan for this week
+
+.pull-left[
+### Tuesday
+  - [Prologue](#prologue)
+  - [Text mining with R](#tidytext)
+  - [example-14](#example-14)
+  - [Time permitting: tf-idf](#tf-idf)
+  - [Time permitting: n-gram ratios](#n-gram-ratios)
+]
+
+.pull-right[
+### Thursday
+  - *Thanksgiving Break:&lt;br&gt;No class on Nov 27*
+]
+
+---
+class: inverse, center, middle
+name: prologue
+
+# Prologue
+
+---
+
+# Text comes in many forms
+
+For example: The `schrute` package contains transcripts of [The Office](https://www.imdb.com/title/tt0386676/) (US)
+
+
+``` r
+library(schrute)
+theoffice # this is an object from the schrute package
+```
+
+```
+## # A tibble: 55,130 × 12
+##    index season episode episode_name director   writer    character text  text_w_direction
+##    &lt;int&gt;  &lt;int&gt;   &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;           
+##  1     1      1       1 Pilot        Ken Kwapis Ricky Ge… Michael   All … All right Jim. …
+##  2     2      1       1 Pilot        Ken Kwapis Ricky Ge… Jim       Oh, … Oh, I told you.…
+##  3     3      1       1 Pilot        Ken Kwapis Ricky Ge… Michael   So y… So you've come …
+##  4     4      1       1 Pilot        Ken Kwapis Ricky Ge… Jim       Actu… Actually, you c…
+##  5     5      1       1 Pilot        Ken Kwapis Ricky Ge… Michael   All … All right. Well…
+##  6     6      1       1 Pilot        Ken Kwapis Ricky Ge… Michael   Yes,… [on the phone] …
+##  7     7      1       1 Pilot        Ken Kwapis Ricky Ge… Michael   I've… I've, uh, I've …
+##  8     8      1       1 Pilot        Ken Kwapis Ricky Ge… Pam       Well… Well. I don't k…
+##  9     9      1       1 Pilot        Ken Kwapis Ricky Ge… Michael   If y… If you think sh…
+## 10    10      1       1 Pilot        Ken Kwapis Ricky Ge… Pam       What? What?           
+## # ℹ 55,120 more rows
+## # ℹ 3 more variables: imdb_rating &lt;dbl&gt;, total_votes &lt;int&gt;, air_date &lt;chr&gt;
+```
+
+---
+
+# Text can be analyzed in many ways
+
+&amp;nbsp;
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/14/word-cloud.png" alt="Bad word cloud" title="Bad word cloud" width="85%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Take word clouds, the pie chart of text
+
+**Why are word clouds bad?**
+
+--
+
+- Poor grammar (of graphics)
+  - Usually the only aesthetic is size
+  - Color, position, etc. contain no content
+- Raw word frequency is not always informative
+
+--
+
+**Why are word clouds good?**
+
+--
+
+- Can visualize one-word descriptions
+- Can highlight a single dominant word or phrase
+- Can make before/after comparisons
+
+---
+
+# Some cases are okay
+
+.pull-left[
+.center[
+&lt;figure&gt;
+  &lt;img src="img/14/email-word-cloud.jpg" alt="What Happened? word cloud" title="What Happened? word cloud" width="100%"&gt;
+&lt;/figure&gt;
+]
+]
+
+.pull-right[
+Trump word cloud is uninformative
+
+Clinton word cloud is okay
+- Highlights **email** as the single dominant narrative about Hillary Clinton prior to the 2016 election
+]
+
+???
+
+https://twitter.com/s_soroka/status/907941270735278085
+
+---
+
+# Twitter before and after breakups (4-grams)
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/14/breakups.png" alt="Twitter word cloud before and after breakups" title="Twitter word cloud before and after breakups" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+What do you think of this word cloud?
+
+???
+
+Twitter before and after breakups
+
+https://arxiv.org/abs/1409.5980
+
+https://www.vice.com/en/article/ezvaba/what-our-breakups-look-like-on-twitter
+
+---
+
+# Tech CEOs' memos re: layoffs in 2023
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/14/layoffs_wordcloud.png" alt="Washington Post word cloud of tech CEO layoff memos" title="Washington Post word cloud of tech CEO layoff memos" width="58%"&gt;
+&lt;/figure&gt;
+]
+
+What makes this better than a traditional word cloud? What makes this worse?
+
+???
+
+https://www.washingtonpost.com/business/interactive/2023/tech-layoffs-company-memos/
+
+---
+
+# Even better: other methods to visualize text
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/14/layoffs_economy.png" alt="Washington Post analysis of tech CEO layoff memos" title="Washington Post analysis of tech CEO layoff memos" width="75%"&gt;
+  &lt;img src="img/14/layoffs_economic_factors.png" alt="Washington Post analysis of tech CEO layoff memos" title="Washington Post analysis of tech CEO layoff memos" width="75%"&gt;
+  &lt;img src="img/14/layoffs_apologies.png" alt="Washington Post analysis of tech CEO layoff memos" title="Washington Post analysis of tech CEO layoff memos" width="75%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+https://www.washingtonpost.com/business/interactive/2023/tech-layoffs-company-memos/
+
+---
+
+# Even better: other methods to visualize text
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/14/minimap-1.png" alt="Map of US state mentions in song lyrics" title="Map of US state mentions in song lyrics" width="70%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+https://juliasilge.com/blog/song-lyrics-across/
+
+
+---
+class: inverse, center, middle
+name: tidytext
+
+# Text mining with R
+
+---
+
+# Text mining with R
+
+We already learned about strings and regular expressions in week 5
+
+Many of our data frames include `chr` variables with **structured text** that are useful for filtering and other operations (e.g., stock tickers)
+
+--
+
+This week we will learn about methods to glean insights from **unstructured text** (as well as revisit and reinforce what we learned in week 5)
+
+--
+
+**Text mining** refers to this process of extracting structured information from unstructured text
+
+---
+
+# Core concepts and techniques
+
+--
+
+Tokens, lemmas, and parts of speech
+
+--
+
+Sentiment analysis
+
+--
+
+tf-idf
+
+--
+
+Topics and LDA
+
+---
+
+# Core concepts and techniques
+
+**Tokens**, lemmas, and parts of speech
+
+**Sentiment analysis**
+
+tf-idf
+
+Topics and LDA
+
+**We will cover tokens and sentiment analysis** given time constraints
+
+---
+
+# The tidytext package
+
+.pull-left[
+We will use the `tidytext` package
+
+`tidytext` brings tidy data concepts and `tidyverse` tools to text analysis
+]
+
+.pull-right.center[
+&lt;figure&gt;
+  &lt;img src="img/14/cover.png" alt="Tidy text mining with R" title="Tidy text mining with R" width="80%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+https://www.tidytextmining.com/
+
+
+---
+
+# Let's start with some unstructured text
+
+
+```
+THE BOY WHO LIVED　　Mr. and Mrs. Dursley, of number four, Privet Drive, were proud to say that they
+were perfectly normal, thank you very much. They were the last people you'd expect to be involved in
+anything strange or mysterious, because they just didn't hold with such nonsense.　　Mr. Dursley was
+the director of a firm called Grunnings, which made drills. He was a big, beefy man with hardly any
+neck, although he did have a very large mustache. Mrs. Dursley was thin and blonde and had nearly
+twice the usual amount of neck, which came in very useful as she spent so much of her time craning
+over garden fences, spying on the neighbors. The Dursleys had a small son called Dudley and in their
+opinion there was no finer boy anywhere.　　The Dursleys had everything they wanted, but they also
+had a secret, and their greatest fear was that somebody would discover it. They didn't think they
+could bear it if anyone found out about the Potters. Mrs. Potter was Mrs. Dursley's sister, but they
+hadn't met for several years; in fact, Mrs. Dursley pretended she didn't have a sister, because her
+sister and her good-for-nothing husband were as unDursleyish as it was possible to be. The Dursleys
+shuddered to think what the neighbors would say if the Potters arrived in the street. The Dursleys
+knew that the Potters had a small son, too, but they had never even seen him. This boy was another
+good r... 
+```
+
+---
+
+# Data frames can hold unstructured text
+
+As you know, text can be stored in data frames as character strings
+
+Here, each row corresponds to a chapter
+
+
+
+
+``` r
+head(hp1_data)
+```
+
+```
+## # A tibble: 6 × 2
+##   chapter text                                                                            
+##     &lt;int&gt; &lt;chr&gt;                                                                           
+## 1       1 "THE BOY WHO LIVED　　Mr. and Mrs. Dursley, of number four, Privet Drive, were pr…
+## 2       2 "THE VANISHING GLASS　　Nearly ten years had passed since the Dursleys had woken …
+## 3       3 "THE LETTERS FROM NO ONE　　The escape of the Brazilian boa constrictor earned Ha…
+## 4       4 "THE KEEPER OF THE KEYS　　BOOM. They knocked again. Dudley jerked awake. \"Where…
+## 5       5 "DIAGON ALLEY　　Harry woke early the next morning. Although he could tell it was…
+## 6       6 "THE JOURNEY FROM PLATFORM NINE AND THREE-QUARTERS　　Harry's last month with the…
+```
+
+---
+
+# Tidy text (data)
+
+Tidy text format: a table with one **token** per row
+
+--
+
+What is a token in the context of text analysis?
+
+--
+
+- Any meaningful unit of text used for analysis
+
+--
+
+- Often words, but also letters, n-grams, sentences, paragraphs, chapters, etc.
+
+--
+
+The relevant token depends on the analysis you are doing
+
+--
+
+So the definition of tidy text depends on what you are doing!
+
+--
+
+**Tokenization** is the process of splitting text into tokens
+
+---
+
+# Tokenization: words
+
+`tidytext::unnest_tokens` tokenizes **words** by default
+- Optionally: characters, ngrams, sentences, lines, paragraphs, etc.
+
+--
+
+.pull-left[
+
+``` r
+hp1_data |&gt; 
+* unnest_tokens(    # convert data to tokens
+*   input = text,   # split text column
+*   output = "word",# make new word column
+*   ) |&gt;
+  relocate(word)    # move new column to front
+```
+.small[Note: `unnest_tokens()` expects **output** before **input** if you don't name arguments]
+]
+
+--
+
+.pull-right[
+
+```
+## # A tibble: 77,875 × 2
+##    word    chapter
+##    &lt;chr&gt;     &lt;int&gt;
+##  1 the           1
+##  2 boy           1
+##  3 who           1
+##  4 lived         1
+##  5 mr            1
+##  6 and           1
+##  7 mrs           1
+##  8 dursley       1
+##  9 of            1
+## 10 number        1
+## # ℹ 77,865 more rows
+```
+]
+
+---
+
+# We can treat tokens like any other data
+
+.pull-left[
+For example, we can count them:
+
+
+``` r
+hp1_data |&gt; 
+  unnest_tokens(
+    input = text, 
+    output = "word", 
+    ) |&gt;        
+* count(word, sort = TRUE)
+```
+What do you think are the most common words?
+]
+
+--
+
+.pull-right[
+
+```
+## # A tibble: 5,978 × 2
+##    word      n
+##    &lt;chr&gt; &lt;int&gt;
+##  1 the    3629
+##  2 and    1923
+##  3 to     1861
+##  4 a      1691
+##  5 he     1528
+##  6 of     1267
+##  7 harry  1213
+##  8 was    1186
+##  9 it     1027
+## 10 in      968
+## # ℹ 5,968 more rows
+```
+
+Let's visualize this...
+]
+
+---
+
+# Raw word frequency is not always informative
+
+.left-code[
+
+``` r
+hp1_data |&gt; 
+  unnest_tokens("word", text) |&gt; 
+  count(word, sort = TRUE) |&gt; 
+* slice_max(
+*   order_by = n, # order rows by count
+*   n = 10        # slice the top 10 rows
+* ) |&gt;
+  ggplot(aes(
+    x = n, 
+    y = fct_reorder(word, n)
+  )) +
+  geom_col() +
+  labs(
+    x = "Word Frequency in Harry Potter 1", 
+    y = NULL
+    ) +
+  theme_bw()
+```
+
+How can we make this better?
+]
+
+.right-plot[
+![](14-slides_files/figure-html/word-count-plot-1.png)
+]
+
+---
+
+# Stop words
+
+We can filter out common **stop words** that we want to ignore
+
+
+``` r
+stop_words # this is an object from the tidytext package
+```
+
+```
+## # A tibble: 1,149 × 2
+##    word        lexicon
+##    &lt;chr&gt;       &lt;chr&gt;  
+##  1 a           SMART  
+##  2 a's         SMART  
+##  3 able        SMART  
+##  4 about       SMART  
+##  5 above       SMART  
+##  6 according   SMART  
+##  7 accordingly SMART  
+##  8 across      SMART  
+##  9 actually    SMART  
+## 10 after       SMART  
+## # ℹ 1,139 more rows
+```
+
+--
+
+How could we remove these stop words from our Harry Potter tokens?
+
+---
+
+# Token frequency: words
+
+.left-code[
+
+``` r
+hp1_data |&gt; 
+  unnest_tokens("word", text) |&gt; 
+* anti_join(stop_words, join_by(word)) |&gt;
+  count(word, sort = TRUE) |&gt; 
+  slice_max(order_by = n, n = 10) |&gt;
+  ggplot(aes(
+    x = n, 
+    y = fct_reorder(word, n)
+  )) +
+  geom_col() +
+  labs(
+    x = "Word Frequency in Harry Potter 1", 
+    y = NULL
+    ) +
+  theme_bw()
+```
+That's better!
+]
+
+.right-plot[
+![](14-slides_files/figure-html/hp-words-1.png)
+]
+
+---
+
+# Tokenization: n-grams
+
+**n** contiguous tokens form an **n-gram**
+
+Example: two consecutive words are a bigram
+
+--
+
+.more-left[
+
+``` r
+hp1_data |&gt; 
+  unnest_tokens(
+    input = text, 
+*   output = "bigram", # call the new column bigram
+*   token = "ngrams",  # we want to fill it with ngrams
+*   n = 2) |&gt;          # more specifically, bigrams
+  relocate(bigram)
+```
+]
+
+.less-right[
+
+```
+## # A tibble: 77,858 × 2
+##    bigram      chapter
+##    &lt;chr&gt;         &lt;int&gt;
+##  1 the boy           1
+##  2 boy who           1
+##  3 who lived         1
+##  4 lived mr          1
+##  5 mr and            1
+##  6 and mrs           1
+##  7 mrs dursley       1
+##  8 dursley of        1
+##  9 of number         1
+## 10 number four       1
+## # ℹ 77,848 more rows
+```
+]
+
+---
+
+# Tokenization: n-grams
+
+How can we remove bigrams that include one or more stop words given what we have learned so far?
+
+
+```
+## # A tibble: 77,858 × 2
+##    bigram      chapter
+##    &lt;chr&gt;         &lt;int&gt;
+##  1 the boy           1
+##  2 boy who           1
+##  3 who lived         1
+##  4 lived mr          1
+##  5 mr and            1
+##  6 and mrs           1
+##  7 mrs dursley       1
+##  8 dursley of        1
+##  9 of number         1
+## 10 number four       1
+## # ℹ 77,848 more rows
+```
+
+---
+
+# Tokenization: n-grams
+
+How can we remove bigrams that include one or more stop words given what we have learned so far?
+
+.more-left[
+
+``` r
+hp1_data |&gt; 
+  unnest_tokens("bigram", text, token = "ngrams", n = 2) |&gt; 
+* separate_wider_delim(          # remember this?
+*   bigram,                      # split bigrams
+*   delim = " ",                 # split at space
+*   names = c("word1", "word2"), # assign names
+*   cols_remove = FALSE          # keep "bigram" col
+* ) |&gt;
+* anti_join(stop_words,          # remove cases w/ stop
+*   join_by(word1 == word)) |&gt;   #   words in first term
+* anti_join(stop_words,          # remove cases w/ stop
+*   join_by(word2 == word)) |&gt;   #   words in second term
+  count(bigram, sort = TRUE)     # count
+```
+]
+
+.less-right[
+One word at a time:
+1. get each word
+2. filter out stop words
+]
+
+---
+
+# Tokenization: n-grams
+
+What do you think are the most common bigrams in Harry Potter and the Philosopher's Stone, after removing bigrams that include stop words?
+
+.more-left[
+
+``` r
+hp1_data |&gt; 
+  unnest_tokens("bigram", text, token = "ngrams", n = 2) |&gt; 
+* separate_wider_delim(          # remember this?
+*   bigram,                      # split bigrams
+*   delim = " ",                 # split at space
+*   names = c("word1", "word2"), # assign names
+*   cols_remove = FALSE          # keep "bigram" col
+* ) |&gt;
+* anti_join(stop_words,          # remove cases w/ stop
+*   join_by(word1 == word)) |&gt;   #   words in first term
+* anti_join(stop_words,          # remove cases w/ stop
+*   join_by(word2 == word)) |&gt;   #   words in second term
+  count(bigram, sort = TRUE)     # count
+```
+]
+
+--
+
+.less-right[
+
+```
+## # A tibble: 7,695 × 2
+##    bigram                   n
+##    &lt;chr&gt;                &lt;int&gt;
+##  1 uncle vernon            97
+##  2 professor mcgonagall    90
+##  3 aunt petunia            52
+##  4 harry potter            26
+##  5 harry looked            22
+##  6 professor dumbledore    20
+##  7 professor quirrell      18
+##  8 hermione granger        16
+##  9 privet drive            16
+## 10 professor flitwick      15
+## # ℹ 7,685 more rows
+```
+]
+
+---
+
+# Token frequency: n-grams
+
+We can visualize the top bigrams in Harry Potter and the Philosopher's Stone:
+
+.more-left[
+
+``` r
+hp1_data |&gt; 
+  unnest_tokens("bigram", text, token = "ngrams", n = 2) |&gt; 
+  separate_wider_delim(bigram, delim = " ",
+    names = c("word1", "word2"), cols_remove = FALSE) |&gt;
+  anti_join(stop_words, join_by(word1 == word)) |&gt; 
+  anti_join(stop_words, join_by(word2 == word)) |&gt; 
+  count(bigram) |&gt; 
+* slice_max(order_by = n,
+*           n = 10) |&gt;
+* ggplot(aes(x = n,
+*            y = fct_reorder(bigram, n))) +
+* geom_col() +
+* labs(x = NULL, y = NULL) +
+  theme_bw()
+```
+]
+
+.less-right[
+![](14-slides_files/figure-html/hp1-bigram-plot-1.png)
+]
+
+---
+
+# Token frequency: n-grams
+
+As always, tools and tricks from the layered grammar of graphics apply:
+
+&lt;img src="14-slides_files/figure-html/hp-bigrams-1.png" width="95%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Sentiment analysis
+
+Simple approach: quantify sentiment of each word in a corpus, then sum them up
+
+--
+
+.pull-left-3.small-code[
+
+``` r
+get_sentiments("bing")
+```
+
+```
+# A tibble: 6,786 × 2
+   word        sentiment
+   &lt;chr&gt;       &lt;chr&gt;    
+ 1 2-faces     negative 
+ 2 abnormal    negative 
+ 3 abolish     negative 
+ 4 abominable  negative 
+ 5 abominably  negative 
+ 6 abominate   negative 
+ 7 abomination negative 
+ 8 abort       negative 
+ 9 aborted     negative 
+10 aborts      negative 
+# ℹ 6,776 more rows
+```
+]
+
+--
+
+.pull-middle-3.small-code[
+
+``` r
+get_sentiments("afinn")
+```
+
+```
+# A tibble: 2,477 × 2
+   word       value
+   &lt;chr&gt;      &lt;dbl&gt;
+ 1 abandon       -2
+ 2 abandoned     -2
+ 3 abandons      -2
+ 4 abducted      -2
+ 5 abduction     -2
+ 6 abductions    -2
+ 7 abhor         -3
+ 8 abhorred      -3
+ 9 abhorrent     -3
+10 abhors        -3
+# ℹ 2,467 more rows
+```
+]
+
+--
+
+.pull-right-3.small-code[
+
+``` r
+get_sentiments("nrc")
+```
+
+```
+# A tibble: 13,872 × 2
+   word        sentiment
+   &lt;chr&gt;       &lt;chr&gt;    
+ 1 abacus      trust    
+ 2 abandon     fear     
+ 3 abandon     negative 
+ 4 abandon     sadness  
+ 5 abandoned   anger    
+ 6 abandoned   fear     
+ 7 abandoned   negative 
+ 8 abandoned   sadness  
+ 9 abandonment anger    
+10 abandonment fear     
+# ℹ 13,862 more rows
+```
+]
+
+---
+
+# Harry Potter sentiment analysis
+
+&lt;img src="14-slides_files/figure-html/hp-net-sentiment-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+class: inverse, center, middle
+name: example-14
+
+# example-14
+
+
+---
+class: inverse, center, middle
+name: tf-idf
+
+# tf-idf
+
+
+---
+
+# tf-idf
+
+Term frequency-inverse document frequency
+
+tf-idf is a measure of how important a term is to a document within a broader collection or corpus
+
+$$
+`\begin{aligned}
+tf(\text{term}) &amp;= \frac{n_{\text{term}}}{n_{\text{terms in document}}} \\
+idf(\text{term}) &amp;= \ln{\left(\frac{n_{\text{documents}}}{n_{\text{documents containing term}}}\right)} \\
+tf\text{-}idf(\text{term}) &amp;= tf(\text{term}) \times idf(\text{term})
+\end{aligned}`
+$$
+
+---
+
+# Harry Potter tf-idf
+
+&lt;img src="14-slides_files/figure-html/hp-tf-idf-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: inverse, center, middle
+name: n-gram-ratios
+
+# n-gram ratios (time permitting)
+
+
+---
+
+# Token frequency: n-gram ratios
+
+We can move beyond frequency plots to analyze relative frequencies by groups:
+
+&lt;img src="14-slides_files/figure-html/hp-he-she-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+--
+
+How would you make this?
+
+.small[This is not an endorsement of J. K. Rowling's views on sex and gender]
+
+
+---
+
+# Token frequency: n-gram ratios
+
+1: Identify and separate bigrams
+
+.more-left[
+
+``` r
+bigram_split &lt;- hp |&gt;
+* # tokenize into bigrams
+  unnest_tokens(
+    "bigram", 
+    text, 
+    token = "ngrams", 
+    n = 2
+  )  |&gt;
+* # separate the bigram column into two columns
+  separate_wider_delim(
+    bigram,
+    delim = " ",
+    names = c("word1", "word2"),
+  ) |&gt;
+  select(word1, word2)
+
+bigram_split
+```
+]
+
+--
+
+.less-right[
+
+```
+## # A tibble: 1,089,186 × 2
+##    word1   word2  
+##    &lt;chr&gt;   &lt;chr&gt;  
+##  1 the     boy    
+##  2 boy     who    
+##  3 who     lived  
+##  4 lived   mr     
+##  5 mr      and    
+##  6 and     mrs    
+##  7 mrs     dursley
+##  8 dursley of     
+##  9 of      number 
+## 10 number  four   
+## # ℹ 1,089,176 more rows
+```
+]
+
+
+---
+
+# Token frequency: n-gram ratios
+
+2: Filter and count bigrams that begin with "he", "she"
+
+.more-left[
+
+``` r
+bigram_he_she_counts &lt;- bigram_split |&gt;
+  # only choose rows where the first word is he or she
+* filter(word1=="he" | word1=="she") |&gt;
+  # count unique pairs of words
+* count(word1, word2, sort = TRUE)
+
+bigram_he_she_counts
+```
+]
+
+--
+
+.less-right[
+
+```
+## # A tibble: 2,096 × 3
+##    word1 word2      n
+##    &lt;chr&gt; &lt;chr&gt;  &lt;int&gt;
+##  1 he    was     2490
+##  2 he    had     2138
+##  3 he    said    1270
+##  4 he    could    925
+##  5 she   said     615
+##  6 she   was      603
+##  7 he    looked   428
+##  8 he    did      386
+##  9 she   had      385
+## 10 he    would    349
+## # ℹ 2,086 more rows
+```
+]
+
+
+---
+
+# Token frequency: n-gram ratios
+
+3: Pivot the data to the `word2` level (and clean up)
+
+.more-left[
+
+``` r
+word_counts &lt;- bigram_he_she_counts |&gt;
+  # keep rows where the second word appears 10+ times
+  group_by(word2) |&gt;
+  filter(sum(n) &gt; 10) |&gt;
+  ungroup() |&gt;
+  # pivot out the word1 column to columns "he" and "she"
+* pivot_wider(names_from = word1, values_from = n) |&gt;
+  # remove cases where either he or she is missing
+  # (can't divide by 0. note this discards info though!)
+  filter(!is.na(he) &amp; !is.na(she))
+
+word_counts
+```
+]
+
+--
+
+.less-right[
+
+```
+## # A tibble: 262 × 3
+##    word2     he   she
+##    &lt;chr&gt;  &lt;int&gt; &lt;int&gt;
+##  1 was     2490   603
+##  2 had     2138   385
+##  3 said    1270   615
+##  4 could    925    64
+##  5 looked   428   144
+##  6 did      386    58
+##  7 would    349    49
+##  8 knew     297    20
+##  9 felt     285     4
+## 10 saw      285    21
+## # ℹ 252 more rows
+```
+]
+
+---
+
+# Token frequency: n-gram ratios
+
+4: Compute pronoun-specific frequencies for the most common bigrams
+
+.more-left[
+
+``` r
+word_frequencies &lt;- word_counts |&gt; 
+  # normalize word2 counts to frequencies by he/she
+* mutate(he  = he  / sum(he),
+*        she = she / sum(she))
+
+word_frequencies
+```
+]
+
+--
+
+.less-right[
+
+```
+## # A tibble: 262 × 3
+##    word2      he      she
+##    &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1 was    0.142  0.146   
+##  2 had    0.122  0.0930  
+##  3 said   0.0725 0.149   
+##  4 could  0.0528 0.0155  
+##  5 looked 0.0244 0.0348  
+##  6 did    0.0220 0.0140  
+##  7 would  0.0199 0.0118  
+##  8 knew   0.0169 0.00483 
+##  9 felt   0.0163 0.000966
+## 10 saw    0.0163 0.00507 
+## # ℹ 252 more rows
+```
+]
+
+---
+
+# Token frequency: n-gram ratios
+
+5: Compute log ratios for the most common bigrams
+
+.more-left[
+
+``` r
+log_ratios &lt;- word_frequencies |&gt;
+  # compute logged ratio of the she counts to he counts
+  # taking logs just helps to compress outliers
+* mutate(logratio = log2(she / he)) |&gt;
+  # sort by that ratio
+  arrange(desc(logratio)) |&gt; 
+  select(word2, logratio)
+
+log_ratios
+```
+]
+
+--
+
+.less-right[
+
+```
+## # A tibble: 262 × 2
+##    word2    logratio
+##    &lt;chr&gt;       &lt;dbl&gt;
+##  1 screamed     4.30
+##  2 shrieked     3.89
+##  3 snapped      3.27
+##  4 replied      3.25
+##  5 barked       2.89
+##  6 cried        2.43
+##  7 sounded      2.08
+##  8 say          1.89
+##  9 checked      1.82
+## 10 jerked       1.82
+## # ℹ 252 more rows
+```
+]
+
+---
+
+# Token frequency: n-gram ratios
+
+6: Filter the data for plotting
+
+.pull-left[
+
+``` r
+plot_word_ratios &lt;- log_ratios |&gt;
+  # take the top 5 logratios by pronoun
+  # (logratios are +/- for she/he)
+* group_by(logratio &lt; 0) |&gt;
+* slice_max(abs(logratio), n = 5) |&gt;
+  ungroup()
+
+plot_word_ratios
+```
+]
+
+--
+
+.pull-right[
+
+```
+## # A tibble: 10 × 3
+##    word2      logratio `logratio &lt; 0`
+##    &lt;chr&gt;         &lt;dbl&gt; &lt;lgl&gt;         
+##  1 screamed       4.30 FALSE         
+##  2 shrieked       3.89 FALSE         
+##  3 snapped        3.27 FALSE         
+##  4 replied        3.25 FALSE         
+##  5 barked         2.89 FALSE         
+##  6 felt          -4.07 TRUE          
+##  7 remembered    -3.67 TRUE          
+##  8 yelled        -2.92 TRUE          
+##  9 heard         -2.53 TRUE          
+## 10 forced        -2.44 TRUE
+```
+]
+
+---
+
+# Token frequency: n-gram ratios
+
+7: Plot the data
+
+.more-left[
+
+``` r
+plot_word_ratios |&gt; 
+  ggplot(aes(x = logratio, 
+             y = fct_reorder(word2, logratio), 
+             fill = logratio &lt; 0)) +
+  geom_col() +
+  labs(title = "How much more/less likely", 
+       x = NULL, y = NULL) +
+  scale_fill_manual(name = "", 
+                    labels = c("More 'she'", "More 'he'"),
+                    values = c("#3D9970", "#FF851B"),
+                    guide = guide_legend(reverse = TRUE)) +
+  scale_x_continuous(breaks = seq(-3, 3),
+                     labels = c("8x", "4x", "2x",
+                              "Same", "2x", "4x", "8x")) +
+  theme_bw(base_size = 20) +
+  theme(legend.position = "bottom")
+```
+]
+
+--
+
+.less-right[
+&lt;img src="14-slides_files/figure-html/hp-he-she-plotr-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": "%current%",
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": false
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
