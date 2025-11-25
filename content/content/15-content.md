@@ -1,7 +1,7 @@
 ---
 title: "Prelim 2 Review"
 linktitle: "Prelim 2 Review"
-date: "2025-11-25 10:06:32"
+date: "2025-11-25 12:01:02"
 menu:
   content:
     parent: Course content
@@ -19,6 +19,6 @@ output:
 
 ### Practice prelim questions
 
-- <i class="fas fa-book"></i> [Practice questions for prelim 1](/content/practice-prelims/prelim-2-practice.pdf)
+- <i class="fas fa-book"></i> [Practice questions for prelim 2](/content/practice-prelims/prelim-2-practice.pdf)
 
 Solutions to the practice prelim will be posted after Thanksgiving Break. Feel free to email me if you complete the practice prelim and want a copy of the solutions sooner.
