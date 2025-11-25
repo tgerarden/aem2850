@@ -1,7 +1,7 @@
 ---
 title: "Prelim 2 Review"
 linktitle: "Prelim 2 Review"
-date: "`r format(Sys.time())`"
+date: "2025-11-25 10:06:32"
 menu:
   content:
     parent: Course content
