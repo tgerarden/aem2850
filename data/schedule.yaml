@@ -125,7 +125,7 @@ lessons:
     assignment: "13-homework"
     bg: 1
 
-  - title: '<span class="content-title">Text</span>'
+  - title: '<span class="content-title">Text <br> *Thanksgiving Break: No class on Nov 27*</span>'
     session: "Session 14"
     date: "Week 14"
     content: "14-content"
@@ -133,10 +133,8 @@ lessons:
     assignment: "14-homework"
     bg: 2
 
-  - title: '<span class="content-title">*Thanksgiving Break: No class on Nov 27*</span>'
-
-#  - title: '**Conclusion**'
-#    header: True
+  - title: '**Conclusion**'
+    header: True
 
   - title: '<span class="content-title">Prelim 2 review <br> *No class on Dec 4; optional office hours*</span>'
     session: "Session 15"
@@ -150,4 +148,3 @@ lessons:
     date: "Dec 4 at 7:30pm"
     # # assignment: "final-project"
     bg: 3
-
