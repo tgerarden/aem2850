@@ -139,6 +139,7 @@ lessons:
   - title: '<span class="content-title">Prelim 2 review <br> *No class on Dec 4; optional office hours*</span>'
     session: "Session 15"
     date: "Week 15"
+    content: "15-content"
     # # content: "06-content"
     # # example: "06-example"
     # # assignment: "06-homework"
