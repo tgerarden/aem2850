@@ -1,0 +1,177 @@
+date,country,avg_cases_7_days
+2020-01-05,United States of America,0
+2020-01-12,United States of America,0
+2020-01-19,United States of America,0
+2020-01-26,United States of America,1
+2020-02-02,United States of America,0.285714286
+2020-02-09,United States of America,1.571428571
+2020-02-16,United States of America,0.571428571
+2020-02-23,United States of America,2.285714286
+2020-03-01,United States of America,4.714285714
+2020-03-08,United States of America,55.85714286
+2020-03-15,United States of America,495
+2020-03-22,United States of America,3926.571429
+2020-03-29,United States of America,13556.28571
+2020-04-05,United States of America,25164.42857
+2020-04-12,United States of America,31310.28571
+2020-04-19,United States of America,28021.42857
+2020-04-26,United States of America,29309.28571
+2020-05-03,United States of America,28348
+2020-05-10,United States of America,26035.14286
+2020-05-17,United States of America,24147.42857
+2020-05-24,United States of America,23760.71429
+2020-05-31,United States of America,20919.42857
+2020-06-07,United States of America,21397.14286
+2020-06-14,United States of America,21696.57143
+2020-06-21,United States of America,25717.28571
+2020-06-28,United States of America,36896.85714
+2020-07-05,United States of America,48880.85714
+2020-07-12,United States of America,56029.28571
+2020-07-19,United States of America,66609.57143
+2020-07-26,United States of America,66843
+2020-08-02,United States of America,61607.14286
+2020-08-09,United States of America,53701.28571
+2020-08-16,United States of America,51808.85714
+2020-08-23,United States of America,45112.57143
+2020-08-30,United States of America,42135.14286
+2020-09-06,United States of America,42179
+2020-09-13,United States of America,35088.71429
+2020-09-20,United States of America,40139.57143
+2020-09-27,United States of America,43539.14286
+2020-10-04,United States of America,42621.14286
+2020-10-11,United States of America,47749.85714
+2020-10-18,United States of America,55376.28571
+2020-10-25,United States of America,64205.42857
+2020-11-01,United States of America,79913.42857
+2020-11-08,United States of America,112870.5714
+2020-11-15,United States of America,143549.2857
+2020-11-22,United States of America,167926.1429
+2020-11-29,United States of America,166057.2857
+2020-12-06,United States of America,182990.2857
+2020-12-13,United States of America,209783.1429
+2020-12-20,United States of America,216846.8571
+2020-12-27,United States of America,194303.1429
+2021-01-03,United States of America,197285
+2021-01-10,United States of America,238164.4286
+2021-01-17,United States of America,227136.4286
+2021-01-24,United States of America,180837.2857
+2021-01-31,United States of America,152660.7143
+2021-02-07,United States of America,122464.2857
+2021-02-14,United States of America,95796
+2021-02-21,United States of America,67640.71429
+2021-02-28,United States of America,66535.85714
+2021-03-07,United States of America,60105.57143
+2021-03-14,United States of America,54857.14286
+2021-03-21,United States of America,54221.57143
+2021-03-28,United States of America,59688.28571
+2021-04-04,United States of America,64280
+2021-04-11,United States of America,65135.71429
+2021-04-18,United States of America,66745.28571
+2021-04-25,United States of America,58013.57143
+2021-05-02,United States of America,48343.85714
+2021-05-09,United States of America,41760.57143
+2021-05-16,United States of America,33335.71429
+2021-05-23,United States of America,25944.14286
+2021-05-30,United States of America,21115.85714
+2021-06-06,United States of America,14158.85714
+2021-06-13,United States of America,14223.57143
+2021-06-20,United States of America,11518.14286
+2021-06-27,United States of America,12519.57143
+2021-07-04,United States of America,13862.42857
+2021-07-11,United States of America,40930
+2021-07-18,United States of America,31797
+2021-07-25,United States of America,51289.57143
+2021-08-01,United States of America,78155.14286
+2021-08-08,United States of America,106150.8571
+2021-08-15,United States of America,126637.7143
+2021-08-22,United States of America,145709.4286
+2021-08-29,United States of America,156412.8571
+2021-09-05,United States of America,163464.4286
+2021-09-12,United States of America,146081.4286
+2021-09-19,United States of America,148207.7143
+2021-09-26,United States of America,121756.2857
+2021-10-03,United States of America,107955.4286
+2021-10-10,United States of America,97426.28571
+2021-10-17,United States of America,83176.71429
+2021-10-24,United States of America,72649
+2021-10-31,United States of America,75169.42857
+2021-11-07,United States of America,72887.28571
+2021-11-14,United States of America,79597.14286
+2021-11-21,United States of America,96696.57143
+2021-11-28,United States of America,84627.71429
+2021-12-05,United States of America,107288.1429
+2021-12-12,United States of America,119281.2857
+2021-12-19,United States of America,128444.1429
+2021-12-26,United States of America,202488.4286
+2022-01-02,United States of America,387434
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,

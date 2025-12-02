@@ -1,0 +1,362 @@
+---
+#########################################################
+# Steps to complete this prelim:
+#   1. Add your name to the author field of the yaml header
+#   2. Fill in the code chunks and use inline code to answer the questions 
+#   3. Click on "Render" directly above to render output (or Ctrl/Cmd-Shift-K)
+#   4. Repeat steps 2-3 until you are satisfied with the final product
+#   5. Download the files prelim-1.pdf AND prelim-1.qmd
+#   6. Upload prelim-1.pdf AND prelim-1.qmd to canvas
+# Reminder: you can run code chunks interactively, not just via Render
+# You can use keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
+#########################################################
+title: "Prelim 2"
+subtitle: "AEM 2850 / AEM 5850 -- Spring 2024"
+author: "Write your name and netid here"
+date: "May 7, 2024"
+format: pdf
+urlcolor: blue
+---
+
+```{r setup, include = FALSE, echo = FALSE}
+library(tidyverse)
+library(sf)
+
+# set global options for all code chunks
+library(knitr)
+knitr::opts_chunk$set(fig.align = "center",
+                      out.width = "75%",
+                      warning=FALSE, 
+                      message = FALSE)
+
+# Import COVID-19 data
+covid <- read_csv("covid_cases_usa.csv")
+
+# Import Olympics data
+swim <- read_csv("olympics_swimming.csv") |>
+  filter(
+    distance_in_meters == "100m" ,
+    relay == 0 ,
+    stroke %in% c("Backstroke", "Freestyle") ,
+    year >= 1948
+  )
+
+# Import Zara data
+zara <- read_csv("zara_webscrape.csv")
+
+# Import S&P 500 price data
+load("sp500.RData")
+prices <- sp500_prices |>
+  group_by(symbol) |>
+  mutate(count = n()) |>
+  ungroup() |>
+  filter(count == max(count)) |>
+  select(-count) |> 
+  mutate(year = year(date))
+aapl_benchmark <- prices |>
+  filter(symbol == "AAPL") |>
+  filter(date==min(date) | date==max(date)) |>
+  mutate(cum_return = (adjusted - lag(adjusted)) / lag(adjusted) ) |>
+  filter(!is.na(cum_return)) |>
+  mutate(ann_return = ((1 + cum_return)^(1/5) - 1) * 100) |>
+  pull(ann_return)
+```
+
+
+## Preface
+
+The goal of this prelim is to assess your understanding of data visualization concepts and facility with key visualization and programming tools covered in weeks 7 through 14 of the course.
+
+We will work with multiple data sets, most of which are already loaded and all of which are available in the working directory of the project (see the Files pane on the lower right).
+
+
+## Instructions
+
+- You must complete Prelim 2 **in person** in Warren 150 during class
+- Prelim 2 is open internet, but **do not communicate with classmates**
+- Do not use packages outside the `tidyverse` packages we have already loaded for you (penalties may apply)
+- When done, **upload BOTH your .qmd and .pdf files** to [canvas](https://canvas.cornell.edu/courses/62697/assignments/625809)
+
+## Additional notes
+
+- The prelim is 100 points total, and each question states the number of points it is worth
+- **Render early and often** to avoid wasting time sorting out what code needs debugging
+- We will give partial credit if your answers are incomplete, especially if you provide comments or text that describes the logic of what you *would* do if you had more time
+- If you have trouble rendering your document, do not delete your work in progress code. That will make it hard for us to give you partial credit. Instead, you can:
+  - Comment out problematic code using `#` or keyboard shortcut Cntrl/Cmd-Shift-C
+  - Replace `{r}` with `{r, eval = FALSE}` at the top of the relevant code chunk
+  - Ask questions!
+
+<!--- Please leave the code above unchanged except for adding your name in the yaml header. Questions start from here. --->
+
+
+{{< pagebreak >}}
+## 1. [6 points] The plot below comes from an economics article about students' decisions to drop out of college. The bars represent estimates of students' average beliefs about the lifetime returns to completing different levels of schooling.
+
+![Discounted expected lifetime earnings](images/discounted-expected-earnings.png){width=75%}
+
+## Describe two changes you could make to this visualization to improve its effectiveness at conveying this information.
+
+1. The axis for bars/columns should always start at zero.
+
+2. The column shading and position of the legend make it difficult to associate columns with categories. A better approach would be to integrate the labels with the chart. For instance, one could flip the chart so that the categories are on the y axis, label each bar according to its category, and remove the legend.
+
+*Note:* we will accept other answers as long as they are reasonable.
+
+
+
+{{< pagebreak >}}
+# COVID-19
+
+## 2. [12 points] Using the `covid` data frame already loaded into your R session, create a plot of the number of new COVID-19 cases in the U.S. over time, contained in the variable `avg_cases_7_days`.[^1] The original data represents the count of individual cases, converted to a 7-day moving average. Plot the number of cases in thousands, not ones. Add a horizontal red line indicating 150 thousand cases. Make sure the graph and its axes have informative titles.
+
+[^1]: Data comes from the [World Health Organization](https://data.who.int/dashboards/covid19/data?n=o).
+
+```{r}
+covid |>
+  ggplot(aes(x = date, y = avg_cases_7_days / 1e3)) +
+  geom_line() +
+  geom_hline(yintercept = 150, linetype = "dotted", color = "red") +
+  labs(
+    x = "Date", 
+    y = "New cases (thousands)",
+    title = "7-day average number of new COVID-19 cases in the U.S."
+  ) +
+  theme_bw()
+```
+
+
+{{< pagebreak >}}
+## 3. [9 points] Consider now an alternative version of the data visualization from 1. On Jan 6, 2022, the New York Times (NYT) featured an essay with this graph:
+
+![New COVID-19 cases in the US ([The New York Times](https://www.nytimes.com/2022/01/06/opinion/omicron-covid-us.html) -- Jan 6, 2022)](images/nyt_covid.png){width=50%}
+
+## Aesthetically speaking, this graph is more elaborate that the one you made above in part 1a. But is it also more effective in conveying information? Briefly discuss two things you think your graph does better than the NYT's.
+
+*Note:* If you were unable to complete question 2, explain the graph you were trying to create and then answer this question based on that.
+
+<!-- Tip: If you were to show these two graphs to a general audience, which one you think they'd have an easier time with? Is it immediate to understand what the spiral layout in the NYT graph represents or would it take some effort from audience members? How about the number of cases itself? Is it easy to tell when it was above or below 150k? -->
+
+1.   It is difficult to tell at any point what the number of cases is in the NYT graph. We can tell that it was a small quantity in the beginning and that it explodes in the end, but can't really tell how close or far to 150k cases it was at any point. In ours, the 150k line makes it very clear to see when the number of cases was above or below that.
+
+2.   The choice to represent number of cases with areas in the NYT graph rather than dots or lines does not help with making comparisons because [human perception performs relatively worse with areas than positions](https://ucdavisdatalab.github.io/workshop_data_viz_principles/principles-of-visual-perception.html#perception-and-encodings).
+
+3.   Comparisons between different points in time are challenging to make because they can be far apart in the image and are not plotted against reference lines, unlike our graph.
+
+4.   In the NYT graph, there could be confusion regarding what distance from the center of the spiral represents. It is not immediately obvious that it captures time rather than number of cases, which would incorrectly suggest that new cases in the US increased continuously during the period ("spiraling" out of control). In ours we follow convention by instead plotting time from left to right, which is familiar to most people.
+
+\vfill
+## Briefly discuss one thing you think the NYT's graph does (or *could* do) better than yours.
+
+1. The NYT's graph is unique, and therefore attention-grabbing, so it may draw potential readers in.
+
+2. Spiral charts like this one could do a better job of highlighting seasonality or a lack thereof, since the spiral is lined up based on time of year. In our chart, by contrast, it is difficulty to make direct comparisons between the same time in different years since they are spread out along the x axis.
+
+*Note:* we will accept other answers as long as they are reasonable.
+
+
+
+{{< pagebreak >}}
+# Olympic Swimming
+
+## 4. [12 points] Olympic swim times have gotten quicker over the years. Has that trend held across strokes and genders? In the graph below, we plotted 100-meter finishing times using different colors to help delineate groups and facilitate comparisons. The result leaves much to be desired. Describe two changes you could make to more effectively compare *trends over time* for Men and Women, *separately for each `stroke`* (i.e., Backstroke and Freestyle).
+
+1. ...
+
+2. ...
+
+## Then edit the code below to implement your proposed changes.
+
+```{r}
+swim |>
+  ggplot(aes(x = year, y = time_seconds, color = gender)) +
+  geom_point() +
+  scale_x_continuous(
+    breaks = seq(1948, 2020, 12),
+    minor_breaks = seq(1948, 2020, 4)
+  ) +
+  labs(
+    x = "Year", y = "Event completion time (seconds)",
+    title = "Completion times of 100m Olympic swimming events",
+    color = "Gender"
+  ) +
+  theme(legend.position = "bottom")
+```
+
+
+<!-- {{< pagebreak >}} -->
+
+## *Note: we included a static version of the plot below so you can compare your revised graphic to the original:*
+
+![Bad swimming graph](images/bad-swimming-graph.png){width=75%}
+
+
+## ANSWER:
+
+1. Replace `geom_point()` with `geom_smooth()`: lines emphasize *trends*, whereas points emphasize observations.
+
+2. Use `facet_wrap(vars(stroke))` to facet by stroke to more effectively compare Men and Women, *separately for each `stroke`*.
+
+*Note:* we will accept other solutions that effectively compare trends over time for Men and Women, separately for each stroke.
+
+```{r}
+swim |>
+  ggplot(aes(x = year, y = time_seconds, color = gender)) +
+  geom_smooth() +
+  scale_x_continuous(
+    breaks = seq(1948, 2020, 12),
+    minor_breaks = seq(1948, 2020, 4)
+  ) +
+  labs(
+    x = "Year", y = "Event completion time (seconds)",
+    title = "Completion times of 100m Olympic swimming events",
+    color = "Gender"
+  ) +
+  theme(legend.position = "bottom") +
+  facet_wrap(vars(stroke))
+```
+
+
+{{< pagebreak >}}
+# Shopping at Zara
+
+## 5. [12 points] The data frame `zara` contains data on apparel sold by Zara scraped from their website on Feb. 19, 2024. Make a basic scatterplot of `price` vs `section` without customizing the geometry or adding other layers.
+
+*Note: For this question, you will not be graded on the aesthetic presentation of your graph, so don’t waste time making nice labels, etc.*
+
+```{r}
+zara |> 
+  ggplot(aes(x = section, y = price)) +
+  geom_point()
+```
+
+\vfill
+## Is your basic scatterplot very informative about which `section` has a higher average `price`? If not, name one way you could make it more informative, and use words to describe how you would implement your suggestion.
+
+No, it is not informative about which has a higher average price! The visualization above is intended to illustrate the relationship between a numerical variable (`price`) and a categorical variable (`section`). As we discussed in class, scatter plots are not the best way to approach this. It would be better to use box plots, densities, or histograms.
+
+
+{{< pagebreak >}}
+## 6. [12 points] Use the data frame `zara` to estimate a linear regression model of the relationship between the `price` of a piece of clothing and whether it's in the men's or women section (use column `section`):
+
+$$
+price_i = \beta_0 + \beta_1 \cdot section_i + \varepsilon_i
+$$
+
+## Print the results using `summary()`.
+
+<!-- Tip: Note that `section` enters the linear regression model as a binary variable (i. e., a "dummy" variable). Keep that in mind when you interpret your results. If you're having trouble with interpretation, comparing the numbers to part 3a may give some clues. -->
+
+```{r}
+zara |>
+  lm(formula = price ~ section) |>
+  summary()
+```
+
+
+\vfill
+## Which category has a higher average price, men's or women's?
+
+On average, clothes at Zara cost $68.73 for men, and are $7.21 cheaper for women. Thus, men's products have a higher average price.
+
+
+{{< pagebreak >}}
+# Trees of Ithaca
+
+The folder `"trees"` contains a shapefile with data on trees managed by the City of Ithaca, NY.[^trees]
+
+[^trees]: We modified the City's data slightly to simplify this problem.
+
+## 7. [18 points] Read the shapefile in the folder `trees` as an `sf` object. Each geometry in this shapefile is a tree. Count the number of trees in each city area (column `AREA`). Which area has the most trees?
+
+<!-- Tip: Recall that most dplyr functions work with `sf` objects just like they do with typical data frames. -->
+
+```{r}
+# read_sf("City_Managed_Trees/City_Managed_Trees.shp") |> 
+#   filter(TREECLASS %in% c("Park", "Street")) |> 
+#   write_sf("trees/trees.shp")
+
+trees <- read_sf("trees/trees.shp")
+
+area_most <- trees |> 
+  count(AREA) |> 
+  slice_max(n) |> 
+  pull(AREA)
+```
+
+`r str_to_title(area_most)` has the most trees.
+
+## Create a map of the trees in Ithaca, shading the points according to the contents of their classificated in the column `TREECLASS`. Customize the title, legend, geometry size, and color scale for clarity.
+
+```{r out.width = "100%"}
+trees |>
+  ggplot(aes(color = TREECLASS)) +
+  geom_sf(size = 0.25) +
+  scale_color_viridis_d() +
+  labs(
+    title = "Trees of Ithaca, NY",
+    color = "Classification"
+  ) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, vjust = .5))
+```
+
+
+{{< pagebreak >}}
+# AAPL Annualized Returns, Revisited
+
+## 8. [19 points] The code below computes Apple's annualized return using the data frame `prices`, which includes data from the start of 2019 through the end of 2023. Create a function `get_annual_return()` that generalizes this code so that it returns Apple's annualized return since a `start_year` of the user's choice. To get full credit, incorporate conditional execution so that the function returns an informative error message if the user passes a `start_year` outside the range of the data.
+
+*Note:* Think carefully about what needs to be added/modified to the test case to return accurate results!
+
+```{r}
+prices |>
+  filter(symbol == "AAPL") |>
+  filter(date==min(date) | date==max(date)) |>
+  mutate(cum_return = (adjusted - lag(adjusted)) / lag(adjusted) ) |>
+  filter(!is.na(cum_return)) |>
+  mutate(ann_return = ((1 + cum_return)^(1/5) - 1) * 100) |>
+  pull(ann_return)
+
+get_annual_return <- function(start_year){
+  if(start_year >= 2019 & start_year < 2024){
+    years <- 2024 - start_year
+    prices |>
+      filter(symbol == "AAPL") |>
+      filter(year >= start_year) |>
+      filter(date==min(date) | date==max(date)) |>
+      mutate(cum_return = (adjusted - lag(adjusted)) / lag(adjusted) ) |>
+      filter(!is.na(cum_return)) |>
+      mutate(ann_return = ((1 + cum_return)^(1/years) - 1) * 100) |>
+      pull(ann_return)
+  } else {
+    print(str_glue("The start year {start_year} is not valid."))
+    NA
+  }
+}
+```
+
+## After writing your function, remove `eval = FALSE` from the code chunk below to output results of testing the function.
+
+```{r eval = FALSE}
+# benchmark function against test case
+get_annual_return(2019) == aapl_benchmark # this should return TRUE
+
+# test other cases
+get_annual_return(2015)
+get_annual_return(2020)
+get_annual_return(2025)
+```
+
+```{r}
+# benchmark function against test case
+get_annual_return(2019) == aapl_benchmark
+
+# test other cases
+get_annual_return(2015)
+get_annual_return(2020)
+get_annual_return(2025)
+```
+
+
+

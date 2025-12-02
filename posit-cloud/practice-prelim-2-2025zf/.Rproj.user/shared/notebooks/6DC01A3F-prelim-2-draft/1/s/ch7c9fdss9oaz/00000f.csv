@@ -1,0 +1,3 @@
+"0","zara |> "
+"0","  ggplot(aes(x = section, y = price)) +"
+"0","  geom_point()"

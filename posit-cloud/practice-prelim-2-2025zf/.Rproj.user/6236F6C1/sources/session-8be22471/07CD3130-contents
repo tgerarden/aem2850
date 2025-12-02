@@ -1,0 +1,315 @@
+---
+#########################################################
+# Steps to complete this prelim:
+#   1. Add your name to the author field of the yaml header
+#   2. Fill in the code chunks and use inline code to answer the questions 
+#   3. Click on "Render" directly above to render output (or Ctrl/Cmd-Shift-K)
+#   4. Repeat steps 2-3 until you are satisfied with the final product
+#   5. Download the files prelim-1.pdf AND prelim-1.qmd
+#   6. Upload prelim-1.pdf AND prelim-1.qmd to canvas
+# Reminder: you can run code chunks interactively, not just via Render
+# You can use keyboard shortcuts, icons in each chunk, or Run at the top right of this pane
+#########################################################
+title: "Prelim 2"
+subtitle: "AEM 2850 / AEM 5850 -- Spring 2024"
+author: "Write your name and netid here"
+date: "May 7, 2024"
+format: pdf
+urlcolor: blue
+---
+
+```{r setup, include = FALSE, echo = FALSE}
+library(rvest)
+library(sf)
+library(tidyverse)
+
+# Import COVID-19 data
+covid <- read_csv("covid_cases_usa.csv")
+
+# Import Olympics data
+swim <- read_csv("olympics_swimming.csv")
+
+# Import Slope Day data
+slopeday_menu <- read_csv("slopeday/slopeday_menu.csv")
+
+# Slope Day html
+slopeday_web <- "slopeday/Slope Day May 8, 2024 Student & Campus Life Cornell University.htm"
+
+# Import Zara data
+zara <- read_csv("zara_webscrape.csv")
+
+```
+
+# COVID-19
+
+## 1a. Using the `covid` data frame already loaded into your R session, create a line plot of the 7-day average number of new COVID-19 cases in the US over time.[^1] The number of cases should be plotted as thousands, and the scale should have breaks every 50 thousand cases Add a red line indicating 150 thousand cases. Make sure the graph and its axes have informative titles.
+
+[^1]: Data comes from the [World Health Organization](https://data.who.int/dashboards/covid19/data?n=o).
+
+```{r}
+
+covid |>
+  mutate(cases_thousands = avg_cases_7_days / 1e3) |>
+  ggplot(aes(x = date, y = cases_thousands)) +
+  geom_line() +
+  geom_hline(yintercept = 150, lty = "12", color = "red") +
+  scale_y_continuous(breaks = seq(0, 1000, 50)) +
+  labs(
+    x = "Date", y = "New cases ('000s)",
+    title = "7-day average no. of new COVID-19 cases in the US"
+  ) +
+  theme_bw()
+
+```
+
+## 1b. Consider now this alternative way of visualizing similar data. On Jan 6, 2022, the New York Times (NYT) featured an essay with this graph:
+
+![New COVID-19 cases in the US ([The New York Times](https://www.nytimes.com/2022/01/06/opinion/omicron-covid-us.html) -- Jan 6, 2022)](images/nyt_covid.png)
+
+## Aesthetically speaking, this graph is more elaborate that the one we made above in part 1a. But is it also more effective in conveying information? Briefly discuss at least two aspects which you think our graph does better than the NYT's.
+
+<!-- Tip: If you were to show these two graphs to a general audience, which one you think they'd have an easier time with? Is it immediate to understand what the spiral layout in the NYT graph represents or would it take some effort from audience members? How about the number of cases itself? Is it easy to tell when it was above or below 150k? -->
+
+-   It is difficult to tell at any point what the number of cases is in the NYT graph. We can tell that it was a small quantity in the beginning and that it explodes in the end, but can't really tell how close or far to 150k cases it was at any point. In ours, by comparison, the 150k line makes it very clear to see when the number of cases was above or below that threshold, and by how much as well.
+
+-   The choice to represent number of cases with areas in the NYT graph rather than dots or lines does not help with making comparisons because [human perception performs relatively worse with areas than positions](https://ucdavisdatalab.github.io/workshop_data_viz_principles/principles-of-visual-perception.html#perception-and-encodings).
+
+-   Comparisons between different points in time are challenging to make because they can be far apart in the image and are not plotted against reference lines, unlike our graph.
+
+-   In the NYT graph, there could be confusion regarding what distance from the center of the spiral represents. It is not immediately obvious that it captures time rather than number of cases, which would incorrectly suggest that new cases in the US increased continuously during the period ("spiraling" out of control). In ours we follow convention by instead plotting time from left to right, which is familiar to most people.
+
+{{< pagebreak >}}
+
+# Olympic swimming
+
+## 2. In the graph below, we attemped to illustrate how completion times of swimming events in the Olympics have changed over the years. For any given event, we're looking at all competitors, not just the winner. We highlight swimming styles ("strokes") and genders by using different aesthetics with hopes that this would make comparisons of the same type of event over time easier.
+
+## Name changes you could make to more easily (i) tell apart male from female times; and (ii) be able to see multiple competitors with similar completion times in a same event (that is, avoid points overlapping).
+
+*Note: we included a static version of the original image on the next page so you can compare your revised graphic with it.*
+
+```{r}
+swim |>
+  mutate(year_date = ymd(year, truncated = 2)) |>
+  filter(
+    distance_in_meters == "100m" &
+    relay == 0 &
+    stroke %in% c("Backstroke", "Breaststroke", "Butterfly", "Freestyle")
+  ) %>%
+  ggplot(aes(x = year_date, y = time_seconds, color = stroke, shape = gender)) +
+  geom_point(size = 2, na.rm = TRUE) +
+  geom_smooth(method = "lm", na.rm = TRUE) +
+  scale_x_date(
+    breaks = ymd(seq(1912, 2020, 12), truncated = 2),
+    minor_breaks = ymd(seq(1912, 2020, 4), truncated = 2),
+    date_labels = "%Y"
+  ) +
+  labs(
+    x = "Year", y = "Event completion time (seconds)",
+    title = "Completion times of 100m Olympic swimming events",
+    color = "Swimming style",
+    shape = "Gender"
+  )
+
+```
+
+{{< pagebreak >}}
+
+![Bad swimming graph](images/bad%20swimming%20graph.png) {{< pagebreak >}}
+
+ANSWER:
+
+In this solution we:
+
+-   Split the graph in two by gender using `facet_wrap`. Note this makes the `shape` aesthetic redundant, which is why we remove it.
+-   Reduce the size of points and set `position = "jitter"`, which introduces a small random deviation in the x-position of points to reduce overlap.
+
+Other solutions that address the two issues named in the question are also acceptable.
+
+```{r}
+
+swim |>
+  mutate(year_date = ymd(year, truncated = 2)) |>
+  filter(
+    distance_in_meters == "100m" &
+    relay == 0 &
+    stroke %in% c("Backstroke", "Breaststroke", "Butterfly", "Freestyle")
+  ) %>%
+  ggplot(aes(x = year_date, y = time_seconds, color = stroke)) +
+  geom_point(position = "jitter", size = .1, na.rm = TRUE) + 
+  geom_smooth(method = "lm", na.rm = TRUE) +
+  scale_x_date(
+    breaks = ymd(seq(1912, 2020, 12), truncated = 2),
+    minor_breaks = ymd(seq(1912, 2020, 4), truncated = 2),
+    date_labels = "%Y"
+  ) +
+  labs(
+    x = "Year", y = "Event completion time (seconds)",
+    title = "Completion times of 100m Olympic swimming events",
+    color = "Swimming style"
+  ) +
+  facet_wrap(~ gender, ncol = 1)
+
+```
+
+{{< pagebreak >}}
+
+# Shopping at Zara
+
+## 3a. The data frame `zara` (already loaded into your R session) contains data on apparel sold by Zara scraped from their website on Feb. 19, 2024. Calculate the average price of men's and women's apparel separately (use column `section`).
+
+```{r}
+
+zara |>
+  group_by(section) |>
+  summarise(avg_price = mean(price))
+
+```
+
+## 3b. Estimate a linear regression model of the relationship between the price of a piece of clothing and whether it's in the men's or women section --- that is:
+
+$$
+price_i = \beta_0 + \beta_1 \cdot section_i + \varepsilon_i
+$$
+
+## Print the results using `summary()`. How do you interpret the estimated coefficients?
+
+<!-- Tip: Note that `section` enters the linear regression model as a binary variable (i. e., a "dummy" variable). Keep that in mind when you interpret your results. If you're having trouble with interpretation, comparing the numbers to part 3a may give some clues. -->
+
+```{r}
+
+zara |>
+  lm(formula = price ~ section) |>
+  summary()
+
+```
+
+On average, clothes at Zara cost \$68.73 for men and are \$7.2 cheaper for women.
+
+## 3c. Now expand the model of part 3b to include column `in_stock` as another explaining variable --- this variable informs the number of units of each item Zara had in stock.[^2] That is, modify your regression model to be:
+
+[^2]: Variable `in_stock` does not exist in the original dataset and was created with hypothetical data for this exercise.
+
+$$
+price_i = \beta_0 + \beta_1 \cdot section_i + \beta_2 \cdot in\_stock_i + \varepsilon_i
+$$
+
+## Print the results using `summary()`. How do you interpret the estimated coefficients now?
+
+```{r}
+
+zara |>
+  lm(formula = price ~ section + in_stock) |>
+  summary()
+
+```
+
+Given the number of units in stock a particular item has, women's items were on average \$2.73 cheaper than men's, although the coefficient is not statistically significant. On the other hand, now there is a significant negative association between units in stock and price --- that is, having one more unit in stock of a particular item decreases the price by \$0.02 on average.
+
+Considering that the estimate of $\beta_1$ changed considerably and lost statistical significance upon the introduction of `in_stock`, the result suggests that Zara had more women's items in stock than men's.
+
+{{< pagebreak >}}
+
+# Slope Day
+
+## Tomorrow is Slope Day! Let's find out what food options will be offered by scraping information from the [event's webpage](https://scl.cornell.edu/slopeday).[^3]
+
+[^3]: Information accurate as of Apr. 11, 2024.
+
+*Obs. If you're having trouble with web scraping, you can still work on part 4d.*
+
+## 4a. Use the url contained in the object `slopeday_web` (pre-assigned for you at the beginning of this file) to read Slope Day's webpage into R. Use the CSS selector "div.expander div" to keep only HTML elements that are expandable sections of the webpage. Assign your result to a new object called `slopeday_html`.
+
+```{r}
+slopeday_html <-
+  read_html(slopeday_web) |>
+  html_elements("div.expander div")
+```
+
+## 4b. We need to identify which of the expandable sections in the webpage contains information about food. Using your object of part 8a, convert it to a character vector (not a table/data frame) and use `str_detect` to create a logical vector that indicates whether the pattern `"Food Available on Slope Day"` is present or not in each character string. Assign this logical vector to a new object called `is_food`.
+
+<!-- Tip: We're not operating on data frames here, so functions like mutate, summarize, filter, and select do not apply and are not needed. -->
+
+```{r}
+is_food <-
+  slopeday_html |>
+  html_text() |>
+  str_detect("Food Available on Slope Day")
+```
+
+## 4c. Return to `slopeday_html`. We're going to extract food information using `is_food`. You can do this via base R's `subset` function as shown below (`filter` won't work because `slopeday_html` is not a data frame):
+
+```{r hint, eval = FALSE}
+# (DO NOT EDIT) This is a hint. You can copy and paste it in your own code.
+subset(slopeday_html, is_food)
+```
+
+## So, using the hint above, apply `subset` to `slopeday_html` to keep only the part of the webpage that contains information on food. Then use the CSS selector "li" to keep the HTML elements that correspond to the list of food items. Convert it to a character vector (not a table/data frame). Print the results.
+
+```{r}
+slopeday_html |>
+  subset(is_food) |>
+  html_elements("li") |>
+  html_text2()
+```
+
+## 4d. We tidied up the text data extracted from the Slope Day webpage and put it into a data frame object called `slopeday_menu`. Create a new column in `slopeday_menu` that identifies whether the food option is vegan or not by looking at the `disclaimers` column, and then create a pie chart to illustrate the share of food items that is vegan. Use `theme_void()`.
+
+```{r}
+
+slopeday_menu |>
+  mutate(is_vegan = str_detect(disclaimers, regex("vegan", ignore_case = TRUE))) |>
+  ggplot(aes(y = 1, fill = is_vegan)) +
+  geom_bar() +
+  coord_polar() +
+  scale_fill_discrete(labels = c("TRUE" = "Vegan", "FALSE" = "Not vegan")) +
+  labs(
+    y = NULL, fill = NULL,
+    title = "Share of vegan food options at Slope Day 2024"
+  ) +
+  theme_void()
+
+```
+
+{{< pagebreak >}}
+
+# Trees of Ithaca
+
+The folder `"City_Managed_Trees"` contains a shapefile with data on trees managed by the City of Ithaca, NY. Each black dot in the image below is a tree.
+
+![City-managed trees of Ithaca, NY](images/trees_ithaca.png)
+
+## 5a. Read the shapefile in the folder `"City_Managed_Trees"` as an `sf` object. Each geometry in this shapefile is a tree. Count the number of trees in each city area (column `AREA`). Which area has the most trees?
+
+<!-- Tip: Recall that most dplyr functions work with `sf` objects just like they do with typical data frames. -->
+
+```{r}
+
+trees <- read_sf("City_Managed_Trees/City_Managed_Trees.shp")
+
+trees |> count(AREA)
+
+```
+
+## 5b. Filter your `sf` object to keep only rows of the area that has the most trees (as per what you found in the previous part). Create a map to show trees in this area, using column `DBH` so that they are shaded according to their size. Customize the title, scale, and legend as time allows.
+
+## (OPTIONAL; no grade) Where in this particular area are the largest trees located? Can you name this location?
+
+*Note: Column `DBH` stands for "diameter at breast height", a standard way of measuring tree size ([Wikipedia](https://en.wikipedia.org/wiki/Diameter_at_breast_height)).*
+
+```{r}
+
+trees |>
+  filter(AREA == "NORTH SIDE") |>
+  ggplot() +
+  geom_sf(aes(color = DBH)) +
+  scale_color_viridis_c() +
+  labs(
+    title = "Trees in the north side of Ithaca, NY",
+    color = "Tree size (DBH)",
+    caption = "DBH stands for \"diameter at breast height\",\na standard way of measuring tree size."
+  ) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, vjust = .5))
+
+```

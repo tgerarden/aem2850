@@ -1,0 +1,65 @@
+"0","library(tidyverse)"
+"0","library(sf)"
+"0",""
+"0","# set global options for all code chunks"
+"0","library(knitr)"
+"0","knitr::opts_chunk$set(fig.align = ""center"","
+"0","                      out.width = ""75%"","
+"0","                      warning=FALSE, "
+"0","                      message = FALSE)"
+"0",""
+"0","# Import COVID-19 data"
+"0","covid <- read_csv(""covid_cases_usa.csv"")"
+"1","[1mRows: [22m[34m105[39m [1mColumns: [22m[34m3[39m
+"
+"1","[36m──[39m [1mColumn specification[22m [36m───────────────────────────────────────────────────────────────────────────────────────────────────[39m
+[1mDelimiter:[22m "",""
+[31mchr[39m  (1): country
+[32mdbl[39m  (1): avg_cases_7_days
+[34mdate[39m (1): date
+"
+"1","
+[36mℹ[39m Use `spec()` to retrieve the full column specification for this data.
+[36mℹ[39m Specify the column types or set `show_col_types = FALSE` to quiet this message.
+"
+"0","# Import Olympics data"
+"0","swim <- read_csv(""olympics_swimming.csv"") |>"
+"0","  filter("
+"0","    distance_in_meters == ""100m"" ,"
+"0","    relay == 0 ,"
+"0","    stroke %in% c(""Backstroke"", ""Freestyle"") ,"
+"0","    year >= 1948"
+"0","  )"
+"1","[1mRows: [22m[34m4359[39m [1mColumns: [22m[34m10[39m
+"
+"1","[36m──[39m [1mColumn specification[22m [36m───────────────────────────────────────────────────────────────────────────────────────────────────[39m
+[1mDelimiter:[22m "",""
+[31mchr[39m (6): location, distance_in_meters, stroke, gender, country, athlete
+[32mdbl[39m (4): year, relay, rank, time_seconds
+"
+"1","
+[36mℹ[39m Use `spec()` to retrieve the full column specification for this data.
+[36mℹ[39m Specify the column types or set `show_col_types = FALSE` to quiet this message.
+"
+"0","# Import Zara data"
+"0","zara <- read_csv(""zara_webscrape.csv"")"
+"1","[1mRows: [22m[34m3129[39m [1mColumns: [22m[34m7[39m
+"
+"1","[36m──[39m [1mColumn specification[22m [36m───────────────────────────────────────────────────────────────────────────────────────────────────[39m
+[1mDelimiter:[22m "",""
+[31mchr[39m (5): sku, name, currency, terms, section
+[32mdbl[39m (2): price, in_stock
+"
+"1","
+[36mℹ[39m Use `spec()` to retrieve the full column specification for this data.
+[36mℹ[39m Specify the column types or set `show_col_types = FALSE` to quiet this message.
+"
+"0","# Import S&P 500 price data"
+"0","load(""sp500.RData"")"
+"0","prices <- sp500_prices |>"
+"0","  group_by(symbol) |>"
+"0","  mutate(count = n()) |>"
+"0","  ungroup() |>"
+"0","  filter(count == max(count)) |>"
+"0","  select(-count) |> "
+"0","  mutate(year = year(date))"
