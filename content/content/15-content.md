@@ -1,7 +1,7 @@
 ---
 title: "Prelim 2 Review"
 linktitle: "Prelim 2 Review"
-date: "2025-12-01 10:41:49"
+date: "2025-12-02 09:01:59"
 menu:
   content:
     parent: Course content
@@ -35,6 +35,7 @@ output:
 
 ## Plan for today
 - Questions about prelim logistics? :raising_hand_woman:
+- Time to complete course evaluations (links to info: [html](/slides/15-slides.html), [pdf](/slides/15-slides.pdf))
 - Questions about specific content? :raising_hand_man:
 
 ### Practice prelim questions

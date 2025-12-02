@@ -42,7 +42,7 @@ library(tidyverse)
 
 class: center, middle
 
-# Conclusion
+# Course evaluations
 
 .class-info[
 
@@ -53,49 +53,6 @@ Cornell Dyson<br>
 Fall 2025
 
 ]
-
----
-
-# Announcements
-
-Plan for this week:
-  - Tuesday: slides and a short example
-  - Thursday: prelim 2 Q&A, time to complete course evaluations, **homework-14**
-    - If you come to class and work through the homework, you will get full credit
-    - Due Thursday at 11:59pm so you can focus on studying for prelim 2
-
---
-
-Plan for next week:
-  - **Prelim 2** in class on Tuesday, May 6
-  - **Homework 15 - Course Survey** due Monday, May 12 at 11:59pm
-    - I will give you time in class on Thursday to complete this
-
---
-
-Questions before we get started?
-
----
-
-# Plan for this week
-
-.pull-left[
-### Tuesday
-  - [Prelim 2 Q&A](#prelim-2)
-  - [Complete course evaluations](#course-evals-in-class)
-]
-
-.pull-right[
-### Thursday
-  - [In Class: optional open office hours with TAs](#prelim-2)
-  - [Evening: Prelim 2](#prelim-2)
-]
-
----
-class: inverse, center, middle
-name: course-evals
-
-# Course evaluations
 
 ---
 
@@ -111,89 +68,14 @@ With these objectives in mind...
 
 ---
 
-# Please complete course evaluations
-
-I take feedback seriously and will use it to improve this course!
-
---
-
-Concrete suggestions are most helpful
-
---
-
-**I would appreciate your feedback through two *anonymous* channels:**
-
-1. Homework 15 - Course Feedback Survey (on canvas)
-2. University course evaluations
-
---
-
-**I will give you time to complete these in class on Thursday**
-
---
-
-**I will award a bonus point on Homework 15 for completing evaluations**
-
---
-
-Thank you in advance for your feedback!
-
-
----
-class: inverse, center, middle
-name: prelim-2
-
-# Prelim 2
-
----
-
-# Prelim 2
-
-Format: paper exam, closed-book (-notes, -computer, etc.)
-
-It will stress concepts more than syntax (but will test both)
-
-We will have multiple question types, including but not limited to:
-1. improve this data visualization
-2. multiple choice and short answer questions
-3. explain how you would approach a coding task, including key functions (but not full code)
-4. explain what code we provide would do
-5. write short code snippets
-
----
-
-# Prelim 2 preparation
-
-We will provide practice questions by Friday, May 2
-
-I have extra office hours by appointment May 1 and May 2
-
-The TAs will have regular open office hours May 2 and May 5
-
-The TAs will host an extra review session on May 5 (see canvas for details)
-
-Questions?
-
----
-class: inverse, center, middle
-name: course-evals-in-class
-
-# Course evaluations
-
----
-
 # Please take 10 mins to complete course evals
 
 I take feedback seriously and will use it to improve this course!
 
+**I would appreciate your feedback through the *anonymous* university course evaluations**
+
 Concrete suggestions are most helpful
 
-**I would appreciate your feedback through two channels:**
+**I will award a bonus point to class participation for completing evaluations**
 
-1. Homework 15 - Course Feedback Survey (on canvas)
-2. University course evaluations
-
-Both will be anonymous
-
-Reminder: **bonus point on Homework 15 for completing university evaluations**
-
+Thank you in advance for your feedback!
