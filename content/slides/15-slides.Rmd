@@ -160,8 +160,6 @@ We will have multiple question types, including but not limited to:
 4. explain what code we provide would do
 5. write short code snippets
 
-**TBD:** we *may* provide a function reference sheet (will announce by Monday AM)
-
 ---
 
 # Prelim 2 preparation
